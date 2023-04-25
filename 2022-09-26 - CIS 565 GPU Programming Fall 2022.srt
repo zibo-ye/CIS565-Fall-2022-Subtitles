@@ -1,0 +1,6832 @@
+1
+00:00:00,000 --> 00:00:24,080
+All right. So today is one of my favorite lectures of the year. It's the CUDA performance
+
+2
+00:00:24,080 --> 00:00:30,400
+lab. This is, this lecture is essentially how I got started in 565 after I graduated
+
+3
+00:00:30,400 --> 00:00:35,680
+from the class. Once I graduated, I started working for a company called Rayfire where
+
+4
+00:00:35,680 --> 00:00:40,440
+I was doing CUDA and OpenCM day in, day out. So I was using the debugger, the profiler
+
+5
+00:00:40,440 --> 00:00:46,200
+every day. So when I was taking this class 10 years ago, there was no class, there's
+
+6
+00:00:46,200 --> 00:00:51,920
+no recording about how to use the inside tools back then. So because I was doing it daily,
+
+7
+00:00:51,920 --> 00:00:56,560
+I told Patrick back then, Hey, let me come do a guest lecture about the profiler, about
+
+8
+00:00:56,560 --> 00:01:01,600
+the debugger. So this lecture is essentially an evolution of that, where we take it up
+
+9
+00:01:01,600 --> 00:01:07,120
+as an exercise about how do we go from something that is very basic to something that is very
+
+10
+00:01:07,120 --> 00:01:13,120
+extraordinary and utilizing the complete GPU performance. So that's, that's exactly what
+
+11
+00:01:13,120 --> 00:01:23,440
+we're going to see today. What we'd also see is, we'd also see a bunch of inside tools,
+
+12
+00:01:23,440 --> 00:01:29,920
+the especially the inside compute. But we'd also revisit a bunch of topics from last week.
+
+13
+00:01:29,920 --> 00:01:34,320
+So remember how I said, we'll revisit bank complex, memory coalescing and stuff. We'll
+
+14
+00:01:34,320 --> 00:01:40,080
+do those today. And we'll do it as part of two very small exercises. That should be very
+
+15
+00:01:40,080 --> 00:01:45,600
+easy on an algorithmic level, but we'll take it forward in a performance level. So those are
+
+16
+00:01:45,600 --> 00:01:53,280
+transpose. And the other one is reductions. Okay. So if you haven't already done it, again,
+
+17
+00:01:53,280 --> 00:01:58,400
+it was optional. I know you guys are focused on project three, but I've set up this repo here.
+
+18
+00:01:58,400 --> 00:02:04,400
+And before the class, I committed matrix transpose naive and matrix transpose shared,
+
+19
+00:02:04,400 --> 00:02:09,680
+because I want us to get started with a little bit of a heads up in class so that we have enough
+
+20
+00:02:09,680 --> 00:02:14,080
+time. So if you haven't completed those, just pull, just pull from GitHub and you'll be fine.
+
+21
+00:02:15,440 --> 00:02:18,400
+And that's about it. Okay. Any questions on this?
+
+22
+00:02:21,120 --> 00:02:24,320
+Okay. So let's get started with memory coalescing. Okay.
+
+23
+00:02:28,480 --> 00:02:32,720
+Actually, let me hold that. Let me show you the project itself.
+
+24
+00:02:32,720 --> 00:02:43,120
+So I'm going to pull up my visual studio and I have a transpose here. So as you can see,
+
+25
+00:02:44,080 --> 00:02:48,560
+I have my kernels completed. So this is the code I have published. If you need the text to be bigger,
+
+26
+00:02:48,560 --> 00:02:52,640
+just let me know. I'll zoom in. Okay. It's especially the last row. Let me know if the
+
+27
+00:02:52,640 --> 00:02:58,560
+text is big enough for you. What we have here, and I'll go to the host side of it,
+
+28
+00:02:59,520 --> 00:03:07,840
+is a bunch of kernels and compute that build on top of each other. So what we get started with
+
+29
+00:03:07,840 --> 00:03:14,960
+is a few benchmarks. So this mem benchmark here essentially runs CUDA mem copies to give you
+
+30
+00:03:14,960 --> 00:03:20,080
+a baseline for what mem copy speeds you should be expecting on your laptop. And I'll talk a little
+
+31
+00:03:20,080 --> 00:03:26,720
+bit more about this later. Then what we do is we set up some host arrays. We make sure we have
+
+32
+00:03:26,720 --> 00:03:30,560
+gold arrays. So these gold arrays are essentially, we know that these are correct because we are
+
+33
+00:03:30,560 --> 00:03:34,640
+doing them on the CPU. And we are always going to check our output against these.
+
+34
+00:03:35,600 --> 00:03:40,240
+We set up our device arrays, do CUDA mallet, and this is where we are doing our gold standard.
+
+35
+00:03:42,400 --> 00:03:46,960
+We do a CPU transpose so that we have a CPU benchmark. Again, this is a naive version of it.
+
+36
+00:03:46,960 --> 00:03:51,520
+If you wanted, you could do a highly parallel versions. It's up to you, but I'll just stick
+
+37
+00:03:51,600 --> 00:03:56,640
+to the naive one. We have a device-to-device copy. I'll get to this in a little bit,
+
+38
+00:03:56,640 --> 00:04:02,960
+why I have this. We have a naive transpose kernel. We have shared memory. And then what we are going
+
+39
+00:04:02,960 --> 00:04:09,440
+to look at today is bank conflicts, unrolling the loop, and doing a little bit more with that. And
+
+40
+00:04:09,440 --> 00:04:13,440
+then we'll go to the reduction side. But if we take a look at any of these kernels, so let me
+
+41
+00:04:13,440 --> 00:04:20,320
+pick shared memory transpose here. What we have is setting up our sizes here for the number of
+
+42
+00:04:20,320 --> 00:04:25,360
+blocks and threads. This give up function is something that's very common in CUDA land,
+
+43
+00:04:25,360 --> 00:04:31,680
+essentially. What it says is it does a seal. So instead of doing a seal function, it actually
+
+44
+00:04:31,680 --> 00:04:39,120
+does, if you look at the code up top, it's essentially size x plus block.x minus 1 divided
+
+45
+00:04:39,120 --> 00:04:43,760
+by block.x. That's essentially what it does. So it's very simple, just rounds up.
+
+46
+00:04:44,160 --> 00:04:51,600
+And VTX region. So this is essentially what you call a markup in our profiler. I'll show this,
+
+47
+00:04:51,600 --> 00:04:56,960
+when I launch the profiler, I'll show this to you. It essentially marks a section that you
+
+48
+00:04:56,960 --> 00:05:02,560
+want to look at. So it's like a bookmark. So that's what you want to see. CUDA event record
+
+49
+00:05:02,560 --> 00:05:08,160
+is a way, again, for performance profiling. You can see events in your profiler. So that's why I
+
+50
+00:05:08,400 --> 00:05:18,160
+have this here. And then, notice this, for performance compute, I'm not doing one iteration,
+
+51
+00:05:18,160 --> 00:05:25,280
+I'm doing 10. Anybody know why I'm doing 10? All right. For example, 100. Why am I not doing just
+
+52
+00:05:25,280 --> 00:05:34,560
+one? Yeah, exactly. There's a warmup where the GPU needs to initialize the kernel and maybe
+
+53
+00:05:34,560 --> 00:05:39,040
+run it a few times so that you want an average. And this applies to CPU as well. If you're doing
+
+54
+00:05:39,040 --> 00:05:43,600
+any CPU benchmarking as well, you want to do it n number of times an average amount.
+
+55
+00:05:46,560 --> 00:05:51,440
+For matrix transfer shared, these numbers will essentially give you the templates for
+
+56
+00:05:51,440 --> 00:05:57,680
+assigning shared memory. CUDA event record is stopping this record here. Event synchronize
+
+57
+00:05:57,680 --> 00:06:02,400
+means it's going to synchronize everything that happened between start and stop.
+
+58
+00:06:03,360 --> 00:06:09,520
+And then, this is marking the end of this benchmark. Then you essentially
+
+59
+00:06:10,320 --> 00:06:16,080
+calculate the elapsed time, you do a mem copy, and then you check the results to make sure that
+
+60
+00:06:16,080 --> 00:06:20,000
+they're correct. So that's essentially how we are going through each one of these kernels
+
+61
+00:06:22,080 --> 00:06:29,440
+in the code. They're mostly copy-paste. So what I'm going to do is make sure first
+
+62
+00:06:29,440 --> 00:06:36,320
+that you're in release with debug info. Because if you don't do debug info, you will always run
+
+63
+00:06:36,320 --> 00:06:42,400
+into an issue where the function names and the code are not visible to the profiler and the debugger.
+
+64
+00:06:42,400 --> 00:06:46,960
+So we want to check performance, but we also want the debug symbols. So make sure you're
+
+65
+00:06:46,960 --> 00:06:51,920
+in release with debug. Now, I'm not going to run the profiler first. What I'm going to do is hit,
+
+66
+00:06:53,360 --> 00:06:57,280
+what should I hit for performance profiling? What keys or what shortcut should I hit for
+
+67
+00:06:57,280 --> 00:07:02,960
+performance profiling? F5? How many of you say F5?
+
+68
+00:07:05,600 --> 00:07:08,880
+Somebody, I mean, how do you guys run? Everybody, you all run your code, right?
+
+69
+00:07:10,400 --> 00:07:18,240
+So F5 is essentially the shortcut for this launch with debugger. So if you see here,
+
+70
+00:07:18,880 --> 00:07:24,640
+well, in Visual Studio, I guess they changed it to F7. Sorry, F7 is built, but let's run.
+
+71
+00:07:24,640 --> 00:07:33,040
+Did they change these menus? They always do. Here, start debugging is F5. So if you are hitting F5,
+
+72
+00:07:33,920 --> 00:07:39,120
+what that means is the code that you're running is still attached to the Visual Studio debugger.
+
+73
+00:07:39,120 --> 00:07:43,440
+You may be launching a command window and maybe not debugging it, but you're still
+
+74
+00:07:44,000 --> 00:07:49,120
+launching it as debug. For performance, you should always be launching with control F5.
+
+75
+00:07:49,920 --> 00:07:53,280
+Like without a doubt, if you're generating a chart, launch with control F5.
+
+76
+00:07:54,720 --> 00:07:59,200
+So that's what I'm going to do. I'm going to hit control F5. Probably going to take a little bit
+
+77
+00:08:00,160 --> 00:08:08,240
+to compile and run. But what we are going to see as an output is a few things. So let me pull
+
+78
+00:08:08,240 --> 00:08:16,000
+this up here. So the first thing you're going to see is my GPU name. I'm printing this using
+
+79
+00:08:16,560 --> 00:08:24,160
+the CUDA device info, and I'm transferring 16 MB of memory for checking my bandwidth.
+
+80
+00:08:25,280 --> 00:08:32,640
+So the first two are called host-to-host device. So I'm essentially benchmarking my post copy. So
+
+81
+00:08:32,640 --> 00:08:40,160
+from RAM to RAM, how fast is it? And I have a new XPS. I believe it's a DDR4 memory, and I'm getting
+
+82
+00:08:40,160 --> 00:08:48,240
+about 40 gigabytes per second of copy. Next, I'm doing what are known as pageable transfers. So
+
+83
+00:08:48,240 --> 00:08:55,520
+these are 11 and 8. Anybody know why these numbers are significant or what these numbers tell me?
+
+84
+00:08:55,520 --> 00:09:06,320
+What is this related to?
+
+85
+00:09:10,480 --> 00:09:14,720
+And what is it limited by? What hardware is it limited by?
+
+86
+00:09:16,960 --> 00:09:24,080
+What is that connection called? The PCIe bus. The PCIe, when you are going in the
+
+87
+00:09:24,080 --> 00:09:31,280
+market and buying GPUs, you're always going to see PCIe 3, PCIe 4, 16 lanes, etc. On some of the
+
+88
+00:09:31,280 --> 00:09:38,000
+AMD Threadripper, you're going to see 64 threads. So it's both ways. You need 16
+
+89
+00:09:38,000 --> 00:09:45,120
+lanes on your GPU, and you need 16 lanes on your CPU for the swapping to happen well. So right now,
+
+90
+00:09:45,120 --> 00:09:50,320
+those are the speeds I'm getting. We'll get to the pin memory in a little bit, but look at this
+
+91
+00:09:50,320 --> 00:09:56,960
+number, device-to-device bandwidth. That's a CUDA global memory-to-global memory copy bandwidth.
+
+92
+00:09:56,960 --> 00:10:03,680
+And look, it's four times faster than CPU. On my laptop GPU, I'm not even talking about a big,
+
+93
+00:10:03,680 --> 00:10:09,200
+fast, beefy GPU. Even on my laptop GPU, it's four times faster than the CPU memory.
+
+94
+00:10:09,200 --> 00:10:15,360
+So that's where you know that the global memory is fast, but yet not fast enough for a GPU computer.
+
+95
+00:10:15,360 --> 00:10:22,800
+Now, let's come to the CPU side. So on the CPU transport, transport is expected very slow.
+
+96
+00:10:22,800 --> 00:10:30,160
+We only get 0.8852 gigabytes a second. Compare that to 43 gigabytes a second.
+
+97
+00:10:30,880 --> 00:10:36,400
+It's a lot, right? It's a huge difference. It's like 50 times slower. So not great.
+
+98
+00:10:37,600 --> 00:10:41,440
+Our device-to-device copy. So now think about the device-to-device copy.
+
+99
+00:10:42,160 --> 00:10:47,600
+What is that actually doing? A device-to-device copy kernel, what is it doing?
+
+100
+00:10:51,600 --> 00:10:55,840
+It's doing the same thing as a CUDA memcpy, right? The exact same thing. There's no difference,
+
+101
+00:10:55,840 --> 00:11:03,520
+except that we are doing it inside a kernel. And that is 146 versus 162. You could say some
+
+102
+00:11:03,520 --> 00:11:08,800
+level of error, but it's close enough. That's like 90-something percent there. So we'll give it a pass.
+
+103
+00:11:09,680 --> 00:11:13,920
+Naive transpose is 35, and shared memory transpose is 7.
+
+104
+00:11:16,800 --> 00:11:22,560
+Tell me what operation transpose is most like. And there's a hint here.
+
+105
+00:11:25,120 --> 00:11:31,840
+What operation is transpose most like? It's like copy. It is taking one element
+
+106
+00:11:32,240 --> 00:11:40,560
+from one place and putting it in the other place. Forget about indexing. But if you think about
+
+107
+00:11:40,560 --> 00:11:46,480
+the comparison between copy and transpose, the only difference is where the output is written.
+
+108
+00:11:47,280 --> 00:11:53,440
+Otherwise, the operation is exactly the same. So why should our transpose bandwidth
+
+109
+00:11:54,240 --> 00:12:01,600
+be anything less than our copy bandwidth, right? There's not much compute happening
+
+110
+00:12:01,840 --> 00:12:06,080
+in transpose, right? So in last class, we discussed compute, copy, overlap, and stuff.
+
+111
+00:12:06,080 --> 00:12:09,920
+That's out of the door. There's not enough compute. We'll forget about that. But we should
+
+112
+00:12:09,920 --> 00:12:16,640
+at least be getting the same amount or close enough to the same speed as we are with the copy,
+
+113
+00:12:16,640 --> 00:12:25,600
+right? But if we look at a naive method, we're only getting 35. We're getting less than a quarter of
+
+114
+00:12:25,600 --> 00:12:33,120
+the speed as compared to the device. Are we satisfied with that? No, right? We're here to
+
+115
+00:12:33,120 --> 00:12:39,600
+do performance. We are absolutely not satisfied with it. So that's why what we're going to do
+
+116
+00:12:39,600 --> 00:12:47,200
+in this class is essentially work through this and see how we optimize it, OK? So let me close
+
+117
+00:12:47,200 --> 00:12:56,400
+that for now. And I'm going to go back to Visual Studio. And now I'm going to launch
+
+118
+00:12:56,400 --> 00:13:00,400
+Insight Compute. And I'm going to say interactive profile.
+
+119
+00:13:03,120 --> 00:13:06,800
+Sorry, it's launching here. So let me bring these.
+
+120
+00:13:08,960 --> 00:13:12,640
+So I'm going to say Windows. It's already attached to this. Make sure it's the right
+
+121
+00:13:12,640 --> 00:13:19,120
+configuration. So I've released for you. Make sure NVTX support is yes, because we want those
+
+122
+00:13:19,120 --> 00:13:26,160
+markers, right? And then all looks good to me. And then I'm going to hit launch.
+
+123
+00:13:28,800 --> 00:13:32,480
+So it's going to run in the background. And it will generate some stats. And we'll see when
+
+124
+00:13:32,480 --> 00:13:38,960
+it's ready. This paused. At the first instance of CUDA commands, it will pause because I hit
+
+125
+00:13:38,960 --> 00:13:44,560
+the interactive profiler. But I'm just going to hit this Play button. And that will run all of it,
+
+126
+00:13:44,560 --> 00:13:52,160
+OK? So let me, I think I need to enable this auto profile before I do that. All right.
+
+127
+00:13:53,200 --> 00:13:59,120
+So it'll run a bunch of times. It'll collect a bunch of metrics. And I'll show you a first version
+
+128
+00:13:59,120 --> 00:14:02,960
+of how to read that. We'll come back to the profiler again multiple times through this lecture.
+
+129
+00:14:03,520 --> 00:14:08,880
+But at least initially, I'll show you how to use the profiler in a very generic way.
+
+130
+00:14:09,760 --> 00:14:19,760
+So as you can see, it's all filling up here. And each CUDA call is getting filled up. And
+
+131
+00:14:19,760 --> 00:14:23,840
+these are not kernel calls. These are like driver level calls. So if you're doing a memory copy,
+
+132
+00:14:23,840 --> 00:14:28,640
+you're going to see it. If you do events, you're going to see it and all that. So you can see some
+
+133
+00:14:28,640 --> 00:14:39,600
+events synchronized and stuff as this goes by. It should be. Any questions so far while this is
+
+134
+00:14:39,600 --> 00:14:55,120
+running? I usually call it .nbprof, usually. But there's no rule around it. Essentially,
+
+135
+00:14:55,120 --> 00:14:58,400
+you can save the profiler's output and bring it back up if you wanted to.
+
+136
+00:14:58,960 --> 00:15:06,800
+OK. So my profiler's done. What I'm going to do is I'm going to go to session first, OK?
+
+137
+00:15:07,920 --> 00:15:13,120
+So in session, what you get is, OK, how is this run? The first thing you're going to get. So
+
+138
+00:15:13,120 --> 00:15:17,760
+what command line arguments did you use and all that? So you first get some system information.
+
+139
+00:15:18,400 --> 00:15:24,640
+But if you scroll down, now you start seeing some GPU information, right? You start seeing
+
+140
+00:15:24,640 --> 00:15:29,120
+attributes. You start seeing some numbers that matter. I'm going to highlight a few here.
+
+141
+00:15:29,120 --> 00:15:35,360
+And there's another way to see this. So let me do, I have a breakpoint already.
+
+142
+00:15:40,080 --> 00:15:43,680
+Yeah. So I have a breakpoint, right? So another way to see this is if you hit
+
+143
+00:15:44,400 --> 00:15:47,440
+CUDA start debugging and it's going to hit this breakpoint here.
+
+144
+00:15:48,320 --> 00:15:56,640
+So once it hits that breakpoint, if you go to inside window, resources,
+
+145
+00:15:57,440 --> 00:16:02,800
+and you go to CUDA devices. Let me try to see if I can zoom in. It's not allowing me to zoom in.
+
+146
+00:16:03,680 --> 00:16:06,960
+Yeah. So let's look at it here.
+
+147
+00:16:06,960 --> 00:16:16,000
+So a few numbers I want you to pay attention to, OK?
+
+148
+00:16:22,640 --> 00:16:31,600
+Let's start here. These three. These are max block dim size x, y, and z. So these are the
+
+149
+00:16:31,600 --> 00:16:38,880
+maximum size of any dimension of your block. So the number of threads in a block. While we've said
+
+150
+00:16:38,880 --> 00:16:44,000
+the total number of threads in a block can't be greater than 1024, what this is also saying is
+
+151
+00:16:44,640 --> 00:16:49,840
+you can't have more than 1024 threads in x or y, but you can only have 64 threads in z.
+
+152
+00:16:51,360 --> 00:16:55,600
+OK? So you can't have 1, 1, 1024 in the z configuration as an example.
+
+153
+00:16:56,160 --> 00:17:01,520
+The other thing I want to show you is this. Grid dim x, y, z. Those are the number of blocks you
+
+154
+00:17:01,520 --> 00:17:06,400
+can have in each dimension. And for all intents and purposes, that's basically infinite. You have
+
+155
+00:17:06,400 --> 00:17:13,440
+2 billion around x. You have another 65,000 around y and another 65,000 around z. So if you
+
+156
+00:17:13,440 --> 00:17:20,880
+multiply all of those, that's a lot of blocks. So basically unlimited. So the other thing here
+
+157
+00:17:21,840 --> 00:17:27,600
+is this line. Max blocks for multiprocessor. For me, it's 16. So what that's saying is,
+
+158
+00:17:28,880 --> 00:17:35,360
+assuming other resources are fine, the number of blocks that can live in one SM at any given time
+
+159
+00:17:35,360 --> 00:17:42,640
+is 16. This might be different for your GPUs. It's 16 for my GPU. OK? But when you're going
+
+160
+00:17:42,640 --> 00:17:47,600
+into the industry and writing programs, you're going to have to choose what the baseline GPU
+
+161
+00:17:47,600 --> 00:17:51,920
+or the most optimized GPU is going to be, or what the most optimized hardware is going to be.
+
+162
+00:17:51,920 --> 00:18:01,840
+And this is how you're going to choose it. OK? And speaking of choosing here, so max registers
+
+163
+00:18:01,840 --> 00:18:08,160
+per block, max registers for multiprocessor. For me, both of those are 65,000. And that's 65,000
+
+164
+00:18:08,160 --> 00:18:13,920
+bytes. So that allows you to choose how many registers per block you should have and stuff.
+
+165
+00:18:14,640 --> 00:18:22,160
+Same with shared memory. I have shared memory per block, which is 48 kilobytes for me. And we have
+
+166
+00:18:22,160 --> 00:18:29,520
+shared memory for multiprocessor, which is one megabyte. So I can have a lot more shared memory
+
+167
+00:18:29,520 --> 00:18:39,760
+across different contexts, across different blocks, within an SM. The other thing here,
+
+168
+00:18:39,760 --> 00:18:46,800
+so going back to our previous conversation, max threads per block. Again, we have max threads
+
+169
+00:18:46,800 --> 00:18:52,640
+for dimension blocks, block domain, block divide, block density. But total across the block is also
+
+170
+00:18:52,640 --> 00:18:58,800
+1024 for me. And then max threads for multiprocessor, these are active threads, is 1536.
+
+171
+00:18:59,760 --> 00:19:10,640
+OK? So you can have 16 blocks per SM, but a total of 1536 threads. Let's see what else.
+
+172
+00:19:21,280 --> 00:19:26,560
+So warp size. Remember how I said warp size will always be 32? I've never seen this change. OK.
+
+173
+00:19:26,560 --> 00:19:32,080
+It's there as a piece of information, but it has never changed. And then the other thing I want to
+
+174
+00:19:32,080 --> 00:19:42,080
+show you before we quit is L1 cache, L2 cache size, persisting L2 cache size. And there should
+
+175
+00:19:42,080 --> 00:19:47,360
+be one for total global memory. That's what I'm looking for. So let's see.
+
+176
+00:19:57,680 --> 00:20:02,880
+Stock rate, total constant memory. I'm surprised it's not showing here. OK.
+
+177
+00:20:03,840 --> 00:20:08,160
+So that's devices. If you want to know your device information, that's where you go. OK?
+
+178
+00:20:08,880 --> 00:20:11,360
+Let's look at...
+
+179
+00:20:19,520 --> 00:20:24,080
+OK. Let's quit this for now, and let's go back to our profiler.
+
+180
+00:20:26,720 --> 00:20:30,800
+So in the profiler, we are going to see the same information as well. OK? You're going to see
+
+181
+00:20:30,800 --> 00:20:35,280
+pretty much exactly the same information that we saw before, but maybe in a little bit more detail.
+
+182
+00:20:35,280 --> 00:20:40,800
+But most of it will be the same. The only one here, total memory is added here. I have four
+
+183
+00:20:40,800 --> 00:20:51,600
+gigabytes of global memory, so that's being shown here. OK. So that session, in summary,
+
+184
+00:20:51,600 --> 00:20:56,560
+so if you go into your profile and change page to summary, what you're going to see is a bunch of
+
+185
+00:20:56,560 --> 00:21:02,560
+API calls. So you're going to see kernel calls here, what dimensions they were called with,
+
+186
+00:21:02,560 --> 00:21:07,440
+both block and grid, how much time they took, what was the memory throughput, what was the
+
+187
+00:21:07,440 --> 00:21:12,720
+compute throughput. You're going to see an overview of all the kernels that were called
+
+188
+00:21:12,720 --> 00:21:17,520
+in this page. If you go to details... Actually, let's come back to details.
+
+189
+00:21:18,480 --> 00:21:23,760
+If you want the source code, like if you have a thrill for reading assembly-level source code,
+
+190
+00:21:23,760 --> 00:21:30,720
+you're going to see it here. So if we go to, let's say... Let's go to a copy kernel,
+
+191
+00:21:30,720 --> 00:21:34,800
+because that'll be simple, right? This is what your copy kernel looks like to a GPU.
+
+192
+00:21:36,640 --> 00:21:43,120
+Let's try to identify some instructions very, very quickly. So we are doing some move, OK?
+
+193
+00:21:43,120 --> 00:21:46,720
+I don't know what that is, but we are doing... What is S2R?
+
+194
+00:21:50,160 --> 00:21:56,240
+What do you think S2R is? I think it's shared to register, but... IMAN?
+
+195
+00:21:56,240 --> 00:22:05,520
+Integer, multiply, and add. IMAN is integer, multiply, and add. So when you see
+
+196
+00:22:07,280 --> 00:22:14,320
+threadIdx.x plus blockDim.size, that is an integer, multiply, and add operations. The
+
+197
+00:22:14,320 --> 00:22:18,960
+GPU can do it in one instruction. It doesn't have to do the multiply and addition separately. It can
+
+198
+00:22:18,960 --> 00:22:24,240
+do it in one instruction using three inputs. So you see three inputs here, and then one output.
+
+199
+00:22:27,120 --> 00:22:34,160
+And then move is a copy. IMAN wide is if you need the long integer, you use a wide.
+
+200
+00:22:35,600 --> 00:22:40,960
+And then exit is when the kernel is done. Again, not important for you to know, but if you want
+
+201
+00:22:40,960 --> 00:22:47,840
+to look at, like we discussed in the last class about how threads can be reordered or commands
+
+202
+00:22:47,840 --> 00:22:53,600
+can be reordered, this is where. And you kind of see this here in this column here. So if you look
+
+203
+00:22:53,600 --> 00:23:00,960
+at this column, dependencies, you can see which registers or which instructions are dependent on
+
+204
+00:23:00,960 --> 00:23:08,080
+which other instructions. So that way you can tell where the GPU might be remapping it.
+
+205
+00:23:08,880 --> 00:23:12,800
+The other thing you can see here is the number of live registers.
+
+206
+00:23:14,160 --> 00:23:19,360
+Even though your kernel might be written in one way, the GPU can optimize registers out once
+
+207
+00:23:19,360 --> 00:23:24,880
+they're no longer in use. So what we see here is the maximum amount of registers our kernel uses
+
+208
+00:23:24,880 --> 00:23:31,840
+is five at any given point. But at different points, it can be using five.
+
+209
+00:23:32,800 --> 00:23:36,320
+But then it reduces the number of registers when it doesn't need them.
+
+210
+00:23:37,280 --> 00:23:40,320
+Let's see what else.
+
+211
+00:23:50,320 --> 00:23:55,120
+All right. So let's look at details now. And I'm not going to go fully into this. I'll step
+
+212
+00:23:55,120 --> 00:24:00,960
+through it as we do different kernels. But the first thing to look at is the GPU speed of light
+
+213
+00:24:00,960 --> 00:24:06,560
+throughput, as they call it. And immediately, what you notice here, let's read this line.
+
+214
+00:24:06,560 --> 00:24:11,600
+This is the first thing. Even before I expand it, you can see it. High memory throughput.
+
+215
+00:24:12,800 --> 00:24:16,240
+Memory is more heavily utilized than compute. Yeah, go ahead.
+
+216
+00:24:19,760 --> 00:24:21,120
+I know, I know. That's why I'm reading it out.
+
+217
+00:24:26,080 --> 00:24:29,520
+If you're running it on your screen, that would be the best thing. I want you to try it out.
+
+218
+00:24:29,600 --> 00:24:34,480
+It's not something I know. You're not able to run profiler?
+
+219
+00:24:36,000 --> 00:24:42,000
+OK. With the latest clone?
+
+220
+00:24:45,600 --> 00:24:47,280
+Yeah, if I were, you'd just have to allow it.
+
+221
+00:24:50,800 --> 00:24:56,400
+OK. All right. So let me drop this Zoom link here then. But hopefully, it works.
+
+222
+00:24:56,400 --> 00:25:02,080
+And make sure you're on mute. And you can have your cameras off.
+
+223
+00:25:07,520 --> 00:25:13,200
+I'll do that one second. You don't have to.
+
+224
+00:25:15,920 --> 00:25:21,280
+OK. I've never done that. You have to allow the firewalls, but you don't have to run it as admin.
+
+225
+00:25:22,160 --> 00:25:26,160
+So let's see.
+
+226
+00:25:26,160 --> 00:25:55,600
+OK. So I've posted the link to add this question. So if you, it's on the performance lab, which is
+
+227
+00:25:55,600 --> 00:26:00,640
+pinned. So if you look at the second link in the pinned and scroll down, the link is there.
+
+228
+00:26:01,680 --> 00:26:09,280
+So I'll give everybody two minutes to join that. And during that time, I'll show how to run this
+
+229
+00:26:09,280 --> 00:26:36,160
+again. So if you're in, and then let's,
+
+230
+00:26:39,280 --> 00:26:47,520
+OK. Make sure you're mute, please. OK. So to recap, to run, make sure your build is done.
+
+231
+00:26:48,080 --> 00:26:51,760
+Then you pick release with debug info in your configuration.
+
+232
+00:26:52,800 --> 00:26:58,720
+And then insight, compute, and run profile. OK.
+
+233
+00:27:01,040 --> 00:27:04,240
+Once you run profile, I won't run it. But essentially, what you want to do is
+
+234
+00:27:04,800 --> 00:27:11,120
+you want to make sure you can do profile or interactive profile. First time I did interactive
+
+235
+00:27:11,120 --> 00:27:16,400
+profile, now I can do profile. It doesn't really matter. Just make sure that in the filter or
+
+236
+00:27:16,400 --> 00:27:22,640
+wherever it's NVTX support is enabled. That's the most important thing, because we have NVTX
+
+237
+00:27:22,640 --> 00:27:27,840
+in this file. If you select interactive profile, you're going to be able to see this here.
+
+238
+00:27:28,800 --> 00:27:35,840
+Once you hit launch, you will see a pause on the first PUDA command. OK. In that case,
+
+239
+00:27:35,840 --> 00:27:39,280
+what you need to do is, I'm going to close this because I don't want to run it again.
+
+240
+00:27:39,920 --> 00:27:46,640
+You want to hit this button. It's called auto profile. Click that button. And then you click
+
+241
+00:27:46,640 --> 00:27:54,240
+this button, which is the pause play button. And then it'll profile everything for you. OK.
+
+242
+00:27:57,840 --> 00:28:04,240
+Anybody seeing any errors?
+
+243
+00:28:57,840 --> 00:29:13,920
+All right. So for the sake of time, I'm going to continue because otherwise,
+
+244
+00:29:13,920 --> 00:29:18,960
+this will become a very, very long lecture. Just make sure to follow along. OK. And then
+
+245
+00:29:18,960 --> 00:29:23,280
+maybe after class, if you guys still have an issue running it, then I can help debug that.
+
+246
+00:29:23,760 --> 00:29:34,400
+OK. So I was talking about speed of light here. And let's read that first line there. OK. It says
+
+247
+00:29:34,400 --> 00:29:41,520
+high memory throughput. Memory is more heavily utilized than compute. OK. Even before we proceed
+
+248
+00:29:41,520 --> 00:29:47,680
+with that, what do we know about this kernel? What kernel is it? It's a copy kernel, right?
+
+249
+00:29:47,840 --> 00:29:54,560
+It's a copy kernel, right? It doesn't have much compute. It maximizes on memory bandwidth.
+
+250
+00:29:54,560 --> 00:29:59,440
+So this statement, while a warning, is almost like factual. It's just confirming what we already
+
+251
+00:29:59,440 --> 00:30:06,800
+know. OK. But look at what it's also saying. Look at the memory workload analysis section
+
+252
+00:30:06,800 --> 00:30:13,440
+to identify DRAM bottlenecks. DRAM is your global memory, dynamic RAM. Check memory replay
+
+253
+00:30:13,440 --> 00:30:18,000
+coalescing, which we are going to talk about again today, to make sure you are efficiently
+
+254
+00:30:18,000 --> 00:30:23,280
+utilizing the bytes transferred. Also consider whether it's possible to do more work per memory.
+
+255
+00:30:23,920 --> 00:30:28,160
+What does that sound like from last class? Do more work per memory access.
+
+256
+00:30:31,760 --> 00:30:37,760
+That's kind of like the Rube unrolling part, right? And whether there are values you can
+
+257
+00:30:37,760 --> 00:30:42,640
+recompute. Essentially, what that last part is saying is, are there values that you're storing
+
+258
+00:30:42,640 --> 00:30:47,760
+in global memory that you can pretty quickly do as compute? So that you don't have to read it
+
+259
+00:30:47,760 --> 00:30:54,240
+from global memory. It'll be faster to compute itself. So that's what it's saying. OK. So it
+
+260
+00:30:54,240 --> 00:30:59,440
+told us to look at memory workload analysis here. So I'm going to click that. All right. This is a
+
+261
+00:30:59,440 --> 00:31:05,760
+beautiful chart, one of my favorite ever. OK. Let's look at what this is showing.
+
+262
+00:31:06,240 --> 00:31:13,600
+On the left, we have kernel. OK. And on the right, we have different types of memory.
+
+263
+00:31:14,640 --> 00:31:20,560
+And as we move left, we get closer and closer to the threads, or closer and closer to registers.
+
+264
+00:31:21,200 --> 00:31:28,000
+So we have L1 cache, L2 cache, and different types of memory. So in the copy kernel,
+
+265
+00:31:28,000 --> 00:31:32,960
+what type of memory are we using? Or types of memory are we using in the copy kernel?
+
+266
+00:31:35,920 --> 00:31:43,840
+We are using global. What else? Maybe. But in the code that you see, we are directly copying
+
+267
+00:31:43,840 --> 00:31:48,480
+from one global memory to another global. So let's take a look. We are not using any
+
+268
+00:31:48,480 --> 00:31:52,960
+global memory. So that's 0. Don't need. We are not using any texture memory. We are not
+
+269
+00:31:52,960 --> 00:31:57,680
+using surface memory. We are not doing any load store on global. And we are not using
+
+270
+00:31:57,680 --> 00:32:02,960
+any shared memory either. So all of this is 0. But we are using global memory.
+
+271
+00:32:03,920 --> 00:32:10,160
+And what this is saying is we have 1 million instructions doing global memory to kernel,
+
+272
+00:32:10,960 --> 00:32:17,760
+and about 525,000 requesting global memory from cache. And to fill it into cache,
+
+273
+00:32:18,320 --> 00:32:23,200
+we are getting a lot of it from L2 cache. And from L2 cache, we are getting it from device memory.
+
+274
+00:32:23,200 --> 00:32:34,480
+Why is this 67.11 MB? Why is this significant? Why is it exactly 67.11 MB?
+
+275
+00:32:42,720 --> 00:32:47,280
+So think about how much memory we have. I'm copying 4096 by 4096
+
+276
+00:32:48,240 --> 00:32:56,960
+elements. So that 16 million was the data type. It's a float, right? 16 million elements
+
+277
+00:32:56,960 --> 00:33:06,240
+times 4 bytes each is 64 million, right? 64 million, if you convert that, if you write it
+
+278
+00:33:06,240 --> 00:33:12,800
+out, because when I say 1,000, it's not really 1,000. It's 1024. 64 million is essentially that
+
+279
+00:33:12,880 --> 00:33:18,800
+much memory space, maybe with a little bit of overflow. So that's why you'll get exactly that.
+
+280
+00:33:21,040 --> 00:33:26,480
+So we'll see a lot more of this in a little bit. But this is in a very simple copy kernel.
+
+281
+00:33:27,280 --> 00:33:34,720
+And what I want to show you is this part here. It has 1 million wavefronts, and the peak is 6.11,
+
+282
+00:33:34,720 --> 00:33:39,920
+not very high. And then you see how many local loads you have, how many global loads.
+
+283
+00:33:40,640 --> 00:33:45,760
+And then you have global stores. So you're reading and writing, and the number of bytes
+
+284
+00:33:45,760 --> 00:33:52,640
+is here. That's how many bytes you're reading and writing. So it's a very great chart to compare,
+
+285
+00:33:54,000 --> 00:33:57,440
+if you have a known algorithm, to see exactly how it's performing.
+
+286
+00:33:59,600 --> 00:34:05,440
+Let's come back to this. Let's take a look very quickly at transpose naive before we go ahead.
+
+287
+00:34:06,080 --> 00:34:08,000
+Because here, take a look at this.
+
+288
+00:34:11,120 --> 00:34:17,200
+This is 67.11, right? We are reading 67.11. Well, how much are we writing?
+
+289
+00:34:20,400 --> 00:34:26,400
+536 megabytes? Where do we have 536 megabytes of data?
+
+290
+00:34:26,480 --> 00:34:32,080
+Where is this number coming from?
+
+291
+00:34:34,960 --> 00:34:40,240
+Why do you think we have 536 megabytes of data? Writing. We don't have that much data to write,
+
+292
+00:34:40,240 --> 00:34:45,760
+but we are writing it. So if you scroll down, let's take another different look at it.
+
+293
+00:34:47,840 --> 00:34:53,600
+Take a look at this. The number of wavefronts, and the number of sectors,
+
+294
+00:34:53,600 --> 00:34:57,120
+and the number of bytes. Why are all these three different?
+
+295
+00:34:59,840 --> 00:35:03,520
+Any guesses? We'll take a look at it in the slides, but any early guesses why this might be
+
+296
+00:35:03,520 --> 00:35:15,200
+different? Wavefronts, let's ignore. Sectors is kind of like blocks of money.
+
+297
+00:35:15,600 --> 00:35:22,800
+But you're on the right front, I gave you a hint there.
+
+298
+00:35:26,080 --> 00:35:28,400
+But why are these different, these numbers,
+
+299
+00:35:30,800 --> 00:35:36,800
+compared to our copy kernel or even compared to the read?
+
+300
+00:35:46,080 --> 00:35:54,160
+Yes, exactly. What is that called?
+
+301
+00:35:58,080 --> 00:36:04,960
+Not memory coalescing. Yes, exactly. So look at this. Again, if you didn't know that,
+
+302
+00:36:04,960 --> 00:36:11,200
+if I wasn't here to tell you that, you're going to read this. Kernel exhibits low compute throughput
+
+303
+00:36:11,200 --> 00:36:15,920
+and memory bandwidth utilization. Remember what we did in copy kernel, it was just compute.
+
+304
+00:36:15,920 --> 00:36:22,160
+Memory bandwidth itself was fine. Here it's in low compute and memory bandwidth. And if you read
+
+305
+00:36:22,160 --> 00:36:28,320
+ahead, achieve compute throughput and a memory bandwidth below 60%. What that is saying is,
+
+306
+00:36:28,320 --> 00:36:33,600
+hey, you launched a GPU kernel. Yeah, you made your stuff go faster, but you're below even the
+
+307
+00:36:33,600 --> 00:36:40,000
+60% mark of utilizing your GPU. That's kind of what it's saying. So if you read that,
+
+308
+00:36:40,000 --> 00:36:42,720
+know that there's some optimization you can make in your kernel.
+
+309
+00:36:45,120 --> 00:36:50,640
+And then if you read below on the compute workload analysis, you're going to see more info there.
+
+310
+00:36:52,160 --> 00:36:56,720
+So with that, let's pause. Let's pause on the profile and let's take a look at our slides.
+
+311
+00:37:00,960 --> 00:37:05,520
+All right, so let's look at memory coalescing. As Tom mentioned, it's a problem in a naive kernel.
+
+312
+00:37:05,520 --> 00:37:16,560
+Right? So memory coalescing is concurrent access of threads in a wall leading continuous memory
+
+313
+00:37:16,560 --> 00:37:22,000
+or writing continuous memory to global memory. Let's take a look at a few examples.
+
+314
+00:37:23,600 --> 00:37:32,560
+So let's say we have theoretically L1 and L2 cache. And L1 cache is 128 bytes continuous,
+
+315
+00:37:32,560 --> 00:37:36,960
+which means you can store your four bytes. You can store an int. You can store a float in there.
+
+316
+00:37:37,760 --> 00:37:43,040
+But if you read or write, you have to do it for the entire block. You have to do it for 128 bytes.
+
+317
+00:37:43,040 --> 00:37:49,680
+You can't do four bytes at a time. Similarly, L2 is multiples of 32 bytes. Everybody clear
+
+318
+00:37:49,680 --> 00:37:56,640
+how this is structured? So let's take a look at a few examples. So this is only for information,
+
+319
+00:37:56,640 --> 00:38:03,200
+but let's take a look at an example. So let's say we have 32 threads in a wall. Right?
+
+320
+00:38:04,000 --> 00:38:08,960
+And they're reading 32 floats, which are four byte words, if you want to call them in memory.
+
+321
+00:38:09,920 --> 00:38:17,840
+32 times four is 128. If they are aligned and all within the same cache block,
+
+322
+00:38:17,920 --> 00:38:27,440
+then this is read in one read cycle, in which case you get 100% bus utilization.
+
+323
+00:38:29,200 --> 00:38:34,720
+OK? This is like the optimal scenario. You have each word reading continuous memory.
+
+324
+00:38:34,720 --> 00:38:41,520
+It is perfectly aligned, and you get perfect bus utilization. Everybody clear on this?
+
+325
+00:38:41,920 --> 00:38:48,880
+OK. What about this scenario, where you have different threads reading different parts of
+
+326
+00:38:48,880 --> 00:38:56,560
+the same block, but all the threads fall within the same block? Is that fine? That's fine as well.
+
+327
+00:38:57,120 --> 00:39:02,800
+The memory bus doesn't care which thread is reading what. All the memory thread gets,
+
+328
+00:39:02,800 --> 00:39:10,160
+in a conceptual way, is I need memory from 128 to 256. OK? And then the memory bus reads
+
+329
+00:39:10,560 --> 00:39:15,280
+OK? And then it lets the threads do whatever it wants with that. The memory controller is only
+
+330
+00:39:15,280 --> 00:39:22,000
+getting how much memory it needs. And in that case, it's still perfect. No problem whatsoever. OK?
+
+331
+00:39:30,080 --> 00:39:35,600
+Exactly. That is a great analogy. That is exactly how you think about this. OK?
+
+332
+00:39:36,480 --> 00:39:42,960
+What about this? Let's say you have alternating elements. You're not reading continuous,
+
+333
+00:39:42,960 --> 00:39:47,360
+but maybe you're reading alternating. Or maybe some fall in the previous one. It doesn't have
+
+334
+00:39:47,360 --> 00:39:54,000
+to always fall within the exact 128 bytes, right? Maybe it's shifted a little bit. In that case,
+
+335
+00:39:54,640 --> 00:39:58,800
+while you may only be reading this much of this block, you have to read the whole thing.
+
+336
+00:39:59,040 --> 00:40:07,440
+The bus has to still read the whole block. In this case, you're still reading 128 bytes,
+
+337
+00:40:08,320 --> 00:40:14,800
+but you're using 128 bytes, but you have to read 256 bytes,
+
+338
+00:40:15,520 --> 00:40:22,800
+in which case your bus utilization becomes 50%. OK? Everybody on board with this?
+
+339
+00:40:24,240 --> 00:40:28,000
+So when you're doing alternating or jumping around, where do we do jump around?
+
+340
+00:40:29,520 --> 00:40:35,440
+Well, in which algorithm did we jump around? Or have some kind of a step?
+
+341
+00:40:38,480 --> 00:40:42,720
+These are just introductions, right? Where we had steps, where we were reading from one place,
+
+342
+00:40:42,720 --> 00:40:46,480
+writing to another. That would give you a different bus utilization.
+
+343
+00:40:46,880 --> 00:40:52,000
+And you can do this. Yeah, yeah, yeah. You can do that.
+
+344
+00:41:03,680 --> 00:41:04,880
+Any other questions on this?
+
+345
+00:41:07,600 --> 00:41:12,320
+OK. So let's look at an L2 example. Now, let's say we have the same example,
+
+346
+00:41:13,280 --> 00:41:21,440
+OK? But it's falling in L2. Now, let's take a look at it. Now, because L2 blocks are smaller
+
+347
+00:41:21,440 --> 00:41:30,160
+than 32 kilobytes, or 32 bytes each, now we need five of these blocks, and we get an 80% utilization.
+
+348
+00:41:31,840 --> 00:41:35,680
+Utilization shouldn't be the only number you focus on, but it is an important number.
+
+349
+00:41:36,400 --> 00:41:42,560
+OK? But what you're seeing here is the total number of memory, total amount of memory that
+
+350
+00:41:42,560 --> 00:41:53,040
+you read is 160 bytes compared to 256 bytes. But this may be faster if you are excluding enough
+
+351
+00:41:53,040 --> 00:41:58,720
+blocks. It may be faster. Not always, OK? What about this?
+
+352
+00:41:58,720 --> 00:42:05,360
+All the threads are reading one place from memory.
+
+353
+00:42:11,680 --> 00:42:16,960
+Right. You're still reading the same amount of memory as you did in our first example,
+
+354
+00:42:17,520 --> 00:42:25,360
+but all the threads only need one value. So as a ratio of reading one value compared to 32 values
+
+355
+00:42:25,360 --> 00:42:30,080
+that you're actually reading in the bus, it's not great utilization. But if you have to read it,
+
+356
+00:42:30,080 --> 00:42:36,080
+you have to read it. If you can avoid this, fantastic. Avoid it. OK? So make sure that
+
+357
+00:42:36,080 --> 00:42:40,320
+if you're reading something like this, you are doing it purposefully and intentionally.
+
+358
+00:42:40,320 --> 00:42:50,320
+Don't do it by mistake. Yeah? So if we look at L2, the same example in L2, now we get 12.5%
+
+359
+00:42:50,320 --> 00:42:57,840
+utilization. Still not great, but maybe better than what we had before. OK? So that's why don't
+
+360
+00:42:57,840 --> 00:43:02,880
+only pay attention to the bus utilization. Make sure that your algorithm is well thought out.
+
+361
+00:43:03,520 --> 00:43:07,600
+This may still be bad. If you're doing it unnecessarily, it's still bad.
+
+362
+00:43:08,640 --> 00:43:13,920
+But in some algorithms, you have to do it. For example, in the last step of reduction, where you
+
+363
+00:43:13,920 --> 00:43:19,600
+have to write something to global memory, you can't avoid it. Right? You can't just throw away
+
+364
+00:43:19,600 --> 00:43:27,200
+the result. But make sure you're only doing it when absolutely necessary. So as a function,
+
+365
+00:43:36,320 --> 00:43:41,760
+just like you have registers that are closer to the poles and global memory is further away or
+
+366
+00:43:41,760 --> 00:43:49,200
+slower from the poles, you have L1 and L2 cache, which take global memory and store it in L1, L2,
+
+367
+00:43:49,280 --> 00:43:52,560
+and then they give it to your register. So if you're having...
+
+368
+00:43:59,920 --> 00:44:06,720
+So there are blocks. When you get into designing hardware, you make certain tradeoffs
+
+369
+00:44:07,360 --> 00:44:12,560
+about what can be random and what can be sequential. So the more faster you want,
+
+370
+00:44:12,560 --> 00:44:15,440
+the more sequential it has to be, the more predictable it has to be.
+
+371
+00:44:16,320 --> 00:44:22,640
+The slower it is, for example, hard disk drives have complete randomness. Whereas if you look
+
+372
+00:44:22,640 --> 00:44:27,760
+at even solid-state drives, you're going to get some level of sequential. So that's kind of what
+
+373
+00:44:27,760 --> 00:44:33,440
+you get. That's kind of how hardware is designed. So you get global memory, it gets stored in cache,
+
+374
+00:44:33,440 --> 00:44:40,400
+and then the cache becomes faster way to access it from the threads. Any other questions on this?
+
+375
+00:44:41,040 --> 00:44:47,360
+Okay. So if we generalize this, if you have threads reading from all over the place,
+
+376
+00:44:48,320 --> 00:44:54,960
+in L1 cache, you're going to get n times 128 total reads, and your bus utilization will be 128
+
+377
+00:44:55,600 --> 00:45:00,720
+divided by n times 128, if each n is reading from a different block.
+
+378
+00:45:02,720 --> 00:45:08,400
+And similarly, in L2, you'll get an n divided by 28. That's kind of how you get it.
+
+379
+00:45:10,720 --> 00:45:17,520
+Okay. So these are conceptual examples to show you how bus utilization works.
+
+380
+00:45:18,160 --> 00:45:20,240
+We'll come back to it in a little bit. Okay.
+
+381
+00:45:22,560 --> 00:45:26,960
+The other thing I want to talk to you about, this is just two slides, is a reminder for
+
+382
+00:45:26,960 --> 00:45:33,520
+shared memory. And I'll show you how to launch shared memory in a new way at this point. So
+
+383
+00:45:34,880 --> 00:45:38,160
+you all remember underscore underscore shared, you've used it plenty of times,
+
+384
+00:45:38,160 --> 00:45:44,880
+please continue to use it, it's always good. To define this, you should do shared underscore
+
+385
+00:45:44,880 --> 00:45:49,680
+underscore float myvar. This happens with the kernel. Or there's a second way to specify it.
+
+386
+00:45:50,960 --> 00:45:58,720
+You can say extern shared float myvar. This goes in the kernel. This line goes in the kernel.
+
+387
+00:45:59,760 --> 00:46:05,280
+In your kernel launch, you have blocks, you have threads, now you have a new number,
+
+388
+00:46:05,360 --> 00:46:10,240
+shared bytes. Okay. What's the difference between these two? What's the main difference between
+
+389
+00:46:10,240 --> 00:46:20,160
+these two? What's the requirement here? The cycle is picked at compile time. So you can determine
+
+390
+00:46:20,160 --> 00:46:24,800
+it based on what code you're running, how big your data is and stuff like that. You can't
+
+391
+00:46:24,800 --> 00:46:31,040
+determine that here. Here you can, this is dynamic. This allows you to compute the shared
+
+392
+00:46:31,040 --> 00:46:36,320
+memory at runtime and then tell the kernel how much shared memory you need. Okay.
+
+393
+00:46:38,720 --> 00:46:44,320
+So as a reminder, shared memory is communication only within the block, you cache it,
+
+394
+00:46:45,200 --> 00:46:50,480
+improve global memory access, and then it's divided into 32-bit banks, which we covered last
+
+395
+00:46:50,480 --> 00:46:56,080
+time. Okay. So we'll come back to that. Everybody clear on shared memory? Any questions? Anything
+
+396
+00:46:56,080 --> 00:47:00,240
+you want me to revisit from last time? Except banks, which I will revisit in a little bit.
+
+397
+00:47:02,000 --> 00:47:09,680
+Any questions on this? Okay. All right. So let's take a look at matrix transpose.
+
+398
+00:47:09,680 --> 00:47:12,640
+Okay. We did the theory. Let's take a look at a practical example.
+
+399
+00:47:17,760 --> 00:47:24,400
+So matrix transpose is what we call inherently parallel or embarrassingly parallel. Okay.
+
+400
+00:47:24,960 --> 00:47:28,960
+The parallelism is so obvious that if you don't do it, it's kind of like an embarrassment.
+
+401
+00:47:29,920 --> 00:47:35,280
+So it's very simple to do. Like we discussed before, it's literally the same as a copy
+
+402
+00:47:35,280 --> 00:47:39,520
+operation, except we are copying it into a different location. We are copying each element
+
+403
+00:47:39,520 --> 00:47:46,000
+into a different location. So on a CPU, I'm not even going to bother reading the code because
+
+404
+00:47:46,000 --> 00:47:52,800
+all of you know this. There's nothing complicated there. It's very easy to do. It's slow because
+
+405
+00:47:52,800 --> 00:47:58,080
+it's often squared. You have two for loops there and it's often squared. Okay. But we are not in
+
+406
+00:47:58,160 --> 00:48:08,880
+a CPU class. We are in GPU class. Okay. So on the GPU, the idea is to do transpose that you launch
+
+407
+00:48:08,880 --> 00:48:15,680
+one element per thread, you compute the index, you compute the copy index, and you copy the data.
+
+408
+00:48:16,720 --> 00:48:24,640
+Okay. Pretty simple. Like the algorithmically, it's not complex whatsoever. Our performance
+
+409
+00:48:24,640 --> 00:48:31,840
+is now O of one. We went from O of N squared to O of one because the parallelism is built in.
+
+410
+00:48:31,840 --> 00:48:39,520
+It's implicit in the CPU. So now, essentially what you're doing is on the GPU, you're doing a
+
+411
+00:48:39,520 --> 00:48:44,720
+memcpy. Even though it might be in different indices, you're still doing one global memory
+
+412
+00:48:44,720 --> 00:48:55,680
+to global memory memcpy. Okay. So if memcpy bandwidth is 100% of practical GPU bandwidth,
+
+413
+00:48:55,680 --> 00:49:02,480
+different for all of our GPUs, how much should we get for transpose? So I want you all to do
+
+414
+00:49:02,480 --> 00:49:09,520
+something. I was going to get posters. I want you all to do something. Take whatever pen you have,
+
+415
+00:49:09,520 --> 00:49:13,600
+paper. If you want to come on the board and write on the board, I'm more than happy for you to.
+
+416
+00:49:13,600 --> 00:49:17,040
+That was another thing I was going to ask you to do. Come write your predictions on the board.
+
+417
+00:49:19,440 --> 00:49:24,880
+Actually, let's do that. Let's do that. Why don't all of you come up, write your name and
+
+418
+00:49:24,880 --> 00:49:32,480
+write a number for how much faster. So two things. I want you to write as a percentage of
+
+419
+00:49:34,000 --> 00:49:39,760
+device to device copy bandwidth. So if you think it'll be 50%, write 50%, okay,
+
+420
+00:49:39,760 --> 00:49:45,040
+of device to device bandwidth that we'll see. And then I want you to write how many times
+
+421
+00:49:45,040 --> 00:49:50,080
+faster it'll be than the CPU. Okay. Let's do those. Let's do that very quickly. Okay. Let's
+
+422
+00:49:50,080 --> 00:49:57,520
+not spend too much time. That's fine. Somebody wanted you to erase that side.
+
+423
+00:49:59,600 --> 00:50:03,840
+Again, this is all fun and games. I'm probably going to base the entire
+
+424
+00:50:03,840 --> 00:50:08,320
+class's data on this thing. Okay. So make sure you get your predictions correct.
+
+425
+00:50:09,760 --> 00:50:15,280
+Come on, come on. Don't, don't be shy. Don't be shy. So, so this is how I'm going to write. Okay.
+
+426
+00:50:21,760 --> 00:50:28,080
+So I'm going to write a percentage. Okay. And I'm going to write times and then put some numbers
+
+427
+00:50:29,040 --> 00:50:31,920
+and then they're not talking to the entire chat box. So just write your numbers.
+
+428
+00:50:31,920 --> 00:50:41,600
+Anyway, it doesn't matter. Come quick, come quick. Don't want to spend too much time.
+
+429
+00:50:56,160 --> 00:50:59,280
+Remember, the times was faster than the CPU, not faster than the
+
+430
+00:50:59,280 --> 00:51:00,720
+copy kernel. That's impossible.
+
+431
+00:51:06,080 --> 00:51:08,160
+Don't look at other answers. Just come up with yours.
+
+432
+00:51:12,720 --> 00:51:17,920
+There's more talk here if you want to take a break. And then anybody talk?
+
+433
+00:51:23,360 --> 00:51:24,240
+There's more talk here.
+
+434
+00:51:29,280 --> 00:51:31,920
+Yes.
+
+435
+00:51:59,280 --> 00:52:14,880
+Percentage compared to GPU bandwidth, device-to-device bandwidth.
+
+436
+00:52:14,880 --> 00:52:20,400
+So if I use half of them, do I have to read half of them to write this?
+
+437
+00:52:20,400 --> 00:52:22,320
+No, just write it as a percentage.
+
+438
+00:52:22,320 --> 00:52:28,320
+It should be like a copy, but if you're getting 100 on copy, how much should you get on transpose?
+
+439
+00:52:29,120 --> 00:52:39,120
+All right. Anybody left?
+
+440
+00:52:41,280 --> 00:52:43,040
+I think a lot of people are here, but okay.
+
+441
+00:52:43,040 --> 00:52:50,800
+Make your guess. We'll find out.
+
+442
+00:52:59,600 --> 00:53:04,800
+All right. Last call. One minute to write.
+
+443
+00:53:13,040 --> 00:53:37,840
+Okay. All right. 30 seconds.
+
+444
+00:53:43,040 --> 00:54:07,840
+So conservative on the times faster. Remember, it was faster than CPU, but okay, we'll see.
+
+445
+00:54:08,720 --> 00:54:13,600
+Okay. So let's take a look at the naive transpose algorithm.
+
+446
+00:54:14,880 --> 00:54:18,240
+And this is purely just to walk through it just like we did on the CPU.
+
+447
+00:54:19,360 --> 00:54:25,040
+We compute the global row index in the matrix. We compute the global column index in the matrix.
+
+448
+00:54:25,760 --> 00:54:29,040
+We have an index in and an index out, which is flipped.
+
+449
+00:54:29,920 --> 00:54:32,400
+Sorry about the capitalization. I'm sure PowerPoint did that.
+
+450
+00:54:33,360 --> 00:54:36,880
+But look at how we have flipped i and j and also x and y.
+
+451
+00:54:38,560 --> 00:54:41,440
+And then index out equals index in. That's it.
+
+452
+00:54:42,800 --> 00:54:45,760
+Nothing more than that whatsoever. Any questions about this?
+
+453
+00:54:49,760 --> 00:54:52,640
+Okay. What are the problems? Yeah.
+
+454
+00:54:52,720 --> 00:55:19,520
+Not really, but we'll kind of get to the nuance of that. So what are the problems with this?
+
+455
+00:55:19,600 --> 00:55:21,840
+We already saw one problem. What was it?
+
+456
+00:55:25,760 --> 00:55:30,880
+From a profiler. Yeah. So we are not reading convenience memory, right? Okay. So let's take
+
+457
+00:55:30,880 --> 00:55:35,760
+a look at this. So we saw memory coalescing in different patterns, right? Which ones of
+
+458
+00:55:35,760 --> 00:55:45,120
+these are used for matrix transpose? Okay. Six. Where are six used?
+
+459
+00:55:50,560 --> 00:55:56,640
+I think, okay. What else? What other memory patterns are used?
+
+460
+00:55:57,520 --> 00:56:01,040
+What other memory patterns are we using when we are writing the transpose kernel?
+
+461
+00:56:04,560 --> 00:56:16,000
+So Ed says he thinks six is used for writing. For example, what are we using for reading?
+
+462
+00:56:20,800 --> 00:56:22,240
+Which ones are we using for reading?
+
+463
+00:56:22,880 --> 00:56:27,680
+Is it one? Okay. Our reading is generally continuous, so one. Are we using anything
+
+464
+00:56:27,680 --> 00:56:34,320
+else? So we are using one for reading, six for writing? Possibly, yes. What else are we using?
+
+465
+00:56:37,360 --> 00:56:39,120
+Or are we not using anything else?
+
+466
+00:56:42,800 --> 00:56:46,960
+So we are using one and we are using one for reading.
+
+467
+00:56:47,920 --> 00:56:52,400
+So we are using one and we are using six, but we're also using two. Two is getting used when
+
+468
+00:56:52,400 --> 00:56:58,240
+we are writing diagonal blocks. Remember, when you're doing the diagonals, you're reading and
+
+469
+00:56:58,240 --> 00:57:06,320
+writing within the same space. Okay. So that's why we use diagonal blocks. One is good. We know
+
+470
+00:57:06,320 --> 00:57:14,240
+one is good. One gets maximum bus utilization. Four is bad. This is what we're using for
+
+471
+00:57:15,040 --> 00:57:26,160
+writing. This becomes bad. This is where, remember how we saw the 500 number?
+
+472
+00:57:31,680 --> 00:57:38,080
+Remember this? Remember this number? That is coming because you are writing
+
+473
+00:57:38,800 --> 00:57:46,320
+that is coming because you are writing one memory for each block in a way. Okay. So now,
+
+474
+00:57:46,320 --> 00:57:52,000
+even though you're only writing one element within that block of memory, you're still
+
+475
+00:57:52,880 --> 00:57:56,240
+processing that much memory. You're still reading or writing that much memory,
+
+476
+00:57:56,880 --> 00:58:02,400
+because that's how the memory controller works. So that's why you're 67 when reading is perfect.
+
+477
+00:58:02,400 --> 00:58:09,040
+It's 100% utilization is what you need, but now you're writing 530 megabytes,
+
+478
+00:58:09,600 --> 00:58:12,880
+which has all of that extra memory that you need.
+
+479
+00:58:14,720 --> 00:58:20,880
+So that's kind of, again, reading this, you can infer it back. I'm here to teach you as an
+
+480
+00:58:20,880 --> 00:58:25,680
+example, but every time you see this and it doesn't add up, it doesn't make sense,
+
+481
+00:58:26,480 --> 00:58:34,000
+that's kind of what is happening. Okay. All right. Another example, another way of looking at this
+
+482
+00:58:34,000 --> 00:58:39,920
+is you're reading two elements, so you're reading 10 blocks, but then you're writing in random way.
+
+483
+00:58:39,920 --> 00:58:46,080
+So for example, you may be reading in thread one, you may be reading three and writing in here,
+
+484
+00:58:46,080 --> 00:58:50,480
+but you can actually be writing that much. That's kind of the problem that's happening.
+
+485
+00:58:50,480 --> 00:59:00,080
+Okay. So our problem is coalesced memory, and to improve that, we want coalesced memory.
+
+486
+00:59:00,720 --> 00:59:06,480
+How do we do that? What's a solution to flip to having coalesced memory reads a byte?
+
+487
+00:59:08,560 --> 00:59:15,360
+Shared memory, kind of a given, given that I gave that in the code. Okay. So let's take a look at
+
+488
+00:59:15,360 --> 00:59:23,920
+shared memory. What it allows us to do is instead of having randomized writes within a block,
+
+489
+00:59:24,960 --> 00:59:30,240
+you use shared memory to flip within a block. Okay. And then you can write it
+
+490
+00:59:31,440 --> 00:59:38,000
+streamlined to the GPU. Okay. So we'll change the algorithm a little bit. We'll compute the
+
+491
+00:59:38,000 --> 00:59:43,920
+input index, same as the naive transpose. We'll then copy data into the shared memory.
+
+492
+00:59:45,680 --> 00:59:51,760
+We'll then compute the output index. Output index doesn't change, but except that it has
+
+493
+00:59:51,760 --> 00:59:59,920
+coalesced memory access now. And transpose only happens in shared memory. Okay. So this is kind
+
+494
+00:59:59,920 --> 01:00:06,720
+of what it looks like. You have a global memory of a matrix. You read that into shared memory
+
+495
+01:00:06,720 --> 01:00:12,160
+everywhere. You do a synthreads, because every time you write into shared memory, you should
+
+496
+01:00:12,160 --> 01:00:18,880
+do a synthreads. Do the transpose in shared memory. See how the transpose is happening here.
+
+497
+01:00:19,680 --> 01:00:26,960
+And then you write all of these out. Okay. Another way to see this, another visualization. I just
+
+498
+01:00:26,960 --> 01:00:33,280
+give you different visualizations so that you understand it. What's happening here is for this
+
+499
+01:00:33,280 --> 01:00:41,360
+block, you're reading it into shared memory just normally. Do a synthreads. Within the block,
+
+500
+01:00:41,360 --> 01:00:50,160
+you're flipping. Okay. So see how this is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 CD. You're flipping this
+
+501
+01:00:50,160 --> 01:00:55,040
+into columns. So instead of 0, 1, 2, 3 as a row, you get 1, 2, 3 as a column.
+
+502
+01:00:56,480 --> 01:01:02,320
+This is perfectly fine. Shared memory gets you random access. You don't have a problem of random
+
+503
+01:01:02,320 --> 01:01:10,720
+access in shared memory. Okay. This is perfectly fine. But now, what you get is this very well
+
+504
+01:01:10,720 --> 01:01:19,760
+written out here. Okay. So now, look at this. So you have 2 as a row. 2, 3, 4, 5. 2, 3, 4, 5.
+
+505
+01:01:20,800 --> 01:01:29,200
+6, 5, 2, 1. 6, 5, 2, 1. 18, 2, 7, 9. 0, 4, 3, 7. Transpose, right? So you took that and put it
+
+506
+01:01:29,200 --> 01:01:36,400
+here, except what you did is you flipped it in shared memory. So what's actually happening in
+
+507
+01:01:36,400 --> 01:01:42,240
+the background is this thread is writing to this thread. That's easy and clear.
+
+508
+01:01:44,080 --> 01:01:50,160
+Well, where was this thread writing in 9? Don't think about the element.
+
+509
+01:01:51,360 --> 01:01:56,960
+The thread which read this element, where did that write in 9?
+
+510
+01:01:56,960 --> 01:02:10,960
+It wrote it here. You're right. It wrote it here. 4 wrote it here. 5 wrote it here.
+
+511
+01:02:11,600 --> 01:02:16,720
+If we take this 7, this 7 wrote it here. What's actually happening is threads that were continuous
+
+512
+01:02:16,720 --> 01:02:23,520
+here now have to scan all of this memory, scan all of this memory to go to the next thread.
+
+513
+01:02:23,520 --> 01:02:28,560
+So they're not continuous anymore. They're not writing continuous. We're changing this.
+
+514
+01:02:29,760 --> 01:02:35,360
+This is getting transposed here. That's easy to understand. Now what's happening is
+
+515
+01:02:36,160 --> 01:02:45,840
+instead of the 3 writing 3 here, 3 writes to 6. 3 takes this element here and puts it here.
+
+516
+01:02:45,840 --> 01:02:53,760
+This thread here takes this element and puts it here. So now you have threads writing continuously
+
+517
+01:02:53,760 --> 01:03:00,080
+as well. Make sense? All right, let's take a look at the code.
+
+518
+01:03:02,960 --> 01:03:07,360
+So the first thing we do is compute the blocks. Why do we do the blocks?
+
+519
+01:03:08,240 --> 01:03:13,600
+Because if we take a look at this matrix, forget the elements inside.
+
+520
+01:03:14,400 --> 01:03:22,400
+If you think of the thick lines, this transpose is essentially here. If you think of them as
+
+521
+01:03:22,400 --> 01:03:28,400
+submatrixes, you're first transposing the submatrix and then transposing the elements inside.
+
+522
+01:03:29,920 --> 01:03:34,800
+So that's why we store this Bx and By because we have first transposed the Bx and By.
+
+523
+01:03:34,880 --> 01:03:45,600
+Input, transposed output. So see how input is Bx times threadIdx.x. Output Ti,
+
+524
+01:03:46,240 --> 01:03:52,240
+transposed Ti is By. See how we are switching these blocks. Remember how I said we'll transpose
+
+525
+01:03:52,240 --> 01:03:58,720
+the blocks first? So that's what is happening. Bx is becoming for j. By is becoming for i.
+
+526
+01:03:59,680 --> 01:04:06,880
+But notice threadIdx.x and threadIdx.y don't change. x is associated with i, y is associated
+
+527
+01:04:06,880 --> 01:04:16,880
+with j. This is so that our threads write sequentially. And then we go to reading
+
+528
+01:04:17,520 --> 01:04:24,560
+our input into matrix, into our shared memory matrix, same threads. And then see how we're
+
+529
+01:04:24,800 --> 01:04:33,680
+flipping x and y. We have y and x, we're getting x and y. So we are flipping it in shared memory,
+
+530
+01:04:33,680 --> 01:04:40,960
+we are transposing it in shared memory. And this output, see how Tj times size y plus Ti,
+
+531
+01:04:42,000 --> 01:04:47,360
+j times size x plus i. So j is always the major component, i is always the minor component.
+
+532
+01:04:48,320 --> 01:04:50,320
+And that's why this will be a sequential write.
+
+533
+01:04:52,720 --> 01:04:58,240
+Yes, so we solve memory coordinating. Any questions?
+
+534
+01:05:02,160 --> 01:05:11,920
+Everybody get this? So let me take a pause here. And I'm going to come here.
+
+535
+01:05:11,920 --> 01:05:14,560
+And I'm going to run this again.
+
+536
+01:05:19,360 --> 01:05:26,080
+Yes, so we had device for device at 135. Naive at 35. Shared memory at 75.
+
+537
+01:05:26,960 --> 01:05:31,040
+I thought we solved memory coalescing. Why aren't we getting 130 something?
+
+538
+01:05:32,400 --> 01:05:38,640
+Why are we only getting 75? I mean, it's an improvement. It's quite fast, which is amazing.
+
+539
+01:05:39,280 --> 01:05:44,720
+But not satisfactory to our goals, right? Our goal was here. This is our goal.
+
+540
+01:05:46,320 --> 01:05:47,600
+So why are we only getting 75?
+
+541
+01:05:50,640 --> 01:05:51,440
+What's the problem?
+
+542
+01:05:56,160 --> 01:06:01,840
+Is anybody happy with this performance? Will you be like, OK, my work is done, I'm going home?
+
+543
+01:06:02,000 --> 01:06:07,440
+No, right? We are in a performance class. We are in a GPU class. So let's minimize that.
+
+544
+01:06:08,880 --> 01:06:16,880
+And I'm going to go to our profile. And I'm going to go to our shared kernel.
+
+545
+01:06:19,680 --> 01:06:25,600
+So let's take a look at first our speed of light. This kernel exhibits low computer
+
+546
+01:06:26,320 --> 01:06:37,600
+memory bandwidth. It's saying less than 60%. OK, so in our naive kernel, it said it only exhibits
+
+547
+01:06:37,600 --> 01:06:43,680
+low compute, but didn't save memory. Now it's saying memory too. OK, so let's look at why.
+
+548
+01:06:46,880 --> 01:06:51,600
+I love this chart again. Let's take a look at it. Now we're using shared memory. So not only do we
+
+549
+01:06:51,600 --> 01:06:58,320
+get this 67, 67. So first of all, we fixed this. This is now fixed. There's no 536 megabytes being
+
+550
+01:06:58,320 --> 01:07:03,840
+read. That's our first confirmation that we are on the right track. Now let's take a look.
+
+551
+01:07:04,800 --> 01:07:09,280
+This is equal. This is equal. This is equal. Fantastic. Amazing improvement.
+
+552
+01:07:10,400 --> 01:07:16,000
+Shared memory. We are using shared memory now. That's equal as well, right? Shared memory doesn't
+
+553
+01:07:16,000 --> 01:07:20,720
+have that block situation that it's reading from M day. So where's the problem?
+
+554
+01:07:23,280 --> 01:07:28,080
+Let's scroll down. Let's see what the profile. Remember, the profile is there to help you. OK,
+
+555
+01:07:29,040 --> 01:07:34,720
+let's scroll down. What do we see? Hey, there's something here.
+
+556
+01:07:34,720 --> 01:07:45,840
+We have a new table here for shared memory. OK, what are we seeing?
+
+557
+01:07:51,600 --> 01:07:55,200
+Conflict? So what's our problem now?
+
+558
+01:07:56,080 --> 01:08:05,120
+Dynamics. OK, so let's see how to solve these now. OK, so see, remember how I said,
+
+559
+01:08:05,120 --> 01:08:09,120
+I'm here to teach, but really you should all be running this profile on your own code.
+
+560
+01:08:09,920 --> 01:08:16,480
+You would be finding things like that. OK, so let's take a look. Let's come back to PowerPoint.
+
+561
+01:08:16,640 --> 01:08:30,000
+So problems. We're not close. We are about halfway from a bad conflict. We've doubled
+
+562
+01:08:30,000 --> 01:08:35,840
+our live performance, but we haven't, we're not even close to 50% of our GPU bandwidth.
+
+563
+01:08:36,960 --> 01:08:45,760
+So our solution is to remove band conflicts. Before we get there, I'm going to explain
+
+564
+01:08:45,760 --> 01:08:51,760
+band conflicts once again, because it never goes, almost nobody understands it the first time.
+
+565
+01:08:51,760 --> 01:08:58,400
+And that's no insult to anybody in this class. It is a complex topic. OK, different charts. I'm
+
+566
+01:08:58,400 --> 01:09:05,200
+not reusing the same slides from last time. So shared memory is organized into 32 packs. OK,
+
+567
+01:09:06,240 --> 01:09:12,160
+and this is the way you think about it. So you have a warp. You define, let's say,
+
+568
+01:09:12,160 --> 01:09:15,360
+shared float of file 64. This is how your memory is going to be laid out.
+
+569
+01:09:17,040 --> 01:09:20,160
+OK, there's index 0, index 1, index 2, and so on.
+
+570
+01:09:23,200 --> 01:09:30,320
+So if you want to access indices in a parallel advance, that's perfectly fine.
+
+571
+01:09:30,320 --> 01:09:35,040
+Each index goes to a different bank, grabs that memory. Everybody clear?
+
+572
+01:09:36,000 --> 01:09:40,480
+What happens if you do something like that, like this? Let's say this index here, which I've given
+
+573
+01:09:40,480 --> 01:09:51,040
+a few examples of. So thread ID wants index 0, that's in bank 0. Thread IDX1 also wants index 0,
+
+574
+01:09:51,040 --> 01:10:00,320
+that's also in bank 0. Thread IDX10 wants index 10, that's in bank 10. 16 wants 16, that's in 16.
+
+575
+01:10:00,560 --> 01:10:05,280
+16 wants 16, that's in 16. 30 and 31 both want 30, which is in bank 30.
+
+576
+01:10:06,240 --> 01:10:07,360
+What happens in this case?
+
+577
+01:10:11,280 --> 01:10:16,560
+Exactly. It should be fine because they're requesting the same address. See how both
+
+578
+01:10:16,560 --> 01:10:22,400
+are requesting 0, 2, 30, and so on? They're requesting the same address. They're requesting
+
+579
+01:10:22,400 --> 01:10:30,640
+the same bytes of memory. So this is fine. In this case, where we have now different,
+
+580
+01:10:31,680 --> 01:10:37,200
+same bank, but different memory. So you're trying to access 0 and 32, 2 and 34,
+
+581
+01:10:37,200 --> 01:10:44,560
+6 and 30 and 62. What happens now? This is a bank conflict now. This is a two-way bank conflict
+
+582
+01:10:44,560 --> 01:10:51,840
+because what's happening is these two threads are trying to access different memory, but B0
+
+583
+01:10:51,840 --> 01:11:00,720
+can only give one value at a time. In between the same bank, if you think of this vertically,
+
+584
+01:11:01,520 --> 01:11:06,880
+only one memory can cross this. If you want to think of this as a barrier or a dam or whatever,
+
+585
+01:11:07,920 --> 01:11:13,360
+or a tollbooth, as I mentioned last time, only one of these, any one of this, it doesn't have
+
+586
+01:11:13,360 --> 01:11:19,200
+to be a specific one. Any one of this can only cross one at a time. You can't have two crossing
+
+587
+01:11:19,280 --> 01:11:25,360
+at a time. So essentially, what happens here is 0 goes first and then 32 goes first.
+
+588
+01:11:26,160 --> 01:11:34,320
+So you get that in sequence. Between different banks, so for example, 0, 2, 30, they can all go
+
+589
+01:11:34,320 --> 01:11:40,240
+at once. There's parallelism in that. But there's no parallelism between 0 and 32.
+
+590
+01:11:41,200 --> 01:11:50,240
+What about something like this? This is a worst-case scenario. This is entirely sequential.
+
+591
+01:11:50,240 --> 01:11:58,320
+You've turned your wall from a parallel wall into a sequential wall. What does this remind you of?
+
+592
+01:11:58,400 --> 01:11:59,440
+What does this remind you of?
+
+593
+01:12:06,320 --> 01:12:09,120
+Right? What part of transform?
+
+594
+01:12:18,560 --> 01:12:24,240
+So if now you think of this table as your sum matrix,
+
+595
+01:12:24,320 --> 01:12:26,960
+you've put memory in there from the lead operation.
+
+596
+01:12:28,480 --> 01:12:34,640
+When you put memory in there, you put them 0, 1, 2, 3, 2, 31 at one time. Then you put 32 to 63
+
+597
+01:12:34,640 --> 01:12:39,760
+another time, and so on. Different wards are putting different rows. But now,
+
+598
+01:12:41,200 --> 01:12:44,960
+each ward is leading vertically. Each ward is leading a column.
+
+599
+01:12:45,040 --> 01:12:46,480
+Each ward is leading a column.
+
+600
+01:12:48,720 --> 01:12:54,240
+Right? So if you remember that diagram that I had with the sum matrices,
+
+601
+01:12:54,880 --> 01:12:58,640
+it had reading as rows and writing as columns.
+
+602
+01:13:00,720 --> 01:13:04,880
+So now that's essentially what you're doing. You're running into 32-way bank conflicts.
+
+603
+01:13:05,600 --> 01:13:14,880
+So if you take a look at the code, in our input, y represents row and x represents column and bank
+
+604
+01:13:14,880 --> 01:13:25,920
+number. So if you look at this, this is x, this is y. y is the row, x is the column number. But
+
+605
+01:13:26,880 --> 01:13:36,080
+in the output, x is the bank, x is the bank, and y is the column number. And within the ward,
+
+606
+01:13:36,880 --> 01:13:40,960
+this is going to change. Or this is going to stay the same, and this is going to change.
+
+607
+01:13:42,960 --> 01:13:49,280
+Remember, this is the bank number. So this is going to change, and you get a 32-way bank problem.
+
+608
+01:13:50,000 --> 01:13:59,120
+So if you take a look at this again, what you're seeing is you're reading one way,
+
+609
+01:13:59,680 --> 01:14:06,080
+and then you're writing another way. So that's your bank conflict. In global memory, it's perfectly
+
+610
+01:14:06,080 --> 01:14:11,040
+fine. But when you're reading or writing to shared memory, that's when the problem happens.
+
+611
+01:14:11,520 --> 01:14:15,520
+But when you're reading or writing to shared memory, that's when the problem happens.
+
+612
+01:14:18,080 --> 01:14:26,800
+So what we want is, when we read from input, there's no bank conflict, right? No problem.
+
+613
+01:14:27,760 --> 01:14:33,520
+But when we are writing, we are getting this kind of a 32-way bank problem. Worst kind possible.
+
+614
+01:14:34,480 --> 01:14:39,600
+You can't have a greater than 32-way bank conflict, even if you wanted to, because warp size
+
+615
+01:14:39,600 --> 01:14:59,600
+is 32. So how do we resolve this? So the answer is, we have to remap or change the way we are
+
+616
+01:14:59,600 --> 01:15:03,600
+either storing the memory, or how we are using threads.
+
+617
+01:15:16,960 --> 01:15:18,160
+What other ideas do you have?
+
+618
+01:15:18,160 --> 01:15:30,880
+In this case, the different algorithms will require different things to solve bank conflicts.
+
+619
+01:15:30,880 --> 01:15:35,760
+There's no one universal way to solve bank conflicts. But for transpose, there's a very
+
+620
+01:15:35,760 --> 01:15:47,680
+simple way to do it. We change the number of shared memory per row size. It's very simple,
+
+621
+01:15:47,680 --> 01:15:51,920
+but it takes a little bit of math to understand. So see how we are declaring
+
+622
+01:15:53,280 --> 01:15:58,480
+block size y and block size x? That's probably intuitive. That's what we would all do. Why do we
+
+623
+01:15:58,480 --> 01:16:06,720
+want to give extra memory? But if we change this to block size x plus 1, we are only changing the
+
+624
+01:16:06,720 --> 01:16:14,240
+size of the memory per row. We're not changing the number of elements or anything like that.
+
+625
+01:16:14,320 --> 01:16:18,480
+We're only changing the size of the shared memory. We're not even changing the size of
+
+626
+01:16:18,480 --> 01:16:24,320
+blocks, threads, global memory, not changing any of that. Take a look at this.
+
+627
+01:16:27,840 --> 01:16:34,720
+Our problem is, to step back, our problem within a block. This problem only exists within a block
+
+628
+01:16:34,720 --> 01:16:41,920
+because it's shared memory bank conflicts. Within a warp, our y is always going to be the same.
+
+629
+01:16:42,880 --> 01:16:50,720
+Assuming 32 by 32, our y is always going to remain the same. Our x is going to go from 0 to 31.
+
+630
+01:16:52,880 --> 01:17:05,120
+So our old index was 0 times size x, 1 times size x, all plus y. These all multiply to 32
+
+631
+01:17:06,080 --> 01:17:12,720
+and then you have a y as a constant. Size x is always 32 in our case.
+
+632
+01:17:15,520 --> 01:17:23,520
+So anything times 32 plus y will go to the y's back. That's what you have to remember.
+
+633
+01:17:25,200 --> 01:17:32,160
+But now if you change this to have 0 times size x plus 1, 1 times size x plus 1, because that's
+
+634
+01:17:32,560 --> 01:17:40,560
+what we're changing here. Now you go to different backs. Look at how you become y plus 1, y plus 10,
+
+635
+01:17:40,560 --> 01:17:48,960
+y plus 16. You're not changing how much shared memory we are copying. You're not changing how
+
+636
+01:17:48,960 --> 01:17:52,320
+many blocks we have on. You're not changing how many threads we have. You're not changing a warp
+
+637
+01:17:52,320 --> 01:17:57,920
+size. All we're changing is we are telling, hey shared memory, give me one extra useless element
+
+638
+01:17:57,920 --> 01:18:09,120
+in your memory. Why does this work? I've given you the answer. Now I'm asking you why it works.
+
+639
+01:18:09,920 --> 01:18:30,880
+So now if I show it to you visually, this is what has happened.
+
+640
+01:18:30,880 --> 01:18:45,120
+What we have said was, so now we are allocating 32 plus 1 times of memory per row. Remember that.
+
+641
+01:18:45,120 --> 01:18:51,440
+That's the key. But we are not changing the number of elements. We are still going to read 32 by 32
+
+642
+01:18:51,440 --> 01:19:02,800
+elements. All we said was, change this to x plus 1. So when you do 1 here, Smem 1, 0 is going to
+
+643
+01:19:02,800 --> 01:19:09,840
+come here. It's not going to change. In our old system, Smem of 1, 0 would have come here. First
+
+644
+01:19:09,840 --> 01:19:16,720
+row zeroth element. But now it comes here. Because there is this extra dummy element from this plus
+
+645
+01:19:16,720 --> 01:19:24,000
+1 guy. And that creates an offset. So we are not using that element for anything except to
+
+646
+01:19:24,000 --> 01:19:29,440
+avoid background. No memory gets written to it. No memory is there for me. So just to clarify,
+
+647
+01:19:29,440 --> 01:19:37,360
+the number of banks is always 32? Yes. The number of banks is always 32. The number of
+
+648
+01:19:37,760 --> 01:19:41,040
+sizes is always 32. So this is the only thing you are changing.
+
+649
+01:19:45,360 --> 01:19:52,000
+Now what happens is, the first row, your first row is written from 0 to 31 times.
+
+650
+01:19:53,840 --> 01:20:00,000
+Where is the second row written? Here. Our second row is written from D1. And then where?
+
+651
+01:20:00,000 --> 01:20:09,840
+Where does it go? It goes this way. But does it finish at 63 here? Or maybe I made a mistake here.
+
+652
+01:20:10,400 --> 01:20:19,920
+Maybe 62 here. And then it finishes here. Row 1 goes from here to here. Row 2 starts here and
+
+653
+01:20:19,920 --> 01:20:27,040
+goes till here. Still storing the same number of elements. What this grey element allows us to do
+
+654
+01:20:27,040 --> 01:20:34,080
+is offset where our 0th element of each row is within the shared memory.
+
+655
+01:20:35,360 --> 01:20:45,520
+The 0th element of 0 row is 0. The 0th element of row 1 is in bank 1. The 0th element of row 2
+
+656
+01:20:45,520 --> 01:20:50,320
+is in bank 2. And so on. So when you are trying to read all the 0th elements
+
+657
+01:20:50,320 --> 01:20:54,400
+to write as a column in a transpose, you are reading all different banks.
+
+658
+01:20:54,560 --> 01:21:02,240
+Very simple, elegant solution. Just adding two characters, plus and a 1. And it solves bank
+
+659
+01:21:02,240 --> 01:21:11,680
+conflicts. So all you need to do in your code is change this line to this line, plus 1.
+
+660
+01:21:12,640 --> 01:21:15,120
+Or it should have been flipped the other way, I think. But yeah.
+
+661
+01:21:16,080 --> 01:21:24,000
+OK. All right. So let's take a look at that in code.
+
+662
+01:21:33,040 --> 01:21:36,160
+All right. So let's make sure my CPU side is set up correctly.
+
+663
+01:21:36,960 --> 01:21:40,960
+Knife transpose, shared memory transpose. So let me copy this.
+
+664
+01:21:45,680 --> 01:21:55,920
+And then I have to set this up so that I have 32.
+
+665
+01:21:59,840 --> 01:22:00,560
+What happens here?
+
+666
+01:22:03,120 --> 01:22:08,400
+33, right? No, there's 32. It's block size. I think I add plus 1 there.
+
+667
+01:22:15,120 --> 01:22:18,080
+All right. So let's
+
+668
+01:22:25,280 --> 01:22:33,120
+I'm going to copy that exact kernel and paste it here. And all I'm going to change,
+
+669
+01:22:35,040 --> 01:22:39,920
+like I said before, is plus and 1. All right. Let's run this.
+
+670
+01:22:39,920 --> 01:22:46,960
+So we've got 75 before. We went from 37 to 75. How much are we going to go to now?
+
+671
+01:22:48,720 --> 01:22:49,760
+I have a compiler.
+
+672
+01:22:53,360 --> 01:23:04,400
+Oh. No, I don't want that. 159. Oops. Visual Studio doesn't like people. I keep forgetting
+
+673
+01:23:04,400 --> 01:23:11,600
+to recap that. I use Vim, by the way. If any of you use Vim, you have my support.
+
+674
+01:23:18,560 --> 01:23:19,360
+How did we get?
+
+675
+01:23:24,880 --> 01:23:33,840
+35. In Knive, we got 35. In shared memory, we got 74. In shared memory with bank conflicts,
+
+676
+01:23:33,840 --> 01:23:40,480
+we got 120. That's how much faster we've made our code with a few changes.
+
+677
+01:23:43,200 --> 01:23:48,880
+OK? And if you run this in the profiler, for the sake of time, I won't today,
+
+678
+01:23:48,880 --> 01:23:54,320
+you will see that the number of bank conflicts will go down to zero, literally zero. It won't
+
+679
+01:23:54,320 --> 01:24:03,680
+even be one. And that's how much better you'll have made your code. OK. All right.
+
+680
+01:24:04,560 --> 01:24:16,480
+All right. So again, a note slide, but I'll skip that for now. OK. So we are close to
+
+681
+01:24:16,480 --> 01:24:22,000
+production ready. We are 120 versus 140 something for device-to-device copy.
+
+682
+01:24:23,120 --> 01:24:26,800
+Still some way to go, right? We're not satisfied. We want that last 1% of it.
+
+683
+01:24:27,600 --> 01:24:35,200
+How can we improve? There's two ways. We do more work per thread, and we do loop and roll.
+
+684
+01:24:36,000 --> 01:24:42,080
+Why is that? Remember, I initially said, transpose doesn't have that much work to do, right?
+
+685
+01:24:43,440 --> 01:24:49,760
+So maybe we increase how much work a thread does, so that we reduce the number of blocks
+
+686
+01:24:49,760 --> 01:24:57,040
+that are waiting. And that will improve our performance. So we do that by essentially
+
+687
+01:24:57,040 --> 01:25:04,720
+loop and rolling, where we have one thread copy multiple elements. Or to think of it in an easier
+
+688
+01:25:04,720 --> 01:25:13,280
+way, one block to multiple blocks of transpose. OK? So this is kind of how it works.
+
+689
+01:25:14,240 --> 01:25:22,480
+You reduce the number of threads. You go from, let's say, a thread of size 4x4 to a thread of
+
+690
+01:25:22,480 --> 01:25:32,240
+size 4x1 in this example. And that 4x1 loops and does three more rolls. So you're doing the work
+
+691
+01:25:32,240 --> 01:25:41,680
+of 4x4 threads in 4x1 threads. OK? So this is done using a time and a size factor. OK?
+
+692
+01:25:44,240 --> 01:25:49,120
+So the walkthrough of this code is, on the host, you set the same number of blocks.
+
+693
+01:25:50,320 --> 01:25:57,360
+But there's a new number of threads per block, which is, let's say, reduced by a factor of time.
+
+694
+01:25:57,360 --> 01:26:03,280
+I won't say 4. I use 4 for this example. But of a factor of time, as we follow.
+
+695
+01:26:05,280 --> 01:26:10,320
+On the device, on your kernel, you want the same amount of shared memory. You don't want
+
+696
+01:26:10,320 --> 01:26:13,200
+to change the amount of shared memory. You still need to copy that same amount.
+
+697
+01:26:14,320 --> 01:26:20,880
+Compute the indices same as before. Then you need to use a loop to make sure you're doing
+
+698
+01:26:20,880 --> 01:26:27,040
+the multiple elements. And then you're copying the data from source to device.
+
+699
+01:26:28,000 --> 01:26:37,920
+So let's take a look at the code. So we still have just a look at tile and tile plus one.
+
+700
+01:26:38,320 --> 01:26:43,360
+Remember, we still have bank conflicts. You still want to protect from bank conflicts.
+
+701
+01:26:44,640 --> 01:26:53,840
+You have an input. OK? See how we use tile here? And then we have a pragma unroll. I showed this
+
+702
+01:26:53,840 --> 01:27:00,320
+in the last class. It tells the compiler to unroll the loop. And then you have thread id and thread
+
+703
+01:27:00,480 --> 01:27:08,880
+x plus k. This k is a factor for each row. And then you do y plus k here. And you get the
+
+704
+01:27:08,880 --> 01:27:13,600
+indices for that. Do a sync thread. You're writing to shared memory, so do a sync thread.
+
+705
+01:27:15,040 --> 01:27:23,360
+Change it so that now you're working on output indices. OK? Again, the pragma unroll. And now
+
+706
+01:27:23,360 --> 01:27:28,880
+you're going to write it out the same way. OK? So let's see how this works.
+
+707
+01:27:31,280 --> 01:27:40,400
+I'm going to go into Visual Studio. Let's keep having it. That's not good.
+
+708
+01:27:52,000 --> 01:27:53,520
+OK. It really seems on this time.
+
+709
+01:28:01,280 --> 01:28:04,560
+OK. Something's happening.
+
+710
+01:28:08,800 --> 01:28:11,520
+Yeah, it's coming back. I thought I had to restart.
+
+711
+01:28:13,280 --> 01:28:15,600
+This is what happens when you do live demos in class, by the way.
+
+712
+01:28:22,720 --> 01:28:28,800
+OK. Yeah. OK. We're back. So I'm going to shamelessly copy it because I already
+
+713
+01:28:28,800 --> 01:28:34,240
+have the solution. But you guys should definitely try to implement this. OK?
+
+714
+01:28:37,840 --> 01:28:48,960
+Copy and paste. OK? Let's make sure our CPU side is fine.
+
+715
+01:28:52,640 --> 01:28:56,400
+32.8. OK. Thailand side. OK. This should all be good.
+
+716
+01:28:56,400 --> 01:29:11,360
+Yep. All right. So we had 120 last time. How much do we go to now?
+
+717
+01:29:12,000 --> 01:29:14,960
+By reducing the number of threads we use by four.
+
+718
+01:29:18,640 --> 01:29:21,200
+I'm sure I made the same mistake of controllers.
+
+719
+01:29:21,200 --> 01:29:36,160
+Our side is not defined.
+
+720
+01:29:51,200 --> 01:30:11,040
+Let's try this one more time. I made a bad copy paste. Sorry about that.
+
+721
+01:30:11,040 --> 01:30:26,080
+All right. So let's see. There's a final part in transform. Let's see if we have some guesses.
+
+722
+01:30:27,440 --> 01:30:38,640
+We have a 90% 10x, 90% 25, 90% 30, 100% nx. That's a cheapy guess. 90% 1,000 times faster,
+
+723
+01:30:38,640 --> 01:30:45,840
+80% 30 times faster, 54 times faster, slower than memcpy, slower than memcpy by 30%,
+
+724
+01:30:46,560 --> 01:30:55,040
+so 70%, I guess, approximately. 75% n3, 50% n3, 50% n5. We can clearly see these people
+
+725
+01:30:55,040 --> 01:31:06,480
+copying each other. 80% n5 times, 80% n5 times. Somebody copied that. 30 to 100% faster.
+
+726
+01:31:08,640 --> 01:31:14,160
+All right. So let's see how much faster are we.
+
+727
+01:31:16,400 --> 01:31:21,200
+Device-to-device bandwidth 164. How much do we have here? 162.
+
+728
+01:31:23,040 --> 01:31:30,880
+I mean, within margin of error, 100%. Right? So even though we are doing a little bit more
+
+729
+01:31:30,880 --> 01:31:35,200
+compute for shared memory and this and that, all that latency is hidden away.
+
+730
+01:31:36,160 --> 01:31:42,080
+All that latency, literally all that compute we have is hidden away and we are almost equal to
+
+731
+01:31:42,080 --> 01:31:49,440
+device-to-device bandwidth. Okay. How many times faster are we? 1592 milliseconds,
+
+732
+01:31:49,440 --> 01:31:56,000
+approximately 1600 milliseconds on the CPU, 8 milliseconds on the GPU. How many times faster
+
+733
+01:31:56,160 --> 01:32:02,880
+is that? 200 times faster. We are 200 times faster than the CPU.
+
+734
+01:32:05,360 --> 01:32:14,080
+That's how we improve GPU performance. Okay. So let's take a look at a few more slides before
+
+735
+01:32:14,080 --> 01:32:21,440
+we take a break. So this is on my old laptop. I didn't generate new laptop numbers, but here we
+
+736
+01:32:21,440 --> 01:32:31,760
+had about 86 times faster than CPU. Then, oops, on a 1080 Ti, I had this on my desktop. Again,
+
+737
+01:32:31,760 --> 01:32:40,480
+the beefier the GPU, the faster it's going to be. 550 times faster than the CPU. I got 200 on my
+
+738
+01:32:40,480 --> 01:32:48,160
+laptop. A 1080 Ti, a few years older GPU, got 550 times. Okay. Of course, if you make CPU
+
+739
+01:32:48,160 --> 01:32:53,280
+multi-threaded, blah, blah, blah, or asterisks and whatever, but it's still going to be a lot
+
+740
+01:32:53,280 --> 01:33:03,040
+faster than your CPU. Okay. All right. So yeah, some of you made good predictions. Some of you
+
+741
+01:33:03,040 --> 01:33:11,200
+were underestimating the GPU, but we'll do this again for sure. So let's take a break.
+
+742
+01:33:12,080 --> 01:33:19,280
+Let's come back at 7pm. I'm giving you a slightly longer break, but I'll start sharp at 7,
+
+743
+01:33:19,280 --> 01:33:28,240
+so make sure you're back. And then we'll do the reduction side of the performance level. Okay.
+
+744
+01:33:28,240 --> 01:33:45,920
+Let's resume recording so that it's there. Okay. So the other exercise we're going to see today
+
+745
+01:33:45,920 --> 01:33:50,800
+is reduction. And reduction, like transpose, is a simple algorithm. We've seen it. We've
+
+746
+01:33:50,800 --> 01:33:56,160
+implemented it. But now we're going to see how do we go from a simple reduction
+
+747
+01:33:56,960 --> 01:34:01,440
+into a complex reduction. And I'm not talking about, like, if you get into scan, there's like
+
+748
+01:34:01,440 --> 01:34:05,120
+work-efficient scan and stuff like that, right? We're not changing the algorithm.
+
+749
+01:34:05,920 --> 01:34:10,800
+We're just optimizing the algorithm that we already have in a more computer-efficient way. Okay.
+
+750
+01:34:13,040 --> 01:34:20,320
+So let's take a look. So to recap, a reduction, at least in the case of today's
+
+751
+01:34:20,400 --> 01:34:25,120
+exercise, it's going to be a sum, is an operation where you take an array of elements,
+
+752
+01:34:26,080 --> 01:34:30,880
+then you run a binary operation on them, on each two elements, and then you get a
+
+753
+01:34:30,880 --> 01:34:39,200
+single element as an output. Okay. So we have two examples here. Another way to look at it,
+
+754
+01:34:39,200 --> 01:34:43,440
+or on the CPU side, is kind of like this, where you have this tree you're building, and
+
+755
+01:34:43,440 --> 01:34:48,720
+you have some identity you start with, and you keep performing the operation n number of times.
+
+756
+01:34:49,200 --> 01:34:56,800
+Okay. Everybody clear on this? Okay. So it's also binary in nature, right? So you can do
+
+757
+01:34:56,800 --> 01:35:04,560
+this not only with addition, but multiplication and, or whatever you want. And then you do that,
+
+758
+01:35:04,560 --> 01:35:14,720
+you kind of build this tree, and you get the result. Okay. So on the GPU side, you want to
+
+759
+01:35:14,800 --> 01:35:19,280
+do parallel reduction. You want the whole array being computed at the same time.
+
+760
+01:35:20,480 --> 01:35:28,720
+And what that gets you is to maximize the occupancy, as we call it, which is how much
+
+761
+01:35:28,720 --> 01:35:34,160
+time are those streaming multiprocessors busy? How much work are they doing? So you want to
+
+762
+01:35:34,160 --> 01:35:39,200
+hide the latency, essentially. You want to hide the memory latency. And you want to process where
+
+763
+01:35:39,200 --> 01:35:46,960
+the latency is. Okay. This operation is not very arithmetic intensive. Like we have seen
+
+764
+01:35:47,520 --> 01:35:53,920
+in work efficient and before that, there aren't many compute operations. It's just one,
+
+765
+01:35:53,920 --> 01:35:59,280
+one floating point operation, in this case, an add. And it's completely memory bound.
+
+766
+01:36:00,320 --> 01:36:02,320
+What does it mean if it's completely memory bound?
+
+767
+01:36:02,320 --> 01:36:10,240
+When I say memory bound, what does it mean? What? Sorry?
+
+768
+01:36:11,680 --> 01:36:16,560
+Bottleneck is? Memory. So what does that mean? What is the maximum performance we can get?
+
+769
+01:36:19,920 --> 01:36:23,280
+The memory bandwidth is the maximum performance we can get, even for this.
+
+770
+01:36:23,280 --> 01:36:26,320
+Even though transpose and reduction are completely different operations,
+
+771
+01:36:27,600 --> 01:36:31,200
+they're still limited by the same thing. So on GPU, you're going to see either
+
+772
+01:36:31,200 --> 01:36:36,080
+compute limited or memory limited or bandwidth related. Memory limited or bandwidth related kind
+
+773
+01:36:36,080 --> 01:36:40,960
+of means the same thing. But in this case, they're going to have the same theoretical max
+
+774
+01:36:40,960 --> 01:36:46,880
+performance. Okay. But we still want to hit that. We don't just want to settle. We still want to hit
+
+775
+01:36:46,880 --> 01:36:55,760
+it. So what we need, what's different from transpose is that we need a way to communicate
+
+776
+01:36:55,760 --> 01:37:01,280
+the partial results between blocks. If you have very, very big arrays,
+
+777
+01:37:03,440 --> 01:37:09,200
+not all, even the blocks, the result of the blocks also need to be computed patently.
+
+778
+01:37:09,760 --> 01:37:16,320
+So you need some way to do this. And a global thing is not patently. So what we do is,
+
+779
+01:37:16,320 --> 01:37:22,160
+essentially, we do a recursive reduction, where you do a reduce, you get all the results of the
+
+780
+01:37:22,160 --> 01:37:28,240
+blocks, and then you do a reduction again. But let's get to that a little later. Let's get to
+
+781
+01:37:28,240 --> 01:37:36,160
+the recursive part a little later. So comparing serial and parallel reduce. Serial reduce, you
+
+782
+01:37:36,160 --> 01:37:42,640
+get O of n, because you're doing n operations. Whereas parallel reduce, you get O of log n,
+
+783
+01:37:42,640 --> 01:37:47,920
+so you're reducing it significantly. And then you get runtime complexity of O of log n as well.
+
+784
+01:37:47,920 --> 01:37:58,960
+So if we look at the code walkthrough, this is going to be pretty much the same as
+
+785
+01:37:59,840 --> 01:38:05,280
+on transpose. In our first part of optimizing reduction,
+
+786
+01:38:05,280 --> 01:38:08,880
+we are going to do the secondary reduce on the CPU. So we are going to do
+
+787
+01:38:09,440 --> 01:38:21,920
+that for now. Later on, we'll see how to optimize that as well. So let's take a look at the code.
+
+788
+01:38:30,720 --> 01:38:37,040
+So I have number of elements set to 32 million, and the number of threads per block to 256.
+
+789
+01:38:37,680 --> 01:38:46,880
+I'm going to jump down to main to show you that that looks very similar to how we had it in
+
+790
+01:38:46,880 --> 01:38:53,440
+transpose. So for reduction state 0, we are defining the number of sets per block. This
+
+791
+01:38:53,440 --> 01:39:01,600
+is 1D, so you don't have the 2D thing. And then you are copying memory, allocating output, setting
+
+792
+01:39:01,600 --> 01:39:07,920
+the output memory to 0. 0 is identity in case of addition, so remember that. Then we are calling the
+
+793
+01:39:07,920 --> 01:39:18,320
+kernel. And then we are making sure we do a CPU side addition for the secondary recursive addition.
+
+794
+01:39:20,000 --> 01:39:25,920
+Once that happens and we verify that our goal result matches our true result, that's when we'll
+
+795
+01:39:25,920 --> 01:39:32,880
+start doing a performance benchmark. And see how the performance benchmark does include a memcpy
+
+796
+01:39:32,880 --> 01:39:39,360
+here, because it's part of the algorithm. In a lot of cases, we've told you don't do memcpy inside
+
+797
+01:39:39,360 --> 01:39:44,720
+the timer. In this case, it's needed, because without memcpy, you don't have the proper result.
+
+798
+01:39:44,720 --> 01:39:51,840
+So memcpy becomes part of the algorithm. So we do that n times, and then we get a result for it.
+
+799
+01:39:52,160 --> 01:40:00,640
+All right, let's take a look back at this.
+
+800
+01:40:02,640 --> 01:40:09,120
+So we are going to divide the code into four parts. The first part, and the fourth part,
+
+801
+01:40:09,120 --> 01:40:12,720
+we are actually not going to touch at all in this class. The first part is
+
+802
+01:40:13,760 --> 01:40:16,960
+dynamic shared memory and computed nets. That's going to be the same for all the
+
+803
+01:40:17,040 --> 01:40:21,440
+terms. We are not going to change that. The last part is copying the result of each block. That
+
+804
+01:40:21,440 --> 01:40:26,320
+is the final reduced element from each block into global value. Not going to change that,
+
+805
+01:40:26,320 --> 01:40:31,840
+because there's nothing to optimize that. These are the only two parts of the code we are going
+
+806
+01:40:31,840 --> 01:40:39,680
+to change. If these don't make sense, it will in a little bit. So let me show you what that
+
+807
+01:40:39,760 --> 01:40:44,000
+code looks like. Actually, let's just take zero first from there.
+
+808
+01:40:46,000 --> 01:40:51,760
+So state zero. Now, like we had in transport, we had naive shared, shared without back conflicts
+
+809
+01:40:51,760 --> 01:40:56,800
+and unrolled. In our reduction example, I'm just going to call it state zero, state one,
+
+810
+01:40:56,800 --> 01:41:05,760
+state two, and so on. So in state zero, the obvious way we started with, even in our lectures,
+
+811
+01:41:06,720 --> 01:41:14,240
+this is when I asked you how would you do reduce, this is what normal average people
+
+812
+01:41:14,240 --> 01:41:21,600
+would think. Okay, let's just keep adding two numbers. So to do this algorithm, this is the
+
+813
+01:41:21,600 --> 01:41:29,680
+code. And this is the exact code from the x-axis, so I'm not changing anything. So part one is you
+
+814
+01:41:29,760 --> 01:41:37,600
+do the, you declare the shared memory, and then you compute your 1 in d index. This is not going
+
+815
+01:41:37,600 --> 01:41:43,040
+to change whatsoever across this entire exercise. Okay, there's nothing to optimize between these
+
+816
+01:41:43,040 --> 01:41:51,680
+two statements. And at the last, part four is if threadIdx.x equals zero, write it to global
+
+817
+01:41:51,680 --> 01:41:57,360
+memory. There's nothing to optimize here. You can't get rid of this if, you can't have it passed
+
+818
+01:41:57,360 --> 01:42:02,400
+away from shared memory to global memory. So nothing to optimize here. All you can optimize
+
+819
+01:42:02,400 --> 01:42:10,080
+is between these two. So let's take a look at those. In the first part two, what we're doing
+
+820
+01:42:10,080 --> 01:42:15,760
+is checking the condition, and then reading the data from global memory to shared memory.
+
+821
+01:42:16,480 --> 01:42:20,800
+Simple operation, no problem. And then because we are reading into shared memory, call the
+
+822
+01:42:20,800 --> 01:42:25,840
+sync threads. And notice that I didn't put the sync threads inside this. Don't do that.
+
+823
+01:42:26,800 --> 01:42:31,440
+Okay, the second part is straight out of our slides from parallel adverts.
+
+824
+01:42:33,520 --> 01:42:37,200
+What do we have? We have c equals one, c less than blockdel.x, c times two.
+
+825
+01:42:38,400 --> 01:42:44,400
+For every alternate thread on the left, so you can remember this, for every alternate thread
+
+826
+01:42:44,400 --> 01:42:54,960
+on the left, add its right counterpart. Okay, and then we copy. Okay, so let's run this.
+
+827
+01:42:56,160 --> 01:43:09,040
+Okay, one, two. Let me escape that. I want to do something.
+
+828
+01:43:09,040 --> 01:43:18,240
+Let's see.
+
+829
+01:43:32,960 --> 01:43:38,800
+Okay, so what I wanted to do was I wanted to pre-run all the kernels in the background,
+
+830
+01:43:38,880 --> 01:43:47,680
+so I'm going to go back in a second. So while that runs, tell me over here in the slides,
+
+831
+01:43:52,560 --> 01:43:55,760
+what is the problem with that kernel? What are some of the problems you already see with that
+
+832
+01:43:55,760 --> 01:44:05,760
+kernel where we need to optimize it? We've already discussed this, so some of the ideas should be
+
+833
+01:44:05,840 --> 01:44:10,880
+written off. The modular? Yes, you want to get rid of the modular. What else?
+
+834
+01:44:16,400 --> 01:44:17,360
+What are the problems?
+
+835
+01:44:20,400 --> 01:44:21,760
+There is one more very easy.
+
+836
+01:44:24,560 --> 01:44:29,280
+This condition, right? Why are you doing c times equal to every time? So that's another.
+
+837
+01:44:30,240 --> 01:44:31,920
+And then what are some of the bigger changes?
+
+838
+01:44:38,400 --> 01:44:43,920
+So let's start with those. Let me make sure this profiling is done so that I can show it to you
+
+839
+01:44:44,560 --> 01:44:47,040
+in class. Okay, it wants to do a little bit more.
+
+840
+01:44:47,760 --> 01:44:48,800
+That'll be added.
+
+841
+01:44:58,080 --> 01:45:02,800
+Okay.
+
+842
+01:45:02,880 --> 01:45:06,560
+Okay.
+
+843
+01:45:12,560 --> 01:45:20,560
+So many times.
+
+844
+01:45:22,240 --> 01:45:28,640
+Sorry, I wanted to run this so that I have the entire profile ready to show you,
+
+845
+01:45:28,640 --> 01:45:36,480
+so maybe it's just taking a little bit of time. Any questions in the meantime of what we're doing
+
+846
+01:45:36,480 --> 01:45:51,200
+here? Questions on this stuff? I'm sure all of you have written something similar in your
+
+847
+01:45:51,200 --> 01:45:58,160
+project too, right? Okay. Any questions about how the shared memory gets written?
+
+848
+01:46:00,560 --> 01:46:02,400
+Let me show you that maybe very quickly.
+
+849
+01:46:05,200 --> 01:46:13,120
+Yeah, so let me show you that. That's a good way to spend some time. So you see how
+
+850
+01:46:13,120 --> 01:46:26,640
+in... So here, unlike transport, we aren't saying anything about the amount of sharing.
+
+851
+01:46:26,640 --> 01:46:33,760
+There's no template. There's no number inside the bracket. So we have a new way of declaring this.
+
+852
+01:46:34,320 --> 01:46:40,560
+Okay. And that is seen here. Pay attention to this.
+
+853
+01:46:43,280 --> 01:46:49,040
+We have how many blocks. This is how we have a new number.
+
+854
+01:46:49,760 --> 01:46:56,400
+Size of float, size bin.in, in which case is that block size. So we're doing block size,
+
+855
+01:46:56,400 --> 01:47:02,000
+number of floats. That's how many bytes in here. So that goes into the amount of shared memory that
+
+856
+01:47:02,000 --> 01:47:10,400
+we want to add. Okay. So this is more dynamic way of allocating shared memory. It's generally...
+
+857
+01:47:10,560 --> 01:47:17,760
+In terms of whether one is faster than the other, no, not really. This allows you to do it at runtime,
+
+858
+01:47:17,760 --> 01:47:24,160
+whereas the way we were doing it with transpose was more static because everything had to be
+
+859
+01:47:24,160 --> 01:47:34,000
+known at compile time. Okay. The other thing you can do with this is also you can have different
+
+860
+01:47:34,000 --> 01:47:39,840
+shared memory. So with the old way, you could very easily do different shared memory. This
+
+861
+01:47:39,840 --> 01:47:43,200
+also allows you to do different shared memory if you want. Okay.
+
+862
+01:47:46,160 --> 01:47:52,160
+Let's check on our profiler. Yeah, it's done. Okay. So I can close that. Let me...
+
+863
+01:47:52,160 --> 01:48:10,480
+Okay. So I'm only going to copy state zero now.
+
+864
+01:48:22,160 --> 01:48:43,760
+Okay. Let's copy production state zero. Again, if you compare this code,
+
+865
+01:48:43,760 --> 01:48:46,960
+it's exactly what I showed in the slides, except for the comments.
+
+866
+01:48:52,240 --> 01:48:58,000
+Okay. Any guesses on how much faster this naive version of reduction is going to be faster than
+
+867
+01:48:58,880 --> 01:49:06,800
+the CPU before I run this? Yeah, Tom, five times? Only five?
+
+868
+01:49:06,800 --> 01:49:10,320
+Mine is only going to be five times faster than CPU for 32 million elements?
+
+869
+01:49:13,920 --> 01:49:19,600
+I'm going to say 25 at least. I'm pretty sure I'm off with that. All right.
+
+870
+01:49:22,320 --> 01:49:28,480
+CPU reduce, 102 milliseconds, 7.37 gigabytes per second on the CPU.
+
+871
+01:49:30,480 --> 01:49:37,360
+47 milliseconds, 28.63 times. Tom, good guess? Almost five times faster.
+
+872
+01:49:38,000 --> 01:49:45,920
+I think we are about four times faster. Okay. But look at this number, 28.63. How much bandwidth
+
+873
+01:49:46,000 --> 01:49:52,880
+did my laptop have? 140, right? We're nowhere close. We need to improve this a lot more. Okay.
+
+874
+01:49:56,800 --> 01:50:04,720
+So let's go back to PowerPoint and see what we have going on. So Tom suggested
+
+875
+01:50:05,840 --> 01:50:10,720
+modular is a problem, right? So these are numbers from GPUs I tested on,
+
+876
+01:50:10,720 --> 01:50:17,600
+won't go over each one of them. But the problem was, as Tom suggested, two things.
+
+877
+01:50:18,800 --> 01:50:23,520
+Interleaved addressing, where we are jumping around, and divergent warps. Remember that?
+
+878
+01:50:23,520 --> 01:50:26,880
+Divergent warps that we don't want to be doing different things in different threads?
+
+879
+01:50:28,000 --> 01:50:34,320
+What are the solutions? First one is easy. Remove the modular operator. Second one is remove the
+
+880
+01:50:34,320 --> 01:50:39,120
+divergent branches. So let's take the first one first. But before that, let's do warp divergence
+
+881
+01:50:39,120 --> 01:50:45,120
+for a little bit. I'm sure I'm going to be reiterating a lot of this, but essentially you
+
+882
+01:50:45,120 --> 01:50:53,360
+have 10, 24 threads, up to 10, 24 threads per block. You have 32 threads each. Okay. And you
+
+883
+01:50:53,360 --> 01:51:00,080
+want all of those threads, all of those 32 threads to execute in lockstep. You want them to execute
+
+884
+01:51:00,080 --> 01:51:05,920
+the same commands at the same time. So as an example, if you have, let's say my warp is eight
+
+885
+01:51:05,920 --> 01:51:11,920
+threads here. If they all execute the if condition at the same time, half of them go to
+
+886
+01:51:13,440 --> 01:51:18,720
+the first one, half of them go to the second one. That's a problem. Now threads are not doing any
+
+887
+01:51:18,720 --> 01:51:25,280
+work and waiting for it. Okay. Now you have a different condition where the entire warp
+
+888
+01:51:25,280 --> 01:51:31,760
+does one thing or the other. That's fine. Okay. All the threads in a warp should ideally be doing
+
+889
+01:51:31,760 --> 01:51:39,680
+the same thing at the same time. So the suggestion here is to have the threads in a block,
+
+890
+01:51:39,680 --> 01:51:46,720
+first of all, make the multiples of 32. And then incomplete warps are essentially unusable. So
+
+891
+01:51:46,720 --> 01:51:52,080
+what you want to do is you want to take all the used and done threads and put them in warps by
+
+892
+01:51:52,080 --> 01:52:02,160
+themselves so that they exit early. Okay. But back to reduction. So we want to do two things
+
+893
+01:52:02,160 --> 01:52:12,640
+first. Okay. We want to, we want to remove the module. Okay. As step one in removing divergent
+
+894
+01:52:12,640 --> 01:52:21,760
+clutches. And if you look at this, okay, every time for each operation, we are checking,
+
+895
+01:52:21,760 --> 01:52:27,520
+each time the loop goes, we are doing C less than locked into X. We are doing C times the
+
+896
+01:52:27,520 --> 01:52:34,560
+move. And we are doing this, which is a very, very bad operation. Okay. So how do we change this?
+
+897
+01:52:36,720 --> 01:52:40,160
+We do something like this. Remember, I'm only showing you part of the code. I'm not going to
+
+898
+01:52:40,160 --> 01:52:45,120
+show you, if I'm only showing you, for example, part three here, that means part two and part
+
+899
+01:52:45,120 --> 01:52:49,760
+four and part one remains the same. Okay. Okay. Let's take a look at this for loop now.
+
+900
+01:52:52,000 --> 01:52:56,960
+We changed this a little bit. We did C equals one, C less than block bit.x, C
+
+901
+01:52:58,080 --> 01:53:02,880
+multiplied equals two. This is the same as our old for loop. We are not changing this.
+
+902
+01:53:02,880 --> 01:53:08,160
+This is our old code here. Okay. We're not changing the for loop. What we are changing
+
+903
+01:53:08,160 --> 01:53:14,640
+is we are storing this index. We're using a register to do multiplication and then do a
+
+904
+01:53:14,640 --> 01:53:22,640
+comparison compared to using a modulo. It's checking the same condition. Okay. It's the
+
+905
+01:53:22,640 --> 01:53:28,240
+exact same condition, except you're removing the modulo. So if you're ever using a modulo
+
+906
+01:53:28,240 --> 01:53:33,520
+in a knit condition, think about how you want to change that. That's the first thing you do.
+
+907
+01:53:34,480 --> 01:53:39,280
+You don't even try to restructure the for loop or anything like that. The first thing you do is
+
+908
+01:53:39,280 --> 01:53:47,280
+how do you remove that? Okay. So this is essentially what I want you to notice here.
+
+909
+01:53:48,400 --> 01:53:56,560
+Okay. Let's take a look at our performance now. I'm going to go back to my reduction copy because
+
+910
+01:53:56,560 --> 01:54:08,080
+I don't want to code live and I'm going to copy this and paste it in my reduction.
+
+911
+01:54:09,760 --> 01:54:13,840
+All the CPU side for reduction is set up already. So I'm not changing any of that.
+
+912
+01:54:15,120 --> 01:54:22,400
+And this is purely for saving time. Okay. So we were at 25 before. How much are we going to get
+
+913
+01:54:22,400 --> 01:54:33,120
+to now? Just by removing the modulo. We were at 25 gigabytes per second or 28 now, and we are at 41.
+
+914
+01:54:34,160 --> 01:54:41,120
+One operation, we removed a modulo operation. There's nothing else we did. And we went from 28
+
+915
+01:54:41,120 --> 01:54:50,240
+to 41. No change in memory, how we are reading, how we are writing, no bank conflicts or anything
+
+916
+01:54:50,240 --> 01:54:55,200
+like that. We removed modulo. That's the only thing we did. Now you know how bad modulo is.
+
+917
+01:54:56,800 --> 01:55:06,880
+Okay. All right. So let's go back to our slides and some more performance numbers.
+
+918
+01:55:07,520 --> 01:55:13,040
+So of our two part thing, we removed modulo. We went to from 28 to 41, but there's still
+
+919
+01:55:13,040 --> 01:55:21,280
+a hundred more gigabytes that we need to accomplish. Okay. So our second problem
+
+920
+01:55:21,280 --> 01:55:26,240
+was interleaved addressing. So this is what stage one and stage two are doing.
+
+921
+01:55:27,200 --> 01:55:30,320
+What do we want to change this to? We saw this in class last time,
+
+922
+01:55:31,600 --> 01:55:34,160
+in parallel algorithms. What do we want to change this to?
+
+923
+01:55:34,160 --> 01:55:44,640
+We want to shift it onto the left, right? You want all the left elements to be writing
+
+924
+01:55:44,640 --> 01:55:52,880
+and reading from the right. Okay. You want this. Okay. So this is sequential addressing
+
+925
+01:55:52,880 --> 01:56:00,800
+and non-divergent warps. Okay. So to do this, what is the start? What is the start of our
+
+926
+01:56:01,120 --> 01:56:04,400
+We are not changing the for loop, right? We are not changing how the indexing is done.
+
+927
+01:56:05,440 --> 01:56:06,880
+What is the start of this for loop?
+
+928
+01:56:14,000 --> 01:56:21,040
+No, you're starting, this is now your step. It's not your offset, it's your step.
+
+929
+01:56:21,920 --> 01:56:23,760
+So what is the step in the first case?
+
+930
+01:56:26,480 --> 01:56:38,480
+Sorry? What if I do? No, you're starting with the largest difference and halving it every time.
+
+931
+01:56:38,480 --> 01:56:44,400
+So what are we starting with? Block to length? No, that's power. You get the power.
+
+932
+01:56:45,200 --> 01:56:51,120
+If you think there's a block size of 16, what are we starting with? What is our offset
+
+933
+01:56:51,120 --> 01:57:00,800
+in the block size? Yeah, block size divided by 2. So our start is block them by 2. What is our step?
+
+934
+01:57:04,880 --> 01:57:10,480
+In our for loop, so in for loop you have start, condition, or start, step, and end, right?
+
+935
+01:57:11,120 --> 01:57:17,120
+End is your condition. What is your step? What is changing in each iteration?
+
+936
+01:57:25,920 --> 01:57:32,240
+Yeah, so what is happening to the offset? It's going down by half every time,
+
+937
+01:57:32,240 --> 01:57:36,080
+right? So C equals C by 2. Is there a faster way to do this?
+
+938
+01:57:40,560 --> 01:57:47,440
+What is that operator called? Bit shift. Bit shift. You do that. That is way faster.
+
+939
+01:57:49,520 --> 01:57:53,920
+What's the end? What is the exit condition for the for loop?
+
+940
+01:58:00,480 --> 01:58:06,640
+So that. So C equals 1 or C greater than 0. C greater than 0 is a better condition.
+
+941
+01:58:07,440 --> 01:58:10,720
+And that's all we're going to change. This is the only thing we are going to change in stage 2 now.
+
+942
+01:58:12,640 --> 01:58:21,280
+So this is our old form, OK? Now we're changing this for C equals block them by 2, C greater than
+
+943
+01:58:21,280 --> 01:58:27,440
+0, C greater than greater than 1. Look at this beautiful if condition here. There are 8.x,
+
+944
+01:58:27,440 --> 01:58:32,480
+so it's indigent, digital compilers, and ringing power. If you compare these two,
+
+945
+01:58:33,360 --> 01:58:39,280
+even stage 1, it's an improvement because now you're reducing how many compute operations
+
+946
+01:58:39,280 --> 01:58:44,560
+you're doing. That's way better than stage 0, which had a modular limit, OK?
+
+947
+01:58:45,600 --> 01:58:50,480
+Any questions about this? Any questions about this operation and why we did it?
+
+948
+01:58:53,200 --> 01:58:56,720
+OK. Let's see how much performance improvement we're getting.
+
+949
+01:58:57,280 --> 01:59:01,280
+Reduction, stage 2.
+
+950
+01:59:14,160 --> 01:59:16,960
+All right. We were at 41. Any guesses how much we go to now?
+
+951
+01:59:17,760 --> 01:59:20,480
+Now we are changing how we are reading and writing memory, by the way,
+
+952
+01:59:21,040 --> 01:59:29,040
+or at least in shared memory. How much do we go to? So we went from 28 to 38 this time to 50.
+
+953
+01:59:29,040 --> 01:59:34,960
+So with that margin of error, another 25% improvement. How many times faster are we
+
+954
+01:59:34,960 --> 01:59:44,560
+than the CPU? So CPU is 183 milliseconds. We are already at 27, right? So we are making big steps,
+
+955
+01:59:44,560 --> 01:59:47,600
+all right, but we are not satisfied. We need to go fast.
+
+956
+01:59:51,920 --> 02:00:03,920
+All right. So now what's the problem? We did fix our addressing. We fixed modular operation.
+
+957
+02:00:05,280 --> 02:00:10,640
+What are some of our problems? Is bank conflict the problem?
+
+958
+02:00:15,120 --> 02:00:19,680
+How many of you think bank conflict is a problem? Or don't think bank conflict is a problem?
+
+959
+02:00:27,360 --> 02:00:29,680
+OK. How many of you think memory coalescing is a problem?
+
+960
+02:00:35,840 --> 02:00:40,640
+OK. How many of you think that the problem is thread tap usage?
+
+961
+02:00:41,280 --> 02:00:44,240
+For instance, what's the problem with thread usage?
+
+962
+02:00:52,960 --> 02:00:56,800
+Talking about these threads, right? So this thread, nothing happens. These threads, nothing
+
+963
+02:00:56,800 --> 02:01:01,920
+happens. That's what for instance, let's try to highlight. That is a problem. Let's try to solve
+
+964
+02:01:02,880 --> 02:01:10,960
+it. So in stage two, in the first iteration, already half the threads are not used.
+
+965
+02:01:12,640 --> 02:01:23,680
+OK. So remember in transpose how we, using tile, we made one row do the work of four rows,
+
+966
+02:01:24,480 --> 02:01:28,240
+right? And that improved performance, that it got us to 100% bandwidth.
+
+967
+02:01:28,560 --> 02:01:32,240
+Here, the reverse is happening. Half the threads are not doing anything.
+
+968
+02:01:33,040 --> 02:01:35,600
+At least in transpose, all the threads were actually doing something.
+
+969
+02:01:36,480 --> 02:01:40,480
+Here, in the first iteration itself, half the threads are not doing anything.
+
+970
+02:01:41,920 --> 02:01:47,040
+Second iteration, three quarters are not doing anything. So as the number of iterations increase,
+
+971
+02:01:48,080 --> 02:01:51,920
+the number of threads as a percentage, most of them are not doing anything.
+
+972
+02:01:52,160 --> 02:01:57,040
+That's too much wasted work. The warp, some of the warps will exit, but not all of them. OK.
+
+973
+02:01:58,000 --> 02:02:05,680
+So let's, how do we improve this? So the first thing we do is let's have a warp type.
+
+974
+02:02:06,400 --> 02:02:08,320
+How do we have a warp type? What do we need to do?
+
+975
+02:02:11,920 --> 02:02:19,680
+We use some shared memory to store some data. OK. This is called a shared memory.
+
+976
+02:02:20,640 --> 02:02:26,240
+This is called add-on load. What we essentially are going to do is,
+
+977
+02:02:27,440 --> 02:02:31,360
+now that we've halved our threads, so let me actually go back to this image.
+
+978
+02:02:33,760 --> 02:02:41,200
+OK. So what was happening here is we launched with 16 threads, OK, and each thread read one
+
+979
+02:02:41,200 --> 02:02:47,600
+element here. OK. We know that's useless because already 16 threads are doing just a read and
+
+980
+02:02:47,600 --> 02:02:54,960
+nothing else. What if we don't launch these threads at all and just make these elements
+
+981
+02:02:54,960 --> 02:03:02,960
+or these threads also read this? Why not? Right? Each thread can do one more read. It's not the
+
+982
+02:03:02,960 --> 02:03:14,080
+worst thing in the world. So that's what we want to do. So what it does is it's not increasing our
+
+983
+02:03:14,080 --> 02:03:19,200
+global memory usage. Remember that. We were reading that same amount of data anyway. We're
+
+984
+02:03:19,200 --> 02:03:28,080
+just making threads reread different parts of the global memory. OK. But now that we are going to
+
+985
+02:03:28,080 --> 02:03:34,640
+make the same thread read global memory, why don't we just add it when we're reading it? Right?
+
+986
+02:03:35,360 --> 02:03:39,360
+So let's take a look at that. This is kind of what I'm talking about.
+
+987
+02:03:40,320 --> 02:03:46,080
+The first few elements I'm going to read anyway. Maybe you store them in shared memory or a
+
+988
+02:03:46,080 --> 02:03:51,840
+register. It doesn't really matter. When you read these elements, instead of giving them more memory,
+
+989
+02:03:52,640 --> 02:04:01,120
+just add it in. Right? Why do we want to put these in separate registers or separate shared memory?
+
+990
+02:04:01,120 --> 02:04:06,320
+Kind of pointless, right? Because all you're going to do is add them back in. So why not add
+
+991
+02:04:07,280 --> 02:04:16,720
+them in when you load? This is called add on load. OK. So in terms of code, all we're going to
+
+992
+02:04:16,720 --> 02:04:22,240
+change is, instead of having this if IDX less than n read global memory into shared memory,
+
+993
+02:04:23,920 --> 02:04:31,520
+now what we're going to have is open the same condition, read the first element into shared
+
+994
+02:04:31,520 --> 02:04:39,280
+memory, same as before. See this line and see this line. But now, if IDX was
+
+995
+02:04:39,280 --> 02:04:42,800
+blocked and not active less than n, so you're moving that to the second half,
+
+996
+02:04:44,880 --> 02:04:49,600
+read the global memory, not a different shared memory index. You just plus equal it.
+
+997
+02:04:50,480 --> 02:04:56,240
+So you're getting rid of one iteration now. Because you're having the number of elements you have.
+
+998
+02:04:57,200 --> 02:05:03,760
+OK. So any questions about this?
+
+999
+02:05:07,440 --> 02:05:12,000
+Any questions about why this works and how this is making an impact?
+
+1000
+02:05:18,720 --> 02:05:25,280
+Yes. Yes. That still happens. So what we're solving here, if I can go back a few
+
+1001
+02:05:26,400 --> 02:05:35,840
+slides, is, look, as a total number, this is the majority of our message. That's literally
+
+1002
+02:05:35,840 --> 02:05:43,600
+half our message. So we are solving this first one by doing add on load. We are solving this
+
+1003
+02:05:43,600 --> 02:05:48,800
+first part. But by solving this first part, we are getting rid of half of our problem ID.
+
+1004
+02:05:48,880 --> 02:05:56,320
+And that's going to be the maximum chunk of it. So any other thoughts on this?
+
+1005
+02:05:59,360 --> 02:06:00,400
+What do we do after this?
+
+1006
+02:06:03,600 --> 02:06:07,680
+So we are doing add on load for two things, right? What do we do next?
+
+1007
+02:06:08,560 --> 02:06:11,600
+We are doing add on load for two elements, or one element, and then you're adding it.
+
+1008
+02:06:23,200 --> 02:06:25,120
+In terms of optimization, what do we do?
+
+1009
+02:06:25,520 --> 02:06:30,560
+Instead, in terms of getting rid of that, we only get rid of the first half.
+
+1010
+02:06:32,560 --> 02:06:34,560
+What would we do if we wanted to do more?
+
+1011
+02:06:37,520 --> 02:06:39,520
+Why don't we do one more add on load?
+
+1012
+02:06:43,360 --> 02:06:50,560
+So we are doing add on load for two elements, and then you're adding it to the first half.
+
+1013
+02:06:50,640 --> 02:06:52,320
+Why don't we do one more add on load?
+
+1014
+02:06:55,040 --> 02:06:56,080
+Get rid of more threads.
+
+1015
+02:07:01,680 --> 02:07:05,280
+So instead of doing a single add on load, so this is a single add on load, right?
+
+1016
+02:07:06,160 --> 02:07:11,040
+Why don't we do multiple add on loads? We are not using more global memory.
+
+1017
+02:07:11,840 --> 02:07:16,400
+We are not using more shared memory. We are just doing more add on loads and reducing
+
+1018
+02:07:16,400 --> 02:07:20,240
+the number of threads we need for reading global memory.
+
+1019
+02:07:20,240 --> 02:07:22,160
+That's the biggest change we are making.
+
+1020
+02:07:25,840 --> 02:07:33,600
+Yes, exactly. We are unrolling how we are doing in our stages.
+
+1021
+02:07:34,320 --> 02:07:36,080
+Okay, so let's take a look at it.
+
+1022
+02:07:36,880 --> 02:07:42,720
+So what I'm going to do now is, instead of a single add by itself, we are going to do a single
+
+1023
+02:07:42,720 --> 02:07:48,880
+add within the loop, and then have a counter called tile that does it in the loop.
+
+1024
+02:07:48,880 --> 02:07:52,560
+So this is what our code is actually going to look like.
+
+1025
+02:07:54,160 --> 02:07:58,320
+We're going to start with shared memory of thread ID x.x0, that's identity.
+
+1026
+02:08:00,320 --> 02:08:03,440
+This loop, very simple, but we have a stage three tile.
+
+1027
+02:08:03,440 --> 02:08:07,040
+That tile is going to tell us how many adds on load we want to do,
+
+1028
+02:08:07,760 --> 02:08:09,360
+preferably a power of two.
+
+1029
+02:08:09,360 --> 02:08:11,360
+So you want it to be two, four, et cetera.
+
+1030
+02:08:12,320 --> 02:08:16,480
+And now we have this condition, same as before in a single add on load,
+
+1031
+02:08:16,480 --> 02:08:21,600
+except we do seed and plot them, and then we are doing just a bunch of add on loads.
+
+1032
+02:08:24,320 --> 02:08:28,160
+Okay, everybody clear on why this works?
+
+1033
+02:08:31,040 --> 02:08:33,600
+So if I go back a bunch of slides...
+
+1034
+02:08:33,600 --> 02:08:41,280
+One more.
+
+1035
+02:08:41,920 --> 02:08:44,880
+So what we're essentially doing is, in a single add on load,
+
+1036
+02:08:45,840 --> 02:08:49,760
+these elements will load and add these elements, okay?
+
+1037
+02:08:49,760 --> 02:08:51,040
+That's a single add on load.
+
+1038
+02:08:51,840 --> 02:08:54,560
+What we want to do with tile is, why stop here?
+
+1039
+02:08:55,200 --> 02:08:59,120
+Why not have these elements load and add these elements?
+
+1040
+02:09:00,000 --> 02:09:04,240
+These four elements load and add these four elements, and so on.
+
+1041
+02:09:04,240 --> 02:09:08,480
+So you're removing a bunch of iterations there, okay?
+
+1042
+02:09:09,440 --> 02:09:13,680
+So the secondary for loop you have in part three,
+
+1043
+02:09:13,680 --> 02:09:15,520
+essentially gets rid of the for loops,
+
+1044
+02:09:15,520 --> 02:09:17,840
+and reduces the number of threads per block you need.
+
+1045
+02:09:20,160 --> 02:09:21,680
+So let's jump forward again.
+
+1046
+02:09:23,040 --> 02:09:24,240
+I think we were here.
+
+1047
+02:09:24,960 --> 02:09:25,200
+Okay.
+
+1048
+02:09:25,200 --> 02:09:32,000
+So I'm only going to edit part two now, I'm not editing part three.
+
+1049
+02:09:32,000 --> 02:09:34,400
+So let's take a look at Visual Studio,
+
+1050
+02:09:36,960 --> 02:09:42,400
+production, stage three, and I'm going to copy it from tile, by the way.
+
+1051
+02:09:42,560 --> 02:09:43,060
+Okay.
+
+1052
+02:09:54,960 --> 02:09:57,040
+So let's do tile equals two first.
+
+1053
+02:10:01,840 --> 02:10:06,320
+So tile equals two means add on load one time, okay?
+
+1054
+02:10:07,200 --> 02:10:10,080
+So we are only getting rid of the first interleave.
+
+1055
+02:10:10,880 --> 02:10:11,680
+How much do we go?
+
+1056
+02:10:12,400 --> 02:10:18,800
+We went from 40 to 75, or 73, 70, within margin of error, right?
+
+1057
+02:10:18,800 --> 02:10:23,040
+Almost doubling our speed, because we removed that first element.
+
+1058
+02:10:23,040 --> 02:10:23,760
+What does that mean?
+
+1059
+02:10:25,360 --> 02:10:31,760
+We essentially reduced half of our research time by doing that, okay?
+
+1060
+02:10:32,400 --> 02:10:33,760
+But why stop there?
+
+1061
+02:10:33,760 --> 02:10:35,440
+We did it in the for loop, right?
+
+1062
+02:10:35,440 --> 02:10:37,200
+And we want to test our performance.
+
+1063
+02:10:38,560 --> 02:10:40,720
+I'm going to change this to four.
+
+1064
+02:10:43,040 --> 02:10:45,040
+So now we are doing four add on loads.
+
+1065
+02:10:46,320 --> 02:10:48,080
+Now we reduce two levels, essentially.
+
+1066
+02:10:49,120 --> 02:10:50,240
+So let's see how this does.
+
+1067
+02:10:53,840 --> 02:10:54,480
+What is this number?
+
+1068
+02:10:55,200 --> 02:10:56,160
+127.
+
+1069
+02:10:58,080 --> 02:10:59,200
+And I didn't even change anything.
+
+1070
+02:10:59,200 --> 02:11:00,800
+I just changed the number of adds on loads.
+
+1071
+02:11:01,840 --> 02:11:03,600
+I didn't change anything about the algorithm.
+
+1072
+02:11:04,640 --> 02:11:09,440
+I just changed how we are utilizing our threads in a useful manner.
+
+1073
+02:11:10,400 --> 02:11:12,880
+You don't want a thread just reading and going away.
+
+1074
+02:11:12,880 --> 02:11:13,840
+That's kind of pointless.
+
+1075
+02:11:13,840 --> 02:11:15,760
+You want the threads to actually be going somewhere.
+
+1076
+02:11:16,400 --> 02:11:20,000
+And now we go from 40 to 127 by doing adds on loads.
+
+1077
+02:11:20,000 --> 02:11:37,120
+Yeah, pretty much.
+
+1078
+02:11:37,120 --> 02:11:39,200
+So that's kind of what I was going to get at.
+
+1079
+02:11:39,680 --> 02:11:44,000
+Yes, you could take this number all the way to 2 power 10.
+
+1080
+02:11:44,000 --> 02:11:45,200
+And that'll be 1024.
+
+1081
+02:11:45,200 --> 02:11:45,920
+You could do that.
+
+1082
+02:11:47,040 --> 02:11:48,960
+But at some point, you're going to have diminishing returns.
+
+1083
+02:11:48,960 --> 02:11:51,120
+So look, we hit 156 now.
+
+1084
+02:11:51,920 --> 02:11:56,400
+So that's like 96%, 98% of memcpy performance.
+
+1085
+02:11:57,520 --> 02:11:59,840
+So yes, your adds on loads will get you closer.
+
+1086
+02:12:06,560 --> 02:12:08,000
+Depending on the algorithm, yes.
+
+1087
+02:12:08,640 --> 02:12:10,640
+So you don't want to be doing too much work,
+
+1088
+02:12:10,640 --> 02:12:12,560
+have too much branching, and stuff like that.
+
+1089
+02:12:12,560 --> 02:12:16,000
+You also want to have enough warps to replace your memory reads.
+
+1090
+02:12:16,000 --> 02:12:16,960
+Remember that?
+
+1091
+02:12:16,960 --> 02:12:19,680
+So you want to have at least a level of compute.
+
+1092
+02:12:19,680 --> 02:12:24,160
+You don't want to have memory things holding up your compute side.
+
+1093
+02:12:25,040 --> 02:12:26,720
+So yes, it does make a difference.
+
+1094
+02:12:27,360 --> 02:12:30,080
+OK, all right.
+
+1095
+02:12:43,760 --> 02:12:48,080
+All right, so that performance that we're getting
+
+1096
+02:12:48,080 --> 02:12:51,600
+is similar to what I've seen on other GPUs as well.
+
+1097
+02:12:53,920 --> 02:12:55,680
+So now, I did this as well.
+
+1098
+02:12:55,680 --> 02:12:57,200
+I went from 1, 2, 4, 8.
+
+1099
+02:12:59,200 --> 02:13:05,040
+But one thing that you should see is, even with all of these adds on load,
+
+1100
+02:13:06,320 --> 02:13:08,880
+the last warp is still divergent.
+
+1101
+02:13:10,400 --> 02:13:10,640
+Right?
+
+1102
+02:13:11,680 --> 02:13:13,760
+No matter how many adds on load you do,
+
+1103
+02:13:13,760 --> 02:13:16,160
+no matter how we've changed the algorithm,
+
+1104
+02:13:16,800 --> 02:13:20,880
+the last warp is still exactly that diagram that I showed you before.
+
+1105
+02:13:21,520 --> 02:13:26,480
+Within the block, as you have, let's say, 256 adds, you have 8 warps.
+
+1106
+02:13:26,480 --> 02:13:29,280
+Some of those warps will exit because all the adds are done.
+
+1107
+02:13:30,640 --> 02:13:36,240
+But within the last warp, as you're doing 32 to 16, 16 to 8, 8 to 4 elements,
+
+1108
+02:13:37,200 --> 02:13:38,480
+that warp is going to diverge.
+
+1109
+02:13:40,160 --> 02:13:40,640
+OK?
+
+1110
+02:13:41,360 --> 02:13:43,600
+So what's a possible solution to that?
+
+1111
+02:13:44,480 --> 02:13:48,880
+Because if we are able to improve that last warp performance,
+
+1112
+02:13:48,880 --> 02:13:51,040
+we are still going to improve the GPU algorithm.
+
+1113
+02:13:52,560 --> 02:13:54,160
+So that's kind of the motivation there.
+
+1114
+02:13:54,160 --> 02:14:00,400
+How do we extract that last, to quote National Treasure Nicholas Cage,
+
+1115
+02:14:00,400 --> 02:14:03,840
+how do you extract that last full measure of devotion from your algorithm?
+
+1116
+02:14:07,840 --> 02:14:09,520
+And this is kind of what I'm trying to do.
+
+1117
+02:14:10,240 --> 02:14:19,760
+And this is kind of a complicated thing, but it kind of extends what we've been doing until now.
+
+1118
+02:14:20,640 --> 02:14:22,960
+Here's what have we done in stage 3.
+
+1119
+02:14:26,560 --> 02:14:28,160
+Unroll that operation, right?
+
+1120
+02:14:28,160 --> 02:14:29,600
+Can we unroll it on the warp level?
+
+1121
+02:14:33,120 --> 02:14:35,120
+We want to unroll it now at the warp level.
+
+1122
+02:14:35,120 --> 02:14:36,080
+Let's just see how we do that.
+
+1123
+02:14:36,160 --> 02:14:39,840
+So now I'm going to split Part 3 into two parts to explain what's under this.
+
+1124
+02:14:39,840 --> 02:14:40,340
+OK?
+
+1125
+02:14:41,840 --> 02:14:44,400
+The first part is everything under C greater than 32.
+
+1126
+02:14:46,240 --> 02:14:51,440
+That is, everything until we have multiple warps in a block remains the same.
+
+1127
+02:14:51,440 --> 02:14:52,400
+No difference whatsoever.
+
+1128
+02:14:54,160 --> 02:14:57,520
+When we hit one warp, that's when we want to do something different.
+
+1129
+02:14:59,440 --> 02:15:00,000
+Is this clear?
+
+1130
+02:15:00,080 --> 02:15:01,520
+Just the split up of this.
+
+1131
+02:15:01,520 --> 02:15:03,120
+I want to make sure everybody's clear with that.
+
+1132
+02:15:03,760 --> 02:15:08,240
+As long as we have multiple warps, we do what we've been doing before.
+
+1133
+02:15:08,240 --> 02:15:08,800
+No change.
+
+1134
+02:15:10,880 --> 02:15:16,800
+Once this condition exists, that means the number of threads are less than 32.
+
+1135
+02:15:16,800 --> 02:15:18,960
+Or 32 or less, which means one more.
+
+1136
+02:15:19,680 --> 02:15:20,180
+OK?
+
+1137
+02:15:20,180 --> 02:15:22,240
+So this is where we are going to do something different.
+
+1138
+02:15:23,680 --> 02:15:24,720
+We're going to do something different.
+
+1139
+02:15:25,680 --> 02:15:30,480
+We're going to introduce a new function called warpReduce.
+
+1140
+02:15:30,480 --> 02:15:35,440
+So when we have one warp, we're going to call this new function called warpReduce,
+
+1141
+02:15:35,440 --> 02:15:38,000
+and we're going to give it the shared memory and the thread IDX.
+
+1142
+02:15:39,760 --> 02:15:40,260
+OK?
+
+1143
+02:15:41,680 --> 02:15:44,160
+In this function, we're going to do something like this.
+
+1144
+02:15:44,160 --> 02:15:46,000
+This is like almost magical.
+
+1145
+02:15:47,040 --> 02:15:51,680
+The beauty of how it works is that we're going to have a new function called warpReduce.
+
+1146
+02:15:51,680 --> 02:15:52,640
+Almost magical.
+
+1147
+02:15:53,760 --> 02:15:55,440
+The beauty of how it works is amazing.
+
+1148
+02:15:57,120 --> 02:16:02,560
+What we're going to do is, firstly, we're going to have this keyword called volatile
+
+1149
+02:16:03,280 --> 02:16:04,480
+assigned to the shared memory.
+
+1150
+02:16:05,360 --> 02:16:09,360
+What volatile does is, it tells the compiler and the GPU,
+
+1151
+02:16:10,400 --> 02:16:14,640
+I'm doing something in very normal speech.
+
+1152
+02:16:14,640 --> 02:16:17,520
+It's saying, I'm doing something crazy with my memory.
+
+1153
+02:16:17,520 --> 02:16:19,040
+I know what I'm doing.
+
+1154
+02:16:19,040 --> 02:16:21,200
+Don't try to be super smart about it.
+
+1155
+02:16:21,280 --> 02:16:21,780
+OK?
+
+1156
+02:16:22,240 --> 02:16:23,920
+So that it doesn't reorder things.
+
+1157
+02:16:23,920 --> 02:16:25,200
+It doesn't mess things about.
+
+1158
+02:16:25,840 --> 02:16:28,240
+This is very detrimental code.
+
+1159
+02:16:28,240 --> 02:16:29,200
+Don't touch my code.
+
+1160
+02:16:29,200 --> 02:16:30,560
+Don't optimize it.
+
+1161
+02:16:30,560 --> 02:16:31,840
+That's what this volatile is.
+
+1162
+02:16:32,720 --> 02:16:33,220
+OK?
+
+1163
+02:16:34,800 --> 02:16:39,440
+Now, what we're going to do is, look at this unroll.
+
+1164
+02:16:40,960 --> 02:16:43,280
+Remember, this is only happening for one warp.
+
+1165
+02:16:44,320 --> 02:16:45,280
+And the first warp.
+
+1166
+02:16:45,280 --> 02:16:46,080
+Only the first warp.
+
+1167
+02:16:46,080 --> 02:16:47,280
+Not the last warp.
+
+1168
+02:16:47,280 --> 02:16:48,400
+Not the middle warp.
+
+1169
+02:16:48,400 --> 02:16:49,440
+Only the first warp.
+
+1170
+02:16:49,440 --> 02:16:51,120
+0 to 31 threads.
+
+1171
+02:16:51,440 --> 02:16:51,940
+OK?
+
+1172
+02:16:53,040 --> 02:16:55,280
+What we're doing is complete unroll.
+
+1173
+02:16:56,160 --> 02:16:57,440
+This is still in parallel.
+
+1174
+02:16:58,240 --> 02:17:02,720
+Each thread that is between 0 and 31, go add 0.
+
+1175
+02:17:04,000 --> 02:17:06,560
+In this case, it will become 32 to 63.
+
+1176
+02:17:08,000 --> 02:17:08,500
+OK?
+
+1177
+02:17:09,760 --> 02:17:17,680
+Once that is done, all threads, 0 to 31, go add, in this case, what is it?
+
+1178
+02:17:17,840 --> 02:17:23,600
+16 to 48 or 47.
+
+1179
+02:17:25,120 --> 02:17:26,240
+Something seems wrong, right?
+
+1180
+02:17:27,120 --> 02:17:28,080
+OK, let's do one more.
+
+1181
+02:17:30,320 --> 02:17:38,960
+All threads, 0 to 31, add 8 to 40 or 39.
+
+1182
+02:17:41,440 --> 02:17:42,640
+Something seems weird, right?
+
+1183
+02:17:44,320 --> 02:17:47,440
+So let me write that down so that it's easy for you.
+
+1184
+02:17:47,840 --> 02:17:51,360
+So we'll run this.
+
+1185
+02:17:51,360 --> 02:17:51,860
+OK?
+
+1186
+02:17:56,160 --> 02:17:57,440
+And this is the same for all.
+
+1187
+02:17:59,040 --> 02:18:00,880
+This indexing doesn't change.
+
+1188
+02:18:00,880 --> 02:18:02,400
+We're not exiting any thread.
+
+1189
+02:18:02,400 --> 02:18:03,280
+There's no return.
+
+1190
+02:18:03,280 --> 02:18:04,400
+There's no if conditions.
+
+1191
+02:18:04,400 --> 02:18:05,280
+Nothing.
+
+1192
+02:18:05,280 --> 02:18:06,480
+So this remains the same.
+
+1193
+02:18:08,080 --> 02:18:08,580
+OK?
+
+1194
+02:18:09,380 --> 02:18:19,540
+Now, on the first line, we have PID plus 32.
+
+1195
+02:18:20,100 --> 02:18:24,820
+So this goes from 32 all the way to 63.
+
+1196
+02:18:26,900 --> 02:18:27,400
+OK?
+
+1197
+02:18:28,340 --> 02:18:29,140
+Same thing here.
+
+1198
+02:18:30,900 --> 02:18:31,460
+This goes.
+
+1199
+02:18:31,460 --> 02:18:32,900
+Now we have 16, right?
+
+1200
+02:18:32,900 --> 02:18:36,820
+So 16 goes to 47.
+
+1201
+02:18:39,060 --> 02:18:45,860
+8 goes to 39.
+
+1202
+02:18:50,340 --> 02:18:54,180
+4, 35.
+
+1203
+02:18:58,420 --> 02:19:01,780
+2, 33.
+
+1204
+02:19:04,500 --> 02:19:05,380
+And then 1, right?
+
+1205
+02:19:05,380 --> 02:19:11,780
+32.
+
+1206
+02:19:11,780 --> 02:19:13,300
+Have you ever seen indexing like this?
+
+1207
+02:19:15,860 --> 02:19:17,380
+What's the problem with this?
+
+1208
+02:19:20,580 --> 02:19:23,540
+Or what is odd about indexing like this?
+
+1209
+02:19:28,980 --> 02:19:30,980
+OK, let's come back to this.
+
+1210
+02:19:32,180 --> 02:19:34,100
+I'm writing to shed memory.
+
+1211
+02:19:34,100 --> 02:19:34,980
+What am I not doing?
+
+1212
+02:19:36,020 --> 02:19:39,940
+Why am I not doing sing threads?
+
+1213
+02:19:44,020 --> 02:19:45,300
+Why am I not doing sing threads?
+
+1214
+02:19:54,420 --> 02:19:55,780
+Why am I not doing sing threads?
+
+1215
+02:20:01,060 --> 02:20:02,580
+Why do we need sing threads?
+
+1216
+02:20:02,580 --> 02:20:03,620
+Let's start here.
+
+1217
+02:20:03,620 --> 02:20:04,120
+Tom?
+
+1218
+02:20:05,620 --> 02:20:08,100
+Yeah, exactly.
+
+1219
+02:20:09,140 --> 02:20:12,900
+We use sing threads because within a block,
+
+1220
+02:20:12,900 --> 02:20:15,620
+we can have different warps executing at different times.
+
+1221
+02:20:16,420 --> 02:20:19,140
+So sing threads tells all the warps,
+
+1222
+02:20:19,140 --> 02:20:21,700
+hey, get to this point, and then we'll continue on again.
+
+1223
+02:20:22,820 --> 02:20:24,180
+How many warps do we have now?
+
+1224
+02:20:24,980 --> 02:20:26,340
+One, we've guaranteed that.
+
+1225
+02:20:27,460 --> 02:20:29,620
+By this previous condition, we've
+
+1226
+02:20:29,620 --> 02:20:31,380
+guaranteed we only have one warp left.
+
+1227
+02:20:32,180 --> 02:20:34,340
+Anything else will be like, oh, I
+
+1228
+02:20:34,340 --> 02:20:35,300
+don't need to do that work.
+
+1229
+02:20:35,300 --> 02:20:35,940
+I'm going to exit.
+
+1230
+02:20:39,140 --> 02:20:40,820
+In this point, there's only one warp left.
+
+1231
+02:20:41,700 --> 02:20:42,820
+So no need of sing threads.
+
+1232
+02:20:42,820 --> 02:20:44,580
+First, we've gotten rid of that condition.
+
+1233
+02:20:46,100 --> 02:20:47,380
+Why does this condition work?
+
+1234
+02:20:47,380 --> 02:20:49,220
+Why do these indexes work?
+
+1235
+02:20:51,140 --> 02:20:53,780
+First, tell me, if we did that in a normal algorithm,
+
+1236
+02:20:53,780 --> 02:20:58,100
+not here, if we did that in production as a whole,
+
+1237
+02:20:58,100 --> 02:21:00,180
+what would be the problem of that kind of indexing?
+
+1238
+02:21:04,340 --> 02:21:13,220
+What would be the problem of reading and using that kind of indexing?
+
+1239
+02:21:14,500 --> 02:21:19,940
+Because remember, your read indexes are 0 to 31.
+
+1240
+02:21:21,060 --> 02:21:22,020
+Let's take this example.
+
+1241
+02:21:22,020 --> 02:21:23,940
+Your read indexes are 0 to 31.
+
+1242
+02:21:24,500 --> 02:21:26,420
+Your write indexes are 4 to 35.
+
+1243
+02:21:27,460 --> 02:21:28,020
+What happens?
+
+1244
+02:21:30,020 --> 02:21:31,620
+Not time complex, but close.
+
+1245
+02:21:31,780 --> 02:21:32,580
+Race conditions.
+
+1246
+02:21:34,180 --> 02:21:35,620
+You could have race conditions, right?
+
+1247
+02:21:36,340 --> 02:21:39,940
+Or read over write, write over read, whatever it might be.
+
+1248
+02:21:41,380 --> 02:21:42,180
+Why does this work?
+
+1249
+02:21:44,980 --> 02:21:48,020
+I'm not saying race conflicts and write over reads are gone there.
+
+1250
+02:21:48,740 --> 02:21:50,100
+But this still works.
+
+1251
+02:21:50,100 --> 02:21:50,900
+Why does it work?
+
+1252
+02:21:53,540 --> 02:21:59,140
+Imagine that diagram earlier, the arrow diagram and the sense.
+
+1253
+02:21:59,780 --> 02:22:00,660
+Why does this work?
+
+1254
+02:22:06,660 --> 02:22:12,580
+This works because the useful part of shared memory,
+
+1255
+02:22:13,460 --> 02:22:19,140
+where we are writing things at each step, are still consistent.
+
+1256
+02:22:20,260 --> 02:22:26,660
+But the part where these things overlap is all useless to us at that point.
+
+1257
+02:22:27,620 --> 02:22:30,580
+Do I have a diagram?
+
+1258
+02:22:30,580 --> 02:22:31,620
+No, I don't have a diagram.
+
+1259
+02:22:31,620 --> 02:22:33,540
+So I'm going to step back a little bit.
+
+1260
+02:22:37,540 --> 02:22:38,740
+Actually, I do have a diagram.
+
+1261
+02:22:41,220 --> 02:22:45,700
+So let's say we are at S-MEM, TID plus 2.16.
+
+1262
+02:22:47,380 --> 02:22:50,100
+What we are essentially going to do is, for all the times
+
+1263
+02:22:50,100 --> 02:22:52,820
+we are going to be adding an offset and saving it, right?
+
+1264
+02:22:53,860 --> 02:22:55,780
+So let's take this step for example.
+
+1265
+02:22:57,060 --> 02:22:58,420
+We do the first one.
+
+1266
+02:22:59,460 --> 02:23:03,060
+And even in this, even in this step, even in this stage,
+
+1267
+02:23:03,860 --> 02:23:07,460
+there are these threads, even though I haven't shown it,
+
+1268
+02:23:08,180 --> 02:23:09,700
+are going to want to write to this.
+
+1269
+02:23:10,420 --> 02:23:12,020
+We don't have any if conditions here.
+
+1270
+02:23:13,140 --> 02:23:15,940
+So we are going to be adding an offset and saving it, right?
+
+1271
+02:23:16,420 --> 02:23:19,140
+And they'll copy from somewhere here, and they'll try to write.
+
+1272
+02:23:21,220 --> 02:23:24,020
+But what do we know about this memory now?
+
+1273
+02:23:25,540 --> 02:23:26,740
+It's never used in the future.
+
+1274
+02:23:28,500 --> 02:23:30,340
+So we don't care about overwriting this.
+
+1275
+02:23:33,860 --> 02:23:39,780
+So once you have this, you can actually write to this.
+
+1276
+02:23:39,780 --> 02:23:48,500
+So once you have, in this stage, it will be like plus 8, right?
+
+1277
+02:23:48,500 --> 02:23:51,300
+So we are doing TID, TID plus 8.
+
+1278
+02:23:51,300 --> 02:23:54,020
+So for 33, you're adding offset of 8.
+
+1279
+02:23:54,020 --> 02:23:56,180
+16, you'll put that here, OK?
+
+1280
+02:23:57,140 --> 02:23:57,940
+So you're doing that.
+
+1281
+02:23:57,940 --> 02:23:59,300
+So you're doing TID plus 8.
+
+1282
+02:24:00,260 --> 02:24:01,860
+Then you're doing TID plus 4.
+
+1283
+02:24:02,820 --> 02:24:04,420
+0 adds 5.
+
+1284
+02:24:05,220 --> 02:24:06,420
+1 adds 6.
+
+1285
+02:24:08,340 --> 02:24:09,300
+Sorry, 1 adds 5.
+
+1286
+02:24:10,420 --> 02:24:11,380
+2 adds 6.
+
+1287
+02:24:11,380 --> 02:24:12,100
+3 adds 7.
+
+1288
+02:24:13,140 --> 02:24:16,180
+This part of the memory is still consistent, OK?
+
+1289
+02:24:16,180 --> 02:24:17,140
+So we're all good.
+
+1290
+02:24:19,220 --> 02:24:24,180
+57 is going to try to add 16 and write it to this 57, even though I haven't updated it.
+
+1291
+02:24:25,140 --> 02:24:26,900
+57 will try to add 16.
+
+1292
+02:24:26,900 --> 02:24:28,900
+121 will try to add 66.
+
+1293
+02:24:28,900 --> 02:24:31,140
+113 will try to add 69.
+
+1294
+02:24:31,140 --> 02:24:32,420
+We are not preventing those.
+
+1295
+02:24:32,980 --> 02:24:33,860
+We're not stopping them.
+
+1296
+02:24:33,860 --> 02:24:35,220
+We're not putting an if condition.
+
+1297
+02:24:36,020 --> 02:24:38,500
+The fact is, we don't care about that memory.
+
+1298
+02:24:39,140 --> 02:24:43,460
+Once we've read that, at that stage, we don't care about it anymore.
+
+1299
+02:24:45,300 --> 02:24:46,740
+That's what this algorithm does.
+
+1300
+02:24:48,500 --> 02:24:51,300
+Then that's why we are able to unroll it at the walk level.
+
+1301
+02:24:52,420 --> 02:24:57,060
+And because we are able to do it like this, no more walk divergence.
+
+1302
+02:24:57,780 --> 02:24:59,300
+We may be doing useless work.
+
+1303
+02:25:00,100 --> 02:25:04,180
+We may be, this 57 may try to add 16, which is fine.
+
+1304
+02:25:05,060 --> 02:25:06,660
+Because we are doing it in a walk level.
+
+1305
+02:25:06,660 --> 02:25:10,340
+That compute is going to happen anyway, OK?
+
+1306
+02:25:10,340 --> 02:25:12,420
+It's just that we don't care about the result.
+
+1307
+02:25:12,420 --> 02:25:14,820
+And we are not spending more time doing it.
+
+1308
+02:25:14,820 --> 02:25:15,700
+That's the key thing.
+
+1309
+02:25:17,140 --> 02:25:18,900
+And that will help improve performance.
+
+1310
+02:25:20,660 --> 02:25:22,500
+So let's see how this works, OK?
+
+1311
+02:25:24,260 --> 02:25:27,460
+So I'm going to go back to Visual Studio.
+
+1312
+02:25:28,100 --> 02:25:30,020
+I'm going to go to Reduction.
+
+1313
+02:25:31,780 --> 02:25:34,100
+So that WordProduce is already copied.
+
+1314
+02:25:35,380 --> 02:25:36,260
+I'm going to
+
+1315
+02:25:49,460 --> 02:25:50,500
+copy stage four.
+
+1316
+02:25:50,500 --> 02:26:04,260
+And so that we are comparing apples to apples, I'm going to make stage four or stage three
+
+1317
+02:26:04,260 --> 02:26:05,940
+also tile equals two.
+
+1318
+02:26:05,940 --> 02:26:09,540
+So now we have stage three tile two and stage four tile two.
+
+1319
+02:26:09,540 --> 02:26:11,300
+So that we are comparing apples to apples.
+
+1320
+02:26:11,940 --> 02:26:13,060
+Let's see how that performs.
+
+1321
+02:26:14,340 --> 02:26:18,020
+Now, this is kind of the last 2%, 3% of performance.
+
+1322
+02:26:18,020 --> 02:26:20,420
+So you may or may not see a huge improvement.
+
+1323
+02:26:20,660 --> 02:26:22,100
+But let's see what it is.
+
+1324
+02:26:22,100 --> 02:26:22,980
+Oh, pretty good.
+
+1325
+02:26:22,980 --> 02:26:25,700
+So stage three was 74.
+
+1326
+02:26:25,700 --> 02:26:28,020
+Stage five, just by WordProduce.
+
+1327
+02:26:28,020 --> 02:26:31,380
+Remember, we did an unroll and then we did a WordProduce.
+
+1328
+02:26:31,380 --> 02:26:32,660
+And we are at 125.
+
+1329
+02:26:34,100 --> 02:26:35,300
+The tile IDs are the same.
+
+1330
+02:26:36,180 --> 02:26:39,140
+Now let's change the tile IDs and see how much we get.
+
+1331
+02:26:39,140 --> 02:26:42,900
+So I'm going to make stage four tile also four.
+
+1332
+02:26:44,660 --> 02:26:46,260
+Stage four tile four.
+
+1333
+02:26:46,260 --> 02:26:49,700
+And then stage three tile also four.
+
+1334
+02:26:50,500 --> 02:26:51,540
+Let's see how this works.
+
+1335
+02:26:53,220 --> 02:26:54,660
+I don't remember these results yet.
+
+1336
+02:26:56,660 --> 02:26:58,420
+And this year, I don't have a new GPU.
+
+1337
+02:26:58,420 --> 02:27:00,020
+So I don't know what to expect.
+
+1338
+02:27:01,060 --> 02:27:06,340
+OK, so stage three now became 137, which we kind of expected from last time.
+
+1339
+02:27:06,340 --> 02:27:08,500
+But stage four also improved for 131.
+
+1340
+02:27:09,380 --> 02:27:10,580
+So it's not kind of in vain.
+
+1341
+02:27:11,780 --> 02:27:16,500
+We are making significant and noticeable improvements by extracting that last mile
+
+1342
+02:27:16,500 --> 02:27:17,460
+of performance as well.
+
+1343
+02:27:21,460 --> 02:27:21,940
+OK.
+
+1344
+02:27:25,220 --> 02:27:26,660
+But I'm greedy, right?
+
+1345
+02:27:26,660 --> 02:27:27,540
+I like performance.
+
+1346
+02:27:28,340 --> 02:27:29,220
+Why should I stop there?
+
+1347
+02:27:33,940 --> 02:27:37,300
+OK, so those are some numbers from all the GPUs.
+
+1348
+02:27:38,580 --> 02:27:40,500
+But what does stage four require you to do?
+
+1349
+02:27:43,460 --> 02:27:46,020
+Remember, in stage three, there's still a for loop.
+
+1350
+02:27:46,980 --> 02:27:50,420
+OK, let me bring up stage four core conditions.
+
+1351
+02:27:50,420 --> 02:28:01,140
+So this stage four, we have a for loop here and we have a for loop here.
+
+1352
+02:28:02,660 --> 02:28:05,140
+And we have these conditions all over the place.
+
+1353
+02:28:06,660 --> 02:28:09,700
+So what does what produce inspire you to do?
+
+1354
+02:28:12,500 --> 02:28:14,100
+You want to get rid of these conditions?
+
+1355
+02:28:14,900 --> 02:28:15,860
+Is that what you want to do?
+
+1356
+02:28:17,460 --> 02:28:18,340
+Let's try to do that.
+
+1357
+02:28:20,420 --> 02:28:24,900
+So what if we get rid of the entire for loop itself?
+
+1358
+02:28:26,180 --> 02:28:34,340
+OK, so we know for a fact that GPU block sizes are 512 for older GPUs than 24 for modern.
+
+1359
+02:28:36,260 --> 02:28:38,900
+So there's only a limited number of conditions we have to write.
+
+1360
+02:28:40,020 --> 02:28:45,140
+And if we make block sizes power of 2, or more preferably multiple of 32,
+
+1361
+02:28:45,940 --> 02:28:47,380
+then we can take advantage of this.
+
+1362
+02:28:47,700 --> 02:28:52,180
+But one tricky thing here is that block sizes are not known at compile time.
+
+1363
+02:28:53,620 --> 02:28:57,060
+So if we can make block sizes known at compile time,
+
+1364
+02:28:57,060 --> 02:28:59,540
+and this kind of stretches the boundary of what we can do,
+
+1365
+02:29:01,940 --> 02:29:05,540
+then what we can do is we can use templates for the block size.
+
+1366
+02:29:07,700 --> 02:29:11,220
+And that means that the compiler will know what our block size is.
+
+1367
+02:29:13,060 --> 02:29:14,580
+So let's see how that works.
+
+1368
+02:29:15,220 --> 02:29:18,100
+OK, so let's see how that makes a difference.
+
+1369
+02:29:20,180 --> 02:29:25,220
+So if I know my block size at compile time, not at run time, this is what I do.
+
+1370
+02:29:28,980 --> 02:29:30,980
+I've completely unrolled this, OK?
+
+1371
+02:29:32,420 --> 02:29:35,780
+If block size greater than or equal to 32, never true by today.
+
+1372
+02:29:38,340 --> 02:29:38,820
+Do that.
+
+1373
+02:29:40,020 --> 02:29:43,300
+Again, inspired from our loop operator, there's the same line,
+
+1374
+02:29:43,300 --> 02:29:44,500
+except with a different offset.
+
+1375
+02:29:47,380 --> 02:29:50,500
+If block size greater than 512, same thing.
+
+1376
+02:29:52,260 --> 02:29:53,780
+Just do the same thing over and over.
+
+1377
+02:29:54,740 --> 02:29:55,780
+Now there's a question there.
+
+1378
+02:29:55,780 --> 02:29:57,460
+Have I committed a cardinal sin?
+
+1379
+02:29:58,980 --> 02:29:59,700
+What have I done?
+
+1380
+02:30:03,460 --> 02:30:08,420
+It's a very, very, very readable, beautiful code.
+
+1381
+02:30:09,460 --> 02:30:12,180
+But what sin have I committed?
+
+1382
+02:30:12,900 --> 02:30:13,620
+Sixth sense.
+
+1383
+02:30:13,620 --> 02:30:15,700
+There's a sixth sense inside the condition.
+
+1384
+02:30:17,300 --> 02:30:19,620
+Why is it not a cardinal sin, and why am I OK with it?
+
+1385
+02:30:26,020 --> 02:30:27,380
+All the threads are not going in here.
+
+1386
+02:30:29,620 --> 02:30:36,420
+So for example, if we have 1024 threads, OK, not all the threads might go in here.
+
+1387
+02:30:38,020 --> 02:30:41,540
+But there's one other catch that will make that true.
+
+1388
+02:30:42,340 --> 02:30:44,340
+No.
+
+1389
+02:30:44,340 --> 02:30:45,780
+Remember this?
+
+1390
+02:30:47,060 --> 02:30:49,060
+This template does not have compile time.
+
+1391
+02:30:49,060 --> 02:30:54,100
+So the kernels can generate different versions for different block sizes.
+
+1392
+02:30:57,220 --> 02:31:02,900
+If you get different block sizes here, if you get 1024 or 512 here, OK,
+
+1393
+02:31:03,860 --> 02:31:08,980
+the kernel will generate, the compiler will generate different versions of this kernel
+
+1394
+02:31:09,540 --> 02:31:13,700
+in runtime code that have different sections of the sorting.
+
+1395
+02:31:13,700 --> 02:31:21,380
+So for example, if you pass threads equals 256, for example, OK,
+
+1396
+02:31:22,820 --> 02:31:27,300
+it knows in the kernel, it knows block size greater than 1024,
+
+1397
+02:31:27,300 --> 02:31:32,420
+never true, because the template you plot, this block size here is my template.
+
+1398
+02:31:34,020 --> 02:31:36,500
+This threads that are passing here is block size here.
+
+1399
+02:31:37,300 --> 02:31:42,660
+So if I already tell my kernel, block size is 256,
+
+1400
+02:31:44,100 --> 02:31:47,620
+this will never be true, the compiler will just get rid of this code.
+
+1401
+02:31:49,060 --> 02:31:55,700
+Block size is 256 greater than or equal to 512, false, it will get rid of this code.
+
+1402
+02:31:56,500 --> 02:32:02,980
+Now this line, block size 256 greater than or equal to 256, yes, true.
+
+1403
+02:32:03,060 --> 02:32:08,020
+But what it will do is, this is always true now.
+
+1404
+02:32:08,980 --> 02:32:12,100
+So it'll just get rid of this if block and just leave this here.
+
+1405
+02:32:13,860 --> 02:32:17,780
+So that's the compiler level optimization we are taking into account here.
+
+1406
+02:32:17,780 --> 02:32:22,180
+So this will, this inference is not a sin by itself,
+
+1407
+02:32:22,740 --> 02:32:25,380
+because of what we are doing on the templates level.
+
+1408
+02:32:25,380 --> 02:32:35,060
+I would not recommend using if conditions inside of FragModel.
+
+1409
+02:32:35,780 --> 02:32:36,580
+But it's possible.
+
+1410
+02:32:38,260 --> 02:32:43,300
+It has to be that the if condition has to be resolved at compiler.
+
+1411
+02:32:43,300 --> 02:32:44,180
+That's the key thing.
+
+1412
+02:32:45,140 --> 02:32:49,220
+So then we don't probably get rid of the if condition?
+
+1413
+02:32:49,220 --> 02:32:50,660
+Yes, because...
+
+1414
+02:32:50,660 --> 02:32:52,980
+Without FragModel or they have access?
+
+1415
+02:32:52,980 --> 02:32:54,660
+No, there's no FragModel.
+
+1416
+02:32:55,460 --> 02:32:56,500
+This is harder to import.
+
+1417
+02:32:58,980 --> 02:33:04,340
+Okay, so yeah, essentially this is the explanation for that.
+
+1418
+02:33:05,460 --> 02:33:10,500
+Because all of these conditions in red are evaluated at compile time,
+
+1419
+02:33:10,500 --> 02:33:12,500
+the compiler kind of gets rid of them.
+
+1420
+02:33:12,500 --> 02:33:16,180
+And if any of them are false, it'll get rid of the code inside of them as well.
+
+1421
+02:33:17,620 --> 02:33:24,500
+Okay, so let's take a look at how this code actually looks in Visual Studio.
+
+1422
+02:33:24,660 --> 02:33:38,500
+So I'm going to go into reduction and copy this.
+
+1423
+02:33:50,580 --> 02:33:52,500
+Okay, so let's take a look at this.
+
+1424
+02:33:53,460 --> 02:33:55,140
+The copy part is the same.
+
+1425
+02:33:55,140 --> 02:33:56,740
+The add on load, I'm not changing.
+
+1426
+02:33:56,740 --> 02:33:58,100
+The add on load remains the same.
+
+1427
+02:33:59,140 --> 02:34:04,420
+But now you have these if conditions here that are getting resolved.
+
+1428
+02:34:04,420 --> 02:34:08,660
+So block size, if I scroll up a little bit, is my template.
+
+1429
+02:34:09,940 --> 02:34:13,940
+Okay, so all of these conditions are known at compile time.
+
+1430
+02:34:13,940 --> 02:34:17,700
+So the compiler can get rid of them if needed.
+
+1431
+02:34:18,660 --> 02:34:22,900
+And then for the last part, which is the single warp stage,
+
+1432
+02:34:24,340 --> 02:34:27,540
+that's when we do the warp reduce.
+
+1433
+02:34:27,540 --> 02:34:29,380
+All the other code exits.
+
+1434
+02:34:29,380 --> 02:34:31,700
+So let's take a look at how that works.
+
+1435
+02:34:32,580 --> 02:34:34,580
+We have tile equals four.
+
+1436
+02:34:34,580 --> 02:34:36,580
+So I'm going to make this four as well.
+
+1437
+02:34:37,460 --> 02:34:40,100
+And let's run.
+
+1438
+02:34:42,580 --> 02:34:44,340
+So let's see how this performs.
+
+1439
+02:34:48,340 --> 02:34:53,540
+We got 151 and 154.4.
+
+1440
+02:34:54,500 --> 02:34:55,540
+Close enough, I would say.
+
+1441
+02:34:58,420 --> 02:35:00,020
+I'll put that in within margin of error.
+
+1442
+02:35:00,020 --> 02:35:02,420
+So now you know, at this point, you know, okay,
+
+1443
+02:35:02,420 --> 02:35:04,100
+we are getting to diminishing returns.
+
+1444
+02:35:05,540 --> 02:35:06,900
+If you're trying to convince your manager,
+
+1445
+02:35:06,900 --> 02:35:09,300
+hey, let me work on reductions, you're going to get a no,
+
+1446
+02:35:09,300 --> 02:35:11,940
+this is good enough, start doing something else.
+
+1447
+02:35:12,660 --> 02:35:16,180
+So let's reduce our add on loads and try one last time.
+
+1448
+02:35:17,860 --> 02:35:25,860
+Okay.
+
+1449
+02:35:34,340 --> 02:35:34,660
+All right.
+
+1450
+02:35:35,300 --> 02:35:38,260
+So we have, when we get tile equals two,
+
+1451
+02:35:38,260 --> 02:35:40,500
+then we got 140 and 140.
+
+1452
+02:35:40,500 --> 02:35:42,340
+So the difference is slightly larger.
+
+1453
+02:35:42,340 --> 02:35:44,820
+As you increase the number of adds on loads,
+
+1454
+02:35:44,820 --> 02:35:47,220
+the closer you're getting into full unrolling anyway.
+
+1455
+02:35:47,540 --> 02:35:49,620
+So that's what this is doing.
+
+1456
+02:35:52,020 --> 02:35:52,520
+Okay.
+
+1457
+02:35:52,900 --> 02:35:56,260
+So I think that satisfied my hunger for performance.
+
+1458
+02:35:57,380 --> 02:35:59,300
+So here are some numbers from older GPUs.
+
+1459
+02:35:59,300 --> 02:36:00,180
+These are the charts.
+
+1460
+02:36:03,220 --> 02:36:04,180
+So again, look at it.
+
+1461
+02:36:05,620 --> 02:36:06,580
+I'm doing better now.
+
+1462
+02:36:08,100 --> 02:36:08,900
+Look at my chart.
+
+1463
+02:36:10,820 --> 02:36:14,180
+Very clearly, elements versus time, the world is better.
+
+1464
+02:36:15,220 --> 02:36:16,420
+Time in milliseconds.
+
+1465
+02:36:17,540 --> 02:36:20,180
+Not MS, not just MS, time in milliseconds.
+
+1466
+02:36:20,900 --> 02:36:22,100
+And there's a clear progression.
+
+1467
+02:36:23,780 --> 02:36:28,180
+Numbers in there, 0.25, 0.5, 1 million, 2 million, 4 million.
+
+1468
+02:36:28,180 --> 02:36:31,140
+I'm not putting six zeros there and making my audience
+
+1469
+02:36:31,140 --> 02:36:32,660
+talk about how many zeros there is.
+
+1470
+02:36:32,660 --> 02:36:34,900
+This is numbers in English.
+
+1471
+02:36:35,940 --> 02:36:36,900
+Just put some numbers.
+
+1472
+02:36:37,460 --> 02:36:38,900
+Makes it very, very easy to read.
+
+1473
+02:36:39,700 --> 02:36:40,200
+Okay.
+
+1474
+02:36:41,460 --> 02:36:41,960
+All right.
+
+1475
+02:36:42,760 --> 02:36:45,720
+So there was one thing, there was one thing that we skipped.
+
+1476
+02:36:47,320 --> 02:36:49,640
+There was one assumption we made at the start of reduction
+
+1477
+02:36:49,640 --> 02:36:52,200
+that we were like, oh, we'll take a look at this later.
+
+1478
+02:36:52,200 --> 02:37:00,200
+What was that?
+
+1479
+02:37:00,200 --> 02:37:09,400
+What about reduction did we skip?
+
+1480
+02:37:09,800 --> 02:37:15,720
+Oh, not the algorithm.
+
+1481
+02:37:16,280 --> 02:37:19,560
+But I did say that we are not going to look at something
+
+1482
+02:37:19,560 --> 02:37:21,080
+for now at that time.
+
+1483
+02:37:21,800 --> 02:37:22,680
+And what was that?
+
+1484
+02:37:25,400 --> 02:37:27,720
+I said we are only going to do a single pass reduction, right?
+
+1485
+02:37:27,720 --> 02:37:29,960
+The secondary pass would be on the CPU.
+
+1486
+02:37:30,680 --> 02:37:31,320
+Remember that?
+
+1487
+02:37:32,680 --> 02:37:35,880
+So the way to optimize this further
+
+1488
+02:37:36,840 --> 02:37:38,680
+is we call reduction again.
+
+1489
+02:37:38,680 --> 02:37:43,400
+So for example, if we launch 32 million elements
+
+1490
+02:37:44,840 --> 02:37:49,480
+with blocks of 256 each, how many blocks do we have?
+
+1491
+02:37:49,480 --> 02:37:54,840
+So let's do calculator because even I need one for this.
+
+1492
+02:37:56,600 --> 02:38:04,840
+I have 32 times 1024 times 1024, that's 32 times 1024.
+
+1493
+02:38:06,600 --> 02:38:08,360
+Times 1024.
+
+1494
+02:38:09,480 --> 02:38:14,120
+So that I clearly can't type, can I?
+
+1495
+02:38:14,760 --> 02:38:20,840
+32 times 1024 times 1024.
+
+1496
+02:38:22,360 --> 02:38:23,800
+That's 32 million elements.
+
+1497
+02:38:24,920 --> 02:38:27,160
+I have 256 threads per block.
+
+1498
+02:38:27,960 --> 02:38:35,400
+I have 131,000 block results that now I need to reduce again.
+
+1499
+02:38:36,600 --> 02:38:38,440
+So that's what recursive reduction comes in.
+
+1500
+02:38:39,720 --> 02:38:46,520
+If we have 131,000 elements sitting on the GPU
+
+1501
+02:38:47,560 --> 02:38:50,840
+that we until now have been copying over to the CPU
+
+1502
+02:38:50,840 --> 02:38:53,400
+and then doing single threaded CPU reduction,
+
+1503
+02:38:54,520 --> 02:39:00,600
+would it instead be better to do 131,000 reduction
+
+1504
+02:39:02,200 --> 02:39:02,840
+on the GPU?
+
+1505
+02:39:02,840 --> 02:39:04,520
+We are not copying any additional memory now.
+
+1506
+02:39:04,520 --> 02:39:05,560
+It's already on the GPU.
+
+1507
+02:39:05,800 --> 02:39:06,920
+We just have to run the process.
+
+1508
+02:39:08,040 --> 02:39:12,040
+And then we copy 131,000 divided by 256,
+
+1509
+02:39:12,040 --> 02:39:14,040
+probably like 512 elements back.
+
+1510
+02:39:16,040 --> 02:39:17,080
+It's going to be faster.
+
+1511
+02:39:17,080 --> 02:39:20,760
+And then you can do 512 threads on the CPU.
+
+1512
+02:39:22,280 --> 02:39:23,720
+So essentially what we do is,
+
+1513
+02:39:24,280 --> 02:39:25,720
+and I'll go through this quickly,
+
+1514
+02:39:27,960 --> 02:39:29,240
+is let me...
+
+1515
+02:39:29,880 --> 02:39:31,080
+So I have this here.
+
+1516
+02:39:31,080 --> 02:39:33,560
+So what I'm going to show you is more on this.
+
+1517
+02:39:40,360 --> 02:39:40,920
+Yeah.
+
+1518
+02:39:40,920 --> 02:39:43,720
+So what we're going to do is we're going to create these wrappers.
+
+1519
+02:39:46,360 --> 02:39:49,560
+So for state zero, I'm just going to call it a state zero wrapper.
+
+1520
+02:39:50,600 --> 02:39:53,160
+And what I'm going to do is if elements,
+
+1521
+02:39:53,160 --> 02:39:55,320
+the number of resulting elements,
+
+1522
+02:39:55,320 --> 02:39:57,240
+the number of elements that are going to be
+
+1523
+02:39:57,880 --> 02:39:59,000
+resulting elements,
+
+1524
+02:39:59,000 --> 02:40:02,200
+the number of block results is less than one block.
+
+1525
+02:40:03,320 --> 02:40:04,360
+Until that happens,
+
+1526
+02:40:05,240 --> 02:40:08,440
+I'm just going to copy memory to...
+
+1527
+02:40:08,440 --> 02:40:10,200
+I'm going to do a recursive reduction.
+
+1528
+02:40:11,320 --> 02:40:11,820
+Okay.
+
+1529
+02:40:12,600 --> 02:40:16,200
+So let's go back to our example.
+
+1530
+02:40:16,200 --> 02:40:23,800
+So we have 32 times 24 times 1024.
+
+1531
+02:40:24,520 --> 02:40:25,720
+We have that many elements.
+
+1532
+02:40:27,400 --> 02:40:29,800
+That's greater than one block, obviously.
+
+1533
+02:40:29,800 --> 02:40:30,760
+So we are going to say,
+
+1534
+02:40:30,760 --> 02:40:32,040
+okay, launch my kernel,
+
+1535
+02:40:32,840 --> 02:40:36,200
+which reduces to divided by 256.
+
+1536
+02:40:37,080 --> 02:40:40,040
+We get that many elements after the first pass of reduction.
+
+1537
+02:40:41,320 --> 02:40:42,600
+Is that greater than one block?
+
+1538
+02:40:43,160 --> 02:40:43,660
+Yes.
+
+1539
+02:40:44,680 --> 02:40:47,240
+I'm going to divide it again by 256.
+
+1540
+02:40:47,240 --> 02:40:49,880
+So now I'm doing a reduction on the GPU a second time.
+
+1541
+02:40:51,160 --> 02:40:52,760
+512 threads.
+
+1542
+02:40:52,760 --> 02:40:54,280
+Is that less than one block?
+
+1543
+02:40:54,280 --> 02:40:55,560
+Yes, possibly.
+
+1544
+02:40:55,560 --> 02:40:57,480
+If your block size is 1024.
+
+1545
+02:40:57,480 --> 02:40:58,520
+So that's what it means.
+
+1546
+02:40:58,520 --> 02:41:00,360
+So we won't do reduction once,
+
+1547
+02:41:00,360 --> 02:41:01,400
+we'll do reduction twice
+
+1548
+02:41:01,400 --> 02:41:03,800
+so that the amount of data we copy from the GPU
+
+1549
+02:41:04,360 --> 02:41:07,880
+and the amount of CPU reduction we have to do is reduced.
+
+1550
+02:41:07,880 --> 02:41:08,380
+Okay.
+
+1551
+02:41:08,920 --> 02:41:11,000
+So for the sake of simplicity,
+
+1552
+02:41:11,000 --> 02:41:14,120
+what I'm going to do is take this entire file
+
+1553
+02:41:14,920 --> 02:41:16,600
+and I'm going to post it in my reduction
+
+1554
+02:41:18,280 --> 02:41:21,960
+so that I can show you how much better it is.
+
+1555
+02:41:21,960 --> 02:41:22,460
+Okay.
+
+1556
+02:41:26,520 --> 02:41:28,440
+So I'm still running 1024.
+
+1557
+02:41:28,440 --> 02:41:29,720
+Let's see what our tile is.
+
+1558
+02:41:30,520 --> 02:41:33,480
+So it's stage two,
+
+1559
+02:41:33,480 --> 02:41:35,160
+stage three tile is two,
+
+1560
+02:41:35,160 --> 02:41:37,480
+stage four tile is two
+
+1561
+02:41:37,480 --> 02:41:38,840
+and stage five tile is two.
+
+1562
+02:41:38,840 --> 02:41:39,800
+Okay. Let's run that.
+
+1563
+02:41:41,320 --> 02:41:44,040
+So remember now our algorithms are the same.
+
+1564
+02:41:44,040 --> 02:41:46,760
+We're just running reduction multiple times if needed.
+
+1565
+02:41:47,320 --> 02:41:47,820
+Okay.
+
+1566
+02:41:51,160 --> 02:41:51,720
+All right.
+
+1567
+02:41:51,720 --> 02:41:53,480
+So it's kind of the same,
+
+1568
+02:41:53,480 --> 02:41:55,320
+not too much faster.
+
+1569
+02:41:55,320 --> 02:41:55,820
+Okay.
+
+1570
+02:41:57,320 --> 02:42:01,240
+But what happens when,
+
+1571
+02:42:01,240 --> 02:42:01,960
+for example,
+
+1572
+02:42:05,160 --> 02:42:09,240
+we increase this to 128 million elements.
+
+1573
+02:42:10,600 --> 02:42:11,100
+Okay.
+
+1574
+02:42:20,120 --> 02:42:20,920
+So now we have,
+
+1575
+02:42:20,920 --> 02:42:23,560
+now this recursive reduction starts making a difference
+
+1576
+02:42:23,560 --> 02:42:26,680
+when we have many elements
+
+1577
+02:42:26,680 --> 02:42:28,760
+because our CPU time will increase.
+
+1578
+02:42:28,760 --> 02:42:33,640
+So now our stage four and five are basically the same
+
+1579
+02:42:34,280 --> 02:42:36,120
+and stage three has also increased.
+
+1580
+02:42:36,680 --> 02:42:40,920
+So now if you're starting a total time for GPU
+
+1581
+02:42:40,920 --> 02:42:42,200
+and CPU reduction,
+
+1582
+02:42:43,240 --> 02:42:45,000
+this time will start looking a lot better
+
+1583
+02:42:45,880 --> 02:42:48,520
+for elements that are much larger.
+
+1584
+02:42:54,120 --> 02:42:54,620
+Okay.
+
+1585
+02:42:58,680 --> 02:43:02,280
+So now if we take a look at also,
+
+1586
+02:43:02,280 --> 02:43:04,360
+I don't have all the numbers for my latest slide,
+
+1587
+02:43:04,360 --> 02:43:07,800
+but single GPU pass plus CPU reduction
+
+1588
+02:43:07,800 --> 02:43:10,520
+versus recursive GPU passes plus CPU reduction.
+
+1589
+02:43:11,960 --> 02:43:13,560
+There's a clear increase there.
+
+1590
+02:43:13,560 --> 02:43:14,520
+It may not be much,
+
+1591
+02:43:14,520 --> 02:43:15,480
+it's still about 10%,
+
+1592
+02:43:16,440 --> 02:43:19,480
+but it's still valid improvements.
+
+1593
+02:43:19,560 --> 02:43:24,920
+And then on a 1080Ti it's a lot better.
+
+1594
+02:43:24,920 --> 02:43:26,920
+It's up to 60% better in this case,
+
+1595
+02:43:26,920 --> 02:43:28,920
+30% better in other cases.
+
+1596
+02:43:31,880 --> 02:43:34,280
+And here's the chart for how that looks.
+
+1597
+02:43:35,800 --> 02:43:37,800
+And now if we compare side by side,
+
+1598
+02:43:38,760 --> 02:43:41,320
+single pass versus recursive reduction,
+
+1599
+02:43:41,880 --> 02:43:43,160
+here's how you see it.
+
+1600
+02:43:43,160 --> 02:43:46,600
+So the left two columns are single pass
+
+1601
+02:43:46,600 --> 02:43:47,960
+for 32 million elements.
+
+1602
+02:43:47,960 --> 02:43:49,480
+The right two green columns
+
+1603
+02:43:49,480 --> 02:43:53,400
+are 128 million single and recursive.
+
+1604
+02:43:53,400 --> 02:43:54,280
+Lower is better.
+
+1605
+02:43:54,840 --> 02:43:58,280
+So you can clearly see how much difference it's making.
+
+1606
+02:43:58,280 --> 02:43:59,800
+It's a lot different for stage zero
+
+1607
+02:43:59,800 --> 02:44:01,800
+because there's a lot more improvement that we had.
+
+1608
+02:44:02,360 --> 02:44:03,720
+And as you get to stage five,
+
+1609
+02:44:04,440 --> 02:44:05,880
+as a percentage similar,
+
+1610
+02:44:05,880 --> 02:44:08,040
+but diminishing in terms of numbers.
+
+1611
+02:44:11,160 --> 02:44:11,660
+Okay.
+
+1612
+02:44:13,320 --> 02:44:15,080
+Quiz question before we end the class.
+
+1613
+02:44:15,080 --> 02:44:16,520
+Who knows the difference between these?
+
+1614
+02:44:17,960 --> 02:44:45,000
+So this is easy, right?
+
+1615
+02:44:45,000 --> 02:44:46,920
+So this one is easy.
+
+1616
+02:44:46,920 --> 02:44:50,040
+Data can't change and the pointer to the data can't change.
+
+1617
+02:44:50,040 --> 02:44:50,540
+Okay.
+
+1618
+02:44:53,080 --> 02:45:00,680
+This one, float star constex is a constant pointer.
+
+1619
+02:45:00,680 --> 02:45:01,880
+The pointer can't change,
+
+1620
+02:45:03,560 --> 02:45:04,920
+but the value can change.
+
+1621
+02:45:05,800 --> 02:45:06,300
+Okay.
+
+1622
+02:45:06,920 --> 02:45:08,920
+The top one is the opposite.
+
+1623
+02:45:08,920 --> 02:45:11,080
+Const float star is the pointer can change,
+
+1624
+02:45:11,640 --> 02:45:13,240
+the data and the pointer can't change.
+
+1625
+02:45:14,120 --> 02:45:14,680
+Okay.
+
+1626
+02:45:14,680 --> 02:45:15,960
+So make sure you remember that.
+
+1627
+02:45:16,360 --> 02:45:17,160
+There's a neat trick.
+
+1628
+02:45:18,200 --> 02:45:20,280
+Also because it affects the compiler.
+
+1629
+02:45:21,320 --> 02:45:23,160
+If you have your compiler,
+
+1630
+02:45:23,960 --> 02:45:25,960
+const float star constex,
+
+1631
+02:45:25,960 --> 02:45:27,720
+it will make a lot of assumptions
+
+1632
+02:45:27,720 --> 02:45:29,000
+that will improve your performance.
+
+1633
+02:45:30,040 --> 02:45:31,320
+Because it will cache everything.
+
+1634
+02:45:31,320 --> 02:45:33,560
+It knows the data can't change.
+
+1635
+02:45:33,560 --> 02:45:36,840
+So as soon as you copy it to the GPU,
+
+1636
+02:45:36,840 --> 02:45:38,440
+it already pushes it to L2.
+
+1637
+02:45:39,080 --> 02:45:42,200
+So that because it knows whenever you launch a kernel
+
+1638
+02:45:42,200 --> 02:45:44,440
+and you're using this kind of addressing,
+
+1639
+02:45:45,080 --> 02:45:47,320
+it knows that the data is going to remain constant
+
+1640
+02:45:47,320 --> 02:45:50,200
+and it can apply those optimizations.
+
+1641
+02:45:50,200 --> 02:45:53,000
+So make sure you're using some form of this
+
+1642
+02:45:53,000 --> 02:45:55,240
+depending on what addressing you're doing.
+
+1643
+02:45:58,680 --> 02:46:01,800
+Last thing is this restrict flag.
+
+1644
+02:46:02,440 --> 02:46:03,400
+It's really cool because
+
+1645
+02:46:05,240 --> 02:46:08,280
+what it allows you to tell your compiler
+
+1646
+02:46:08,280 --> 02:46:11,000
+is my memory doesn't overlap.
+
+1647
+02:46:11,000 --> 02:46:14,120
+So if you think about matrix multiplier reduction,
+
+1648
+02:46:14,680 --> 02:46:15,720
+matrix transpose,
+
+1649
+02:46:16,360 --> 02:46:19,320
+you're giving your kernels multiple pointers, right?
+
+1650
+02:46:20,280 --> 02:46:21,480
+You're giving it addresses.
+
+1651
+02:46:23,320 --> 02:46:25,480
+But there's no way for the kernel or the compiler
+
+1652
+02:46:25,480 --> 02:46:28,200
+to know that those addresses don't overlap
+
+1653
+02:46:28,200 --> 02:46:30,360
+in your compute, right?
+
+1654
+02:46:31,560 --> 02:46:34,600
+You can access the entire memory
+
+1655
+02:46:34,600 --> 02:46:36,600
+if you want it with that pointer.
+
+1656
+02:46:36,600 --> 02:46:39,320
+You can do minus, you can do plus, you can do strides.
+
+1657
+02:46:40,280 --> 02:46:41,960
+You can do whatever you want in the kernel
+
+1658
+02:46:42,840 --> 02:46:46,280
+and you can make two pointers overlap with each other, okay?
+
+1659
+02:46:47,160 --> 02:46:50,680
+Restrict tells your compiler that,
+
+1660
+02:46:50,680 --> 02:46:52,920
+hey, I've taken all the precautions
+
+1661
+02:46:52,920 --> 02:46:55,320
+to make sure that A and B don't overlap.
+
+1662
+02:46:56,200 --> 02:46:58,840
+And that again will allow your compiler
+
+1663
+02:47:00,680 --> 02:47:03,640
+to improve performance and reduce a bunch of checks
+
+1664
+02:47:03,640 --> 02:47:04,840
+that it's going to be doing.
+
+1665
+02:47:06,040 --> 02:47:08,360
+Remember, these compilers and these systems
+
+1666
+02:47:08,360 --> 02:47:11,640
+have a lot of error correction built into them, okay?
+
+1667
+02:47:12,920 --> 02:47:14,680
+By passing flags like restrict,
+
+1668
+02:47:15,480 --> 02:47:16,520
+tells the compiler that,
+
+1669
+02:47:16,520 --> 02:47:17,640
+hey, I'm a good programmer.
+
+1670
+02:47:17,640 --> 02:47:18,920
+I've taken care of my memory.
+
+1671
+02:47:18,920 --> 02:47:20,440
+You can skip a bunch of checks
+
+1672
+02:47:20,440 --> 02:47:22,280
+and that improves performance.
+
+1673
+02:47:22,280 --> 02:47:24,760
+Realistically, it improves performance, okay?
+
+1674
+02:47:27,480 --> 02:47:31,080
+So essentially the conclusion to today's performance lab
+
+1675
+02:47:32,360 --> 02:47:35,240
+is that while you may start thinking
+
+1676
+02:47:35,240 --> 02:47:37,000
+about parallel programming naively,
+
+1677
+02:47:37,960 --> 02:47:40,360
+you very quickly should run the profiler,
+
+1678
+02:47:40,360 --> 02:47:42,120
+understand what your kernel is doing,
+
+1679
+02:47:42,120 --> 02:47:43,560
+understand what the bottlenecks are
+
+1680
+02:47:44,200 --> 02:47:46,040
+and just keep running it.
+
+1681
+02:47:46,040 --> 02:47:49,960
+Understand where the complex situations are.
+
+1682
+02:47:49,960 --> 02:47:51,400
+Try to think about your for loops,
+
+1683
+02:47:51,400 --> 02:47:53,960
+your if conditions, loop unrolling,
+
+1684
+02:47:53,960 --> 02:47:55,800
+how much work your thread is doing,
+
+1685
+02:47:55,800 --> 02:47:57,080
+all of those kinds of things
+
+1686
+02:47:57,080 --> 02:47:59,960
+to unlock the maximum performance from your GPU.
+
+1687
+02:48:02,200 --> 02:48:03,800
+And templates are always there to help.
+
+1688
+02:48:03,800 --> 02:48:06,120
+So that's graceful.
+
+1689
+02:48:06,120 --> 02:48:07,560
+So a few more guides.
+
+1690
+02:48:07,560 --> 02:48:09,480
+So of course the CUDA programming guide,
+
+1691
+02:48:09,480 --> 02:48:11,320
+all of you should be referring to it.
+
+1692
+02:48:12,360 --> 02:48:13,640
+There's a best practices.
+
+1693
+02:48:13,640 --> 02:48:18,520
+And this was a talk in 2019 given by NVIDIA at GTC
+
+1694
+02:48:18,520 --> 02:48:22,600
+that essentially walked through all the profiler steps
+
+1695
+02:48:22,600 --> 02:48:24,360
+and information about the profile and stuff.
+
+1696
+02:48:24,360 --> 02:48:25,080
+So it's very good.
+
+1697
+02:48:25,080 --> 02:48:26,360
+Definitely take a look at it.
+
+1698
+02:48:27,160 --> 02:48:29,560
+I always refer to it before this class.
+
+1699
+02:48:29,560 --> 02:48:32,440
+So make sure you take a look
+
+1700
+02:48:32,440 --> 02:48:34,360
+and then run your path traces to it as well.
+
+1701
+02:48:34,360 --> 02:48:35,240
+The path trace, of course,
+
+1702
+02:48:35,240 --> 02:48:36,680
+is a much more complex algorithm.
+
+1703
+02:48:36,680 --> 02:48:39,960
+So you may not get that much useful information,
+
+1704
+02:48:39,960 --> 02:48:44,200
+but definitely go back and try to run project two through it.
+
+1705
+02:48:44,200 --> 02:48:46,440
+And you'll see a lot of benefit in that.
+
+1706
+02:48:48,040 --> 02:48:49,400
+So that's it for today's class.
+
+1707
+02:48:50,040 --> 02:48:51,960
+I hope you enjoyed improving that performance.
+
+1708
+02:48:51,960 --> 02:48:55,640
+And you'll be inspired to do a lot more in your own projects.
+

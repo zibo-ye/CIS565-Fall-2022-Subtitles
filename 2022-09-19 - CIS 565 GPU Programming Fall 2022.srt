@@ -1,0 +1,2248 @@
+1
+00:00:00,000 --> 00:00:06,480
+Hi everyone. Welcome to the class today. Unfortunately, I'm not able to be there in person because
+
+2
+00:00:06,480 --> 00:00:10,720
+I've had some emergency travel come up. So what I'm going to do is I'm going to record
+
+3
+00:00:10,720 --> 00:00:17,400
+this lecture and we'll watch it in the class. You know, the TAs will host this.
+
+4
+00:00:17,400 --> 00:00:23,780
+The kind of the happy mistake here is that this lecture makes for a really good recording
+
+5
+00:00:23,780 --> 00:00:28,440
+because it's very theoretical. We don't necessarily discuss CUDA and stuff in this lecture. What
+
+6
+00:00:28,440 --> 00:00:34,180
+we're going to be doing is looking at the history of how CPU architecture worked and
+
+7
+00:00:34,180 --> 00:00:41,540
+how that has influenced how GPUs work. And we're kind of going to build our own CIS 565
+
+8
+00:00:41,540 --> 00:00:49,220
+GPU in this lecture. So let's take a look at how all of it plays together.
+
+9
+00:00:49,220 --> 00:00:57,100
+Starting off with a couple of acknowledgments. And then so this wall of GPU history that
+
+10
+00:00:57,100 --> 00:01:01,940
+was done at Microsoft, I came across this, I believe on either Twitter or LinkedIn. And
+
+11
+00:01:01,940 --> 00:01:08,580
+it really showed how graphics cards have evolved. To the left is everything in the 90s. And
+
+12
+00:01:08,580 --> 00:01:17,100
+what's in focus closest to the camera is GPUs in 2008. And you can see the 8400 GS from
+
+13
+00:01:17,100 --> 00:01:23,540
+NVIDIA kind of highlighted there. And that's really where CUDA started. That was one of
+
+14
+00:01:23,540 --> 00:01:30,620
+the first CUDA GPUs. And we've seen the evolution since about how GPUs have grown. So it gives
+
+15
+00:01:30,620 --> 00:01:38,220
+you a sense of GPUs are not just modern technology. They've come a very, very long way. And have
+
+16
+00:01:38,220 --> 00:01:47,620
+been inspired from many generations of architecture and redesign.
+
+17
+00:01:47,620 --> 00:01:53,460
+So a couple of things to look at first. So GPUs and CPUs, the performance, the compute
+
+18
+00:01:53,460 --> 00:01:58,780
+performance at least, is measured in what is known as flops. Floating point operations
+
+19
+00:01:58,780 --> 00:02:10,940
+per second. So this is essentially what you're measuring as the amount of multiplication
+
+20
+00:02:10,940 --> 00:02:25,980
+and addition operations that you can do in the GPU. So this is calculated using how many
+
+21
+00:02:25,980 --> 00:02:33,020
+gigaflops or teraflops we have, at least today. Back in the day, it would have been megaflops.
+
+22
+00:02:33,020 --> 00:02:39,500
+Before that, it would have probably been just flops or kiloflops. So modern day GPUs certainly
+
+23
+00:02:40,220 --> 00:02:48,300
+operate in the teraflop range. Supercomputers operate in the petaflops, if not the exaflops.
+
+24
+00:02:48,300 --> 00:02:54,780
+So one of Intel's big goals is to make an exaflop supercomputer. So that's essentially
+
+25
+00:02:54,780 --> 00:03:02,860
+10 to the power of 18 gigaflops per second. Which is absolutely incredible. The amount
+
+26
+00:03:02,860 --> 00:03:09,180
+of compute power at our fingertips would be incredible. So let's take a look at some modern
+
+27
+00:03:10,300 --> 00:03:15,980
+hardware and how many teraflops they have. So the slides are a couple of years older,
+
+28
+00:03:15,980 --> 00:03:24,860
+so you may not see the most modern Intel, NVIDIA, AMD hardware, but it's still representative of
+
+29
+00:03:25,820 --> 00:03:33,660
+of what the trends are essentially. So an AMD Ryzen 9 3900X was one and a half teraflops,
+
+30
+00:03:33,660 --> 00:03:40,940
+an Intel i9 9900K, which was top of the line CPU about two generations ago, was 1.22 teraflops.
+
+31
+00:03:43,020 --> 00:03:51,180
+An NVIDIA GPU, again, a couple of years old, an RTX GPU was 16.32 teraflops. That's almost
+
+32
+00:03:52,140 --> 00:03:59,660
+10 to 12 times about what the Intel and AMD CPUs are producing. Again, remember that this is in
+
+33
+00:03:59,660 --> 00:04:06,700
+terms of compute performance. If you take the standard work that CPUs do in terms of running
+
+34
+00:04:06,700 --> 00:04:09,900
+the operating system and stuff, you're not going to be able to get that same performance. But if
+
+35
+00:04:09,900 --> 00:04:16,620
+you do algorithms that are really driven for parallel computing, then you're going to be able
+
+36
+00:04:16,620 --> 00:04:22,140
+to maximize all the gigaflops, both on the CPU and the GPU, but you're going to see a bigger gain
+
+37
+00:04:22,140 --> 00:04:30,940
+on the GPU. Similarly, this kind of scaling is happening on system monochip hardware as well. So
+
+38
+00:04:31,660 --> 00:04:38,140
+whether it's the Tegra, the Jetsons, or the Drive PX that NVIDIA is building, we are seeing the
+
+39
+00:04:38,140 --> 00:04:45,340
+same kind of scaling happening where GPUs are able to provide a lot more compute performance.
+
+40
+00:04:46,300 --> 00:04:49,820
+While I don't have it in these slides, I'm pretty sure that's the same with
+
+41
+00:04:50,780 --> 00:04:57,100
+Apple's ARM architectures where they have the CPU and the GPU on the same chip.
+
+42
+00:04:58,300 --> 00:05:02,460
+You're going to see the same numbers and the same trends on there too.
+
+43
+00:05:04,540 --> 00:05:10,700
+So if you look at the way these trends are happening, you can see that there's been
+
+44
+00:05:10,700 --> 00:05:17,500
+an explosion since around 2008, 2011, when GPUs really started taking off compared to the CPU.
+
+45
+00:05:18,620 --> 00:05:23,180
+You can see how single precision and double precision performance for Intel CPUs are in
+
+46
+00:05:23,180 --> 00:05:29,180
+the blue. And then with NVIDIA GPUs, it's just keeping rising up. Of course, the data here
+
+47
+00:05:29,180 --> 00:05:36,300
+probably ends around 2016, but even then the trends have certainly continued to expand there.
+
+48
+00:05:37,260 --> 00:05:43,420
+And on the theoretical bandwidth side, you can still see how the bandwidth rate is increasing as
+
+49
+00:05:43,420 --> 00:05:53,260
+well. With CPUs, we are seeing DDR4, DDR5 kind of memories coming into play on the CPU side,
+
+50
+00:05:53,260 --> 00:06:01,740
+but GPUs are already on DDR5, DDR5 high bandwidth, stacking multiple memory vertically. And all of
+
+51
+00:06:02,060 --> 00:06:10,860
+those things are giving GPUs really high bandwidth as well. And with PCIe expanding. So PCIe4 is
+
+52
+00:06:10,860 --> 00:06:16,940
+kind of standard now, PCIe5 we'll probably see in the next year or two, and PCIe6 is essentially
+
+53
+00:06:16,940 --> 00:06:23,500
+getting standardized as we speak. So those are essentially, with each generation are doubling
+
+54
+00:06:24,300 --> 00:06:35,340
+the amount of bandwidth you get from copying data from CPU to the GPU. So what that means is if you
+
+55
+00:06:35,340 --> 00:06:42,700
+had a PCIe3 bus between the CPU and the GPU, that would have given you somewhere around 16
+
+56
+00:06:42,700 --> 00:06:50,780
+gigabytes per second of overall bandwidth to copy your CPU data to the GPU. Whereas with PCIe4,
+
+57
+00:06:50,780 --> 00:06:58,460
+you essentially double that bandwidth. So now you can copy CPU to GPU faster, which means the
+
+58
+00:06:58,460 --> 00:07:04,300
+overhead of using GPUs for improving your compute is becoming lower and lower every day.
+
+59
+00:07:07,980 --> 00:07:16,700
+So Flops is great, but we also have to put it into context. One of the main things that we have
+
+60
+00:07:16,700 --> 00:07:21,420
+to think about is power and heat limits. We can't be, especially in today's world, we have to be
+
+61
+00:07:21,420 --> 00:07:27,420
+conscious of how much energy we are using in terms of the hardware we run and what algorithms we are
+
+62
+00:07:27,420 --> 00:07:33,420
+running on that hardware. Single core performance, if you measure it, has kind of been, while the
+
+63
+00:07:33,420 --> 00:07:38,860
+number is increasing, it's kind of been slowing down given how power and heat limits are changing.
+
+64
+00:07:38,860 --> 00:07:43,740
+You have an ultra ultra thin laptop that needs heat dissipation, you're probably getting a slower
+
+65
+00:07:44,620 --> 00:07:52,300
+clock rate on your CPU. So just examples like that. And then GPUs also, we are starting to see
+
+66
+00:07:52,300 --> 00:08:00,300
+how the die size or how big your chips are, how much power they use, what it costs, especially
+
+67
+00:08:00,300 --> 00:08:06,140
+over the last couple of years, has really changed the dynamic of what the cost benefit analysis of
+
+68
+00:08:06,140 --> 00:08:11,580
+GPU performance also is. The other thing to think about is how this works in mobile.
+
+69
+00:08:12,460 --> 00:08:17,420
+When you have a mobile phone and a battery installed, that's when performance for what
+
+70
+00:08:17,420 --> 00:08:24,380
+becomes really important, where optimizing it for saving battery and doing proper compute and
+
+71
+00:08:24,380 --> 00:08:33,100
+using it efficiently becomes really, really important. So let's take a look at what are
+
+72
+00:08:33,100 --> 00:08:41,020
+the major components of a CPU, more in theoretical terms, but essentially understanding how a CPU is
+
+73
+00:08:41,020 --> 00:08:45,580
+divided, what are the considerations that go into making a CPU? And this kind of gets into
+
+74
+00:08:45,580 --> 00:08:49,180
+computer architecture class, but we'll try to keep it brief and at a high level,
+
+75
+00:08:49,820 --> 00:08:54,380
+but essentially all leading into how GPUs are developed.
+
+76
+00:08:56,700 --> 00:09:02,700
+So in a lightly threaded desktop application, some of the most common ones are Vim, which is
+
+77
+00:09:02,700 --> 00:09:10,300
+my favorite editor. LS is essentially the list of files commands on Linux. What you're going to see
+
+78
+00:09:10,300 --> 00:09:16,380
+is a lot of these commands and operations are likely threaded. They likely have a lot of branches
+
+79
+00:09:16,380 --> 00:09:23,100
+and they access a lot of memory. So these are some numbers that were run by Warren Semple back in the
+
+80
+00:09:23,100 --> 00:09:29,500
+day about how much memory access, how many branches, and how much actual compute these
+
+81
+00:09:29,500 --> 00:09:34,460
+kind of commands are doing. So if you look at this, vector instructions, which is kind of the
+
+82
+00:09:34,460 --> 00:09:41,980
+instructions that GPUs are really good at, is 1% or less than 1% of the overall compute.
+
+83
+00:09:42,780 --> 00:09:49,420
+And that's really interesting because what that says is the job of running a command on the CPU
+
+84
+00:09:49,420 --> 00:09:56,700
+is not necessarily always about the highest performance. It's also about how do you manage
+
+85
+00:09:56,700 --> 00:10:00,620
+all the branching, memory access, and other things that you have to do.
+
+86
+00:10:01,260 --> 00:10:08,940
+So a simple CPU core probably at its fundamental looks something like this. You have five stages,
+
+87
+00:10:08,940 --> 00:10:14,860
+which are fetch, decode, execute, memory, and write back. For anybody who's done
+
+88
+00:10:14,860 --> 00:10:20,300
+compute architecture, this probably looks very familiar to you. And what happens is all of these
+
+89
+00:10:20,300 --> 00:10:27,100
+steps occur in one clock period. So once the clock updates, you're going to get all of these
+
+90
+00:10:27,260 --> 00:10:34,140
+instructions happening at once. So just to go over a quick overview of what each of these means,
+
+91
+00:10:34,140 --> 00:10:39,900
+fetch is fetching the next instruction that is to be executed. So this can be an add, a multiply,
+
+92
+00:10:39,900 --> 00:10:46,780
+a read operation, a write operation. So those are all fetches. Decode is taking the assembly
+
+93
+00:10:46,780 --> 00:10:54,060
+and decoding it into an actual instruction that the hardware can understand. Execute is actually
+
+94
+00:10:54,780 --> 00:11:01,420
+executing that instruction. Memory is writing that result into a register. And then write back
+
+95
+00:11:01,420 --> 00:11:08,300
+is anything that needs to go back and then get then to the program counter for the next iteration.
+
+96
+00:11:09,420 --> 00:11:13,500
+Essentially, what this simple architecture shows is really bad utilization,
+
+97
+00:11:14,220 --> 00:11:21,020
+where you have all of this running for one command in one clock cycle. Until this
+
+98
+00:11:21,980 --> 00:11:27,420
+entire thing finishes for one command, you cannot update the clock cycle. So it gives really bad
+
+99
+00:11:28,460 --> 00:11:37,980
+clock utilization, essentially. So one of the solutions to this is kind of breaking this apart,
+
+100
+00:11:37,980 --> 00:11:44,540
+where you break the pipeline into different segments. So you have a memory segment,
+
+101
+00:11:45,020 --> 00:11:50,300
+a register file, an ALU segment, a data and memory segment, and a register file segment.
+
+102
+00:11:50,860 --> 00:11:58,140
+And what this allows you to do is have instruction level parallelism. So each part of this pipeline
+
+103
+00:11:58,140 --> 00:12:03,900
+can be executing a different instruction at a different clock cycle. So if something is in the
+
+104
+00:12:03,900 --> 00:12:09,820
+data mem cycle, there can be another instruction that's in the ALU part, and another instruction
+
+105
+00:12:10,460 --> 00:12:19,820
+that's in a reg file part. So this essentially gives you pipelining, where as soon as one
+
+106
+00:12:19,820 --> 00:12:27,420
+instruction is done, everything moves to the next step. So what this provides is essentially
+
+107
+00:12:29,020 --> 00:12:33,900
+an instruction level parallelism that significantly improves the clock speed.
+
+108
+00:12:34,860 --> 00:12:43,260
+It reduces how much time any instruction is waiting. So at all times, you can have multiple
+
+109
+00:12:43,260 --> 00:12:51,260
+instructions running at once. It does, however, increase latency. So sometimes if instructions
+
+110
+00:12:51,260 --> 00:12:57,100
+are taking too long to execute, something's going to be waiting before it can get executed.
+
+111
+00:12:57,740 --> 00:13:04,140
+It also increases the number of transistors and gates you need, and it also increases your chip
+
+112
+00:13:04,140 --> 00:13:09,340
+size, because now you have different control structures in place, and now you need to
+
+113
+00:13:09,340 --> 00:13:17,260
+dedicate transistors to those control structures. The other thing that this can cause is an issue
+
+114
+00:13:17,260 --> 00:13:23,100
+with dependent instructions. So what happens if an instruction that's getting executed depends on
+
+115
+00:13:23,100 --> 00:13:29,660
+an instruction that may happen before, or may have happened a lot earlier? How do you take care
+
+116
+00:13:29,660 --> 00:13:35,420
+of that? That's one thing. The other thing is branches. While it's all good that we can execute
+
+117
+00:13:35,420 --> 00:13:40,860
+multiple instructions in line, what is the next instruction depends on an Intel's condition,
+
+118
+00:13:40,860 --> 00:13:47,260
+where you have to pick which branch you want to execute. So that makes a lot of difference here.
+
+119
+00:13:48,140 --> 00:13:55,580
+So to give you some sense of how many stages there are, Intel Core 2 CPU had 14 stages back
+
+120
+00:13:55,580 --> 00:14:03,660
+in the day. So I'm talking a long time ago. A Pentium 4 had 20 stages, and modern architectures
+
+121
+00:14:03,660 --> 00:14:09,420
+probably have somewhere in between that. So essentially, this kind of pipelining, and I'm
+
+122
+00:14:09,420 --> 00:14:15,420
+showing a very simple version of it here, is what allows for very, very high clock cycles these days.
+
+123
+00:14:17,820 --> 00:14:25,420
+So now if we take a look at branches, and how they might execute, we don't know what instructions
+
+124
+00:14:25,420 --> 00:14:30,780
+will execute after the branch, until the branch is executed. So you don't know which instruction
+
+125
+00:14:30,780 --> 00:14:40,060
+is next, until you actually hit the if-else part, or if-equals part. So J equals is that equal
+
+126
+00:14:40,060 --> 00:14:48,220
+checking on the loop. So we could either stall it, and not execute any instructions until that
+
+127
+00:14:48,220 --> 00:14:57,180
+branch is executed, or we can speculate, and try to decide which one is likely to execute.
+
+128
+00:14:58,220 --> 00:15:03,420
+And then if something fails, then we just throw all of that information away and start again.
+
+129
+00:15:03,980 --> 00:15:09,900
+So a very common way of thinking about this is, if you have a for loop that's going from
+
+130
+00:15:10,460 --> 00:15:17,900
+0 to 100, 100 times, the branch prediction is going to go one way, where it's going to be like,
+
+131
+00:15:17,900 --> 00:15:23,980
+OK, continue for loop, continue for loop, increment, continue for loop. But on the 100th iteration,
+
+132
+00:15:23,980 --> 00:15:32,860
+it's going to fail. But if you're trying to optimize our performance on a CPU, it's better to
+
+133
+00:15:33,740 --> 00:15:41,100
+predict correctly 100 times, and fail once, than it is to wait and stall every single time for 100
+
+134
+00:15:41,100 --> 00:15:46,140
+times. So that's kind of what we get here, because of branch prediction.
+
+135
+00:15:48,380 --> 00:15:54,860
+So modern day CPUs are actually very, very good at this. Most of the time, you get 90% accuracy.
+
+136
+00:15:54,860 --> 00:16:00,700
+This is helped by both compilers and hardware level logic. This improves performance,
+
+137
+00:16:00,700 --> 00:16:06,460
+as well as energy efficiency. However, the downside is that now the chips are bigger.
+
+138
+00:16:06,460 --> 00:16:11,340
+You're dedicating more and more transistors into being better hardware branch predictors.
+
+139
+00:16:12,300 --> 00:16:20,940
+So now, the efficiency of compute per transistor is probably decreased. It also probably increases
+
+140
+00:16:20,940 --> 00:16:26,460
+the fetch stage latency, because now you're in different branch predictors, and you're trying
+
+141
+00:16:26,460 --> 00:16:36,780
+to do different things. And then, lastly, is security concerns. A few of you may have been
+
+142
+00:16:36,780 --> 00:16:42,540
+either probably in your freshman year, or a little before that, when Spectre and Meltdown
+
+143
+00:16:42,540 --> 00:16:49,180
+were the talk of the town about how, at the very core hardware level, these issues existed,
+
+144
+00:16:49,180 --> 00:16:55,500
+where they could provide hackers the ability to get in by reading memory that they shouldn't have
+
+145
+00:16:55,500 --> 00:17:02,460
+access to. And how that happened is essentially because of branch prediction, where at the
+
+146
+00:17:02,460 --> 00:17:07,500
+hardware level, the chips were executing instructions that were kind of in the future.
+
+147
+00:17:08,140 --> 00:17:13,820
+That is, they were executing instructions based on branch prediction, assuming that they would
+
+148
+00:17:13,820 --> 00:17:21,260
+just throw away the results later on. But what that allowed potential hackers or security loopholes is
+
+149
+00:17:22,220 --> 00:17:28,780
+you could write a branch prediction that went one way all the time. And then, when the CPU trusted
+
+150
+00:17:28,780 --> 00:17:33,420
+it enough, then you tried to access bad memory through it. So of course, I'm doing a very bad
+
+151
+00:17:33,420 --> 00:17:39,740
+job of explaining the core part of the security. I'm not necessarily a security person. But
+
+152
+00:17:39,740 --> 00:17:45,100
+essentially, that's what led to the hardware level issues, and weren't fixed by any operating system.
+
+153
+00:17:45,100 --> 00:17:51,660
+Intel actually had to build it into the new chip so that these kind of issues didn't happen
+
+154
+00:17:51,660 --> 00:18:05,900
+in the future. So looking at memory hierarchies, so some of this we've discussed in the class from
+
+155
+00:18:05,900 --> 00:18:11,020
+a CUDA perspective. But let's look at it from the CPU perspective as well. Essentially, the
+
+156
+00:18:11,020 --> 00:18:20,300
+philosophy is, as the memory gets larger, it also gets slower. So in rough numbers, if you had SRAM,
+
+157
+00:18:20,300 --> 00:18:27,100
+which is our L1, L2, L3 cache on the CPU, you're going to have very, very fast bandwidth because
+
+158
+00:18:27,100 --> 00:18:33,420
+it's literally located near the CPU. But you're going to get very, very small size. Even modern
+
+159
+00:18:34,380 --> 00:18:41,900
+CPUs have somewhere between 1 to 20 megabytes of L1, L2, L3 cache. Now from there, if you go into
+
+160
+00:18:41,900 --> 00:18:48,540
+DRAM, which is your regular 16 GB, 32 GB memory that you have in your laptop, that's going to be
+
+161
+00:18:48,540 --> 00:18:55,740
+somewhere between 15 to 40, depending on whether you have DDR3, DDR4, et cetera. So you get more
+
+162
+00:18:55,740 --> 00:19:02,780
+memory, almost 1,000 times more memory, but you're also reducing how fast you can access it.
+
+163
+00:19:03,900 --> 00:19:10,780
+And then from there, if you keep increasing a flash or a solid state drive, even NVMe,
+
+164
+00:19:10,780 --> 00:19:16,220
+NVMe is slightly faster, but not reflected here, you're going to get significantly more sizes where
+
+165
+00:19:16,220 --> 00:19:23,500
+it's anywhere from 256 GB these days to four terabytes. And your speed is probably going to be
+
+166
+00:19:23,500 --> 00:19:30,940
+in the hundreds of megabytes if you're on a regular SSD. And if you have an NVMe that's running over
+
+167
+00:19:30,940 --> 00:19:37,740
+PCI, then you're probably getting into the one terabyte or, sorry, one gigabyte or up to four
+
+168
+00:19:37,740 --> 00:19:43,980
+gigabytes per second. And finally, if you're on a traditional spinning hard disk, which are still
+
+169
+00:19:43,980 --> 00:19:50,540
+very, very much used these days, you're going to get somewhere in the low 100 megabytes per second
+
+170
+00:19:50,540 --> 00:19:56,380
+read and write speed. So essentially the larger you get, the more time you're spending on actually
+
+171
+00:19:56,380 --> 00:20:02,940
+trying to find where the memory exists. That's where the latency happens. It's not in actually
+
+172
+00:20:04,220 --> 00:20:11,180
+reading the memory, but it's in the memory bus about how the actual physical architecture,
+
+173
+00:20:11,180 --> 00:20:15,420
+how fast can it read the memory. And it's also in finding where the memory exists. So if you're
+
+174
+00:20:15,420 --> 00:20:19,340
+building up a cache and stuff, you're going to access it faster. If you don't have that cache,
+
+175
+00:20:19,340 --> 00:20:24,380
+you actually need to physically spin this in the case of hard disks, it's going to be a lot slower.
+
+176
+00:20:26,460 --> 00:20:32,780
+So in the case of caching, what we are essentially doing is keeping the most important data as close
+
+177
+00:20:32,780 --> 00:20:40,860
+as we need. So that the most frequently accessed data is the fastest to get. So what we are
+
+178
+00:20:40,860 --> 00:20:48,780
+essentially doing is exploiting temporal locality, which is if your data is likely to be used again.
+
+179
+00:20:48,780 --> 00:20:52,700
+So for example, again, if we go back to the for loop example, if you're doing the same operations
+
+180
+00:20:52,700 --> 00:20:58,380
+over and over, it's best to cache those results. And then you're also doing spatial locality.
+
+181
+00:20:58,940 --> 00:21:06,060
+Again, using that for loop example, if you're trying to add two arrays, the CPU and the compiler
+
+182
+00:21:06,060 --> 00:21:12,780
+can predict that after index I, the next iteration is going to access I plus one and the next
+
+183
+00:21:12,780 --> 00:21:19,740
+iteration is going to access I plus two and so on. So what it can do is predictably, it can fetch all
+
+184
+00:21:19,740 --> 00:21:25,020
+of that continuous memory into a cache and store it. So now you don't have to copy it each time
+
+185
+00:21:25,020 --> 00:21:31,900
+into the cache. So taking a look at the cache hierarchy, what you're going to see is something
+
+186
+00:21:31,900 --> 00:21:38,460
+like this, where L1 is the actual instruction and data caches. So in CUDA, this would essentially be
+
+187
+00:21:39,180 --> 00:21:46,940
+the same as registers. L2 would be unified cache and L3 would be slightly bigger unified
+
+188
+00:21:46,940 --> 00:21:53,260
+cache, but probably distributed across the cores. And then away from the chip itself,
+
+189
+00:21:53,260 --> 00:21:56,300
+you get main memory and of course, hard disk drives.
+
+190
+00:21:58,860 --> 00:22:03,580
+So let's take a look at what some CPU architectures actually look like. So this is
+
+191
+00:22:03,580 --> 00:22:13,180
+an actual image of an Intel CPU conceptually. Now, you can probably identify some parts and
+
+192
+00:22:13,180 --> 00:22:18,780
+others, but let's see what it actually breaks up into. If you have any predictions, put that
+
+193
+00:22:18,780 --> 00:22:23,980
+in your mind so that when I go to the next screenshot, let's compare about how it comes out.
+
+194
+00:22:25,580 --> 00:22:33,100
+So this is how the chip actually breaks up. You have this huge L3 cache here and that's where
+
+195
+00:22:35,180 --> 00:22:40,380
+you know how CPUs and GPUs are different. You have about six to eight cores here,
+
+196
+00:22:40,380 --> 00:22:46,140
+depending on how many they're going to enable. And then you have a lot of IO controllers and
+
+197
+00:22:46,140 --> 00:22:53,100
+memory controllers along with them. So what I want to really highlight here is the ratio of
+
+198
+00:22:53,900 --> 00:23:00,860
+the transistors that are dedicated to compute, which is the core parts, and the amount of
+
+199
+00:23:00,860 --> 00:23:06,860
+transistors dedicated to memory and memory controllers. So it's a huge percentage. So
+
+200
+00:23:06,940 --> 00:23:11,580
+only about 25% of the time is just in the L3 cache.
+
+201
+00:23:13,900 --> 00:23:18,780
+And once we go a little further, I'm going to show you how it looks on GPUs.
+
+202
+00:23:21,820 --> 00:23:28,860
+So this is on a more modern CPU, so it's an i9-9900. Again, we're going to see something
+
+203
+00:23:28,860 --> 00:23:37,420
+very similar here, where you have a lot of this dedicated to CPU cores and a lot of it in the L3
+
+204
+00:23:37,420 --> 00:23:44,940
+caches. And then you have some transistors dedicated to GPU and media. The reason it's
+
+205
+00:23:44,940 --> 00:23:51,980
+written GPU and media because a lot of the transistors here are also dedicated to things
+
+206
+00:23:51,980 --> 00:23:59,420
+like video decoding and video editing and those kinds of things. So those are built on a hardware
+
+207
+00:23:59,420 --> 00:24:17,820
+as well. So now let's see how we can go about improving the pipeline that we had. So we spoke
+
+208
+00:24:17,820 --> 00:24:25,420
+about how you can add different stages to the pipeline so that you can exploit instruction
+
+209
+00:24:25,420 --> 00:24:30,940
+level parallelism. But there's another type of parallelism that we can extract, which is
+
+210
+00:24:30,940 --> 00:24:37,420
+scalar or super scalar in the way, where you're not just doing the same pipeline,
+
+211
+00:24:37,420 --> 00:24:44,300
+but you're making two pipelines that derive from the same instruction register. So now,
+
+212
+00:24:44,300 --> 00:24:49,100
+if you have one pipeline that's running in the top half, you can have another one
+
+213
+00:24:49,100 --> 00:24:53,740
+running in the bottom half. So this way, you're increasing the pipeline width, essentially.
+
+214
+00:24:55,740 --> 00:25:02,140
+So this can get into something like scheduling and reordering. So let's take this example.
+
+215
+00:25:02,140 --> 00:25:10,380
+We have four registers here, or four instructions, sorry. XOR, add, subtract, and add increment.
+
+216
+00:25:11,180 --> 00:25:18,620
+Notice that add is dependent on XOR. So it's called read after write. So essentially,
+
+217
+00:25:18,620 --> 00:25:28,780
+the XOR always needs to happen before the add here. So XOR R1 plus R2, you get R3. And then
+
+218
+00:25:28,780 --> 00:25:38,460
+the result of R3 is used in the add. Subtraction and add i are dependent. So they are read after
+
+219
+00:25:38,460 --> 00:25:44,620
+write again. So subtraction R5 minus R2, you get R3. And then R3 is read here.
+
+220
+00:25:46,540 --> 00:25:54,780
+And finally, XOR and sub. So this XOR and this sub are not dependent at all, but they're write
+
+221
+00:25:54,780 --> 00:26:00,060
+after write. So depending on what order you do them in, you could potentially be getting into
+
+222
+00:26:00,060 --> 00:26:06,620
+race conditions. But they are not necessarily dependent on each other. So let's see how we
+
+223
+00:26:06,620 --> 00:26:13,980
+can optimize this. So how about we change this so that we are using a few more registers.
+
+224
+00:26:15,020 --> 00:26:22,620
+So consider this. So XOR, P1 and P2 goes into P6. And P6 is still used in the add operation,
+
+225
+00:26:22,620 --> 00:26:30,220
+and you get P6, P4 into P7. So XOR and add are still dependent. But for subtract, we change it.
+
+226
+00:26:30,220 --> 00:26:36,780
+We do P5 and P2, again, same as before. But we now write it into P8. Instead of writing into
+
+227
+00:26:36,780 --> 00:26:42,540
+the same register as the XOR result, we write it into a new register. And then that register gets
+
+228
+00:26:42,540 --> 00:26:51,340
+used in add i. So you can have P8, 1 into P9. So now what we are essentially doing is XOR and sub
+
+229
+00:26:51,340 --> 00:26:58,220
+can execute in parallel. And then add and add i can execute in parallel. So the first two instructions
+
+230
+00:26:58,220 --> 00:27:01,660
+and the second two instructions are completely independent of each other.
+
+231
+00:27:03,900 --> 00:27:09,100
+So that's essentially what is called out of order execution, where you're giving the CPU
+
+232
+00:27:09,100 --> 00:27:15,980
+and the compiler permission to reorder the instructions based on the order that you're
+
+233
+00:27:15,980 --> 00:27:23,020
+providing. So that's why it's always important, even in CUDA, to have memory operations and
+
+234
+00:27:23,020 --> 00:27:29,100
+compute operations kind of next to each other so that the GPU can optimize them if needed.
+
+235
+00:27:31,340 --> 00:27:38,540
+So this workflow is kind of the way that reordering happens. And there's a reorder
+
+236
+00:27:38,540 --> 00:27:44,540
+buffer to keep track of status of the in-flight instructions, because we can't just freehand
+
+237
+00:27:45,100 --> 00:27:50,060
+modify things as we want. We actually have to keep track of the results and which instructions
+
+238
+00:27:50,060 --> 00:27:57,740
+have executed and which have not. So that also drives into having an actual issue queue and a
+
+239
+00:27:57,740 --> 00:28:04,540
+scheduler, which chooses the next instruction. So it needs to have some smarts about how it
+
+240
+00:28:04,540 --> 00:28:11,740
+predicts which operations are dependent and independent and picking the next instruction
+
+241
+00:28:11,740 --> 00:28:23,020
+to put on the schedule. So on the CPU, now going from CPU from one pipeline into actually
+
+242
+00:28:23,020 --> 00:28:28,540
+parallelizing the CPU, we've covered instruction-level parallelism, where you can have
+
+243
+00:28:29,340 --> 00:28:34,540
+superscalar and out of order. And then you can have data-level parallelism. So that's vectors,
+
+244
+00:28:34,540 --> 00:28:39,100
+and we'll get to that on the next slide. And finally, we'll have thread-level parallelism. So
+
+245
+00:28:39,100 --> 00:28:44,220
+you'll have simultaneous multi-threading, which we are all very used to in modern-day CPUs. And we
+
+246
+00:28:44,220 --> 00:28:50,860
+also get multi-core. That's essentially what Intel and AMD have thrived on more recently.
+
+247
+00:28:51,500 --> 00:28:59,260
+So let's take a look at vector. So if you take a look at this for loop, what we see is this is
+
+248
+00:28:59,260 --> 00:29:05,100
+going from int i equals 0, i less than n, i plus plus. And it's doing the same operation over and
+
+249
+00:29:05,100 --> 00:29:11,660
+over. If you imagine this in an assembly language, what you're going to see is something like
+
+250
+00:29:12,220 --> 00:29:20,060
+execute the for loop, or execute the assignment, execute the condition, execute the statement,
+
+251
+00:29:20,700 --> 00:29:25,740
+execute the increment, execute the condition, then you execute the statement again,
+
+252
+00:29:26,460 --> 00:29:32,300
+then increment, then condition, and then the statement again. So these three steps
+
+253
+00:29:33,260 --> 00:29:39,980
+kind of keep repeating each other. But what if you were able to take advantage of something
+
+254
+00:29:39,980 --> 00:29:45,900
+that we've spoken about in GPU land, essentially? And that's SIMD. So single instruction,
+
+255
+00:29:45,900 --> 00:29:52,220
+multiple data. So what if you changed your for loop to be something like this, where you increment
+
+256
+00:29:52,220 --> 00:30:02,140
+by 4, but you add more instructions explicitly? So now you know that this n is not maybe a multiple
+
+257
+00:30:02,620 --> 00:30:08,700
+of 4, or you're not going to have invalid memory accesses. So now you can explicitly write these
+
+258
+00:30:08,700 --> 00:30:15,260
+instructions, as shown in red, so that you're doing more compute and less condition checking.
+
+259
+00:30:15,260 --> 00:30:22,300
+So now it can execute faster without the overhead of that increment and checks for every single
+
+260
+00:30:22,300 --> 00:30:30,780
+for loop iteration. So that essentially allows us to have more ALU computation,
+
+261
+00:30:31,980 --> 00:30:37,180
+and also needs more memory, but eventually makes our performance faster.
+
+262
+00:30:39,420 --> 00:30:47,420
+So some examples of vector instructions in modern architectures are SSE2, where you have four white
+
+263
+00:30:47,420 --> 00:30:52,700
+packed floats and packed integer instructions. So these are essentially things like operating
+
+264
+00:30:52,700 --> 00:30:59,580
+on VEC4s and VEC3s that can be really optimized, because you're not doing it as a vector operation.
+
+265
+00:31:00,620 --> 00:31:06,140
+AVX is the modern version of SSE2. So now you can do eight white packed floats and
+
+266
+00:31:06,140 --> 00:31:10,460
+integer instructions. And that's in the more modern Intel and AMD hardware.
+
+267
+00:31:11,660 --> 00:31:14,620
+So that's about vector instructions, where you are essentially taking
+
+268
+00:31:15,260 --> 00:31:21,740
+the same instruction, but multiple data, and executing it within the same clock cycle.
+
+269
+00:31:24,620 --> 00:31:32,540
+And then we have thread level parallelism, where you can have, in your program, you can define
+
+270
+00:31:32,540 --> 00:31:37,180
+multiple threads and what they should do. And this is more on the software level. So it's more
+
+271
+00:31:37,180 --> 00:31:42,620
+controlled by the developers and the programmers who are writing the code. So we have to manage
+
+272
+00:31:42,620 --> 00:31:47,900
+about how, which instructions they execute, what the algorithms are, and stuff like that.
+
+273
+00:31:50,620 --> 00:31:56,540
+And then on simultaneous multi-threading, these instructions can be issued from multiple threads,
+
+274
+00:31:57,900 --> 00:32:03,500
+and they require a partitioning of the reorder buffer. So you have different parts of the reorder
+
+275
+00:32:03,500 --> 00:32:09,100
+buffer working on different threads. And what they allow you to do is not necessarily duplicate the
+
+276
+00:32:09,100 --> 00:32:15,340
+hardware, but they take up more cache and execution resources, because now they have
+
+277
+00:32:15,340 --> 00:32:22,060
+to track different things from different threads simultaneously. So while it reduces single-threaded
+
+278
+00:32:22,060 --> 00:32:27,260
+performance, it can really improve multi-threaded performance because of that additional hardware
+
+279
+00:32:27,260 --> 00:32:36,700
+that's there to optimize it. And finally, on multicore, what we are seeing is, especially
+
+280
+00:32:36,700 --> 00:32:43,980
+since AMD's Threadripper CPUs came out, there's a huge increase in the number of cores that the
+
+281
+00:32:43,980 --> 00:32:50,860
+hardware companies are putting into the CPUs. So for example, Intel's latest architecture,
+
+282
+00:32:50,860 --> 00:32:55,820
+they come with that big little architecture where they have, let's say, four to six
+
+283
+00:32:56,460 --> 00:33:02,620
+efficient CPUs. So these are CPUs that are going to run under low performance loads,
+
+284
+00:33:02,620 --> 00:33:07,340
+but be really amazing with battery life. So essentially, performance per watt is really,
+
+285
+00:33:07,340 --> 00:33:15,740
+really good. And then you have four to six big cores where the performance is really good,
+
+286
+00:33:15,740 --> 00:33:19,180
+but you don't care as much about how much power you're consuming. So for example,
+
+287
+00:33:19,180 --> 00:33:24,780
+in gaming workloads or high-performance computing workloads, it's going to take the same thing that
+
+288
+00:33:24,780 --> 00:33:32,060
+you were doing. It's going to realize quickly, oh, my program needs to run on the higher performance
+
+289
+00:33:32,060 --> 00:33:37,500
+CPUs. So it's going to take that, move it from the efficient cores onto the high-performance cores,
+
+290
+00:33:37,500 --> 00:33:41,740
+and that's going to use up more battery life, but you'll get your results faster as well.
+
+291
+00:33:43,660 --> 00:33:49,660
+So in these cores, what you're essentially getting is full cores, duplicating the
+
+292
+00:33:49,660 --> 00:33:56,140
+hardware essentially, and no resource sharing other than the L3 cache at most points. It's
+
+293
+00:33:56,140 --> 00:34:01,260
+easier to take advantage of that in Mozilla because you can essentially copy-paste each core,
+
+294
+00:34:01,260 --> 00:34:05,580
+any number of times on the chip, as long as you can control the chip size.
+
+295
+00:34:06,940 --> 00:34:12,780
+What you decrease or don't get so much off is the utilization because you have all of this
+
+296
+00:34:13,340 --> 00:34:17,980
+independent cores now. They can't always talk to each other in the most efficient way,
+
+297
+00:34:17,980 --> 00:34:27,660
+so you get a little bit less utilization. So concluding the CPU part, so CPUs are essentially
+
+298
+00:34:27,660 --> 00:34:32,380
+optimized for sequential programming, and of course, a little bit for multi-threaded programming,
+
+299
+00:34:32,380 --> 00:34:37,660
+but they're essentially programmed for multi-threaded versions of sequential programming,
+
+300
+00:34:37,660 --> 00:34:44,220
+where you have pipelines, branch predictions, superscalar, out-of-order execution, lots of
+
+301
+00:34:45,260 --> 00:34:53,500
+human-controlled workflows essentially. And to reduce that execution time, we are increasing
+
+302
+00:34:53,500 --> 00:34:59,900
+the clock speed and trying to increase the utilization. Memory is always a problem because
+
+303
+00:34:59,900 --> 00:35:05,420
+you're going to have different levels of cache and different levels of memory, but always that bus
+
+304
+00:35:05,420 --> 00:35:10,380
+width and the speed is going to be a limitation to how much parallelism and compute we can extract
+
+305
+00:35:10,380 --> 00:35:18,140
+from that. So for modern-day architectures, modern-day CPUs, you're going to get anywhere
+
+306
+00:35:18,140 --> 00:35:24,060
+from 4 to 12 to 16, maybe 32 threads on the highest-end architectures, but how do you get to
+
+307
+00:35:24,860 --> 00:35:33,020
+32,000 threads or 64,000 threads that modern-day GPUs are able to execute? So let's take a look at
+
+308
+00:35:33,020 --> 00:35:40,700
+that. So essentially, going back to this chart from before, we are asking, how did this happen?
+
+309
+00:35:41,580 --> 00:35:49,180
+How are we going from, in 2005 and 2007, GPUs and CPUs being relatively close to each other
+
+310
+00:35:49,180 --> 00:35:59,420
+in terms of performance to this huge gap that we see today? So let's take a look at what kind of
+
+311
+00:35:59,420 --> 00:36:06,300
+workloads GPUs handle, both in terms of algorithms and their use cases, to make this kind of
+
+312
+00:36:07,260 --> 00:36:13,820
+scaling possible. So the first and very common use case is, of course,
+
+313
+00:36:13,820 --> 00:36:20,300
+rendering of triangles and pixels. Very, very popular. You have millions of triangles and
+
+314
+00:36:20,940 --> 00:36:25,340
+you're generally applying the same operation to them, the same world coordinate transformations,
+
+315
+00:36:25,340 --> 00:36:31,580
+the same normal maps and other things. So again, single instruction, multiple data really applies.
+
+316
+00:36:32,540 --> 00:36:39,660
+For pixels and fragments, rendering things on the screen, again, if you have your rasterization
+
+317
+00:36:39,660 --> 00:36:44,060
+algorithm, it's going to be very similar for all the pixels. If you're applying different filters,
+
+318
+00:36:45,980 --> 00:36:52,860
+different shaders, that's going to have, again, those single instructions, but you're applying
+
+319
+00:36:52,860 --> 00:36:57,820
+them to many, many, many pixels at the same time. So very, very parallel workloads.
+
+320
+00:36:58,700 --> 00:37:04,620
+So let's take a look at how GPUs have essentially evolved in rendering triangles and vertices
+
+321
+00:37:05,740 --> 00:37:12,140
+since the early days of gaming. So one of the first and biggest computer games was,
+
+322
+00:37:12,140 --> 00:37:20,380
+of course, Wolfenstein 3D and then Doom 1, both by id Software. This was all software rendering.
+
+323
+00:37:20,940 --> 00:37:27,020
+There was nothing like a GPU back then. It was all very, very primitive CPUs. And using
+
+324
+00:37:27,820 --> 00:37:34,620
+software code to make sure that we are able to render the right things at the right time.
+
+325
+00:37:34,620 --> 00:37:41,980
+So for Wolf 3D, it's all a 2.5D game. There's no actual 3D here. There's no ceiling or floor,
+
+326
+00:37:41,980 --> 00:37:47,260
+if you notice. It's all gray. There's no height changes. It's all on the same floor.
+
+327
+00:37:48,300 --> 00:37:54,620
+There's no rolling walls. There's no lighting. It's all flat shading. And the other thing you'll
+
+328
+00:37:54,620 --> 00:38:00,940
+notice, which you may or may not have until today, is the enemies, the agents that you kill,
+
+329
+00:38:01,820 --> 00:38:08,380
+are always facing you. They're never facing away from you. So that's why things like raycasting
+
+330
+00:38:08,380 --> 00:38:14,860
+and pre-computed texture coordinates work in this game. Of course, with Doom 1, now you had
+
+331
+00:38:16,060 --> 00:38:22,940
+this built on the BSP tree by Bruce Naylor. You have texture maps on all the surfaces,
+
+332
+00:38:22,940 --> 00:38:28,060
+including the floor and the ceiling. You have lighting, so you can see how the light from the
+
+333
+00:38:28,060 --> 00:38:34,540
+top is showing on the floor. You have different floors, so you can go up and down. You have
+
+334
+00:38:34,540 --> 00:38:43,180
+rolling walls. So you can see even within the span of a year of how the game evolved.
+
+335
+00:38:43,180 --> 00:38:49,100
+And if you want to read more about its software and how the early days of gaming really evolved
+
+336
+00:38:49,100 --> 00:38:54,940
+and how they came up with these algorithms, I'd recommend you read the book called Masters of
+
+337
+00:38:54,940 --> 00:39:00,540
+Doom. It's an amazing book, especially if you love gaming. You get a lot of history of
+
+338
+00:39:01,340 --> 00:39:05,740
+its software and other games. And I definitely recommend it.
+
+339
+00:39:08,140 --> 00:39:13,900
+So why GPU? So we are definitely seeing the workloads that are amassing parallel,
+
+340
+00:39:13,900 --> 00:39:18,860
+both in terms of data parallelism as well as pipeline parallelism. And there are also CPUs
+
+341
+00:39:18,860 --> 00:39:22,860
+and GPUs being different chips and being asynchronous to each other. They can also
+
+342
+00:39:22,860 --> 00:39:32,460
+execute in parallel. However, not everything is improved by making GPUs software programmable.
+
+343
+00:39:32,460 --> 00:39:37,020
+So when we are programming CUDA cores, they're essentially software programmable cores
+
+344
+00:39:37,020 --> 00:39:43,260
+where you can write code to execute on them. There is still space on our chips for hardware level
+
+345
+00:39:44,460 --> 00:39:48,380
+fixed function hardware, essentially, as it's called. So these are for texture filtering,
+
+346
+00:39:48,380 --> 00:39:55,340
+therefore rasterization, where you can change the states and change the different parameters that
+
+347
+00:39:55,340 --> 00:39:59,820
+are fed into these algorithms. But you can't necessarily program the algorithm. You can't
+
+348
+00:39:59,820 --> 00:40:07,980
+program the fixed function units of these fixed function hardware, essentially. So that's why
+
+349
+00:40:07,980 --> 00:40:14,540
+you're still going to have some compute that's fixed function and has dedicated transistors that
+
+350
+00:40:14,540 --> 00:40:19,740
+are not programmable. But they provide significant performance improvements without necessarily
+
+351
+00:40:19,740 --> 00:40:27,980
+giving access to the whole algorithm or to the user. And then beyond graphics, you get a lot of
+
+352
+00:40:27,980 --> 00:40:33,340
+different things we can do. We've already looked at matrix multiply in the first classes. You can
+
+353
+00:40:33,340 --> 00:40:39,740
+do cloud simulation, high simulation, particle systems. Nowadays, you can do machine learning and
+
+354
+00:40:40,460 --> 00:40:47,980
+computer vision and other things. So GPUs are used for a lot more than just graphics and simulation.
+
+355
+00:40:50,620 --> 00:40:59,980
+So let's start now building what I call the CIS 565 GPU. And in reality, it's the beyond
+
+356
+00:41:00,060 --> 00:41:06,620
+programmable shading course GPU from SIGGRAPH 2011. But let's say we are building the 565 GPU
+
+357
+00:41:06,620 --> 00:41:14,540
+inspired by that. So here's a very simple shader. Those of you who've done CIS 460, 461 should be
+
+358
+00:41:14,540 --> 00:41:21,500
+very familiar with this. The specific code that's here is not very important. What I want to share
+
+359
+00:41:21,500 --> 00:41:29,660
+is that this code applies to millions of pixels at the same time. So let's say you have a 4K
+
+360
+00:41:29,740 --> 00:41:41,980
+screen that is 3840 by 2160, you get probably about 8 million pixels, somewhere around that.
+
+361
+00:41:42,540 --> 00:41:48,700
+So these same operations, literally these four lines of code are being applied to 8 million pixels
+
+362
+00:41:49,820 --> 00:41:55,260
+at the same time. So now you can see how this kind of becomes similar to a kernel that we write
+
+363
+00:41:55,260 --> 00:42:00,540
+in CUDA where you have, let's say your matrix, and you're doing the same operations for the
+
+364
+00:42:00,540 --> 00:42:14,460
+entire matrix. So let's see how this works. The first thing we have to do is take the shader and
+
+365
+00:42:14,460 --> 00:42:20,860
+compile it into assembly language, something that the GPU can understand. And the input to that
+
+366
+00:42:20,860 --> 00:42:26,780
+is going to be one unshaded fragment or a pixel. And then the output is going to be,
+
+367
+00:42:26,780 --> 00:42:31,100
+after applying all the operations, you're going to get a shaded fragment. It's going to be colored
+
+368
+00:42:31,100 --> 00:42:34,940
+or it's going to have transparency and other things. But essentially, that's the function
+
+369
+00:42:34,940 --> 00:42:41,660
+where you have one pixel, you run the shader, and you get one pixel out. And to execute this,
+
+370
+00:42:42,300 --> 00:42:50,620
+what you're going to have is this kind of very simple ALU fetch decode and execution context.
+
+371
+00:42:50,620 --> 00:42:55,660
+So the fetch decode essentially gets the instruction, the ALU executes it,
+
+372
+00:42:55,660 --> 00:43:02,300
+and the execution context stores all the memory. So we can go through the different lines and
+
+373
+00:43:02,300 --> 00:43:08,700
+stuff. So line by line, it's going to execute that. So if we take a look at the CPU before
+
+374
+00:43:09,260 --> 00:43:15,420
+the multi-core era, so essentially in the generation of single cores, what you had was
+
+375
+00:43:15,420 --> 00:43:21,100
+this, you had the fetch decode, you had a small ALU unit, you had some execution context,
+
+376
+00:43:21,900 --> 00:43:27,420
+and you had a huge data cache. So we've seen L1, L2, L3, but of course, not all of them existed
+
+377
+00:43:27,420 --> 00:43:33,340
+back then. Maybe you had L1 and L2, but they were still very, very large compared to how much
+
+378
+00:43:33,340 --> 00:43:40,380
+compute you had, how much ALU you had. And then you had the out-of-order logic, the fancy branch
+
+379
+00:43:40,380 --> 00:43:46,940
+predictor, the memory prefetcher, so that you're able to do all the optimizations around a single
+
+380
+00:43:46,940 --> 00:43:53,420
+instruction rather than parallelize multiple instructions at the same time. So keep this in
+
+381
+00:43:53,420 --> 00:44:05,020
+mind. I want you to keep this kind of high-level diagram about what a single-core pre-multi-core
+
+382
+00:44:05,580 --> 00:44:10,780
+CPU kind of looked like and how the components were essentially divided.
+
+383
+00:44:12,940 --> 00:44:17,500
+So let's take this and let's start working on it, because this is essentially what they had in the
+
+384
+00:44:17,500 --> 00:44:22,060
+90s, right? And we want to take what they had in the 90s and build a GPU out of it. So let's
+
+385
+00:44:22,780 --> 00:44:30,460
+take this and change a few ideas here. So the first idea is that we want to increase transistors
+
+386
+00:44:30,460 --> 00:44:38,540
+count, make the chip essentially bigger so that we can add more cores to it. So rather than using
+
+387
+00:44:38,540 --> 00:44:46,060
+transistors to increase the branch predictors and the out-of-order execution, let's add more ALU
+
+388
+00:44:46,060 --> 00:44:54,940
+units essentially. So that's the first idea. And this is essentially within a core. So if you get
+
+389
+00:44:54,940 --> 00:45:00,140
+two cores, this is what it looks like. You have the fetch ALU at execution context,
+
+390
+00:45:00,140 --> 00:45:05,980
+but you have two of those now. So you can produce two fragments in parallel. Why stop at two? Let's
+
+391
+00:45:05,980 --> 00:45:14,060
+go to four. So now you can produce four pixels in parallel. Again, no need to stop there. Let's go to
+
+392
+00:45:14,060 --> 00:45:24,620
+16. Now you see how having a lot of ALUs with execution context and their own instruction
+
+393
+00:45:26,220 --> 00:45:30,780
+decode is essentially going to help produce multiple fragments at parallel.
+
+394
+00:45:32,780 --> 00:45:39,420
+But many fragments should be able to share the same instruction stream. So if I go back here,
+
+395
+00:45:39,420 --> 00:45:47,420
+maybe one step back, all of these units have their own fetch and decode. But what we discussed
+
+396
+00:45:47,420 --> 00:45:53,500
+is that all of these pixels and fragments are essentially executing the same instruction.
+
+397
+00:45:54,140 --> 00:46:00,460
+So we should ask ourselves, is there a need for a fetch decode for all of them to have it
+
+398
+00:46:00,460 --> 00:46:06,460
+independently? Or can we combine them into one? So essentially that's what this slide gets to
+
+399
+00:46:07,020 --> 00:46:15,020
+is instead of suggesting that we have fetch decode per ALU, why not combine a bunch of ALUs
+
+400
+00:46:15,020 --> 00:46:21,740
+and have one fetch decode? So let's see how that might work. So you have a simple processing core,
+
+401
+00:46:21,740 --> 00:46:26,140
+but let's change this a little bit. So we said we want to have fetch decode for one,
+
+402
+00:46:26,140 --> 00:46:34,860
+but have many ALUs, right? So that's what our idea two is. So we have one fetch decode.
+
+403
+00:46:35,820 --> 00:46:43,260
+In this case, eight ALUs. And then the context is now subdivided. We have eight contexts for each
+
+404
+00:46:43,260 --> 00:46:49,740
+of the ALUs, and then we have a shared context. What does this start looking like? Especially
+
+405
+00:46:49,740 --> 00:46:56,300
+the shared part of it. It starts looking like how we have blocks in CUDA, where if you think about
+
+406
+00:46:56,300 --> 00:47:02,780
+the threads, each thread has its own registers that are private to each, so its own context.
+
+407
+00:47:03,500 --> 00:47:07,580
+And then there's shared memory. So there's a shared context that all the threads can access.
+
+408
+00:47:08,300 --> 00:47:11,340
+So now you start getting the picture of how these things relate.
+
+409
+00:47:12,700 --> 00:47:21,340
+So this is idea two. Let's see how we modify the shader with this. So we can take the same
+
+410
+00:47:21,340 --> 00:47:27,900
+instruction from our shader, bring it into fetch decode, and all the ALUs now execute the same
+
+411
+00:47:27,900 --> 00:47:33,500
+instruction on different inputs, and then produce different outputs. The instructions remain the
+
+412
+00:47:33,500 --> 00:47:42,940
+same. The memory and the context changes. So now we have what is essentially one core,
+
+413
+00:47:43,500 --> 00:47:50,140
+but it has eight ALUs in it. So let's see how we can take this a step further.
+
+414
+00:47:51,100 --> 00:48:02,220
+How about we do 128 in parallel, where you can have taking this concept essentially where you
+
+415
+00:48:02,220 --> 00:48:08,860
+have eight ALUs and one core, and you make 16 cores out of them. So now you can do 16 times
+
+416
+00:48:08,860 --> 00:48:17,740
+eight is 128. You can do 128 fragments in parallel. So now, again, we start seeing how this is leading
+
+417
+00:48:17,820 --> 00:48:27,100
+up to code architectures essentially. So in terms of doing our traditional workflows of
+
+418
+00:48:27,740 --> 00:48:34,380
+rendering vertices, fragments, primitives, and even compute work items. I wrote OpenCL work items
+
+419
+00:48:35,500 --> 00:48:41,260
+but they can be certainly any form of parallel compute. You can divide these up into different
+
+420
+00:48:41,260 --> 00:48:46,540
+cores. Remember that within each core you want to be the same instructions,
+
+421
+00:48:47,340 --> 00:48:52,380
+but different cores can be executing different kinds of instructions. So that's where you can
+
+422
+00:48:52,380 --> 00:49:08,940
+grow the parallelism. So now, given what we designed about these GPUs here, or the GPU
+
+423
+00:49:08,940 --> 00:49:16,060
+cores here, where we have the 16 cores and each of them have eight ALUs, what do we do about
+
+424
+00:49:16,060 --> 00:49:22,540
+branches? This is kind of foreshadowing what we already spoke about in CUDA, but it's well worth
+
+425
+00:49:22,540 --> 00:49:30,140
+repeating it here. So let's say we have our eight ALUs within each core and we are going to execute
+
+426
+00:49:30,140 --> 00:49:38,460
+this shader code that has a branch in it. So the first evaluation is to check if each of those
+
+427
+00:49:38,460 --> 00:49:43,420
+eight cores has a true or false statement in it. And some can have true and some can have false.
+
+428
+00:49:44,380 --> 00:49:51,020
+And in that case, those three threads that are true are going to execute while the false
+
+429
+00:49:51,020 --> 00:49:58,060
+statements wait. And then the false statements are going to execute while the true one waits.
+
+430
+00:49:58,060 --> 00:50:03,420
+So just like we spoke about in CUDA, this is not ideal, but sometimes it may need to be done and
+
+431
+00:50:03,420 --> 00:50:11,500
+we should try to minimize this case. The worst-case scenario is that each core takes a different path
+
+432
+00:50:12,140 --> 00:50:17,980
+and now you get one-eighth the peak performance. So instead of all the ALUs executing the
+
+433
+00:50:17,980 --> 00:50:23,420
+same operation, you get all the ALUs executing different operations. So that's the worst-case
+
+434
+00:50:23,420 --> 00:50:31,500
+scenario. We don't want to do that. So simply processing, just for a clarification,
+
+435
+00:50:32,220 --> 00:50:40,220
+does not necessarily imply SIMD instructions. So with explicit vector instructions, so SSE AVX,
+
+436
+00:50:40,780 --> 00:50:49,260
+you get what is essentially vector instructions. But the second way, which is more of what the GPU
+
+437
+00:50:49,260 --> 00:50:56,700
+is, is KLAN instructions and hardware vectorization, where the cores essentially create
+
+438
+00:50:56,700 --> 00:51:01,420
+the parallelism that you need. It's kind of like what we discussed in matrix multiply, where
+
+439
+00:51:01,420 --> 00:51:06,460
+the for loops disappear and become implicit within the threads of the blocks we launch.
+
+440
+00:51:09,580 --> 00:51:14,780
+So the other thing we should discuss along with branch divergence is stalls,
+
+441
+00:51:15,900 --> 00:51:19,420
+which is also something we discussed in the CUDA lectures, is about how
+
+442
+00:51:20,060 --> 00:51:26,300
+memory is read and what happens when we wait. So what we want to do along with our course,
+
+443
+00:51:26,700 --> 00:51:34,380
+back to designing the GPU. So let's take our course and add an L1 cache that's small,
+
+444
+00:51:34,380 --> 00:51:41,580
+but super high speed, an L2 cache that's slightly larger, but slower speed, and a big L3 cache that
+
+445
+00:51:41,580 --> 00:51:49,740
+is shared with all of them that might be more larger, but slower than L1, L2, but still faster
+
+446
+00:51:49,740 --> 00:51:56,300
+than the memory. And then you have a bus between the memory and the GPU itself. And when I say
+
+447
+00:51:56,300 --> 00:52:03,100
+memory, it's more on the CPU side. So this bus kind of becomes the PCIe, et cetera.
+
+448
+00:52:04,940 --> 00:52:11,340
+So now we always have to discuss about how we reduce that latency. In the CUDA lectures,
+
+449
+00:52:11,340 --> 00:52:19,660
+in matrix multiply, we've seen how we should have more threads to cover that performance
+
+450
+00:52:20,140 --> 00:52:27,340
+essentially. So to do that, what we want to do is interleave the processing of fragments
+
+451
+00:52:27,340 --> 00:52:32,700
+in our building the GPU example. We want to interleave the processing of fragments
+
+452
+00:52:32,700 --> 00:52:39,980
+into a single core so that it avoids stalls and we get low latency essentially.
+
+453
+00:52:39,980 --> 00:52:47,660
+So the way to do that is to take our fragment shader and divide it into parts of groups of
+
+454
+00:52:47,660 --> 00:52:54,700
+threads, kind of like this is essentially where we get to the idea of warps. So if we take our warp
+
+455
+00:52:54,700 --> 00:53:02,380
+and have eight ALUs execute the first part until it hits a stall, we are going to make it,
+
+456
+00:53:03,180 --> 00:53:09,340
+what we essentially want is if this hits a stall, we want the next batch of threads to be able to
+
+457
+00:53:09,340 --> 00:53:15,660
+run right away with zero latency between the switch. So we get a stall, we launch the next
+
+458
+00:53:16,620 --> 00:53:21,900
+next group of threads. Of course, because we are executing the same instructions,
+
+459
+00:53:21,900 --> 00:53:28,140
+now batch two is going to hit a stall and same with batch three and batch four. But what we want
+
+460
+00:53:28,140 --> 00:53:35,660
+is that once batch four hits a stall, another batch should be able to run. In this case,
+
+461
+00:53:35,660 --> 00:53:40,540
+it would be batch one because batch one has finished its stall, it's ready to run. And as
+
+462
+00:53:40,540 --> 00:53:45,980
+soon as batch four hits a stall, batch one is ready to run. So in this way, what we essentially
+
+463
+00:53:45,980 --> 00:53:54,540
+get is instead of one starting here, stalling, becoming runnable, then runs again, and then
+
+464
+00:53:54,540 --> 00:54:00,220
+two instead of starting here, starts down here. Instead of doing that, we get a more
+
+465
+00:54:00,220 --> 00:54:06,060
+waterfall approach to it. So we are saving a lot of latency that's happening in between these stalls.
+
+466
+00:54:06,780 --> 00:54:14,060
+So essentially, while it may slightly increase the runtime of one group, because you see how
+
+467
+00:54:14,060 --> 00:54:20,620
+it becomes runnable, but it may have to wait a little bit. But the overall runtime of all of
+
+468
+00:54:20,620 --> 00:54:26,700
+these different warps is much faster, because now they can all execute in this waterfall model
+
+469
+00:54:26,700 --> 00:54:35,500
+instead of all having to execute sequentially. So now what we've changed is instead of
+
+470
+00:54:35,500 --> 00:54:43,580
+each core with eight ALUs executing eight fragments each, so they had eight contacts
+
+471
+00:54:43,580 --> 00:54:49,580
+and they were running eight fragments, now we want them to run 32 fragments on the same eight ALUs.
+
+472
+00:54:50,460 --> 00:54:55,340
+What do we need for that? We need more memory so that we can store all of those contacts,
+
+473
+00:54:55,340 --> 00:55:00,780
+and they become very, very fast to switch. So this is the change we're making now. We have
+
+474
+00:55:00,780 --> 00:55:06,540
+the fetch decode, we have the eight ALUs, and we make our storage much larger. But we don't
+
+475
+00:55:06,540 --> 00:55:13,420
+make the storage much larger by simple mechanism. What we want to do is we want to subdivide it.
+
+476
+00:55:14,140 --> 00:55:21,980
+So we subdivide it by this. We create these subparts to it, where each group has its own
+
+477
+00:55:21,980 --> 00:55:26,460
+contacts and shared memory, and now you can have different contacts and shared memory.
+
+478
+00:55:26,460 --> 00:55:35,100
+So when one goes out for a stall, another one is ready to switch in directly. So in this case,
+
+479
+00:55:35,100 --> 00:55:42,780
+you can have 18 very small contacts, you can have, in this case, 12 medium contacts,
+
+480
+00:55:42,780 --> 00:55:46,620
+or you can have four very large contacts with the same amount of memory. You can kind of
+
+481
+00:55:47,580 --> 00:55:53,580
+swap them in and out. So if we go back to something like this, what we're essentially
+
+482
+00:55:53,580 --> 00:55:59,900
+seeing from, let's say, coming from the CUDA perspective, is how you have this fetch decode,
+
+483
+00:55:59,900 --> 00:56:07,100
+you have your ALUs, which are the actual execution units, and then you have the memory
+
+484
+00:56:07,660 --> 00:56:15,500
+that's sitting in the SM, and what it's providing for that zero overhead switching of different warps.
+
+485
+00:56:16,460 --> 00:56:22,220
+So now in our example chip, what I want to do is, before I get to the math that's on the left side,
+
+486
+00:56:22,780 --> 00:56:30,860
+I want to show you how this relates to our CUDA architecture. So if you imagine, each of these
+
+487
+00:56:30,860 --> 00:56:38,540
+essentially becomes a streaming multiprocessor. So where you have each SM had its own scheduler
+
+488
+00:56:38,540 --> 00:56:43,580
+and instruction controller, it had many, many cores, while in our example, we may only have
+
+489
+00:56:43,660 --> 00:56:54,540
+eight ALUs, and SM can have 128 or 192 cores within each. So that's how many threads it can
+
+490
+00:56:54,540 --> 00:57:01,820
+run at the same time. And then the memory that's within each SM is essentially allowing us to
+
+491
+00:57:01,820 --> 00:57:08,460
+swap out those warps and blocks as needed, so that the compute of that SM is always occupied.
+
+492
+00:57:09,020 --> 00:57:15,500
+So that's essentially how it relates to the CUDA side of things. And that's also why
+
+493
+00:57:15,500 --> 00:57:22,140
+shared memory is shared only within the block and not across all the SMs, because
+
+494
+00:57:22,140 --> 00:57:28,700
+the shared memory is going to be living inside these memory banks that don't necessarily
+
+495
+00:57:28,700 --> 00:57:34,780
+communicate across the SMs. So we have SM, we have the instruction and fetch decode,
+
+496
+00:57:34,780 --> 00:57:40,540
+we have the memory, and that's allowing us to switch context really fast. And then we have
+
+497
+00:57:40,540 --> 00:57:43,820
+the ALUs and the cores, which are actually doing the instruction.
+
+498
+00:57:45,340 --> 00:57:52,140
+So now, if this is our CIS 565 GPUs, we have 16 cores, or in the case of CUDA,
+
+499
+00:57:52,140 --> 00:58:00,300
+we would call these SMs. We would have eight multiply and add units per core, so 128 total.
+
+500
+00:58:01,260 --> 00:58:08,220
+And we can have 16 simultaneous instruction streams, because we have 16 cores here.
+
+501
+00:58:09,580 --> 00:58:18,060
+And with that, if we have, let's say, four warps per core, we can have 64 concurrent,
+
+502
+00:58:18,060 --> 00:58:25,740
+but interleaved instruction streams. So how we have that waterfall model, if each SM can
+
+503
+00:58:25,740 --> 00:58:31,740
+house four contexts, so you have the four purple memory banks here, if they can each handle four,
+
+504
+00:58:31,740 --> 00:58:38,620
+that means we can have four contexts that can switch right away. So four times 16 is 64
+
+505
+00:58:38,620 --> 00:58:48,300
+concurrent instruction streams. And a total of that is 512 fragments. So you can have 64 times
+
+506
+00:58:48,380 --> 00:58:58,300
+eight fragments running at any given time. So overall, if you're running 512 fragments,
+
+507
+00:58:59,020 --> 00:59:06,380
+that leads to 256 gigaflops if your clock rate is one gigahertz.
+
+508
+00:59:06,380 --> 00:59:13,020
+The way to calculate this is you take 500 concurrent fragments, multiply that by
+
+509
+00:59:13,740 --> 00:59:17,740
+the clock cycle. In each clock cycle, you can essentially do
+
+510
+00:59:20,780 --> 00:59:28,140
+one floating point operation. So you multiply that, and then you multiply the clock rate.
+
+511
+00:59:28,140 --> 00:59:34,780
+So depending on that and how many clock cycles it needs, you'd get to 256 gigaflops.
+
+512
+00:59:36,380 --> 00:59:41,340
+So that's the kind of math here. So that's how we've designed our 565 GPU.
+
+513
+00:59:43,820 --> 00:59:50,300
+So if we compare the CPU and GPU memory architectures, on the CPU, we can have,
+
+514
+00:59:51,420 --> 01:00:00,220
+you know, we have different cores with ALUs. But on the GPU, we'll have very, very large cores,
+
+515
+01:00:00,220 --> 01:00:06,140
+but they have a lot more ALUs, and probably slightly more execution context, and some
+
+516
+01:00:06,860 --> 01:00:13,660
+fixed function memory as well. And then you have an L2 cache, and then you have a huge memory bus
+
+517
+01:00:13,660 --> 01:00:20,540
+to our GPU memory. Whereas on the CPU, you have this DDR3 RAM that's about 20 to 30 GB.
+
+518
+01:00:21,100 --> 01:00:29,580
+But on GPUs, this is 177 architecture. It's an old slide. It's from 2014. Modern day GPUs can
+
+519
+01:00:29,580 --> 01:00:35,980
+get anywhere from 600 to 700 gigabytes per second. So you get this huge bus between
+
+520
+01:00:35,980 --> 01:00:43,180
+the global memory and the caches on the GPU. So as a thought experiment,
+
+521
+01:00:45,500 --> 01:00:49,500
+if our job was to do element-wise multiplication of two vectors,
+
+522
+01:00:51,820 --> 01:00:58,140
+the way to do this is for each element, we are going to be doing read A, read B,
+
+523
+01:00:58,140 --> 01:01:03,740
+compute A times B, and store the result in C. So those four instructions with three memory
+
+524
+01:01:03,740 --> 01:01:13,980
+operations, 12 bytes, and GTX 480 could do 480 multiplications per clock at 1.4 gigahertz. So
+
+525
+01:01:14,700 --> 01:01:26,780
+you have 1.4 billion, essentially, times 480 multiplications that can happen per second.
+
+526
+01:01:28,460 --> 01:01:35,740
+But to make that possible, you need 7.5 terabytes of bandwidth to keep all the cores busy. Again,
+
+527
+01:01:35,740 --> 01:01:41,020
+this goes back to the concept of matrix multiply and how we hid latency and stuff
+
+528
+01:01:41,900 --> 01:01:50,860
+because of more compute. So if you wanted to get this maximum compute rate of 480 multiplies
+
+529
+01:01:50,860 --> 01:01:57,820
+per clock cycle, you would need 7.5 terabytes of bandwidth to keep up that. And that's practically
+
+530
+01:01:57,820 --> 01:02:05,340
+possible for GTX 480 had about 177 gigabytes. So that's only 2% efficiency, but it's still
+
+531
+01:02:05,340 --> 01:02:12,380
+eight times faster than the CPU. So even though we may or may not be using the GPU to its fullest
+
+532
+01:02:12,380 --> 01:02:17,500
+incredible capability because other hardware limits, it's still going to be very much faster
+
+533
+01:02:17,500 --> 01:02:25,580
+than the CPU. So this thought experiment where the problem is not limited by how much compute we have,
+
+534
+01:02:25,580 --> 01:02:31,500
+it's limited by the speed of the memory itself. And if the memory for faster, we could compute it
+
+535
+01:02:31,500 --> 01:02:40,860
+faster is known as a bandwidth limited problem. If the problem essentially is not with compute,
+
+536
+01:02:40,860 --> 01:02:44,780
+it's with how fast we can read with memory and the memory system cannot keep up,
+
+537
+01:02:44,780 --> 01:02:49,100
+that's what is known as a bandwidth limited problem. You can have a compute limited problem
+
+538
+01:02:49,100 --> 01:02:53,820
+as well where the compute can't keep up and the bandwidth is perfectly fine reading the data.
+
+539
+01:02:53,820 --> 01:02:57,740
+There are different algorithms that are compute limited and bandwidth limited.
+
+540
+01:02:57,740 --> 01:03:02,780
+So we'll certainly touch on some of those as we progress in the semester.
+
+541
+01:03:04,940 --> 01:03:13,180
+So ultimately, what is a GPU? We've designed this GPU for 5GPU essentially,
+
+542
+01:03:13,740 --> 01:03:22,860
+but at its core compared to the CPU that we did earlier, a GPU has a bunch of shader and compute
+
+543
+01:03:22,860 --> 01:03:29,820
+cores. It has some fixed function for texture and rasterization, but it probably has some other
+
+544
+01:03:29,820 --> 01:03:35,980
+things like video decoding and other things that can also use parallelism. And then you can have
+
+545
+01:03:36,620 --> 01:03:43,100
+a scheduler that is able to schedule tasks to all of these many, many cores at different
+
+546
+01:03:43,100 --> 01:03:51,420
+hardware or software levels. So that's the idea of a GPU. So now the last slide here is
+
+547
+01:03:51,420 --> 01:03:59,900
+essentially the summary of how we go from CPU to GPU. The first idea is that we slim down the cores,
+
+548
+01:03:59,900 --> 01:04:08,540
+we take out all the bulk around it and we pack it with many, many ALUs. This allows for explicit
+
+549
+01:04:08,540 --> 01:04:13,900
+SIMD instructions and also allows for sharing managed by the hardware. So kind of like the matrix
+
+550
+01:04:13,900 --> 01:04:19,260
+multiply implicitly in the hardware because we are launching so many different threads.
+
+551
+01:04:20,060 --> 01:04:27,660
+And the last idea is to have so much execution that the latency of stalls like memory reads and
+
+552
+01:04:27,660 --> 01:04:36,060
+stuff is hidden by groups of fragments, essentially in CUDA called warps, which can with zero
+
+553
+01:04:36,060 --> 01:04:42,700
+overhead switch in when a group of threads hits a stall and the cores need swapping out.
+
+554
+01:04:42,700 --> 01:04:50,060
+So those three big ideas are essentially what are the core of GPUs today. So that's it for this
+
+555
+01:04:50,060 --> 01:04:55,020
+lecture. Thank you for watching. And more than happy to take questions as we come up in future
+
+556
+01:04:55,020 --> 01:05:02,140
+classes. And certainly looking to get back to more on the parallel algorithms and performance
+
+557
+01:05:02,140 --> 01:05:08,780
+side of things. And the next class, which will be Wednesday, will be our project three path
+
+558
+01:05:08,780 --> 01:05:13,740
+tracer recitation. The entire class will be dedicated to that because it's a much longer
+
+559
+01:05:13,740 --> 01:05:18,700
+recitation. We like to dive deep into it. But certainly looking forward to it. The path tracer
+
+560
+01:05:18,700 --> 01:05:24,300
+is by far one of the favorite projects that everybody does in this class. And we really
+
+561
+01:05:24,300 --> 01:05:30,380
+love to see great results coming from that. So thank you for joining and I'll see you all on
+
+562
+01:05:30,380 --> 01:05:34,700
+Wednesday.
+

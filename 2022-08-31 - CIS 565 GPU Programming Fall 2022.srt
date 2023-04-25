@@ -1,0 +1,4940 @@
+1
+00:00:00,000 --> 00:00:29,960
+All right, let's, let's get started with our first question.
+
+2
+00:00:29,960 --> 00:00:33,480
+This is our first proper lecture.
+
+3
+00:00:33,480 --> 00:00:38,120
+So what I'll be doing over the next probably an hour will be giving an introduction to
+
+4
+00:00:38,120 --> 00:00:44,680
+CUDA, which is what we use for at least the first three projects.
+
+5
+00:00:44,680 --> 00:00:53,800
+So to give you, to give you a history of, you know, different graphics APIs, 2001, 2002,
+
+6
+00:00:53,800 --> 00:00:56,880
+there wasn't even thing called GPU programming.
+
+7
+00:00:56,880 --> 00:01:01,120
+It was called general purpose GPU.
+
+8
+00:01:01,120 --> 00:01:06,680
+This was well before, you know, modern graphics cards were a thing, they were more like VGA
+
+9
+00:01:06,680 --> 00:01:07,680
+cards and stuff.
+
+10
+00:01:07,680 --> 00:01:14,920
+And they were used for how, how essentially you could use that hardware to do different
+
+11
+00:01:14,920 --> 00:01:16,320
+kind of computing.
+
+12
+00:01:16,320 --> 00:01:19,440
+2007 is when NVIDIA released CUDA.
+
+13
+00:01:19,440 --> 00:01:26,720
+And that's where, you know, the, the real shift in GPU programming started.
+
+14
+00:01:26,720 --> 00:01:33,960
+And then 2008, Chronos released OpenCL, which was an open standard for compute devices across
+
+15
+00:01:33,960 --> 00:01:34,960
+all manufacturers.
+
+16
+00:01:34,960 --> 00:01:40,040
+2011, WebGL came out that introduced that onto the web.
+
+17
+00:01:40,040 --> 00:01:43,120
+2013, OpenGL released compute shaders.
+
+18
+00:01:43,120 --> 00:01:48,280
+Now you can do compute shaders within OpenGL, I believe it was 4.3 back then.
+
+19
+00:01:48,840 --> 00:01:58,480
+2015, Vulkan and Spirry came out, which allowed compute shaders on, on, on Vulkan and combining
+
+20
+00:01:58,480 --> 00:02:01,440
+OpenCL and all that started happening.
+
+21
+00:02:01,440 --> 00:02:04,640
+2018 was RTX GPUs.
+
+22
+00:02:04,640 --> 00:02:09,040
+That's when ray tracing became much more popular, at least real-time ray tracing.
+
+23
+00:02:09,040 --> 00:02:12,320
+2019, Apple released Metal.
+
+24
+00:02:12,360 --> 00:02:19,560
+And then 2021, 22, which is now, is people are working on web, web GPU.
+
+25
+00:02:25,560 --> 00:02:26,560
+Yeah, yeah, absolutely.
+
+26
+00:02:26,560 --> 00:02:31,560
+As I said in the beginning, you know, there are no stupid questions, go ahead and ask.
+
+27
+00:02:42,560 --> 00:02:55,560
+Yeah, so there's, there's different levels, right?
+
+28
+00:02:55,560 --> 00:02:58,560
+So let me, let me give you an example.
+
+29
+00:02:58,560 --> 00:03:01,560
+What's your favorite programming?
+
+30
+00:03:01,560 --> 00:03:04,560
+C++, I mean, that's my favorite.
+
+31
+00:03:04,560 --> 00:03:09,560
+When you're writing C++, what's, what does the computer know?
+
+32
+00:03:09,800 --> 00:03:13,800
+You know C++, what does the computer know?
+
+33
+00:03:13,800 --> 00:03:16,800
+Exactly, you know, you know, zeros and ones.
+
+34
+00:03:16,800 --> 00:03:19,800
+Zeros and ones talk to probably assembly.
+
+35
+00:03:19,800 --> 00:03:22,800
+The assembly language talks to the operating system.
+
+36
+00:03:22,800 --> 00:03:25,800
+Operating system probably talks to the compiler.
+
+37
+00:03:25,800 --> 00:03:27,800
+And then that talks to your code.
+
+38
+00:03:27,800 --> 00:03:30,800
+So there's different levels of abstraction that's going on.
+
+39
+00:03:30,800 --> 00:03:34,800
+When it comes to graphics APIs, whether that's, you know, general purpose, more like CUDA
+
+40
+00:03:35,040 --> 00:03:39,040
+or like Vulkan, they're essentially ways to talk to the hardware
+
+41
+00:03:39,040 --> 00:03:42,040
+to get pixels rendering on the screen.
+
+42
+00:03:42,040 --> 00:03:48,040
+And you could, if you wanted, write assembly language for GPUs,
+
+43
+00:03:48,040 --> 00:03:51,040
+but nobody's going to try and do that, that's failed.
+
+44
+00:03:51,040 --> 00:03:55,040
+So we built APIs on one or the other.
+
+45
+00:03:55,040 --> 00:04:00,040
+There's more advanced APIs like Vulkan, which make you do very explicit
+
+46
+00:04:00,280 --> 00:04:05,280
+decision-making on how your memory and your compute flows, essentially.
+
+47
+00:04:05,280 --> 00:04:10,280
+And there are more implicit APIs, like WebGL is wrapped up in a lot of useful things.
+
+48
+00:04:10,280 --> 00:04:13,280
+And then even on top of that, you may have other libraries,
+
+49
+00:04:13,280 --> 00:04:16,280
+like Three.js is a WebGL-based rendering engine.
+
+50
+00:04:16,280 --> 00:04:19,280
+Or you may have Unreal Engine or Unity,
+
+51
+00:04:19,280 --> 00:04:23,280
+which are game engines built on these APIs that abstract them even further.
+
+52
+00:04:23,280 --> 00:04:28,280
+So what we are going to be looking at in this class is a few different ways
+
+53
+00:04:28,520 --> 00:04:33,520
+of GPU programming about how do you take code
+
+54
+00:04:33,520 --> 00:04:40,520
+and make it do really complex and amazing things in a very parallel way.
+
+55
+00:04:40,520 --> 00:04:43,520
+A simple way to describe it, and I'm sure I have examples,
+
+56
+00:04:43,520 --> 00:04:48,520
+is if I were to, say, add a million elements,
+
+57
+00:04:48,520 --> 00:04:52,520
+you're probably going to write for i equals zero, i less than a million,
+
+58
+00:04:52,520 --> 00:04:55,520
+add them up. We don't do that on GPUs.
+
+59
+00:04:55,760 --> 00:04:58,760
+What we do on GPUs is what I'm going to show you today.
+
+60
+00:04:59,760 --> 00:05:02,760
+Any other questions on this?
+
+61
+00:05:15,760 --> 00:05:20,760
+Most likely no, because they use a lot less power.
+
+62
+00:05:21,000 --> 00:05:23,000
+So they have GPUs.
+
+63
+00:05:23,000 --> 00:05:26,000
+They have the same architecture as your big GPUs,
+
+64
+00:05:26,000 --> 00:05:28,000
+but they probably have a lot less power.
+
+65
+00:05:28,000 --> 00:05:30,000
+They have a lot less performance.
+
+66
+00:05:30,000 --> 00:05:32,000
+So it's all about scale at that point.
+
+67
+00:05:32,000 --> 00:05:35,000
+Even between a laptop and a desktop GPU,
+
+68
+00:05:35,000 --> 00:05:39,000
+what we'll probably see in probably next lecture or maybe after that
+
+69
+00:05:39,000 --> 00:05:44,000
+is about how the scale between different GPUs changes.
+
+70
+00:05:51,000 --> 00:05:54,000
+Yeah.
+
+71
+00:05:54,000 --> 00:05:57,000
+Now, these days, it's called system on a chip.
+
+72
+00:05:57,000 --> 00:06:00,000
+I think what I was trying to say before was
+
+73
+00:06:00,000 --> 00:06:05,000
+what the older generation of GPUs,
+
+74
+00:06:05,000 --> 00:06:08,000
+they're more called fixed functions where they have one job to do.
+
+75
+00:06:08,000 --> 00:06:11,000
+You give them pixels and they're end of pixels.
+
+76
+00:06:11,000 --> 00:06:14,000
+I'm simplifying quite a bit, but that's essentially what it is.
+
+77
+00:06:14,000 --> 00:06:18,000
+Modern GPUs have a lot more that they can do,
+
+78
+00:06:18,240 --> 00:06:21,240
+a lot more programming you can do with it to do amazing things,
+
+79
+00:06:21,240 --> 00:06:23,240
+not just rendering pixels on screen,
+
+80
+00:06:23,240 --> 00:06:25,240
+but running machine learning algorithms,
+
+81
+00:06:25,240 --> 00:06:28,240
+running scientific simulations and all of that.
+
+82
+00:06:28,240 --> 00:06:30,240
+The output doesn't have to be visual.
+
+83
+00:06:30,240 --> 00:06:33,240
+It can be a lot more than that.
+
+84
+00:06:39,240 --> 00:06:41,240
+Yes.
+
+85
+00:06:41,240 --> 00:06:44,240
+You get more programmability on your phones.
+
+86
+00:06:44,480 --> 00:06:47,480
+I'm sure Gabe Duggani, when he comes,
+
+87
+00:06:47,480 --> 00:06:50,480
+is going to enlighten us, including myself on that.
+
+88
+00:06:50,480 --> 00:06:53,480
+I'm probably not an expert on mobile GPUs.
+
+89
+00:06:53,480 --> 00:06:56,480
+I know it from a high level, but I'm looking forward to that guest lecture
+
+90
+00:06:56,480 --> 00:06:59,480
+to learn myself.
+
+91
+00:06:59,480 --> 00:07:02,480
+What other questions do you have?
+
+92
+00:07:02,480 --> 00:07:05,480
+Okay.
+
+93
+00:07:05,480 --> 00:07:09,480
+Let's get some terminology out of the way.
+
+94
+00:07:09,480 --> 00:07:12,480
+When we talk about GPU programming,
+
+95
+00:07:12,720 --> 00:07:15,720
+we are going to use these terms all the time.
+
+96
+00:07:15,720 --> 00:07:19,720
+First is the host, and that is typically your CPU.
+
+97
+00:07:19,720 --> 00:07:22,720
+Common languages, you write this in C++,
+
+98
+00:07:22,720 --> 00:07:25,720
+maybe Python, Java, whatever else you want,
+
+99
+00:07:25,720 --> 00:07:28,720
+but most of the projects in this class, at least, are going to be C, C++.
+
+100
+00:07:28,720 --> 00:07:32,720
+The second term is device, which is used for the GPU.
+
+101
+00:07:32,720 --> 00:07:35,720
+When you're writing programs, when you're writing your code,
+
+102
+00:07:35,720 --> 00:07:38,720
+you're not going to be calling it CPU and GPU.
+
+103
+00:07:38,720 --> 00:07:41,720
+You're going to be calling it most likely host and device,
+
+104
+00:07:41,960 --> 00:07:44,960
+which we'll see as later on.
+
+105
+00:07:44,960 --> 00:07:47,960
+Host and device have separate not only processors,
+
+106
+00:07:47,960 --> 00:07:50,960
+but also memory.
+
+107
+00:07:50,960 --> 00:07:53,960
+You actually have to explicitly copy it from one place to the other.
+
+108
+00:07:53,960 --> 00:07:56,960
+A CUDA program likely contains CPU processing
+
+109
+00:07:56,960 --> 00:07:59,960
+as well as GPU processing in it.
+
+110
+00:07:59,960 --> 00:08:02,960
+The other term to know is a kernel.
+
+111
+00:08:02,960 --> 00:08:05,960
+Now, if you've taken an operating systems class or something like that,
+
+112
+00:08:05,960 --> 00:08:08,960
+you know kernel has a different meaning there.
+
+113
+00:08:09,200 --> 00:08:12,200
+In GPU programming, a kernel is a data parallel function
+
+114
+00:08:12,200 --> 00:08:15,200
+where you're writing your code once,
+
+115
+00:08:15,200 --> 00:08:18,200
+but it's executing for a lot more data
+
+116
+00:08:18,200 --> 00:08:21,200
+and then a lot of it in parallel.
+
+117
+00:08:21,200 --> 00:08:24,200
+If you've done shader programming, this is very close
+
+118
+00:08:24,200 --> 00:08:27,200
+to what a shader is in OpenGL, WebGL, Vulkan,
+
+119
+00:08:27,200 --> 00:08:30,200
+those kind of things.
+
+120
+00:08:30,200 --> 00:08:35,200
+A CUDA kernel is executed by n times.
+
+121
+00:08:35,200 --> 00:08:38,200
+When I was giving the earlier example of how do you add
+
+122
+00:08:38,440 --> 00:08:41,440
+a million elements, on a CPU you do
+
+123
+00:08:41,440 --> 00:08:44,440
+for i equals zero, i less than a million.
+
+124
+00:08:44,440 --> 00:08:47,440
+On GPU, you do it a little different.
+
+125
+00:08:47,440 --> 00:08:50,440
+On the CPU, what you do is you do a kernel launch,
+
+126
+00:08:50,440 --> 00:08:53,440
+and that's the bottom half of our mini program.
+
+127
+00:08:53,440 --> 00:08:56,440
+On top is the kernel itself.
+
+128
+00:08:56,440 --> 00:08:59,440
+The first thing to know about kernel
+
+129
+00:08:59,440 --> 00:09:02,440
+is that it has that underscore underscore global
+
+130
+00:09:02,440 --> 00:09:05,440
+specifier, which tells the compiler
+
+131
+00:09:05,680 --> 00:09:08,680
+and the runtime that this function runs
+
+132
+00:09:08,680 --> 00:09:11,680
+on the GPU and it runs in parallel.
+
+133
+00:09:11,680 --> 00:09:14,680
+That's first.
+
+134
+00:09:14,680 --> 00:09:17,680
+Everything other than that is standard C code,
+
+135
+00:09:17,680 --> 00:09:20,680
+where you have pointers and other things.
+
+136
+00:09:20,680 --> 00:09:23,680
+The first line you see in there is
+
+137
+00:09:23,680 --> 00:09:26,680
+int i equals thread IDX.
+
+138
+00:09:26,680 --> 00:09:29,680
+Thread IDX.x is a way to denote
+
+139
+00:09:29,680 --> 00:09:32,680
+which thread you're running on.
+
+140
+00:09:32,920 --> 00:09:35,920
+You're going to be literally running millions of threads at a time.
+
+141
+00:09:35,920 --> 00:09:38,920
+These thread IDX, and we'll get into it
+
+142
+00:09:38,920 --> 00:09:41,920
+in a little bit in deeper detail,
+
+143
+00:09:41,920 --> 00:09:44,920
+is a way to identify which thread you're running on.
+
+144
+00:09:44,920 --> 00:09:47,920
+That will help you identify what data you need
+
+145
+00:09:47,920 --> 00:09:50,920
+to work on.
+
+146
+00:09:50,920 --> 00:09:53,920
+When we get to that third line there, which is the actual addition,
+
+147
+00:09:53,920 --> 00:09:56,920
+what you're seeing throughout this program is that there's no
+
+148
+00:09:56,920 --> 00:09:59,920
+for loop anywhere.
+
+149
+00:09:59,920 --> 00:10:02,920
+Essentially becomes implicit because you're launching this kernel
+
+150
+00:10:02,920 --> 00:10:05,920
+that works on many, many threads.
+
+151
+00:10:05,920 --> 00:10:08,920
+Now you go from O of N to O of 1
+
+152
+00:10:08,920 --> 00:10:11,920
+essentially when you do GPU programming.
+
+153
+00:10:11,920 --> 00:10:14,920
+The normal
+
+154
+00:10:14,920 --> 00:10:17,920
+flow of a GPU program looks like this,
+
+155
+00:10:17,920 --> 00:10:20,920
+where you have some serial code where you're setting things up.
+
+156
+00:10:20,920 --> 00:10:23,920
+You launch a kernel. It does a lot of things in parallel.
+
+157
+00:10:23,920 --> 00:10:26,920
+You maybe have some more CPU code that's doing something
+
+158
+00:10:26,920 --> 00:10:29,920
+with the result of that, and then maybe you launch more kernels
+
+159
+00:10:29,920 --> 00:10:32,920
+and repeat that kind of thing. At a very, very high level,
+
+160
+00:10:32,920 --> 00:10:35,920
+this is what happens in a CUDA program.
+
+161
+00:10:38,920 --> 00:10:41,920
+We spoke about threads. Now, how are threads organized?
+
+162
+00:10:41,920 --> 00:10:44,920
+If you have millions, if not billions of threads,
+
+163
+00:10:44,920 --> 00:10:47,920
+you need some way to organize them.
+
+164
+00:10:47,920 --> 00:10:50,920
+Threads are grouped
+
+165
+00:10:50,920 --> 00:10:53,920
+in what are known as blocks.
+
+166
+00:10:53,920 --> 00:10:56,920
+Blocks are an array of threads, and that can be arranged
+
+167
+00:10:56,920 --> 00:10:59,920
+1D, 2D, or 3D.
+
+168
+00:10:59,920 --> 00:11:02,920
+All the blocks that you launch with a single kernel
+
+169
+00:11:02,920 --> 00:11:05,920
+will have the same number of threads.
+
+170
+00:11:05,920 --> 00:11:08,920
+Then groups of blocks are then
+
+171
+00:11:08,920 --> 00:11:11,920
+called a grid. Grid is more of a
+
+172
+00:11:11,920 --> 00:11:14,920
+system-level concept. We don't necessarily program
+
+173
+00:11:14,920 --> 00:11:17,920
+grids by themselves. We program more on block
+
+174
+00:11:17,920 --> 00:11:20,920
+level. Within each block,
+
+175
+00:11:20,920 --> 00:11:23,920
+threads can synchronize. They can share some shared memory
+
+176
+00:11:23,920 --> 00:11:26,920
+and talk to each other, which is not
+
+177
+00:11:26,920 --> 00:11:29,920
+necessarily possible at a grid level.
+
+178
+00:11:29,920 --> 00:11:32,920
+Visually, this is what it looks like.
+
+179
+00:11:32,920 --> 00:11:35,920
+You have posts on the left side
+
+180
+00:11:35,920 --> 00:11:38,920
+where you're running your code and launching your kernels.
+
+181
+00:11:38,920 --> 00:11:41,920
+Then each time you launch a kernel, it's going to be
+
+182
+00:11:41,920 --> 00:11:44,920
+launching your blocks on the GPU
+
+183
+00:11:44,920 --> 00:11:47,920
+arranged as threads. Each block has
+
+184
+00:11:47,920 --> 00:11:50,920
+its own indices, and then within each block, the threads
+
+185
+00:11:50,920 --> 00:11:53,920
+have their own indices.
+
+186
+00:11:53,920 --> 00:11:56,920
+Another way to think about them in each block
+
+187
+00:11:56,920 --> 00:11:59,920
+is the threads can be arranged as a vector, as a
+
+188
+00:11:59,920 --> 00:12:02,920
+matrix, or as a volume. Most of the times
+
+189
+00:12:02,920 --> 00:12:05,920
+you're going to be dealing with vectors or matrices.
+
+190
+00:12:05,920 --> 00:12:08,920
+Rarely will you ever get into volumes.
+
+191
+00:12:08,920 --> 00:12:11,920
+Any questions on this so far?
+
+192
+00:12:11,920 --> 00:12:14,920
+Okay.
+
+193
+00:12:15,920 --> 00:12:18,920
+Like I said before,
+
+194
+00:12:18,920 --> 00:12:21,920
+when you're trying to launch these many threads, it's
+
+195
+00:12:21,920 --> 00:12:24,920
+important to know what data you're supposed to be working on.
+
+196
+00:12:24,920 --> 00:12:27,920
+If you get the
+
+197
+00:12:27,920 --> 00:12:30,920
+index, you're going to be working on the wrong data.
+
+198
+00:12:30,920 --> 00:12:33,920
+Multiple threads might be working on the wrong data.
+
+199
+00:12:33,920 --> 00:12:36,920
+One of the most critical things you're going to be
+
+200
+00:12:36,920 --> 00:12:39,920
+learning is how do you arrange your threads and make
+
+201
+00:12:39,920 --> 00:12:42,920
+each thread do the right thing.
+
+202
+00:12:43,920 --> 00:12:46,920
+A core part of that is the
+
+203
+00:12:46,920 --> 00:12:49,920
+thread IDX identifier, which
+
+204
+00:12:49,920 --> 00:12:52,920
+essentially is a three-component identifier.
+
+205
+00:12:52,920 --> 00:12:55,920
+You have .X, .Y, and .Z
+
+206
+00:12:55,920 --> 00:12:58,920
+that tell you the index of the thread within a block.
+
+207
+00:12:58,920 --> 00:13:01,920
+Your block, if you have, let's say,
+
+208
+00:13:01,920 --> 00:13:04,920
+512 threads,
+
+209
+00:13:04,920 --> 00:13:07,920
+will go from 0 to 511.
+
+210
+00:13:07,920 --> 00:13:10,920
+Or if you have, let's say, 16 by 16,
+
+211
+00:13:11,920 --> 00:13:14,920
+then it will go between 0 and 15 and 0 and 15 in each
+
+212
+00:13:14,920 --> 00:13:17,920
+axis.
+
+213
+00:13:17,920 --> 00:13:20,920
+Looking at a quick example, this is what we would
+
+214
+00:13:20,920 --> 00:13:23,920
+structure it as.
+
+215
+00:13:23,920 --> 00:13:26,920
+We would call the kernel with how many
+
+216
+00:13:26,920 --> 00:13:29,920
+blocks you want and how many threads you want.
+
+217
+00:13:29,920 --> 00:13:32,920
+Let's say in this example you have one block and you
+
+218
+00:13:32,920 --> 00:13:35,920
+have two-dimensional block of threads.
+
+219
+00:13:35,920 --> 00:13:38,920
+Maybe think like 10 by 10 or whatever your favorite
+
+220
+00:13:38,920 --> 00:13:41,920
+number is.
+
+221
+00:13:41,920 --> 00:13:44,920
+If you're using that to add a vector, you're going to
+
+222
+00:13:44,920 --> 00:13:47,920
+convert that into a 1D index using that formula
+
+223
+00:13:47,920 --> 00:13:50,920
+before.
+
+224
+00:13:50,920 --> 00:13:53,920
+Block dim is another identifier that essentially
+
+225
+00:13:53,920 --> 00:13:56,920
+tells you how big each block is.
+
+226
+00:13:56,920 --> 00:13:59,920
+Again, because we're doing a lot of this programmatically
+
+227
+00:13:59,920 --> 00:14:02,920
+at runtime, we're able to pick what our block size is.
+
+228
+00:14:02,920 --> 00:14:05,920
+We'll be looking at how to pick the right block size
+
+229
+00:14:05,920 --> 00:14:08,920
+later on.
+
+230
+00:14:08,920 --> 00:14:11,920
+The important thing to note here is these APIs and
+
+231
+00:14:11,920 --> 00:14:14,920
+runtimes allow us to control and get information about
+
+232
+00:14:14,920 --> 00:14:17,920
+how big our block size is and stuff like that.
+
+233
+00:14:17,920 --> 00:14:20,920
+Any questions on threads?
+
+234
+00:14:20,920 --> 00:14:23,920
+Yes.
+
+235
+00:14:36,920 --> 00:14:39,920
+Sorry.
+
+236
+00:14:44,920 --> 00:14:47,920
+Here we're specifying
+
+237
+00:14:47,920 --> 00:14:50,920
+all of the grids that we have available.
+
+238
+00:14:50,920 --> 00:14:53,920
+One block.
+
+239
+00:14:53,920 --> 00:14:56,920
+Then threads per block, we're specifying that it is a
+
+240
+00:14:56,920 --> 00:14:59,920
+2D block or are all blocks like...
+
+241
+00:14:59,920 --> 00:15:02,920
+The first part of what you said was
+
+242
+00:15:02,920 --> 00:15:05,920
+right.
+
+243
+00:15:05,920 --> 00:15:08,920
+What I'm trying to show you here is that in this
+
+244
+00:15:08,920 --> 00:15:11,920
+vector add, I am specifically launching one block
+
+245
+00:15:11,920 --> 00:15:14,920
+that is of size n by n.
+
+246
+00:15:14,920 --> 00:15:17,920
+For example, if I pick n equals 16,
+
+247
+00:15:17,920 --> 00:15:20,920
+I'm launching one block with 256 threads.
+
+248
+00:15:20,920 --> 00:15:23,920
+That's it.
+
+249
+00:15:23,920 --> 00:15:26,920
+No more, no less.
+
+250
+00:15:26,920 --> 00:15:29,920
+I can choose whatever n I want.
+
+251
+00:15:29,920 --> 00:15:32,920
+For this slide, what I want you to know is
+
+252
+00:15:32,920 --> 00:15:35,920
+if I launch one block with 256 threads for this
+
+253
+00:15:35,920 --> 00:15:38,920
+terminal, I have 256 threads
+
+254
+00:15:38,920 --> 00:15:41,920
+that I can do work with.
+
+255
+00:15:41,920 --> 00:15:44,920
+If I wanted to change that to 512,
+
+256
+00:15:44,920 --> 00:15:47,920
+I have to call, let's say, 32 by 16.
+
+257
+00:15:47,920 --> 00:15:50,920
+In this example,
+
+258
+00:15:50,920 --> 00:15:53,920
+it's purely to show how you arrange a block and a
+
+259
+00:15:53,920 --> 00:15:56,920
+thread in an API call rather than
+
+260
+00:15:56,920 --> 00:15:59,920
+understanding how many you should launch,
+
+261
+00:15:59,920 --> 00:16:02,920
+which we'll get to in a little bit.
+
+262
+00:16:02,920 --> 00:16:05,920
+Go ahead.
+
+263
+00:16:15,920 --> 00:16:18,920
+The more on the hardware level,
+
+264
+00:16:18,920 --> 00:16:21,920
+I think it's too early
+
+265
+00:16:21,920 --> 00:16:24,920
+to explain that. I don't want to confuse you, but
+
+266
+00:16:24,920 --> 00:16:27,920
+we'll see how they become a concept.
+
+267
+00:16:43,920 --> 00:16:46,920
+That's a typo.
+
+268
+00:16:46,920 --> 00:16:49,920
+That should be matrix addition.
+
+269
+00:16:49,920 --> 00:16:52,920
+My bad.
+
+270
+00:16:53,920 --> 00:16:56,920
+Yeah?
+
+271
+00:17:01,920 --> 00:17:04,920
+Good question.
+
+272
+00:17:04,920 --> 00:17:07,920
+Where do you think it is?
+
+273
+00:17:13,920 --> 00:17:16,920
+We will get to universal memory,
+
+274
+00:17:16,920 --> 00:17:19,920
+but most of the time
+
+275
+00:17:20,920 --> 00:17:23,920
+I would not say actually use that.
+
+276
+00:17:23,920 --> 00:17:26,920
+It's a concept for people who don't know GPU programming,
+
+277
+00:17:26,920 --> 00:17:29,920
+if I'm being clear.
+
+278
+00:17:29,920 --> 00:17:32,920
+The memory that we have here
+
+279
+00:17:32,920 --> 00:17:35,920
+is a pointer
+
+280
+00:17:35,920 --> 00:17:38,920
+in memory on the GPU.
+
+281
+00:17:38,920 --> 00:17:41,920
+If you try to use A, B, and C on the CPU side,
+
+282
+00:17:41,920 --> 00:17:44,920
+you'll get garbage because you can have the same
+
+283
+00:17:44,920 --> 00:17:47,920
+pointer IDs on CPU and GPU,
+
+284
+00:17:47,920 --> 00:17:50,920
+but they point to completely separate memories.
+
+285
+00:17:50,920 --> 00:17:53,920
+For example, you can have Walnut Street
+
+286
+00:17:53,920 --> 00:17:56,920
+in every single city in the US,
+
+287
+00:17:56,920 --> 00:17:59,920
+but Philadelphia is different from Walnut Street in New York.
+
+288
+00:17:59,920 --> 00:18:02,920
+That's an important concept.
+
+289
+00:18:02,920 --> 00:18:05,920
+Any other questions?
+
+290
+00:18:05,920 --> 00:18:08,920
+I did change the typo, by the way.
+
+291
+00:18:18,920 --> 00:18:21,920
+Right.
+
+292
+00:18:21,920 --> 00:18:24,920
+I haven't gotten to memory yet,
+
+293
+00:18:24,920 --> 00:18:27,920
+but I will get to that.
+
+294
+00:18:27,920 --> 00:18:30,920
+Any other questions?
+
+295
+00:18:30,920 --> 00:18:33,920
+All right.
+
+296
+00:18:33,920 --> 00:18:36,920
+A thread block
+
+297
+00:18:36,920 --> 00:18:39,920
+is essentially a group of threads,
+
+298
+00:18:39,920 --> 00:18:42,920
+and it does have limits.
+
+299
+00:18:42,920 --> 00:18:45,920
+You will see me refer to G80 and GT200 quite a bit,
+
+300
+00:18:45,920 --> 00:18:48,920
+but be pretty assured that none of you
+
+301
+00:18:48,920 --> 00:18:51,920
+will ever encounter that hardware ever again.
+
+302
+00:18:51,920 --> 00:18:54,920
+G80 and GT200 were the first two or three generations
+
+303
+00:18:54,920 --> 00:18:57,920
+of GPUs that NVIDIA released,
+
+304
+00:18:57,920 --> 00:19:00,920
+and those have lower specs just because they had lower
+
+305
+00:19:00,920 --> 00:19:03,920
+number of transistors.
+
+306
+00:19:03,920 --> 00:19:06,920
+They could do lesser things.
+
+307
+00:19:06,920 --> 00:19:09,920
+They had 512 threads, but most modern GPUs
+
+308
+00:19:09,920 --> 00:19:12,920
+have a block limit of 1024.
+
+309
+00:19:13,920 --> 00:19:16,920
+All threads in a block
+
+310
+00:19:16,920 --> 00:19:19,920
+reside on the same processor core.
+
+311
+00:19:19,920 --> 00:19:22,920
+When you think of GPUs,
+
+312
+00:19:22,920 --> 00:19:25,920
+they're not necessarily one execution unit,
+
+313
+00:19:25,920 --> 00:19:28,920
+but they have what are called streaming multiprocessors
+
+314
+00:19:28,920 --> 00:19:31,920
+that allow you to execute those.
+
+315
+00:19:31,920 --> 00:19:34,920
+The key thing to remember from this slide is that
+
+316
+00:19:34,920 --> 00:19:37,920
+threads in a block are kind of neighbors of each other.
+
+317
+00:19:37,920 --> 00:19:40,920
+They all execute together.
+
+318
+00:19:41,920 --> 00:19:44,920
+Then they share the memory of that core.
+
+319
+00:19:44,920 --> 00:19:47,920
+Within each block,
+
+320
+00:19:47,920 --> 00:19:50,920
+like I said, you can have it 1D or 2D,
+
+321
+00:19:50,920 --> 00:19:53,920
+and just like we have ThreadIdx.x
+
+322
+00:19:53,920 --> 00:19:56,920
+and ThreadIdx.y,
+
+323
+00:19:56,920 --> 00:19:59,920
+similarly you have BlockIdx.
+
+324
+00:19:59,920 --> 00:20:02,920
+Just like you identify which thread you're working with,
+
+325
+00:20:02,920 --> 00:20:05,920
+you can identify which block you're working with.
+
+326
+00:20:05,920 --> 00:20:08,920
+The dimension size of each block in the kernel
+
+327
+00:20:08,920 --> 00:20:11,920
+can be identified using block diffs.
+
+328
+00:20:11,920 --> 00:20:14,920
+Let's go back to our matrix addition example.
+
+329
+00:20:14,920 --> 00:20:17,920
+Let me go here.
+
+330
+00:20:17,920 --> 00:20:20,920
+I'll jump around my slides.
+
+331
+00:20:20,920 --> 00:20:23,920
+I told you that the maximum size of a block
+
+332
+00:20:23,920 --> 00:20:26,920
+is 1024, right?
+
+333
+00:20:26,920 --> 00:20:29,920
+If I give this limit of block equals 1,
+
+334
+00:20:29,920 --> 00:20:32,920
+what is the maximum number of matrix additions I can do?
+
+335
+00:20:32,920 --> 00:20:35,920
+What's the maximum size of my matrix?
+
+336
+00:20:39,920 --> 00:20:42,920
+If you're
+
+337
+00:20:42,920 --> 00:20:45,920
+arranging your block
+
+338
+00:20:45,920 --> 00:20:48,920
+as n by n,
+
+339
+00:20:48,920 --> 00:20:51,920
+that means you can matrix add
+
+340
+00:20:51,920 --> 00:20:54,920
+a maximum of 32 by 32.
+
+341
+00:20:54,920 --> 00:20:57,920
+You can't go bigger than that.
+
+342
+00:20:57,920 --> 00:21:00,920
+But we all know that we can launch
+
+343
+00:21:00,920 --> 00:21:03,920
+millions of threads.
+
+344
+00:21:03,920 --> 00:21:06,920
+32 by 32 becomes the limit of one block.
+
+345
+00:21:06,920 --> 00:21:09,920
+Now let's see how do we scale that up.
+
+346
+00:21:09,920 --> 00:21:12,920
+We do that kind of like this.
+
+347
+00:21:12,920 --> 00:21:15,920
+Let's say you have
+
+348
+00:21:15,920 --> 00:21:18,920
+a matrix of size whatever.
+
+349
+00:21:18,920 --> 00:21:21,920
+Pick a big number.
+
+350
+00:21:21,920 --> 00:21:24,920
+Whether it's a million or a billion, it's up to you.
+
+351
+00:21:24,920 --> 00:21:27,920
+We define first the number of threads per block.
+
+352
+00:21:27,920 --> 00:21:30,920
+This is going to be the same for every single block.
+
+353
+00:21:30,920 --> 00:21:33,920
+It can be 16 by 16 like I've shown you.
+
+354
+00:21:33,920 --> 00:21:36,920
+It could be 8 by 8.
+
+355
+00:21:36,920 --> 00:21:39,920
+We'll get to how to choose that much later on.
+
+356
+00:21:39,920 --> 00:21:42,920
+But let's define it as 16 by 16.
+
+357
+00:21:42,920 --> 00:21:45,920
+The number of blocks we need
+
+358
+00:21:45,920 --> 00:21:48,920
+is n divided by the number of threads per block.
+
+359
+00:21:48,920 --> 00:21:51,920
+Now you have many, many, many blocks.
+
+360
+00:21:51,920 --> 00:21:54,920
+The number of blocks
+
+361
+00:21:54,920 --> 00:21:57,920
+are essentially infinite for all intents and purposes
+
+362
+00:21:57,920 --> 00:22:00,920
+in GPU.
+
+363
+00:22:00,920 --> 00:22:03,920
+It's basically infinite.
+
+364
+00:22:03,920 --> 00:22:06,920
+That is where the scaling comes from.
+
+365
+00:22:06,920 --> 00:22:09,920
+Your block is limited,
+
+366
+00:22:09,920 --> 00:22:12,920
+but the number of blocks you can have is basically infinite.
+
+367
+00:22:12,920 --> 00:22:15,920
+That's what allows you to do
+
+368
+00:22:15,920 --> 00:22:18,920
+this one.
+
+369
+00:22:18,920 --> 00:22:21,920
+There you're going to identify
+
+370
+00:22:21,920 --> 00:22:24,920
+the global X and the global Y.
+
+371
+00:22:24,920 --> 00:22:27,920
+If you just use thread IDX.X and thread IDX.Y,
+
+372
+00:22:28,920 --> 00:22:31,920
+within each block,
+
+373
+00:22:31,920 --> 00:22:34,920
+they're going to go from 0 to 15,
+
+374
+00:22:34,920 --> 00:22:37,920
+0 to 15 in each axis.
+
+375
+00:22:37,920 --> 00:22:40,920
+You'll be overwriting the same data.
+
+376
+00:22:40,920 --> 00:22:43,920
+You'll only be working on the top left of the matrix.
+
+377
+00:22:43,920 --> 00:22:46,920
+But what you want to work on is the entire matrix.
+
+378
+00:22:46,920 --> 00:22:49,920
+That's how you subdivide your matrix into blocks.
+
+379
+00:22:49,920 --> 00:22:52,920
+Let's look at a math example here
+
+380
+00:22:52,920 --> 00:22:55,920
+where n equals 32.
+
+381
+00:22:56,920 --> 00:22:59,920
+Here n is the size of the matrix.
+
+382
+00:22:59,920 --> 00:23:02,920
+If our matrix is 32 by 32,
+
+383
+00:23:02,920 --> 00:23:05,920
+1024 elements,
+
+384
+00:23:05,920 --> 00:23:08,920
+purely used because it's simple to understand.
+
+385
+00:23:08,920 --> 00:23:11,920
+We have a block
+
+386
+00:23:11,920 --> 00:23:14,920
+that is 16 by 16.
+
+387
+00:23:14,920 --> 00:23:17,920
+Then our thread IDs go from 0 to 15 in the X axis
+
+388
+00:23:17,920 --> 00:23:20,920
+and 0 to 15 in the Y axis.
+
+389
+00:23:20,920 --> 00:23:23,920
+How many blocks do we need
+
+390
+00:23:24,920 --> 00:23:27,920
+if each block is 16 by 16?
+
+391
+00:23:32,920 --> 00:23:35,920
+We need four blocks.
+
+392
+00:23:35,920 --> 00:23:38,920
+Same if we have two by two blocks.
+
+393
+00:23:47,920 --> 00:23:50,920
+Each block is going to do four elements.
+
+394
+00:23:51,920 --> 00:23:54,920
+We need 256 blocks for that.
+
+395
+00:23:58,920 --> 00:24:01,920
+Here's how the math works out.
+
+396
+00:24:01,920 --> 00:24:04,920
+I said how we want to convert
+
+397
+00:24:04,920 --> 00:24:07,920
+local thread IDs into global indices.
+
+398
+00:24:07,920 --> 00:24:10,920
+Our minimum
+
+399
+00:24:10,920 --> 00:24:13,920
+for the X axis
+
+400
+00:24:13,920 --> 00:24:16,920
+is
+
+401
+00:24:16,920 --> 00:24:19,920
+the block IDs
+
+402
+00:24:19,920 --> 00:24:22,920
+from 0 to 15.
+
+403
+00:24:22,920 --> 00:24:25,920
+Multiply by 16
+
+404
+00:24:25,920 --> 00:24:28,920
+which is the block size.
+
+405
+00:24:28,920 --> 00:24:31,920
+Then you add the thread IDs
+
+406
+00:24:31,920 --> 00:24:34,920
+which go from 0 to 15.
+
+407
+00:24:34,920 --> 00:24:37,920
+Minimum is 0, 16, and 0.
+
+408
+00:24:37,920 --> 00:24:40,920
+The maximum is 31.
+
+409
+00:24:40,920 --> 00:24:43,920
+Now you see how we go from
+
+410
+00:24:43,920 --> 00:24:46,920
+row 0 to row 31 using our block.
+
+411
+00:24:47,920 --> 00:24:50,920
+Same with the Y.
+
+412
+00:24:50,920 --> 00:24:53,920
+You go from 0 to 31 as well.
+
+413
+00:24:53,920 --> 00:24:56,920
+That's how you use blocks
+
+414
+00:24:56,920 --> 00:24:59,920
+to help your scaling.
+
+415
+00:24:59,920 --> 00:25:02,920
+You can change that to a million
+
+416
+00:25:02,920 --> 00:25:05,920
+and the math will remain the same.
+
+417
+00:25:05,920 --> 00:25:08,920
+The equations don't change whatsoever.
+
+418
+00:25:08,920 --> 00:25:11,920
+Any questions on this?
+
+419
+00:25:11,920 --> 00:25:14,920
+This is the fundamental thing you need to understand
+
+420
+00:25:15,920 --> 00:25:18,920
+to do GPU programming about how these threads and blocks
+
+421
+00:25:18,920 --> 00:25:21,920
+are structured.
+
+422
+00:25:39,920 --> 00:25:42,920
+We'll get into scheduling and stuff later, but yes.
+
+423
+00:25:45,920 --> 00:25:48,920
+Technically, all memory is sequential.
+
+424
+00:25:48,920 --> 00:25:51,920
+On the hardware level,
+
+425
+00:25:51,920 --> 00:25:54,920
+there's no concept of 2D memory.
+
+426
+00:25:54,920 --> 00:25:57,920
+Everything is 1D.
+
+427
+00:25:57,920 --> 00:26:00,920
+2D is for humans to understand how the memory is arranged
+
+428
+00:26:00,920 --> 00:26:03,920
+and visualize it and imagine it.
+
+429
+00:26:03,920 --> 00:26:06,920
+When you're doing programming at that hardware level,
+
+430
+00:26:06,920 --> 00:26:09,920
+it's important to understand how the memory is arranged
+
+431
+00:26:09,920 --> 00:26:12,920
+so you're optimizing for that as well.
+
+432
+00:26:12,920 --> 00:26:15,920
+In future lectures, we'll be talking about how memory should be
+
+433
+00:26:15,920 --> 00:26:18,920
+arranged and how you can take advantage of certain patterns
+
+434
+00:26:18,920 --> 00:26:21,920
+in memory to help with performance.
+
+435
+00:26:24,920 --> 00:26:27,920
+Any other questions?
+
+436
+00:26:27,920 --> 00:26:30,920
+Again, this is fundamental, so please ask the questions you have.
+
+437
+00:26:30,920 --> 00:26:33,920
+Go ahead.
+
+438
+00:26:38,920 --> 00:26:41,920
+You mean type as ints and floats or something?
+
+439
+00:26:41,920 --> 00:26:44,920
+They're all
+
+440
+00:26:44,920 --> 00:26:47,920
+unsigned integers
+
+441
+00:26:47,920 --> 00:26:50,920
+or long integers.
+
+442
+00:26:51,920 --> 00:26:54,920
+Yeah.
+
+443
+00:26:59,920 --> 00:27:02,920
+They have notations in hardware as well,
+
+444
+00:27:02,920 --> 00:27:05,920
+but they are all runtime concepts.
+
+445
+00:27:05,920 --> 00:27:08,920
+You set them up.
+
+446
+00:27:08,920 --> 00:27:11,920
+There's no default.
+
+447
+00:27:11,920 --> 00:27:14,920
+You have to explicitly specify what your block size is.
+
+448
+00:27:21,920 --> 00:27:24,920
+Yeah, that's a very good question.
+
+449
+00:27:24,920 --> 00:27:27,920
+If I can rephrase your question,
+
+450
+00:27:27,920 --> 00:27:30,920
+what you're asking is,
+
+451
+00:27:30,920 --> 00:27:33,920
+OK, we have very neat numbers here.
+
+452
+00:27:33,920 --> 00:27:36,920
+We say our matrix is 32 by 32, which is 1024.
+
+453
+00:27:36,920 --> 00:27:39,920
+In this class, by the way, powers of 2 are your best friend.
+
+454
+00:27:39,920 --> 00:27:42,920
+If you can memorize them, that would be the best.
+
+455
+00:27:42,920 --> 00:27:45,920
+What happens if our matrix is 25 by 25?
+
+456
+00:27:45,920 --> 00:27:48,920
+Right?
+
+457
+00:27:48,920 --> 00:27:51,920
+It can't go well as a square, right?
+
+458
+00:27:51,920 --> 00:27:54,920
+Or it can't fit into a block nicely as a power of 2.
+
+459
+00:27:54,920 --> 00:27:57,920
+Or maybe it's 23 by 27.
+
+460
+00:27:57,920 --> 00:28:00,920
+Whatever.
+
+461
+00:28:00,920 --> 00:28:03,920
+Pick a number that doesn't fit into some of these nice numbers.
+
+462
+00:28:03,920 --> 00:28:06,920
+And the question is,
+
+463
+00:28:06,920 --> 00:28:09,920
+what do we do with the extra threads that we have?
+
+464
+00:28:09,920 --> 00:28:12,920
+What happens is, when you launch
+
+465
+00:28:12,920 --> 00:28:15,920
+any number of blocks with the thread configuration,
+
+466
+00:28:15,920 --> 00:28:18,920
+every block always launches
+
+467
+00:28:18,920 --> 00:28:21,920
+with the same number of threads.
+
+468
+00:28:21,920 --> 00:28:24,920
+When you write CUDA kernels, it is your responsibility
+
+469
+00:28:24,920 --> 00:28:27,920
+to check the indexes and return them
+
+470
+00:28:27,920 --> 00:28:30,920
+if they're not going to be doing anything useful.
+
+471
+00:28:30,920 --> 00:28:33,920
+So let's say you launch 1024 threads
+
+472
+00:28:33,920 --> 00:28:36,920
+to do vector addition, but you only have a thousand elements.
+
+473
+00:28:36,920 --> 00:28:39,920
+What do you do with those extra 24 threads?
+
+474
+00:28:39,920 --> 00:28:42,920
+You return them.
+
+475
+00:28:42,920 --> 00:28:45,920
+So i is less than size, and if not, you return them.
+
+476
+00:28:45,920 --> 00:28:48,920
+So that is an important concept as well.
+
+477
+00:28:48,920 --> 00:28:51,920
+Any other questions?
+
+478
+00:29:00,920 --> 00:29:03,920
+They will try to access whatever memory you tell them.
+
+479
+00:29:07,920 --> 00:29:10,920
+No.
+
+480
+00:29:10,920 --> 00:29:13,920
+So we'll get to exactly what returning means later on,
+
+481
+00:29:13,920 --> 00:29:16,920
+but no, they won't be used elsewhere, as you've suggested.
+
+482
+00:29:19,920 --> 00:29:22,920
+So that they don't access invalid memory
+
+483
+00:29:22,920 --> 00:29:25,920
+and overwrite results that they shouldn't be.
+
+484
+00:29:25,920 --> 00:29:28,920
+What other questions?
+
+485
+00:29:31,920 --> 00:29:34,920
+Okay.
+
+486
+00:29:34,920 --> 00:29:37,920
+I have an example of proper matrix multiply example
+
+487
+00:29:37,920 --> 00:29:40,920
+at the end of this deck, so we'll see a lot more of it,
+
+488
+00:29:40,920 --> 00:29:43,920
+but for now, I want you to understand the principles
+
+489
+00:29:43,920 --> 00:29:46,920
+that are involved.
+
+490
+00:29:46,920 --> 00:29:49,920
+So I said that all the threads in a block
+
+491
+00:29:49,920 --> 00:29:52,920
+execute together.
+
+492
+00:29:52,920 --> 00:29:55,920
+Blocks by themselves, different blocks,
+
+493
+00:29:55,920 --> 00:29:58,920
+can execute completely independently.
+
+494
+00:29:58,920 --> 00:30:01,920
+They don't talk to each other in any way, shape, or form.
+
+495
+00:30:01,920 --> 00:30:04,920
+They can execute in serial, they can execute in parallel.
+
+496
+00:30:04,920 --> 00:30:07,920
+We'll get to that in future lectures, but the scheduling is in any order
+
+497
+00:30:07,920 --> 00:30:10,920
+based on the number of cores available to us.
+
+498
+00:30:13,920 --> 00:30:16,920
+So a visual example of this is something like this.
+
+499
+00:30:16,920 --> 00:30:19,920
+Let's say you want to launch eight blocks.
+
+500
+00:30:19,920 --> 00:30:22,920
+I have a laptop GPU with two cores.
+
+501
+00:30:22,920 --> 00:30:25,920
+It's going to launch something like on the left,
+
+502
+00:30:25,920 --> 00:30:28,920
+where it does two blocks at a time and then serializes them.
+
+503
+00:30:28,920 --> 00:30:31,920
+You have a beefy desktop GPU that has more cores.
+
+504
+00:30:31,920 --> 00:30:34,920
+You're going to be doing more of them in serial
+
+505
+00:30:34,920 --> 00:30:37,920
+or more of them in parallel and then serial later on.
+
+506
+00:30:37,920 --> 00:30:40,920
+So that's kind of the visual representation of how
+
+507
+00:30:40,920 --> 00:30:43,920
+GPUs scale the blocks.
+
+508
+00:30:43,920 --> 00:30:46,920
+Those are my final slides on threads
+
+509
+00:30:46,920 --> 00:30:49,920
+and blocks, so please ask questions.
+
+510
+00:30:55,920 --> 00:30:58,920
+Yeah, exactly.
+
+511
+00:31:02,920 --> 00:31:05,920
+Mm-hmm.
+
+512
+00:31:17,920 --> 00:31:20,920
+There are APIs to check for that.
+
+513
+00:31:23,920 --> 00:31:26,920
+Yes.
+
+514
+00:31:32,920 --> 00:31:35,920
+That's where scheduling comes in.
+
+515
+00:31:35,920 --> 00:31:38,920
+I want to keep that for later.
+
+516
+00:31:38,920 --> 00:31:41,920
+Any other questions?
+
+517
+00:31:53,920 --> 00:31:56,920
+Yes, there are some considerations.
+
+518
+00:31:56,920 --> 00:31:59,920
+It's called resource allocation.
+
+519
+00:31:59,920 --> 00:32:02,920
+So far, we've seen choosing threads and blocks
+
+520
+00:32:02,920 --> 00:32:05,920
+based on our total number of elements,
+
+521
+00:32:05,920 --> 00:32:08,920
+the total number of work we want to do.
+
+522
+00:32:08,920 --> 00:32:11,920
+But as we go further in the class, what we learn is that
+
+523
+00:32:11,920 --> 00:32:14,920
+those are not the only two considerations.
+
+524
+00:32:14,920 --> 00:32:17,920
+Memory is a consideration.
+
+525
+00:32:17,920 --> 00:32:20,920
+Performance is a consideration.
+
+526
+00:32:20,920 --> 00:32:23,920
+How big your kernels are and what they do.
+
+527
+00:32:23,920 --> 00:32:26,920
+What kind of read patterns do they have?
+
+528
+00:32:26,920 --> 00:32:29,920
+How do we pick an optimal block size for that?
+
+529
+00:32:29,920 --> 00:32:32,920
+Sorry, I think there was a question there.
+
+530
+00:32:50,920 --> 00:32:53,920
+Yeah, so
+
+531
+00:32:54,920 --> 00:32:57,920
+I specifically said shared memory is shared within a block.
+
+532
+00:32:57,920 --> 00:33:00,920
+Shared memory is a special type of memory.
+
+533
+00:33:00,920 --> 00:33:03,920
+I'm going to start on memory with the next slide.
+
+534
+00:33:03,920 --> 00:33:06,920
+But when you say, let's say you bought a GPU
+
+535
+00:33:06,920 --> 00:33:09,920
+and it has 8 GB of memory,
+
+536
+00:33:09,920 --> 00:33:12,920
+that's the global memory, essentially.
+
+537
+00:33:12,920 --> 00:33:15,920
+Every thread can access that.
+
+538
+00:33:15,920 --> 00:33:18,920
+Shared memory is a special type of memory that sits much closer
+
+539
+00:33:18,920 --> 00:33:21,920
+to the threads themselves.
+
+540
+00:33:21,920 --> 00:33:24,920
+From the next slide, I'll get to what it actually means.
+
+541
+00:33:24,920 --> 00:33:27,920
+Any other questions?
+
+542
+00:33:30,920 --> 00:33:33,920
+All right, so let's look at memory.
+
+543
+00:33:33,920 --> 00:33:36,920
+There are different types of
+
+544
+00:33:36,920 --> 00:33:39,920
+memories we have on a GPU.
+
+545
+00:33:39,920 --> 00:33:42,920
+First, let me start with the host part.
+
+546
+00:33:42,920 --> 00:33:45,920
+On the host, you have one memory.
+
+547
+00:33:45,920 --> 00:33:48,920
+If you pick your favorite memory allocator,
+
+548
+00:33:48,920 --> 00:33:51,920
+you're allocating memory in your RAM on your CPU.
+
+549
+00:33:51,920 --> 00:33:54,920
+Most of the time, that's the only memory you have.
+
+550
+00:33:54,920 --> 00:33:57,920
+On the GPU, you have various different types of memories.
+
+551
+00:33:57,920 --> 00:34:00,920
+You have shared memory, like we were just talking about.
+
+552
+00:34:00,920 --> 00:34:03,920
+You have registers, where if you do essentially
+
+553
+00:34:03,920 --> 00:34:06,920
+int i, that's where it's getting stored.
+
+554
+00:34:06,920 --> 00:34:09,920
+And then you have global memory and constant memory.
+
+555
+00:34:09,920 --> 00:34:12,920
+So let's start looking at each one of those.
+
+556
+00:34:12,920 --> 00:34:15,920
+So the host,
+
+557
+00:34:15,920 --> 00:34:18,920
+that is your CPU. Again, I will use more hosts
+
+558
+00:34:18,920 --> 00:34:21,920
+than CPU, but I'm using it in this class so that we're all getting used to it.
+
+559
+00:34:21,920 --> 00:34:24,920
+So the global memory
+
+560
+00:34:24,920 --> 00:34:27,920
+and constant memory
+
+561
+00:34:27,920 --> 00:34:30,920
+are the only memories the host can read and write from.
+
+562
+00:34:30,920 --> 00:34:33,920
+It can't access shared memory directly.
+
+563
+00:34:33,920 --> 00:34:36,920
+It can only read and write global memory.
+
+564
+00:34:36,920 --> 00:34:39,920
+So there's APIs for those,
+
+565
+00:34:39,920 --> 00:34:42,920
+and they're called CUDA mallet
+
+566
+00:34:42,920 --> 00:34:45,920
+and CUDA free. If these names sound familiar to you,
+
+567
+00:34:45,920 --> 00:34:48,920
+because they are. They are essentially CUDA versions of mallet
+
+568
+00:34:48,920 --> 00:34:51,920
+and free like you use on the CPU.
+
+569
+00:34:51,920 --> 00:34:54,920
+CUDA mallet allocates memory. CUDA free frees memory.
+
+570
+00:34:54,920 --> 00:34:57,920
+Please be good programming citizens and use both.
+
+571
+00:34:57,920 --> 00:35:00,920
+You don't want to mallet allocate and then not free it.
+
+572
+00:35:03,920 --> 00:35:06,920
+So this is how memory transfers work.
+
+573
+00:35:06,920 --> 00:35:09,920
+First, you do a CUDA mallet.
+
+574
+00:35:09,920 --> 00:35:12,920
+Notice how we use
+
+575
+00:35:12,920 --> 00:35:15,920
+a pointer
+
+576
+00:35:15,920 --> 00:35:18,920
+of a pointer.
+
+577
+00:35:18,920 --> 00:35:21,920
+So when you do the void star star, you're doing pointer to a pointer
+
+578
+00:35:21,920 --> 00:35:24,920
+so that the
+
+579
+00:35:24,920 --> 00:35:27,920
+CUDA mallet call is going to allocate memory
+
+580
+00:35:27,920 --> 00:35:30,920
+and then write the address of the pointer
+
+581
+00:35:30,920 --> 00:35:33,920
+into device memory.
+
+582
+00:35:33,920 --> 00:35:36,920
+And then the size is how much memory you want to allocate
+
+583
+00:35:36,920 --> 00:35:39,920
+in bytes. So for example, if you want to allocate
+
+584
+00:35:39,920 --> 00:35:42,920
+one int, that's four bytes.
+
+585
+00:35:42,920 --> 00:35:45,920
+But of course, you're going to allocate much more than that.
+
+586
+00:35:45,920 --> 00:35:48,920
+Any questions on this? Any questions on how you
+
+587
+00:35:48,920 --> 00:35:51,920
+allocate memory?
+
+588
+00:35:51,920 --> 00:35:54,920
+Okay, so what you want
+
+589
+00:35:54,920 --> 00:35:57,920
+when you do, let's say, mallet from the CPU,
+
+590
+00:35:57,920 --> 00:36:00,920
+what you're essentially getting
+
+591
+00:36:00,920 --> 00:36:03,920
+is a memory pointer.
+
+592
+00:36:03,920 --> 00:36:06,920
+So the runtime is giving you the address
+
+593
+00:36:06,920 --> 00:36:09,920
+to a memory space on the CPU.
+
+594
+00:36:09,920 --> 00:36:12,920
+On the GPU, it's similar
+
+595
+00:36:12,920 --> 00:36:15,920
+where the GPU is giving you
+
+596
+00:36:15,920 --> 00:36:18,920
+a memory space, the address to a memory space on the GPU.
+
+597
+00:36:18,920 --> 00:36:21,920
+So in CUDA,
+
+598
+00:36:21,920 --> 00:36:24,920
+most of the API is like this
+
+599
+00:36:24,920 --> 00:36:27,920
+where it's writing two variables
+
+600
+00:36:27,920 --> 00:36:30,920
+instead of doing, let's say, device memory equals CUDA mallet.
+
+601
+00:36:30,920 --> 00:36:33,920
+It's going to be CUDA mallet equals
+
+602
+00:36:33,920 --> 00:36:36,920
+and you give the pointer to the memory,
+
+603
+00:36:36,920 --> 00:36:39,920
+to the variable you want to put that address in.
+
+604
+00:36:39,920 --> 00:36:42,920
+So the value inside device memory
+
+605
+00:36:42,920 --> 00:36:45,920
+is a pointer.
+
+606
+00:36:45,920 --> 00:36:48,920
+So that's why it's called pointer to a pointer.
+
+607
+00:36:48,920 --> 00:36:51,920
+And then you do the size is how much memory you want to allocate
+
+608
+00:36:51,920 --> 00:36:54,920
+on the GPU itself.
+
+609
+00:36:54,920 --> 00:36:57,920
+So
+
+610
+00:36:57,920 --> 00:37:00,920
+the word casting is mostly just to remove warnings
+
+611
+00:37:00,920 --> 00:37:03,920
+because we are allocating in bytes.
+
+612
+00:37:03,920 --> 00:37:06,920
+We're not allocating floats or doubles or unsigned ints.
+
+613
+00:37:06,920 --> 00:37:09,920
+We are allocating in bytes.
+
+614
+00:37:09,920 --> 00:37:12,920
+So the CUDA mallet call doesn't care what the data type is.
+
+615
+00:37:12,920 --> 00:37:15,920
+You could be allocating vectories, for example.
+
+616
+00:37:15,920 --> 00:37:18,920
+The mallet call doesn't care what type it is.
+
+617
+00:37:18,920 --> 00:37:21,920
+So we use the void star star to remove any warnings
+
+618
+00:37:21,920 --> 00:37:24,920
+or things compilers might complain about.
+
+619
+00:37:25,920 --> 00:37:28,920
+Yeah.
+
+620
+00:37:44,920 --> 00:37:47,920
+Right.
+
+621
+00:37:47,920 --> 00:37:50,920
+So here's how it kind of works.
+
+622
+00:37:51,920 --> 00:37:54,920
+So in your CPU memory,
+
+623
+00:37:54,920 --> 00:37:57,920
+you have various things, right?
+
+624
+00:37:58,920 --> 00:38:01,920
+And device memory
+
+625
+00:38:01,920 --> 00:38:04,920
+is actually one of these.
+
+626
+00:38:04,920 --> 00:38:07,920
+Okay.
+
+627
+00:38:07,920 --> 00:38:10,920
+And then on the GPU
+
+628
+00:38:10,920 --> 00:38:13,920
+you again have more memory
+
+629
+00:38:13,920 --> 00:38:16,920
+and let's say
+
+630
+00:38:16,920 --> 00:38:19,920
+this is the memory you are allocating.
+
+631
+00:38:19,920 --> 00:38:22,920
+The value in this
+
+632
+00:38:22,920 --> 00:38:25,920
+is the address here, right?
+
+633
+00:38:25,920 --> 00:38:28,920
+And the reason we don't use,
+
+634
+00:38:28,920 --> 00:38:31,920
+we could use potentially any type that we wanted.
+
+635
+00:38:31,920 --> 00:38:34,920
+But again, for readability sake, we want to know what type
+
+636
+00:38:34,920 --> 00:38:37,920
+of pointer it is so that the compiler can understand
+
+637
+00:38:37,920 --> 00:38:40,920
+and make sure that it's doing the right things
+
+638
+00:38:40,920 --> 00:38:43,920
+and the right optimization with it.
+
+639
+00:38:43,920 --> 00:38:46,920
+Could you do void star? Absolutely. No problem whatsoever.
+
+640
+00:38:46,920 --> 00:38:49,920
+The compiler won't complain about it or anything,
+
+641
+00:38:49,920 --> 00:38:52,920
+but it's more for human readability that we do that.
+
+642
+00:39:04,920 --> 00:39:07,920
+It's a pointer to a memory address.
+
+643
+00:39:07,920 --> 00:39:10,920
+Yes.
+
+644
+00:39:10,920 --> 00:39:13,920
+This is a GPU memory point.
+
+645
+00:39:13,920 --> 00:39:16,920
+So that means, for example,
+
+646
+00:39:16,920 --> 00:39:19,920
+sometimes lines are like a manual CPU memory.
+
+647
+00:39:19,920 --> 00:39:22,920
+So it never allocates the same address
+
+648
+00:39:22,920 --> 00:39:25,920
+as it would allow.
+
+649
+00:39:25,920 --> 00:39:28,920
+It could.
+
+650
+00:39:28,920 --> 00:39:31,920
+For example, both GPU memory
+
+651
+00:39:31,920 --> 00:39:34,920
+and CPU memory have the address zero.
+
+652
+00:39:34,920 --> 00:39:37,920
+I'm not saying it will allocate, but it could allocate a zero
+
+653
+00:39:37,920 --> 00:39:40,920
+or it could allocate a XYZ
+
+654
+00:39:41,920 --> 00:39:44,920
+or whatever it might be.
+
+655
+00:39:44,920 --> 00:39:47,920
+You can't.
+
+656
+00:39:47,920 --> 00:39:50,920
+That's why you have to manage that.
+
+657
+00:39:50,920 --> 00:39:53,920
+You have to declare your variables in a way that you're tracking it.
+
+658
+00:39:53,920 --> 00:39:56,920
+So usually the most common way is to do
+
+659
+00:39:56,920 --> 00:39:59,920
+H underscore A or B underscore A.
+
+660
+00:39:59,920 --> 00:40:02,920
+And we'll see that in the example later.
+
+661
+00:40:02,920 --> 00:40:05,920
+But you use variable names to essentially track those things.
+
+662
+00:40:05,920 --> 00:40:08,920
+Yes.
+
+663
+00:40:08,920 --> 00:40:11,920
+Many lectures down the line, we'll see a different way
+
+664
+00:40:11,920 --> 00:40:14,920
+to take care of it as well.
+
+665
+00:40:14,920 --> 00:40:17,920
+What other questions do you have on this very basic
+
+666
+00:40:17,920 --> 00:40:20,920
+CUDA mallet for you?
+
+667
+00:40:20,920 --> 00:40:23,920
+Okay.
+
+668
+00:40:23,920 --> 00:40:26,920
+So now we've allocated memory, right?
+
+669
+00:40:26,920 --> 00:40:29,920
+Now we want to copy that memory.
+
+670
+00:40:29,920 --> 00:40:32,920
+Again, when we do this, we're only allocating memory.
+
+671
+00:40:32,920 --> 00:40:35,920
+We've not actually created any useful data in it.
+
+672
+00:40:36,920 --> 00:40:39,920
+So we need to copy memory in different directions.
+
+673
+00:40:39,920 --> 00:40:42,920
+So we have four directions that we can copy in.
+
+674
+00:40:42,920 --> 00:40:45,920
+Host-to-host, which we'll almost never use
+
+675
+00:40:45,920 --> 00:40:48,920
+using CUDA memcpy.
+
+676
+00:40:48,920 --> 00:40:51,920
+You can do that using various CPU calls,
+
+677
+00:40:51,920 --> 00:40:54,920
+whether that's STD copy or anything else.
+
+678
+00:40:54,920 --> 00:40:57,920
+You can copy host-to-device,
+
+679
+00:40:57,920 --> 00:41:00,920
+which is essentially one of the first things you will do.
+
+680
+00:41:00,920 --> 00:41:03,920
+You will copy useful data from your host to your device.
+
+681
+00:41:04,920 --> 00:41:07,920
+And the way to do that with this CUDA memcpy API.
+
+682
+00:41:07,920 --> 00:41:10,920
+Here, you're putting the destination first.
+
+683
+00:41:10,920 --> 00:41:13,920
+Remember, in CUDA APIs, the destination will always come first.
+
+684
+00:41:13,920 --> 00:41:16,920
+Even if you look at CUDA mallets, the destination is coming first.
+
+685
+00:41:16,920 --> 00:41:19,920
+So you take your destination pointer
+
+686
+00:41:19,920 --> 00:41:22,920
+and your host pointer.
+
+687
+00:41:22,920 --> 00:41:25,920
+To your question, this is how we're tracking it.
+
+688
+00:41:25,920 --> 00:41:28,920
+We're calling it device pointer and host pointer.
+
+689
+00:41:28,920 --> 00:41:31,920
+We have to name these in a useful way so that we understand.
+
+690
+00:41:32,920 --> 00:41:35,920
+We're copying the sign in bytes.
+
+691
+00:41:35,920 --> 00:41:38,920
+Again, that's why CUDA doesn't care about what data type you have
+
+692
+00:41:38,920 --> 00:41:41,920
+because we specify everything in bytes.
+
+693
+00:41:41,920 --> 00:41:44,920
+And last is the copy direction.
+
+694
+00:41:44,920 --> 00:41:47,920
+This is an enum.
+
+695
+00:41:47,920 --> 00:41:50,920
+There are different enums and we go through them in the API.
+
+696
+00:41:50,920 --> 00:41:53,920
+But this one is saying CUDA memcpy host-to-device.
+
+697
+00:41:53,920 --> 00:41:56,920
+Very obvious what its function is.
+
+698
+00:41:56,920 --> 00:41:59,920
+So any questions on this?
+
+699
+00:42:00,920 --> 00:42:03,920
+Okay.
+
+700
+00:42:03,920 --> 00:42:06,920
+The next one is device-to-host.
+
+701
+00:42:06,920 --> 00:42:09,920
+You've allocated memory. You've copied it to the GPU.
+
+702
+00:42:09,920 --> 00:42:12,920
+You've run a kernel on it.
+
+703
+00:42:12,920 --> 00:42:15,920
+Now you need to copy the result back to do something more with it.
+
+704
+00:42:15,920 --> 00:42:18,920
+Again, you use the CUDA memcpy for this.
+
+705
+00:42:18,920 --> 00:42:21,920
+Destination first. So we're copying to host.
+
+706
+00:42:21,920 --> 00:42:24,920
+So destination comes first.
+
+707
+00:42:24,920 --> 00:42:27,920
+Device pointer, the source, comes second.
+
+708
+00:42:28,920 --> 00:42:31,920
+And lastly, the enum, which is CUDA memcpy device-to-host.
+
+709
+00:42:31,920 --> 00:42:34,920
+Should be fairly obvious at this point.
+
+710
+00:42:34,920 --> 00:42:37,920
+The last thing you can do
+
+711
+00:42:37,920 --> 00:42:40,920
+is device-to-device.
+
+712
+00:42:40,920 --> 00:42:43,920
+You want to copy memory from one place in the GPU
+
+713
+00:42:43,920 --> 00:42:46,920
+to another place in the GPU.
+
+714
+00:42:46,920 --> 00:42:49,920
+And you use device-to-device for that.
+
+715
+00:42:49,920 --> 00:42:52,920
+Same thing.
+
+716
+00:42:52,920 --> 00:42:55,920
+See how we're not using device and host here
+
+717
+00:42:56,920 --> 00:42:59,920
+.
+
+718
+00:42:59,920 --> 00:43:02,920
+Again, choose the names.
+
+719
+00:43:02,920 --> 00:43:05,920
+And finally,
+
+720
+00:43:05,920 --> 00:43:08,920
+the enum is device-to-device.
+
+721
+00:43:08,920 --> 00:43:11,920
+Any questions so far?
+
+722
+00:43:14,920 --> 00:43:17,920
+All of you ready to get into an example
+
+723
+00:43:17,920 --> 00:43:20,920
+of a proper program?
+
+724
+00:43:20,920 --> 00:43:23,920
+Yeah.
+
+725
+00:43:24,920 --> 00:43:27,920
+So let's say
+
+726
+00:43:27,920 --> 00:43:30,920
+you wanted to
+
+727
+00:43:30,920 --> 00:43:33,920
+do matrix transpose.
+
+728
+00:43:33,920 --> 00:43:36,920
+Very simple example.
+
+729
+00:43:36,920 --> 00:43:39,920
+You could do matrix transpose in place
+
+730
+00:43:39,920 --> 00:43:42,920
+where you read all the memory and write to the same space
+
+731
+00:43:42,920 --> 00:43:45,920
+or you can create a copy of that matrix
+
+732
+00:43:45,920 --> 00:43:48,920
+so you have the matrix itself and a matrix transpose.
+
+733
+00:43:48,920 --> 00:43:51,920
+That's a very simple way of explaining it.
+
+734
+00:43:52,920 --> 00:43:55,920
+What are the questions
+
+735
+00:43:55,920 --> 00:43:58,920
+before we dive into an example?
+
+736
+00:43:58,920 --> 00:44:01,920
+This is all global memory, yes.
+
+737
+00:44:11,920 --> 00:44:14,920
+No.
+
+738
+00:44:14,920 --> 00:44:17,920
+I haven't shown it here, but
+
+739
+00:44:17,920 --> 00:44:20,920
+there are ways to set which device is active
+
+740
+00:44:20,920 --> 00:44:23,920
+or which device is the device you're calling stuff for
+
+741
+00:44:23,920 --> 00:44:26,920
+and that's how you would control that.
+
+742
+00:44:26,920 --> 00:44:29,920
+What are the questions?
+
+743
+00:44:29,920 --> 00:44:32,920
+Okay.
+
+744
+00:44:32,920 --> 00:44:35,920
+Let's take a look at combining all of this,
+
+745
+00:44:35,920 --> 00:44:38,920
+combining how we do threads and blocks,
+
+746
+00:44:38,920 --> 00:44:41,920
+how we allocate memory and how we call kernels
+
+747
+00:44:41,920 --> 00:44:44,920
+into a very simple program.
+
+748
+00:44:44,920 --> 00:44:47,920
+So let's use matrix multiply
+
+749
+00:44:47,920 --> 00:44:50,920
+because it's better than vector addition
+
+750
+00:44:50,920 --> 00:44:53,920
+and vector addition becomes very, very simple.
+
+751
+00:44:53,920 --> 00:44:56,920
+So matrix multiply has a few things going for it.
+
+752
+00:44:56,920 --> 00:44:59,920
+It has each row of a matrix
+
+753
+00:44:59,920 --> 00:45:02,920
+is essentially a vector
+
+754
+00:45:02,920 --> 00:45:05,920
+and each matrix multiplication for each element
+
+755
+00:45:05,920 --> 00:45:08,920
+is essentially a dot product.
+
+756
+00:45:08,920 --> 00:45:11,920
+And then you need to have clear conceptual understanding
+
+757
+00:45:11,920 --> 00:45:14,920
+of row major and column major,
+
+758
+00:45:14,920 --> 00:45:17,920
+what changes first and how things are stored in memory.
+
+759
+00:45:17,920 --> 00:45:20,920
+And then each dot product is
+
+760
+00:45:20,920 --> 00:45:23,920
+a result to the output matrix.
+
+761
+00:45:23,920 --> 00:45:26,920
+So visually, this is what is going on.
+
+762
+00:45:26,920 --> 00:45:29,920
+For each output matrix,
+
+763
+00:45:29,920 --> 00:45:32,920
+this one, the result
+
+764
+00:45:32,920 --> 00:45:35,920
+of this element here is the dot product
+
+765
+00:45:35,920 --> 00:45:38,920
+of this vector and this vector.
+
+766
+00:45:38,920 --> 00:45:41,920
+So you're essentially doing
+
+767
+00:45:41,920 --> 00:45:44,920
+whatever row this is, you're taking the first element
+
+768
+00:45:44,920 --> 00:45:47,920
+here, multiplying it with that first element,
+
+769
+00:45:47,920 --> 00:45:50,920
+second element here, multiplying it with the second element
+
+770
+00:45:50,920 --> 00:45:53,920
+and adding all of those up to give you
+
+771
+00:45:53,920 --> 00:45:56,920
+a dot product. And that's what matrix multiply
+
+772
+00:45:56,920 --> 00:45:59,920
+essentially is.
+
+773
+00:45:59,920 --> 00:46:02,920
+So we have a thousand by thousand matrix.
+
+774
+00:46:02,920 --> 00:46:05,920
+How many operations are we doing?
+
+775
+00:46:05,920 --> 00:46:08,920
+And I'm talking about multiply and add operations.
+
+776
+00:46:08,920 --> 00:46:11,920
+Just to do a matrix
+
+777
+00:46:11,920 --> 00:46:14,920
+multiply. Anybody want to take a guess?
+
+778
+00:46:14,920 --> 00:46:17,920
+We can get to the answer later, but anybody taking a guess now?
+
+779
+00:46:17,920 --> 00:46:20,920
+Okay.
+
+780
+00:46:20,920 --> 00:46:23,920
+We'll come back to it.
+
+781
+00:46:23,920 --> 00:46:26,920
+Have your guesses ready then.
+
+782
+00:46:26,920 --> 00:46:29,920
+All right. Let's take a look at CPU example.
+
+783
+00:46:29,920 --> 00:46:32,920
+Everybody's done a few matrix multiply at least once, I hope.
+
+784
+00:46:32,920 --> 00:46:35,920
+Okay.
+
+785
+00:46:36,920 --> 00:46:39,920
+This is all CPU code.
+
+786
+00:46:39,920 --> 00:46:42,920
+You have the first two lines
+
+787
+00:46:42,920 --> 00:46:45,920
+for i and j, which are essentially doing
+
+788
+00:46:45,920 --> 00:46:48,920
+your rows and columns.
+
+789
+00:46:48,920 --> 00:46:51,920
+Generally, i and j in matrix multiply
+
+790
+00:46:51,920 --> 00:46:54,920
+the first two are always representative of the
+
+791
+00:46:54,920 --> 00:46:57,920
+output matrix.
+
+792
+00:46:57,920 --> 00:47:00,920
+So this element is i column.
+
+793
+00:47:00,920 --> 00:47:03,920
+So this row is i,
+
+794
+00:47:03,920 --> 00:47:06,920
+this column is j.
+
+795
+00:47:06,920 --> 00:47:09,920
+So for each element,
+
+796
+00:47:09,920 --> 00:47:12,920
+now you have to do a dot product.
+
+797
+00:47:12,920 --> 00:47:15,920
+So you're going to do sum equals dot,
+
+798
+00:47:15,920 --> 00:47:18,920
+where it's going to store the dot product.
+
+799
+00:47:18,920 --> 00:47:21,920
+And now you have to walk each vector.
+
+800
+00:47:21,920 --> 00:47:24,920
+So you're going to use a for that.
+
+801
+00:47:24,920 --> 00:47:27,920
+You're getting the a element from matrix n,
+
+802
+00:47:27,920 --> 00:47:30,920
+you're getting the b element from matrix n,
+
+803
+00:47:30,920 --> 00:47:33,920
+you're getting the cumulative sum of a time.
+
+804
+00:47:33,920 --> 00:47:36,920
+And then finally, once you're done with all of that,
+
+805
+00:47:36,920 --> 00:47:39,920
+you're writing that into p,
+
+806
+00:47:39,920 --> 00:47:42,920
+into the element.
+
+807
+00:47:42,920 --> 00:47:45,920
+Everybody on board with this?
+
+808
+00:47:45,920 --> 00:47:48,920
+Any questions?
+
+809
+00:47:48,920 --> 00:47:51,920
+Because we're going to be taking this and putting it on the GP.
+
+810
+00:47:51,920 --> 00:47:54,920
+Okay.
+
+811
+00:47:54,920 --> 00:47:57,920
+So anybody have a guess on how many operations this is?
+
+812
+00:47:58,920 --> 00:48:01,920
+Yeah.
+
+813
+00:48:01,920 --> 00:48:04,920
+Close.
+
+814
+00:48:04,920 --> 00:48:07,920
+I think that is it.
+
+815
+00:48:07,920 --> 00:48:10,920
+So essentially for a thousand by thousand matrix,
+
+816
+00:48:10,920 --> 00:48:13,920
+you have a thousand times a thousand dot products,
+
+817
+00:48:13,920 --> 00:48:16,920
+so a million dot products.
+
+818
+00:48:16,920 --> 00:48:19,920
+And each of those, each of those dot products,
+
+819
+00:48:19,920 --> 00:48:22,920
+there's a thousand multiplies and a thousand adds.
+
+820
+00:48:22,920 --> 00:48:25,920
+So you have a billion multiplies and a billion additions
+
+821
+00:48:25,920 --> 00:48:28,920
+on the CPU.
+
+822
+00:48:28,920 --> 00:48:31,920
+Now, this is where you can start to see,
+
+823
+00:48:31,920 --> 00:48:34,920
+well, billion is a big number.
+
+824
+00:48:34,920 --> 00:48:37,920
+CPUs are fast, but we can still see how it might take time.
+
+825
+00:48:37,920 --> 00:48:40,920
+If you were to put this on a GPU with thousands of cores,
+
+826
+00:48:40,920 --> 00:48:43,920
+now we start seeing how we can get performance really well.
+
+827
+00:48:43,920 --> 00:48:46,920
+So let's,
+
+828
+00:48:46,920 --> 00:48:49,920
+let's get to how we program this actually on the GPU.
+
+829
+00:48:49,920 --> 00:48:52,920
+So let's make a CUDA skeleton.
+
+830
+00:48:52,920 --> 00:48:55,920
+Okay.
+
+831
+00:48:55,920 --> 00:48:58,920
+So we start with three steps.
+
+832
+00:48:58,920 --> 00:49:01,920
+First, we want to allocate and initialize our matrices.
+
+833
+00:49:01,920 --> 00:49:04,920
+We want to copy them to the device.
+
+834
+00:49:04,920 --> 00:49:07,920
+So that's part one.
+
+835
+00:49:07,920 --> 00:49:10,920
+Part two is actually running matrix multiplication on our device.
+
+836
+00:49:10,920 --> 00:49:13,920
+Part three is copying it back onto the CPU.
+
+837
+00:49:13,920 --> 00:49:16,920
+Okay.
+
+838
+00:49:16,920 --> 00:49:19,920
+And of course, freeing the memory,
+
+839
+00:49:19,920 --> 00:49:22,920
+freeing the memory,
+
+840
+00:49:22,920 --> 00:49:25,920
+freeing the memory,
+
+841
+00:49:25,920 --> 00:49:28,920
+freeing the memory.
+
+842
+00:49:28,920 --> 00:49:31,920
+All right.
+
+843
+00:49:31,920 --> 00:49:34,920
+So let's start with our first part.
+
+844
+00:49:34,920 --> 00:49:37,920
+Hopefully none of this is new to you by now.
+
+845
+00:49:37,920 --> 00:49:40,920
+So I have a function, I'm not calling it main,
+
+846
+00:49:40,920 --> 00:49:43,920
+but it's a function on the CPU.
+
+847
+00:49:43,920 --> 00:49:46,920
+You don't see underscore underscore global,
+
+848
+00:49:46,920 --> 00:49:49,920
+but it's just for understanding.
+
+849
+00:49:49,920 --> 00:49:52,920
+And again, for good naming purposes,
+
+850
+00:49:52,920 --> 00:49:55,920
+see how I've called them float devN, devN and devP,
+
+851
+00:49:55,920 --> 00:49:58,920
+which means they are on the device.
+
+852
+00:49:58,920 --> 00:50:01,920
+Okay.
+
+853
+00:50:01,920 --> 00:50:04,920
+So now first step is to allocate memory.
+
+854
+00:50:04,920 --> 00:50:07,920
+Using CUDA malloc,
+
+855
+00:50:07,920 --> 00:50:10,920
+we pass the pointers and we pass the sizes that we want.
+
+856
+00:50:10,920 --> 00:50:13,920
+Okay.
+
+857
+00:50:13,920 --> 00:50:16,920
+The second step is to copy memory.
+
+858
+00:50:16,920 --> 00:50:19,920
+Now I'm not showing you how the CPU memory was initialized
+
+859
+00:50:19,920 --> 00:50:22,920
+and all of that, all of you know how to do that.
+
+860
+00:50:22,920 --> 00:50:25,920
+I'm just showing you how we are going to copy memory
+
+861
+00:50:25,920 --> 00:50:28,920
+from host to device.
+
+862
+00:50:28,920 --> 00:50:31,920
+So you get your host pointers for M and N,
+
+863
+00:50:31,920 --> 00:50:34,920
+your destination is devM and devN respectively,
+
+864
+00:50:34,920 --> 00:50:37,920
+and you're doing a host to device copy.
+
+865
+00:50:37,920 --> 00:50:40,920
+So now once you do this, all of your CPU memory for M and N
+
+866
+00:50:40,920 --> 00:50:43,920
+gets copied onto the GPU.
+
+867
+00:50:43,920 --> 00:50:46,920
+Okay. We'll get to the kernel later.
+
+868
+00:50:46,920 --> 00:50:49,920
+Part three is getting that memory back.
+
+869
+00:50:49,920 --> 00:50:52,920
+So once the kernel executes and P is multiplied properly,
+
+870
+00:50:52,920 --> 00:50:55,920
+we can copy from devP
+
+871
+00:50:55,920 --> 00:50:58,920
+from the memory on the device after our kernel.
+
+872
+00:50:58,920 --> 00:51:01,920
+Our host is where we want the return back.
+
+873
+00:51:01,920 --> 00:51:04,920
+And we go CUDA and copy device to host
+
+874
+00:51:04,920 --> 00:51:07,920
+so that we have the memory back.
+
+875
+00:51:07,920 --> 00:51:10,920
+And finally, we'll free all of it.
+
+876
+00:51:10,920 --> 00:51:13,920
+So that's just sort of straight up CUDA free and give the device pointers for.
+
+877
+00:51:13,920 --> 00:51:16,920
+Any questions on the skeleton?
+
+878
+00:51:16,920 --> 00:51:19,920
+Because we are essentially done with part one and part three of our skeleton.
+
+879
+00:51:25,920 --> 00:51:28,920
+All right. So step two
+
+880
+00:51:28,920 --> 00:51:31,920
+is writing the kernel in CUDA.
+
+881
+00:51:31,920 --> 00:51:34,920
+Okay.
+
+882
+00:51:34,920 --> 00:51:37,920
+So let's start with the matrix kernel.
+
+883
+00:51:37,920 --> 00:51:40,920
+And first we start with global,
+
+884
+00:51:40,920 --> 00:51:43,920
+which is the kernel specifier.
+
+885
+00:51:43,920 --> 00:51:46,920
+Why is the return type always void?
+
+886
+00:51:46,920 --> 00:51:49,920
+Maybe.
+
+887
+00:51:49,920 --> 00:51:52,920
+But what if there could be?
+
+888
+00:51:52,920 --> 00:51:55,920
+Right?
+
+889
+00:51:55,920 --> 00:51:58,920
+Let's see.
+
+890
+00:51:58,920 --> 00:52:01,920
+See, you could.
+
+891
+00:52:01,920 --> 00:52:04,920
+Let's say there was an automatic way to get GPU.
+
+892
+00:52:04,920 --> 00:52:07,920
+Go ahead.
+
+893
+00:52:11,920 --> 00:52:14,920
+Yeah. Okay.
+
+894
+00:52:14,920 --> 00:52:17,920
+But get one step higher. Go ahead.
+
+895
+00:52:17,920 --> 00:52:20,920
+Sorry?
+
+896
+00:52:20,920 --> 00:52:23,920
+No, I think you're going too low. I want us to come higher up.
+
+897
+00:52:23,920 --> 00:52:26,920
+So you're close.
+
+898
+00:52:26,920 --> 00:52:29,920
+A kernel runs in parallel. That's for sure.
+
+899
+00:52:29,920 --> 00:52:32,920
+Why isn't there a return type?
+
+900
+00:52:35,920 --> 00:52:38,920
+What happens if every thread tries to run again?
+
+901
+00:52:38,920 --> 00:52:41,920
+We're talking about millions of threads here, right?
+
+902
+00:52:41,920 --> 00:52:44,920
+Can every thread return?
+
+903
+00:52:44,920 --> 00:52:47,920
+What does every thread return mean?
+
+904
+00:52:47,920 --> 00:52:50,920
+Every thread could return different things.
+
+905
+00:52:50,920 --> 00:52:53,920
+Right?
+
+906
+00:52:53,920 --> 00:52:56,920
+Yeah.
+
+907
+00:52:56,920 --> 00:52:59,920
+Essentially the problem is a combination of all of that.
+
+908
+00:52:59,920 --> 00:53:02,920
+Of all of what you said.
+
+909
+00:53:02,920 --> 00:53:05,920
+There's no specific, there's no direct way to transform one value from GPU to CPU.
+
+910
+00:53:05,920 --> 00:53:08,920
+Because the performance will be very bad.
+
+911
+00:53:08,920 --> 00:53:11,920
+There's the programming stacks of CPU and GPU are definitely different.
+
+912
+00:53:11,920 --> 00:53:14,920
+Everything runs in parallel.
+
+913
+00:53:14,920 --> 00:53:17,920
+So how do you return something?
+
+914
+00:53:17,920 --> 00:53:20,920
+Different things could be running at different times.
+
+915
+00:53:20,920 --> 00:53:23,920
+So like I said before, different blocks can be executing at different times.
+
+916
+00:53:23,920 --> 00:53:26,920
+How do you know when to return?
+
+917
+00:53:26,920 --> 00:53:29,920
+And then, you know, based on having different threads,
+
+918
+00:53:29,920 --> 00:53:32,920
+what does it even mean to return from many, many threads?
+
+919
+00:53:32,920 --> 00:53:35,920
+So to avoid all of those, there is no return from a global.
+
+920
+00:53:35,920 --> 00:53:38,920
+Okay?
+
+921
+00:53:38,920 --> 00:53:41,920
+And then for our host,
+
+922
+00:53:41,920 --> 00:53:44,920
+our parameters,
+
+923
+00:53:44,920 --> 00:53:47,920
+what we're going to do is specify cons for where we are only reading data.
+
+924
+00:53:47,920 --> 00:53:50,920
+And not cons.
+
+925
+00:53:50,920 --> 00:53:53,920
+For the memory buffers, we're going to be writing data.
+
+926
+00:53:53,920 --> 00:53:56,920
+So just be good citizens about it and help the compiler understand the
+
+927
+00:53:56,920 --> 00:53:59,920
+different memory access patterns that could be taking place.
+
+928
+00:53:59,920 --> 00:54:02,920
+Any questions on the declaration?
+
+929
+00:54:12,920 --> 00:54:15,920
+Because that's not necessarily the compiler's job.
+
+930
+00:54:15,920 --> 00:54:18,920
+It may give you a warning, but it won't necessarily complain.
+
+931
+00:54:19,920 --> 00:54:22,920
+No,
+
+932
+00:54:22,920 --> 00:54:25,920
+CUDA is all C.
+
+933
+00:54:25,920 --> 00:54:28,920
+I mean, there are versions of CUDA that are mostly C++-ish,
+
+934
+00:54:28,920 --> 00:54:31,920
+but what you're seeing here is all C.
+
+935
+00:54:31,920 --> 00:54:34,920
+There's no C++ in it.
+
+936
+00:54:39,920 --> 00:54:42,920
+So M is a memory buffer.
+
+937
+00:54:42,920 --> 00:54:45,920
+All of these are just memory buffers.
+
+938
+00:54:45,920 --> 00:54:48,920
+We are representing them as matrices.
+
+939
+00:54:48,920 --> 00:54:51,920
+What other questions?
+
+940
+00:54:51,920 --> 00:54:54,920
+Okay.
+
+941
+00:54:54,920 --> 00:54:57,920
+So let's take a look at how a matrix multiplies.
+
+942
+00:54:57,920 --> 00:55:00,920
+The first thing we do,
+
+943
+00:55:00,920 --> 00:55:03,920
+again, I'm putting some constraints here that are probably obvious to
+
+944
+00:55:03,920 --> 00:55:06,920
+some of you.
+
+945
+00:55:06,920 --> 00:55:09,920
+We'll get to those constraints later.
+
+946
+00:55:09,920 --> 00:55:12,920
+We want which element we are going to be operating on.
+
+947
+00:55:12,920 --> 00:55:15,920
+So if we had an INJ in our CPU that pointed to the P matrix,
+
+948
+00:55:15,920 --> 00:55:18,920
+we are getting those INJ here as well,
+
+949
+00:55:18,920 --> 00:55:21,920
+using TX and TY.
+
+950
+00:55:21,920 --> 00:55:24,920
+We allocate an accumulator.
+
+951
+00:55:24,920 --> 00:55:27,920
+Where is this going to get allocated?
+
+952
+00:55:27,920 --> 00:55:30,920
+Which memory is it going to use?
+
+953
+00:55:30,920 --> 00:55:33,920
+No, it's not going to be used.
+
+954
+00:55:33,920 --> 00:55:36,920
+Remember, every thread is doing this.
+
+955
+00:55:36,920 --> 00:55:39,920
+Every single thread.
+
+956
+00:55:39,920 --> 00:55:42,920
+So this will be in registers, actually.
+
+957
+00:55:42,920 --> 00:55:45,920
+If you're doing a float P,
+
+958
+00:55:45,920 --> 00:55:48,920
+it's going to be in registers.
+
+959
+00:55:48,920 --> 00:55:51,920
+I've not shown you how to use shared memory yet.
+
+960
+00:55:51,920 --> 00:55:54,920
+I'll show you in the next class or next Wednesday.
+
+961
+00:55:54,920 --> 00:55:57,920
+But this, if you do float P,
+
+962
+00:55:57,920 --> 00:56:00,920
+if you do TX and TY, these are all registers.
+
+963
+00:56:00,920 --> 00:56:03,920
+These are the fastest way to access memory.
+
+964
+00:56:03,920 --> 00:56:06,920
+And they are individual to a thread.
+
+965
+00:56:07,920 --> 00:56:10,920
+Let's say these are all threads.
+
+966
+00:56:10,920 --> 00:56:13,920
+This thread's TX and TY is going to be different from this thread's TX and TY.
+
+967
+00:56:13,920 --> 00:56:16,920
+And they can't talk to each other.
+
+968
+00:56:16,920 --> 00:56:19,920
+So these are all registers.
+
+969
+00:56:19,920 --> 00:56:24,920
+So K is kind of similar to how we did K on the CPU.
+
+970
+00:56:24,920 --> 00:56:27,920
+But what happened to the two outer loops?
+
+971
+00:56:27,920 --> 00:56:30,920
+What happened to the I loop and the J loop?
+
+972
+00:56:31,920 --> 00:56:34,920
+Yeah.
+
+973
+00:56:34,920 --> 00:56:37,920
+Exactly. They're taken care of by the implicit parallelism
+
+974
+00:56:37,920 --> 00:56:40,920
+that a kernel provides to us anyway.
+
+975
+00:56:40,920 --> 00:56:43,920
+So instead of writing for I equals
+
+976
+00:56:43,920 --> 00:56:46,920
+zero I less than N, that is taken care of
+
+977
+00:56:46,920 --> 00:56:49,920
+by a block and thread configuration anyway.
+
+978
+00:56:49,920 --> 00:56:52,920
+So that's the number of threads we are launching.
+
+979
+00:56:52,920 --> 00:56:55,920
+So each thread has to do just one element at a time.
+
+980
+00:56:55,920 --> 00:56:58,920
+So when we get to this 4K loop,
+
+981
+00:56:58,920 --> 00:57:01,920
+that's very similar to what we did on the CPU.
+
+982
+00:57:01,920 --> 00:57:04,920
+So you're taking memory from devM and devN.
+
+983
+00:57:04,920 --> 00:57:07,920
+Remember the 1D access?
+
+984
+00:57:07,920 --> 00:57:10,920
+You have to convert TX and TY into a 1D memory buffer.
+
+985
+00:57:10,920 --> 00:57:13,920
+And then you're going to do the
+
+986
+00:57:13,920 --> 00:57:16,920
+multiply and add here.
+
+987
+00:57:16,920 --> 00:57:19,920
+And then finally you're going to write that
+
+988
+00:57:19,920 --> 00:57:22,920
+into the global memory.
+
+989
+00:57:29,920 --> 00:57:32,920
+Exactly.
+
+990
+00:57:32,920 --> 00:57:35,920
+So that's where the parallelism comes in.
+
+991
+00:57:35,920 --> 00:57:38,920
+Because you're doing the same,
+
+992
+00:57:38,920 --> 00:57:41,920
+you're literally doing the exact same operation for every thread, right?
+
+993
+00:57:41,920 --> 00:57:44,920
+So you're calling many different threads
+
+994
+00:57:44,920 --> 00:57:47,920
+and they're all going to be doing the same thing.
+
+995
+00:57:47,920 --> 00:57:50,920
+And that's where GPUs are.
+
+996
+00:57:50,920 --> 00:57:53,920
+They want to be doing the same thing many, many times
+
+997
+00:57:53,920 --> 00:57:56,920
+and that's where the parallelism and the performance comes in.
+
+998
+00:57:56,920 --> 00:57:59,920
+Okay.
+
+999
+00:57:59,920 --> 00:58:02,920
+So memory.
+
+1000
+00:58:02,920 --> 00:58:05,920
+Yes.
+
+1001
+00:58:05,920 --> 00:58:08,920
+So like access.
+
+1002
+00:58:08,920 --> 00:58:11,920
+Okay.
+
+1003
+00:58:11,920 --> 00:58:14,920
+So let's take a very small example.
+
+1004
+00:58:14,920 --> 00:58:17,920
+So let's see.
+
+1005
+00:58:17,920 --> 00:58:20,920
+Okay.
+
+1006
+00:58:20,920 --> 00:58:23,920
+This is a matrix.
+
+1007
+00:58:23,920 --> 00:58:26,920
+Hardware memory is never 2D.
+
+1008
+00:58:26,920 --> 00:58:29,920
+It's always 1D.
+
+1009
+00:58:29,920 --> 00:58:32,920
+So I'm just going to erase this.
+
+1010
+00:58:32,920 --> 00:58:35,920
+How many?
+
+1011
+00:58:35,920 --> 00:58:38,920
+1, 2, 3, 4, 5, 6, 7, 8.
+
+1012
+00:58:38,920 --> 00:58:41,920
+Okay.
+
+1013
+00:58:41,920 --> 00:58:44,920
+So this is a matrix.
+
+1014
+00:58:44,920 --> 00:58:47,920
+Okay.
+
+1015
+00:58:47,920 --> 00:58:50,920
+So this is probably going to be stored as A, B, C,
+
+1016
+00:58:50,920 --> 00:58:53,920
+D, E, F,
+
+1017
+00:58:53,920 --> 00:58:56,920
+G, H, I.
+
+1018
+00:58:56,920 --> 00:58:59,920
+Now let's say our point of view is DP.
+
+1019
+00:58:59,920 --> 00:59:02,920
+Okay.
+
+1020
+00:59:02,920 --> 00:59:05,920
+DP of 0.
+
+1021
+00:59:05,920 --> 00:59:08,920
+Okay.
+
+1022
+00:59:08,920 --> 00:59:11,920
+DP of 0, 1
+
+1023
+00:59:11,920 --> 00:59:14,920
+in value.
+
+1024
+00:59:14,920 --> 00:59:17,920
+Like you can do this on CPUs.
+
+1025
+00:59:17,920 --> 00:59:20,920
+There's no such thing on GPUs like this.
+
+1026
+00:59:20,920 --> 00:59:23,920
+Okay.
+
+1027
+00:59:23,920 --> 00:59:26,920
+So what we essentially have to do is use some human I
+
+1028
+00:59:26,920 --> 00:59:29,920
+and J to convert each index from here to here.
+
+1029
+00:59:29,920 --> 00:59:32,920
+So let's take F, for example.
+
+1030
+00:59:32,920 --> 00:59:35,920
+Let's say this is I
+
+1031
+00:59:35,920 --> 00:59:38,920
+and this is J.
+
+1032
+00:59:38,920 --> 00:59:41,920
+This would be 1, 2.
+
+1033
+00:59:41,920 --> 00:59:44,920
+The 0 index. Remember, it's always 0 index.
+
+1034
+00:59:44,920 --> 00:59:47,920
+So when you take 1, 2,
+
+1035
+00:59:47,920 --> 00:59:50,920
+you're going to do 2 times
+
+1036
+00:59:50,920 --> 00:59:53,920
+1 times
+
+1037
+00:59:53,920 --> 00:59:56,920
+then
+
+1038
+00:59:56,920 --> 00:59:59,920
+whatever the dimension is, plus 2.
+
+1039
+00:59:59,920 --> 01:00:02,920
+Dimension here is 3.
+
+1040
+01:00:02,920 --> 01:00:05,920
+So 1 times 3 plus 2 equals 5.
+
+1041
+01:00:05,920 --> 01:00:08,920
+What is D of 5?
+
+1042
+01:00:08,920 --> 01:00:11,920
+0, 1, 2, 3, 4, 5.
+
+1043
+01:00:11,920 --> 01:00:14,920
+Float?
+
+1044
+01:00:14,920 --> 01:00:17,920
+Yeah.
+
+1045
+01:00:17,920 --> 01:00:20,920
+I got that part.
+
+1046
+01:00:20,920 --> 01:00:23,920
+It's for the data type.
+
+1047
+01:00:23,920 --> 01:00:26,920
+But you're reading it as an array.
+
+1048
+01:00:26,920 --> 01:00:29,920
+Float pointer
+
+1049
+01:00:29,920 --> 01:00:32,920
+and nothing is the same thing.
+
+1050
+01:00:32,920 --> 01:00:35,920
+So when you
+
+1051
+01:00:35,920 --> 01:00:38,920
+let's say it's on CPU,
+
+1052
+01:00:38,920 --> 01:00:41,920
+let's say you're doing
+
+1053
+01:00:41,920 --> 01:00:44,920
+in
+
+1054
+01:00:44,920 --> 01:00:47,920
+equals
+
+1055
+01:00:47,920 --> 01:00:50,920
+if you pass a float pointer
+
+1056
+01:00:50,920 --> 01:00:53,920
+0, it's just like that.
+
+1057
+01:00:53,920 --> 01:00:56,920
+You can't say
+
+1058
+01:00:56,920 --> 01:00:59,920
+1.
+
+1059
+01:00:59,920 --> 01:01:02,920
+So let's say you have A of 10.
+
+1060
+01:01:02,920 --> 01:01:05,920
+What this is doing is
+
+1061
+01:01:05,920 --> 01:01:08,920
+actually, this is the same as
+
+1062
+01:01:08,920 --> 01:01:11,920
+writing int
+
+1063
+01:01:11,920 --> 01:01:14,920
+star A equals
+
+1064
+01:01:14,920 --> 01:01:17,920
+new
+
+1065
+01:01:17,920 --> 01:01:20,920
+I'm sure I'm making a mistake here, but ignore it.
+
+1066
+01:01:20,920 --> 01:01:23,920
+So this
+
+1067
+01:01:23,920 --> 01:01:26,920
+A and this A are basically the same.
+
+1068
+01:01:26,920 --> 01:01:29,920
+The pointer here is just
+
+1069
+01:01:29,920 --> 01:01:32,920
+the pointer to this thing.
+
+1070
+01:01:32,920 --> 01:01:35,920
+You could absolutely do
+
+1071
+01:01:35,920 --> 01:01:38,920
+A plus 1, right?
+
+1072
+01:01:38,920 --> 01:01:41,920
+And it would essentially add the A pointer
+
+1073
+01:01:41,920 --> 01:01:44,920
+plus 1 byte.
+
+1074
+01:01:44,920 --> 01:01:47,920
+So that's how it works.
+
+1075
+01:01:47,920 --> 01:01:50,920
+So when we do
+
+1076
+01:01:50,920 --> 01:01:53,920
+DP of let's say 1,
+
+1077
+01:01:53,920 --> 01:01:56,920
+what this means is DP
+
+1078
+01:01:56,920 --> 01:01:59,920
+plus 1 times
+
+1079
+01:01:59,920 --> 01:02:02,920
+size of
+
+1080
+01:02:02,920 --> 01:02:05,920
+whatever the type is.
+
+1081
+01:02:05,920 --> 01:02:08,920
+That's essentially what we're doing.
+
+1082
+01:02:08,920 --> 01:02:11,920
+So we are essentially adding
+
+1083
+01:02:11,920 --> 01:02:14,920
+4 bytes to the address.
+
+1084
+01:02:15,920 --> 01:02:18,920
+It's handled by run time.
+
+1085
+01:02:18,920 --> 01:02:21,920
+It's allocated at run time.
+
+1086
+01:02:21,920 --> 01:02:24,920
+We'll get to that
+
+1087
+01:02:24,920 --> 01:02:27,920
+in the next lecture.
+
+1088
+01:02:27,920 --> 01:02:30,920
+But yes, you've raised a very good question.
+
+1089
+01:02:30,920 --> 01:02:33,920
+What other questions do you have?
+
+1090
+01:02:33,920 --> 01:02:36,920
+Everybody understands how the matrix kernel works?
+
+1091
+01:02:36,920 --> 01:02:39,920
+Because this is really important.
+
+1092
+01:02:39,920 --> 01:02:42,920
+We are going to use this to build
+
+1093
+01:02:42,920 --> 01:02:45,920
+on our GPU understanding.
+
+1094
+01:02:45,920 --> 01:02:48,920
+So understanding this basic thing is super important.
+
+1095
+01:02:48,920 --> 01:02:51,920
+Okay.
+
+1096
+01:02:51,920 --> 01:02:54,920
+So let's move on to the next
+
+1097
+01:02:54,920 --> 01:02:57,920
+question.
+
+1098
+01:02:57,920 --> 01:03:00,920
+So what is the
+
+1099
+01:03:00,920 --> 01:03:03,920
+kernel?
+
+1100
+01:03:03,920 --> 01:03:06,920
+So we've done three parts.
+
+1101
+01:03:06,920 --> 01:03:09,920
+We've done the CUDA memory transfers,
+
+1102
+01:03:09,920 --> 01:03:12,920
+probably the simplest part.
+
+1103
+01:03:12,920 --> 01:03:15,920
+We've done the implementation of the kernels,
+
+1104
+01:03:15,920 --> 01:03:18,920
+but now we have to do invoking the kernel,
+
+1105
+01:03:18,920 --> 01:03:21,920
+which we haven't done so far.
+
+1106
+01:03:21,920 --> 01:03:24,920
+We haven't actually called the kernel.
+
+1107
+01:03:24,920 --> 01:03:27,920
+So that is done using this.
+
+1108
+01:03:27,920 --> 01:03:30,920
+Let's call it width-by-width.
+
+1109
+01:03:30,920 --> 01:03:33,920
+And we launch one block.
+
+1110
+01:03:33,920 --> 01:03:36,920
+And then we launch the matrix itself.
+
+1111
+01:03:36,920 --> 01:03:39,920
+So we launch matrix-multiply-kernel.
+
+1112
+01:03:39,920 --> 01:03:42,920
+We'll define the blocks and threads
+
+1113
+01:03:42,920 --> 01:03:45,920
+and then see how we've given
+
+1114
+01:03:45,920 --> 01:03:48,920
+dev-n, dev-n, dev-p.
+
+1115
+01:03:48,920 --> 01:03:51,920
+Why do we have width there?
+
+1116
+01:03:51,920 --> 01:03:54,920
+Or why is width not a pointer?
+
+1117
+01:03:54,920 --> 01:03:57,920
+So width is an integer.
+
+1118
+01:03:57,920 --> 01:04:00,920
+You can see it up there in the matrix-multiply-cpu function.
+
+1119
+01:04:00,920 --> 01:04:03,920
+It's a constant width.
+
+1120
+01:04:03,920 --> 01:04:06,920
+But we are not passing it as a pointer.
+
+1121
+01:04:06,920 --> 01:04:09,920
+Why?
+
+1122
+01:04:18,920 --> 01:04:21,920
+Right.
+
+1123
+01:04:22,920 --> 01:04:25,920
+These are passed as pointers
+
+1124
+01:04:25,920 --> 01:04:27,920
+because they're literally on the GPU memory.
+
+1125
+01:04:27,920 --> 01:04:30,920
+You don't want to be copying it when you're calling the kernel.
+
+1126
+01:04:30,920 --> 01:04:33,920
+But when you call width, like an int
+
+1127
+01:04:33,920 --> 01:04:36,920
+or a float or something very simple, a very implicit type,
+
+1128
+01:04:36,920 --> 01:04:39,920
+that gets copied by,
+
+1129
+01:04:39,920 --> 01:04:42,920
+passed by copy, essentially.
+
+1130
+01:04:42,920 --> 01:04:45,920
+So every thread is literally getting a copy of width.
+
+1131
+01:04:46,920 --> 01:04:49,920
+Okay.
+
+1132
+01:04:49,920 --> 01:04:52,920
+So now a few questions for you.
+
+1133
+01:04:52,920 --> 01:04:55,920
+What is the major performance problem of our implementation?
+
+1134
+01:04:57,920 --> 01:05:00,920
+I can go back to a kernel
+
+1135
+01:05:00,920 --> 01:05:03,920
+to show you what it looks like.
+
+1136
+01:05:03,920 --> 01:05:06,920
+What is the performance problem here?
+
+1137
+01:05:10,920 --> 01:05:13,920
+Now, I haven't given you all the information
+
+1138
+01:05:13,920 --> 01:05:16,920
+to identify all the performance problems, but I'm looking for guesses.
+
+1139
+01:05:16,920 --> 01:05:19,920
+Go ahead.
+
+1140
+01:05:27,920 --> 01:05:30,920
+So the for loop is important.
+
+1141
+01:05:30,920 --> 01:05:33,920
+We can't necessarily get rid of that, but you're close.
+
+1142
+01:05:33,920 --> 01:05:36,920
+I want you to think more.
+
+1143
+01:05:39,920 --> 01:05:42,920
+That's the answer to my next question.
+
+1144
+01:05:43,920 --> 01:05:46,920
+Where?
+
+1145
+01:05:46,920 --> 01:05:49,920
+Tell me which lines.
+
+1146
+01:05:49,920 --> 01:05:52,920
+Which lines are we copying that memory?
+
+1147
+01:05:52,920 --> 01:05:55,920
+You're getting this point here.
+
+1148
+01:05:55,920 --> 01:05:58,920
+So where are we copying memory?
+
+1149
+01:05:58,920 --> 01:06:01,920
+So we're not copying memory here.
+
+1150
+01:06:01,920 --> 01:06:04,920
+We're reading memory here and we're writing memory here.
+
+1151
+01:06:04,920 --> 01:06:07,920
+So where is the problem?
+
+1152
+01:06:07,920 --> 01:06:10,920
+Is it here or what?
+
+1153
+01:06:10,920 --> 01:06:13,920
+The problem.
+
+1154
+01:06:13,920 --> 01:06:16,920
+So what exactly is the problem?
+
+1155
+01:06:16,920 --> 01:06:19,920
+I think that we are reading memory in a for loop.
+
+1156
+01:06:19,920 --> 01:06:22,920
+So we are reading it many, many times.
+
+1157
+01:06:22,920 --> 01:06:25,920
+So it will discard and reuse the same value.
+
+1158
+01:06:25,920 --> 01:06:28,920
+So that's not missing.
+
+1159
+01:06:28,920 --> 01:06:31,920
+Okay.
+
+1160
+01:06:31,920 --> 01:06:34,920
+Yeah.
+
+1161
+01:06:50,920 --> 01:06:53,920
+Anybody have anything else to add to that?
+
+1162
+01:06:53,920 --> 01:06:56,920
+That is one part of the right answer.
+
+1163
+01:06:56,920 --> 01:06:59,920
+What else do we want to add to it?
+
+1164
+01:06:59,920 --> 01:07:02,920
+Yeah.
+
+1165
+01:07:02,920 --> 01:07:05,920
+So not necessarily.
+
+1166
+01:07:05,920 --> 01:07:08,920
+Not exactly that.
+
+1167
+01:07:08,920 --> 01:07:11,920
+But where is this memory stored?
+
+1168
+01:07:11,920 --> 01:07:14,920
+It's in global memory.
+
+1169
+01:07:14,920 --> 01:07:17,920
+What did I say was the fastest memory?
+
+1170
+01:07:17,920 --> 01:07:20,920
+Where is shared memory?
+
+1171
+01:07:20,920 --> 01:07:23,920
+It's on that chip, so it's pretty close.
+
+1172
+01:07:23,920 --> 01:07:26,920
+The worst memory, albeit it is very fast,
+
+1173
+01:07:26,920 --> 01:07:29,920
+the worst memory on a GPU is global.
+
+1174
+01:07:29,920 --> 01:07:32,920
+It is in a way the biggest,
+
+1175
+01:07:32,920 --> 01:07:35,920
+but it is also the slowest.
+
+1176
+01:07:35,920 --> 01:07:38,920
+It is still very, very fast.
+
+1177
+01:07:38,920 --> 01:07:41,920
+It's 10 times faster than your CPU,
+
+1178
+01:07:41,920 --> 01:07:44,920
+but it is still the slowest.
+
+1179
+01:07:44,920 --> 01:07:47,920
+So when you're doing this,
+
+1180
+01:07:47,920 --> 01:07:50,920
+on every thread,
+
+1181
+01:07:50,920 --> 01:07:53,920
+now you have a performance problem.
+
+1182
+01:07:54,920 --> 01:07:57,920
+This kernel is still going to be faster than your CPU.
+
+1183
+01:07:57,920 --> 01:08:00,920
+If you're trying to compare matrix multiplier on CPU
+
+1184
+01:08:00,920 --> 01:08:03,920
+versus matrix multiplier on GPU,
+
+1185
+01:08:03,920 --> 01:08:06,920
+this will still be faster,
+
+1186
+01:08:06,920 --> 01:08:09,920
+but it doesn't mean it's the fastest version of the kernel.
+
+1187
+01:08:09,920 --> 01:08:12,920
+When I said performance is going to be a key theme,
+
+1188
+01:08:12,920 --> 01:08:15,920
+this is what I'm talking about.
+
+1189
+01:08:15,920 --> 01:08:18,920
+We won't settle for, okay, we are faster than CPU.
+
+1190
+01:08:18,920 --> 01:08:21,920
+No, we want to embarrass the CPU.
+
+1191
+01:08:22,920 --> 01:08:25,920
+Any other thoughts to add to performance?
+
+1192
+01:08:36,920 --> 01:08:39,920
+That's a very good idea that we'll touch on next time.
+
+1193
+01:08:39,920 --> 01:08:42,920
+I want you to hold that thought
+
+1194
+01:08:42,920 --> 01:08:45,920
+and bring it to the next class.
+
+1195
+01:08:45,920 --> 01:08:48,920
+What other ideas do you have?
+
+1196
+01:08:51,920 --> 01:08:54,920
+It's a register,
+
+1197
+01:08:54,920 --> 01:08:57,920
+so it's perfectly fine.
+
+1198
+01:08:57,920 --> 01:09:00,920
+Good answers and good thoughts.
+
+1199
+01:09:00,920 --> 01:09:03,920
+I'm glad you guys are already ahead of the curve.
+
+1200
+01:09:03,920 --> 01:09:06,920
+What is the major limitation?
+
+1201
+01:09:06,920 --> 01:09:09,920
+I'll come back to you on that.
+
+1202
+01:09:09,920 --> 01:09:12,920
+What does one block mean?
+
+1203
+01:09:12,920 --> 01:09:15,920
+What are we limiting then?
+
+1204
+01:09:15,920 --> 01:09:18,920
+What does that mean?
+
+1205
+01:09:18,920 --> 01:09:21,920
+Because if we use one block,
+
+1206
+01:09:21,920 --> 01:09:24,920
+the maximum square matrix,
+
+1207
+01:09:24,920 --> 01:09:27,920
+because right now we're dealing with a square matrix,
+
+1208
+01:09:27,920 --> 01:09:30,920
+is 32 by 32.
+
+1209
+01:09:30,920 --> 01:09:33,920
+A thousand elements.
+
+1210
+01:09:33,920 --> 01:09:36,920
+Not very big.
+
+1211
+01:09:36,920 --> 01:09:39,920
+We want to be millions, if not billions of elements.
+
+1212
+01:09:39,920 --> 01:09:42,920
+This kernel does not have that.
+
+1213
+01:09:42,920 --> 01:09:45,920
+In first class here,
+
+1214
+01:09:45,920 --> 01:09:48,920
+we will build up on this.
+
+1215
+01:09:48,920 --> 01:09:51,920
+It only works for a thousand elements at most.
+
+1216
+01:09:51,920 --> 01:09:54,920
+That is a major limitation.
+
+1217
+01:09:54,920 --> 01:09:57,920
+What are the assumptions we made in our matrix?
+
+1218
+01:09:57,920 --> 01:10:00,920
+I just mentioned one of those.
+
+1219
+01:10:00,920 --> 01:10:03,920
+It's square.
+
+1220
+01:10:03,920 --> 01:10:06,920
+Most of the time, it may not be square.
+
+1221
+01:10:06,920 --> 01:10:09,920
+We didn't check for any bounds.
+
+1222
+01:10:09,920 --> 01:10:12,920
+That's a major limitation as well.
+
+1223
+01:10:12,920 --> 01:10:15,920
+What we're going to do in the next class,
+
+1224
+01:10:15,920 --> 01:10:18,920
+on next Wednesday,
+
+1225
+01:10:18,920 --> 01:10:21,920
+is dive into a bunch more concepts about
+
+1226
+01:10:21,920 --> 01:10:24,920
+programming, get into a little bit of scheduling,
+
+1227
+01:10:24,920 --> 01:10:27,920
+a little bit of more memory,
+
+1228
+01:10:27,920 --> 01:10:30,920
+talk a little bit more about the performance of each kind of memory.
+
+1229
+01:10:30,920 --> 01:10:33,920
+Then we will look at how do we make this kernel perfect.
+
+1230
+01:10:33,920 --> 01:10:36,920
+That's all for my lecture today.
+
+1231
+01:10:36,920 --> 01:10:39,920
+Definitely take a look at the slides if you want.
+
+1232
+01:10:39,920 --> 01:10:42,920
+Finish project 0 and take a look at project 1.
+
+1233
+01:10:42,920 --> 01:10:45,920
+Enjoy your Labor Day break.
+
+1234
+01:10:45,920 --> 01:10:48,920
+I will see you guys on Wednesday.
+
+1235
+01:11:06,920 --> 01:11:09,920
+Take care.
+

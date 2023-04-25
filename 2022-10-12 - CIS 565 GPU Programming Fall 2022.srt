@@ -1,0 +1,9824 @@
+1
+00:00:00,000 --> 00:00:02,680
+All right.
+
+2
+00:00:02,680 --> 00:00:06,040
+So an atomic add internally would be implemented
+
+3
+00:00:06,040 --> 00:00:07,160
+something like this.
+
+4
+00:00:07,160 --> 00:00:09,800
+Now you'll never have to write a function like this device
+
+5
+00:00:09,800 --> 00:00:11,480
+because it's already given to you by CUDA
+
+6
+00:00:11,480 --> 00:00:14,680
+but this is more of an exercise, okay?
+
+7
+00:00:14,680 --> 00:00:18,800
+So what we start with is an incoming address
+
+8
+00:00:18,800 --> 00:00:21,000
+which is the value you want to update
+
+9
+00:00:21,000 --> 00:00:25,040
+and a value here that you're going to add to that address.
+
+10
+00:00:27,680 --> 00:00:29,520
+And each thread is going to try to do this
+
+11
+00:00:29,520 --> 00:00:32,280
+because this is essentially a register.
+
+12
+00:00:32,280 --> 00:00:34,480
+Each thread can try to add a different value
+
+13
+00:00:34,480 --> 00:00:36,680
+to your address, okay?
+
+14
+00:00:36,680 --> 00:00:39,800
+So one, so each thread tries to execute this.
+
+15
+00:00:39,800 --> 00:00:41,800
+They come in here, okay?
+
+16
+00:00:41,800 --> 00:00:45,200
+They, and remember the return function here
+
+17
+00:00:45,200 --> 00:00:47,800
+has to be the old value, okay?
+
+18
+00:00:47,800 --> 00:00:52,040
+The new value stored here, it returns the old value, okay?
+
+19
+00:00:52,040 --> 00:00:54,760
+That is a key thing in atomic operations.
+
+20
+00:00:54,760 --> 00:00:57,640
+So we come in here, we create a register for old
+
+21
+00:00:57,640 --> 00:00:59,720
+so that we can return that writing code.
+
+22
+00:00:59,720 --> 00:01:01,840
+And then we try to do some kind of a lock.
+
+23
+00:01:02,800 --> 00:01:05,280
+I'm making up a function here, okay?
+
+24
+00:01:05,280 --> 00:01:07,600
+I want to try to block this address.
+
+25
+00:01:07,600 --> 00:01:10,200
+If I'm successful in locking it,
+
+26
+00:01:10,200 --> 00:01:13,840
+then I'll come in, store the old value in old
+
+27
+00:01:13,840 --> 00:01:16,560
+and then add the new value in address.
+
+28
+00:01:16,560 --> 00:01:17,880
+And then I'll return old.
+
+29
+00:01:19,560 --> 00:01:21,400
+Does this make sense to everybody?
+
+30
+00:01:21,400 --> 00:01:23,720
+How this locking mechanism is working?
+
+31
+00:01:24,600 --> 00:01:25,640
+Any questions here?
+
+32
+00:01:27,800 --> 00:01:31,320
+So what would this essentially do in CUDA
+
+33
+00:01:31,320 --> 00:01:34,920
+when we have blocks of threads?
+
+34
+00:01:34,920 --> 00:01:36,720
+What does this do now?
+
+35
+00:01:47,080 --> 00:01:48,400
+Yeah, exactly.
+
+36
+00:01:49,800 --> 00:01:52,440
+In a way, this is what it's meant to do.
+
+37
+00:01:52,440 --> 00:01:56,320
+This is what is known as a locking mechanism.
+
+38
+00:01:56,320 --> 00:01:58,600
+So in programming styles of coordination,
+
+39
+00:01:58,600 --> 00:02:00,320
+there are three mechanisms.
+
+40
+00:02:00,320 --> 00:02:03,680
+And these are derived from GTC sites that I created.
+
+41
+00:02:03,680 --> 00:02:06,400
+You can have locking, which is what I showed you.
+
+42
+00:02:06,400 --> 00:02:07,800
+You can have lock-free.
+
+43
+00:02:08,680 --> 00:02:11,240
+Lock-free doesn't necessarily mean not parallel.
+
+44
+00:02:11,240 --> 00:02:12,240
+It's just lock-free.
+
+45
+00:02:12,240 --> 00:02:14,720
+And I'll get to that in a little bit.
+
+46
+00:02:14,720 --> 00:02:15,920
+And then there's wait-free.
+
+47
+00:02:15,920 --> 00:02:18,960
+Wait-free is essentially what we do in CUDA
+
+48
+00:02:18,960 --> 00:02:21,040
+for all the things like reductions and stuff
+
+49
+00:02:21,040 --> 00:02:23,360
+that we've done is wait-free.
+
+50
+00:02:23,360 --> 00:02:25,280
+So let's take a look at each of those.
+
+51
+00:02:26,560 --> 00:02:30,840
+So first, locking essentially means
+
+52
+00:02:30,840 --> 00:02:32,960
+that all threads try to get the lock.
+
+53
+00:02:33,840 --> 00:02:36,400
+One thread that is successful in getting the lock,
+
+54
+00:02:36,400 --> 00:02:38,840
+it doesn't work and releases the thread.
+
+55
+00:02:40,920 --> 00:02:45,920
+So as long as every thread doesn't get a lock and release,
+
+56
+00:02:46,920 --> 00:02:48,280
+we have to wait there.
+
+57
+00:02:48,760 --> 00:02:49,600
+Okay?
+
+58
+00:02:50,680 --> 00:02:52,560
+So it's not...
+
+59
+00:02:55,200 --> 00:02:57,000
+So if we go back here,
+
+60
+00:02:57,000 --> 00:03:02,000
+essentially, until all threads did this to be true,
+
+61
+00:03:02,040 --> 00:03:03,040
+they can't come down here.
+
+62
+00:03:03,040 --> 00:03:04,920
+All the threads can't come down here.
+
+63
+00:03:06,280 --> 00:03:07,960
+So that's locking.
+
+64
+00:03:07,960 --> 00:03:09,440
+Let's take a look at lock-free.
+
+65
+00:03:09,440 --> 00:03:11,280
+So this is a little different, okay?
+
+66
+00:03:12,640 --> 00:03:15,720
+What happens here is, unlike before,
+
+67
+00:03:15,720 --> 00:03:18,480
+where all the threads try to get the lock,
+
+68
+00:03:18,480 --> 00:03:20,920
+all the threads will try to get the lock.
+
+69
+00:03:20,920 --> 00:03:24,480
+If they fail, they'll go back and try again.
+
+70
+00:03:24,480 --> 00:03:26,320
+And then the one thread that gets the lock
+
+71
+00:03:26,320 --> 00:03:29,240
+will execute the instructions.
+
+72
+00:03:29,240 --> 00:03:30,080
+Okay?
+
+73
+00:03:30,080 --> 00:03:31,800
+The main difference here
+
+74
+00:03:31,800 --> 00:03:34,840
+is how the loop is essentially structured
+
+75
+00:03:34,840 --> 00:03:39,840
+in how the lock is picked up
+
+76
+00:03:39,960 --> 00:03:42,960
+and how the threads that are not successful,
+
+77
+00:03:42,960 --> 00:03:44,640
+the work that they're doing.
+
+78
+00:03:44,640 --> 00:03:46,040
+So over here,
+
+79
+00:03:47,400 --> 00:03:50,040
+if a thread is not successful in getting a lock,
+
+80
+00:03:50,040 --> 00:03:51,840
+they'll try to keep getting the lock
+
+81
+00:03:51,840 --> 00:03:53,280
+over and over and over again
+
+82
+00:03:53,280 --> 00:03:54,840
+without moving to the next line.
+
+83
+00:03:54,840 --> 00:03:57,360
+It'll wait at that line.
+
+84
+00:03:57,360 --> 00:03:59,480
+Here, you're gonna change what happened.
+
+85
+00:03:59,480 --> 00:04:03,240
+You're gonna change so that it goes back to a certain point,
+
+86
+00:04:03,240 --> 00:04:05,440
+does the instructions again, and then comes back.
+
+87
+00:04:05,440 --> 00:04:10,440
+So as a reminder, CUDA has free compute, right?
+
+88
+00:04:10,680 --> 00:04:13,880
+So this proves to be better
+
+89
+00:04:13,880 --> 00:04:16,200
+because now you have threads working in lockstep
+
+90
+00:04:16,200 --> 00:04:17,520
+and doing compute,
+
+91
+00:04:17,520 --> 00:04:19,160
+rather than just checking for memory
+
+92
+00:04:19,160 --> 00:04:20,840
+over and over and over again.
+
+93
+00:04:22,280 --> 00:04:24,800
+So this is essentially,
+
+94
+00:04:24,800 --> 00:04:27,040
+this kind of lock-free style
+
+95
+00:04:27,040 --> 00:04:28,920
+is essentially what is called Atomic CAS.
+
+96
+00:04:28,920 --> 00:04:31,120
+And we'll take a look at that a little later.
+
+97
+00:04:31,120 --> 00:04:34,640
+Atomic CAS stands for Atomic Compare and Swap.
+
+98
+00:04:34,640 --> 00:04:37,240
+And we'll see examples of that later.
+
+99
+00:04:37,240 --> 00:04:39,760
+And also Atomic Exchange and Atomic Add
+
+100
+00:04:39,760 --> 00:04:43,120
+in CUDA use this kind of lock-free mechanism.
+
+101
+00:04:44,880 --> 00:04:48,440
+The last time, which we can't do for Atomics
+
+102
+00:04:48,440 --> 00:04:52,000
+is all the threads make progress.
+
+103
+00:04:52,000 --> 00:04:55,520
+Each thread makes memory updates automatically
+
+104
+00:04:55,520 --> 00:04:57,480
+and no threads are blocked by other threads,
+
+105
+00:04:57,480 --> 00:04:59,880
+which is essentially what is Paddle programming.
+
+106
+00:05:01,200 --> 00:05:04,280
+So I'm gonna switch to a different deck here
+
+107
+00:05:04,280 --> 00:05:05,760
+and I've linked it from here
+
+108
+00:05:05,760 --> 00:05:07,160
+because I wanna walk through
+
+109
+00:05:08,680 --> 00:05:12,880
+some of the stuff from the NVIDIA slide.
+
+110
+00:05:12,880 --> 00:05:14,280
+So let's take a look at it.
+
+111
+00:05:21,760 --> 00:05:24,560
+Yes, both could serialize everything,
+
+112
+00:05:24,560 --> 00:05:26,480
+but it depends on what address they're trying to,
+
+113
+00:05:26,480 --> 00:05:28,360
+and that's what I'm getting at here.
+
+114
+00:05:28,360 --> 00:05:31,400
+So you can have different atomic access patterns, right?
+
+115
+00:05:31,400 --> 00:05:34,400
+You can have all the threads
+
+116
+00:05:34,400 --> 00:05:36,880
+trying to access the same address.
+
+117
+00:05:36,880 --> 00:05:39,000
+You can have all the atomics
+
+118
+00:05:39,000 --> 00:05:40,720
+trying to access the same cache line
+
+119
+00:05:40,720 --> 00:05:42,320
+because remember all the cache line stuff
+
+120
+00:05:42,720 --> 00:05:43,560
+is being read together, right?
+
+121
+00:05:43,560 --> 00:05:46,120
+So that could happen as well,
+
+122
+00:05:46,120 --> 00:05:48,520
+or it could be more scattered.
+
+123
+00:05:48,520 --> 00:05:50,680
+So those are different atomic access patterns
+
+124
+00:05:50,680 --> 00:05:52,680
+and why I'm showing you this
+
+125
+00:05:52,680 --> 00:05:54,200
+will become clear in a second.
+
+126
+00:05:59,080 --> 00:06:02,720
+So locking guarantees essentially access control
+
+127
+00:06:02,720 --> 00:06:05,920
+about which threads have the ability
+
+128
+00:06:05,920 --> 00:06:08,720
+to read, modify and delete data.
+
+129
+00:06:08,720 --> 00:06:10,240
+You can't have different threads
+
+130
+00:06:10,240 --> 00:06:11,360
+trying to do different things.
+
+131
+00:06:11,400 --> 00:06:13,360
+You can just get memory corruption.
+
+132
+00:06:13,360 --> 00:06:16,240
+So we have to make sure that it works correctly.
+
+133
+00:06:18,280 --> 00:06:19,960
+We'll skip a few slides.
+
+134
+00:06:24,640 --> 00:06:25,480
+Yeah, sure.
+
+135
+00:06:26,320 --> 00:06:31,320
+So when we think about what divergence and atomics,
+
+136
+00:06:31,840 --> 00:06:34,760
+we have to remember that CUDA works in walks, right?
+
+137
+00:06:34,760 --> 00:06:38,080
+32 threads execute in lockstep,
+
+138
+00:06:38,080 --> 00:06:40,720
+which means all the threads have to do the same thing.
+
+139
+00:06:41,600 --> 00:06:43,920
+As a reminder, if we have this kind of function here
+
+140
+00:06:43,920 --> 00:06:46,840
+where we have an if condition as, and all that,
+
+141
+00:06:46,840 --> 00:06:48,200
+you get this kind of a pattern
+
+142
+00:06:48,200 --> 00:06:50,800
+where some threads are doing work and some threads are not,
+
+143
+00:06:50,800 --> 00:06:54,960
+but essentially some threads are idle at that point.
+
+144
+00:06:56,880 --> 00:07:01,200
+So if we try to do this with locking, right?
+
+145
+00:07:01,200 --> 00:07:04,040
+And let's say one thread gets the lock
+
+146
+00:07:04,040 --> 00:07:08,280
+and this is a locked side programming,
+
+147
+00:07:08,280 --> 00:07:12,720
+what happens is all of these threads that are not locked
+
+148
+00:07:12,720 --> 00:07:15,680
+just idle at that place until they get people,
+
+149
+00:07:15,680 --> 00:07:18,000
+until this thread unlocks it.
+
+150
+00:07:18,000 --> 00:07:20,680
+So these threads don't do anything at all.
+
+151
+00:07:24,600 --> 00:07:29,600
+In a different way, if the wrong thread idles,
+
+152
+00:07:30,080 --> 00:07:32,720
+and remember, we can do atomics for different reasons
+
+153
+00:07:32,720 --> 00:07:34,080
+for different threads, okay?
+
+154
+00:07:34,080 --> 00:07:35,800
+It's not always an atomic add
+
+155
+00:07:35,800 --> 00:07:40,040
+that is adding the same thing to the same address.
+
+156
+00:07:40,040 --> 00:07:41,800
+You can have atomics for different reasons
+
+157
+00:07:41,800 --> 00:07:46,800
+that have a thread condition for writing to global memory.
+
+158
+00:07:47,640 --> 00:07:49,120
+What is an example of this?
+
+159
+00:07:53,200 --> 00:07:54,840
+What could be an example of this?
+
+160
+00:07:57,280 --> 00:08:01,440
+So if you remember, we did reduction, right?
+
+161
+00:08:02,680 --> 00:08:05,560
+Imagine doing one block of reduction
+
+162
+00:08:06,320 --> 00:08:08,080
+using atomic add.
+
+163
+00:08:08,080 --> 00:08:10,880
+You can do it serially where you do thread one
+
+164
+00:08:10,880 --> 00:08:13,280
+plus thread two plus thread three and so on,
+
+165
+00:08:13,280 --> 00:08:15,000
+or you can do it in the tree structure
+
+166
+00:08:15,000 --> 00:08:19,240
+that we did for our scan algorithms and stuff.
+
+167
+00:08:19,240 --> 00:08:22,800
+But you can do that within a block for atomic add, right?
+
+168
+00:08:22,800 --> 00:08:26,400
+Now, in that case, you will be trying to use,
+
+169
+00:08:26,400 --> 00:08:28,920
+trying to check which address you're adding to,
+
+170
+00:08:28,920 --> 00:08:30,400
+and then different threads are gonna try
+
+171
+00:08:30,400 --> 00:08:31,720
+to lock different things.
+
+172
+00:08:32,720 --> 00:08:36,360
+So in that scenario, you would get into the situation
+
+173
+00:08:36,360 --> 00:08:39,920
+where the wrong thread could try to access
+
+174
+00:08:39,920 --> 00:08:44,480
+the wrong location, and then it's kind of like
+
+175
+00:08:44,480 --> 00:08:46,720
+you're failing at what you're trying to do.
+
+176
+00:08:48,920 --> 00:08:52,200
+So what we want to do is,
+
+177
+00:08:52,200 --> 00:08:54,320
+we don't want to use locks in threads
+
+178
+00:08:54,320 --> 00:08:56,760
+because it causes divergence and hangs.
+
+179
+00:08:57,600 --> 00:09:01,640
+What we want to do is elect one thread to take the lock
+
+180
+00:09:02,560 --> 00:09:04,560
+until other threads can get the lock.
+
+181
+00:09:04,560 --> 00:09:07,040
+So this is called a lock-free mechanism.
+
+182
+00:09:09,720 --> 00:09:14,120
+So lock-free mechanisms are essentially
+
+183
+00:09:14,120 --> 00:09:17,880
+what we'll do with compare and swap,
+
+184
+00:09:17,880 --> 00:09:22,520
+which is to read, modify, and then write the operation.
+
+185
+00:09:22,520 --> 00:09:24,000
+So the reason this works,
+
+186
+00:09:24,000 --> 00:09:26,560
+and I'll show you how exactly it is,
+
+187
+00:09:26,560 --> 00:09:29,400
+is that it's much higher throughput
+
+188
+00:09:29,400 --> 00:09:31,520
+because it's not trying to read memory
+
+189
+00:09:31,520 --> 00:09:32,560
+all at the same time,
+
+190
+00:09:32,560 --> 00:09:34,240
+and exactly one thread is guaranteed
+
+191
+00:09:34,240 --> 00:09:36,400
+to succeed at all times.
+
+192
+00:09:36,400 --> 00:09:37,720
+So let's take a look.
+
+193
+00:09:38,840 --> 00:09:40,400
+So in lock-free updates,
+
+194
+00:09:42,440 --> 00:09:44,480
+this, oh, sorry.
+
+195
+00:09:46,160 --> 00:09:49,600
+When it tries to take the lock,
+
+196
+00:09:49,600 --> 00:09:53,240
+so the first step is every thread is gonna try to lock.
+
+197
+00:09:53,240 --> 00:09:55,760
+If it succeeds, it's gonna read and modify the value
+
+198
+00:09:55,760 --> 00:09:56,800
+and unlock.
+
+199
+00:09:56,800 --> 00:09:59,200
+Otherwise, it's gonna try taking the lock again.
+
+200
+00:09:59,960 --> 00:10:03,040
+This code, and we have it in the slides,
+
+201
+00:10:03,040 --> 00:10:04,920
+the class slides as well,
+
+202
+00:10:04,920 --> 00:10:09,080
+is essentially, what this is doing is
+
+203
+00:10:09,080 --> 00:10:11,960
+while this lock-free mechanism,
+
+204
+00:10:11,960 --> 00:10:14,920
+and atomic exchanges is kind of a lock here,
+
+205
+00:10:16,480 --> 00:10:18,640
+while this lock doesn't succeed,
+
+206
+00:10:18,640 --> 00:10:20,440
+keep trying to do that, right?
+
+207
+00:10:22,040 --> 00:10:23,360
+If it succeeds, you come in,
+
+208
+00:10:23,360 --> 00:10:27,160
+you change the value, and then you return, okay?
+
+209
+00:10:27,160 --> 00:10:31,280
+So this line becomes the locking mechanism here.
+
+210
+00:10:32,800 --> 00:10:35,760
+What we want to do and change this to
+
+211
+00:10:35,760 --> 00:10:37,480
+is something like this.
+
+212
+00:10:37,480 --> 00:10:38,720
+We generate the new value
+
+213
+00:10:38,720 --> 00:10:40,280
+based on the current data that we have.
+
+214
+00:10:40,280 --> 00:10:43,200
+So we essentially do the add, okay?
+
+215
+00:10:43,200 --> 00:10:45,960
+Take the register that was passed in,
+
+216
+00:10:45,960 --> 00:10:47,960
+do the add anyway,
+
+217
+00:10:47,960 --> 00:10:52,800
+but you change the value only if you succeed on locking,
+
+218
+00:10:52,800 --> 00:10:53,640
+okay?
+
+219
+00:10:53,640 --> 00:10:56,000
+So let's see how that works.
+
+220
+00:10:56,120 --> 00:10:57,800
+I'll come back to the slides here.
+
+221
+00:10:59,560 --> 00:11:03,760
+So I'll keep this here so that I can switch back to it,
+
+222
+00:11:04,800 --> 00:11:07,600
+but let's take a look at how this is gonna work.
+
+223
+00:11:10,880 --> 00:11:11,720
+Okay.
+
+224
+00:11:18,600 --> 00:11:19,440
+One second.
+
+225
+00:11:26,000 --> 00:11:26,840
+Okay.
+
+226
+00:11:28,040 --> 00:11:28,880
+All right.
+
+227
+00:11:31,320 --> 00:11:33,120
+So what we are gonna do is
+
+228
+00:11:33,120 --> 00:11:36,520
+we had this mechanism, right?
+
+229
+00:11:36,520 --> 00:11:39,320
+This lock mechanism that was essentially
+
+230
+00:11:39,320 --> 00:11:40,800
+holding up all the threads here
+
+231
+00:11:40,800 --> 00:11:43,000
+without allowing them to work in lockstep.
+
+232
+00:11:44,520 --> 00:11:46,320
+How would we implement this without locking?
+
+233
+00:11:46,320 --> 00:11:47,800
+So I've put the code down here,
+
+234
+00:11:47,800 --> 00:11:51,080
+the old code down here for reference, okay?
+
+235
+00:11:51,080 --> 00:11:53,560
+And we are gonna use atomic comparisons for this
+
+236
+00:11:53,600 --> 00:11:56,040
+as suggested in the NVIDIA slides.
+
+237
+00:11:57,240 --> 00:12:01,960
+And atomic comparisons has this mechanism here
+
+238
+00:12:01,960 --> 00:12:06,960
+that what it does is it's going to take an address
+
+239
+00:12:07,560 --> 00:12:11,240
+of compare value and a final value, okay?
+
+240
+00:12:12,880 --> 00:12:14,360
+Now here's the trick.
+
+241
+00:12:15,880 --> 00:12:18,720
+If it gets a lock on the address, okay?
+
+242
+00:12:18,720 --> 00:12:21,760
+The atomic pass, not atomic add.
+
+243
+00:12:21,760 --> 00:12:26,080
+So the atomic pass, if it gets the address here,
+
+244
+00:12:26,080 --> 00:12:30,880
+what it does is it stores the old value in address, okay?
+
+245
+00:12:31,760 --> 00:12:35,520
+If old is the same as compare, okay?
+
+246
+00:12:35,520 --> 00:12:40,520
+What that means is if the current value in address
+
+247
+00:12:41,080 --> 00:12:44,240
+and whether it is able to get a lock
+
+248
+00:12:44,240 --> 00:12:48,440
+is the same as the compare value, the condition value, okay?
+
+249
+00:12:48,440 --> 00:12:51,120
+Then only, then do we actually switch it
+
+250
+00:12:51,120 --> 00:12:52,240
+to the final value.
+
+251
+00:12:53,920 --> 00:12:56,320
+Otherwise, and then we return the old value.
+
+252
+00:12:56,320 --> 00:13:00,040
+And this will make sense when we come to add in a little bit,
+
+253
+00:13:00,040 --> 00:13:00,880
+okay?
+
+254
+00:13:00,880 --> 00:13:03,320
+Just understand how compare and swap work.
+
+255
+00:13:03,320 --> 00:13:06,960
+In compare and swap, we have an input value
+
+256
+00:13:06,960 --> 00:13:09,480
+that we are comparing to a compare value
+
+257
+00:13:09,480 --> 00:13:13,440
+if true value becomes address, okay?
+
+258
+00:13:15,200 --> 00:13:18,160
+So once again, if address equals compare,
+
+259
+00:13:18,920 --> 00:13:21,160
+if the value in address equals compare,
+
+260
+00:13:21,160 --> 00:13:23,480
+then we write value into address, okay?
+
+261
+00:13:23,480 --> 00:13:25,160
+That is compare and swap.
+
+262
+00:13:27,640 --> 00:13:31,720
+So we lock, do the swap, and then return.
+
+263
+00:13:31,720 --> 00:13:34,960
+So now let's take an example.
+
+264
+00:13:34,960 --> 00:13:37,560
+If address equals one, okay?
+
+265
+00:13:37,560 --> 00:13:40,760
+What is the result of atomic pass, the first line?
+
+266
+00:13:40,760 --> 00:13:41,600
+Okay.
+
+267
+00:13:45,240 --> 00:13:47,120
+But remember, we have address.
+
+268
+00:13:48,120 --> 00:13:51,000
+The compare is one here, and value is two.
+
+269
+00:13:54,680 --> 00:13:56,840
+What's the starting point then?
+
+270
+00:13:56,840 --> 00:13:59,520
+So the,
+
+271
+00:14:00,400 --> 00:14:01,880
+all is,
+
+272
+00:14:03,120 --> 00:14:04,280
+all is at the end.
+
+273
+00:14:04,280 --> 00:14:05,120
+So,
+
+274
+00:14:08,160 --> 00:14:10,520
+address, the address,
+
+275
+00:14:10,520 --> 00:14:13,480
+at the address currently, the old value is one,
+
+276
+00:14:13,480 --> 00:14:16,680
+so one equals compare and swap one.
+
+277
+00:14:16,680 --> 00:14:21,160
+So then we will return one, but now address stores,
+
+278
+00:14:22,960 --> 00:14:24,160
+stores two.
+
+279
+00:14:24,160 --> 00:14:27,600
+Right, so like both of you suggested,
+
+280
+00:14:27,600 --> 00:14:31,440
+what's happening here is, if we look at this again,
+
+281
+00:14:32,400 --> 00:14:35,760
+if this is true, let's assume it's true,
+
+282
+00:14:35,760 --> 00:14:38,320
+old, we store old of address,
+
+283
+00:14:38,320 --> 00:14:40,840
+and then old and compare are the same.
+
+284
+00:14:40,840 --> 00:14:43,000
+Remember, we are not comparing address to compare,
+
+285
+00:14:43,000 --> 00:14:45,600
+we are comparing old to compare,
+
+286
+00:14:45,600 --> 00:14:46,840
+and that's the intention.
+
+287
+00:14:47,760 --> 00:14:51,160
+So the one gets stored in old,
+
+288
+00:14:51,160 --> 00:14:55,280
+and old one equals one, true,
+
+289
+00:14:55,280 --> 00:14:58,360
+so we put two in address, okay?
+
+290
+00:14:58,360 --> 00:15:02,120
+But this returns one, and stores two.
+
+291
+00:15:02,120 --> 00:15:04,160
+What happens in the next line after this?
+
+292
+00:15:08,240 --> 00:15:10,520
+What's the value in address here?
+
+293
+00:15:10,520 --> 00:15:11,480
+Two.
+
+294
+00:15:11,480 --> 00:15:13,480
+Now what is the result of compare?
+
+295
+00:15:14,960 --> 00:15:17,440
+False, so we don't, we don't, we don't fall.
+
+296
+00:15:17,440 --> 00:15:20,800
+So address still remains two.
+
+297
+00:15:20,800 --> 00:15:22,080
+What about the next line?
+
+298
+00:15:24,480 --> 00:15:27,080
+The compare is true, so now address becomes three
+
+299
+00:15:27,080 --> 00:15:27,920
+and returns two.
+
+300
+00:15:28,480 --> 00:15:32,520
+So you see how compare and swap kind of builds
+
+301
+00:15:32,520 --> 00:15:35,360
+towards atomic add, essentially?
+
+302
+00:15:35,360 --> 00:15:39,640
+So if given atomic pass, how do we implement atomic add?
+
+303
+00:15:40,520 --> 00:15:43,120
+And the answer to that is something like this,
+
+304
+00:15:43,120 --> 00:15:48,120
+where you take the old address and put it in old,
+
+305
+00:15:48,160 --> 00:15:50,400
+and create a new assumed value.
+
+306
+00:15:51,480 --> 00:15:54,040
+Now look, there's no locking mechanism here.
+
+307
+00:15:55,040 --> 00:15:57,880
+So now, we're going to do,
+
+308
+00:15:57,880 --> 00:16:01,880
+and we put the old and assumed value intentionally.
+
+309
+00:16:03,080 --> 00:16:04,360
+And this assumed is important
+
+310
+00:16:04,360 --> 00:16:08,240
+because we want to keep doing work without having locked.
+
+311
+00:16:08,240 --> 00:16:11,840
+So in that case, old will essentially become,
+
+312
+00:16:11,840 --> 00:16:14,600
+compare and swap the address,
+
+313
+00:16:14,600 --> 00:16:15,960
+so we have to still give the address,
+
+314
+00:16:15,960 --> 00:16:18,520
+we can't replace that, we still need that pointer.
+
+315
+00:16:19,560 --> 00:16:23,200
+The assumed value, and then the value plus a zero.
+
+316
+00:16:24,840 --> 00:16:27,960
+Value plus assumed is the final value of an atomic add.
+
+317
+00:16:34,600 --> 00:16:37,600
+Until we know that assumed is not old,
+
+318
+00:16:39,320 --> 00:16:41,000
+why is this condition important?
+
+319
+00:16:47,120 --> 00:16:49,440
+What is that condition essentially telling us?
+
+320
+00:16:49,960 --> 00:16:54,960
+Old only equals old if the add fails, I guess.
+
+321
+00:16:55,600 --> 00:16:56,920
+Exactly.
+
+322
+00:16:56,920 --> 00:17:01,920
+Assumed will not equal old if the atomic pass succeeds.
+
+323
+00:17:03,360 --> 00:17:06,320
+Because what will happen is,
+
+324
+00:17:06,320 --> 00:17:10,560
+this will update and store a different value node,
+
+325
+00:17:10,560 --> 00:17:13,120
+because atomic pass will return a different value node
+
+326
+00:17:13,120 --> 00:17:15,040
+because the address is getting faked.
+
+327
+00:17:15,040 --> 00:17:18,200
+So that's why, if this condition fails,
+
+328
+00:17:18,200 --> 00:17:21,240
+that's when we know the atomic operation has succeeded.
+
+329
+00:17:22,200 --> 00:17:25,120
+So while this happens,
+
+330
+00:17:25,120 --> 00:17:26,880
+all the threads will keep doing this
+
+331
+00:17:26,880 --> 00:17:29,240
+without actually updating address,
+
+332
+00:17:29,240 --> 00:17:31,720
+and only the thread that receives the permission,
+
+333
+00:17:31,720 --> 00:17:36,400
+the locking to update address will actually update it.
+
+334
+00:17:36,400 --> 00:17:40,120
+So this will guarantee that the thread we intend to update
+
+335
+00:17:41,000 --> 00:17:42,560
+will update it.
+
+336
+00:17:42,560 --> 00:17:46,360
+So just to highlight that again,
+
+337
+00:17:46,360 --> 00:17:50,200
+if the value address didn't change, then we update it.
+
+338
+00:17:50,200 --> 00:17:54,200
+If some other thread has the locking and changes the value,
+
+339
+00:17:54,200 --> 00:17:57,520
+then we still, we don't increment it at all.
+
+340
+00:17:57,520 --> 00:18:00,200
+So that's the method behind the madness here.
+
+341
+00:18:03,920 --> 00:18:05,160
+Any questions on this?
+
+342
+00:18:09,600 --> 00:18:12,560
+So this is essentially to show you
+
+343
+00:18:12,560 --> 00:18:16,200
+how atomics are built into CUDA.
+
+344
+00:18:17,040 --> 00:18:17,920
+You will never have to write any of this code.
+
+345
+00:18:17,920 --> 00:18:21,760
+You can just use atomic add function from CUDA anyway.
+
+346
+00:18:21,760 --> 00:18:25,240
+This is to show you how people
+
+347
+00:18:25,240 --> 00:18:27,920
+who are building the CUDA SDK and the libraries
+
+348
+00:18:27,920 --> 00:18:30,680
+think about all of this while doing performance.
+
+349
+00:18:30,680 --> 00:18:32,960
+And if you are using any of these atomic operations,
+
+350
+00:18:32,960 --> 00:18:34,480
+that you think about it as well,
+
+351
+00:18:34,480 --> 00:18:37,560
+about how you are gonna be using this.
+
+352
+00:18:38,720 --> 00:18:39,960
+So it's not just atomic add,
+
+353
+00:18:39,960 --> 00:18:43,600
+but you get a bunch of atomic functions as well.
+
+354
+00:18:43,600 --> 00:18:46,000
+In addition to add, you get add, subtract, exchange,
+
+355
+00:18:46,800 --> 00:18:50,000
+which swaps values, min, max, increment, decrement,
+
+356
+00:18:50,000 --> 00:18:52,080
+and then compare and swap, which we saw.
+
+357
+00:18:52,080 --> 00:18:53,240
+You also get bitwise.
+
+358
+00:18:53,240 --> 00:18:55,840
+You can do bitwise and, or, or, x, or,
+
+359
+00:18:55,840 --> 00:18:58,560
+and then build various things on top of this.
+
+360
+00:18:59,920 --> 00:19:01,320
+So now two questions.
+
+361
+00:19:02,840 --> 00:19:05,040
+I've always maintained in the class
+
+362
+00:19:05,040 --> 00:19:08,960
+that two threads from different blocks can't work together.
+
+363
+00:19:08,960 --> 00:19:11,360
+Can they, now you think about atomics?
+
+364
+00:19:17,000 --> 00:19:17,840
+Okay.
+
+365
+00:19:19,760 --> 00:19:22,440
+From different blocks, threads can't work together.
+
+366
+00:19:22,440 --> 00:19:23,920
+There's no sync block function.
+
+367
+00:19:23,920 --> 00:19:25,960
+There's only sync thread in a block.
+
+368
+00:19:26,880 --> 00:19:31,040
+How can atomics help or not help
+
+369
+00:19:31,040 --> 00:19:33,680
+in different blocks working together?
+
+370
+00:19:33,680 --> 00:19:34,520
+Okay.
+
+371
+00:19:42,840 --> 00:19:44,760
+Threads in different blocks
+
+372
+00:19:44,760 --> 00:19:47,240
+may be trying to access the same thing.
+
+373
+00:19:47,240 --> 00:19:48,080
+Which one?
+
+374
+00:19:57,880 --> 00:19:58,720
+Not shared.
+
+375
+00:19:58,720 --> 00:19:59,920
+Shared is limited to a block.
+
+376
+00:20:01,800 --> 00:20:02,640
+Yep.
+
+377
+00:20:02,640 --> 00:20:04,280
+So very, very bad.
+
+378
+00:20:04,280 --> 00:20:05,960
+Don't ever do it.
+
+379
+00:20:05,960 --> 00:20:10,160
+But you can have different threads from different blocks
+
+380
+00:20:10,160 --> 00:20:13,480
+trying to access the same memory using atomics.
+
+381
+00:20:13,480 --> 00:20:16,280
+And based on that, you can make that a conditional.
+
+382
+00:20:17,480 --> 00:20:20,200
+For example, when you ordered reduction,
+
+383
+00:20:20,200 --> 00:20:22,160
+you had your block sums, right?
+
+384
+00:20:22,160 --> 00:20:25,480
+That you wrote into memory, read it on the CPU side,
+
+385
+00:20:25,480 --> 00:20:26,840
+and then computed it there.
+
+386
+00:20:27,840 --> 00:20:31,400
+What happens if you selected let this block zero
+
+387
+00:20:31,400 --> 00:20:33,800
+and be like, okay, block zero after all,
+
+388
+00:20:33,800 --> 00:20:37,320
+or not all block zero, but memory space zero.
+
+389
+00:20:38,160 --> 00:20:39,720
+Thread zeros of all the blocks
+
+390
+00:20:39,720 --> 00:20:42,920
+should atomically write to that memory space
+
+391
+00:20:42,920 --> 00:20:47,320
+so that now you're just computing the reduction,
+
+392
+00:20:47,320 --> 00:20:48,800
+the block sum reduction
+
+393
+00:20:48,800 --> 00:20:51,640
+within one memory space in global memory.
+
+394
+00:20:51,640 --> 00:20:52,480
+It's possible.
+
+395
+00:20:52,480 --> 00:20:53,320
+You can do it.
+
+396
+00:20:53,320 --> 00:20:54,960
+You can absolutely do it,
+
+397
+00:20:54,960 --> 00:20:56,120
+but I wouldn't recommend it
+
+398
+00:20:56,120 --> 00:20:57,960
+because what you're doing then
+
+399
+00:20:57,960 --> 00:21:00,200
+is essentially serializing all of your code.
+
+400
+00:21:02,280 --> 00:21:04,000
+Why should we use atomic spelling?
+
+401
+00:21:09,920 --> 00:21:11,440
+I kind of just gave you the answer for that
+
+402
+00:21:11,440 --> 00:21:12,800
+before asking the question.
+
+403
+00:21:16,880 --> 00:21:18,080
+Serializes.
+
+404
+00:21:18,080 --> 00:21:19,960
+Yeah, it serializes.
+
+405
+00:21:19,960 --> 00:21:21,200
+What's the worst case?
+
+406
+00:21:22,920 --> 00:21:24,640
+All the threads are serial.
+
+407
+00:21:24,640 --> 00:21:27,400
+Yeah, all the threads could become serial in that case.
+
+408
+00:21:27,400 --> 00:21:30,080
+If all the threads are trying to access the same memory
+
+409
+00:21:30,120 --> 00:21:32,040
+and do the same operation,
+
+410
+00:21:32,040 --> 00:21:33,640
+you could make a thread serial.
+
+411
+00:21:35,520 --> 00:21:38,200
+It's worse, even more worse,
+
+412
+00:21:38,200 --> 00:21:41,160
+if you try to do it in global memory.
+
+413
+00:21:41,160 --> 00:21:44,120
+Doing it within shared memory is not too bad.
+
+414
+00:21:44,120 --> 00:21:46,880
+Don't ever, ever, ever do atomics in global memory
+
+415
+00:21:46,880 --> 00:21:49,360
+unless you absolutely need to.
+
+416
+00:21:49,360 --> 00:21:50,680
+And there's no other alternative
+
+417
+00:21:50,680 --> 00:21:53,880
+because remember for each of those blocks,
+
+418
+00:21:55,320 --> 00:21:57,440
+the thread has to go to global memory,
+
+419
+00:21:57,440 --> 00:21:58,920
+get the value updated.
+
+420
+00:21:58,920 --> 00:22:00,560
+There's like 200 cycles of time.
+
+421
+00:22:00,560 --> 00:22:01,720
+By that time, one of the block
+
+422
+00:22:01,720 --> 00:22:04,040
+could have already updated and you don't know.
+
+423
+00:22:04,040 --> 00:22:08,000
+So it's kind of like communicating with Mars.
+
+424
+00:22:08,000 --> 00:22:09,680
+The round trip to Mars is what?
+
+425
+00:22:09,680 --> 00:22:12,200
+12 minutes, 24 minutes, something like that.
+
+426
+00:22:12,200 --> 00:22:15,400
+By the time you send a message and you receive those,
+
+427
+00:22:15,400 --> 00:22:17,480
+the situation has already changed.
+
+428
+00:22:17,480 --> 00:22:22,240
+So don't try to do atomics in global memory.
+
+429
+00:22:23,800 --> 00:22:25,520
+So as a conclusion,
+
+430
+00:22:25,520 --> 00:22:27,680
+atomics essentially allow creation
+
+431
+00:22:27,680 --> 00:22:29,640
+of much more sophisticated algorithms
+
+432
+00:22:29,640 --> 00:22:32,600
+where you can actually tweak the algorithm
+
+433
+00:22:32,600 --> 00:22:35,800
+to take advantage of atomics in a good way.
+
+434
+00:22:35,800 --> 00:22:37,800
+You could absolutely do atomics in a bad way.
+
+435
+00:22:37,800 --> 00:22:40,600
+So make sure you're doing it in a good way.
+
+436
+00:22:40,600 --> 00:22:44,080
+And the GPU has parallel hardware to execute atomics.
+
+437
+00:22:44,080 --> 00:22:45,240
+It's on a memory level.
+
+438
+00:22:45,240 --> 00:22:48,360
+It's covered in the slides that I was showing you before.
+
+439
+00:22:48,360 --> 00:22:49,360
+You can take a look at that,
+
+440
+00:22:49,360 --> 00:22:51,120
+but I don't want to dive that deep.
+
+441
+00:22:54,200 --> 00:22:57,160
+But atomics also force serialization.
+
+442
+00:22:57,840 --> 00:23:00,400
+So this line here essentially says,
+
+443
+00:23:00,400 --> 00:23:05,200
+don't forcefully do serialization because you find it easy.
+
+444
+00:23:05,200 --> 00:23:07,600
+Don't use atomics because you find it easier
+
+445
+00:23:07,600 --> 00:23:09,320
+to check your algorithm.
+
+446
+00:23:10,200 --> 00:23:13,000
+Try to optimize your algorithm to do it without atomics,
+
+447
+00:23:13,000 --> 00:23:15,360
+but if you absolutely need it,
+
+448
+00:23:15,360 --> 00:23:17,040
+only then do you actually use it.
+
+449
+00:23:19,040 --> 00:23:20,560
+So that's all for atomics.
+
+450
+00:23:20,560 --> 00:23:23,640
+Any questions before I switch over to our advanced topics
+
+451
+00:23:23,640 --> 00:23:24,880
+and cool that part of it?
+
+452
+00:23:28,160 --> 00:23:31,920
+You, I don't think Project 4 uses atomics,
+
+453
+00:23:31,920 --> 00:23:34,200
+but if you think of the kernels and stuff,
+
+454
+00:23:34,200 --> 00:23:36,400
+if you were trying to add all the values,
+
+455
+00:23:36,400 --> 00:23:38,920
+so at some point you could use atomics
+
+456
+00:23:38,920 --> 00:23:41,000
+in different algorithms that are similar.
+
+457
+00:23:43,720 --> 00:23:46,320
+All right, I'm going to switch over.
+
+458
+00:23:46,320 --> 00:23:48,920
+Make sure, this slide is just really good.
+
+459
+00:23:48,920 --> 00:23:52,240
+I haven't, I'm trying to find the video for it
+
+460
+00:23:52,240 --> 00:23:54,240
+so that I can link it.
+
+461
+00:23:54,240 --> 00:23:57,840
+I'll do that when I am successful in getting that.
+
+462
+00:23:59,480 --> 00:24:00,320
+All right.
+
+463
+00:24:04,880 --> 00:24:06,600
+All right, so in advanced topics,
+
+464
+00:24:06,600 --> 00:24:08,480
+we're going to cover a bunch of topics
+
+465
+00:24:08,480 --> 00:24:10,880
+like we did in performance lab.
+
+466
+00:24:10,880 --> 00:24:14,920
+And we're going to walk through all of these one by one.
+
+467
+00:24:16,480 --> 00:24:20,160
+So first we have what is called CUDA Unified Memory.
+
+468
+00:24:20,160 --> 00:24:24,240
+And this really is for people
+
+469
+00:24:24,240 --> 00:24:27,720
+who haven't understood CUDA like you have in this class,
+
+470
+00:24:28,760 --> 00:24:31,240
+who don't understand the memory management side of things
+
+471
+00:24:31,240 --> 00:24:33,680
+and allocation, reallocation and stuff like that.
+
+472
+00:24:35,800 --> 00:24:40,720
+So CUDA Unified Memory is essentially a memory manager.
+
+473
+00:24:40,720 --> 00:24:42,400
+That's essentially what it does.
+
+474
+00:24:42,400 --> 00:24:45,120
+All it's doing is that it has two pointers,
+
+475
+00:24:45,120 --> 00:24:47,240
+one for device and host,
+
+476
+00:24:47,240 --> 00:24:49,640
+but allows you to use a single pointer for it.
+
+477
+00:24:51,440 --> 00:24:54,720
+The API to allocate CUDA Unified Memory
+
+478
+00:24:54,720 --> 00:24:56,480
+is CUDA mallet managed.
+
+479
+00:24:56,480 --> 00:24:59,640
+Again, memory manager, mallet managed, you get the point.
+
+480
+00:25:00,960 --> 00:25:04,280
+And that is synchronized using CUDA device synchronized.
+
+481
+00:25:05,280 --> 00:25:08,400
+So here's a visual overview of what that looks like.
+
+482
+00:25:09,920 --> 00:25:12,960
+On our CPU, we have system memory.
+
+483
+00:25:12,960 --> 00:25:15,320
+On the GPU, we have GPU memory.
+
+484
+00:25:15,320 --> 00:25:17,960
+And this is how all of you have written for so far.
+
+485
+00:25:19,240 --> 00:25:24,240
+What CUDA Unified Memory does is it makes a virtual memory
+
+486
+00:25:25,520 --> 00:25:28,320
+that essentially makes it appear to your program
+
+487
+00:25:28,320 --> 00:25:29,880
+as if you're working with the same memory
+
+488
+00:25:29,880 --> 00:25:33,120
+on both GPU and CPU.
+
+489
+00:25:33,120 --> 00:25:33,960
+Okay.
+
+490
+00:25:35,760 --> 00:25:38,080
+Why is this good or not good?
+
+491
+00:25:40,640 --> 00:25:41,960
+Yeah.
+
+492
+00:25:42,080 --> 00:25:44,360
+I can think of a reason it's not good
+
+493
+00:25:44,360 --> 00:25:49,360
+because you have to use extra resources
+
+494
+00:25:49,840 --> 00:25:53,520
+to maintain this unified, this virtual memory
+
+495
+00:25:53,520 --> 00:25:56,120
+that needs more overhead.
+
+496
+00:25:56,120 --> 00:26:00,440
+Yes, but in certain cases it can be good, that problem,
+
+497
+00:26:00,440 --> 00:26:03,840
+where you're frequently synchronizing
+
+498
+00:26:03,840 --> 00:26:08,840
+between CPU and GPU, you can simplify this.
+
+499
+00:26:08,840 --> 00:26:10,480
+But you can do that with other APIs.
+
+500
+00:26:10,760 --> 00:26:14,160
+What makes CUDA Unified Memory different from that?
+
+501
+00:26:15,480 --> 00:26:17,480
+And it can be good and bad in some way.
+
+502
+00:26:17,480 --> 00:26:18,920
+I'm not saying it's only bad.
+
+503
+00:26:18,920 --> 00:26:20,480
+Could be good, it could be bad.
+
+504
+00:26:20,480 --> 00:26:21,320
+Yeah.
+
+505
+00:26:40,160 --> 00:26:43,160
+So, what this essentially does is,
+
+506
+00:26:44,080 --> 00:26:47,880
+it's for people who may not be so used to CUDA,
+
+507
+00:26:47,880 --> 00:26:49,600
+which is not new, it's okay.
+
+508
+00:26:49,600 --> 00:26:52,240
+This is for, you're in a lab,
+
+509
+00:26:52,240 --> 00:26:54,280
+you give your co-worker an idea.
+
+510
+00:26:54,280 --> 00:26:56,280
+Hey, let's try to use CUDA for this.
+
+511
+00:26:56,280 --> 00:26:58,440
+You're doing all the core memory stuff
+
+512
+00:26:58,440 --> 00:26:59,880
+and they're writing the program.
+
+513
+00:26:59,880 --> 00:27:01,400
+This makes it easier for them.
+
+514
+00:27:02,400 --> 00:27:06,600
+But what it also makes you do is a lot of synchronization.
+
+515
+00:27:06,600 --> 00:27:07,440
+Okay.
+
+516
+00:27:08,880 --> 00:27:11,920
+You can't do CUDA memcpy on this.
+
+517
+00:27:12,920 --> 00:27:15,240
+Or you shouldn't do CUDA memcpy on it.
+
+518
+00:27:15,240 --> 00:27:16,600
+Okay, because you just get one point
+
+519
+00:27:16,600 --> 00:27:18,800
+of what's your host point or nothing.
+
+520
+00:27:19,400 --> 00:27:20,640
+You just get one pointer for it.
+
+521
+00:27:20,640 --> 00:27:24,360
+So, it's much more explicit to use CUDA memcpy
+
+522
+00:27:24,360 --> 00:27:26,240
+than it is to use Unified Memory.
+
+523
+00:27:27,920 --> 00:27:30,320
+So, here's an example of what that looks like.
+
+524
+00:27:31,440 --> 00:27:34,280
+We have two float pointers, X and Y.
+
+525
+00:27:34,280 --> 00:27:38,160
+We, just like CUDA malloc, we do CUDA malloc manage.
+
+526
+00:27:38,160 --> 00:27:41,760
+But now see, we are not doing new float
+
+527
+00:27:41,760 --> 00:27:43,120
+or something on the host side.
+
+528
+00:27:43,120 --> 00:27:45,920
+We are only doing malloc manage.
+
+529
+00:27:45,920 --> 00:27:48,240
+This code is gonna do both the host side
+
+530
+00:27:48,680 --> 00:27:51,520
+and the device side allocation, all this.
+
+531
+00:27:51,520 --> 00:27:55,760
+From there, you can do host side stuff using X and Y.
+
+532
+00:27:55,760 --> 00:27:59,520
+You can also do device side stuff using X and Y.
+
+533
+00:27:59,520 --> 00:28:00,560
+There's no difference.
+
+534
+00:28:00,560 --> 00:28:03,400
+And then you do CUDA device synchronize.
+
+535
+00:28:03,400 --> 00:28:06,840
+The device synchronize will essentially copy host
+
+536
+00:28:06,840 --> 00:28:08,440
+to device or device to host.
+
+537
+00:28:08,440 --> 00:28:10,280
+Now, here's the rub, okay?
+
+538
+00:28:12,600 --> 00:28:15,920
+What happens if you change both the host and the device?
+
+539
+00:28:18,880 --> 00:28:19,720
+Right?
+
+540
+00:28:20,960 --> 00:28:23,200
+What happens if you...
+
+541
+00:28:23,200 --> 00:28:25,840
+Remember, this is asynchronous.
+
+542
+00:28:25,840 --> 00:28:29,080
+You could be doing stuff here on X and Y.
+
+543
+00:28:31,240 --> 00:28:33,080
+How do you resolve that?
+
+544
+00:28:33,080 --> 00:28:35,120
+CUDA doesn't know how to resolve that.
+
+545
+00:28:35,120 --> 00:28:38,160
+So, that's where the disadvantage starts coming in,
+
+546
+00:28:38,160 --> 00:28:41,640
+that it's not as explicit as you want it to.
+
+547
+00:28:41,640 --> 00:28:43,400
+If you are writing a sequential program
+
+548
+00:28:43,400 --> 00:28:46,640
+that doesn't do any X and Y policy,
+
+549
+00:28:46,640 --> 00:28:48,400
+sure, you could use it,
+
+550
+00:28:48,400 --> 00:28:51,320
+but make sure that you're being safe about it.
+
+551
+00:28:53,480 --> 00:28:55,800
+So, for unified memory,
+
+552
+00:28:57,960 --> 00:28:59,800
+there's no significant advantage.
+
+553
+00:28:59,800 --> 00:29:02,720
+There's no hardware advantage on Kepler and Maxwell GPU.
+
+554
+00:29:02,720 --> 00:29:07,240
+So, this is your six, seven, eight, nine GTX series,
+
+555
+00:29:07,240 --> 00:29:08,680
+essentially.
+
+556
+00:29:08,680 --> 00:29:10,440
+From Pascal onwards,
+
+557
+00:29:10,440 --> 00:29:14,000
+which is the GTX 1080 kind of series onwards,
+
+558
+00:29:14,000 --> 00:29:16,160
+that's when you get some modern concepts
+
+559
+00:29:16,160 --> 00:29:18,480
+around managed memory as well,
+
+560
+00:29:18,480 --> 00:29:20,960
+such as prefetching, page fault handling,
+
+561
+00:29:20,960 --> 00:29:24,360
+and even simultaneous GPU and access.
+
+562
+00:29:24,360 --> 00:29:25,960
+So, this is where I was telling,
+
+563
+00:29:25,960 --> 00:29:29,360
+oh, if GPU and CPU are trying to write it simultaneously,
+
+564
+00:29:29,360 --> 00:29:30,200
+what happens?
+
+565
+00:29:30,200 --> 00:29:33,160
+So, on the newer hardware, it can work.
+
+566
+00:29:34,160 --> 00:29:37,440
+The last place it has a pretty big advantage
+
+567
+00:29:37,440 --> 00:29:40,320
+is if you're doing out-of-port.
+
+568
+00:29:40,320 --> 00:29:42,720
+And out-of-port means,
+
+569
+00:29:42,720 --> 00:29:47,520
+if the memory you need doesn't fit into the GPU's memory.
+
+570
+00:29:47,520 --> 00:29:50,840
+So, for example, if you have maybe a 4GB GPU,
+
+571
+00:29:50,840 --> 00:29:53,280
+you have 16GB RAM on the CPU,
+
+572
+00:29:54,160 --> 00:29:57,080
+maybe 4GB is not enough for whatever algorithm you're doing,
+
+573
+00:29:57,080 --> 00:29:58,880
+and you need some more space.
+
+574
+00:29:58,880 --> 00:30:03,600
+You could assign a lot more on the CPU side,
+
+575
+00:30:03,600 --> 00:30:07,520
+and then have it copy to the GPU on demand.
+
+576
+00:30:07,520 --> 00:30:10,400
+So, it allows subscribing only on the newer GPUs.
+
+577
+00:30:10,400 --> 00:30:13,200
+If you try to do it on Kepler and Maxon, this will fail.
+
+578
+00:30:15,120 --> 00:30:16,600
+Okay.
+
+579
+00:30:16,600 --> 00:30:20,000
+So, takeaways for CUDA Unified Memory.
+
+580
+00:30:20,000 --> 00:30:21,280
+It's good for beginners,
+
+581
+00:30:21,280 --> 00:30:22,480
+wouldn't recommend it for newbies.
+
+582
+00:30:22,480 --> 00:30:25,280
+You guys know a lot better about that.
+
+583
+00:30:25,280 --> 00:30:26,240
+It's synchronous.
+
+584
+00:30:27,160 --> 00:30:30,600
+What that means is anytime you change
+
+585
+00:30:30,600 --> 00:30:33,080
+which device is writing,
+
+586
+00:30:33,080 --> 00:30:35,840
+it's gonna synchronize both the CPU and the GPU.
+
+587
+00:30:35,840 --> 00:30:38,160
+It's gonna make everything hold,
+
+588
+00:30:38,160 --> 00:30:39,960
+and then only then it'll do the operation
+
+589
+00:30:39,960 --> 00:30:42,160
+so that it knows it's still atomic.
+
+590
+00:30:43,760 --> 00:30:45,440
+Good for the new hardware,
+
+591
+00:30:45,440 --> 00:30:48,080
+but the direct APIs are still the way to go
+
+592
+00:30:48,080 --> 00:30:49,640
+if you know how to use them.
+
+593
+00:30:49,640 --> 00:30:52,280
+And then you can write your own memory manager
+
+594
+00:30:52,280 --> 00:30:53,880
+when, if needed.
+
+595
+00:30:53,880 --> 00:30:56,480
+You can create your own APIs around it if you want.
+
+596
+00:30:57,720 --> 00:30:59,720
+So, any questions around Unified Memory?
+
+597
+00:31:02,760 --> 00:31:03,600
+Yep.
+
+598
+00:31:03,600 --> 00:31:08,360
+So, I assume it's not the copying memory back and forth.
+
+599
+00:31:08,360 --> 00:31:10,600
+No, that is exactly what it is.
+
+600
+00:31:10,600 --> 00:31:12,840
+So, that's a good story.
+
+601
+00:31:12,840 --> 00:31:16,680
+CUDA Unified Memory was introduced in CUDA 6.5.
+
+602
+00:31:16,680 --> 00:31:19,120
+Back then, CUDA would make two releases a year,
+
+603
+00:31:19,120 --> 00:31:22,400
+a 0.0 release and a 0.5 release.
+
+604
+00:31:22,400 --> 00:31:24,000
+Nowadays, they make a lot fewer
+
+605
+00:31:24,000 --> 00:31:27,000
+because the SDK has essentially evolved
+
+606
+00:31:27,000 --> 00:31:28,720
+to a pretty stable point.
+
+607
+00:31:30,120 --> 00:31:33,360
+So, at that point, I remember I was working on a project,
+
+608
+00:31:34,120 --> 00:31:35,280
+a medical imaging project
+
+609
+00:31:36,360 --> 00:31:39,480
+that was working with large images
+
+610
+00:31:39,480 --> 00:31:41,000
+and small versions of those images.
+
+611
+00:31:41,000 --> 00:31:45,520
+So, for example, it had a 32 by 32 image
+
+612
+00:31:45,520 --> 00:31:48,280
+and a corresponding 1024 by 1024 image.
+
+613
+00:31:48,280 --> 00:31:53,280
+Again, it was doing some bacterial culture analysis
+
+614
+00:31:53,680 --> 00:31:54,640
+or something on it.
+
+615
+00:31:56,240 --> 00:31:59,880
+Now, 1024 by 1024 large image is great for GPUs.
+
+616
+00:31:59,880 --> 00:32:02,000
+You can throw like a thousand of it on GPU
+
+617
+00:32:02,000 --> 00:32:04,680
+and it'll work really well.
+
+618
+00:32:04,680 --> 00:32:07,920
+Those tiny 8 by 8, 32 by 32 image,
+
+619
+00:32:08,840 --> 00:32:12,200
+we asked ourselves, why should we copy this on the GPU?
+
+620
+00:32:12,200 --> 00:32:14,360
+The CPU is gonna be faster for it.
+
+621
+00:32:14,360 --> 00:32:16,640
+You know that overhead and copying it to the GPU
+
+622
+00:32:16,640 --> 00:32:19,000
+and copying it back is not worth it.
+
+623
+00:32:19,000 --> 00:32:23,440
+So, what we did was we created an asynchronous operation
+
+624
+00:32:23,440 --> 00:32:27,280
+and I'll talk a little bit more about how you do that
+
+625
+00:32:27,280 --> 00:32:30,640
+where the CPU was working on the small images
+
+626
+00:32:30,640 --> 00:32:33,400
+and the GPU was working on the bigger images.
+
+627
+00:32:33,400 --> 00:32:35,600
+And we needed to know that everything
+
+628
+00:32:35,600 --> 00:32:36,800
+was synchronized and stuff.
+
+629
+00:32:36,800 --> 00:32:40,760
+So, as part of that project, we wrote a memory manager
+
+630
+00:32:40,760 --> 00:32:43,360
+and this was right before CUDA 6.5 came out.
+
+631
+00:32:44,480 --> 00:32:47,960
+So, CUDA 6.5 comes out and really announces unified memory
+
+632
+00:32:47,960 --> 00:32:50,240
+and we're like, yeah, we already wrote that.
+
+633
+00:32:50,240 --> 00:32:51,920
+So, we don't need to use unified memory.
+
+634
+00:32:51,920 --> 00:32:54,000
+We had our own memory manager for it.
+
+635
+00:32:54,000 --> 00:32:58,000
+So, yes, under the hood, it's doing pretty much exactly that
+
+636
+00:32:58,000 --> 00:33:00,640
+with the exceptions of these few things here,
+
+637
+00:33:00,640 --> 00:33:03,920
+which are, again, you need to know how you're using
+
+638
+00:33:03,920 --> 00:33:07,480
+your data before you decide, okay, this applies to me.
+
+639
+00:33:07,480 --> 00:33:09,600
+You don't really get too much advantage
+
+640
+00:33:09,600 --> 00:33:10,720
+in using unified memory.
+
+641
+00:33:10,720 --> 00:33:14,080
+The direct API calls will give you more advantages
+
+642
+00:33:14,080 --> 00:33:14,920
+than this one.
+
+643
+00:33:21,040 --> 00:33:22,320
+It is easier, but...
+
+644
+00:33:29,000 --> 00:33:32,480
+Because there's a reason you don't use Java
+
+645
+00:33:32,480 --> 00:33:35,000
+and you use C++ for performance.
+
+646
+00:33:35,000 --> 00:33:38,240
+You don't use JavaScript for performance, you use C++.
+
+647
+00:33:38,240 --> 00:33:41,520
+Just because programming one way is easier
+
+648
+00:33:41,520 --> 00:33:43,400
+doesn't mean it's the best way to program.
+
+649
+00:33:43,400 --> 00:33:45,240
+So, that's what you have to remember.
+
+650
+00:33:47,280 --> 00:33:48,760
+Any other questions on unified?
+
+651
+00:33:48,760 --> 00:33:49,600
+Leo?
+
+652
+00:33:49,600 --> 00:33:54,600
+So, since you declared the memory on the host,
+
+653
+00:33:55,560 --> 00:33:59,920
+I assume the address is like an actual address of the host.
+
+654
+00:33:59,920 --> 00:34:02,040
+So, you can do that for your...
+
+655
+00:34:02,040 --> 00:34:03,360
+Yeah, yeah.
+
+656
+00:34:04,720 --> 00:34:08,880
+It essentially, I don't know for sure,
+
+657
+00:34:08,880 --> 00:34:12,280
+but what I think this does is on the host,
+
+658
+00:34:15,200 --> 00:34:18,600
+or at least on the host or device, one of the places,
+
+659
+00:34:18,600 --> 00:34:21,920
+it creates a pointer to a pointer or some kind of a mapping.
+
+660
+00:34:21,920 --> 00:34:24,560
+So, the driver essentially knows that,
+
+661
+00:34:24,560 --> 00:34:27,920
+hey, if I am doing anything with this address,
+
+662
+00:34:27,920 --> 00:34:29,840
+from this address, go to that address and do it.
+
+663
+00:34:29,840 --> 00:34:33,560
+Because it's almost impossible to have
+
+664
+00:34:33,560 --> 00:34:36,320
+the exact same address in both the GPU
+
+665
+00:34:36,320 --> 00:34:37,800
+and CPU become available.
+
+666
+00:34:38,960 --> 00:34:40,000
+It's nearly impossible.
+
+667
+00:34:40,000 --> 00:34:43,040
+So, yes, some kind of a mapping has to happen
+
+668
+00:34:43,040 --> 00:34:43,880
+under the hood.
+
+669
+00:34:46,800 --> 00:34:48,200
+Any other questions on this?
+
+670
+00:34:50,920 --> 00:34:51,760
+Okay.
+
+671
+00:34:52,920 --> 00:34:53,760
+All right.
+
+672
+00:34:53,760 --> 00:34:56,520
+So, let's talk about faster memory transfer.
+
+673
+00:34:56,520 --> 00:34:58,320
+I've said, unified memory is not great.
+
+674
+00:34:58,320 --> 00:34:59,840
+Okay, how do we do this faster?
+
+675
+00:34:59,840 --> 00:35:01,800
+And some of this you may have actually picked up
+
+676
+00:35:01,800 --> 00:35:03,040
+in performance lab.
+
+677
+00:35:04,080 --> 00:35:09,080
+So, GPUs are useful because of all the compute they have,
+
+678
+00:35:10,920 --> 00:35:12,720
+all the memory bandwidth they have,
+
+679
+00:35:14,080 --> 00:35:17,720
+but they're limited in one way, the PCIe memory bandwidth.
+
+680
+00:35:17,720 --> 00:35:19,720
+Now, of course, this is improving PCIe,
+
+681
+00:35:19,720 --> 00:35:23,480
+five is out, six is coming, seven is coming and so on.
+
+682
+00:35:23,480 --> 00:35:28,000
+But a lot of this is still very limited
+
+683
+00:35:28,000 --> 00:35:32,560
+by what is essentially tens of gigabytes of bandwidth
+
+684
+00:35:32,560 --> 00:35:36,600
+between the CPU and GPU versus the hundreds of gigabytes
+
+685
+00:35:36,600 --> 00:35:38,280
+of bandwidth you have on the GPU.
+
+686
+00:35:39,480 --> 00:35:44,480
+So, for example, on a 1080 Ti, which was a PCIe 3 card,
+
+687
+00:35:44,480 --> 00:35:48,080
+you had 16 lanes maximum.
+
+688
+00:35:48,080 --> 00:35:52,040
+And based on that, you would get 16 GB theoretical
+
+689
+00:35:52,040 --> 00:35:55,360
+copy speed or approximately 13 gigabytes
+
+690
+00:35:55,360 --> 00:35:57,720
+of realistic copy speed.
+
+691
+00:35:57,720 --> 00:36:00,800
+Compare that to the 330 global memory bandwidth
+
+692
+00:36:00,800 --> 00:36:02,400
+that you have, okay?
+
+693
+00:36:03,880 --> 00:36:07,360
+But if you run your programs and you run your profilers,
+
+694
+00:36:07,360 --> 00:36:10,640
+what you're actually gonna see is most of your mem copies
+
+695
+00:36:10,640 --> 00:36:13,320
+between CPU and GPU probably get around
+
+696
+00:36:13,320 --> 00:36:16,520
+four to six gigabytes a second, okay?
+
+697
+00:36:16,520 --> 00:36:18,520
+And the performance lab has all of this code.
+
+698
+00:36:18,520 --> 00:36:19,840
+So if you open performance lab,
+
+699
+00:36:19,840 --> 00:36:23,800
+you can check how much mem copy speed you're getting, okay?
+
+700
+00:36:23,800 --> 00:36:27,960
+So ultimately, this bandwidth is 55 times lower
+
+701
+00:36:27,960 --> 00:36:30,760
+than global memory bandwidth on the GPU,
+
+702
+00:36:30,760 --> 00:36:32,320
+which is not good, right?
+
+703
+00:36:34,080 --> 00:36:35,960
+We don't want this to become the bottleneck
+
+704
+00:36:35,960 --> 00:36:39,160
+and the downside of using GPUs.
+
+705
+00:36:39,160 --> 00:36:43,360
+So how do we make this at least hit this limit here,
+
+706
+00:36:43,360 --> 00:36:46,400
+that the theoretical limit that we have, okay?
+
+707
+00:36:47,520 --> 00:36:52,120
+So one solution is don't use hosted device drivers.
+
+708
+00:36:53,480 --> 00:36:55,360
+Not really a practical solution, right?
+
+709
+00:36:55,360 --> 00:36:56,920
+Like there has to be some transfer.
+
+710
+00:36:56,920 --> 00:36:59,720
+We can't always have random number generation
+
+711
+00:36:59,720 --> 00:37:02,680
+that is generating all the data on the GPU for free
+
+712
+00:37:02,680 --> 00:37:03,960
+because compute is free.
+
+713
+00:37:04,960 --> 00:37:07,760
+So the other solution is optimized,
+
+714
+00:37:07,760 --> 00:37:09,520
+but how do we optimize that?
+
+715
+00:37:11,120 --> 00:37:15,880
+We optimize that by reducing the overhead of the copy, okay?
+
+716
+00:37:17,520 --> 00:37:21,240
+So when you do, let's say any line,
+
+717
+00:37:21,240 --> 00:37:26,240
+like on the CPU int A equals new or malloc
+
+718
+00:37:27,600 --> 00:37:30,880
+or whatever your favorite memory allocator is,
+
+719
+00:37:30,880 --> 00:37:33,920
+what you're telling your operating system to do
+
+720
+00:37:33,920 --> 00:37:37,480
+is assign pageable memory to your pointer.
+
+721
+00:37:38,520 --> 00:37:41,720
+Pageable memory essentially means that the memory
+
+722
+00:37:41,720 --> 00:37:44,720
+can be moved by the operating system
+
+723
+00:37:44,760 --> 00:37:46,960
+into different locations,
+
+724
+00:37:46,960 --> 00:37:50,320
+whether that's in hardware or into virtual memory,
+
+725
+00:37:50,320 --> 00:37:51,560
+page memory, et cetera.
+
+726
+00:37:51,560 --> 00:37:53,000
+And that's why it's called pageable memory
+
+727
+00:37:53,000 --> 00:37:55,720
+because there's a hashing mechanism behind it.
+
+728
+00:37:57,760 --> 00:38:01,760
+The key thing is that you can't do mem copies
+
+729
+00:38:01,760 --> 00:38:02,840
+from pageable memory.
+
+730
+00:38:04,520 --> 00:38:06,880
+You can't do mem copies from pageable memory
+
+731
+00:38:06,880 --> 00:38:11,200
+because there's a certain latency in copying that memory
+
+732
+00:38:11,200 --> 00:38:13,880
+from CPU to GPU.
+
+733
+00:38:13,920 --> 00:38:16,360
+And if the operating system changes that in any way,
+
+734
+00:38:16,360 --> 00:38:17,920
+then you have corrupted memory.
+
+735
+00:38:18,840 --> 00:38:23,840
+So what we need to do is change the pageable memory
+
+736
+00:38:24,400 --> 00:38:26,400
+into what is called pin memory.
+
+737
+00:38:26,400 --> 00:38:29,880
+Pin memory means the operating system can't change it.
+
+738
+00:38:29,880 --> 00:38:32,080
+The operating system won't change it.
+
+739
+00:38:32,080 --> 00:38:37,080
+And that's when you can copy it to the GPU.
+
+740
+00:38:38,880 --> 00:38:40,800
+So essentially what it's doing is
+
+741
+00:38:40,800 --> 00:38:43,160
+it's taking all the pageable memory you have
+
+742
+00:38:44,640 --> 00:38:47,480
+copying that, literally copying that in hardware
+
+743
+00:38:47,480 --> 00:38:49,920
+to a new pin memory location.
+
+744
+00:38:49,920 --> 00:38:51,880
+And then you copy from the pin memory.
+
+745
+00:38:53,720 --> 00:38:56,160
+What if you could remove this entire overhead?
+
+746
+00:38:56,160 --> 00:38:58,560
+What if you could allocate pin memory directly?
+
+747
+00:39:00,280 --> 00:39:05,280
+So that is done by this form, CUDA malloc host.
+
+748
+00:39:05,920 --> 00:39:09,920
+CUDA malloc host allocates pin memory on the host side.
+
+749
+00:39:10,920 --> 00:39:14,160
+And please always check for errors on this.
+
+750
+00:39:14,160 --> 00:39:15,920
+It can result in failures.
+
+751
+00:39:17,880 --> 00:39:21,400
+You're free using CUDA free host,
+
+752
+00:39:21,400 --> 00:39:23,480
+but all the other uses remain the same.
+
+753
+00:39:23,480 --> 00:39:28,080
+So this is an example of page memory when you use malloc.
+
+754
+00:39:28,080 --> 00:39:31,320
+If you want to allocate pin memory for that same thing,
+
+755
+00:39:31,320 --> 00:39:33,400
+you use CUDA malloc host and assign it by.
+
+756
+00:39:33,400 --> 00:39:34,600
+So kind of like CUDA malloc,
+
+757
+00:39:34,600 --> 00:39:36,400
+but you're assigning it on the host.
+
+758
+00:39:37,400 --> 00:39:40,360
+What could be the problem with this?
+
+759
+00:39:44,400 --> 00:39:46,680
+Why can this result in errors,
+
+760
+00:39:46,680 --> 00:39:48,200
+especially CUDA malloc host?
+
+761
+00:39:50,720 --> 00:39:53,360
+Yeah, not enough space could be available
+
+762
+00:39:53,360 --> 00:39:54,800
+on the host side to do this.
+
+763
+00:39:56,720 --> 00:39:59,000
+So to compare performance, again,
+
+764
+00:39:59,000 --> 00:40:00,960
+this is a screenshot of a performance lab
+
+765
+00:40:00,960 --> 00:40:02,360
+you can go home and run it.
+
+766
+00:40:03,360 --> 00:40:07,360
+So in this GTX 770 example,
+
+767
+00:40:07,360 --> 00:40:11,120
+I believe this was on my Intel Signing Bridge,
+
+768
+00:40:11,120 --> 00:40:13,360
+probably like 4770, so VE1.
+
+769
+00:40:14,800 --> 00:40:18,520
+So see how pageable transfers have a bandwidth of 4.6.
+
+770
+00:40:18,520 --> 00:40:22,040
+And then the same transfer using pin memory is 12.
+
+771
+00:40:22,040 --> 00:40:24,200
+So three times, almost three times faster.
+
+772
+00:40:25,440 --> 00:40:27,200
+Behind the text is,
+
+773
+00:40:28,480 --> 00:40:31,040
+is there's another name for pin memory
+
+774
+00:40:31,040 --> 00:40:34,440
+that let me move this here
+
+775
+00:40:35,560 --> 00:40:37,760
+so that we can all read it.
+
+776
+00:40:37,760 --> 00:40:39,160
+I forget the name of that.
+
+777
+00:40:43,440 --> 00:40:45,080
+All right, it's called page log memory
+
+778
+00:40:45,080 --> 00:40:47,680
+for obvious reasons that the page of it,
+
+779
+00:40:47,680 --> 00:40:50,280
+the page of the memory can't be changed essentially.
+
+780
+00:40:53,000 --> 00:40:56,600
+So concluding on pin memory,
+
+781
+00:40:56,600 --> 00:40:59,520
+it allows faster memory transfers,
+
+782
+00:40:59,520 --> 00:41:01,600
+but it's a blocking host allocation,
+
+783
+00:41:02,440 --> 00:41:06,760
+which means that blocking on the host,
+
+784
+00:41:06,760 --> 00:41:09,040
+similar to blocking on device,
+
+785
+00:41:09,040 --> 00:41:10,720
+can mean that all your threads
+
+786
+00:41:10,720 --> 00:41:12,520
+in the program will get blocked.
+
+787
+00:41:12,520 --> 00:41:17,040
+Like no new memory or operations can be allocated
+
+788
+00:41:17,040 --> 00:41:20,720
+or done until there's a lock,
+
+789
+00:41:20,720 --> 00:41:22,720
+the pin memory is allocated,
+
+790
+00:41:22,720 --> 00:41:24,800
+and only then can you continue.
+
+791
+00:41:24,800 --> 00:41:27,920
+Until all the threads pause and the memory is allocated,
+
+792
+00:41:27,960 --> 00:41:29,640
+other threads won't be able to continue.
+
+793
+00:41:29,640 --> 00:41:32,480
+So that's a blocking host allocation,
+
+794
+00:41:32,480 --> 00:41:35,280
+and it will also take longer to do so.
+
+795
+00:41:36,440 --> 00:41:38,440
+The key thing is that we use it wisely.
+
+796
+00:41:41,240 --> 00:41:43,080
+One way to put a malicose can fail
+
+797
+00:41:43,080 --> 00:41:44,680
+if there's not enough memory,
+
+798
+00:41:44,680 --> 00:41:48,160
+but why am I saying use it wisely
+
+799
+00:41:48,160 --> 00:41:52,120
+is because the operating system can't move your memory.
+
+800
+00:41:52,120 --> 00:41:54,280
+How can you get in trouble because of that?
+
+801
+00:41:58,920 --> 00:42:03,920
+How can you get in trouble if you use pin memory, right?
+
+802
+00:42:07,960 --> 00:42:10,720
+There's no, like in case you get no new memory,
+
+803
+00:42:10,720 --> 00:42:13,160
+there's no other way to do it.
+
+804
+00:42:13,160 --> 00:42:14,080
+That's it.
+
+805
+00:42:28,920 --> 00:42:32,920
+All right, so you can get in trouble in two ways.
+
+806
+00:42:32,920 --> 00:42:36,840
+One, you can assign so much pin memory
+
+807
+00:42:36,840 --> 00:42:39,960
+that the operating system can't do anything about it.
+
+808
+00:42:39,960 --> 00:42:41,720
+Again, pin memory literally means
+
+809
+00:42:41,720 --> 00:42:42,720
+I know what I'm doing,
+
+810
+00:42:42,720 --> 00:42:46,920
+operating system don't move this around and stuff.
+
+811
+00:42:46,920 --> 00:42:49,080
+Now, let's say I have 16 GB RAM,
+
+812
+00:42:49,080 --> 00:42:50,920
+I assign 16 GB memory,
+
+813
+00:42:50,920 --> 00:42:53,280
+the operating system can't assign anything more
+
+814
+00:42:53,280 --> 00:42:55,880
+and could lead to crashes or hang or anything.
+
+815
+00:42:56,720 --> 00:43:00,920
+The other side is also true where you assign the memory
+
+816
+00:43:00,920 --> 00:43:02,400
+and maybe you assign it in the for loop
+
+817
+00:43:02,400 --> 00:43:04,360
+but you don't free it.
+
+818
+00:43:04,360 --> 00:43:06,240
+Now it becomes even more important
+
+819
+00:43:06,240 --> 00:43:08,200
+that you're doing good memory management
+
+820
+00:43:08,200 --> 00:43:10,160
+and you're freeing it as necessary.
+
+821
+00:43:10,160 --> 00:43:12,320
+Otherwise you'll just overflow
+
+822
+00:43:12,320 --> 00:43:15,760
+all of the memory that you have, okay?
+
+823
+00:43:15,760 --> 00:43:17,160
+So that's pin memory.
+
+824
+00:43:17,160 --> 00:43:19,040
+We will discuss a couple more advantages
+
+825
+00:43:19,040 --> 00:43:21,280
+when we discuss dreams later on.
+
+826
+00:43:22,280 --> 00:43:27,200
+Okay, one more memory thing
+
+827
+00:43:27,200 --> 00:43:30,760
+and we call that zero copy, okay?
+
+828
+00:43:30,760 --> 00:43:35,760
+So zero copy is a mechanism in CUDA
+
+829
+00:43:36,400 --> 00:43:40,160
+that maps your host memory to the device.
+
+830
+00:43:40,160 --> 00:43:41,760
+And I mean that literally.
+
+831
+00:43:41,760 --> 00:43:46,520
+You could access the host side RAM
+
+832
+00:43:46,520 --> 00:43:50,240
+from the GPU over PCIe.
+
+833
+00:43:50,240 --> 00:43:53,440
+Now, obviously it's gonna be very, very slow, okay?
+
+834
+00:43:53,440 --> 00:43:55,640
+Compared to the 330 gigabytes
+
+835
+00:43:55,640 --> 00:43:59,000
+of global memory bandwidth that we have,
+
+836
+00:43:59,000 --> 00:44:01,600
+if we are accessing that over PCIe
+
+837
+00:44:01,600 --> 00:44:03,920
+up to 16 gigabytes per second,
+
+838
+00:44:03,920 --> 00:44:05,240
+that's like 15 times slower.
+
+839
+00:44:05,240 --> 00:44:07,000
+So obviously it's gonna be slower.
+
+840
+00:44:08,240 --> 00:44:09,720
+But what it allows you to do,
+
+841
+00:44:09,720 --> 00:44:11,800
+especially in like machine learning or other things
+
+842
+00:44:11,800 --> 00:44:14,680
+is where you have those giant kernels or images
+
+843
+00:44:14,680 --> 00:44:17,480
+that you can't copy onto the GPU,
+
+844
+00:44:17,480 --> 00:44:22,480
+it still allows you to use your host as a memory bank, okay?
+
+845
+00:44:25,800 --> 00:44:30,600
+So there isn't, unless,
+
+846
+00:44:30,600 --> 00:44:32,200
+except for out-of-port situations,
+
+847
+00:44:32,200 --> 00:44:35,000
+if you're not using very large images
+
+848
+00:44:35,000 --> 00:44:37,120
+or matrices or other things,
+
+849
+00:44:37,120 --> 00:44:41,560
+there's no real advantage for most desktop applications.
+
+850
+00:44:45,080 --> 00:44:46,760
+But I said desktop applications.
+
+851
+00:44:46,760 --> 00:44:48,160
+What about system on a chip?
+
+852
+00:44:49,440 --> 00:44:50,800
+What do you notice in this?
+
+853
+00:44:52,480 --> 00:44:55,880
+This is a conceptual architecture diagram
+
+854
+00:44:55,880 --> 00:44:59,640
+of a Tegra processor.
+
+855
+00:44:59,640 --> 00:45:01,000
+What do you notice in this?
+
+856
+00:45:09,800 --> 00:45:12,640
+Okay, just read out what you're seeing, okay?
+
+857
+00:45:12,640 --> 00:45:14,760
+And then tell me what I'm looking for.
+
+858
+00:45:17,440 --> 00:45:20,520
+So there's obviously a big CPU here,
+
+859
+00:45:20,520 --> 00:45:22,720
+an ARM CPU and a big GPU, right?
+
+860
+00:45:22,720 --> 00:45:25,840
+Or big is relative to the system on a chip size.
+
+861
+00:45:25,840 --> 00:45:26,880
+What else do you see?
+
+862
+00:45:32,040 --> 00:45:34,360
+A bunch of specialized processors, absolutely.
+
+863
+00:45:35,600 --> 00:45:37,080
+What do you see in this image?
+
+864
+00:45:39,480 --> 00:45:40,840
+This is a Tegra K1.
+
+865
+00:45:41,400 --> 00:45:42,240
+Okay.
+
+866
+00:45:46,000 --> 00:45:47,400
+What do you see in this image
+
+867
+00:45:47,400 --> 00:45:49,640
+that you are not seeing elsewhere?
+
+868
+00:45:51,240 --> 00:45:53,280
+Or what are you not seeing in this image
+
+869
+00:45:53,280 --> 00:45:55,000
+that you may have seen elsewhere?
+
+870
+00:46:05,520 --> 00:46:08,200
+I'm not sure if this is working.
+
+871
+00:46:11,840 --> 00:46:14,800
+GPU side of the thing, right?
+
+872
+00:46:14,800 --> 00:46:17,520
+So what are we looking for here?
+
+873
+00:46:18,600 --> 00:46:22,280
+Is it the GPU and the CPU are sharing memory?
+
+874
+00:46:25,760 --> 00:46:27,000
+You're sharing memory?
+
+875
+00:46:27,000 --> 00:46:27,840
+Thank you.
+
+876
+00:46:27,840 --> 00:46:28,680
+Yeah.
+
+877
+00:46:28,680 --> 00:46:29,680
+If I'm looking at this diagram,
+
+878
+00:46:29,680 --> 00:46:34,280
+do you think they're both using the same DDR7?
+
+879
+00:46:34,280 --> 00:46:35,200
+This?
+
+880
+00:46:35,200 --> 00:46:36,480
+Okay, now tell me this.
+
+881
+00:46:37,480 --> 00:46:41,480
+Can you tell me what the same thing in this image?
+
+882
+00:46:49,760 --> 00:46:51,360
+The DDR4 here is the memory.
+
+883
+00:46:51,360 --> 00:46:53,120
+So you're exactly right.
+
+884
+00:46:54,480 --> 00:46:55,920
+On system on the chip,
+
+885
+00:46:57,640 --> 00:46:58,840
+there's only one memory.
+
+886
+00:47:00,600 --> 00:47:01,440
+Okay.
+
+887
+00:47:01,440 --> 00:47:03,360
+Everything that we've discussed so far
+
+888
+00:47:03,360 --> 00:47:05,080
+for the past many weeks,
+
+889
+00:47:06,080 --> 00:47:09,880
+has been the full-side memory and a device-side memory,
+
+890
+00:47:09,880 --> 00:47:12,600
+and you have to do memcpy between the two, right?
+
+891
+00:47:13,680 --> 00:47:17,560
+But what happens on the system on a chip
+
+892
+00:47:17,560 --> 00:47:20,080
+where you literally have the same physical memory?
+
+893
+00:47:22,680 --> 00:47:24,040
+CUDA programs will still work.
+
+894
+00:47:24,040 --> 00:47:25,920
+If you take your performance lab
+
+895
+00:47:25,920 --> 00:47:27,120
+or your ray tracer or something
+
+896
+00:47:27,120 --> 00:47:31,480
+and put it on a Tegra GPU, it will still work.
+
+897
+00:47:31,480 --> 00:47:34,240
+It will do your CUDA mallocs and stuff
+
+898
+00:47:34,240 --> 00:47:36,040
+and it will still work.
+
+899
+00:47:36,040 --> 00:47:38,480
+But here's where you can take advantage, okay?
+
+900
+00:47:39,920 --> 00:47:44,360
+So because they have physically unified memory,
+
+901
+00:47:45,400 --> 00:47:49,240
+that means using our standard pipeline
+
+902
+00:47:49,240 --> 00:47:52,680
+where we malloc host, malloc device,
+
+903
+00:47:52,680 --> 00:47:54,840
+CUDA memcpy host to device,
+
+904
+00:47:54,840 --> 00:47:57,960
+we are actually creating two copies of the physical memory.
+
+905
+00:47:57,960 --> 00:47:58,800
+Okay?
+
+906
+00:47:58,800 --> 00:48:00,600
+This is our standard pipeline to the right, right?
+
+907
+00:48:00,640 --> 00:48:04,520
+Where we initialize and host the device,
+
+908
+00:48:04,520 --> 00:48:06,480
+copy memory to device and stuff.
+
+909
+00:48:07,480 --> 00:48:11,520
+That's creating two copies on the same memory.
+
+910
+00:48:11,520 --> 00:48:12,360
+Okay?
+
+911
+00:48:13,680 --> 00:48:17,120
+That's where zero copy comes into its element,
+
+912
+00:48:17,120 --> 00:48:22,120
+where because it has literally the same physical memory,
+
+913
+00:48:23,000 --> 00:48:24,680
+you can use the same physical memory
+
+914
+00:48:24,680 --> 00:48:26,080
+for both host and device.
+
+915
+00:48:26,080 --> 00:48:28,360
+Now you only have one copy.
+
+916
+00:48:28,360 --> 00:48:30,200
+And there's no PCIe there either.
+
+917
+00:48:30,800 --> 00:48:31,640
+It's all system on a chip.
+
+918
+00:48:31,640 --> 00:48:33,360
+You have your memory, your GPU
+
+919
+00:48:33,360 --> 00:48:36,480
+and your CPU on the same hardware.
+
+920
+00:48:36,480 --> 00:48:39,520
+So you can use pin memory for this
+
+921
+00:48:39,520 --> 00:48:40,920
+and there's no unified memory.
+
+922
+00:48:40,920 --> 00:48:44,440
+There's no, you know, waving your magic wand
+
+923
+00:48:44,440 --> 00:48:46,440
+creating unified memory.
+
+924
+00:48:46,440 --> 00:48:49,800
+There's no memcpy and literally there's no gimmicks.
+
+925
+00:48:49,800 --> 00:48:51,560
+You are literally operating on the same memory
+
+926
+00:48:51,560 --> 00:48:52,520
+at the same time.
+
+927
+00:48:54,040 --> 00:48:56,720
+So here's an example of how it works.
+
+928
+00:48:56,720 --> 00:48:59,000
+The first thing you have to do is set the device flag
+
+929
+00:48:59,000 --> 00:49:01,520
+that allows you to map host and device.
+
+930
+00:49:01,520 --> 00:49:05,280
+So that's done by CUDA set device flags,
+
+931
+00:49:05,280 --> 00:49:07,280
+CUDA device map host.
+
+932
+00:49:07,280 --> 00:49:08,120
+Okay?
+
+933
+00:49:08,120 --> 00:49:10,520
+That's just a state flag that you'll set.
+
+934
+00:49:12,160 --> 00:49:13,640
+On the host side,
+
+935
+00:49:13,640 --> 00:49:18,200
+you're going to create two pointers in our example.
+
+936
+00:49:18,200 --> 00:49:20,720
+And then you're going to do CUDA host add.
+
+937
+00:49:20,720 --> 00:49:22,000
+Okay?
+
+938
+00:49:22,000 --> 00:49:24,480
+And you're going to do this same thing
+
+939
+00:49:24,480 --> 00:49:26,280
+that we've done before,
+
+940
+00:49:26,280 --> 00:49:28,720
+where you give the pointer the size
+
+941
+00:49:29,400 --> 00:49:30,560
+and then you have to pass this flag,
+
+942
+00:49:30,560 --> 00:49:32,320
+CUDA host add map.
+
+943
+00:49:33,240 --> 00:49:34,080
+Okay?
+
+944
+00:49:34,080 --> 00:49:36,960
+That tells that the memory should be mapped
+
+945
+00:49:36,960 --> 00:49:39,560
+on the GPU and the CPU.
+
+946
+00:49:39,560 --> 00:49:40,400
+Okay?
+
+947
+00:49:42,120 --> 00:49:44,080
+Everybody follow through, any questions?
+
+948
+00:49:46,440 --> 00:49:47,360
+Okay.
+
+949
+00:49:47,360 --> 00:49:49,080
+So from there,
+
+950
+00:49:49,080 --> 00:49:52,240
+what we are going to do is create two device pointers.
+
+951
+00:49:53,040 --> 00:49:55,280
+I have a question.
+
+952
+00:49:55,280 --> 00:49:56,880
+It's a dumb question to play.
+
+953
+00:49:57,800 --> 00:50:02,120
+Would system on a chip be more like a game system
+
+954
+00:50:02,120 --> 00:50:03,960
+where everything is connected?
+
+955
+00:50:03,960 --> 00:50:04,800
+Or?
+
+956
+00:50:04,800 --> 00:50:05,640
+It could be.
+
+957
+00:50:05,640 --> 00:50:07,080
+But even like, for example,
+
+958
+00:50:07,080 --> 00:50:11,320
+an Xbox or a PS5 have different system,
+
+959
+00:50:11,320 --> 00:50:13,400
+different host memory and device memory.
+
+960
+00:50:13,400 --> 00:50:15,880
+This would be more like your phone,
+
+961
+00:50:15,880 --> 00:50:18,240
+a Nintendo Switch has a Tegra chip in it.
+
+962
+00:50:19,360 --> 00:50:21,080
+Your autonomous cars may have.
+
+963
+00:50:22,720 --> 00:50:24,120
+M1 Macs, yeah, great example.
+
+964
+00:50:24,120 --> 00:50:25,800
+M1 Macs have unified memory,
+
+965
+00:50:25,800 --> 00:50:27,120
+although they don't support CUDA,
+
+966
+00:50:27,120 --> 00:50:28,440
+but they have unified memory.
+
+967
+00:50:28,440 --> 00:50:29,280
+Yes.
+
+968
+00:50:32,240 --> 00:50:33,360
+So, okay.
+
+969
+00:50:33,360 --> 00:50:35,200
+So we do the host,
+
+970
+00:50:35,200 --> 00:50:38,560
+we do CUDA host add map to initialize all the maps.
+
+971
+00:50:39,680 --> 00:50:41,640
+Now we need to get the device point.
+
+972
+00:50:43,440 --> 00:50:45,320
+So from the device point that we do,
+
+973
+00:50:45,320 --> 00:50:48,920
+we create the variables to store those pointers.
+
+974
+00:50:48,920 --> 00:50:51,760
+And then we don't do CUDA malloc or anything.
+
+975
+00:50:52,280 --> 00:50:54,840
+We do CUDA host get device pointer.
+
+976
+00:50:54,840 --> 00:50:56,080
+See the function.
+
+977
+00:50:56,080 --> 00:50:58,800
+Host, get device pointer.
+
+978
+00:50:58,800 --> 00:51:00,760
+And what we're doing there is
+
+979
+00:51:00,760 --> 00:51:03,680
+we want to write to the device pointer.
+
+980
+00:51:03,680 --> 00:51:04,800
+Our host pointer is in,
+
+981
+00:51:04,800 --> 00:51:08,000
+and then the zero is just a flag or an offset.
+
+982
+00:51:08,000 --> 00:51:09,360
+If you want to do it from the start,
+
+983
+00:51:09,360 --> 00:51:10,200
+you can do it from the start,
+
+984
+00:51:10,200 --> 00:51:13,080
+otherwise you can get like an offset pointer as well.
+
+985
+00:51:14,040 --> 00:51:16,400
+What this does is there's no allocation
+
+986
+00:51:16,400 --> 00:51:18,120
+or anything happening on the GPU
+
+987
+00:51:19,000 --> 00:51:22,480
+or access on the same system on the chip.
+
+988
+00:51:22,480 --> 00:51:24,720
+This is essentially saying,
+
+989
+00:51:24,720 --> 00:51:25,960
+this is my host pointer,
+
+990
+00:51:25,960 --> 00:51:30,960
+get a CUDA readable device pointer for the device.
+
+991
+00:51:31,360 --> 00:51:32,200
+Okay.
+
+992
+00:51:33,400 --> 00:51:37,600
+Here's the reason you have to think a little bit about this.
+
+993
+00:51:37,600 --> 00:51:38,440
+All of you may be wondering,
+
+994
+00:51:38,440 --> 00:51:40,360
+hey, if it's a system on the chip,
+
+995
+00:51:40,360 --> 00:51:42,720
+why can't I use my host pointer on the device?
+
+996
+00:51:43,760 --> 00:51:45,600
+Most of the time,
+
+997
+00:51:45,600 --> 00:51:48,240
+this function will actually put the same host pointer
+
+998
+00:51:48,240 --> 00:51:50,000
+in the device pointer, most of them,
+
+999
+00:51:50,000 --> 00:51:51,560
+but it's not guaranteed.
+
+1000
+00:51:51,560 --> 00:51:54,120
+That's why you need to run this function.
+
+1001
+00:51:54,120 --> 00:51:57,200
+There may be times where this could be mapped
+
+1002
+00:51:57,200 --> 00:51:58,920
+into a different pointer address.
+
+1003
+00:51:58,920 --> 00:52:00,280
+And so you just have to make sure
+
+1004
+00:52:00,280 --> 00:52:03,560
+that you are always running this function.
+
+1005
+00:52:03,560 --> 00:52:07,240
+And then you can use the device pointer in the terminal,
+
+1006
+00:52:07,240 --> 00:52:10,880
+but there's no need to copy the out back, right?
+
+1007
+00:52:10,880 --> 00:52:12,920
+There's no CUDA mem copy now.
+
+1008
+00:52:12,920 --> 00:52:15,200
+If you just use H out,
+
+1009
+00:52:15,800 --> 00:52:18,560
+you're getting the memory from the kernel anyway.
+
+1010
+00:52:18,560 --> 00:52:20,840
+So unlike CUDA unified memory,
+
+1011
+00:52:20,840 --> 00:52:23,720
+you would have to have to do a CUDA device synchronizer.
+
+1012
+00:52:23,720 --> 00:52:25,200
+Don't have to do that.
+
+1013
+00:52:25,200 --> 00:52:27,760
+You're getting updated memory by default
+
+1014
+00:52:27,760 --> 00:52:30,840
+because it's all in the same physical address.
+
+1015
+00:52:32,400 --> 00:52:33,240
+And then to free it,
+
+1016
+00:52:33,240 --> 00:52:35,000
+you don't have to free device arrays
+
+1017
+00:52:35,000 --> 00:52:38,240
+because we haven't actually allocated any device arrays.
+
+1018
+00:52:38,240 --> 00:52:39,920
+We just need to free the host.
+
+1019
+00:52:40,840 --> 00:52:43,200
+So that's the only thing you have to do.
+
+1020
+00:52:43,200 --> 00:52:47,640
+So this makes a real difference.
+
+1021
+00:52:47,640 --> 00:52:49,400
+So your kernels will remain the same
+
+1022
+00:52:49,400 --> 00:52:51,560
+because you're still using device pointers.
+
+1023
+00:52:52,880 --> 00:52:55,720
+It changes how you are mapping host and device memory
+
+1024
+00:52:55,720 --> 00:52:56,680
+like you've seen.
+
+1025
+00:52:57,760 --> 00:53:00,880
+No changes how any of the pointers are used
+
+1026
+00:53:00,880 --> 00:53:02,920
+and no overhead of mem copy.
+
+1027
+00:53:02,920 --> 00:53:04,800
+You're not duplicating, you're not synchronizing,
+
+1028
+00:53:04,800 --> 00:53:06,560
+you're not doing any mem copies.
+
+1029
+00:53:07,480 --> 00:53:10,920
+And an example to the right is for transpose,
+
+1030
+00:53:10,920 --> 00:53:15,920
+like we've done in the performance lab.
+
+1031
+00:53:16,040 --> 00:53:17,120
+The standard pipeline,
+
+1032
+00:53:17,120 --> 00:53:19,120
+which is having two copies of memories
+
+1033
+00:53:19,120 --> 00:53:21,040
+and doing CUDA mem copy,
+
+1034
+00:53:21,040 --> 00:53:23,800
+gives transpose bandwidth of three.
+
+1035
+00:53:23,800 --> 00:53:28,240
+And this is comparing to 6.6 on a Teger-K1, okay?
+
+1036
+00:53:28,240 --> 00:53:29,680
+So you get half the bandwidth
+
+1037
+00:53:29,680 --> 00:53:30,880
+and that's pretty obvious, right?
+
+1038
+00:53:30,880 --> 00:53:33,040
+You're doing the mem copies.
+
+1039
+00:53:33,040 --> 00:53:36,000
+But in a zero-copy pipeline, you get 5.8,
+
+1040
+00:53:37,360 --> 00:53:39,280
+which is pretty close to the 6.6.
+
+1041
+00:53:40,280 --> 00:53:44,160
+So that's where you see the performance benefits.
+
+1042
+00:53:44,160 --> 00:53:47,160
+If you're doing any system-on-a-chip kind of things,
+
+1043
+00:53:47,160 --> 00:53:49,040
+if you're using the Tegra chips,
+
+1044
+00:53:49,040 --> 00:53:52,320
+especially in your final project, use zero-copy.
+
+1045
+00:53:52,320 --> 00:53:54,760
+It's gonna give you a huge performance advantage
+
+1046
+00:53:54,760 --> 00:53:56,680
+over standard things.
+
+1047
+00:53:56,680 --> 00:53:57,960
+But also make sure that
+
+1048
+00:53:57,960 --> 00:53:59,880
+if you're writing a portable program
+
+1049
+00:53:59,880 --> 00:54:02,640
+that could be doing a system-on-a-chip
+
+1050
+00:54:02,640 --> 00:54:03,840
+or could be doing desktop,
+
+1051
+00:54:03,840 --> 00:54:04,840
+that you're checking for it
+
+1052
+00:54:04,840 --> 00:54:06,720
+and using the correct pipeline.
+
+1053
+00:54:06,720 --> 00:54:09,680
+You don't wanna be using zero-copy inadvertently
+
+1054
+00:54:09,680 --> 00:54:11,520
+on a desktop application.
+
+1055
+00:54:11,520 --> 00:54:14,680
+You're just gonna kill your performance, okay?
+
+1056
+00:54:16,000 --> 00:54:17,200
+Any questions so far?
+
+1057
+00:54:24,080 --> 00:54:26,600
+I mean, it's probably depending on the application, right?
+
+1058
+00:54:26,600 --> 00:54:28,320
+If you have a mobile phone,
+
+1059
+00:54:28,320 --> 00:54:29,920
+you can't put your desktop chip on it.
+
+1060
+00:54:29,920 --> 00:54:32,240
+So you probably have a smaller chip
+
+1061
+00:54:32,240 --> 00:54:36,560
+that's consuming less power, less resources,
+
+1062
+00:54:37,400 --> 00:54:38,840
+but it's all system-on-a-chip, so it's much more efficient.
+
+1063
+00:54:38,840 --> 00:54:41,280
+So it's what kind of application you're building.
+
+1064
+00:54:42,400 --> 00:54:44,840
+An example of it could be a drone.
+
+1065
+00:54:44,840 --> 00:54:47,120
+Your drone is flying, it's doing image processing,
+
+1066
+00:54:47,120 --> 00:54:49,080
+it's doing collision avoidance.
+
+1067
+00:54:49,080 --> 00:54:51,080
+All of those things are actually happening on the GPU.
+
+1068
+00:54:51,080 --> 00:54:54,480
+All your GPU builders, DJI, Skydio, others,
+
+1069
+00:54:54,480 --> 00:54:57,680
+they all take advantage of Tegra-like chips
+
+1070
+00:54:57,680 --> 00:55:01,200
+that are doing a lot of machine learning on the fly.
+
+1071
+00:55:01,200 --> 00:55:05,800
+And if you have this kind of zero-copy,
+
+1072
+00:55:05,800 --> 00:55:08,520
+all of the images that are coming from the camera
+
+1073
+00:55:08,520 --> 00:55:11,480
+are sitting on the same chip, on the same memory.
+
+1074
+00:55:11,480 --> 00:55:13,560
+And now you can have different applications
+
+1075
+00:55:13,560 --> 00:55:16,200
+on the CPU side and the GPU side,
+
+1076
+00:55:16,200 --> 00:55:17,560
+use the same physical memory
+
+1077
+00:55:17,560 --> 00:55:19,720
+without the overhead of copies.
+
+1078
+00:55:19,720 --> 00:55:21,720
+So you get a really good performance improvement
+
+1079
+00:55:21,720 --> 00:55:22,800
+because of that,
+
+1080
+00:55:22,800 --> 00:55:25,400
+which can hide some of the limited performance
+
+1081
+00:55:25,400 --> 00:55:27,040
+it has because it runs off a battery.
+
+1082
+00:55:27,040 --> 00:55:29,840
+It's not running off an electrical grid.
+
+1083
+00:55:29,840 --> 00:55:32,440
+So that's where you have to differentiate
+
+1084
+00:55:32,440 --> 00:55:36,560
+between mobile devices versus desktop applications.
+
+1085
+00:55:40,200 --> 00:55:41,840
+What other questions do you have?
+
+1086
+00:55:49,080 --> 00:55:50,440
+So let's see streams.
+
+1087
+00:55:50,440 --> 00:55:52,200
+Streams and concurrency, okay?
+
+1088
+00:55:52,200 --> 00:55:56,200
+This is probably the most important performance benefit
+
+1089
+00:55:56,200 --> 00:55:58,360
+you'll get from advanced CUDA topics.
+
+1090
+00:55:58,880 --> 00:56:01,040
+Okay.
+
+1091
+00:56:01,040 --> 00:56:05,320
+So once again, a reminder for our standard CUDA pipeline.
+
+1092
+00:56:06,880 --> 00:56:09,960
+The standard pipeline is your input data comes from the CPU
+
+1093
+00:56:09,960 --> 00:56:13,080
+and goes to the GPU, okay?
+
+1094
+00:56:13,080 --> 00:56:14,240
+You launch a kernel,
+
+1095
+00:56:15,120 --> 00:56:17,720
+you copy the results back from the GPU to the CPU
+
+1096
+00:56:17,720 --> 00:56:20,680
+so that you can do things on the CPU.
+
+1097
+00:56:20,680 --> 00:56:24,640
+And then you repeat this as many times as you need to, okay?
+
+1098
+00:56:25,640 --> 00:56:30,920
+So concurrency for CUDA
+
+1099
+00:56:30,920 --> 00:56:33,960
+is essentially designed for parallelism, right?
+
+1100
+00:56:33,960 --> 00:56:37,840
+It's not just designed for parallelism on the GPU
+
+1101
+00:56:37,840 --> 00:56:40,040
+and within the CUDA threads.
+
+1102
+00:56:40,040 --> 00:56:43,840
+It's designed so that you can have parallelism
+
+1103
+00:56:43,840 --> 00:56:45,040
+in more than one way.
+
+1104
+00:56:46,480 --> 00:56:48,200
+So why should we limit ourselves
+
+1105
+00:56:48,200 --> 00:56:49,640
+to one workflow pipeline,
+
+1106
+00:56:49,640 --> 00:56:53,360
+which is do CPU, do GPU, copy to CPU,
+
+1107
+00:56:53,360 --> 00:56:56,600
+do CPU, then copy to GPU again and stuff like that.
+
+1108
+00:56:56,600 --> 00:56:59,200
+We can do, we want to do more, right?
+
+1109
+00:56:59,200 --> 00:57:01,200
+We want to do more kernel launches.
+
+1110
+00:57:01,200 --> 00:57:04,720
+We want to do multiple mem copies.
+
+1111
+00:57:04,720 --> 00:57:08,080
+We want to do multiple mem copies
+
+1112
+00:57:08,080 --> 00:57:11,760
+from host to device of 64 KB or less.
+
+1113
+00:57:12,720 --> 00:57:14,640
+You want to be able to call different functions
+
+1114
+00:57:14,640 --> 00:57:16,120
+at different times.
+
+1115
+00:57:16,120 --> 00:57:20,440
+So now the need for concurrency becomes important
+
+1116
+00:57:20,440 --> 00:57:24,440
+where you can do concurrent operations from time to time.
+
+1117
+00:57:24,440 --> 00:57:27,520
+And most modern GPUs, except for some of the initial ones,
+
+1118
+00:57:27,520 --> 00:57:28,680
+do support concurrency.
+
+1119
+00:57:28,680 --> 00:57:30,640
+And we'll talk a lot about that today.
+
+1120
+00:57:32,520 --> 00:57:37,080
+So in CUDA, every operation that you do,
+
+1121
+00:57:37,080 --> 00:57:39,640
+whether that's management, mem copy, mem set,
+
+1122
+00:57:40,640 --> 00:57:45,160
+your kernels, all are executed in an order.
+
+1123
+00:57:45,160 --> 00:57:47,240
+And streams are a way for you
+
+1124
+00:57:47,240 --> 00:57:50,120
+to define different orders, essentially,
+
+1125
+00:57:50,800 --> 00:57:51,880
+different sequences.
+
+1126
+00:57:51,880 --> 00:57:54,800
+So in this example that I've shown here,
+
+1127
+00:57:54,800 --> 00:57:58,200
+you have stream A that has command A1, A2, A3,
+
+1128
+00:57:58,200 --> 00:58:01,520
+and you have stream B, command B1, B2, B3, okay?
+
+1129
+00:58:03,080 --> 00:58:05,200
+What do you think is the right order here?
+
+1130
+00:58:06,600 --> 00:58:09,560
+We have two streams that execute A1, A2, A3,
+
+1131
+00:58:09,560 --> 00:58:13,000
+and the second one executes B1, B2, B3.
+
+1132
+00:58:13,000 --> 00:58:16,800
+What do you think are the correct order of execution
+
+1133
+00:58:16,800 --> 00:58:18,080
+in this?
+
+1134
+00:58:18,080 --> 00:58:19,800
+Let's start with the first one on the left.
+
+1135
+00:58:20,480 --> 00:58:22,520
+Is this one the right order of execution?
+
+1136
+00:58:27,120 --> 00:58:29,240
+Yes, no, could be, could not be.
+
+1137
+00:58:32,520 --> 00:58:33,800
+Maybe not, why maybe not?
+
+1138
+00:58:36,640 --> 00:58:37,480
+It looks very serious,
+
+1139
+00:58:37,480 --> 00:58:40,920
+but could it be a valid order of execution?
+
+1140
+00:58:40,920 --> 00:58:42,080
+That's what I'm asking.
+
+1141
+00:58:43,440 --> 00:58:45,400
+Maybe, okay, what about the second one?
+
+1142
+00:58:50,000 --> 00:58:51,120
+Okay, the third one.
+
+1143
+00:58:53,840 --> 00:58:55,080
+What about the third one?
+
+1144
+00:58:56,920 --> 00:58:58,680
+Maybe, okay.
+
+1145
+00:58:58,680 --> 00:59:00,160
+I'm just asking, is it valid?
+
+1146
+00:59:00,160 --> 00:59:02,440
+So I'm not asking what the probability is.
+
+1147
+00:59:02,440 --> 00:59:04,640
+Is it a valid order of execution or not?
+
+1148
+00:59:04,640 --> 00:59:05,840
+What about the last one?
+
+1149
+00:59:07,640 --> 00:59:08,480
+It is?
+
+1150
+00:59:11,480 --> 00:59:12,320
+Maybe.
+
+1151
+00:59:14,760 --> 00:59:15,600
+Yeah, exactly.
+
+1152
+00:59:15,600 --> 00:59:18,200
+So these three are all valid,
+
+1153
+00:59:18,200 --> 00:59:19,840
+but within this,
+
+1154
+00:59:19,840 --> 00:59:22,560
+you're seeing a reorder of A3 before A2
+
+1155
+00:59:22,560 --> 00:59:23,880
+and B3 before B2.
+
+1156
+00:59:23,880 --> 00:59:25,000
+That is not allowed.
+
+1157
+00:59:25,000 --> 00:59:27,320
+You can't reorder within a stream,
+
+1158
+00:59:27,320 --> 00:59:30,360
+but you can reorder different streams, okay?
+
+1159
+00:59:30,360 --> 00:59:33,320
+So that order of execution will have to be maintained.
+
+1160
+00:59:34,360 --> 00:59:35,440
+What about now?
+
+1161
+00:59:35,440 --> 00:59:37,680
+Let's say you have two streams on your GPU,
+
+1162
+00:59:37,680 --> 00:59:39,480
+which one of these is valid?
+
+1163
+00:59:44,680 --> 00:59:46,160
+Both of them are valid,
+
+1164
+00:59:46,160 --> 00:59:48,200
+because as long as you're maintaining
+
+1165
+00:59:48,200 --> 00:59:52,160
+the sequence of our execution within your stream,
+
+1166
+00:59:52,160 --> 00:59:53,000
+you're good.
+
+1167
+00:59:53,000 --> 00:59:56,120
+You can jump them around, no problem, okay?
+
+1168
+00:59:57,480 --> 01:00:00,560
+So all CUDA operations actually have a stream.
+
+1169
+01:00:00,560 --> 01:00:03,640
+Even though you may not have used the API so far,
+
+1170
+01:00:03,640 --> 01:00:05,280
+all CUDA operations are streamed.
+
+1171
+01:00:06,720 --> 01:00:09,840
+Both there's async host to device
+
+1172
+01:00:09,840 --> 01:00:11,360
+and device to device memcpy,
+
+1173
+01:00:11,360 --> 01:00:14,800
+as well as kernel launches, they're all streamed.
+
+1174
+01:00:14,800 --> 01:00:17,360
+The condition on the memcpy is that
+
+1175
+01:00:17,360 --> 01:00:20,800
+the async memcpy will always have to be pinned,
+
+1176
+01:00:20,800 --> 01:00:22,520
+because you can't do async
+
+1177
+01:00:22,520 --> 01:00:24,680
+and then have pageable memory being copied
+
+1178
+01:00:24,680 --> 01:00:26,360
+into pin memory and such.
+
+1179
+01:00:26,360 --> 01:00:29,800
+So async operations will always require pin memory.
+
+1180
+01:00:31,920 --> 01:00:36,000
+So the stream that all of you have been using so far
+
+1181
+01:00:36,000 --> 01:00:37,640
+is called the default stream.
+
+1182
+01:00:38,640 --> 01:00:43,080
+Also stream zero for most of the time, okay?
+
+1183
+01:00:43,080 --> 01:00:47,080
+So if you don't specify any stream,
+
+1184
+01:00:47,080 --> 01:00:49,720
+all your operations go into the default stream.
+
+1185
+01:00:49,720 --> 01:00:51,200
+And the default stream is special
+
+1186
+01:00:51,200 --> 01:00:54,720
+because it's always synchronous to the GPU, okay?
+
+1187
+01:00:54,720 --> 01:00:57,000
+All the operations are happening sequentially
+
+1188
+01:00:57,000 --> 01:00:58,880
+and synchronous in the GPU.
+
+1189
+01:00:58,880 --> 01:01:00,680
+You may not, you haven't seen it,
+
+1190
+01:01:00,680 --> 01:01:02,560
+that's why you won't notice it,
+
+1191
+01:01:02,560 --> 01:01:05,280
+because synchronous is like the safe way of operating.
+
+1192
+01:01:06,200 --> 01:01:09,400
+So essentially, if an operation is launched on the GPU,
+
+1193
+01:01:10,000 --> 01:01:13,080
+operation can be a memcpy, a kernel or anything,
+
+1194
+01:01:13,080 --> 01:01:15,600
+then all previous GPU operations
+
+1195
+01:01:15,600 --> 01:01:16,920
+that you may have launched before,
+
+1196
+01:01:16,920 --> 01:01:19,840
+other kernels, other memcpys will have to finish,
+
+1197
+01:01:19,840 --> 01:01:22,000
+only then can you start the new operation.
+
+1198
+01:01:22,920 --> 01:01:26,560
+And you can sync all of those operations
+
+1199
+01:01:26,560 --> 01:01:28,800
+using CUDA device synchronize, okay?
+
+1200
+01:01:31,640 --> 01:01:33,800
+In CUDA 7, just as a note,
+
+1201
+01:01:33,800 --> 01:01:38,360
+you can have different default streams for different threads.
+
+1202
+01:01:38,360 --> 01:01:40,720
+This wasn't possible before that, okay?
+
+1203
+01:01:42,080 --> 01:01:43,200
+All right, so let's take a look
+
+1204
+01:01:43,200 --> 01:01:46,080
+at how we create, destroy, use streams, actually.
+
+1205
+01:01:47,480 --> 01:01:51,120
+So the first thing to note is this CUDA StreamT object.
+
+1206
+01:01:51,120 --> 01:01:52,680
+Like other CUDA objects,
+
+1207
+01:01:52,680 --> 01:01:56,440
+this is a struct that you can create
+
+1208
+01:01:56,440 --> 01:01:59,760
+using CUDA StreamCreate, pass the address,
+
+1209
+01:01:59,760 --> 01:02:01,200
+and you'll get the result back.
+
+1210
+01:02:01,200 --> 01:02:02,960
+Result is an error,
+
+1211
+01:02:02,960 --> 01:02:06,720
+but the stream ID is actually stored in stream one here, okay?
+
+1212
+01:02:07,720 --> 01:02:09,680
+To destroy the stream, you do the same thing,
+
+1213
+01:02:09,680 --> 01:02:13,280
+except you call CUDAStreamDestroy, all right?
+
+1214
+01:02:14,440 --> 01:02:16,720
+Now let's take a look at the memcpy example.
+
+1215
+01:02:17,920 --> 01:02:21,600
+So the function here is called a CUDA memcpy async.
+
+1216
+01:02:21,600 --> 01:02:23,600
+Anytime you do an asynchronous operation,
+
+1217
+01:02:23,600 --> 01:02:27,600
+you'll see the suffix here, that is async, okay?
+
+1218
+01:02:27,600 --> 01:02:30,960
+And it needs pin memory as a reminder.
+
+1219
+01:02:30,960 --> 01:02:32,840
+So what you're gonna do now
+
+1220
+01:02:32,840 --> 01:02:36,120
+is do everything that you were doing same before,
+
+1221
+01:02:36,520 --> 01:02:40,080
+so your destination, your source, your bind signs,
+
+1222
+01:02:40,080 --> 01:02:42,040
+and which direction you're copying it in,
+
+1223
+01:02:42,040 --> 01:02:44,120
+host to device, device to host,
+
+1224
+01:02:44,120 --> 01:02:48,160
+but now you add one more operator,
+
+1225
+01:02:48,160 --> 01:02:51,800
+one more parameter, which is your stream ID, okay?
+
+1226
+01:02:51,800 --> 01:02:54,320
+Because you haven't been using it so far,
+
+1227
+01:02:54,320 --> 01:02:56,640
+it's always the default stream, stream zero,
+
+1228
+01:02:56,640 --> 01:02:58,120
+that goes in there.
+
+1229
+01:02:58,120 --> 01:03:00,440
+But if you are trying to create streams,
+
+1230
+01:03:00,440 --> 01:03:03,600
+you're gonna put a stream ID in there, okay?
+
+1231
+01:03:07,120 --> 01:03:10,320
+If, oh, one caveat here,
+
+1232
+01:03:10,320 --> 01:03:13,240
+if by mistake you use pageable memory in this,
+
+1233
+01:03:14,360 --> 01:03:17,240
+it will just become CUDA memcpy synchronous,
+
+1234
+01:03:17,240 --> 01:03:18,920
+which is the default memcpy.
+
+1235
+01:03:19,880 --> 01:03:23,680
+It'll just call it in the backend as a regular memcpy.
+
+1236
+01:03:25,800 --> 01:03:30,800
+For kernels, again, all the kernels you've written so far
+
+1237
+01:03:30,800 --> 01:03:33,840
+get launched on the default stream zero.
+
+1238
+01:03:34,840 --> 01:03:36,880
+Kernels are always asynchronous,
+
+1239
+01:03:36,880 --> 01:03:39,280
+so there's no async suffix
+
+1240
+01:03:39,280 --> 01:03:41,320
+that you need to add to your kernel.
+
+1241
+01:03:41,320 --> 01:03:45,480
+But what you need to do is now add a fourth parameter,
+
+1242
+01:03:45,480 --> 01:03:46,480
+we need a triple tag.
+
+1243
+01:03:46,480 --> 01:03:51,480
+So we started off 565 with just block and thread,
+
+1244
+01:03:52,120 --> 01:03:54,040
+then we added shared memory for block
+
+1245
+01:03:54,040 --> 01:03:58,600
+when we were looking at shared memory and performance lab.
+
+1246
+01:03:58,600 --> 01:04:02,000
+Now we are adding a fourth parameter, which is stream.
+
+1247
+01:04:02,000 --> 01:04:04,520
+So if you don't pass stream, it's on stream zero.
+
+1248
+01:04:05,480 --> 01:04:07,080
+If you pass the stream,
+
+1249
+01:04:07,080 --> 01:04:10,440
+then it will run asynchronously to other kernel.
+
+1250
+01:04:10,440 --> 01:04:14,000
+If you don't have shared memory, just put zero in there, okay?
+
+1251
+01:04:15,280 --> 01:04:16,560
+Any questions on this?
+
+1252
+01:04:19,680 --> 01:04:21,720
+We'll see in a little bit
+
+1253
+01:04:21,720 --> 01:04:23,840
+about how these actually become parallel,
+
+1254
+01:04:23,840 --> 01:04:26,400
+but just wanna make sure that all of you understand
+
+1255
+01:04:26,400 --> 01:04:30,240
+how streams get used in your operations.
+
+1256
+01:04:33,000 --> 01:04:33,840
+Okay.
+
+1257
+01:04:37,000 --> 01:04:37,840
+All right.
+
+1258
+01:04:37,840 --> 01:04:40,520
+So let's take a look at an example.
+
+1259
+01:04:40,520 --> 01:04:42,280
+So let's say we have two streams,
+
+1260
+01:04:42,280 --> 01:04:43,520
+which I'm gonna create like this.
+
+1261
+01:04:43,520 --> 01:04:46,880
+So I'm gonna create an array of streams
+
+1262
+01:04:46,880 --> 01:04:51,880
+and then put the stream IDs within those, okay?
+
+1263
+01:04:53,200 --> 01:04:56,080
+Then down here, I'm just gonna do my whole style
+
+1264
+01:04:56,080 --> 01:05:01,080
+malicose, which is as a reminder, allocating pin memory.
+
+1265
+01:05:02,440 --> 01:05:03,600
+I'm not doing new here.
+
+1266
+01:05:03,600 --> 01:05:05,520
+I'm not doing host pointer new equals something.
+
+1267
+01:05:05,520 --> 01:05:08,080
+I'm doing put a malicose, okay?
+
+1268
+01:05:14,560 --> 01:05:19,200
+And then the other thing here is allocating
+
+1269
+01:05:19,200 --> 01:05:21,520
+two times pin memory in a single call,
+
+1270
+01:05:21,520 --> 01:05:24,560
+because you don't actually need to separate it out.
+
+1271
+01:05:24,560 --> 01:05:27,040
+You can just create two pointers for hosts
+
+1272
+01:05:27,040 --> 01:05:28,760
+for two different streams.
+
+1273
+01:05:28,760 --> 01:05:30,360
+That's entirely possible.
+
+1274
+01:05:32,120 --> 01:05:34,880
+You don't need to do two put a malicose calls
+
+1275
+01:05:34,880 --> 01:05:37,440
+is essentially what I'm getting at.
+
+1276
+01:05:37,440 --> 01:05:39,120
+Okay.
+
+1277
+01:05:39,120 --> 01:05:43,040
+So here's one way to do a stream operation.
+
+1278
+01:05:43,040 --> 01:05:44,520
+And this is a very simple example.
+
+1279
+01:05:44,520 --> 01:05:46,520
+You can do this in very different ways.
+
+1280
+01:05:48,440 --> 01:05:50,600
+You're gonna call your put a malicose async
+
+1281
+01:05:50,600 --> 01:05:55,120
+pass the device and host pointers here,
+
+1282
+01:05:55,120 --> 01:05:58,960
+copy host to device and the stream parameter.
+
+1283
+01:05:58,960 --> 01:06:00,240
+Then you call your kernel,
+
+1284
+01:06:00,240 --> 01:06:01,880
+whatever the block sizes might be.
+
+1285
+01:06:01,880 --> 01:06:03,000
+We don't use shared memory.
+
+1286
+01:06:03,000 --> 01:06:06,040
+So we put zero and then you call the stream.
+
+1287
+01:06:07,240 --> 01:06:11,320
+While this kernel have non launching an async kernel,
+
+1288
+01:06:11,320 --> 01:06:12,440
+okay?
+
+1289
+01:06:12,440 --> 01:06:15,280
+This you can write CPU code here that executes
+
+1290
+01:06:15,280 --> 01:06:17,520
+while that kernel is executing.
+
+1291
+01:06:19,000 --> 01:06:19,840
+And then,
+
+1292
+01:06:21,280 --> 01:06:24,480
+then this put a memcpy async operation happens.
+
+1293
+01:06:24,480 --> 01:06:27,080
+That's copying the device to host back, okay?
+
+1294
+01:06:28,080 --> 01:06:32,600
+So what's actually happening is that,
+
+1295
+01:06:36,000 --> 01:06:37,760
+so what's actually happening here
+
+1296
+01:06:38,840 --> 01:06:41,200
+is that for these three calls,
+
+1297
+01:06:41,200 --> 01:06:45,680
+put a memcpy, kernel and put a memcpy again here.
+
+1298
+01:06:45,680 --> 01:06:48,360
+Those three operations within the stream,
+
+1299
+01:06:48,360 --> 01:06:50,640
+remember how we had A1, A2, A3?
+
+1300
+01:06:50,640 --> 01:06:54,320
+So this is A1, this is A2, this is A3.
+
+1301
+01:06:54,320 --> 01:06:55,560
+For the next iteration,
+
+1302
+01:06:55,560 --> 01:06:58,360
+because the stream of I will change,
+
+1303
+01:06:58,360 --> 01:07:02,000
+these become B1, B2, B3, okay?
+
+1304
+01:07:02,000 --> 01:07:07,000
+Now, A1 versus or in the A operations
+
+1305
+01:07:07,080 --> 01:07:09,920
+and the B operations can happen in any order.
+
+1306
+01:07:09,920 --> 01:07:14,800
+But within A, A1 has to happen before A2, before A3.
+
+1307
+01:07:14,800 --> 01:07:17,200
+So you can call your kernel,
+
+1308
+01:07:17,200 --> 01:07:20,480
+do a bunch of CPU code and come here on the host.
+
+1309
+01:07:20,480 --> 01:07:21,760
+The host can be like, okay,
+
+1310
+01:07:21,760 --> 01:07:25,120
+I need to execute a put a memcpy async.
+
+1311
+01:07:25,640 --> 01:07:28,160
+But the CUDA driver will essentially tell you,
+
+1312
+01:07:28,160 --> 01:07:30,360
+hey, no wait, my kernel is not done.
+
+1313
+01:07:30,360 --> 01:07:31,920
+You need to wait for the kernel.
+
+1314
+01:07:31,920 --> 01:07:33,800
+And then the host will wait here.
+
+1315
+01:07:33,800 --> 01:07:34,960
+So that's what happens.
+
+1316
+01:07:37,760 --> 01:07:39,880
+Okay, and then finally,
+
+1317
+01:07:39,880 --> 01:07:41,440
+after you're done with all of your stream,
+
+1318
+01:07:41,440 --> 01:07:44,240
+you should destroy the stream as well, okay?
+
+1319
+01:07:46,520 --> 01:07:51,520
+So the other thing to note is
+
+1320
+01:07:52,040 --> 01:07:54,880
+like we have CUDA device interface,
+
+1321
+01:07:55,640 --> 01:07:58,560
+CUDA device synchronize will synchronize all the streams.
+
+1322
+01:07:58,560 --> 01:08:00,040
+It will wait for all the stream,
+
+1323
+01:08:00,040 --> 01:08:04,200
+all the operations and all the streams to execute, okay?
+
+1324
+01:08:04,200 --> 01:08:06,600
+Which is like synchronize the whole GPU.
+
+1325
+01:08:07,800 --> 01:08:09,440
+However, there may be times
+
+1326
+01:08:09,440 --> 01:08:12,280
+when we only need to synchronize the stream.
+
+1327
+01:08:12,280 --> 01:08:13,480
+We may need to be like, okay,
+
+1328
+01:08:13,480 --> 01:08:16,160
+all the stream operations foster here.
+
+1329
+01:08:16,160 --> 01:08:19,120
+So for that, we use CUDA stream synchronize.
+
+1330
+01:08:19,120 --> 01:08:20,720
+We don't use CUDA device synchronize,
+
+1331
+01:08:20,720 --> 01:08:23,120
+we use CUDA stream synchronize for that.
+
+1332
+01:08:25,120 --> 01:08:29,320
+And there are a few different ways you can synchronize.
+
+1333
+01:08:29,320 --> 01:08:31,400
+There's four different ways.
+
+1334
+01:08:31,400 --> 01:08:34,840
+CUDA device synchronize synchronizes all the commands
+
+1335
+01:08:34,840 --> 01:08:37,200
+from all streams, okay?
+
+1336
+01:08:37,200 --> 01:08:38,760
+All of them need to be completed
+
+1337
+01:08:38,760 --> 01:08:40,880
+until you can move to the next step.
+
+1338
+01:08:40,880 --> 01:08:41,720
+That's first.
+
+1339
+01:08:42,680 --> 01:08:45,960
+CUDA thread synchronize is all the commands
+
+1340
+01:08:45,960 --> 01:08:48,880
+from all the streams issued in that thread
+
+1341
+01:08:48,880 --> 01:08:51,160
+need to be synchronized, okay?
+
+1342
+01:08:51,160 --> 01:08:52,880
+So you're gonna have multiple CPU threads
+
+1343
+01:08:52,880 --> 01:08:55,480
+making calls to CUDA,
+
+1344
+01:08:55,480 --> 01:08:59,000
+but the thread synchronize means only those calls
+
+1345
+01:08:59,000 --> 01:09:00,960
+from that thread need to be completed.
+
+1346
+01:09:00,960 --> 01:09:04,040
+Other threads can keep doing whatever they want.
+
+1347
+01:09:04,040 --> 01:09:06,720
+Stream synchronize means you block
+
+1348
+01:09:06,720 --> 01:09:09,800
+until all the commands in the stream are finished.
+
+1349
+01:09:09,800 --> 01:09:11,160
+Other streams, other threads
+
+1350
+01:09:11,160 --> 01:09:12,920
+could be doing whatever they want.
+
+1351
+01:09:12,920 --> 01:09:14,560
+But within that stream,
+
+1352
+01:09:14,560 --> 01:09:17,400
+even if it's assigned from different threads,
+
+1353
+01:09:17,400 --> 01:09:18,480
+we'll need to finish.
+
+1354
+01:09:19,840 --> 01:09:21,960
+The final one is CUDA event synchronize,
+
+1355
+01:09:21,960 --> 01:09:23,760
+which we haven't seen so far,
+
+1356
+01:09:23,760 --> 01:09:25,520
+but we have seen events.
+
+1357
+01:09:25,520 --> 01:09:28,800
+We've seen events in our performance lab
+
+1358
+01:09:28,800 --> 01:09:33,800
+where I use them for marking our ranges in the profile.
+
+1359
+01:09:35,680 --> 01:09:37,080
+You can do an event synchronize,
+
+1360
+01:09:37,080 --> 01:09:40,840
+which means you can have a start event and a stop event.
+
+1361
+01:09:40,840 --> 01:09:42,440
+And if you do an event synchronize,
+
+1362
+01:09:42,440 --> 01:09:44,440
+then all the commands that were issued
+
+1363
+01:09:44,440 --> 01:09:47,560
+between those two events will need to finish.
+
+1364
+01:09:47,560 --> 01:09:51,520
+So there are four ways to synchronize in CUDA.
+
+1365
+01:09:52,880 --> 01:09:57,880
+So now with events, those can be used to,
+
+1366
+01:09:59,240 --> 01:10:02,160
+those can be added to streams to monitor device progress.
+
+1367
+01:10:02,160 --> 01:10:04,440
+You can check on whether an event has finished
+
+1368
+01:10:04,440 --> 01:10:05,520
+or not finished and stuff,
+
+1369
+01:10:05,520 --> 01:10:08,640
+because you can assign events to stream too.
+
+1370
+01:10:09,680 --> 01:10:11,200
+So here's an example of that.
+
+1371
+01:10:12,600 --> 01:10:15,480
+And very similar to performance lab,
+
+1372
+01:10:15,480 --> 01:10:18,640
+you can create your two events using these two lines,
+
+1373
+01:10:18,640 --> 01:10:22,320
+event create using the CUDA event.
+
+1374
+01:10:22,320 --> 01:10:23,680
+You can do an event record.
+
+1375
+01:10:23,680 --> 01:10:28,560
+So now you're saying, hey, event get activated, okay?
+
+1376
+01:10:28,560 --> 01:10:31,840
+And you're giving it a start and a stream.
+
+1377
+01:10:33,080 --> 01:10:35,280
+And then you can stop the event
+
+1378
+01:10:35,280 --> 01:10:39,440
+and then do a synchronize to ensure that all the stuff
+
+1379
+01:10:39,440 --> 01:10:44,040
+between those two is done.
+
+1380
+01:10:44,040 --> 01:10:46,040
+And then CUDA event synchronize
+
+1381
+01:10:46,040 --> 01:10:48,120
+will essentially stop all of those.
+
+1382
+01:10:49,480 --> 01:10:51,480
+Or wait until all of those are completed.
+
+1383
+01:10:53,000 --> 01:10:55,520
+Once this is done, you can actually use start and stop
+
+1384
+01:10:55,520 --> 01:10:59,320
+to find how much time was used asynchronously
+
+1385
+01:10:59,320 --> 01:11:01,120
+for all of those events to happen.
+
+1386
+01:11:02,880 --> 01:11:04,200
+Any questions on this?
+
+1387
+01:11:04,200 --> 01:11:06,040
+Any questions on how events are used?
+
+1388
+01:11:08,440 --> 01:11:11,040
+So once again, you create those two events,
+
+1389
+01:11:12,920 --> 01:11:17,920
+record events before and after each stream is assigned.
+
+1390
+01:11:17,920 --> 01:11:21,280
+And then you delay any additional commands
+
+1391
+01:11:21,280 --> 01:11:25,560
+until all of the work between those two streams is completed.
+
+1392
+01:11:25,560 --> 01:11:27,800
+And then you can check the performance,
+
+1393
+01:11:27,800 --> 01:11:29,160
+how much time it took here.
+
+1394
+01:11:30,960 --> 01:11:32,240
+So any questions on this?
+
+1395
+01:11:36,560 --> 01:11:38,400
+No, everybody clear with events?
+
+1396
+01:11:39,440 --> 01:11:41,160
+Okay, so what's wrong with this?
+
+1397
+01:11:48,440 --> 01:11:49,280
+Okay.
+
+1398
+01:11:55,680 --> 01:11:57,200
+What might be wrong with this?
+
+1399
+01:12:04,120 --> 01:12:05,480
+So here's the mistake.
+
+1400
+01:12:07,000 --> 01:12:09,560
+While this may appear innocuous to all of you
+
+1401
+01:12:09,560 --> 01:12:12,720
+and you may have done this in various classes.
+
+1402
+01:12:13,680 --> 01:12:16,520
+The first memory property is synchronous on the GPU.
+
+1403
+01:12:16,520 --> 01:12:19,320
+You see how we haven't used CUDA memory property async?
+
+1404
+01:12:19,320 --> 01:12:23,600
+The CUDA memory property is always synchronous on the CPU.
+
+1405
+01:12:23,600 --> 01:12:26,040
+And the CPU waits for it to finish.
+
+1406
+01:12:26,040 --> 01:12:27,440
+So this is perfectly safe.
+
+1407
+01:12:28,640 --> 01:12:33,640
+The kernel launch is asynchronous on the CPU.
+
+1408
+01:12:36,640 --> 01:12:39,520
+And while it executes on GPU,
+
+1409
+01:12:39,520 --> 01:12:42,240
+there's actually no way for the CPU to wait for it.
+
+1410
+01:12:43,080 --> 01:12:48,080
+Okay, so the CPU, as soon as it says,
+
+1411
+01:12:48,080 --> 01:12:50,560
+hey, GPU, go work on this kernel,
+
+1412
+01:12:50,560 --> 01:12:51,680
+it can go to the next step.
+
+1413
+01:12:51,680 --> 01:12:53,400
+It doesn't care, right?
+
+1414
+01:12:53,400 --> 01:12:55,840
+There's nothing more for it to do at that line.
+
+1415
+01:12:55,840 --> 01:12:58,880
+There's no return statement to wait for, okay?
+
+1416
+01:12:58,880 --> 01:13:01,240
+So we can go to the next line here on the CPU.
+
+1417
+01:13:02,480 --> 01:13:05,880
+So once the CPU is done here,
+
+1418
+01:13:05,880 --> 01:13:09,880
+the CPU goes and is like, okay, put a mem copy,
+
+1419
+01:13:09,880 --> 01:13:12,600
+execute a copy for me to get my memory back.
+
+1420
+01:13:13,880 --> 01:13:18,880
+And this kind of operation can lead to race conditions.
+
+1421
+01:13:21,600 --> 01:13:26,600
+So when you have the CPU not executing the mem copy,
+
+1422
+01:13:28,680 --> 01:13:32,240
+it's just waiting for this kernel to finish.
+
+1423
+01:13:33,840 --> 01:13:37,720
+So the CPU is just waiting, idling, and not doing anything.
+
+1424
+01:13:38,720 --> 01:13:41,960
+Because all of this is on the default stream, okay?
+
+1425
+01:13:43,440 --> 01:13:44,600
+Now, what about this?
+
+1426
+01:13:49,680 --> 01:13:51,080
+What might happen here?
+
+1427
+01:13:58,280 --> 01:14:03,280
+Right, so here, what happens is CPU does the mem copy,
+
+1428
+01:14:03,760 --> 01:14:05,080
+CPU comes to the kernel,
+
+1429
+01:14:05,160 --> 01:14:07,880
+CPU launches the kernel on the GPU,
+
+1430
+01:14:07,880 --> 01:14:09,200
+and now the CPU can be like,
+
+1431
+01:14:09,200 --> 01:14:10,880
+hey, but while you're running,
+
+1432
+01:14:10,880 --> 01:14:12,960
+let me do some of my own work
+
+1433
+01:14:12,960 --> 01:14:15,040
+before I have to do the mem copy back.
+
+1434
+01:14:15,040 --> 01:14:19,600
+So you actually use the CPU actively
+
+1435
+01:14:19,600 --> 01:14:21,880
+while the GPU is also executing.
+
+1436
+01:14:21,880 --> 01:14:23,400
+So remember when I was mentioning
+
+1437
+01:14:23,400 --> 01:14:26,720
+that we had those big images and those small images?
+
+1438
+01:14:26,720 --> 01:14:28,400
+That's exactly what we did.
+
+1439
+01:14:28,400 --> 01:14:32,120
+We said, hey, GPU, go work on the big images.
+
+1440
+01:14:32,120 --> 01:14:34,440
+The CPU was working on the small images
+
+1441
+01:14:34,440 --> 01:14:37,680
+while those kernels were working on the big GPUs.
+
+1442
+01:14:37,680 --> 01:14:41,800
+So now you have essentially the GPU doing work
+
+1443
+01:14:41,800 --> 01:14:43,640
+and the CPU doing work at the same time.
+
+1444
+01:14:43,640 --> 01:14:44,920
+So you're taking advantage
+
+1445
+01:14:44,920 --> 01:14:47,480
+of all your resources concurrently.
+
+1446
+01:14:49,160 --> 01:14:53,000
+So this is known as either compute-compute overlap
+
+1447
+01:14:53,000 --> 01:14:55,280
+or compute-copy overlap, okay?
+
+1448
+01:14:55,280 --> 01:14:58,800
+So this is essentially CPU and GPU overlap,
+
+1449
+01:14:58,800 --> 01:15:01,400
+where both devices are doing compute.
+
+1450
+01:15:01,400 --> 01:15:02,840
+Why should we stop there?
+
+1451
+01:15:02,840 --> 01:15:06,200
+Why not even overlap our memory copies
+
+1452
+01:15:06,200 --> 01:15:07,680
+and our compute, right?
+
+1453
+01:15:08,800 --> 01:15:13,800
+So CUDA allows your kernels and your mem copy to overlap.
+
+1454
+01:15:15,080 --> 01:15:16,920
+We saw CUDA mem copy async,
+
+1455
+01:15:16,920 --> 01:15:19,800
+which does asynchronous mem copies.
+
+1456
+01:15:19,800 --> 01:15:22,560
+We know that we can assign streams to kernels
+
+1457
+01:15:22,560 --> 01:15:26,280
+and we can do mem copy back using kernels, right?
+
+1458
+01:15:26,280 --> 01:15:31,280
+So if our mem copies and kernels are on different streams,
+
+1459
+01:15:32,280 --> 01:15:35,640
+which we know can be executed in different orders,
+
+1460
+01:15:36,560 --> 01:15:39,400
+we can do different mem copies
+
+1461
+01:15:39,400 --> 01:15:41,440
+and different kernels at the same time.
+
+1462
+01:15:42,600 --> 01:15:45,560
+So depending on your GPU architecture,
+
+1463
+01:15:45,560 --> 01:15:48,440
+you can actually be running 16 concurrent kernels
+
+1464
+01:15:48,440 --> 01:15:50,120
+at the same time, not just one.
+
+1465
+01:15:50,120 --> 01:15:53,960
+You can run 16 concurrent kernels at the same time.
+
+1466
+01:15:53,960 --> 01:15:56,560
+And again, depending on your engine,
+
+1467
+01:15:56,560 --> 01:15:59,720
+you can run one mem copy in each direction.
+
+1468
+01:15:59,720 --> 01:16:02,320
+So you can be running one copy to device
+
+1469
+01:16:02,320 --> 01:16:04,640
+and one copy from device at the same time.
+
+1470
+01:16:05,760 --> 01:16:08,520
+And one easy way to check this is,
+
+1471
+01:16:09,800 --> 01:16:11,480
+let me bring up Visual Studio.
+
+1472
+01:16:15,440 --> 01:16:18,440
+I think Visual Studio removed it.
+
+1473
+01:16:18,440 --> 01:16:22,280
+So let me check the prompt.
+
+1474
+01:16:26,240 --> 01:16:29,240
+So here, what I've done is on my command prompt,
+
+1475
+01:16:29,920 --> 01:16:33,640
+I've run a command called NVIDIA SMI,
+
+1476
+01:16:33,640 --> 01:16:37,600
+but dash Q means query, dash A means all, okay?
+
+1477
+01:16:37,600 --> 01:16:39,800
+So if you just run NVIDIA SMI,
+
+1478
+01:16:40,720 --> 01:16:41,840
+you'll get something like this,
+
+1479
+01:16:41,840 --> 01:16:44,880
+which shows you all the GPU processes that are running.
+
+1480
+01:16:44,880 --> 01:16:46,520
+I have my Epic Games launcher here
+
+1481
+01:16:46,520 --> 01:16:48,240
+because I do stuff with Unreal.
+
+1482
+01:16:48,240 --> 01:16:49,480
+So that's what's showing here.
+
+1483
+01:16:49,480 --> 01:16:50,920
+If I was running a CUDA program,
+
+1484
+01:16:50,920 --> 01:16:52,880
+that would show you that as well.
+
+1485
+01:16:52,880 --> 01:16:56,520
+Okay, now to the part where I want to show.
+
+1486
+01:16:56,520 --> 01:16:59,200
+Of course, I have a 3050 Ti in my laptop.
+
+1487
+01:16:59,680 --> 01:17:01,280
+It's an Ampere architecture GPU.
+
+1488
+01:17:03,440 --> 01:17:08,440
+It's, oops, it has a PCIe 4 bus,
+
+1489
+01:17:08,800 --> 01:17:10,160
+so you can see that here.
+
+1490
+01:17:11,200 --> 01:17:13,720
+But what I'm really looking for
+
+1491
+01:17:13,720 --> 01:17:16,880
+is how many async engines I have.
+
+1492
+01:17:16,880 --> 01:17:18,920
+Let's see, I'm not entirely sure if this will show,
+
+1493
+01:17:18,920 --> 01:17:20,240
+but I'm going to check.
+
+1494
+01:17:21,440 --> 01:17:23,920
+Clocks, application, clocks.
+
+1495
+01:17:25,440 --> 01:17:27,240
+No, I don't think it's showing here.
+
+1496
+01:17:28,240 --> 01:17:31,200
+Let's see, let's open Visual Studio.
+
+1497
+01:17:35,640 --> 01:17:38,960
+Before you could, before Visual Studio allowed you to do
+
+1498
+01:17:41,880 --> 01:17:46,880
+Nsight's GPU info without having to launch a program,
+
+1499
+01:17:47,400 --> 01:17:48,640
+but I think they changed it now.
+
+1500
+01:17:48,640 --> 01:17:50,880
+There's no like Windows system tools now,
+
+1501
+01:17:50,880 --> 01:17:52,480
+so I may need to open something.
+
+1502
+01:17:52,480 --> 01:17:57,200
+So let me open, let me go to the start page.
+
+1503
+01:17:58,240 --> 01:18:02,320
+Start window, we're going to open performance lab.
+
+1504
+01:18:07,800 --> 01:18:10,120
+Let's do transport, well, let me, we can do a deduction.
+
+1505
+01:18:10,120 --> 01:18:14,400
+So now if I do Nsight start CUDA debugging,
+
+1506
+01:18:15,400 --> 01:18:16,840
+hopefully I put a breakpoint.
+
+1507
+01:18:22,600 --> 01:18:23,960
+So let me put a breakpoint.
+
+1508
+01:18:27,240 --> 01:18:32,240
+There, Nsight start CUDA debugging.
+
+1509
+01:18:42,960 --> 01:18:45,680
+Nsight now in Windows is available,
+
+1510
+01:18:45,680 --> 01:18:48,880
+and you can go into resources, which gives you CUDA device.
+
+1511
+01:18:50,240 --> 01:18:53,400
+So now the first thing you see, conveniently for us,
+
+1512
+01:18:53,400 --> 01:18:55,560
+is async engine count.
+
+1513
+01:18:55,600 --> 01:18:58,320
+Async engine count tells you how many asynchronous things
+
+1514
+01:18:58,320 --> 01:19:00,920
+your GPU can execute at once.
+
+1515
+01:19:00,920 --> 01:19:02,880
+So that's the first thing.
+
+1516
+01:19:02,880 --> 01:19:06,560
+And then there should be one more, which is,
+
+1517
+01:19:06,560 --> 01:19:07,840
+if you take a look here,
+
+1518
+01:19:10,840 --> 01:19:12,600
+we can search for async.
+
+1519
+01:19:22,040 --> 01:19:24,760
+So you might also need to check for things like this,
+
+1520
+01:19:24,800 --> 01:19:28,040
+can map host memory, which is, as we discussed before,
+
+1521
+01:19:28,040 --> 01:19:30,760
+for mapping host and device memory.
+
+1522
+01:19:30,760 --> 01:19:32,360
+Can you stream memory operations?
+
+1523
+01:19:32,360 --> 01:19:35,600
+So this is false, so you can't necessarily stream
+
+1524
+01:19:35,600 --> 01:19:36,640
+from one to the other.
+
+1525
+01:19:36,640 --> 01:19:38,400
+This is not the streams that we are talking about,
+
+1526
+01:19:38,400 --> 01:19:41,000
+by the way, so just manage memory is true.
+
+1527
+01:19:41,000 --> 01:19:43,400
+So it supports our manage memory thing
+
+1528
+01:19:43,400 --> 01:19:45,920
+that we spoke about earlier, using unified memory.
+
+1529
+01:19:48,520 --> 01:19:51,360
+But no, it's not showing how many mem copies
+
+1530
+01:19:51,360 --> 01:19:52,400
+it can do at the same time.
+
+1531
+01:19:52,400 --> 01:19:54,840
+So maybe I'll check that and post it in our discussion
+
+1532
+01:19:54,840 --> 01:19:56,120
+about which flag it is.
+
+1533
+01:19:57,760 --> 01:19:59,120
+Let me exit this.
+
+1534
+01:20:03,680 --> 01:20:04,520
+I took the next slide.
+
+1535
+01:20:04,520 --> 01:20:05,560
+So, okay.
+
+1536
+01:20:07,040 --> 01:20:08,520
+So we saw this before, right?
+
+1537
+01:20:10,320 --> 01:20:13,400
+This kind of code, we saw it in our previous example
+
+1538
+01:20:13,400 --> 01:20:15,440
+where I was showing how asynchronous operations
+
+1539
+01:20:15,440 --> 01:20:16,280
+can be done.
+
+1540
+01:20:17,960 --> 01:20:20,760
+Now, here's my question, okay?
+
+1541
+01:20:21,280 --> 01:20:22,800
+This seems pretty good, right?
+
+1542
+01:20:22,800 --> 01:20:27,080
+Like we have n streams, we're creating some offsets.
+
+1543
+01:20:27,080 --> 01:20:30,640
+So for example, an easy way to think about it is transpose.
+
+1544
+01:20:31,520 --> 01:20:35,280
+Let's assume you have a very, very, very big matrix, okay?
+
+1545
+01:20:36,160 --> 01:20:39,840
+That you may or may not want to run in one turn.
+
+1546
+01:20:39,840 --> 01:20:41,840
+You may want to break it up, so you can transpose.
+
+1547
+01:20:41,840 --> 01:20:44,560
+You can transpose different parts of the matrix
+
+1548
+01:20:44,560 --> 01:20:46,240
+at different times.
+
+1549
+01:20:46,240 --> 01:20:50,480
+So let's say we have n streams.
+
+1550
+01:20:51,160 --> 01:20:54,120
+We do put a mem copy async compose to device
+
+1551
+01:20:54,120 --> 01:20:55,760
+asynchronously.
+
+1552
+01:20:55,760 --> 01:20:58,240
+Launch the kernel view to do that.
+
+1553
+01:20:58,240 --> 01:21:00,560
+And then the copy the result back, okay?
+
+1554
+01:21:01,800 --> 01:21:02,800
+Is this efficient?
+
+1555
+01:21:07,400 --> 01:21:09,920
+Now you have to think of compute copy overlap.
+
+1556
+01:21:09,920 --> 01:21:10,920
+Is this efficient?
+
+1557
+01:21:10,920 --> 01:21:12,320
+Both things, yes.
+
+1558
+01:21:26,120 --> 01:21:30,320
+Why is this either efficient or not efficient?
+
+1559
+01:21:36,320 --> 01:21:37,680
+That's the only thing I think, right?
+
+1560
+01:21:37,680 --> 01:21:40,280
+So it should be efficient.
+
+1561
+01:21:40,440 --> 01:21:43,840
+Different streams doing different things.
+
+1562
+01:21:48,880 --> 01:21:52,280
+Async compose starts inside of the button.
+
+1563
+01:21:52,280 --> 01:21:55,280
+Okay, and each time it's going to give a different stream ID.
+
+1564
+01:22:02,840 --> 01:22:06,440
+No, because these are all async commands,
+
+1565
+01:22:06,440 --> 01:22:09,760
+the CPU can be like, okay, I've launched uasync,
+
+1566
+01:22:10,640 --> 01:22:12,320
+I've launched uasync.
+
+1567
+01:22:12,320 --> 01:22:14,320
+Let me go iterate on the next loop.
+
+1568
+01:22:14,320 --> 01:22:15,640
+CPU doesn't have to wait.
+
+1569
+01:22:17,880 --> 01:22:20,000
+From a GPU perspective, is this efficient?
+
+1570
+01:22:20,000 --> 01:22:20,960
+The CPU is fine.
+
+1571
+01:22:25,040 --> 01:22:26,800
+So here's the profile of new focus.
+
+1572
+01:22:29,720 --> 01:22:33,280
+See how this part that I'm marking,
+
+1573
+01:22:33,280 --> 01:22:36,400
+I'm just using NVVP, NVIDIA Visual Profile Log.
+
+1574
+01:22:36,400 --> 01:22:38,000
+You should have it installed.
+
+1575
+01:22:38,000 --> 01:22:41,000
+It's a very old application that I've been around
+
+1576
+01:22:41,000 --> 01:22:43,160
+from like CUDA 3 or 4 or something.
+
+1577
+01:22:43,160 --> 01:22:45,160
+So definitely check it out.
+
+1578
+01:22:46,440 --> 01:22:47,840
+So here's what's happening.
+
+1579
+01:22:49,560 --> 01:22:54,200
+This sliver is essentially all of this space.
+
+1580
+01:22:56,440 --> 01:22:59,520
+There's a huge CUDA memcpy runtime API.
+
+1581
+01:22:59,520 --> 01:23:01,920
+So this row is runtime API,
+
+1582
+01:23:01,920 --> 01:23:04,320
+but this is essentially what is happening here.
+
+1583
+01:23:04,320 --> 01:23:06,560
+You're doing CUDA host to device kernel
+
+1584
+01:23:06,560 --> 01:23:08,240
+and then host to device back.
+
+1585
+01:23:08,240 --> 01:23:10,200
+So you have different streams of host to device,
+
+1586
+01:23:10,200 --> 01:23:12,760
+device to host, and compute,
+
+1587
+01:23:12,760 --> 01:23:15,080
+and it's doing it on different channels.
+
+1588
+01:23:16,960 --> 01:23:19,760
+This is exactly what I'm trying to highlight,
+
+1589
+01:23:19,760 --> 01:23:24,760
+that while this kernel only takes this much time,
+
+1590
+01:23:27,160 --> 01:23:30,520
+this memcpy is essentially waiting from here to here,
+
+1591
+01:23:32,560 --> 01:23:34,960
+because it's still in the stream.
+
+1592
+01:23:35,960 --> 01:23:39,480
+So you don't necessarily get that concurrency.
+
+1593
+01:23:40,960 --> 01:23:43,160
+Now in basic concurrency,
+
+1594
+01:23:43,160 --> 01:23:44,800
+which is what that call loop was,
+
+1595
+01:23:44,800 --> 01:23:46,000
+where we had some ASAP.
+
+1596
+01:23:47,560 --> 01:23:49,320
+Now you get some concurrency.
+
+1597
+01:23:49,320 --> 01:23:51,000
+So let's see how this is looking.
+
+1598
+01:23:52,480 --> 01:23:54,800
+This is a full global view.
+
+1599
+01:23:54,800 --> 01:23:57,680
+This is for streams, those streams.
+
+1600
+01:23:57,680 --> 01:23:58,880
+So in each stream,
+
+1601
+01:23:58,880 --> 01:24:01,400
+we know that we have to do host to device,
+
+1602
+01:24:01,400 --> 01:24:02,240
+we have to do a kernel,
+
+1603
+01:24:02,240 --> 01:24:04,480
+and then we have to do a device to host.
+
+1604
+01:24:05,000 --> 01:24:06,240
+See how we are breaking it up.
+
+1605
+01:24:06,240 --> 01:24:09,440
+Here we had these large memcpys,
+
+1606
+01:24:09,440 --> 01:24:12,200
+here we have broken up the problem into smaller.
+
+1607
+01:24:12,200 --> 01:24:13,920
+So we do a smaller memcpy,
+
+1608
+01:24:13,920 --> 01:24:15,120
+we run the kernel on it,
+
+1609
+01:24:15,120 --> 01:24:17,320
+and then we run the memcpy back.
+
+1610
+01:24:19,640 --> 01:24:22,000
+And we are getting this waterfall model,
+
+1611
+01:24:22,000 --> 01:24:27,000
+which has some possibility of, say, async,
+
+1612
+01:24:27,320 --> 01:24:29,000
+but not really.
+
+1613
+01:24:29,000 --> 01:24:31,880
+And this could be a factor of my GPU as well.
+
+1614
+01:24:31,880 --> 01:24:33,720
+So I'll be clear about that.
+
+1615
+01:24:33,760 --> 01:24:35,240
+This waterfall model,
+
+1616
+01:24:35,240 --> 01:24:38,560
+because I may not have an async engine,
+
+1617
+01:24:38,560 --> 01:24:41,000
+is being a waterfall model, okay?
+
+1618
+01:24:41,000 --> 01:24:43,640
+I may not have the ability to do two memcpys
+
+1619
+01:24:43,640 --> 01:24:44,840
+at the same time.
+
+1620
+01:24:44,840 --> 01:24:47,560
+That's why this is waiting, okay?
+
+1621
+01:24:47,560 --> 01:24:50,440
+The other thing I want to point out is,
+
+1622
+01:24:50,440 --> 01:24:53,440
+instead of having CUDA memcpy, a kernel launch,
+
+1623
+01:24:53,440 --> 01:24:55,120
+and a CUDA memcpy again,
+
+1624
+01:24:56,680 --> 01:24:59,120
+see how there's a few lines here,
+
+1625
+01:24:59,120 --> 01:25:01,400
+and then everything is CUDA device-in-place.
+
+1626
+01:25:01,400 --> 01:25:02,360
+Why?
+
+1627
+01:25:02,360 --> 01:25:05,320
+Because all of these are asynchronous here.
+
+1628
+01:25:05,320 --> 01:25:08,040
+So from a CPU perspective,
+
+1629
+01:25:08,040 --> 01:25:09,800
+the CPU has done all its work,
+
+1630
+01:25:09,800 --> 01:25:11,800
+and it's now waiting at CUDA device-in-place.
+
+1631
+01:25:11,800 --> 01:25:13,560
+That's where the CPU is gone.
+
+1632
+01:25:13,560 --> 01:25:16,400
+This is the CPU view, okay?
+
+1633
+01:25:16,400 --> 01:25:18,520
+This is the GPU view,
+
+1634
+01:25:18,520 --> 01:25:21,520
+where you have all of these async operations happening,
+
+1635
+01:25:21,520 --> 01:25:23,840
+and only when these operations are all done
+
+1636
+01:25:23,840 --> 01:25:27,280
+does the CPU get its control back, okay?
+
+1637
+01:25:27,280 --> 01:25:30,760
+So now this is a GTX 950, no asynchronous engines.
+
+1638
+01:25:31,640 --> 01:25:33,800
+This is a GTX 1080 Ti.
+
+1639
+01:25:33,800 --> 01:25:37,240
+Now look at what we are seeing, okay?
+
+1640
+01:25:37,240 --> 01:25:38,720
+We see on the CPU sides,
+
+1641
+01:25:38,720 --> 01:25:40,640
+we still see the same CUDA device-in-place,
+
+1642
+01:25:40,640 --> 01:25:41,880
+no difference whatsoever.
+
+1643
+01:25:43,320 --> 01:25:45,040
+But look at what's happening here.
+
+1644
+01:25:46,200 --> 01:25:51,200
+We have, on the global view,
+
+1645
+01:25:51,280 --> 01:25:53,960
+or let's do the stream view first.
+
+1646
+01:25:53,960 --> 01:25:56,720
+For stream 14, which is the first stream that we launched,
+
+1647
+01:25:56,720 --> 01:26:00,240
+we do a memcpy, the blue is the kernel,
+
+1648
+01:26:00,480 --> 01:26:02,280
+but as soon as the kernel launches,
+
+1649
+01:26:02,280 --> 01:26:04,720
+so I put my finger there so you can see,
+
+1650
+01:26:04,720 --> 01:26:07,280
+as soon as the kernel launches,
+
+1651
+01:26:07,280 --> 01:26:10,040
+there's a host device happening on the next stream.
+
+1652
+01:26:11,960 --> 01:26:15,360
+Now we are getting memcpy on the computer overlap.
+
+1653
+01:26:15,360 --> 01:26:16,840
+While this kernel is running,
+
+1654
+01:26:16,840 --> 01:26:19,840
+we've already started the second computer.
+
+1655
+01:26:19,840 --> 01:26:22,240
+While this copy is happening,
+
+1656
+01:26:22,240 --> 01:26:24,160
+and the kernel finishes,
+
+1657
+01:26:24,160 --> 01:26:25,960
+we start device-to-host memcpy.
+
+1658
+01:26:26,960 --> 01:26:31,960
+So now we have two memcpys running,
+
+1659
+01:26:33,400 --> 01:26:34,800
+and you could potentially,
+
+1660
+01:26:34,800 --> 01:26:37,440
+if you had a third stream as well, not in this program,
+
+1661
+01:26:37,440 --> 01:26:40,440
+but if you had a third stream that was executing a kernel,
+
+1662
+01:26:40,440 --> 01:26:42,400
+that would have been executing as well.
+
+1663
+01:26:43,680 --> 01:26:48,240
+So now this chart and this chart
+
+1664
+01:26:48,240 --> 01:26:50,400
+are running the same program, there's no difference.
+
+1665
+01:26:50,400 --> 01:26:53,280
+The difference is in the GPU and what it's capable of
+
+1666
+01:26:53,280 --> 01:26:56,000
+and how much concurrency it's capable of.
+
+1667
+01:26:56,000 --> 01:27:00,240
+So now you get this different kind of waterfall model,
+
+1668
+01:27:00,240 --> 01:27:01,880
+and what does this remind us of?
+
+1669
+01:27:04,920 --> 01:27:07,120
+Where did we see something like this before?
+
+1670
+01:27:09,440 --> 01:27:12,480
+Exactly, so take warp scheduling
+
+1671
+01:27:12,480 --> 01:27:13,840
+and put it on the whole GPU
+
+1672
+01:27:13,840 --> 01:27:18,000
+where you're essentially hiding all the latency
+
+1673
+01:27:18,000 --> 01:27:20,360
+for all the compute behind memcpys.
+
+1674
+01:27:21,360 --> 01:27:24,960
+So your computer essentially is completely free of this.
+
+1675
+01:27:26,320 --> 01:27:28,400
+So you are not paying more,
+
+1676
+01:27:28,400 --> 01:27:32,320
+if you look at all the way from here to here,
+
+1677
+01:27:32,320 --> 01:27:35,360
+all the expense is in memcpys.
+
+1678
+01:27:36,520 --> 01:27:38,560
+The kernels are all hidden.
+
+1679
+01:27:38,560 --> 01:27:43,560
+So this is what is called compute-copy overlap, okay?
+
+1680
+01:27:45,040 --> 01:27:46,640
+Now I'll ask the question again,
+
+1681
+01:27:46,640 --> 01:27:49,640
+is this efficient on the GPU?
+
+1682
+01:27:51,240 --> 01:27:54,720
+Yes, no, maybe?
+
+1683
+01:27:58,200 --> 01:27:59,360
+It looks efficient.
+
+1684
+01:27:59,360 --> 01:28:01,120
+Is it better than before?
+
+1685
+01:28:01,120 --> 01:28:06,120
+Is it better than, is it better than this synchronous query?
+
+1686
+01:28:07,080 --> 01:28:09,600
+Yeah, no concurrency, definitely better.
+
+1687
+01:28:11,960 --> 01:28:13,160
+Can we improve this?
+
+1688
+01:28:15,240 --> 01:28:16,240
+By now, all of you should know
+
+1689
+01:28:16,240 --> 01:28:18,440
+when I ask that question, the answer is yes.
+
+1690
+01:28:18,960 --> 01:28:22,360
+Okay, so that is what we'll call basic memcpy.
+
+1691
+01:28:22,360 --> 01:28:25,360
+What we've essentially done is taken the problem
+
+1692
+01:28:25,360 --> 01:28:27,920
+and divided it into different parts.
+
+1693
+01:28:28,840 --> 01:28:31,120
+The problem we have now
+
+1694
+01:28:31,120 --> 01:28:34,200
+is that we're still dependent on copy-compute-copy.
+
+1695
+01:28:34,200 --> 01:28:38,120
+So this is still copy-compute-copy, right?
+
+1696
+01:28:38,120 --> 01:28:40,440
+So how can we improve that a little bit more?
+
+1697
+01:28:41,360 --> 01:28:44,040
+Even though all our operations are async
+
+1698
+01:28:44,040 --> 01:28:46,080
+with respect to the CPU, right?
+
+1699
+01:28:46,080 --> 01:28:49,960
+The CPU was like launched everything and synchronized.
+
+1700
+01:28:49,960 --> 01:28:53,440
+Everything is asynchronous to the GPU.
+
+1701
+01:28:55,200 --> 01:28:58,560
+The compute-copy overlap isn't as good as it can be, okay?
+
+1702
+01:28:59,560 --> 01:29:00,960
+There's an enormous weight there.
+
+1703
+01:29:00,960 --> 01:29:02,240
+So how do we fix this?
+
+1704
+01:29:03,080 --> 01:29:04,800
+What if we do this, okay?
+
+1705
+01:29:04,800 --> 01:29:07,280
+So let me come back here and show this.
+
+1706
+01:29:08,360 --> 01:29:11,240
+What I'm talking about is that all the compute
+
+1707
+01:29:11,240 --> 01:29:15,240
+on all the streams depend on the memcpy to happen first.
+
+1708
+01:29:15,280 --> 01:29:16,480
+On that stream.
+
+1709
+01:29:17,760 --> 01:29:19,400
+Without the memcpy happening
+
+1710
+01:29:19,400 --> 01:29:21,160
+before the kernel-to-kernel panel.
+
+1711
+01:29:22,520 --> 01:29:24,880
+And the memcpy here is launched
+
+1712
+01:29:24,880 --> 01:29:29,880
+after all memcpy two-device kernel and two-host
+
+1713
+01:29:30,200 --> 01:29:31,280
+from the previous stream.
+
+1714
+01:29:31,280 --> 01:29:32,800
+Although it's not dependent,
+
+1715
+01:29:32,800 --> 01:29:35,320
+that's how the CPU is launching it, okay?
+
+1716
+01:29:36,200 --> 01:29:37,480
+So we want to change that.
+
+1717
+01:29:38,440 --> 01:29:41,480
+So here's version two of our code, okay?
+
+1718
+01:29:41,480 --> 01:29:43,120
+And it does the exact same thing.
+
+1719
+01:29:44,120 --> 01:29:48,520
+Instead of doing it in one for loop each time,
+
+1720
+01:29:48,520 --> 01:29:51,080
+what if we change it to do all the device
+
+1721
+01:29:51,080 --> 01:29:55,920
+to host memcpy first, all the kernel launches second,
+
+1722
+01:29:55,920 --> 01:29:58,560
+and then all the kernel launches to copy back third.
+
+1723
+01:29:59,640 --> 01:30:03,040
+Now, from the CPU side, still everything is async.
+
+1724
+01:30:04,120 --> 01:30:08,160
+From the GPU side, the order doesn't change.
+
+1725
+01:30:08,160 --> 01:30:12,560
+Because remember, as long as we have that A1, A2, A3, A4,
+
+1726
+01:30:13,520 --> 01:30:17,280
+it doesn't matter that we launch one memcpy async
+
+1727
+01:30:17,280 --> 01:30:21,160
+on stream one, one memcpy on stream two,
+
+1728
+01:30:21,160 --> 01:30:22,760
+stream three, and so on.
+
+1729
+01:30:22,760 --> 01:30:25,640
+And then we come to kernel and launch kernel on stream one,
+
+1730
+01:30:25,640 --> 01:30:27,560
+kernel on stream two, kernel on stream three.
+
+1731
+01:30:27,560 --> 01:30:28,840
+Doesn't matter at all.
+
+1732
+01:30:28,840 --> 01:30:33,840
+It's just within the stream, it has to be continuous.
+
+1733
+01:30:33,920 --> 01:30:35,840
+So here's a better view of it.
+
+1734
+01:30:35,840 --> 01:30:38,240
+So this is, again, on a 950M,
+
+1735
+01:30:38,240 --> 01:30:41,440
+no change in hardware where we had,
+
+1736
+01:30:41,440 --> 01:30:42,840
+let me go back to show you,
+
+1737
+01:30:43,720 --> 01:30:45,160
+that we had this kind of view,
+
+1738
+01:30:45,160 --> 01:30:48,840
+where we had memcpy, kernel memcpy, right?
+
+1739
+01:30:48,840 --> 01:30:51,280
+And then you had memcpy, kernel memcpy.
+
+1740
+01:30:51,280 --> 01:30:53,960
+Let's take a look at what a new structure looks like.
+
+1741
+01:30:55,400 --> 01:30:57,120
+So now look at this.
+
+1742
+01:30:57,120 --> 01:31:00,400
+You have memcpy, kernel memcpy,
+
+1743
+01:31:00,400 --> 01:31:02,800
+kernel memcpy, kernel memcpy,
+
+1744
+01:31:02,800 --> 01:31:05,920
+even though this device has only one async engine.
+
+1745
+01:31:05,920 --> 01:31:08,920
+So now you get this kind of kernel.
+
+1746
+01:31:08,960 --> 01:31:10,280
+Now we come back here.
+
+1747
+01:31:12,920 --> 01:31:14,520
+Why does it not happen here?
+
+1748
+01:31:14,520 --> 01:31:16,160
+Same hardware, right?
+
+1749
+01:31:16,160 --> 01:31:19,320
+Why do we not get that kernel memcpy?
+
+1750
+01:31:21,400 --> 01:31:24,280
+Because, right, when this kernel finishes,
+
+1751
+01:31:26,200 --> 01:31:27,360
+this memcpy starts.
+
+1752
+01:31:29,520 --> 01:31:32,760
+And this memcpy was launched afterwards.
+
+1753
+01:31:32,760 --> 01:31:34,920
+So you're not getting that CPU async
+
+1754
+01:31:34,920 --> 01:31:36,960
+that is translating to the GPU.
+
+1755
+01:31:36,960 --> 01:31:40,040
+So if you change how your for loops are structured
+
+1756
+01:31:40,040 --> 01:31:41,720
+and how your streams are launched,
+
+1757
+01:31:41,720 --> 01:31:43,160
+you will get better memcpy.
+
+1758
+01:31:43,160 --> 01:31:47,680
+So you get the kernel, memcpy, kernel.
+
+1759
+01:31:47,680 --> 01:31:50,000
+Now you get other memcpy, kernel.
+
+1760
+01:31:50,000 --> 01:31:53,120
+But now, because all the time,
+
+1761
+01:31:53,120 --> 01:31:56,040
+the host to device memcpy is gonna happen first,
+
+1762
+01:31:56,040 --> 01:31:58,840
+this stream's device to host memcpy
+
+1763
+01:31:58,840 --> 01:32:02,120
+has to wait until all of this is done, which is fine.
+
+1764
+01:32:02,120 --> 01:32:04,360
+We still get the compute copy overlap,
+
+1765
+01:32:04,360 --> 01:32:07,640
+but we just have to wait for it to come back,
+
+1766
+01:32:07,640 --> 01:32:09,080
+for the control to come back.
+
+1767
+01:32:10,480 --> 01:32:12,000
+Okay?
+
+1768
+01:32:12,000 --> 01:32:14,160
+Now, what happens on a 1080 Ti
+
+1769
+01:32:14,160 --> 01:32:15,560
+where you have two memcpy?
+
+1770
+01:32:17,280 --> 01:32:21,440
+So now this is a similar view, not too different,
+
+1771
+01:32:21,440 --> 01:32:24,360
+but take a look at how this is structured again.
+
+1772
+01:32:24,360 --> 01:32:27,280
+So you have host to device, device to host, and kernel.
+
+1773
+01:32:27,280 --> 01:32:29,600
+And this is running a lot better as well.
+
+1774
+01:32:30,720 --> 01:32:32,920
+Visually, you won't see too much difference in this
+
+1775
+01:32:32,920 --> 01:32:35,440
+because this already had two async engines.
+
+1776
+01:32:37,840 --> 01:32:39,160
+Okay.
+
+1777
+01:32:39,160 --> 01:32:44,160
+So now by breaking that problem down into different streams,
+
+1778
+01:32:44,160 --> 01:32:47,000
+but also how we launch those streams,
+
+1779
+01:32:47,000 --> 01:32:48,360
+we have proper concurrency.
+
+1780
+01:32:48,360 --> 01:32:51,920
+We have our GPU concurrency
+
+1781
+01:32:51,920 --> 01:32:55,840
+where everything is running in parallel.
+
+1782
+01:32:55,840 --> 01:32:57,480
+You're getting all the memory bandwidth
+
+1783
+01:32:57,480 --> 01:32:58,680
+and stuff like that.
+
+1784
+01:32:58,720 --> 01:33:03,560
+But you now also have host to device memcpy
+
+1785
+01:33:03,560 --> 01:33:07,080
+where you could be, for example, in your path tracer,
+
+1786
+01:33:07,080 --> 01:33:10,880
+it's entirely possible for you to launch the next frame
+
+1787
+01:33:10,880 --> 01:33:12,080
+of your path tracer
+
+1788
+01:33:12,080 --> 01:33:15,560
+while you're copying the old frame back, technically.
+
+1789
+01:33:15,560 --> 01:33:16,400
+Okay?
+
+1790
+01:33:16,400 --> 01:33:17,240
+So just stuff like that.
+
+1791
+01:33:17,240 --> 01:33:18,760
+You could have two buffers.
+
+1792
+01:33:18,760 --> 01:33:20,960
+For example, where did you do ping-ponging?
+
+1793
+01:33:20,960 --> 01:33:24,280
+You did ping-ponging in Boids, right?
+
+1794
+01:33:24,280 --> 01:33:26,280
+You could do ping-ponging like this
+
+1795
+01:33:26,280 --> 01:33:29,200
+where you have different streams running different frames.
+
+1796
+01:33:30,720 --> 01:33:33,680
+So those are the kinds of ideas here.
+
+1797
+01:33:35,040 --> 01:33:36,640
+Of course, you get much better performance
+
+1798
+01:33:36,640 --> 01:33:37,560
+from a standard pipeline,
+
+1799
+01:33:37,560 --> 01:33:39,960
+but also remember that not one size fits all.
+
+1800
+01:33:39,960 --> 01:33:41,280
+You can't just be like,
+
+1801
+01:33:41,280 --> 01:33:43,840
+hey, I'm gonna take my reduction and apply streams to it.
+
+1802
+01:33:43,840 --> 01:33:44,680
+No, no, no.
+
+1803
+01:33:44,680 --> 01:33:46,440
+Think carefully about what you want to do.
+
+1804
+01:33:46,440 --> 01:33:48,520
+And the streams are there for your benefits,
+
+1805
+01:33:48,520 --> 01:33:50,760
+but you have to tune your algorithm
+
+1806
+01:33:50,760 --> 01:33:54,280
+so that it works for streams as well.
+
+1807
+01:33:54,280 --> 01:33:55,120
+Okay?
+
+1808
+01:33:55,120 --> 01:33:56,120
+Any questions on this?
+
+1809
+01:33:57,680 --> 01:33:58,880
+We are at the end of streams.
+
+1810
+01:33:58,880 --> 01:34:01,760
+I want to make sure I take any questions and answer stuff.
+
+1811
+01:34:01,760 --> 01:34:04,000
+If you're doing a final project using CUDA,
+
+1812
+01:34:04,000 --> 01:34:05,640
+I expect you to use streams.
+
+1813
+01:34:12,360 --> 01:34:13,200
+All right.
+
+1814
+01:34:13,200 --> 01:34:14,040
+Any questions?
+
+1815
+01:34:16,360 --> 01:34:17,200
+Yeah, Tom?
+
+1816
+01:34:17,200 --> 01:34:19,240
+You went to the slide a few days ago.
+
+1817
+01:34:19,240 --> 01:34:20,080
+This?
+
+1818
+01:34:20,080 --> 01:34:20,920
+Yeah, yeah.
+
+1819
+01:34:20,920 --> 01:34:24,160
+So why wouldn't some copy pose a device
+
+1820
+01:34:24,200 --> 01:34:25,320
+that overlaps?
+
+1821
+01:34:25,320 --> 01:34:26,160
+I've seen it.
+
+1822
+01:34:26,160 --> 01:34:27,680
+It has two ways in it.
+
+1823
+01:34:27,680 --> 01:34:28,520
+So, okay.
+
+1824
+01:34:28,520 --> 01:34:30,640
+So let me show you what I was talking about.
+
+1825
+01:34:30,640 --> 01:34:33,080
+Maybe it's not that obvious as I would expect.
+
+1826
+01:34:34,600 --> 01:34:35,520
+So look at this.
+
+1827
+01:34:36,480 --> 01:34:38,720
+You have the host memcpy,
+
+1828
+01:34:38,720 --> 01:34:41,360
+device to host memcpy is happening here.
+
+1829
+01:34:41,360 --> 01:34:44,200
+You have the kernel happening at the same time,
+
+1830
+01:34:44,200 --> 01:34:46,800
+and you have host to device happening.
+
+1831
+01:34:46,800 --> 01:34:48,960
+So this is happening both in the basic version
+
+1832
+01:34:48,960 --> 01:34:50,960
+of this code,
+
+1833
+01:34:53,080 --> 01:34:54,000
+this code here.
+
+1834
+01:34:54,840 --> 01:34:57,920
+So this allows you to do this as well.
+
+1835
+01:34:57,920 --> 01:35:01,880
+So with one mem is for one async engine,
+
+1836
+01:35:01,880 --> 01:35:03,280
+you don't get that.
+
+1837
+01:35:03,280 --> 01:35:04,840
+But with two async engines,
+
+1838
+01:35:04,840 --> 01:35:07,720
+you do have device to host memcpy kernel
+
+1839
+01:35:07,720 --> 01:35:10,400
+and host to device memcpy running at the same time.
+
+1840
+01:35:13,240 --> 01:35:16,360
+When you come to our new method, this method,
+
+1841
+01:35:16,360 --> 01:35:19,240
+even with one async engine, you get the benefit.
+
+1842
+01:35:19,240 --> 01:35:20,480
+But with two async engines,
+
+1843
+01:35:20,480 --> 01:35:22,520
+you are already getting the benefit from the code.
+
+1844
+01:35:22,520 --> 01:35:24,880
+So this is not going to change too much.
+
+1845
+01:35:27,400 --> 01:35:29,520
+There might be some optimizations GPU does,
+
+1846
+01:35:29,520 --> 01:35:32,240
+but from a profiler view, it may not change that.
+
+1847
+01:35:32,240 --> 01:35:35,600
+It really depends on how many async engines you have
+
+1848
+01:35:35,600 --> 01:35:38,120
+that are going to determine what kind of optimization
+
+1849
+01:35:38,120 --> 01:35:40,040
+you may need to make on your CPU side.
+
+1850
+01:35:42,840 --> 01:35:43,960
+Any other questions?
+
+1851
+01:35:48,360 --> 01:35:49,200
+All right.
+
+1852
+01:35:49,200 --> 01:35:51,760
+So in that case, let's take a break.
+
+1853
+01:35:51,800 --> 01:35:52,880
+It is almost seven.
+
+1854
+01:35:52,880 --> 01:35:54,960
+So let's come back at seven, five,
+
+1855
+01:35:54,960 --> 01:35:57,600
+and then we'll do some last parts
+
+1856
+01:35:57,600 --> 01:36:01,040
+of advanced CUDA stuff before we end.
+
+1857
+01:36:21,760 --> 01:36:22,600
+Okay.
+
+1858
+01:36:51,760 --> 01:36:54,600
+I think it's like two minutes ago.
+
+1859
+01:37:21,760 --> 01:37:24,680
+I think it's like two minutes ago.
+
+1860
+01:37:51,760 --> 01:37:52,600
+Okay.
+
+1861
+01:38:21,760 --> 01:38:24,920
+I think it's like two minutes ago.
+
+1862
+01:38:51,760 --> 01:38:52,600
+Okay.
+
+1863
+01:39:21,760 --> 01:39:22,600
+Okay.
+
+1864
+01:39:51,760 --> 01:39:53,560
+All right.
+
+1865
+01:40:21,760 --> 01:40:22,600
+Okay.
+
+1866
+01:40:51,760 --> 01:40:52,600
+Okay.
+
+1867
+01:41:21,760 --> 01:41:22,600
+Okay.
+
+1868
+01:41:51,760 --> 01:41:53,600
+Okay.
+
+1869
+01:42:21,760 --> 01:42:22,600
+Okay.
+
+1870
+01:42:51,760 --> 01:42:52,600
+Okay.
+
+1871
+01:43:05,000 --> 01:43:07,680
+All right, let's get restarted
+
+1872
+01:43:07,680 --> 01:43:10,400
+and hopefully we'll be able to finish this part of it
+
+1873
+01:43:10,400 --> 01:43:14,120
+by in maybe 20, 30 minutes and you'll be on your way.
+
+1874
+01:43:14,120 --> 01:43:14,960
+Okay.
+
+1875
+01:43:14,960 --> 01:43:16,960
+So the next part we are going to cover
+
+1876
+01:43:16,960 --> 01:43:19,400
+is called what functions.
+
+1877
+01:43:19,400 --> 01:43:20,240
+Okay.
+
+1878
+01:43:21,240 --> 01:43:24,560
+So as a reminder,
+
+1879
+01:43:26,720 --> 01:43:31,480
+if we are sharing information within a block,
+
+1880
+01:43:31,480 --> 01:43:33,720
+what are the ways to do that right now?
+
+1881
+01:43:33,720 --> 01:43:36,240
+What are the ways that we've covered so far?
+
+1882
+01:43:37,440 --> 01:43:40,200
+To share information within a block between sites.
+
+1883
+01:43:43,440 --> 01:43:44,360
+Shared memory.
+
+1884
+01:43:44,360 --> 01:43:45,400
+What is the other one?
+
+1885
+01:43:48,560 --> 01:43:49,800
+Global memory.
+
+1886
+01:43:50,160 --> 01:43:52,360
+You can, not that I recommend it,
+
+1887
+01:43:52,360 --> 01:43:54,360
+but you could use that if you wanted to.
+
+1888
+01:43:54,360 --> 01:43:56,000
+Okay.
+
+1889
+01:43:56,000 --> 01:43:58,320
+But actually there's one more.
+
+1890
+01:43:58,320 --> 01:44:00,520
+It's called what functions.
+
+1891
+01:44:00,520 --> 01:44:03,360
+And it was introduced after Kepler
+
+1892
+01:44:03,360 --> 01:44:06,440
+and it's essentially a what level interchange
+
+1893
+01:44:06,440 --> 01:44:09,640
+of instructions where you can share registers
+
+1894
+01:44:09,640 --> 01:44:10,880
+with other threads.
+
+1895
+01:44:10,880 --> 01:44:11,720
+Okay.
+
+1896
+01:44:11,720 --> 01:44:13,440
+And remember, this is something I've never said before.
+
+1897
+01:44:13,440 --> 01:44:17,160
+Share registers and information with other threads.
+
+1898
+01:44:17,160 --> 01:44:18,000
+Okay.
+
+1899
+01:44:18,000 --> 01:44:18,920
+So let's see how that works.
+
+1900
+01:44:20,240 --> 01:44:22,320
+There are a few different types of what functions.
+
+1901
+01:44:22,320 --> 01:44:25,080
+So let's go through all of them.
+
+1902
+01:44:25,080 --> 01:44:27,280
+The first one is called what vote.
+
+1903
+01:44:27,280 --> 01:44:28,360
+Okay.
+
+1904
+01:44:28,360 --> 01:44:30,240
+And elections are coming up.
+
+1905
+01:44:30,240 --> 01:44:32,200
+Probably some of you are going to vote.
+
+1906
+01:44:33,080 --> 01:44:36,720
+So this is essentially what is known as a broadcast
+
+1907
+01:44:36,720 --> 01:44:39,040
+and reduce function,
+
+1908
+01:44:39,040 --> 01:44:44,040
+where all the threads give their condition or predicate,
+
+1909
+01:44:45,520 --> 01:44:47,400
+essentially as it's called.
+
+1910
+01:44:47,400 --> 01:44:50,040
+And then there are three types of things you can do.
+
+1911
+01:44:50,040 --> 01:44:55,040
+You can do all, which means are all the threads true?
+
+1912
+01:44:55,720 --> 01:44:58,760
+You can do any, is any thread true?
+
+1913
+01:44:58,760 --> 01:44:59,880
+And then you can do a ballot.
+
+1914
+01:44:59,880 --> 01:45:01,480
+And I'll come to ballot in a little bit.
+
+1915
+01:45:01,480 --> 01:45:02,320
+Okay.
+
+1916
+01:45:02,320 --> 01:45:05,800
+So let's start with all, probably the most important.
+
+1917
+01:45:05,800 --> 01:45:10,040
+And remember, this is happening inside a kernel per thread.
+
+1918
+01:45:10,040 --> 01:45:10,920
+Okay.
+
+1919
+01:45:10,920 --> 01:45:12,200
+But here's what's happening.
+
+1920
+01:45:12,200 --> 01:45:13,040
+Okay.
+
+1921
+01:45:13,040 --> 01:45:17,120
+So this line, in result, all at a predicate,
+
+1922
+01:45:17,920 --> 01:45:19,840
+is local to the thread.
+
+1923
+01:45:20,680 --> 01:45:21,520
+Okay.
+
+1924
+01:45:21,520 --> 01:45:23,360
+So here are two examples.
+
+1925
+01:45:23,360 --> 01:45:25,120
+In result, all,
+
+1926
+01:45:25,120 --> 01:45:26,880
+and IDX.X equals one.
+
+1927
+01:45:27,760 --> 01:45:30,080
+What do you think the result of that is called?
+
+1928
+01:45:33,000 --> 01:45:33,840
+False?
+
+1929
+01:45:35,520 --> 01:45:36,520
+False always?
+
+1930
+01:45:42,040 --> 01:45:44,960
+Like this one is 233 by 233 by 245.
+
+1931
+01:45:47,520 --> 01:45:49,480
+Warp size could be anything.
+
+1932
+01:45:49,480 --> 01:45:51,560
+Warp size is always done.
+
+1933
+01:45:56,480 --> 01:45:57,320
+Yeah.
+
+1934
+01:45:57,320 --> 01:45:59,080
+This, again, remember, this is in the warp.
+
+1935
+01:45:59,080 --> 01:46:00,240
+It's not per block.
+
+1936
+01:46:00,240 --> 01:46:01,960
+It's per warp.
+
+1937
+01:46:01,960 --> 01:46:05,160
+So is this always false?
+
+1938
+01:46:14,240 --> 01:46:15,080
+So, okay.
+
+1939
+01:46:15,080 --> 01:46:15,920
+Let's break it down.
+
+1940
+01:46:15,920 --> 01:46:17,560
+Let's take 1D blocks.
+
+1941
+01:46:17,560 --> 01:46:18,640
+Okay.
+
+1942
+01:46:18,640 --> 01:46:22,000
+Then I, let's take 1D blocks from zero to 1024,
+
+1943
+01:46:22,000 --> 01:46:22,840
+or zero to 512.
+
+1944
+01:46:22,840 --> 01:46:24,360
+It doesn't really matter.
+
+1945
+01:46:24,360 --> 01:46:26,040
+Is this true for any warp?
+
+1946
+01:46:27,240 --> 01:46:28,080
+No.
+
+1947
+01:46:28,080 --> 01:46:28,920
+No.
+
+1948
+01:46:28,920 --> 01:46:29,760
+Okay.
+
+1949
+01:46:29,760 --> 01:46:32,000
+Let's take 2D blocks.
+
+1950
+01:46:32,000 --> 01:46:34,720
+Let's take 16 by 16, or 32 by 32.
+
+1951
+01:46:34,720 --> 01:46:36,480
+Whatever your preference is.
+
+1952
+01:46:36,480 --> 01:46:39,040
+Is this true for any warp in a 2D block?
+
+1953
+01:46:40,800 --> 01:46:44,080
+That all of the threads should be per IDX.X equals one.
+
+1954
+01:46:45,080 --> 01:46:46,640
+No, right?
+
+1955
+01:46:46,640 --> 01:46:47,560
+What about this?
+
+1956
+01:46:48,840 --> 01:46:52,320
+Let me take, what's the IDX?
+
+1957
+01:46:53,360 --> 01:46:54,360
+Yeah.
+
+1958
+01:46:54,360 --> 01:46:55,200
+Okay.
+
+1959
+01:46:55,200 --> 01:46:56,040
+What about this?
+
+1960
+01:47:11,920 --> 01:47:12,760
+Oh, sorry.
+
+1961
+01:47:13,760 --> 01:47:15,080
+What about this?
+
+1962
+01:47:16,480 --> 01:47:20,120
+I'm sure none of you have ever given blocks this way.
+
+1963
+01:47:20,120 --> 01:47:22,440
+So I have one, 512 comma one.
+
+1964
+01:47:24,080 --> 01:47:25,720
+Will it be true for any of them?
+
+1965
+01:47:29,960 --> 01:47:30,800
+Yeah.
+
+1966
+01:47:32,040 --> 01:47:34,240
+But that IDX.X equals one?
+
+1967
+01:47:39,160 --> 01:47:41,480
+What happens if this is zero?
+
+1968
+01:47:41,640 --> 01:47:42,680
+Oh.
+
+1969
+01:47:42,680 --> 01:47:44,480
+If this is zero, that becomes true.
+
+1970
+01:47:45,640 --> 01:47:46,480
+Okay.
+
+1971
+01:47:46,480 --> 01:47:48,920
+If our block configuration is that,
+
+1972
+01:47:48,920 --> 01:47:52,240
+and this is that IDX.X equals zero, then this is true.
+
+1973
+01:47:52,240 --> 01:47:54,680
+That's the only condition I know is this is true.
+
+1974
+01:47:54,680 --> 01:47:56,400
+Otherwise, it's false.
+
+1975
+01:47:56,400 --> 01:47:57,240
+Okay.
+
+1976
+01:47:58,840 --> 01:47:59,680
+R.
+
+1977
+01:47:59,680 --> 01:48:01,560
+R is one index.
+
+1978
+01:48:01,560 --> 01:48:02,400
+I hate those lines.
+
+1979
+01:48:02,400 --> 01:48:03,240
+I hate them.
+
+1980
+01:48:03,240 --> 01:48:04,080
+I hate them.
+
+1981
+01:48:04,080 --> 01:48:04,920
+I hate them.
+
+1982
+01:48:04,920 --> 01:48:07,160
+So, I hate one index.
+
+1983
+01:48:07,160 --> 01:48:08,000
+Yeah.
+
+1984
+01:48:08,000 --> 01:48:08,840
+Zero.
+
+1985
+01:48:08,840 --> 01:48:09,680
+Everything starts with zero.
+
+1986
+01:48:09,680 --> 01:48:10,520
+Okay.
+
+1987
+01:48:12,480 --> 01:48:14,520
+The second one.
+
+1988
+01:48:14,520 --> 01:48:17,680
+In result, all thread IDX.X greater than 60.
+
+1989
+01:48:17,680 --> 01:48:19,480
+What about this line?
+
+1990
+01:48:19,480 --> 01:48:21,640
+Let's start with one deep block again.
+
+1991
+01:48:21,640 --> 01:48:23,760
+Let's say we are going from zero to 512.
+
+1992
+01:48:25,600 --> 01:48:27,840
+For the first one, all,
+
+1993
+01:48:29,160 --> 01:48:30,000
+what happens?
+
+1994
+01:48:30,000 --> 01:48:30,840
+True or false?
+
+1995
+01:48:31,840 --> 01:48:33,640
+The IDX.X greater than 60?
+
+1996
+01:48:33,640 --> 01:48:34,880
+False.
+
+1997
+01:48:34,880 --> 01:48:35,800
+Second one.
+
+1998
+01:48:35,800 --> 01:48:38,640
+33, 32 to 63.
+
+1999
+01:48:38,640 --> 01:48:39,480
+False.
+
+2000
+01:48:39,480 --> 01:48:40,320
+False.
+
+2001
+01:48:40,360 --> 01:48:42,480
+What about the third one?
+
+2002
+01:48:42,480 --> 01:48:45,800
+64 to 95.
+
+2003
+01:48:45,800 --> 01:48:47,600
+True, because they're all index.
+
+2004
+01:48:47,600 --> 01:48:48,440
+Okay.
+
+2005
+01:48:48,440 --> 01:48:50,400
+So, all of you get this.
+
+2006
+01:48:50,400 --> 01:48:51,280
+What about this?
+
+2007
+01:48:53,960 --> 01:48:57,400
+Now we have, instead of doing all, we are doing any.
+
+2008
+01:48:57,400 --> 01:48:59,920
+Let's take one deep, one deep blocks.
+
+2009
+01:48:59,920 --> 01:49:00,960
+Any of this true?
+
+2010
+01:49:03,480 --> 01:49:04,600
+Which one?
+
+2011
+01:49:04,600 --> 01:49:05,920
+Or all of them?
+
+2012
+01:49:05,920 --> 01:49:07,280
+One deep, one deep block.
+
+2013
+01:49:08,360 --> 01:49:09,320
+Only the first one.
+
+2014
+01:49:09,320 --> 01:49:11,480
+No other words will have this.
+
+2015
+01:49:11,480 --> 01:49:12,520
+What about two deep?
+
+2016
+01:49:12,520 --> 01:49:13,880
+Maybe 16 by 16.
+
+2017
+01:49:21,240 --> 01:49:24,520
+16 by 16, how many words will have this true?
+
+2018
+01:49:25,400 --> 01:49:26,240
+All of them.
+
+2019
+01:49:26,240 --> 01:49:28,120
+All the words will have it.
+
+2020
+01:49:28,120 --> 01:49:28,960
+Yeah.
+
+2021
+01:49:28,960 --> 01:49:31,880
+Because all the words will have at least two rows, right?
+
+2022
+01:49:31,880 --> 01:49:33,840
+So one row of Y, another row of Y.
+
+2023
+01:49:33,840 --> 01:49:35,360
+You have 32 threads.
+
+2024
+01:49:35,360 --> 01:49:38,160
+So one row of Y has 16, so you get 32.
+
+2025
+01:49:38,200 --> 01:49:41,080
+So each of them will at least have one pair.
+
+2026
+01:49:41,080 --> 01:49:41,920
+What about this?
+
+2027
+01:49:41,920 --> 01:49:44,160
+One deep, in this case.
+
+2028
+01:49:49,240 --> 01:49:50,640
+Yeah, first one is gonna be false,
+
+2029
+01:49:50,640 --> 01:49:52,080
+and then the rest will be true.
+
+2030
+01:49:52,080 --> 01:49:52,920
+What about two deep?
+
+2031
+01:49:52,920 --> 01:49:54,400
+Let's say 32 by 32.
+
+2032
+01:49:56,360 --> 01:49:58,200
+Is this true or is this false?
+
+2033
+01:49:58,200 --> 01:49:59,960
+In a 32 by 32 case.
+
+2034
+01:50:02,280 --> 01:50:04,960
+All these ones, thread IDs will never go to 16.
+
+2035
+01:50:04,960 --> 01:50:07,360
+Now, here's a different one.
+
+2036
+01:50:07,440 --> 01:50:08,520
+64 by eight.
+
+2037
+01:50:11,360 --> 01:50:14,720
+If you have a 64 by eight block, what happens to this?
+
+2038
+01:50:18,400 --> 01:50:21,640
+Other than the first one per row, right?
+
+2039
+01:50:21,640 --> 01:50:23,800
+So you have 64 by eight.
+
+2040
+01:50:23,800 --> 01:50:27,880
+The first one is gonna be zero to 31, zero.
+
+2041
+01:50:27,880 --> 01:50:32,560
+The second one is gonna be 32 to 63, zero, right?
+
+2042
+01:50:32,560 --> 01:50:34,760
+So that is gonna have this true.
+
+2043
+01:50:34,760 --> 01:50:38,480
+Same zero to 31, comma, one, which is false.
+
+2044
+01:50:38,480 --> 01:50:42,800
+Then the second one will be 32 to 63, comma, one.
+
+2045
+01:50:42,800 --> 01:50:43,840
+And that'll be true.
+
+2046
+01:50:43,840 --> 01:50:46,880
+So again, you don't have to just put threadIDx.x.
+
+2047
+01:50:46,880 --> 01:50:48,480
+Yeah, I just put it there for exercise.
+
+2048
+01:50:48,480 --> 01:50:51,160
+You can literally put any condition here if you want.
+
+2049
+01:50:53,000 --> 01:50:56,360
+Where can this and this...
+
+2050
+01:50:58,080 --> 01:50:58,920
+Any ideas?
+
+2051
+01:50:59,920 --> 01:51:02,600
+You can kind of check if all the threads are active
+
+2052
+01:51:02,600 --> 01:51:03,640
+or not, for example.
+
+2053
+01:51:05,280 --> 01:51:08,240
+For example, all I can tell you are all my threads active.
+
+2054
+01:51:08,240 --> 01:51:09,560
+Maybe do something then.
+
+2055
+01:51:09,560 --> 01:51:10,560
+And you can tell you,
+
+2056
+01:51:10,560 --> 01:51:13,680
+oh, there's only one thread in my warp active.
+
+2057
+01:51:13,680 --> 01:51:14,520
+You know?
+
+2058
+01:51:14,520 --> 01:51:15,560
+I can remember, I told you,
+
+2059
+01:51:15,560 --> 01:51:17,040
+if you have 32 threads in a warp,
+
+2060
+01:51:17,040 --> 01:51:20,880
+all 32 will stay active or not active, right?
+
+2061
+01:51:20,880 --> 01:51:22,800
+If in our performance lab,
+
+2062
+01:51:22,800 --> 01:51:25,520
+we saw how we can exit warps early,
+
+2063
+01:51:25,520 --> 01:51:26,840
+all the threads are not active,
+
+2064
+01:51:26,960 --> 01:51:30,000
+exit warps early, all the threads are done.
+
+2065
+01:51:30,000 --> 01:51:32,880
+If only one thread is doing stuff,
+
+2066
+01:51:32,880 --> 01:51:34,160
+annoyingly staying around,
+
+2067
+01:51:34,160 --> 01:51:35,000
+we might just be like,
+
+2068
+01:51:35,000 --> 01:51:38,560
+no, exit, I don't really care about the other thread.
+
+2069
+01:51:38,560 --> 01:51:40,520
+In certain algorithms, you can do that.
+
+2070
+01:51:45,120 --> 01:51:46,960
+Yes, absolutely.
+
+2071
+01:51:46,960 --> 01:51:49,400
+So let's take a look at our last warp warp,
+
+2072
+01:51:49,400 --> 01:51:51,800
+which is Barrett, okay?
+
+2073
+01:51:51,800 --> 01:51:54,040
+So in Barrett, remember,
+
+2074
+01:51:54,040 --> 01:51:56,680
+there's a neat thing about this.
+
+2075
+01:51:57,520 --> 01:51:58,880
+You have 32 threads for warp.
+
+2076
+01:51:58,880 --> 01:52:01,120
+How many bits does an int have,
+
+2077
+01:52:01,120 --> 01:52:02,400
+int on an unsigned int?
+
+2078
+01:52:03,560 --> 01:52:04,400
+32, right?
+
+2079
+01:52:05,760 --> 01:52:07,640
+Oh, what you can do is,
+
+2080
+01:52:07,640 --> 01:52:11,480
+instead of just getting the result from all of these,
+
+2081
+01:52:11,480 --> 01:52:15,000
+you can share information between all the threads
+
+2082
+01:52:15,000 --> 01:52:19,200
+by doing a Barrett where each thread warps
+
+2083
+01:52:19,200 --> 01:52:22,040
+and the result is stored either yes or no,
+
+2084
+01:52:22,040 --> 01:52:25,120
+true or false, within an unsigned int.
+
+2085
+01:52:25,120 --> 01:52:27,240
+So what we're essentially doing is,
+
+2086
+01:52:28,120 --> 01:52:30,160
+if your Barrett here is,
+
+2087
+01:52:30,160 --> 01:52:32,880
+let's say Barrett of threadIdx.x equals one,
+
+2088
+01:52:34,560 --> 01:52:39,000
+only the threadIdx.x equals one bit is going to be true.
+
+2089
+01:52:39,000 --> 01:52:42,000
+All the rest are going to be false, right?
+
+2090
+01:52:42,000 --> 01:52:44,040
+So you're essentially voting.
+
+2091
+01:52:44,040 --> 01:52:45,960
+And then if you have something like this
+
+2092
+01:52:45,960 --> 01:52:48,520
+where threadIdx.x warp two,
+
+2093
+01:52:48,520 --> 01:52:51,240
+where you're checking even or odd thread IDs,
+
+2094
+01:52:51,240 --> 01:52:52,960
+then you'll get alternate numbers.
+
+2095
+01:52:53,840 --> 01:52:58,280
+Now, what you can then do with this
+
+2096
+01:52:58,280 --> 01:52:59,720
+is a few different things, okay?
+
+2097
+01:52:59,720 --> 01:53:02,400
+Here are a few crazy ideas that you can do with this.
+
+2098
+01:53:04,400 --> 01:53:09,400
+You can count how many bits are true or false
+
+2099
+01:53:09,440 --> 01:53:14,440
+by checking the number or doing XOR and XOR not,
+
+2100
+01:53:14,920 --> 01:53:17,800
+you can check how many bits are true.
+
+2101
+01:53:17,800 --> 01:53:19,000
+Like I was mentioning before,
+
+2102
+01:53:19,000 --> 01:53:21,440
+if you wanted to see how many threads are active,
+
+2103
+01:53:21,440 --> 01:53:23,240
+you can do this and check how many threads
+
+2104
+01:53:23,240 --> 01:53:25,440
+are active within your warp.
+
+2105
+01:53:25,440 --> 01:53:30,320
+You can also, for example, in your path tracer,
+
+2106
+01:53:30,320 --> 01:53:34,880
+check what type of materials things are in your warp, right?
+
+2107
+01:53:34,880 --> 01:53:39,360
+You can, if you wanted to, you can see is material A,
+
+2108
+01:53:39,360 --> 01:53:41,560
+and then you can do a balance within the warp
+
+2109
+01:53:41,560 --> 01:53:44,760
+to see how much divergence you're going to have.
+
+2110
+01:53:44,760 --> 01:53:47,720
+You can also do in-warp reduction with this.
+
+2111
+01:53:47,720 --> 01:53:49,080
+If you wanted to do,
+
+2112
+01:53:49,080 --> 01:53:54,080
+remember how we had the warp shuffle, I think,
+
+2113
+01:53:56,120 --> 01:53:57,600
+back in performance lab,
+
+2114
+01:53:57,600 --> 01:54:00,640
+you can do that with this to count.
+
+2115
+01:54:00,640 --> 01:54:04,400
+So this becomes really useful in understanding
+
+2116
+01:54:04,400 --> 01:54:08,840
+how your warp is operating, okay?
+
+2117
+01:54:08,840 --> 01:54:12,240
+So warp-warp then essentially allows
+
+2118
+01:54:12,240 --> 01:54:15,080
+removing branch divergence like was suggested,
+
+2119
+01:54:16,040 --> 01:54:18,000
+and it reduces dependency on shared memory
+
+2120
+01:54:18,000 --> 01:54:20,160
+because everything is happening in registers.
+
+2121
+01:54:20,160 --> 01:54:21,760
+You're not necessarily sharing registers,
+
+2122
+01:54:21,760 --> 01:54:23,960
+but you're sharing information about registers,
+
+2123
+01:54:23,960 --> 01:54:26,160
+and that is going to all the other threads.
+
+2124
+01:54:27,440 --> 01:54:29,320
+Inactive return threads always return zero,
+
+2125
+01:54:29,320 --> 01:54:30,880
+so they don't participate in it.
+
+2126
+01:54:32,440 --> 01:54:35,480
+And so with CUDA 9, there were a few changes here,
+
+2127
+01:54:35,480 --> 01:54:38,800
+so they added a mask and stuff in that.
+
+2128
+01:54:38,800 --> 01:54:43,800
+So that you can read in the programming guide for CUDA.
+
+2129
+01:54:43,920 --> 01:54:45,560
+Okay.
+
+2130
+01:54:45,560 --> 01:54:47,120
+The last thing we are going to cover today
+
+2131
+01:54:47,120 --> 01:54:48,960
+is called shuffle.
+
+2132
+01:54:48,960 --> 01:54:51,480
+Again, this works on a warp as well.
+
+2133
+01:54:52,320 --> 01:54:56,320
+So shuffle allows you, as we were doing in warp-warp,
+
+2134
+01:54:56,320 --> 01:54:58,360
+we were sharing information about the register.
+
+2135
+01:54:58,360 --> 01:55:00,640
+We were sharing whether it's true or false.
+
+2136
+01:55:00,640 --> 01:55:03,960
+Shuffle actually allows you to share values
+
+2137
+01:55:03,960 --> 01:55:05,600
+between threads, okay?
+
+2138
+01:55:06,520 --> 01:55:08,680
+Other threads can essentially read registers
+
+2139
+01:55:08,680 --> 01:55:10,640
+without using shared memory,
+
+2140
+01:55:10,640 --> 01:55:12,840
+and it's all a single instruction.
+
+2141
+01:55:12,840 --> 01:55:15,160
+There are four types of shuffle.
+
+2142
+01:55:15,160 --> 01:55:16,760
+You can shuffle indexed,
+
+2143
+01:55:16,760 --> 01:55:19,640
+where you're shuffling based on some index value,
+
+2144
+01:55:19,640 --> 01:55:21,640
+like in an array.
+
+2145
+01:55:21,640 --> 01:55:24,800
+You can do shift-right, also called up.
+
+2146
+01:55:24,800 --> 01:55:27,600
+You can shift-left, also called down.
+
+2147
+01:55:27,600 --> 01:55:29,080
+And then you can shift-butterfly,
+
+2148
+01:55:29,080 --> 01:55:30,960
+where you're exchanging.
+
+2149
+01:55:30,960 --> 01:55:32,160
+Okay.
+
+2150
+01:55:32,160 --> 01:55:34,200
+So let's take a look at this.
+
+2151
+01:55:34,200 --> 01:55:36,400
+So for index-shuffle,
+
+2152
+01:55:36,400 --> 01:55:39,520
+what we have is this function here,
+
+2153
+01:55:39,520 --> 01:55:40,560
+which is shuffle.
+
+2154
+01:55:41,520 --> 01:55:43,480
+You've given your variable.
+
+2155
+01:55:43,480 --> 01:55:45,000
+You've given your source name.
+
+2156
+01:55:45,840 --> 01:55:47,680
+Again, remember where we heard lane from.
+
+2157
+01:55:47,680 --> 01:55:49,240
+It's in the debugger, right?
+
+2158
+01:55:49,240 --> 01:55:51,960
+When we say lane, we mean on the hardware level.
+
+2159
+01:55:51,960 --> 01:55:54,000
+So this is lane of the warp.
+
+2160
+01:55:54,000 --> 01:55:55,840
+So you go from zero to 31 only.
+
+2161
+01:55:55,840 --> 01:55:57,240
+There's no 32nd name.
+
+2162
+01:55:58,240 --> 01:55:59,960
+And then you give your warp size,
+
+2163
+01:55:59,960 --> 01:56:03,440
+which is always 32 in our case, okay?
+
+2164
+01:56:03,440 --> 01:56:04,640
+So here's what happens.
+
+2165
+01:56:06,160 --> 01:56:08,320
+If source name is less than width,
+
+2166
+01:56:08,320 --> 01:56:10,680
+then source name is always 32.
+
+2167
+01:56:10,680 --> 01:56:12,400
+It doesn't work to wrap around.
+
+2168
+01:56:13,400 --> 01:56:16,960
+If width is not equal to warp size,
+
+2169
+01:56:16,960 --> 01:56:18,760
+then shuffle behaves as a subset.
+
+2170
+01:56:18,760 --> 01:56:20,680
+So you can actually shuffle
+
+2171
+01:56:20,680 --> 01:56:22,960
+only between like 16 threads, for example.
+
+2172
+01:56:22,960 --> 01:56:24,920
+You don't have to go all the way to 32.
+
+2173
+01:56:26,240 --> 01:56:27,960
+If a source name is inactive,
+
+2174
+01:56:27,960 --> 01:56:29,960
+means it may have returned already,
+
+2175
+01:56:29,960 --> 01:56:31,120
+then the value is undefined.
+
+2176
+01:56:31,120 --> 01:56:32,040
+Don't do that, okay?
+
+2177
+01:56:32,040 --> 01:56:32,880
+Check your stuff.
+
+2178
+01:56:34,280 --> 01:56:36,800
+And if all of these conditions are done,
+
+2179
+01:56:36,800 --> 01:56:39,120
+then the return value is a copy.
+
+2180
+01:56:39,120 --> 01:56:41,600
+Remember, copy, not the exact variable
+
+2181
+01:56:41,640 --> 01:56:43,040
+of the value and source name.
+
+2182
+01:56:43,040 --> 01:56:46,000
+So you're giving, let's say,
+
+2183
+01:56:46,000 --> 01:56:49,960
+let's say you have int t equals thread ID x.x.
+
+2184
+01:56:49,960 --> 01:56:53,400
+You want to get another thread ID.
+
+2185
+01:56:53,400 --> 01:56:54,920
+You would put t here.
+
+2186
+01:56:54,920 --> 01:56:58,560
+You would put the source name of whichever thread you want.
+
+2187
+01:56:58,560 --> 01:57:03,560
+And that lane's value comes back here as a copy, okay?
+
+2188
+01:57:03,760 --> 01:57:05,160
+So let's look at an example.
+
+2189
+01:57:06,400 --> 01:57:09,800
+If we have warp source name,
+
+2190
+01:57:09,800 --> 01:57:12,320
+and I'm doing an example of 16 threads
+
+2191
+01:57:12,320 --> 01:57:14,560
+just because it's convenient in PowerPoint.
+
+2192
+01:57:16,440 --> 01:57:17,800
+This is my source name value.
+
+2193
+01:57:17,800 --> 01:57:19,240
+It's some jumbled value here
+
+2194
+01:57:19,240 --> 01:57:22,720
+based on my randomness that I wanted to have.
+
+2195
+01:57:22,720 --> 01:57:25,800
+It's really odd numbers in that area, okay?
+
+2196
+01:57:27,480 --> 01:57:31,280
+What's happening is if we do t var of source name,
+
+2197
+01:57:31,280 --> 01:57:32,880
+okay, that's what that is.
+
+2198
+01:57:35,000 --> 01:57:39,200
+Then what we are essentially doing for thread zero,
+
+2199
+01:57:40,280 --> 01:57:45,280
+the value in t should be the value of var in lane 15.
+
+2200
+01:57:46,920 --> 01:57:48,480
+Okay, you understand that?
+
+2201
+01:57:48,480 --> 01:57:50,520
+t equals var of source name.
+
+2202
+01:57:50,520 --> 01:57:54,640
+So 15 is here, var is p, so we bring p here.
+
+2203
+01:57:55,560 --> 01:57:59,960
+And similarly, and n is from index 13 and so on and so on.
+
+2204
+01:57:59,960 --> 01:58:02,960
+You can have whatever function or distribution
+
+2205
+01:58:02,960 --> 01:58:05,720
+you want for source name, depending on your algorithm,
+
+2206
+01:58:05,720 --> 01:58:09,440
+but you can mix and read values from different threads
+
+2207
+01:58:10,080 --> 01:58:11,800
+using shuffle, okay?
+
+2208
+01:58:11,800 --> 01:58:13,040
+Any questions on this?
+
+2209
+01:58:17,080 --> 01:58:20,280
+Okay, so, and then there's shuffler
+
+2210
+01:58:20,280 --> 01:58:23,640
+where you have not index,
+
+2211
+01:58:23,640 --> 01:58:25,560
+but you're essentially moving all the values
+
+2212
+01:58:25,560 --> 01:58:28,440
+by some index.
+
+2213
+01:58:28,440 --> 01:58:33,440
+So in this case, you would have the lane ID,
+
+2214
+01:58:34,160 --> 01:58:36,280
+and then you would give your delta.
+
+2215
+01:58:36,280 --> 01:58:37,960
+Delta is by how many you move.
+
+2216
+01:58:37,960 --> 01:58:39,760
+In this case, you're moving by five.
+
+2217
+01:58:40,720 --> 01:58:44,000
+For anything below five, no change happens, okay?
+
+2218
+01:58:44,000 --> 01:58:46,000
+T doesn't change.
+
+2219
+01:58:46,000 --> 01:58:50,320
+But after five, then we start reading the value problem.
+
+2220
+01:58:50,320 --> 01:58:51,800
+So it's shuffling the values up.
+
+2221
+01:58:51,800 --> 01:58:54,120
+There's no circular shuffle here, okay?
+
+2222
+01:58:56,120 --> 01:58:59,640
+Similarly, you can shuffle down, which is the reverse.
+
+2223
+01:58:59,640 --> 01:59:02,600
+And the last values in this case don't shuffle.
+
+2224
+01:59:02,600 --> 01:59:05,240
+They don't circle, again, not circular.
+
+2225
+01:59:06,240 --> 01:59:09,440
+I should have edited that, but it's not circular.
+
+2226
+01:59:09,440 --> 01:59:11,080
+Maybe I should fix the slides.
+
+2227
+01:59:11,920 --> 01:59:14,600
+Okay, any questions on shuffle up and shuffle down?
+
+2228
+01:59:17,280 --> 01:59:18,120
+All right.
+
+2229
+01:59:18,120 --> 01:59:21,000
+The last one is the more powerful one.
+
+2230
+01:59:21,000 --> 01:59:23,320
+It's called shuffle XOR, okay?
+
+2231
+01:59:30,080 --> 01:59:31,920
+I don't know about shuffle up and shuffle down.
+
+2232
+01:59:31,920 --> 01:59:32,760
+I haven't thought about it.
+
+2233
+01:59:32,760 --> 01:59:34,600
+I haven't used it.
+
+2234
+01:59:35,360 --> 01:59:36,880
+Shuffle XOR, definitely.
+
+2235
+01:59:39,240 --> 01:59:42,240
+Yeah, so I don't have any more things.
+
+2236
+01:59:42,240 --> 01:59:43,760
+I'm pretty sure somebody's used it.
+
+2237
+01:59:43,760 --> 01:59:45,600
+I just haven't, so I don't remember.
+
+2238
+01:59:48,240 --> 01:59:52,880
+Okay, so now shuffle XOR is pretty interesting
+
+2239
+01:59:52,880 --> 01:59:56,240
+because what you're doing is now you're copying
+
+2240
+01:59:56,240 --> 02:00:01,240
+from a link on a bitwise operation of your own link, okay?
+
+2241
+02:00:01,400 --> 02:00:03,760
+So it's essentially like an exchange,
+
+2242
+02:00:03,760 --> 02:00:05,800
+but it doesn't have to be two-way.
+
+2243
+02:00:05,800 --> 02:00:08,520
+It can be a one-way exchange as well.
+
+2244
+02:00:08,520 --> 02:00:12,360
+And one of the ways to do this is based on bits
+
+2245
+02:00:12,360 --> 02:00:14,080
+that are flipped, okay?
+
+2246
+02:00:14,080 --> 02:00:17,320
+So the API here is you give your variable
+
+2247
+02:00:17,320 --> 02:00:20,720
+that you want to shuffle.
+
+2248
+02:00:20,720 --> 02:00:23,200
+You give the lane mask and the bit that's flipped.
+
+2249
+02:00:23,200 --> 02:00:25,240
+For which we'll just assume it's 32 for now,
+
+2250
+02:00:25,240 --> 02:00:27,720
+or 16 in my next example.
+
+2251
+02:00:27,720 --> 02:00:29,160
+But here's what it means.
+
+2252
+02:00:29,160 --> 02:00:33,520
+The target lane is the XOR version of lane ID
+
+2253
+02:00:34,160 --> 02:00:35,200
+and lane mask, okay?
+
+2254
+02:00:35,200 --> 02:00:37,280
+There's not and or or, it's XOR, okay?
+
+2255
+02:00:37,280 --> 02:00:38,120
+Remember that.
+
+2256
+02:00:38,120 --> 02:00:40,480
+So there's always going to be a target lane
+
+2257
+02:00:40,480 --> 02:00:42,000
+that is not zero or one.
+
+2258
+02:00:43,480 --> 02:00:46,800
+The result then is VAR of target lane, okay?
+
+2259
+02:00:48,200 --> 02:00:50,640
+Let's take a look at an example, okay?
+
+2260
+02:00:53,080 --> 02:00:58,080
+So we said P equals VAR of mark and lane ID is XOR, right?
+
+2261
+02:00:58,080 --> 02:01:01,000
+Zero and one, what is the XOR?
+
+2262
+02:01:01,000 --> 02:01:01,840
+One.
+
+2263
+02:01:02,760 --> 02:01:07,760
+So the XOR is one, T of one is B, right?
+
+2264
+02:01:11,600 --> 02:01:12,440
+Let's come here.
+
+2265
+02:01:12,440 --> 02:01:15,880
+One and one XOR is zero.
+
+2266
+02:01:15,880 --> 02:01:17,840
+So T becomes A, it's zero.
+
+2267
+02:01:18,800 --> 02:01:20,160
+All right, let's come here.
+
+2268
+02:01:21,280 --> 02:01:24,000
+Now remember, these are two and three, not zero and mark.
+
+2269
+02:01:24,000 --> 02:01:25,520
+So let's come here.
+
+2270
+02:01:25,560 --> 02:01:28,960
+Now remember, these are two and three, not zero and mark.
+
+2271
+02:01:28,960 --> 02:01:34,360
+Two XORed with one is T.
+
+2272
+02:01:34,360 --> 02:01:38,240
+So I'll do bitwise operations here.
+
+2273
+02:01:38,240 --> 02:01:42,320
+So two is one, zero, and one is zero, one.
+
+2274
+02:01:43,400 --> 02:01:46,920
+XOR is one, one, which is three, right?
+
+2275
+02:01:46,920 --> 02:01:48,560
+So you get these two swap.
+
+2276
+02:01:48,560 --> 02:01:51,480
+So the three and XOR one, so if I switch that here,
+
+2277
+02:01:51,480 --> 02:01:54,080
+this becomes one, this becomes zero.
+
+2278
+02:01:54,080 --> 02:01:55,800
+So now you get C2.
+
+2279
+02:01:55,800 --> 02:01:59,360
+And so this is essentially, you compute the mask
+
+2280
+02:01:59,360 --> 02:02:00,800
+and then you get the result back.
+
+2281
+02:02:00,800 --> 02:02:04,040
+So this is a very, very quick way
+
+2282
+02:02:04,040 --> 02:02:07,880
+to get neighboring values, as an example.
+
+2283
+02:02:13,600 --> 02:02:15,800
+Yes, so the mask can be a full integer.
+
+2284
+02:02:15,800 --> 02:02:18,280
+I'll just use one for convenience.
+
+2285
+02:02:18,280 --> 02:02:20,240
+You can have a full integer.
+
+2286
+02:02:20,240 --> 02:02:23,680
+So, but I'm doing the same for...
+
+2287
+02:02:23,680 --> 02:02:24,640
+No, no, not at all.
+
+2288
+02:02:24,640 --> 02:02:28,000
+Again, those are just, so no, it doesn't have to be.
+
+2289
+02:02:28,000 --> 02:02:30,160
+I just made it simple as an example.
+
+2290
+02:02:30,160 --> 02:02:32,400
+So I have more examples here.
+
+2291
+02:02:33,440 --> 02:02:38,440
+So again, this is now mask one, one, one, one,
+
+2292
+02:02:38,560 --> 02:02:41,040
+two, two, two, two, four, four, four, four, okay?
+
+2293
+02:02:41,040 --> 02:02:44,400
+So this is how you would do other things.
+
+2294
+02:02:45,600 --> 02:02:48,080
+The reason I selected the specific order,
+
+2295
+02:02:48,080 --> 02:02:49,280
+what does it look like?
+
+2296
+02:02:51,240 --> 02:02:54,920
+Why do you think I picked the specific order?
+
+2297
+02:02:58,920 --> 02:03:02,200
+They're not switching between labels, right?
+
+2298
+02:03:02,200 --> 02:03:05,800
+This is switching between labels, for sure.
+
+2299
+02:03:08,880 --> 02:03:10,480
+Or what does that remind you of?
+
+2300
+02:03:12,760 --> 02:03:14,960
+Can, yeah, you're on the right path.
+
+2301
+02:03:14,960 --> 02:03:19,280
+So you can decide for this on your own.
+
+2302
+02:03:19,400 --> 02:03:20,800
+But what I want to say is,
+
+2303
+02:03:20,800 --> 02:03:22,480
+don't think of it as individual bits.
+
+2304
+02:03:22,480 --> 02:03:24,840
+Think of it as XOR of integers.
+
+2305
+02:03:24,840 --> 02:03:27,560
+That's the most important thing, okay?
+
+2306
+02:03:27,560 --> 02:03:29,800
+So where is this useful?
+
+2307
+02:03:29,800 --> 02:03:30,640
+Remember this?
+
+2308
+02:03:31,920 --> 02:03:34,520
+Okay, remember this crazy code that we wrote?
+
+2309
+02:03:35,960 --> 02:03:40,960
+So now, this whole thing in all of these instructions
+
+2310
+02:03:41,320 --> 02:03:43,880
+can actually be done with Shuffle.
+
+2311
+02:03:43,880 --> 02:03:47,400
+So what you essentially can do is
+
+2312
+02:03:48,400 --> 02:03:50,840
+share memory of thread ID X.
+
+2313
+02:03:50,840 --> 02:03:54,080
+You can do this, I'd call the same thread on it.
+
+2314
+02:03:54,080 --> 02:03:55,680
+But the same thing with Shuffle.
+
+2315
+02:03:55,680 --> 02:03:57,520
+We can say X equals Shuffle,
+
+2316
+02:03:57,520 --> 02:04:00,240
+X name ID, what does it do?
+
+2317
+02:04:00,240 --> 02:04:03,000
+And then you're gonna get that information back in X,
+
+2318
+02:04:03,000 --> 02:04:05,040
+and then you can add it in that register.
+
+2319
+02:04:06,080 --> 02:04:07,720
+If you want to do it without the same thread,
+
+2320
+02:04:07,720 --> 02:04:10,720
+then without memory, then you can use something like that.
+
+2321
+02:04:12,000 --> 02:04:14,840
+So trust me, this works.
+
+2322
+02:04:14,840 --> 02:04:16,560
+If I take the example,
+
+2323
+02:04:16,560 --> 02:04:18,720
+if I try to explain that, it'll take me 20 minutes,
+
+2324
+02:04:18,720 --> 02:04:20,720
+but trust me that it works.
+
+2325
+02:04:20,720 --> 02:04:22,720
+And this results in a pretty significant
+
+2326
+02:04:22,720 --> 02:04:23,920
+performance improvement.
+
+2327
+02:04:25,200 --> 02:04:26,840
+Our shared memory and shared memory unsafe.
+
+2328
+02:04:26,840 --> 02:04:29,160
+So this implementation that we have here
+
+2329
+02:04:29,160 --> 02:04:30,680
+is shared memory unsafe,
+
+2330
+02:04:30,680 --> 02:04:33,280
+where we're using all the threads, okay?
+
+2331
+02:04:33,280 --> 02:04:35,240
+So shared memory is this part.
+
+2332
+02:04:35,240 --> 02:04:37,560
+Shared memory unsafe is much faster.
+
+2333
+02:04:37,560 --> 02:04:39,360
+But using Shuffle, it's a lot faster.
+
+2334
+02:04:41,280 --> 02:04:43,320
+Because you're sharing that information
+
+2335
+02:04:43,320 --> 02:04:45,800
+through registers and adding it a lot faster.
+
+2336
+02:04:45,840 --> 02:04:47,360
+You don't even have to go to shared memory
+
+2337
+02:04:47,360 --> 02:04:48,880
+or using registers.
+
+2338
+02:04:48,880 --> 02:04:50,080
+That's why it's faster.
+
+2339
+02:04:52,920 --> 02:04:54,840
+And also shared memory doesn't use
+
+2340
+02:04:54,840 --> 02:04:56,000
+any shared memory per block.
+
+2341
+02:04:56,000 --> 02:04:58,440
+So you lose that resource requirement.
+
+2342
+02:05:00,160 --> 02:05:04,240
+So because of that,
+
+2343
+02:05:04,240 --> 02:05:08,480
+this Shuffle way of doing our last warp reduction
+
+2344
+02:05:08,480 --> 02:05:11,200
+will always be faster than shared memory.
+
+2345
+02:05:11,200 --> 02:05:13,160
+It's also safer because we don't have to use
+
+2346
+02:05:13,160 --> 02:05:14,480
+volatile anymore.
+
+2347
+02:05:14,480 --> 02:05:16,480
+And we also don't have to using threads.
+
+2348
+02:05:17,720 --> 02:05:20,240
+And not having that shared memory makes it better.
+
+2349
+02:05:20,240 --> 02:05:22,200
+So let's see how we can implement that.
+
+2350
+02:05:22,200 --> 02:05:24,120
+Now I said I want to explain it in that slide,
+
+2351
+02:05:24,120 --> 02:05:24,960
+but I haven't.
+
+2352
+02:05:27,560 --> 02:05:31,400
+So we can do warp reduce using Shuffle XOR
+
+2353
+02:05:31,400 --> 02:05:32,800
+by doing this, okay?
+
+2354
+02:05:32,800 --> 02:05:36,400
+So sum plus equals Shuffle XOR of 16.
+
+2355
+02:05:37,320 --> 02:05:38,840
+And then the second iteration,
+
+2356
+02:05:38,840 --> 02:05:41,640
+we will do sum plus Shuffle XOR of eight.
+
+2357
+02:05:41,640 --> 02:05:44,880
+And the reason this works is something like this.
+
+2358
+02:05:44,880 --> 02:05:46,800
+Now, our warp size is 32.
+
+2359
+02:05:46,800 --> 02:05:48,320
+I can't put everything in the PowerPoint,
+
+2360
+02:05:48,320 --> 02:05:50,400
+so I'll put it to 16.
+
+2361
+02:05:50,400 --> 02:05:52,640
+Shuffle XOR value of eight,
+
+2362
+02:05:52,640 --> 02:05:56,520
+does all of these registers come here?
+
+2363
+02:05:58,280 --> 02:06:02,440
+If you're at home, you do Shuffle XOR of zero and eight.
+
+2364
+02:06:02,440 --> 02:06:04,760
+XOR of zero and eight is eight.
+
+2365
+02:06:04,760 --> 02:06:06,000
+And you get here.
+
+2366
+02:06:06,000 --> 02:06:09,960
+XOR of eight and one is nine.
+
+2367
+02:06:09,960 --> 02:06:11,400
+So you get the next value.
+
+2368
+02:06:12,240 --> 02:06:13,800
+XOR of eight and two is actually 10.
+
+2369
+02:06:13,800 --> 02:06:15,920
+So you kind of get this additive mechanism
+
+2370
+02:06:15,920 --> 02:06:18,000
+that you get here.
+
+2371
+02:06:18,000 --> 02:06:19,280
+Then you get four.
+
+2372
+02:06:19,280 --> 02:06:20,480
+Shuffle XOR of four.
+
+2373
+02:06:20,480 --> 02:06:22,120
+And you bring those elements here.
+
+2374
+02:06:23,360 --> 02:06:25,040
+So now you're not even using shared memory.
+
+2375
+02:06:25,040 --> 02:06:27,480
+You're still registered.
+
+2376
+02:06:27,480 --> 02:06:31,280
+So the time you were taking in shared memory
+
+2377
+02:06:31,280 --> 02:06:35,920
+that was two or four cycles is registered as one cycle.
+
+2378
+02:06:35,920 --> 02:06:37,440
+So it's a lot faster.
+
+2379
+02:06:37,440 --> 02:06:38,680
+And same as before,
+
+2380
+02:06:38,680 --> 02:06:41,120
+we don't really care about this memory anymore.
+
+2381
+02:06:41,840 --> 02:06:42,680
+So that still applies.
+
+2382
+02:06:42,680 --> 02:06:43,520
+We don't care about that.
+
+2383
+02:06:43,520 --> 02:06:45,040
+We can overwrite it, no problem.
+
+2384
+02:06:45,040 --> 02:06:48,360
+So by doing this, Shuffle XOR any of these,
+
+2385
+02:06:48,360 --> 02:06:52,040
+what's actually happening is these four values come here,
+
+2386
+02:06:52,040 --> 02:06:54,040
+but also these four values go here.
+
+2387
+02:06:54,040 --> 02:06:54,880
+That's happening.
+
+2388
+02:06:54,880 --> 02:06:57,400
+I haven't drawn it here, but that's actually happening,
+
+2389
+02:06:57,400 --> 02:06:59,200
+but we don't really care about that.
+
+2390
+02:07:00,400 --> 02:07:02,640
+So this becomes a lot faster.
+
+2391
+02:07:02,640 --> 02:07:05,280
+So in code, this is what it looks like.
+
+2392
+02:07:05,280 --> 02:07:09,560
+So instead of having all of these lines of code here,
+
+2393
+02:07:12,080 --> 02:07:14,880
+all of these six lines of code here,
+
+2394
+02:07:15,960 --> 02:07:20,960
+we go to these two lines.
+
+2395
+02:07:23,320 --> 02:07:28,320
+Then we have a for loop that goes from warp size to mass.
+
+2396
+02:07:29,280 --> 02:07:32,400
+And all we have to do is do the Shuffle XOR
+
+2397
+02:07:32,400 --> 02:07:34,560
+and the value store the sum.
+
+2398
+02:07:35,840 --> 02:07:37,600
+This can also be done with ShuffleDown,
+
+2399
+02:07:37,640 --> 02:07:40,360
+but it's much easier with XOR.
+
+2400
+02:07:45,360 --> 02:07:47,800
+We can also do this for all the warps.
+
+2401
+02:07:47,800 --> 02:07:51,320
+So let's say we have 1024 threads.
+
+2402
+02:07:51,320 --> 02:07:53,200
+We have 32 warps.
+
+2403
+02:07:53,200 --> 02:07:56,320
+All 32 warps can compute their own sum.
+
+2404
+02:07:57,280 --> 02:08:01,880
+And then the 32 warps can do 32 additions for each warp.
+
+2405
+02:08:01,880 --> 02:08:04,320
+So now it becomes a lot faster to do as well.
+
+2406
+02:08:04,320 --> 02:08:06,080
+And then you can write the final result
+
+2407
+02:08:06,080 --> 02:08:07,840
+to the global memory.
+
+2408
+02:08:10,040 --> 02:08:13,440
+Here's the full code for ShuffleToBlockReduce,
+
+2409
+02:08:13,440 --> 02:08:16,880
+where we start with,
+
+2410
+02:08:18,040 --> 02:08:19,760
+we only use shared memory of 32
+
+2411
+02:08:19,760 --> 02:08:22,560
+so that we are storing the warp results.
+
+2412
+02:08:22,560 --> 02:08:23,960
+For warp, we are storing the results
+
+2413
+02:08:23,960 --> 02:08:26,600
+of using shared memory for the entire thing.
+
+2414
+02:08:27,480 --> 02:08:29,560
+We have a lane and warp ID.
+
+2415
+02:08:30,880 --> 02:08:33,400
+And then we are doing warpReduceSum here,
+
+2416
+02:08:33,400 --> 02:08:35,360
+which I'll come to in the next slide.
+
+2417
+02:08:36,560 --> 02:08:39,760
+And then we are, if we come here, down here,
+
+2418
+02:08:39,760 --> 02:08:42,880
+we are only adding the shared memory for warp
+
+2419
+02:08:42,880 --> 02:08:44,960
+where the source lane is here.
+
+2420
+02:08:46,560 --> 02:08:49,080
+And this is what the kernel looks like
+
+2421
+02:08:50,600 --> 02:08:52,120
+on the global model,
+
+2422
+02:08:52,120 --> 02:08:55,080
+where we are calling this blockSumReduce and getting,
+
+2423
+02:08:55,080 --> 02:08:57,160
+so this is blockSumReduce here,
+
+2424
+02:08:58,240 --> 02:09:01,680
+and warpReduce is here, this one.
+
+2425
+02:09:03,640 --> 02:09:06,640
+So yeah, that's a whole different way
+
+2426
+02:09:06,640 --> 02:09:08,280
+of writing a reduction algorithm
+
+2427
+02:09:08,280 --> 02:09:12,240
+where you significantly reduce how much shared memory you use.
+
+2428
+02:09:15,000 --> 02:09:16,760
+So conclusions for Shuffle.
+
+2429
+02:09:18,400 --> 02:09:21,680
+It is one of the needless tricks in the book.
+
+2430
+02:09:21,680 --> 02:09:23,440
+A lot of people don't use it.
+
+2431
+02:09:23,440 --> 02:09:26,000
+It requires a creative way of thinking about your algorithm
+
+2432
+02:09:26,000 --> 02:09:27,520
+like we saw with reduction.
+
+2433
+02:09:28,440 --> 02:09:29,720
+You can use it for a lot of things.
+
+2434
+02:09:29,720 --> 02:09:32,800
+You can use it for sorts, reduction, transpose, et cetera.
+
+2435
+02:09:33,560 --> 02:09:35,600
+And it always has excellent performance numbers
+
+2436
+02:09:35,600 --> 02:09:38,800
+because it's working on registers,
+
+2437
+02:09:38,800 --> 02:09:40,600
+not even with shared memory.
+
+2438
+02:09:40,600 --> 02:09:42,320
+So you don't have to use unsafe.
+
+2439
+02:09:42,320 --> 02:09:44,280
+You don't have to use sync threads.
+
+2440
+02:09:44,280 --> 02:09:46,720
+Can be used in different ways for different algorithms.
+
+2441
+02:09:46,720 --> 02:09:50,400
+And it also has no bank conflicts, which shared memory has.
+
+2442
+02:09:50,400 --> 02:09:53,840
+So if you find a way to use this in your algorithms,
+
+2443
+02:09:53,840 --> 02:09:56,480
+so certainly think about it and try to use it.
+
+2444
+02:09:58,120 --> 02:10:01,440
+So that brings us to the end of our advanced product topic.
+
+2445
+02:10:01,440 --> 02:10:05,320
+So with this, you're very well set on how you use CUDA.
+
+2446
+02:10:06,120 --> 02:10:09,280
+We'll be on next week,
+
+2447
+02:10:09,280 --> 02:10:12,800
+Liam will be covering machine learning with CUDA.
+
+2448
+02:10:12,800 --> 02:10:15,760
+So that'll be, those are two amazing lectures as well,
+
+2449
+02:10:15,760 --> 02:10:18,920
+especially if you have that machine learning interest
+
+2450
+02:10:18,920 --> 02:10:21,120
+as well as computer vision or NLP
+
+2451
+02:10:21,120 --> 02:10:23,480
+or image processing and stuff.
+
+2452
+02:10:24,320 --> 02:10:28,720
+And then Rachel and Wayne will cover intro to WebGL.
+
+2453
+02:10:28,720 --> 02:10:30,880
+We'll do an intro to welcome recording
+
+2454
+02:10:30,880 --> 02:10:32,400
+and then on next Wednesday
+
+2455
+02:10:32,400 --> 02:10:35,280
+will be project five recitations for Vulkan and WebGL.
+
+2456
+02:10:36,480 --> 02:10:37,640
+So that's it for today.
+

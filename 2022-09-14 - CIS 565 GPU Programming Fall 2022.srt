@@ -1,0 +1,14220 @@
+1
+00:00:00,000 --> 00:00:11,400
+Okay, so I want to get started today by talking a little bit about read-me's.
+
+2
+00:00:11,400 --> 00:00:19,680
+How many of you in project one, how many of you did a proper read-me for the first time
+
+3
+00:00:19,680 --> 00:00:23,080
+when you're writing GitHub projects?
+
+4
+00:00:23,080 --> 00:00:27,040
+And I'm talking about a public open source read-me, I'm not talking about a read-me that
+
+5
+00:00:27,040 --> 00:00:31,320
+you submit with build instructions and stuff, a read-me that has screenshots and that has
+
+6
+00:00:31,320 --> 00:00:33,800
+performance analysis.
+
+7
+00:00:33,800 --> 00:00:34,800
+Anybody else raising their hands?
+
+8
+00:00:34,800 --> 00:00:37,800
+Okay, so I see a few more.
+
+9
+00:00:37,800 --> 00:00:46,120
+So remember, the reason read-me's are important is because when people like myself, we are
+
+10
+00:00:46,120 --> 00:00:51,360
+going out there and looking for really, really smart students to hire, it's very unlikely
+
+11
+00:00:51,360 --> 00:00:55,800
+that I'm actually looking at your code and your algorithm.
+
+12
+00:00:55,800 --> 00:00:58,840
+Like I'm sure they're amazing, all of you sitting in this room are probably the smartest
+
+13
+00:00:58,840 --> 00:01:06,040
+people that are graduating this year, but I'm not always looking at your code, I'm looking
+
+14
+00:01:06,040 --> 00:01:07,040
+at your results.
+
+15
+00:01:07,040 --> 00:01:11,920
+I'm looking at the impact you've created, and that is seen through your reading.
+
+16
+00:01:11,920 --> 00:01:19,080
+So as much as you put into your project, let's say for project zero, you spend five days,
+
+17
+00:01:19,080 --> 00:01:22,560
+for project one, you're going to spend a week, for path tracing, you're going to spend more
+
+18
+00:01:22,560 --> 00:01:23,560
+than two weeks on it.
+
+19
+00:01:24,320 --> 00:01:29,920
+The result of the two weeks is summarized into your read-me, so imagine how much impact
+
+20
+00:01:29,920 --> 00:01:31,920
+that should have.
+
+21
+00:01:31,920 --> 00:01:33,880
+So let's talk a little bit more about that.
+
+22
+00:01:33,880 --> 00:01:38,840
+Let's talk about what makes for a good read-me, what do people look for, and you always want
+
+23
+00:01:38,840 --> 00:01:39,840
+to remember the audience.
+
+24
+00:01:39,840 --> 00:01:43,840
+So let me touch on the audience a little bit.
+
+25
+00:01:43,840 --> 00:01:50,160
+How many of you have spoken to recruiters, company, technical recruiters, people from
+
+26
+00:01:50,160 --> 00:01:52,440
+HR reaching out to you?
+
+27
+00:01:52,440 --> 00:01:53,440
+Probably everybody, right?
+
+28
+00:01:53,440 --> 00:01:57,680
+If you've looked for an internship, you've looked for a job, you've spoken to them.
+
+29
+00:01:57,680 --> 00:01:59,960
+How many of them are actually technical?
+
+30
+00:01:59,960 --> 00:02:05,320
+How many of them have written maybe 15 lines of code in their life?
+
+31
+00:02:05,320 --> 00:02:06,320
+Very, very few.
+
+32
+00:02:06,320 --> 00:02:07,320
+Right?
+
+33
+00:02:07,320 --> 00:02:09,760
+Most of them probably zero.
+
+34
+00:02:09,760 --> 00:02:14,760
+So they don't always understand if you give them super technical information, and that's
+
+35
+00:02:14,760 --> 00:02:16,400
+going to be your first audience.
+
+36
+00:02:16,400 --> 00:02:21,640
+Most of the time as a student, if you're getting into an interview process, you're likely doing
+
+37
+00:02:21,840 --> 00:02:24,840
+a phone screen with an HR person.
+
+38
+00:02:24,840 --> 00:02:30,040
+And your job at that level is just to get to the next step.
+
+39
+00:02:30,040 --> 00:02:34,800
+It's not to convince the HR person that you're the most amazing, if you're able to do that,
+
+40
+00:02:34,800 --> 00:02:35,800
+fantastic.
+
+41
+00:02:35,800 --> 00:02:41,960
+But what the HR person is going to look for is, hey, if I recommend this to my technical
+
+42
+00:02:41,960 --> 00:02:45,040
+lead, is he going to continue the process?
+
+43
+00:02:45,040 --> 00:02:49,840
+Or is he going to think that I'm basically like, that's kind of the decisions HR people
+
+44
+00:02:49,840 --> 00:02:50,840
+are trying to make.
+
+45
+00:02:51,040 --> 00:02:53,280
+So you want to be speaking to them.
+
+46
+00:02:53,280 --> 00:02:57,000
+And then you also want to be speaking to people like me, who are very technical, who understand
+
+47
+00:02:57,000 --> 00:03:03,480
+the work you're doing, and want to see that, hey, this student is really smart, and I want
+
+48
+00:03:03,480 --> 00:03:05,480
+to hire him because he's doing amazing work.
+
+49
+00:03:05,480 --> 00:03:09,200
+So you want to be able to balance both of those things.
+
+50
+00:03:09,200 --> 00:03:13,200
+So let's look at those tips about what makes for a good readme and how you should structure
+
+51
+00:03:13,200 --> 00:03:14,200
+it.
+
+52
+00:03:15,040 --> 00:03:21,880
+The first thing is that you want to provide your context and your contact info.
+
+53
+00:03:21,880 --> 00:03:25,800
+Talk a little bit about the project, not in full detail.
+
+54
+00:03:25,800 --> 00:03:29,320
+You should start with what is this project?
+
+55
+00:03:29,320 --> 00:03:33,640
+It's performance analysis, it's CUDA points, it's a path tracer, you know, very, very simple,
+
+56
+00:03:33,640 --> 00:03:34,640
+very succinctly.
+
+57
+00:03:34,640 --> 00:03:39,760
+And because you're in the position of, hey, here's my information, if you like my project,
+
+58
+00:03:39,760 --> 00:03:41,880
+reach out to me, share your contact info.
+
+59
+00:03:41,880 --> 00:03:46,320
+You may not do that later in your career, like if I'm writing an open source project,
+
+60
+00:03:46,320 --> 00:03:49,320
+it's unlikely that I'm putting my contact information up front.
+
+61
+00:03:49,320 --> 00:03:51,320
+But in your position, you want to be doing that.
+
+62
+00:03:51,320 --> 00:03:56,760
+You want to share your contact information, your LinkedIn, your GitHub, so that anybody
+
+63
+00:03:56,760 --> 00:04:00,880
+who's looking at the project is able to reach out to you, okay?
+
+64
+00:04:00,880 --> 00:04:05,320
+And you want to put your best image up right up front, you know, very clearly that showcases
+
+65
+00:04:05,320 --> 00:04:09,960
+exactly the work you've done.
+
+66
+00:04:10,040 --> 00:04:15,640
+And then once you've passed that, you want to show a little bit of walkthrough, you know,
+
+67
+00:04:15,640 --> 00:04:20,360
+use screenshots, use debug images about what you've done.
+
+68
+00:04:20,360 --> 00:04:26,040
+So this is a great example from a few years ago about how, I believe this was computer
+
+69
+00:04:26,040 --> 00:04:27,040
+vision, right?
+
+70
+00:04:27,040 --> 00:04:32,440
+So how you take an input, run it through different algorithms, what are the intermediate stages,
+
+71
+00:04:32,440 --> 00:04:34,840
+and how you come to the end result.
+
+72
+00:04:34,840 --> 00:04:41,000
+And what this shows is you have a clear understanding of the work you've done, and a clear understanding
+
+73
+00:04:41,000 --> 00:04:43,480
+of how to explain the work you've done.
+
+74
+00:04:43,480 --> 00:04:48,440
+You can be the smartest engineer, inventing the craziest algorithms.
+
+75
+00:04:48,440 --> 00:04:54,560
+But if you're not going to explain the value of that algorithm, and how it benefits the
+
+76
+00:04:54,560 --> 00:04:59,520
+team you're working on, people are not going to understand it.
+
+77
+00:04:59,520 --> 00:05:07,120
+So it's really important to communicate clearly and succinctly what the flow is, and how to
+
+78
+00:05:07,120 --> 00:05:10,760
+understand it.
+
+79
+00:05:10,760 --> 00:05:15,400
+And then you also want to annotate, again, going back to, you know, let's say, the audience
+
+80
+00:05:15,400 --> 00:05:20,640
+of HR people, they may or may not understand what a CUDA path tracer is.
+
+81
+00:05:20,640 --> 00:05:27,320
+Maybe somebody at NVIDIA does, but maybe somebody at, you know, pick your favorite new company
+
+82
+00:05:28,320 --> 00:05:32,920
+probably doesn't understand what a path tracer is, and what's involved in a path tracer.
+
+83
+00:05:32,920 --> 00:05:37,320
+So you want to annotate, you want to showcase the different features.
+
+84
+00:05:37,320 --> 00:05:41,840
+We, most of us in this room are coming from a graphics background, so we understand what
+
+85
+00:05:41,840 --> 00:05:44,080
+the different features in this kind of an image are.
+
+86
+00:05:44,080 --> 00:05:47,720
+There's reflections, refractions, caustics, and other things.
+
+87
+00:05:47,720 --> 00:05:52,800
+But the average run-of-the-mill HR person, or even the software developer who doesn't
+
+88
+00:05:52,800 --> 00:05:55,640
+have a graphics background, isn't going to understand this feature.
+
+89
+00:05:56,360 --> 00:06:03,000
+Not all of this comes for free, so you want to be able to highlight those.
+
+90
+00:06:03,000 --> 00:06:05,520
+And then you want to include debug screenshots.
+
+91
+00:06:05,520 --> 00:06:09,160
+This, I cannot state this enough.
+
+92
+00:06:09,160 --> 00:06:15,880
+If you include debug screenshots, I am going to give you brownie points, because what it
+
+93
+00:06:15,880 --> 00:06:22,440
+tells me is, you know how to use a debugger, you know what the steps in the process are,
+
+94
+00:06:22,440 --> 00:06:28,840
+you understand the different phases of your algorithm, and you're able to use that information
+
+95
+00:06:28,840 --> 00:06:31,800
+to then make your algorithm better.
+
+96
+00:06:31,800 --> 00:06:36,240
+It checks so many boxes that I'm pretty sure those four points that I said aren't even
+
+97
+00:06:36,240 --> 00:06:38,480
+covering it.
+
+98
+00:06:38,480 --> 00:06:42,960
+Debug images are some of the, if other than the best screenshot you put up there, debug
+
+99
+00:06:42,960 --> 00:06:47,520
+images are probably the best thing you can add in your read, okay?
+
+100
+00:06:47,600 --> 00:06:55,280
+So they really communicate the value that you understand your algorithms and your implementation.
+
+101
+00:06:55,280 --> 00:07:02,240
+So the other thing is, you also want to include side-by-side comparisons.
+
+102
+00:07:02,240 --> 00:07:04,320
+It's one thing to include one image.
+
+103
+00:07:04,320 --> 00:07:10,400
+If you just include this image, something like this or this, it's fine.
+
+104
+00:07:10,400 --> 00:07:15,400
+You know, we get it, we've all seen smooth spheres, nothing new.
+
+105
+00:07:15,400 --> 00:07:20,200
+But what you want to explain is, this is non-default.
+
+106
+00:07:20,200 --> 00:07:24,560
+You actually had to put in work to get it to be smoother.
+
+107
+00:07:24,560 --> 00:07:29,600
+This is default, this hard edge thing, and it doesn't look like a sphere, not to the
+
+108
+00:07:29,600 --> 00:07:31,000
+average person at least.
+
+109
+00:07:31,000 --> 00:07:37,440
+So having these side-by-side comparisons of the before and after of your work really help
+
+110
+00:07:37,440 --> 00:07:43,440
+the average reader understand what you're trying to implement and how you're trying
+
+111
+00:07:43,440 --> 00:07:45,600
+to improve on your work.
+
+112
+00:07:45,600 --> 00:07:46,600
+Bloopers.
+
+113
+00:07:46,600 --> 00:07:55,000
+So I spoke a little bit about this in last class, but again, just like debug images,
+
+114
+00:07:55,000 --> 00:08:02,920
+bloopers are amazing in showcasing that you as a developer are able to overcome problems.
+
+115
+00:08:02,920 --> 00:08:09,400
+Bloopers are a perfect example of that because they show that you stumbled, you ran into
+
+116
+00:08:09,400 --> 00:08:12,360
+a problem, but you were able to overcome that.
+
+117
+00:08:12,360 --> 00:08:16,480
+How you overcame it is something for your interview, you know, when you get to your
+
+118
+00:08:16,480 --> 00:08:22,280
+interview and the interviewer asks, tell me about a time you ran into a problem.
+
+119
+00:08:22,280 --> 00:08:26,560
+And boom, you're like, hey, can you open that, read me and see that screenshot?
+
+120
+00:08:26,560 --> 00:08:30,480
+Because now you're going to talk about something like this and be like, I ran into this, I
+
+121
+00:08:30,480 --> 00:08:34,600
+didn't know what was happening, I was only getting red and green and my path tracer didn't
+
+122
+00:08:34,600 --> 00:08:35,600
+work.
+
+123
+00:08:35,600 --> 00:08:38,600
+And then you start talking about how you solved it, right?
+
+124
+00:08:38,920 --> 00:08:44,840
+They're a perfect way of showcasing the problem you ran into visually, rather than just telling,
+
+125
+00:08:44,840 --> 00:08:50,120
+oh, I ran into this bug in a for loop, you know, and people won't get it.
+
+126
+00:08:50,120 --> 00:08:53,200
+You show this, people understand what this problem is.
+
+127
+00:08:53,200 --> 00:08:57,000
+Even if they don't know all the algorithms behind it, they understand, yes, that is a
+
+128
+00:08:57,000 --> 00:08:59,320
+problem that doesn't look right.
+
+129
+00:08:59,320 --> 00:09:03,360
+But when you show them your main screenshot that actually looks right, it clearly shows
+
+130
+00:09:03,360 --> 00:09:05,000
+that you were able to overcome it.
+
+131
+00:09:05,000 --> 00:09:07,840
+And then you tell the story of how you overcame it.
+
+132
+00:09:07,840 --> 00:09:15,120
+A few other bloopers I'll show again, from previous years, that was a void run.
+
+133
+00:09:15,120 --> 00:09:19,400
+How many of you did something like this in your voids?
+
+134
+00:09:19,400 --> 00:09:22,400
+Yeah, see, you're not alone.
+
+135
+00:09:22,400 --> 00:09:26,480
+People are, you're walking in the footsteps of many people who've come before you.
+
+136
+00:09:26,480 --> 00:09:29,680
+And I've run into the exact same problems you have.
+
+137
+00:09:29,680 --> 00:09:37,520
+So don't worry, don't feel that, oh, I'm, if I'm posting a blooper on that discussion
+
+138
+00:09:38,200 --> 00:09:39,200
+or anywhere that it's been embarrassing.
+
+139
+00:09:39,200 --> 00:09:40,200
+No, not at all.
+
+140
+00:09:40,200 --> 00:09:41,200
+We are all running into this.
+
+141
+00:09:41,200 --> 00:09:42,200
+I've been in your shoes once upon a time.
+
+142
+00:09:42,200 --> 00:09:47,560
+I've done way worse, trust me on that.
+
+143
+00:09:47,560 --> 00:09:51,200
+So really, really important to share bloopers.
+
+144
+00:09:51,200 --> 00:09:54,880
+Here are a couple more.
+
+145
+00:09:54,880 --> 00:10:00,200
+An inverted ducky, what's happening there, anybody guess what's happening there?
+
+146
+00:10:00,200 --> 00:10:06,600
+Especially our graphics folks.
+
+147
+00:10:06,680 --> 00:10:09,680
+The camera's perspective is wrong.
+
+148
+00:10:09,680 --> 00:10:12,680
+Yeah, I think that's it.
+
+149
+00:10:12,680 --> 00:10:16,080
+Yeah, the projection matrix is backwards, exactly.
+
+150
+00:10:16,080 --> 00:10:19,080
+The thing is rotating completely inverted.
+
+151
+00:10:19,080 --> 00:10:24,480
+This is from the path tracer.
+
+152
+00:10:24,480 --> 00:10:27,560
+I'm foreshadowing this, but this is from the path tracer.
+
+153
+00:10:27,560 --> 00:10:32,400
+If any of you run into this, please post it on that discussion, okay?
+
+154
+00:10:32,400 --> 00:10:35,600
+Anybody guess what's happening there?
+
+155
+00:10:35,600 --> 00:10:37,600
+Sorry?
+
+156
+00:10:37,600 --> 00:10:53,000
+Yeah, and they're probably also not doing any bounces and things like that.
+
+157
+00:10:53,000 --> 00:10:58,720
+And they're also not computing the normals correctly, I think.
+
+158
+00:10:58,720 --> 00:10:59,720
+Okay.
+
+159
+00:11:00,040 --> 00:11:04,040
+So as you can identify who did this.
+
+160
+00:11:04,040 --> 00:11:05,040
+Sometimes they look amazing.
+
+161
+00:11:05,040 --> 00:11:10,160
+Again, I'm not showing this because I want to brag or anything, although I think it's
+
+162
+00:11:10,160 --> 00:11:11,760
+pretty cool.
+
+163
+00:11:11,760 --> 00:11:12,760
+Anybody guess what's happening here?
+
+164
+00:11:12,760 --> 00:11:17,600
+This wasn't in the old 5.6.3 that we had, it was a fluid simulation.
+
+165
+00:11:17,600 --> 00:11:19,720
+Anybody guess what's happening?
+
+166
+00:11:19,720 --> 00:11:28,440
+Let me back it up again.
+
+167
+00:11:28,440 --> 00:11:40,400
+And then slow it down as well.
+
+168
+00:11:40,400 --> 00:11:41,400
+It's not the simulation.
+
+169
+00:11:41,400 --> 00:11:42,400
+What's going on here?
+
+170
+00:11:42,400 --> 00:11:43,400
+What looks weird in this?
+
+171
+00:11:43,400 --> 00:11:44,400
+The color.
+
+172
+00:11:44,400 --> 00:11:45,400
+What about the color?
+
+173
+00:11:45,400 --> 00:11:58,400
+So let me pick a nice place and stop it.
+
+174
+00:11:59,360 --> 00:12:02,360
+What's weird about this?
+
+175
+00:12:02,360 --> 00:12:03,360
+Great.
+
+176
+00:12:03,360 --> 00:12:04,360
+Yeah.
+
+177
+00:12:04,360 --> 00:12:09,360
+How did that happen?
+
+178
+00:12:09,360 --> 00:12:20,920
+So that happened because I had a bug in my code, and I'm talking about 2012 spring, okay?
+
+179
+00:12:20,920 --> 00:12:23,200
+So literally more than 10 years ago.
+
+180
+00:12:23,200 --> 00:12:30,120
+That happened because I had a bug in my OpenGL code where I was not clamping my color values
+
+181
+00:12:30,120 --> 00:12:32,320
+between zero and one.
+
+182
+00:12:32,320 --> 00:12:38,160
+So they went all sorts of ways, and they kind of like looped around, and they gave me really
+
+183
+00:12:38,160 --> 00:12:39,920
+cool ring out of it.
+
+184
+00:12:39,920 --> 00:12:43,160
+So complete bug, but it looks amazing.
+
+185
+00:12:43,160 --> 00:12:45,160
+So I can pass it.
+
+186
+00:12:45,160 --> 00:12:46,160
+Okay?
+
+187
+00:12:46,160 --> 00:12:48,000
+All right.
+
+188
+00:12:48,000 --> 00:12:57,040
+So any questions on images and debug views and bloopers so far on readings?
+
+189
+00:12:57,040 --> 00:13:07,160
+All of these in here are probably project two doesn't have any visuals, but hopefully
+
+190
+00:13:07,160 --> 00:13:13,200
+some of them are definitely in project three, right?
+
+191
+00:13:13,200 --> 00:13:20,040
+And don't worry about going and revisiting and updating these things, okay?
+
+192
+00:13:20,040 --> 00:13:21,040
+We will grade them.
+
+193
+00:13:21,040 --> 00:13:25,000
+You're free to work in a branch that you want, and once you receive your grade, go update
+
+194
+00:13:25,000 --> 00:13:26,000
+that project.
+
+195
+00:13:26,000 --> 00:13:27,000
+Please do that.
+
+196
+00:13:27,000 --> 00:13:28,000
+I encourage you to do that.
+
+197
+00:13:28,000 --> 00:13:32,880
+Just because the project is done and you've graded, it doesn't mean that repo is dead.
+
+198
+00:13:32,880 --> 00:13:33,880
+Okay?
+
+199
+00:13:33,880 --> 00:13:35,720
+All right.
+
+200
+00:13:35,720 --> 00:13:36,720
+So let's see.
+
+201
+00:13:36,720 --> 00:13:37,720
+All right.
+
+202
+00:13:37,720 --> 00:13:44,800
+So to recap, you want to do your images and stuff.
+
+203
+00:13:44,800 --> 00:13:50,720
+You want to add your bloopers, and for video and animated GIFs, the cellular tools, Lyscap
+
+204
+00:13:50,720 --> 00:13:51,720
+used to be a good one.
+
+205
+00:13:51,720 --> 00:13:52,720
+Screen to GIF is really nice.
+
+206
+00:13:52,720 --> 00:14:01,720
+If you're capturing videos, OBS, Open Broadcaster Studio, I think it's really good for videos.
+
+207
+00:14:01,720 --> 00:14:05,280
+So be sure that you're optimizing the settings.
+
+208
+00:14:05,280 --> 00:14:06,280
+Capture it in full HD.
+
+209
+00:14:06,840 --> 00:14:11,320
+Don't skimp on the resolution and stuff, so be sure to do all of that.
+
+210
+00:14:11,320 --> 00:14:12,320
+Demos are really good.
+
+211
+00:14:12,320 --> 00:14:14,600
+If you want to put a live demo link or something, it's good.
+
+212
+00:14:14,600 --> 00:14:20,520
+If you're putting in build instructions, that's good as well, so be sure to do that.
+
+213
+00:14:20,520 --> 00:14:21,520
+Include performance analysis.
+
+214
+00:14:21,520 --> 00:14:24,040
+You've done that as part of project one.
+
+215
+00:14:24,040 --> 00:14:28,920
+You'll certainly do that as part of project two, and be sure to continue doing that.
+
+216
+00:14:28,920 --> 00:14:34,240
+Again, it shows that you understand the value.
+
+217
+00:14:34,240 --> 00:14:40,480
+Even today, like this morning, I was talking to one of my engineers at Cesium who's working
+
+218
+00:14:40,480 --> 00:14:45,640
+on improving how textures are loaded, and I'm like, okay, you're going to work on this,
+
+219
+00:14:45,640 --> 00:14:47,480
+but tell him how much improvement I should expect.
+
+220
+00:14:47,480 --> 00:14:48,480
+Should it be 5%?
+
+221
+00:14:48,480 --> 00:14:49,480
+Should it be 15%?
+
+222
+00:14:49,480 --> 00:14:51,320
+Should it be 15%?
+
+223
+00:14:51,320 --> 00:14:56,880
+So just being able to get even preliminary numbers that showcase what the potential of
+
+224
+00:14:56,880 --> 00:15:01,960
+a feature improvement is becomes really, really valuable.
+
+225
+00:15:01,960 --> 00:15:04,880
+And then lastly, this line is A here.
+
+226
+00:15:04,880 --> 00:15:08,360
+There's 30 of you in this class.
+
+227
+00:15:08,360 --> 00:15:16,200
+There's probably hundreds of you across DMD, CGD, robotics, CIS, et cetera, right?
+
+228
+00:15:16,200 --> 00:15:19,280
+You want to focus on what you...
+
+229
+00:15:19,280 --> 00:15:23,680
+Even within the 30 projects in this class, you're going to have differences.
+
+230
+00:15:23,680 --> 00:15:24,680
+You're going to work on different things.
+
+231
+00:15:24,680 --> 00:15:25,680
+You're going to work on extra credits, right?
+
+232
+00:15:25,680 --> 00:15:28,920
+You want to highlight those.
+
+233
+00:15:28,920 --> 00:15:29,920
+I can...
+
+234
+00:15:29,920 --> 00:15:34,520
+Any recruiter I can connect with, I can be like, hey, go look at my CIS 5, 6, 7, 8 rules
+
+235
+00:15:34,520 --> 00:15:36,960
+and tell me which one would be good.
+
+236
+00:15:36,960 --> 00:15:39,080
+And what they're going to look for is how to differentiate.
+
+237
+00:15:39,080 --> 00:15:42,200
+They're going to see five projects that all look the same, and they're going to think,
+
+238
+00:15:42,200 --> 00:15:43,200
+oh, this is average.
+
+239
+00:15:43,200 --> 00:15:44,200
+Right?
+
+240
+00:15:44,200 --> 00:15:45,200
+They're going to...
+
+241
+00:15:45,200 --> 00:15:49,080
+Even if you've done the best one, you're going to have the five best projects, but they're
+
+242
+00:15:49,080 --> 00:15:52,680
+going to look, hey, these guys all did the same thing, so maybe there's nothing special
+
+243
+00:15:52,680 --> 00:15:53,680
+about it.
+
+244
+00:15:53,680 --> 00:15:59,760
+So it's as if you focus on what you need by showcasing side-by-side comparison, by annotating
+
+245
+00:15:59,760 --> 00:16:00,760
+your images.
+
+246
+00:16:00,760 --> 00:16:03,000
+That's how you differentiate yourself.
+
+247
+00:16:03,000 --> 00:16:09,520
+Even though you may have done the same implementation, focus on what's unique about you and then
+
+248
+00:16:09,520 --> 00:16:10,520
+highlight that.
+
+249
+00:16:10,520 --> 00:16:11,520
+That's the key thing.
+
+250
+00:16:11,520 --> 00:16:16,280
+You want to be able to communicate that value so that it's creating an impact that is helping
+
+251
+00:16:16,280 --> 00:16:19,800
+you get those interviews, helping you get those jobs, right?
+
+252
+00:16:19,800 --> 00:16:24,360
+So that's the ultimate goal of these read-me's.
+
+253
+00:16:24,360 --> 00:16:30,320
+Any questions on this?
+
+254
+00:16:30,320 --> 00:16:33,360
+So I've linked a bunch of really good read-me examples.
+
+255
+00:16:33,360 --> 00:16:37,200
+I'm not going to open most of them.
+
+256
+00:16:37,200 --> 00:16:43,200
+There's also a link on more of read-me guides and stuff, so all the links for you to check
+
+257
+00:16:43,200 --> 00:16:44,200
+out.
+
+258
+00:16:44,200 --> 00:16:47,840
+Now let's talk a little bit about graphs.
+
+259
+00:16:47,880 --> 00:16:48,880
+This is a graph from Anand's site.
+
+260
+00:16:48,880 --> 00:16:51,880
+I'm sure most of you have read similar charts like this.
+
+261
+00:16:51,880 --> 00:16:58,880
+What are some properties of a good chart?
+
+262
+00:16:58,880 --> 00:17:01,880
+This chart is an example of a good chart.
+
+263
+00:17:01,880 --> 00:17:05,880
+Tell me what are the key things in there that make it good.
+
+264
+00:17:05,880 --> 00:17:08,880
+Yeah, just shut up, you don't have to read it.
+
+265
+00:17:08,880 --> 00:17:11,880
+Well-annotated, and then some of these, whatever.
+
+266
+00:17:11,880 --> 00:17:14,880
+Tell me which part of it is well-annotated.
+
+267
+00:17:14,920 --> 00:17:19,920
+Well-annotated, well-annotated, well-annotated, well-annotated, well-annotated.
+
+268
+00:17:19,920 --> 00:17:26,920
+It sounds like it's already labeled but it says better so you know which one's better.
+
+269
+00:17:26,920 --> 00:17:31,920
+Yes, so yeah, I've highlighted on something very, very important that a lot of students,
+
+270
+00:17:31,920 --> 00:17:34,920
+and not just students, even professionals, miss on.
+
+271
+00:17:34,920 --> 00:17:37,920
+This very line here, higher is better.
+
+272
+00:17:37,920 --> 00:17:42,920
+How many of you did a chart, and put a point where you used time?
+
+273
+00:17:42,960 --> 00:17:46,960
+Probably at least half of you, if I remember correctly, maybe more,
+
+274
+00:17:46,960 --> 00:17:49,960
+where you're like, how much time did a simulation take,
+
+275
+00:17:49,960 --> 00:17:52,960
+or how many frames per second did something take, right?
+
+276
+00:17:52,960 --> 00:17:55,960
+Time is usually lower is better.
+
+277
+00:17:55,960 --> 00:17:59,960
+But if you're drawing a line like that, I'm going to think higher is better,
+
+278
+00:17:59,960 --> 00:18:01,960
+if you don't specify it, right?
+
+279
+00:18:01,960 --> 00:18:06,960
+So even in this chart, you always want to mention higher is better, lower is better.
+
+280
+00:18:06,960 --> 00:18:09,960
+Good point here.
+
+281
+00:18:09,960 --> 00:18:11,960
+What else is good about this?
+
+282
+00:18:12,000 --> 00:18:14,000
+I think...
+
+283
+00:18:20,000 --> 00:18:23,000
+Exactly.
+
+284
+00:18:23,000 --> 00:18:28,000
+So in these, both of these issues are different, except these two,
+
+285
+00:18:28,000 --> 00:18:32,000
+which are more flat, you have a founder's edition and a regular edition.
+
+286
+00:18:32,000 --> 00:18:37,000
+And then the 2080 and the 2080 founder's edition are similar products.
+
+287
+00:18:37,040 --> 00:18:41,040
+And then you have 1080 Ti and 1080 here, which are similar products.
+
+288
+00:18:41,040 --> 00:18:45,040
+So if you are doing, you're preparing different algorithms
+
+289
+00:18:45,040 --> 00:18:48,040
+with different settings within the same chart,
+
+290
+00:18:48,040 --> 00:18:50,040
+give them similar colors, okay?
+
+291
+00:18:50,040 --> 00:18:52,040
+You may give one light blue and dark blue,
+
+292
+00:18:52,040 --> 00:18:55,040
+you may give one yellow and orange kind of thing,
+
+293
+00:18:55,040 --> 00:18:58,040
+but make sure the colors mean something, okay?
+
+294
+00:18:58,040 --> 00:19:01,040
+What else?
+
+295
+00:19:01,040 --> 00:19:03,040
+What are some other good charts?
+
+296
+00:19:03,080 --> 00:19:08,080
+He specifies the configuration, the resolution, the quality.
+
+297
+00:19:08,080 --> 00:19:10,080
+Absolutely.
+
+298
+00:19:10,080 --> 00:19:13,080
+It says what was actually tested.
+
+299
+00:19:16,080 --> 00:19:19,080
+What else?
+
+300
+00:19:22,080 --> 00:19:25,080
+Yeah, good.
+
+301
+00:19:28,080 --> 00:19:31,080
+Yeah.
+
+302
+00:19:33,080 --> 00:19:37,080
+Yeah, especially when the lines are this close,
+
+303
+00:19:37,080 --> 00:19:42,080
+like especially for example, 161.8, 161.7, 161.6,
+
+304
+00:19:42,080 --> 00:19:46,080
+if these numbers one that you didn't have, right?
+
+305
+00:19:46,080 --> 00:19:48,080
+So you want to make sure that when it's this close,
+
+306
+00:19:48,080 --> 00:19:51,080
+you're always putting the number in.
+
+307
+00:19:51,080 --> 00:19:54,080
+What else is good about this chart?
+
+308
+00:19:55,080 --> 00:19:58,080
+Who's the audience for this?
+
+309
+00:19:59,080 --> 00:20:01,080
+Sorry?
+
+310
+00:20:01,120 --> 00:20:02,120
+Gamers, yeah?
+
+311
+00:20:02,120 --> 00:20:05,120
+Technical people, people who are interested in GPUs.
+
+312
+00:20:05,120 --> 00:20:07,120
+Does this speak to them?
+
+313
+00:20:07,120 --> 00:20:10,120
+Do they understand everything that's on this chart?
+
+314
+00:20:10,120 --> 00:20:11,120
+Yes, right?
+
+315
+00:20:11,120 --> 00:20:12,120
+They understand frames per second.
+
+316
+00:20:12,120 --> 00:20:13,120
+They understand GPUs.
+
+317
+00:20:13,120 --> 00:20:15,120
+They understand resolution.
+
+318
+00:20:15,120 --> 00:20:17,120
+They understand which game is it.
+
+319
+00:20:17,120 --> 00:20:19,120
+Ultra quality is generally a setting
+
+320
+00:20:19,120 --> 00:20:21,120
+that most gamers would understand.
+
+321
+00:20:21,120 --> 00:20:24,120
+So make sure that you understand your audience.
+
+322
+00:20:24,120 --> 00:20:27,120
+Now, if you show this to a non-technical person,
+
+323
+00:20:27,120 --> 00:20:29,120
+would they understand it?
+
+324
+00:20:29,160 --> 00:20:31,160
+Would they know what frames per second means?
+
+325
+00:20:31,160 --> 00:20:32,160
+Probably not.
+
+326
+00:20:32,160 --> 00:20:34,160
+They probably don't care.
+
+327
+00:20:34,160 --> 00:20:36,160
+So you always want to give information
+
+328
+00:20:36,160 --> 00:20:38,160
+that is right for your audience as well.
+
+329
+00:20:38,160 --> 00:20:40,160
+So all good points there.
+
+330
+00:20:40,160 --> 00:20:43,160
+Now, let's see some example of maybe not so good charts
+
+331
+00:20:43,160 --> 00:20:45,160
+and how we should improve them.
+
+332
+00:20:45,160 --> 00:20:48,160
+And these are all from previous years in Py65.
+
+333
+00:20:48,160 --> 00:20:49,160
+Not picking on names or anything,
+
+334
+00:20:49,160 --> 00:20:51,160
+but let's see why they're not good.
+
+335
+00:20:51,160 --> 00:20:53,160
+We saw why this is good,
+
+336
+00:20:53,160 --> 00:20:55,160
+but we also need to understand why they're not good
+
+337
+00:20:55,160 --> 00:20:58,160
+because if I go back and look at project one
+
+338
+00:20:58,200 --> 00:21:00,200
+and I'll be sure to share feedback
+
+339
+00:21:00,200 --> 00:21:02,200
+with you during the training,
+
+340
+00:21:02,200 --> 00:21:05,200
+is what changes we should make
+
+341
+00:21:05,200 --> 00:21:08,200
+so that your charts are actually good and useful.
+
+342
+00:21:08,200 --> 00:21:10,200
+So let's take a look at a few of those examples.
+
+343
+00:21:10,200 --> 00:21:13,200
+So tell me what's bad in both of these.
+
+344
+00:21:25,200 --> 00:21:27,200
+We discussed what's good, right?
+
+345
+00:21:27,240 --> 00:21:29,240
+What is missing from these?
+
+346
+00:21:34,240 --> 00:21:35,240
+Yeah, doesn't specify.
+
+347
+00:21:35,240 --> 00:21:36,240
+This time, right?
+
+348
+00:21:36,240 --> 00:21:38,240
+This time in milliseconds,
+
+349
+00:21:38,240 --> 00:21:40,240
+I'm going to assume green is better
+
+350
+00:21:40,240 --> 00:21:41,240
+because it's higher.
+
+351
+00:21:41,240 --> 00:21:44,240
+Higher to the right is always better by default,
+
+352
+00:21:44,240 --> 00:21:45,240
+but in this, it's not.
+
+353
+00:21:45,240 --> 00:21:47,240
+Red is better than this.
+
+354
+00:21:47,240 --> 00:21:48,240
+So yes.
+
+355
+00:21:48,240 --> 00:21:49,240
+What else?
+
+356
+00:21:49,280 --> 00:21:58,280
+Red is a bit wordy, yeah?
+
+357
+00:21:58,280 --> 00:21:59,280
+Because you're essentially saying
+
+358
+00:21:59,280 --> 00:22:01,280
+CPU line, work efficient,
+
+359
+00:22:01,280 --> 00:22:03,280
+trust implementations off-scan,
+
+360
+00:22:03,280 --> 00:22:05,280
+but you're repeating those here.
+
+361
+00:22:05,280 --> 00:22:07,280
+Average runtime off-scan.
+
+362
+00:22:07,280 --> 00:22:08,280
+That's it.
+
+363
+00:22:14,280 --> 00:22:15,280
+Four labels and three lines.
+
+364
+00:22:15,280 --> 00:22:18,280
+The CPU one, I believe is right.
+
+365
+00:22:19,280 --> 00:22:20,280
+Maybe.
+
+366
+00:22:20,280 --> 00:22:22,280
+It looks like that.
+
+367
+00:22:23,280 --> 00:22:24,280
+So, yeah.
+
+368
+00:22:26,280 --> 00:22:27,280
+What else?
+
+369
+00:22:28,280 --> 00:22:31,280
+There is no label for specific data.
+
+370
+00:22:31,280 --> 00:22:33,280
+The line is continuous,
+
+371
+00:22:33,280 --> 00:22:35,280
+but we don't really know
+
+372
+00:22:35,280 --> 00:22:38,280
+what are the actual number values.
+
+373
+00:22:38,280 --> 00:22:40,280
+You mean something like put a number here?
+
+374
+00:22:40,280 --> 00:22:42,280
+I would say that depends
+
+375
+00:22:42,280 --> 00:22:44,280
+on what you're trying to share.
+
+376
+00:22:44,280 --> 00:22:47,280
+Sometimes it can clutter the chart too much
+
+377
+00:22:47,320 --> 00:22:48,320
+if you put too many.
+
+378
+00:22:48,320 --> 00:22:50,320
+Like in this chart,
+
+379
+00:22:50,320 --> 00:22:52,320
+if you're putting four numbers on the lines,
+
+380
+00:22:52,320 --> 00:22:53,320
+I think that's fine.
+
+381
+00:22:53,320 --> 00:22:54,320
+If you're trying to put 15,
+
+382
+00:22:54,320 --> 00:22:56,320
+it's going to look too cluttered
+
+383
+00:22:56,320 --> 00:22:57,320
+and you won't know what to do.
+
+384
+00:22:57,320 --> 00:23:00,320
+So that depends on the situation.
+
+385
+00:23:00,320 --> 00:23:01,320
+What else?
+
+386
+00:23:11,320 --> 00:23:14,320
+Is this zero to 10?
+
+387
+00:23:14,320 --> 00:23:16,320
+Is it zero to one million?
+
+388
+00:23:16,360 --> 00:23:17,360
+Is it 10 to one million?
+
+389
+00:23:17,360 --> 00:23:19,360
+I have no idea.
+
+390
+00:23:19,360 --> 00:23:20,360
+Right?
+
+391
+00:23:20,360 --> 00:23:21,360
+What should I read in that?
+
+392
+00:23:21,360 --> 00:23:22,360
+What else?
+
+393
+00:23:30,360 --> 00:23:31,360
+Definitely.
+
+394
+00:23:31,360 --> 00:23:32,360
+Why are we zero?
+
+395
+00:23:32,360 --> 00:23:34,360
+Why are we wasting space?
+
+396
+00:23:34,360 --> 00:23:36,360
+And again,
+
+397
+00:23:36,360 --> 00:23:38,360
+we said time in milliseconds, right?
+
+398
+00:23:38,360 --> 00:23:42,360
+How many of us think 0.025 milliseconds?
+
+399
+00:23:42,400 --> 00:23:44,400
+None of us, right?
+
+400
+00:23:44,400 --> 00:23:46,400
+So again,
+
+401
+00:23:46,400 --> 00:23:49,400
+think about what scale you're using
+
+402
+00:23:49,400 --> 00:23:51,400
+for your time axis as well.
+
+403
+00:23:51,400 --> 00:23:53,400
+What else?
+
+404
+00:23:55,400 --> 00:23:57,400
+Maybe last column B, sorry.
+
+405
+00:23:58,400 --> 00:24:00,400
+Any other thoughts?
+
+406
+00:24:04,400 --> 00:24:06,400
+Doesn't say what GPU this was or not.
+
+407
+00:24:06,400 --> 00:24:07,400
+At all.
+
+408
+00:24:07,400 --> 00:24:09,400
+Anyway, right?
+
+409
+00:24:09,440 --> 00:24:10,440
+Right?
+
+410
+00:24:10,440 --> 00:24:13,440
+You can't predict anything.
+
+411
+00:24:14,440 --> 00:24:17,440
+What else that I can identify?
+
+412
+00:24:18,440 --> 00:24:19,440
+This one?
+
+413
+00:24:19,440 --> 00:24:20,440
+Yeah.
+
+414
+00:24:24,440 --> 00:24:26,440
+Specify it again.
+
+415
+00:24:26,440 --> 00:24:28,440
+Because this chart,
+
+416
+00:24:28,440 --> 00:24:29,440
+you're probably going to put it
+
+417
+00:24:29,440 --> 00:24:30,440
+in your presentation.
+
+418
+00:24:30,440 --> 00:24:31,440
+Right?
+
+419
+00:24:31,440 --> 00:24:32,440
+So specify it again.
+
+420
+00:24:32,440 --> 00:24:34,440
+Say that it takes you five more seconds
+
+421
+00:24:34,440 --> 00:24:36,440
+to write what GPU it's on.
+
+422
+00:24:36,440 --> 00:24:38,440
+Don't be stingy on things like that.
+
+423
+00:24:38,480 --> 00:24:39,480
+Okay?
+
+424
+00:24:39,480 --> 00:24:40,480
+All right.
+
+425
+00:24:40,480 --> 00:24:41,480
+Let's take another example.
+
+426
+00:24:41,480 --> 00:24:42,480
+What about this?
+
+427
+00:24:44,480 --> 00:24:46,480
+So here,
+
+428
+00:24:46,480 --> 00:24:48,480
+here what I'll show you
+
+429
+00:24:48,480 --> 00:24:51,480
+is that the number of units.
+
+430
+00:24:52,480 --> 00:24:53,480
+Again,
+
+431
+00:24:53,480 --> 00:24:55,480
+make your chart from your side.
+
+432
+00:24:55,480 --> 00:24:56,480
+And I'm specifically going
+
+433
+00:24:56,480 --> 00:24:58,480
+to pick this chart.
+
+434
+00:24:58,480 --> 00:25:00,480
+How many of you can tell me
+
+435
+00:25:00,480 --> 00:25:02,480
+the powers of 2 by heart?
+
+436
+00:25:02,480 --> 00:25:03,480
+I'm sure if you think about it,
+
+437
+00:25:03,480 --> 00:25:04,480
+you can come up with it.
+
+438
+00:25:04,480 --> 00:25:07,480
+But if I ask 2 power 13,
+
+439
+00:25:07,520 --> 00:25:09,520
+who knows the answer?
+
+440
+00:25:09,520 --> 00:25:10,520
+Right?
+
+441
+00:25:10,520 --> 00:25:13,520
+So if I ask you 2, 4, 8, 16,
+
+442
+00:25:13,520 --> 00:25:14,520
+you'll probably get it.
+
+443
+00:25:14,520 --> 00:25:17,520
+But 2 power 13, 2 power 18,
+
+444
+00:25:17,520 --> 00:25:18,520
+you know,
+
+445
+00:25:18,520 --> 00:25:19,520
+we might have to think
+
+446
+00:25:19,520 --> 00:25:20,520
+about it for a second.
+
+447
+00:25:20,520 --> 00:25:22,520
+And if we have to think about it
+
+448
+00:25:22,520 --> 00:25:23,520
+for a second,
+
+449
+00:25:23,520 --> 00:25:24,520
+where we are talking about
+
+450
+00:25:24,520 --> 00:25:26,520
+two powers in everyday class,
+
+451
+00:25:27,520 --> 00:25:29,520
+how does an HR person look like?
+
+452
+00:25:30,520 --> 00:25:31,520
+Right?
+
+453
+00:25:32,520 --> 00:25:33,520
+So why are we using
+
+454
+00:25:33,520 --> 00:25:35,520
+these two powers here?
+
+455
+00:25:35,560 --> 00:25:36,560
+Use many.
+
+456
+00:25:36,560 --> 00:25:38,560
+Use hundreds of powers.
+
+457
+00:25:39,560 --> 00:25:40,560
+Right?
+
+458
+00:25:40,560 --> 00:25:41,560
+Why use two powers?
+
+459
+00:25:41,560 --> 00:25:42,560
+Again,
+
+460
+00:25:42,560 --> 00:25:44,560
+speak to your audience about it.
+
+461
+00:25:44,560 --> 00:25:45,560
+The other thing I want
+
+462
+00:25:45,560 --> 00:25:46,560
+to share in this chart,
+
+463
+00:25:46,560 --> 00:25:47,560
+and maybe I have another slide
+
+464
+00:25:47,560 --> 00:25:48,560
+for it,
+
+465
+00:25:48,560 --> 00:25:49,560
+but I'll share it here.
+
+466
+00:25:49,560 --> 00:25:51,560
+What's wrong with this chart?
+
+467
+00:25:53,560 --> 00:25:54,560
+Yeah,
+
+468
+00:25:54,560 --> 00:25:55,560
+the data is just here.
+
+469
+00:25:55,560 --> 00:25:56,560
+This is the only thing
+
+470
+00:25:56,560 --> 00:25:57,560
+that matters.
+
+471
+00:25:58,560 --> 00:25:59,560
+So why are we using
+
+472
+00:25:59,560 --> 00:26:00,560
+all of this space?
+
+473
+00:26:00,560 --> 00:26:01,560
+Just get it all.
+
+474
+00:26:01,560 --> 00:26:03,560
+Just start here.
+
+475
+00:26:03,600 --> 00:26:04,600
+Right?
+
+476
+00:26:04,600 --> 00:26:05,600
+And GPUs,
+
+477
+00:26:05,600 --> 00:26:06,600
+as I've already said,
+
+478
+00:26:06,600 --> 00:26:07,600
+are for big data.
+
+479
+00:26:07,600 --> 00:26:09,600
+We are not going to,
+
+480
+00:26:09,600 --> 00:26:10,600
+we are not going
+
+481
+00:26:10,600 --> 00:26:12,600
+to be testing in this class
+
+482
+00:26:12,600 --> 00:26:13,600
+for a rate size
+
+483
+00:26:13,600 --> 00:26:15,600
+of 2 power 4 versus 16.
+
+484
+00:26:15,600 --> 00:26:16,600
+You're never going
+
+485
+00:26:16,600 --> 00:26:17,600
+to test 16 elements
+
+486
+00:26:17,600 --> 00:26:18,600
+in Wi-Fi.
+
+487
+00:26:18,600 --> 00:26:19,600
+You're probably going
+
+488
+00:26:19,600 --> 00:26:20,600
+to test 16,000,
+
+489
+00:26:20,600 --> 00:26:21,600
+but you're never
+
+490
+00:26:21,600 --> 00:26:22,600
+testing 16.
+
+491
+00:26:22,600 --> 00:26:23,600
+So just get it all.
+
+492
+00:26:23,600 --> 00:26:25,600
+Start from the beginning.
+
+493
+00:26:26,600 --> 00:26:27,600
+Okay?
+
+494
+00:26:29,600 --> 00:26:31,600
+On this slide,
+
+495
+00:26:31,640 --> 00:26:32,640
+again,
+
+496
+00:26:32,640 --> 00:26:33,640
+a rate size,
+
+497
+00:26:33,640 --> 00:26:34,640
+we have something
+
+498
+00:26:34,640 --> 00:26:35,640
+here,
+
+499
+00:26:35,640 --> 00:26:36,640
+time in milliseconds.
+
+500
+00:26:36,640 --> 00:26:37,640
+Okay.
+
+501
+00:26:37,640 --> 00:26:38,640
+But again,
+
+502
+00:26:38,640 --> 00:26:39,640
+it doesn't say
+
+503
+00:26:39,640 --> 00:26:40,640
+high respect.
+
+504
+00:26:40,640 --> 00:26:41,640
+It doesn't say
+
+505
+00:26:41,640 --> 00:26:42,640
+low respect.
+
+506
+00:26:42,640 --> 00:26:43,640
+Right?
+
+507
+00:26:43,640 --> 00:26:44,640
+I'm going to think
+
+508
+00:26:44,640 --> 00:26:45,640
+all green line is amazing.
+
+509
+00:26:45,640 --> 00:26:46,640
+Green line is going up.
+
+510
+00:26:47,640 --> 00:26:48,640
+Blue line is,
+
+511
+00:26:48,640 --> 00:26:49,640
+blue line is low.
+
+512
+00:26:49,640 --> 00:26:50,640
+Blue line is 5.6.
+
+513
+00:26:51,640 --> 00:26:52,640
+Or,
+
+514
+00:26:52,640 --> 00:26:53,640
+yeah.
+
+515
+00:26:54,640 --> 00:26:55,640
+So,
+
+516
+00:26:56,640 --> 00:26:57,640
+so make sure
+
+517
+00:26:57,640 --> 00:26:58,640
+you're thinking about it.
+
+518
+00:26:58,640 --> 00:26:59,640
+Put your time into it.
+
+519
+00:26:59,680 --> 00:27:00,680
+You're going to,
+
+520
+00:27:00,680 --> 00:27:01,680
+you're going to be doing
+
+521
+00:27:01,680 --> 00:27:02,680
+weeks worth of work
+
+522
+00:27:02,680 --> 00:27:03,680
+for every project.
+
+523
+00:27:03,680 --> 00:27:04,680
+But if you make
+
+524
+00:27:04,680 --> 00:27:05,680
+bad charts like this,
+
+525
+00:27:05,680 --> 00:27:06,680
+all that
+
+526
+00:27:06,680 --> 00:27:07,680
+six and a half days
+
+527
+00:27:07,680 --> 00:27:08,680
+of work
+
+528
+00:27:08,680 --> 00:27:09,680
+is kind of thrown
+
+529
+00:27:09,680 --> 00:27:10,680
+under the water
+
+530
+00:27:10,680 --> 00:27:11,680
+because you're not
+
+531
+00:27:11,680 --> 00:27:12,680
+communicating it correctly.
+
+532
+00:27:13,680 --> 00:27:14,680
+All right.
+
+533
+00:27:14,680 --> 00:27:15,680
+So direction we spoke
+
+534
+00:27:15,680 --> 00:27:16,680
+about it.
+
+535
+00:27:16,680 --> 00:27:17,680
+And this is a very
+
+536
+00:27:17,680 --> 00:27:18,680
+good example of this.
+
+537
+00:27:20,680 --> 00:27:21,680
+Again,
+
+538
+00:27:21,680 --> 00:27:22,680
+if we go back to,
+
+539
+00:27:22,680 --> 00:27:23,680
+you know,
+
+540
+00:27:23,680 --> 00:27:24,680
+things that are
+
+541
+00:27:24,680 --> 00:27:25,680
+bad about charts,
+
+542
+00:27:25,680 --> 00:27:26,680
+running time,
+
+543
+00:27:26,680 --> 00:27:27,680
+you know,
+
+544
+00:27:27,720 --> 00:27:28,720
+things that are bad
+
+545
+00:27:28,720 --> 00:27:29,720
+about charts.
+
+546
+00:27:29,720 --> 00:27:30,720
+Running time
+
+547
+00:27:30,720 --> 00:27:31,720
+doesn't say higher
+
+548
+00:27:31,720 --> 00:27:32,720
+is better,
+
+549
+00:27:32,720 --> 00:27:33,720
+lower is better.
+
+550
+00:27:33,720 --> 00:27:34,720
+Array size,
+
+551
+00:27:34,720 --> 00:27:35,720
+2 power x.
+
+552
+00:27:36,720 --> 00:27:37,720
+And also look at,
+
+553
+00:27:37,720 --> 00:27:38,720
+look at this.
+
+554
+00:27:39,720 --> 00:27:40,720
+We don't really care
+
+555
+00:27:40,720 --> 00:27:41,720
+about 2 power 2,
+
+556
+00:27:41,720 --> 00:27:42,720
+but we don't care
+
+557
+00:27:42,720 --> 00:27:43,720
+about 4 elements.
+
+558
+00:27:43,720 --> 00:27:44,720
+And almost
+
+559
+00:27:44,720 --> 00:27:45,720
+neither do we
+
+560
+00:27:45,720 --> 00:27:46,720
+about
+
+561
+00:27:46,720 --> 00:27:47,720
+4,096 elements,
+
+562
+00:27:47,720 --> 00:27:48,720
+right?
+
+563
+00:27:49,720 --> 00:27:50,720
+We care about
+
+564
+00:27:50,720 --> 00:27:51,720
+4 million elements.
+
+565
+00:27:51,720 --> 00:27:52,720
+So this chart
+
+566
+00:27:52,720 --> 00:27:53,720
+is completely skewed
+
+567
+00:27:53,720 --> 00:27:54,720
+from the data it has.
+
+568
+00:27:54,760 --> 00:27:55,760
+Also doesn't,
+
+569
+00:27:55,760 --> 00:27:56,760
+doesn't show
+
+570
+00:27:56,760 --> 00:27:57,760
+higher is better,
+
+571
+00:27:57,760 --> 00:27:58,760
+lower is better.
+
+572
+00:27:58,760 --> 00:27:59,760
+So everything
+
+573
+00:27:59,760 --> 00:28:00,760
+gets messed up.
+
+574
+00:28:01,760 --> 00:28:02,760
+Now,
+
+575
+00:28:02,760 --> 00:28:03,760
+we know that this
+
+576
+00:28:03,760 --> 00:28:04,760
+is running time,
+
+577
+00:28:04,760 --> 00:28:05,760
+so lower is better.
+
+578
+00:28:05,760 --> 00:28:06,760
+So what we're actually
+
+579
+00:28:06,760 --> 00:28:07,760
+saying is,
+
+580
+00:28:07,760 --> 00:28:08,760
+yeah,
+
+581
+00:28:08,760 --> 00:28:09,760
+I did all of this
+
+582
+00:28:09,760 --> 00:28:10,760
+work for the GPU,
+
+583
+00:28:10,760 --> 00:28:11,760
+but my TTL is still better.
+
+584
+00:28:17,760 --> 00:28:18,760
+Charts are not
+
+585
+00:28:18,760 --> 00:28:19,760
+very communicative.
+
+586
+00:28:19,760 --> 00:28:20,760
+If you are,
+
+587
+00:28:20,760 --> 00:28:21,760
+if you are doing
+
+588
+00:28:21,760 --> 00:28:22,760
+GPU performance
+
+589
+00:28:22,760 --> 00:28:23,760
+for,
+
+590
+00:28:23,800 --> 00:28:24,800
+this is at,
+
+591
+00:28:24,800 --> 00:28:25,800
+at even 4 to
+
+592
+00:28:25,800 --> 00:28:26,800
+4,000,
+
+593
+00:28:26,800 --> 00:28:27,800
+right?
+
+594
+00:28:28,800 --> 00:28:29,800
+Of course the GPU
+
+595
+00:28:29,800 --> 00:28:30,800
+is going to be faster.
+
+596
+00:28:31,800 --> 00:28:32,800
+The overhead
+
+597
+00:28:32,800 --> 00:28:33,800
+of the GPU
+
+598
+00:28:33,800 --> 00:28:34,800
+is going to make it slower.
+
+599
+00:28:35,800 --> 00:28:36,800
+If this was
+
+600
+00:28:36,800 --> 00:28:37,800
+4,000
+
+601
+00:28:37,800 --> 00:28:38,800
+to 4 million,
+
+602
+00:28:38,800 --> 00:28:39,800
+you're easily
+
+603
+00:28:39,800 --> 00:28:40,800
+going to make
+
+604
+00:28:40,800 --> 00:28:41,800
+the GPU look
+
+605
+00:28:41,800 --> 00:28:42,800
+a lot better.
+
+606
+00:28:42,800 --> 00:28:43,800
+So,
+
+607
+00:28:43,800 --> 00:28:44,800
+this is not
+
+608
+00:28:44,800 --> 00:28:45,800
+false.
+
+609
+00:28:45,800 --> 00:28:46,800
+It's not what
+
+610
+00:28:46,800 --> 00:28:47,800
+GPUs are meant for.
+
+611
+00:28:47,800 --> 00:28:48,800
+Talk about why
+
+612
+00:28:48,800 --> 00:28:49,800
+the algorithm that
+
+613
+00:28:49,800 --> 00:28:50,800
+you implemented is good.
+
+614
+00:28:50,800 --> 00:28:51,800
+If you put
+
+615
+00:28:51,800 --> 00:28:52,800
+a chart like this,
+
+616
+00:28:52,840 --> 00:28:53,840
+you're like,
+
+617
+00:28:53,840 --> 00:28:54,840
+hey,
+
+618
+00:28:54,840 --> 00:28:55,840
+I did all of this
+
+619
+00:28:55,840 --> 00:28:56,840
+work and my GPU
+
+620
+00:28:56,840 --> 00:28:57,840
+is still faster than
+
+621
+00:28:57,840 --> 00:28:58,840
+the GPUs.
+
+622
+00:28:58,840 --> 00:28:59,840
+Why are we taking
+
+623
+00:28:59,840 --> 00:29:00,840
+this class?
+
+624
+00:29:00,840 --> 00:29:01,840
+Right?
+
+625
+00:29:01,840 --> 00:29:02,840
+Okay.
+
+626
+00:29:03,840 --> 00:29:04,840
+And,
+
+627
+00:29:04,840 --> 00:29:05,840
+and like we said
+
+628
+00:29:05,840 --> 00:29:06,840
+before,
+
+629
+00:29:06,840 --> 00:29:07,840
+I mentioned that
+
+630
+00:29:07,840 --> 00:29:08,840
+I probably had
+
+631
+00:29:08,840 --> 00:29:09,840
+another slide.
+
+632
+00:29:09,840 --> 00:29:10,840
+Use the number
+
+633
+00:29:10,840 --> 00:29:11,840
+of elements that
+
+634
+00:29:11,840 --> 00:29:12,840
+are actually
+
+635
+00:29:12,840 --> 00:29:13,840
+good for GPUs.
+
+636
+00:29:13,840 --> 00:29:14,840
+Communicate that well.
+
+637
+00:29:14,840 --> 00:29:15,840
+If you,
+
+638
+00:29:15,840 --> 00:29:16,840
+if you are
+
+639
+00:29:16,840 --> 00:29:17,840
+in doubt
+
+640
+00:29:17,840 --> 00:29:18,840
+about what the size
+
+641
+00:29:18,840 --> 00:29:19,840
+should be,
+
+642
+00:29:19,840 --> 00:29:20,840
+start with 2 power 18,
+
+643
+00:29:20,840 --> 00:29:21,840
+start with 256,000
+
+644
+00:29:21,880 --> 00:29:22,880
+That's like
+
+645
+00:29:22,880 --> 00:29:23,880
+the minimum.
+
+646
+00:29:23,880 --> 00:29:24,880
+Yeah,
+
+647
+00:29:24,880 --> 00:29:25,880
+you can go to
+
+648
+00:29:25,880 --> 00:29:26,880
+64,000, 128,000
+
+649
+00:29:26,880 --> 00:29:27,880
+but if you're not
+
+650
+00:29:27,880 --> 00:29:28,880
+sure,
+
+651
+00:29:28,880 --> 00:29:29,880
+start with this.
+
+652
+00:29:29,880 --> 00:29:30,880
+You're doing scan,
+
+653
+00:29:30,880 --> 00:29:31,880
+start with this number
+
+654
+00:29:31,880 --> 00:29:32,880
+and go to like
+
+655
+00:29:32,880 --> 00:29:33,880
+4, 8 million
+
+656
+00:29:33,880 --> 00:29:34,880
+elements.
+
+657
+00:29:34,880 --> 00:29:35,880
+Okay?
+
+658
+00:29:35,880 --> 00:29:36,880
+And that's where
+
+659
+00:29:36,880 --> 00:29:37,880
+the GPU performance
+
+660
+00:29:37,880 --> 00:29:38,880
+is going to shine.
+
+661
+00:29:38,880 --> 00:29:39,880
+It's going to
+
+662
+00:29:39,880 --> 00:29:40,880
+absolutely smoke
+
+663
+00:29:40,880 --> 00:29:41,880
+the CPU
+
+664
+00:29:41,880 --> 00:29:42,880
+in performance
+
+665
+00:29:42,880 --> 00:29:43,880
+and it's going to
+
+666
+00:29:43,880 --> 00:29:44,880
+make the GPU
+
+667
+00:29:44,880 --> 00:29:45,880
+algorithm look better.
+
+668
+00:29:45,880 --> 00:29:46,880
+Okay?
+
+669
+00:29:47,880 --> 00:29:48,880
+Um,
+
+670
+00:29:49,880 --> 00:29:50,880
+so,
+
+671
+00:29:50,920 --> 00:29:51,920
+we already discussed
+
+672
+00:29:51,920 --> 00:29:52,920
+this,
+
+673
+00:29:52,920 --> 00:29:53,920
+color lines,
+
+674
+00:29:53,920 --> 00:29:54,920
+make sure they are
+
+675
+00:29:54,920 --> 00:29:55,920
+similar.
+
+676
+00:29:55,920 --> 00:29:56,920
+You can use
+
+677
+00:29:56,920 --> 00:29:57,920
+light color,
+
+678
+00:29:57,920 --> 00:29:58,920
+dark color
+
+679
+00:29:58,920 --> 00:29:59,920
+and stuff like that.
+
+680
+00:29:59,920 --> 00:30:00,920
+So,
+
+681
+00:30:00,920 --> 00:30:01,920
+especially if you're
+
+682
+00:30:01,920 --> 00:30:02,920
+like,
+
+683
+00:30:02,920 --> 00:30:03,920
+let's say,
+
+684
+00:30:03,920 --> 00:30:04,920
+let's say in our scan
+
+685
+00:30:04,920 --> 00:30:05,920
+you're going to have
+
+686
+00:30:05,920 --> 00:30:06,920
+this naive,
+
+687
+00:30:06,920 --> 00:30:07,920
+efficient and trust.
+
+688
+00:30:07,920 --> 00:30:08,920
+Make sure to use,
+
+689
+00:30:08,920 --> 00:30:09,920
+let's say
+
+690
+00:30:09,920 --> 00:30:10,920
+for naive
+
+691
+00:30:10,920 --> 00:30:11,920
+and efficient
+
+692
+00:30:11,920 --> 00:30:12,920
+you may use
+
+693
+00:30:12,920 --> 00:30:13,920
+similar lines
+
+694
+00:30:13,920 --> 00:30:14,920
+and then trust
+
+695
+00:30:14,920 --> 00:30:15,920
+can be a different color.
+
+696
+00:30:16,920 --> 00:30:17,920
+Okay.
+
+697
+00:30:17,920 --> 00:30:18,920
+So,
+
+698
+00:30:18,920 --> 00:30:19,920
+any questions
+
+699
+00:30:19,960 --> 00:30:20,960
+on this?
+
+700
+00:30:21,960 --> 00:30:22,960
+All of you
+
+701
+00:30:22,960 --> 00:30:23,960
+are going to make
+
+702
+00:30:23,960 --> 00:30:24,960
+really beautiful charts
+
+703
+00:30:24,960 --> 00:30:25,960
+of project 2?
+
+704
+00:30:26,960 --> 00:30:27,960
+Okay.
+
+705
+00:30:27,960 --> 00:30:28,960
+I'm expecting it.
+
+706
+00:30:28,960 --> 00:30:29,960
+I do,
+
+707
+00:30:29,960 --> 00:30:30,960
+I spend 30,
+
+708
+00:30:30,960 --> 00:30:31,960
+45 minutes every year
+
+709
+00:30:31,960 --> 00:30:32,960
+on this and
+
+710
+00:30:32,960 --> 00:30:33,960
+you know,
+
+711
+00:30:33,960 --> 00:30:34,960
+hopefully it's going
+
+712
+00:30:34,960 --> 00:30:35,960
+to make a difference.
+
+713
+00:30:35,960 --> 00:30:36,960
+Okay.
+
+714
+00:30:36,960 --> 00:30:37,960
+Last thing I want
+
+715
+00:30:37,960 --> 00:30:38,960
+to talk about
+
+716
+00:30:38,960 --> 00:30:39,960
+before we get
+
+717
+00:30:39,960 --> 00:30:40,960
+into the lecture
+
+718
+00:30:40,960 --> 00:30:41,960
+is actually
+
+719
+00:30:41,960 --> 00:30:42,960
+promoting your project.
+
+720
+00:30:42,960 --> 00:30:43,960
+Okay?
+
+721
+00:30:43,960 --> 00:30:44,960
+So,
+
+722
+00:30:44,960 --> 00:30:45,960
+here's a question for you.
+
+723
+00:30:45,960 --> 00:30:46,960
+How many
+
+724
+00:30:46,960 --> 00:30:47,960
+of your potential
+
+725
+00:30:47,960 --> 00:30:48,960
+employees,
+
+726
+00:30:49,000 --> 00:30:50,000
+who might be
+
+727
+00:30:50,000 --> 00:30:51,000
+have
+
+728
+00:30:51,000 --> 00:30:52,000
+some sort of
+
+729
+00:30:52,000 --> 00:30:53,000
+a social media
+
+730
+00:30:53,000 --> 00:30:54,000
+on any platform
+
+731
+00:30:54,000 --> 00:30:55,000
+that is relevant
+
+732
+00:30:55,000 --> 00:30:56,000
+to that company?
+
+733
+00:30:57,000 --> 00:30:58,000
+I should probably
+
+734
+00:30:58,000 --> 00:30:59,000
+add Snapchat,
+
+735
+00:30:59,000 --> 00:31:00,000
+Instagram,
+
+736
+00:31:00,000 --> 00:31:01,000
+TikTok to this
+
+737
+00:31:01,000 --> 00:31:02,000
+but let's leave
+
+738
+00:31:02,000 --> 00:31:03,000
+that out for now.
+
+739
+00:31:03,000 --> 00:31:04,000
+But,
+
+740
+00:31:05,000 --> 00:31:06,000
+probably every single
+
+741
+00:31:06,000 --> 00:31:07,000
+one of them,
+
+742
+00:31:07,000 --> 00:31:08,000
+right?
+
+743
+00:31:08,000 --> 00:31:09,000
+At least on LinkedIn.
+
+744
+00:31:09,000 --> 00:31:10,000
+If nothing else,
+
+745
+00:31:10,000 --> 00:31:11,000
+they at least have
+
+746
+00:31:11,000 --> 00:31:12,000
+a LinkedIn presence.
+
+747
+00:31:12,000 --> 00:31:13,000
+Can we all say that?
+
+748
+00:31:14,000 --> 00:31:15,000
+On that LinkedIn presence,
+
+749
+00:31:16,000 --> 00:31:17,000
+how many of them
+
+750
+00:31:17,000 --> 00:31:18,000
+promote their work?
+
+751
+00:31:18,040 --> 00:31:19,040
+How many of them say,
+
+752
+00:31:19,040 --> 00:31:20,040
+hey we have
+
+753
+00:31:20,040 --> 00:31:21,040
+a new product launch,
+
+754
+00:31:21,040 --> 00:31:22,040
+we have a new feature,
+
+755
+00:31:22,040 --> 00:31:23,040
+we have interns
+
+756
+00:31:23,040 --> 00:31:24,040
+joining today,
+
+757
+00:31:24,040 --> 00:31:25,040
+our interns graduated
+
+758
+00:31:25,040 --> 00:31:26,040
+today.
+
+759
+00:31:26,040 --> 00:31:27,040
+How many of them
+
+760
+00:31:27,040 --> 00:31:28,040
+are saying that?
+
+761
+00:31:28,040 --> 00:31:29,040
+All of them.
+
+762
+00:31:29,040 --> 00:31:30,040
+None of them.
+
+763
+00:31:31,040 --> 00:31:32,040
+All of them are
+
+764
+00:31:32,040 --> 00:31:33,040
+promoting their company,
+
+765
+00:31:33,040 --> 00:31:34,040
+their business,
+
+766
+00:31:34,040 --> 00:31:35,040
+their work.
+
+767
+00:31:35,040 --> 00:31:36,040
+Okay?
+
+768
+00:31:36,040 --> 00:31:37,040
+So, why should you not?
+
+769
+00:31:40,040 --> 00:31:41,040
+What makes you
+
+770
+00:31:42,040 --> 00:31:43,040
+hesitant to share
+
+771
+00:31:43,040 --> 00:31:44,040
+your work
+
+772
+00:31:44,040 --> 00:31:45,040
+on social media?
+
+773
+00:31:46,040 --> 00:31:47,040
+Choose the platform
+
+774
+00:31:47,080 --> 00:31:48,080
+of your liking.
+
+775
+00:31:48,080 --> 00:31:49,080
+I'm not saying
+
+776
+00:31:49,080 --> 00:31:50,080
+go post your
+
+777
+00:31:50,080 --> 00:31:51,080
+images on Instagram
+
+778
+00:31:51,080 --> 00:31:52,080
+where your
+
+779
+00:31:52,080 --> 00:31:53,080
+friends and family are.
+
+780
+00:31:53,080 --> 00:31:54,080
+I'm asking
+
+781
+00:31:54,080 --> 00:31:55,080
+why aren't you
+
+782
+00:31:55,080 --> 00:31:56,080
+posting them on LinkedIn
+
+783
+00:31:56,080 --> 00:31:57,080
+where recruiters
+
+784
+00:31:57,080 --> 00:31:58,080
+are looking for you?
+
+785
+00:31:58,080 --> 00:31:59,080
+Right?
+
+786
+00:31:59,080 --> 00:32:00,080
+So, let's take
+
+787
+00:32:00,080 --> 00:32:01,080
+a look at
+
+788
+00:32:01,080 --> 00:32:02,080
+some success stories
+
+789
+00:32:02,080 --> 00:32:03,080
+from this class
+
+790
+00:32:03,080 --> 00:32:04,080
+about how they've
+
+791
+00:32:04,080 --> 00:32:05,080
+made a difference.
+
+792
+00:32:06,080 --> 00:32:07,080
+So, this is from 2018.
+
+793
+00:32:08,080 --> 00:32:09,080
+This was
+
+794
+00:32:09,080 --> 00:32:10,080
+Ziyad,
+
+795
+00:32:10,080 --> 00:32:11,080
+Liam Hall,
+
+796
+00:32:11,080 --> 00:32:12,080
+Latif T as well
+
+797
+00:32:13,080 --> 00:32:14,080
+and Henry,
+
+798
+00:32:14,080 --> 00:32:15,080
+their final project.
+
+799
+00:32:15,080 --> 00:32:16,080
+This was the first
+
+800
+00:32:16,120 --> 00:32:17,120
+DXR project
+
+801
+00:32:17,120 --> 00:32:18,120
+done in this class
+
+802
+00:32:19,120 --> 00:32:20,120
+and probably,
+
+803
+00:32:20,120 --> 00:32:21,120
+I'm pretty sure
+
+804
+00:32:21,120 --> 00:32:22,120
+I can claim this,
+
+805
+00:32:22,120 --> 00:32:23,120
+the first
+
+806
+00:32:23,120 --> 00:32:24,120
+student-led
+
+807
+00:32:24,120 --> 00:32:25,120
+DXR project
+
+808
+00:32:25,120 --> 00:32:26,120
+in the world.
+
+809
+00:32:27,120 --> 00:32:28,120
+I'm pretty sure
+
+810
+00:32:28,120 --> 00:32:29,120
+I can state that.
+
+811
+00:32:29,120 --> 00:32:30,120
+Okay?
+
+812
+00:32:30,120 --> 00:32:31,120
+And these guys,
+
+813
+00:32:31,120 --> 00:32:32,120
+Ziyad,
+
+814
+00:32:32,120 --> 00:32:33,120
+Henry and Liam,
+
+815
+00:32:33,120 --> 00:32:34,120
+they spoke about it
+
+816
+00:32:34,120 --> 00:32:35,120
+extensively
+
+817
+00:32:35,120 --> 00:32:36,120
+on social media.
+
+818
+00:32:36,120 --> 00:32:37,120
+They tagged
+
+819
+00:32:37,120 --> 00:32:38,120
+all the right people
+
+820
+00:32:38,120 --> 00:32:39,120
+who were doing
+
+821
+00:32:39,120 --> 00:32:40,120
+DXR
+
+822
+00:32:40,120 --> 00:32:41,120
+and it got
+
+823
+00:32:41,120 --> 00:32:42,120
+really popular
+
+824
+00:32:42,120 --> 00:32:43,120
+and not just
+
+825
+00:32:43,120 --> 00:32:44,120
+on Twitter
+
+826
+00:32:44,160 --> 00:32:45,160
+but they also
+
+827
+00:32:45,160 --> 00:32:46,160
+created blogs
+
+828
+00:32:46,160 --> 00:32:47,160
+about it.
+
+829
+00:32:47,160 --> 00:32:48,160
+They actually wrote
+
+830
+00:32:48,160 --> 00:32:49,160
+down what was
+
+831
+00:32:49,160 --> 00:32:50,160
+their process,
+
+832
+00:32:50,160 --> 00:32:51,160
+how did they
+
+833
+00:32:51,160 --> 00:32:52,160
+build this up.
+
+834
+00:32:52,160 --> 00:32:53,160
+Again,
+
+835
+00:32:53,160 --> 00:32:54,160
+in the infancy
+
+836
+00:32:54,160 --> 00:32:55,160
+of DXR,
+
+837
+00:32:55,160 --> 00:32:56,160
+there was no
+
+838
+00:32:56,160 --> 00:32:57,160
+documentation.
+
+839
+00:32:57,160 --> 00:32:58,160
+I can tell you that.
+
+840
+00:32:58,160 --> 00:32:59,160
+So, their guides
+
+841
+00:32:59,160 --> 00:33:00,160
+have helped
+
+842
+00:33:00,160 --> 00:33:01,160
+countless more people
+
+843
+00:33:01,160 --> 00:33:02,160
+understand how
+
+844
+00:33:02,160 --> 00:33:03,160
+DXR works.
+
+845
+00:33:03,160 --> 00:33:04,160
+So, even if
+
+846
+00:33:04,160 --> 00:33:05,160
+you don't do
+
+847
+00:33:05,160 --> 00:33:06,160
+a blog,
+
+848
+00:33:06,160 --> 00:33:07,160
+make sure
+
+849
+00:33:07,160 --> 00:33:08,160
+a GitHub readme
+
+850
+00:33:08,160 --> 00:33:09,160
+is really there.
+
+851
+00:33:10,160 --> 00:33:11,160
+Lastly,
+
+852
+00:33:11,160 --> 00:33:12,160
+you know,
+
+853
+00:33:12,160 --> 00:33:13,160
+be sure to share
+
+854
+00:33:13,200 --> 00:33:14,200
+on Twitter as well.
+
+855
+00:33:16,200 --> 00:33:17,200
+A lot of people
+
+856
+00:33:17,200 --> 00:33:18,200
+are going to be following
+
+857
+00:33:18,200 --> 00:33:19,200
+you.
+
+858
+00:33:19,200 --> 00:33:20,200
+If not,
+
+859
+00:33:20,200 --> 00:33:21,200
+they'll follow me
+
+860
+00:33:21,200 --> 00:33:22,200
+and when I retweet it,
+
+861
+00:33:22,200 --> 00:33:23,200
+we're going to be seeing
+
+862
+00:33:23,200 --> 00:33:24,200
+a lot of people
+
+863
+00:33:24,200 --> 00:33:25,200
+approaching you
+
+864
+00:33:25,200 --> 00:33:26,200
+about, hey, good work
+
+865
+00:33:26,200 --> 00:33:27,200
+and things like that.
+
+866
+00:33:27,200 --> 00:33:28,200
+Trust me,
+
+867
+00:33:28,200 --> 00:33:29,200
+it happens
+
+868
+00:33:29,200 --> 00:33:30,200
+and I'm not making it up.
+
+869
+00:33:30,200 --> 00:33:31,200
+Okay.
+
+870
+00:33:31,200 --> 00:33:32,200
+Let's see a few more.
+
+871
+00:33:32,200 --> 00:33:33,200
+So, this was
+
+872
+00:33:36,200 --> 00:33:37,200
+Ziyad,
+
+873
+00:33:37,200 --> 00:33:38,200
+I forget his name.
+
+874
+00:33:40,200 --> 00:33:41,200
+Anyway,
+
+875
+00:33:41,200 --> 00:33:42,200
+they were doing
+
+876
+00:33:42,240 --> 00:33:43,240
+a shadow
+
+877
+00:33:43,240 --> 00:33:44,240
+water
+
+878
+00:33:44,240 --> 00:33:45,240
+simulation.
+
+879
+00:33:45,240 --> 00:33:46,240
+Okay.
+
+880
+00:33:46,240 --> 00:33:47,240
+And they were using
+
+881
+00:33:47,240 --> 00:33:48,240
+this person's
+
+882
+00:33:48,240 --> 00:33:49,240
+paper for it.
+
+883
+00:33:51,240 --> 00:33:52,240
+They put
+
+884
+00:33:52,240 --> 00:33:53,240
+their image
+
+885
+00:33:53,240 --> 00:33:54,240
+on Twitter
+
+886
+00:33:54,240 --> 00:33:55,240
+and thanked
+
+887
+00:33:55,240 --> 00:33:56,240
+the person,
+
+888
+00:33:56,240 --> 00:33:57,240
+thanked the author
+
+889
+00:33:57,240 --> 00:33:58,240
+of the paper
+
+890
+00:33:58,240 --> 00:33:59,240
+for writing it.
+
+891
+00:33:59,240 --> 00:34:00,240
+Really cool gesture.
+
+892
+00:34:00,240 --> 00:34:01,240
+Trust me,
+
+893
+00:34:01,240 --> 00:34:02,240
+that is the
+
+894
+00:34:02,240 --> 00:34:03,240
+most amazing thing
+
+895
+00:34:03,240 --> 00:34:04,240
+you can do
+
+896
+00:34:04,240 --> 00:34:05,240
+for an author
+
+897
+00:34:05,240 --> 00:34:06,240
+of a paper.
+
+898
+00:34:06,240 --> 00:34:07,240
+And when they
+
+899
+00:34:07,240 --> 00:34:08,240
+put that,
+
+900
+00:34:08,240 --> 00:34:09,240
+the author
+
+901
+00:34:09,240 --> 00:34:10,240
+of the paper
+
+902
+00:34:10,240 --> 00:34:11,240
+replied.
+
+903
+00:34:11,280 --> 00:34:12,280
+You know,
+
+904
+00:34:12,280 --> 00:34:13,280
+what happened
+
+905
+00:34:13,280 --> 00:34:14,280
+after that?
+
+906
+00:34:15,280 --> 00:34:16,280
+They ran into
+
+907
+00:34:16,280 --> 00:34:17,280
+a bug
+
+908
+00:34:17,280 --> 00:34:18,280
+in their final project.
+
+909
+00:34:18,280 --> 00:34:19,280
+They ran into
+
+910
+00:34:19,280 --> 00:34:20,280
+an issue
+
+911
+00:34:20,280 --> 00:34:21,280
+where they couldn't
+
+912
+00:34:21,280 --> 00:34:22,280
+do it right.
+
+913
+00:34:22,280 --> 00:34:23,280
+They emailed
+
+914
+00:34:23,280 --> 00:34:24,280
+the author
+
+915
+00:34:24,280 --> 00:34:25,280
+and they were like,
+
+916
+00:34:25,280 --> 00:34:26,280
+hey,
+
+917
+00:34:26,280 --> 00:34:27,280
+we are running
+
+918
+00:34:27,280 --> 00:34:28,280
+into this issue.
+
+919
+00:34:28,280 --> 00:34:29,280
+The author
+
+920
+00:34:29,280 --> 00:34:30,280
+of the paper
+
+921
+00:34:30,280 --> 00:34:31,280
+was like,
+
+922
+00:34:31,280 --> 00:34:32,280
+hey,
+
+923
+00:34:32,280 --> 00:34:33,280
+make sure
+
+924
+00:34:33,280 --> 00:34:34,280
+you're doing
+
+925
+00:34:34,280 --> 00:34:35,280
+X, Y, Z.
+
+926
+00:34:35,280 --> 00:34:36,280
+And they did that
+
+927
+00:34:36,280 --> 00:34:37,280
+and they fixed
+
+928
+00:34:37,280 --> 00:34:38,280
+that issue.
+
+929
+00:34:38,280 --> 00:34:39,280
+And I,
+
+930
+00:34:39,280 --> 00:34:40,280
+there is
+
+931
+00:34:40,320 --> 00:34:41,320
+a paper
+
+932
+00:34:41,320 --> 00:34:42,320
+not just
+
+933
+00:34:42,320 --> 00:34:43,320
+in this class,
+
+934
+00:34:43,320 --> 00:34:44,320
+anywhere.
+
+935
+00:34:44,320 --> 00:34:45,320
+If you are
+
+936
+00:34:45,320 --> 00:34:46,320
+going to be
+
+937
+00:34:46,320 --> 00:34:47,320
+implementing
+
+938
+00:34:47,320 --> 00:34:48,320
+somebody's work,
+
+939
+00:34:48,320 --> 00:34:49,320
+I highly recommend
+
+940
+00:34:49,320 --> 00:34:50,320
+you just
+
+941
+00:34:50,320 --> 00:34:51,320
+reach out to them
+
+942
+00:34:51,320 --> 00:34:52,320
+and be like,
+
+943
+00:34:52,320 --> 00:34:53,320
+hey,
+
+944
+00:34:53,320 --> 00:34:54,320
+thank you for
+
+945
+00:34:54,320 --> 00:34:55,320
+writing the paper.
+
+946
+00:34:55,320 --> 00:34:56,320
+I'm going to be
+
+947
+00:34:56,320 --> 00:34:57,320
+implementing it.
+
+948
+00:34:57,320 --> 00:34:58,320
+I'll let you
+
+949
+00:34:58,320 --> 00:34:59,320
+know how it goes.
+
+950
+00:34:59,320 --> 00:35:00,320
+That's it.
+
+951
+00:35:00,320 --> 00:35:01,320
+You will make
+
+952
+00:35:01,320 --> 00:35:02,320
+somebody's day
+
+953
+00:35:02,320 --> 00:35:03,320
+by doing that.
+
+954
+00:35:03,320 --> 00:35:04,320
+And once you
+
+955
+00:35:04,320 --> 00:35:05,320
+finish that
+
+956
+00:35:05,320 --> 00:35:06,320
+implementation
+
+957
+00:35:06,320 --> 00:35:07,320
+and you share
+
+958
+00:35:07,320 --> 00:35:08,320
+your work
+
+959
+00:35:08,320 --> 00:35:09,320
+with the author,
+
+960
+00:35:09,360 --> 00:35:10,360
+okay?
+
+961
+00:35:13,360 --> 00:35:14,360
+More examples.
+
+962
+00:35:14,360 --> 00:35:15,360
+So,
+
+963
+00:35:15,360 --> 00:35:16,360
+you know,
+
+964
+00:35:16,360 --> 00:35:17,360
+again,
+
+965
+00:35:17,360 --> 00:35:18,360
+most students
+
+966
+00:35:18,360 --> 00:35:19,360
+posting their work,
+
+967
+00:35:19,360 --> 00:35:20,360
+whether it's
+
+968
+00:35:20,360 --> 00:35:21,360
+on LinkedIn
+
+969
+00:35:21,360 --> 00:35:22,360
+or Twitter,
+
+970
+00:35:22,360 --> 00:35:23,360
+it just helps
+
+971
+00:35:23,360 --> 00:35:24,360
+us amplify
+
+972
+00:35:24,360 --> 00:35:25,360
+it even more.
+
+973
+00:35:25,360 --> 00:35:26,360
+It's one thing
+
+974
+00:35:26,360 --> 00:35:27,360
+me writing
+
+975
+00:35:27,360 --> 00:35:28,360
+to say,
+
+976
+00:35:28,360 --> 00:35:29,360
+hey,
+
+977
+00:35:29,360 --> 00:35:30,360
+we did
+
+978
+00:35:30,360 --> 00:35:31,360
+an amazing
+
+979
+00:35:31,360 --> 00:35:32,360
+path tracer,
+
+980
+00:35:32,360 --> 00:35:33,360
+you know,
+
+981
+00:35:33,360 --> 00:35:34,360
+go check out
+
+982
+00:35:34,360 --> 00:35:35,360
+her project.
+
+983
+00:35:35,360 --> 00:35:36,360
+It's another
+
+984
+00:35:36,360 --> 00:35:37,360
+thing for you
+
+985
+00:35:37,360 --> 00:35:38,360
+to write it
+
+986
+00:35:38,400 --> 00:35:39,400
+and promote
+
+987
+00:35:39,400 --> 00:35:40,400
+it.
+
+988
+00:35:40,400 --> 00:35:41,400
+And I'm
+
+989
+00:35:41,400 --> 00:35:42,400
+just becoming
+
+990
+00:35:42,400 --> 00:35:43,400
+a microphone
+
+991
+00:35:43,400 --> 00:35:44,400
+for you
+
+992
+00:35:44,400 --> 00:35:45,400
+in getting
+
+993
+00:35:45,400 --> 00:35:46,400
+connected with
+
+994
+00:35:46,400 --> 00:35:47,400
+the companies
+
+995
+00:35:47,400 --> 00:35:48,400
+and recruiters
+
+996
+00:35:48,400 --> 00:35:49,400
+that you'll
+
+997
+00:35:49,400 --> 00:35:50,400
+be interested
+
+998
+00:35:50,400 --> 00:35:51,400
+in.
+
+999
+00:35:51,400 --> 00:35:52,400
+Okay?
+
+1000
+00:35:52,400 --> 00:35:53,400
+So,
+
+1001
+00:35:53,400 --> 00:35:54,400
+that
+
+1002
+00:35:54,400 --> 00:35:55,400
+project
+
+1003
+00:35:55,400 --> 00:35:56,400
+here,
+
+1004
+00:35:56,400 --> 00:35:57,400
+this was
+
+1005
+00:35:57,400 --> 00:35:58,400
+from 2018,
+
+1006
+00:35:58,400 --> 00:35:59,400
+Emily sent
+
+1007
+00:35:59,400 --> 00:36:00,400
+a message
+
+1008
+00:36:00,400 --> 00:36:01,400
+to Bucket
+
+1009
+00:36:01,400 --> 00:36:02,400
+around that
+
+1010
+00:36:02,400 --> 00:36:03,400
+time where
+
+1011
+00:36:03,400 --> 00:36:04,400
+that tweet,
+
+1012
+00:36:04,400 --> 00:36:05,400
+her tweeting
+
+1013
+00:36:05,400 --> 00:36:06,400
+that and that
+
+1014
+00:36:06,400 --> 00:36:07,400
+getting reshared
+
+1015
+00:36:07,440 --> 00:36:08,440
+led her to
+
+1016
+00:36:08,440 --> 00:36:09,440
+have
+
+1017
+00:36:09,440 --> 00:36:10,440
+an opportunity
+
+1018
+00:36:10,440 --> 00:36:11,440
+at Xbox
+
+1019
+00:36:11,440 --> 00:36:12,440
+or to talk
+
+1020
+00:36:12,440 --> 00:36:13,440
+to Xbox engineers
+
+1021
+00:36:13,440 --> 00:36:14,440
+and stuff,
+
+1022
+00:36:14,440 --> 00:36:15,440
+you know?
+
+1023
+00:36:15,440 --> 00:36:16,440
+And
+
+1024
+00:36:16,440 --> 00:36:17,440
+that's what you are
+
+1025
+00:36:17,440 --> 00:36:18,440
+looking for.
+
+1026
+00:36:18,440 --> 00:36:19,440
+All of you
+
+1027
+00:36:19,440 --> 00:36:20,440
+in this class,
+
+1028
+00:36:20,440 --> 00:36:21,440
+not because
+
+1029
+00:36:21,440 --> 00:36:22,440
+you think,
+
+1030
+00:36:22,440 --> 00:36:23,440
+yes,
+
+1031
+00:36:23,440 --> 00:36:24,440
+you learn a lot
+
+1032
+00:36:24,440 --> 00:36:25,440
+from 565,
+
+1033
+00:36:25,440 --> 00:36:26,440
+but ultimately
+
+1034
+00:36:26,440 --> 00:36:27,440
+you're at Penn
+
+1035
+00:36:27,440 --> 00:36:28,440
+so that you find
+
+1036
+00:36:28,440 --> 00:36:29,440
+really good jobs
+
+1037
+00:36:29,440 --> 00:36:30,440
+that pay you well
+
+1038
+00:36:30,440 --> 00:36:31,440
+and you can do
+
+1039
+00:36:31,440 --> 00:36:32,440
+really good stuff.
+
+1040
+00:36:32,440 --> 00:36:33,440
+And being able
+
+1041
+00:36:33,440 --> 00:36:34,440
+to promote yourself
+
+1042
+00:36:34,440 --> 00:36:35,440
+is a gateway to that.
+
+1043
+00:36:35,440 --> 00:36:36,440
+You can do
+
+1044
+00:36:36,480 --> 00:36:37,480
+a lot of services
+
+1045
+00:36:37,480 --> 00:36:38,480
+and stuff
+
+1046
+00:36:38,480 --> 00:36:39,480
+and they'll all be great.
+
+1047
+00:36:39,480 --> 00:36:40,480
+But
+
+1048
+00:36:40,480 --> 00:36:41,480
+promoting yourself,
+
+1049
+00:36:41,480 --> 00:36:42,480
+you won't get to 100,
+
+1050
+00:36:42,480 --> 00:36:43,480
+you'll get to 100,000
+
+1051
+00:36:43,480 --> 00:36:44,480
+companies who might
+
+1052
+00:36:44,480 --> 00:36:45,480
+want to
+
+1053
+00:36:45,480 --> 00:36:46,480
+see your work
+
+1054
+00:36:46,480 --> 00:36:47,480
+and
+
+1055
+00:36:47,480 --> 00:36:48,480
+maybe
+
+1056
+00:36:48,480 --> 00:36:49,480
+you'll reach,
+
+1057
+00:36:49,480 --> 00:36:50,480
+you'll get connected
+
+1058
+00:36:50,480 --> 00:36:51,480
+with companies
+
+1059
+00:36:51,480 --> 00:36:52,480
+you didn't know
+
+1060
+00:36:52,480 --> 00:36:53,480
+existed
+
+1061
+00:36:53,480 --> 00:36:54,480
+and they'll be
+
+1062
+00:36:54,480 --> 00:36:55,480
+doing really cool work
+
+1063
+00:36:55,480 --> 00:36:56,480
+and you might
+
+1064
+00:36:56,480 --> 00:36:57,480
+want to go work
+
+1065
+00:36:57,480 --> 00:36:58,480
+for them.
+
+1066
+00:36:58,480 --> 00:36:59,480
+Last couple
+
+1067
+00:36:59,480 --> 00:37:00,480
+of examples.
+
+1068
+00:37:00,480 --> 00:37:01,480
+So,
+
+1069
+00:37:01,480 --> 00:37:02,480
+this was done
+
+1070
+00:37:02,480 --> 00:37:03,480
+by
+
+1071
+00:37:03,480 --> 00:37:04,480
+Yusuf Victor
+
+1072
+00:37:04,480 --> 00:37:05,480
+in 2017
+
+1073
+00:37:05,520 --> 00:37:06,520
+and
+
+1074
+00:37:06,520 --> 00:37:07,520
+he did
+
+1075
+00:37:07,520 --> 00:37:08,520
+a library
+
+1076
+00:37:08,520 --> 00:37:09,520
+using
+
+1077
+00:37:09,520 --> 00:37:10,520
+Metal.
+
+1078
+00:37:10,520 --> 00:37:11,520
+So,
+
+1079
+00:37:11,520 --> 00:37:12,520
+Metal was brand new
+
+1080
+00:37:12,520 --> 00:37:13,520
+back then
+
+1081
+00:37:13,520 --> 00:37:14,520
+and he did
+
+1082
+00:37:14,520 --> 00:37:15,520
+a random number
+
+1083
+00:37:15,520 --> 00:37:16,520
+generator
+
+1084
+00:37:16,520 --> 00:37:17,520
+as part of
+
+1085
+00:37:17,520 --> 00:37:18,520
+doing a path tracer
+
+1086
+00:37:18,520 --> 00:37:19,520
+using Metal.
+
+1087
+00:37:19,520 --> 00:37:20,520
+So,
+
+1088
+00:37:20,520 --> 00:37:21,520
+this became
+
+1089
+00:37:21,520 --> 00:37:22,520
+his library.
+
+1090
+00:37:22,520 --> 00:37:23,520
+A few
+
+1091
+00:37:23,520 --> 00:37:24,520
+weeks later
+
+1092
+00:37:24,520 --> 00:37:25,520
+when he checked
+
+1093
+00:37:25,520 --> 00:37:26,520
+out his library
+
+1094
+00:37:26,520 --> 00:37:27,520
+he sees
+
+1095
+00:37:27,520 --> 00:37:28,520
+two people
+
+1096
+00:37:28,520 --> 00:37:29,520
+kind of following
+
+1097
+00:37:29,520 --> 00:37:30,520
+that project
+
+1098
+00:37:30,520 --> 00:37:31,520
+and both of those
+
+1099
+00:37:31,520 --> 00:37:32,520
+people are from
+
+1100
+00:37:32,520 --> 00:37:33,520
+Apple.
+
+1101
+00:37:33,520 --> 00:37:34,520
+Right?
+
+1102
+00:37:34,560 --> 00:37:35,560
+So,
+
+1103
+00:37:35,560 --> 00:37:36,560
+it's possible
+
+1104
+00:37:36,560 --> 00:37:37,560
+that
+
+1105
+00:37:37,560 --> 00:37:38,560
+a student
+
+1106
+00:37:38,560 --> 00:37:39,560
+written
+
+1107
+00:37:39,560 --> 00:37:40,560
+random number
+
+1108
+00:37:40,560 --> 00:37:41,560
+generator
+
+1109
+00:37:41,560 --> 00:37:42,560
+for Metal
+
+1110
+00:37:42,560 --> 00:37:43,560
+was being
+
+1111
+00:37:43,560 --> 00:37:44,560
+used in
+
+1112
+00:37:44,560 --> 00:37:45,560
+Apple software.
+
+1113
+00:37:45,560 --> 00:37:46,560
+I don't make
+
+1114
+00:37:46,560 --> 00:37:47,560
+claims about it
+
+1115
+00:37:47,560 --> 00:37:48,560
+but it's possible.
+
+1116
+00:37:48,560 --> 00:37:49,560
+So,
+
+1117
+00:37:49,560 --> 00:37:50,560
+last one.
+
+1118
+00:37:50,560 --> 00:37:51,560
+This is a
+
+1119
+00:37:51,560 --> 00:37:52,560
+personal one,
+
+1120
+00:37:52,560 --> 00:37:53,560
+right?
+
+1121
+00:37:53,560 --> 00:37:54,560
+So,
+
+1122
+00:37:54,560 --> 00:37:55,560
+when I was
+
+1123
+00:37:55,560 --> 00:37:56,560
+in this class
+
+1124
+00:37:56,560 --> 00:37:57,560
+10 years ago
+
+1125
+00:37:57,560 --> 00:37:58,560
+and did
+
+1126
+00:37:58,560 --> 00:37:59,560
+the path tracer
+
+1127
+00:37:59,560 --> 00:38:00,560
+or
+
+1128
+00:38:00,560 --> 00:38:01,560
+again,
+
+1129
+00:38:01,560 --> 00:38:02,560
+I wasn't very
+
+1130
+00:38:02,560 --> 00:38:03,560
+very forward
+
+1131
+00:38:03,600 --> 00:38:04,600
+so
+
+1132
+00:38:04,600 --> 00:38:05,600
+we used
+
+1133
+00:38:05,600 --> 00:38:06,600
+to write blogs.
+
+1134
+00:38:06,600 --> 00:38:07,600
+Patrick,
+
+1135
+00:38:07,600 --> 00:38:08,600
+instead of reading
+
+1136
+00:38:08,600 --> 00:38:09,600
+we used to
+
+1137
+00:38:09,600 --> 00:38:10,600
+write blogs
+
+1138
+00:38:10,600 --> 00:38:11,600
+and Patrick
+
+1139
+00:38:11,600 --> 00:38:12,600
+tweeted my
+
+1140
+00:38:12,600 --> 00:38:13,600
+path tracer
+
+1141
+00:38:13,600 --> 00:38:14,600
+back then
+
+1142
+00:38:14,600 --> 00:38:15,600
+and using
+
+1143
+00:38:15,600 --> 00:38:16,600
+this hashtag
+
+1144
+00:38:16,600 --> 00:38:17,600
+CUDA here
+
+1145
+00:38:17,600 --> 00:38:18,600
+so,
+
+1146
+00:38:18,600 --> 00:38:19,600
+a company
+
+1147
+00:38:19,600 --> 00:38:20,600
+called
+
+1148
+00:38:20,600 --> 00:38:21,600
+Accelerize
+
+1149
+00:38:21,600 --> 00:38:22,600
+back then
+
+1150
+00:38:22,600 --> 00:38:23,600
+followed
+
+1151
+00:38:23,600 --> 00:38:24,600
+the CUDA
+
+1152
+00:38:24,600 --> 00:38:25,600
+hashtag
+
+1153
+00:38:25,600 --> 00:38:26,600
+because they
+
+1154
+00:38:26,600 --> 00:38:27,600
+were doing
+
+1155
+00:38:27,600 --> 00:38:28,600
+GPU work
+
+1156
+00:38:28,600 --> 00:38:29,600
+and like I said
+
+1157
+00:38:29,600 --> 00:38:30,600
+I had
+
+1158
+00:38:30,600 --> 00:38:31,600
+two or three
+
+1159
+00:38:31,600 --> 00:38:32,600
+followers
+
+1160
+00:38:32,640 --> 00:38:33,640
+and I'm applying
+
+1161
+00:38:33,640 --> 00:38:34,640
+everywhere
+
+1162
+00:38:34,640 --> 00:38:35,640
+and I'm not
+
+1163
+00:38:35,640 --> 00:38:36,640
+having very
+
+1164
+00:38:36,640 --> 00:38:37,640
+good luck.
+
+1165
+00:38:37,640 --> 00:38:38,640
+So,
+
+1166
+00:38:38,640 --> 00:38:39,640
+Accelerize
+
+1167
+00:38:39,640 --> 00:38:40,640
+follows me back
+
+1168
+00:38:40,640 --> 00:38:41,640
+and I'm like
+
+1169
+00:38:41,640 --> 00:38:42,640
+who is this
+
+1170
+00:38:42,640 --> 00:38:43,640
+company that's
+
+1171
+00:38:43,640 --> 00:38:44,640
+trying to
+
+1172
+00:38:44,640 --> 00:38:45,640
+follow me?
+
+1173
+00:38:45,640 --> 00:38:46,640
+Like,
+
+1174
+00:38:46,640 --> 00:38:47,640
+what makes
+
+1175
+00:38:47,640 --> 00:38:48,640
+me special
+
+1176
+00:38:48,640 --> 00:38:49,640
+kind of thing?
+
+1177
+00:38:49,640 --> 00:38:50,640
+So,
+
+1178
+00:38:50,640 --> 00:38:51,640
+I check out
+
+1179
+00:38:51,640 --> 00:38:52,640
+their website
+
+1180
+00:38:52,640 --> 00:38:53,640
+they're doing
+
+1181
+00:38:53,640 --> 00:38:54,640
+CUDA and
+
+1182
+00:38:54,640 --> 00:38:55,640
+OpenCL
+
+1183
+00:38:55,640 --> 00:38:56,640
+work and I'm
+
+1184
+00:38:56,640 --> 00:38:57,640
+like okay
+
+1185
+00:38:57,640 --> 00:38:58,640
+apply,
+
+1186
+00:38:58,640 --> 00:38:59,640
+you know?
+
+1187
+00:38:59,640 --> 00:39:00,640
+And that's
+
+1188
+00:39:00,640 --> 00:39:01,640
+what led
+
+1189
+00:39:01,680 --> 00:39:02,680
+me to
+
+1190
+00:39:02,680 --> 00:39:03,680
+Accelerize.
+
+1191
+00:39:03,680 --> 00:39:04,680
+So,
+
+1192
+00:39:04,680 --> 00:39:05,680
+that's the
+
+1193
+00:39:05,680 --> 00:39:06,680
+story.
+
+1194
+00:39:06,680 --> 00:39:07,680
+Like,
+
+1195
+00:39:07,680 --> 00:39:08,680
+I'm standing
+
+1196
+00:39:08,680 --> 00:39:09,680
+here because
+
+1197
+00:39:09,680 --> 00:39:10,680
+of it.
+
+1198
+00:39:10,680 --> 00:39:11,680
+So,
+
+1199
+00:39:11,680 --> 00:39:12,680
+I can't
+
+1200
+00:39:12,680 --> 00:39:13,680
+emphasize enough
+
+1201
+00:39:13,680 --> 00:39:14,680
+that while
+
+1202
+00:39:14,680 --> 00:39:15,680
+you may be
+
+1203
+00:39:15,680 --> 00:39:16,680
+innovative
+
+1204
+00:39:16,680 --> 00:39:17,680
+or,
+
+1205
+00:39:17,680 --> 00:39:18,680
+you know,
+
+1206
+00:39:18,680 --> 00:39:19,680
+being like
+
+1207
+00:39:19,680 --> 00:39:20,680
+oh,
+
+1208
+00:39:20,680 --> 00:39:21,680
+I'm just
+
+1209
+00:39:21,680 --> 00:39:22,680
+a student
+
+1210
+00:39:22,680 --> 00:39:23,680
+in a class
+
+1211
+00:39:23,680 --> 00:39:24,680
+who's going
+
+1212
+00:39:24,680 --> 00:39:25,680
+to care
+
+1213
+00:39:25,680 --> 00:39:26,680
+about my
+
+1214
+00:39:26,680 --> 00:39:27,680
+work,
+
+1215
+00:39:27,680 --> 00:39:28,680
+a lot
+
+1216
+00:39:28,680 --> 00:39:29,680
+of people
+
+1217
+00:39:29,680 --> 00:39:30,680
+are going
+
+1218
+00:39:30,720 --> 00:39:31,720
+to care
+
+1219
+00:39:31,720 --> 00:39:32,720
+about my
+
+1220
+00:39:32,720 --> 00:39:33,720
+work.
+
+1221
+00:39:33,720 --> 00:39:34,720
+So,
+
+1222
+00:39:34,720 --> 00:39:35,720
+even if
+
+1223
+00:39:35,720 --> 00:39:36,720
+they're not
+
+1224
+00:39:36,720 --> 00:39:37,720
+good,
+
+1225
+00:39:37,720 --> 00:39:38,720
+even if
+
+1226
+00:39:38,720 --> 00:39:39,720
+you think
+
+1227
+00:39:39,720 --> 00:39:40,720
+they're not
+
+1228
+00:39:40,720 --> 00:39:41,720
+good,
+
+1229
+00:39:41,720 --> 00:39:42,720
+right?
+
+1230
+00:39:42,720 --> 00:39:43,720
+Trust me,
+
+1231
+00:39:43,720 --> 00:39:44,720
+you're going
+
+1232
+00:39:44,720 --> 00:39:45,720
+to be having
+
+1233
+00:39:45,720 --> 00:39:46,720
+very high
+
+1234
+00:39:46,720 --> 00:39:47,720
+standards for
+
+1235
+00:39:47,720 --> 00:39:48,720
+your own
+
+1236
+00:39:48,720 --> 00:39:49,720
+work.
+
+1237
+00:39:49,720 --> 00:39:50,720
+The world
+
+1238
+00:39:50,720 --> 00:39:51,720
+will think
+
+1239
+00:39:51,720 --> 00:39:52,720
+they're
+
+1240
+00:39:52,720 --> 00:39:53,720
+me.
+
+1241
+00:39:53,720 --> 00:39:54,720
+So,
+
+1242
+00:39:54,720 --> 00:39:55,720
+I encourage
+
+1243
+00:39:55,720 --> 00:39:56,720
+you to
+
+1244
+00:39:56,720 --> 00:39:57,720
+always talk
+
+1245
+00:39:57,720 --> 00:39:58,720
+about your
+
+1246
+00:39:58,720 --> 00:39:59,720
+work.
+
+1247
+00:39:59,760 --> 00:40:00,760
+You know,
+
+1248
+00:40:00,760 --> 00:40:01,760
+just simple
+
+1249
+00:40:01,760 --> 00:40:02,760
+messages like
+
+1250
+00:40:02,760 --> 00:40:03,760
+that go a
+
+1251
+00:40:03,760 --> 00:40:04,760
+really,
+
+1252
+00:40:04,760 --> 00:40:05,760
+really long
+
+1253
+00:40:05,760 --> 00:40:06,760
+way for
+
+1254
+00:40:06,760 --> 00:40:07,760
+promoting
+
+1255
+00:40:07,760 --> 00:40:08,760
+how you
+
+1256
+00:40:08,760 --> 00:40:09,760
+work and
+
+1257
+00:40:09,760 --> 00:40:10,760
+how your
+
+1258
+00:40:10,760 --> 00:40:11,760
+code looks
+
+1259
+00:40:11,760 --> 00:40:12,760
+and how
+
+1260
+00:40:12,760 --> 00:40:13,760
+you're
+
+1261
+00:40:13,760 --> 00:40:14,760
+thinking about
+
+1262
+00:40:14,760 --> 00:40:15,760
+software.
+
+1263
+00:40:15,760 --> 00:40:16,760
+Because
+
+1264
+00:40:16,760 --> 00:40:17,760
+today,
+
+1265
+00:40:17,760 --> 00:40:18,760
+you might
+
+1266
+00:40:18,760 --> 00:40:19,760
+be promoting
+
+1267
+00:40:19,760 --> 00:40:20,760
+yourself.
+
+1268
+00:40:20,760 --> 00:40:21,760
+Today,
+
+1269
+00:40:21,760 --> 00:40:22,760
+you might
+
+1270
+00:40:22,760 --> 00:40:23,760
+be promoting
+
+1271
+00:40:23,760 --> 00:40:24,760
+yourself
+
+1272
+00:40:24,760 --> 00:40:25,760
+through your
+
+1273
+00:40:25,760 --> 00:40:26,760
+projects.
+
+1274
+00:40:26,760 --> 00:40:27,760
+But what it
+
+1275
+00:40:27,760 --> 00:40:28,760
+tells me
+
+1276
+00:40:28,800 --> 00:40:29,800
+is that
+
+1277
+00:40:29,800 --> 00:40:30,800
+you have to
+
+1278
+00:40:30,800 --> 00:40:31,800
+go to
+
+1279
+00:40:31,800 --> 00:40:32,800
+conferences and
+
+1280
+00:40:32,800 --> 00:40:33,800
+talk about
+
+1281
+00:40:33,800 --> 00:40:34,800
+it,
+
+1282
+00:40:34,800 --> 00:40:35,800
+right?
+
+1283
+00:40:35,800 --> 00:40:36,800
+And that's
+
+1284
+00:40:36,800 --> 00:40:37,800
+a key factor.
+
+1285
+00:40:37,800 --> 00:40:38,800
+A lot
+
+1286
+00:40:38,800 --> 00:40:39,800
+of engineers
+
+1287
+00:40:39,800 --> 00:40:40,800
+just want
+
+1288
+00:40:40,800 --> 00:40:41,800
+to be in
+
+1289
+00:40:41,800 --> 00:40:42,800
+a dark
+
+1290
+00:40:42,800 --> 00:40:43,800
+room and
+
+1291
+00:40:43,800 --> 00:40:44,800
+code all
+
+1292
+00:40:44,800 --> 00:40:45,800
+day.
+
+1293
+00:40:45,800 --> 00:40:46,800
+But yes,
+
+1294
+00:40:46,800 --> 00:40:47,800
+they're great,
+
+1295
+00:40:47,800 --> 00:40:48,800
+no doubt
+
+1296
+00:40:48,800 --> 00:40:49,800
+about it.
+
+1297
+00:40:49,800 --> 00:40:50,800
+But I also
+
+1298
+00:40:50,800 --> 00:40:51,800
+want the
+
+1299
+00:40:51,800 --> 00:40:52,800
+engineers who
+
+1300
+00:40:52,800 --> 00:40:53,800
+are going
+
+1301
+00:40:53,800 --> 00:40:54,800
+to be going
+
+1302
+00:40:54,800 --> 00:40:55,800
+to conferences
+
+1303
+00:40:55,800 --> 00:40:56,800
+talking about
+
+1304
+00:40:56,800 --> 00:40:57,800
+it,
+
+1305
+00:40:57,840 --> 00:40:58,840
+right?
+
+1306
+00:40:58,840 --> 00:40:59,840
+Because
+
+1307
+00:40:59,840 --> 00:41:00,840
+that's
+
+1308
+00:41:00,840 --> 00:41:01,840
+the key
+
+1309
+00:41:01,840 --> 00:41:02,840
+factor.
+
+1310
+00:41:02,840 --> 00:41:03,840
+So that's
+
+1311
+00:41:03,840 --> 00:41:04,840
+all for
+
+1312
+00:41:04,840 --> 00:41:05,840
+the slides
+
+1313
+00:41:05,840 --> 00:41:06,840
+that I have.
+
+1314
+00:41:06,840 --> 00:41:07,840
+I hope
+
+1315
+00:41:07,840 --> 00:41:08,840
+I've inspired
+
+1316
+00:41:08,840 --> 00:41:09,840
+you to do
+
+1317
+00:41:09,840 --> 00:41:10,840
+a lot more
+
+1318
+00:41:10,840 --> 00:41:11,840
+around ReadMe.
+
+1319
+00:41:11,840 --> 00:41:12,840
+But if you
+
+1320
+00:41:12,840 --> 00:41:13,840
+have any
+
+1321
+00:41:13,840 --> 00:41:14,840
+questions,
+
+1322
+00:41:14,840 --> 00:41:15,840
+I'm more
+
+1323
+00:41:15,840 --> 00:41:16,840
+than happy
+
+1324
+00:41:16,840 --> 00:41:17,840
+to take
+
+1325
+00:41:17,840 --> 00:41:18,840
+those.
+
+1326
+00:41:18,840 --> 00:41:19,840
+So
+
+1327
+00:41:19,840 --> 00:41:20,840
+yeah.
+
+1328
+00:41:20,840 --> 00:41:21,840
+Maybe.
+
+1329
+00:41:21,840 --> 00:41:22,840
+Maybe.
+
+1330
+00:41:22,840 --> 00:41:23,840
+I'm not
+
+1331
+00:41:23,840 --> 00:41:24,840
+saying you
+
+1332
+00:41:24,840 --> 00:41:25,840
+should
+
+1333
+00:41:25,840 --> 00:41:26,840
+publicize
+
+1334
+00:41:26,840 --> 00:41:27,840
+every single
+
+1335
+00:41:27,840 --> 00:41:28,840
+project.
+
+1336
+00:41:28,840 --> 00:41:29,840
+In this
+
+1337
+00:41:29,840 --> 00:41:30,840
+class,
+
+1338
+00:41:30,840 --> 00:41:31,840
+maybe.
+
+1339
+00:41:31,840 --> 00:41:32,840
+But
+
+1340
+00:41:32,840 --> 00:41:33,840
+outside of
+
+1341
+00:41:33,840 --> 00:41:34,840
+this class,
+
+1342
+00:41:34,840 --> 00:41:35,840
+I can't say.
+
+1343
+00:41:35,840 --> 00:41:36,840
+But
+
+1344
+00:41:36,840 --> 00:41:37,840
+what I'm
+
+1345
+00:41:37,840 --> 00:41:38,840
+trying to
+
+1346
+00:41:38,840 --> 00:41:39,840
+say is
+
+1347
+00:41:39,840 --> 00:41:40,840
+you,
+
+1348
+00:41:40,840 --> 00:41:41,840
+let's say
+
+1349
+00:41:41,840 --> 00:41:42,840
+you get
+
+1350
+00:41:42,840 --> 00:41:43,840
+to the
+
+1351
+00:41:43,840 --> 00:41:44,840
+path stage
+
+1352
+00:41:44,840 --> 00:41:45,840
+or you
+
+1353
+00:41:45,840 --> 00:41:46,840
+don't need
+
+1354
+00:41:46,840 --> 00:41:47,840
+project 2
+
+1355
+00:41:47,840 --> 00:41:48,840
+for the
+
+1356
+00:41:48,840 --> 00:41:49,840
+next
+
+1357
+00:41:49,840 --> 00:41:50,840
+project,
+
+1358
+00:41:50,840 --> 00:41:51,840
+you may
+
+1359
+00:41:51,840 --> 00:41:52,840
+be producing
+
+1360
+00:41:52,840 --> 00:41:53,840
+amazing
+
+1361
+00:41:53,840 --> 00:41:54,840
+charts or
+
+1362
+00:41:54,840 --> 00:41:55,840
+amazing
+
+1363
+00:41:55,840 --> 00:41:56,840
+images.
+
+1364
+00:41:56,840 --> 00:41:57,840
+And you
+
+1365
+00:41:57,840 --> 00:41:58,840
+may think,
+
+1366
+00:41:58,840 --> 00:41:59,840
+oh,
+
+1367
+00:41:59,840 --> 00:42:00,840
+I slogged
+
+1368
+00:42:00,840 --> 00:42:01,840
+for this,
+
+1369
+00:42:01,840 --> 00:42:02,840
+I ran
+
+1370
+00:42:02,840 --> 00:42:03,840
+into so
+
+1371
+00:42:03,840 --> 00:42:04,840
+many bugs,
+
+1372
+00:42:04,840 --> 00:42:05,840
+I don't
+
+1373
+00:42:05,840 --> 00:42:06,840
+know what
+
+1374
+00:42:06,840 --> 00:42:07,840
+my data
+
+1375
+00:42:07,840 --> 00:42:08,840
+is going
+
+1376
+00:42:08,840 --> 00:42:09,840
+to be.
+
+1377
+00:42:09,840 --> 00:42:10,840
+That's
+
+1378
+00:42:10,840 --> 00:42:11,840
+all fine.
+
+1379
+00:42:11,840 --> 00:42:12,840
+But take
+
+1380
+00:42:12,840 --> 00:42:13,840
+that chart
+
+1381
+00:42:13,840 --> 00:42:14,840
+and be
+
+1382
+00:42:14,840 --> 00:42:15,840
+like,
+
+1383
+00:42:15,840 --> 00:42:16,840
+hey,
+
+1384
+00:42:16,840 --> 00:42:17,840
+I
+
+1385
+00:42:17,840 --> 00:42:18,840
+implemented
+
+1386
+00:42:18,840 --> 00:42:19,840
+one
+
+1387
+00:42:19,840 --> 00:42:20,840
+percent of
+
+1388
+00:42:20,840 --> 00:42:21,840
+all
+
+1389
+00:42:21,840 --> 00:42:22,840
+CIS
+
+1390
+00:42:22,840 --> 00:42:23,840
+programs
+
+1391
+00:42:23,840 --> 00:42:24,840
+across the
+
+1392
+00:42:24,840 --> 00:42:25,840
+world.
+
+1393
+00:42:25,840 --> 00:42:26,840
+I'm not
+
+1394
+00:42:26,840 --> 00:42:27,840
+just talking
+
+1395
+00:42:27,840 --> 00:42:28,840
+about
+
+1396
+00:42:28,840 --> 00:42:29,840
+that.
+
+1397
+00:42:29,840 --> 00:42:30,840
+That makes
+
+1398
+00:42:30,840 --> 00:42:31,840
+you different.
+
+1399
+00:42:31,840 --> 00:42:32,840
+Use that
+
+1400
+00:42:32,840 --> 00:42:33,840
+to your
+
+1401
+00:42:33,840 --> 00:42:34,840
+advantage.
+
+1402
+00:42:34,840 --> 00:42:35,840
+Just because
+
+1403
+00:42:35,840 --> 00:42:36,840
+you think
+
+1404
+00:42:36,840 --> 00:42:37,840
+you may
+
+1405
+00:42:37,840 --> 00:42:38,840
+not have
+
+1406
+00:42:38,840 --> 00:42:39,840
+gotten
+
+1407
+00:42:39,840 --> 00:42:40,840
+100 out
+
+1408
+00:42:40,840 --> 00:42:41,840
+of 100
+
+1409
+00:42:41,840 --> 00:42:42,840
+on your
+
+1410
+00:42:42,840 --> 00:42:43,840
+project
+
+1411
+00:42:43,840 --> 00:42:44,840
+doesn't
+
+1412
+00:42:44,840 --> 00:42:45,840
+make your
+
+1413
+00:42:45,840 --> 00:42:46,840
+project
+
+1414
+00:42:46,840 --> 00:42:47,840
+bad.
+
+1415
+00:42:47,840 --> 00:42:48,840
+But it
+
+1416
+00:42:48,840 --> 00:42:49,840
+doesn't mean
+
+1417
+00:42:49,840 --> 00:42:50,840
+if you're
+
+1418
+00:42:50,840 --> 00:42:51,840
+not getting
+
+1419
+00:42:51,840 --> 00:42:52,840
+100 out
+
+1420
+00:42:52,840 --> 00:42:53,840
+of 100,
+
+1421
+00:42:53,840 --> 00:42:54,840
+your project
+
+1422
+00:42:54,840 --> 00:42:55,840
+is not
+
+1423
+00:42:55,840 --> 00:42:56,840
+good.
+
+1424
+00:42:56,840 --> 00:42:57,840
+So always
+
+1425
+00:42:57,840 --> 00:42:58,840
+remember that.
+
+1426
+00:42:58,840 --> 00:42:59,840
+The work
+
+1427
+00:42:59,840 --> 00:43:00,840
+you're doing
+
+1428
+00:43:00,840 --> 00:43:01,840
+is difficult
+
+1429
+00:43:01,840 --> 00:43:02,840
+but it's
+
+1430
+00:43:02,840 --> 00:43:03,840
+also in
+
+1431
+00:43:03,840 --> 00:43:04,840
+your benefit
+
+1432
+00:43:04,840 --> 00:43:05,840
+and making
+
+1433
+00:43:05,840 --> 00:43:06,840
+you look
+
+1434
+00:43:06,840 --> 00:43:07,840
+unique.
+
+1435
+00:43:07,840 --> 00:43:08,840
+Any
+
+1436
+00:43:08,840 --> 00:43:09,840
+other
+
+1437
+00:43:09,840 --> 00:43:10,840
+questions
+
+1438
+00:43:10,840 --> 00:43:11,840
+or
+
+1439
+00:43:11,840 --> 00:43:12,840
+readings?
+
+1440
+00:43:12,840 --> 00:43:13,840
+Last
+
+1441
+00:43:13,840 --> 00:43:14,840
+one?
+
+1442
+00:43:14,840 --> 00:43:15,840
+Okay.
+
+1443
+00:43:15,840 --> 00:43:16,840
+All
+
+1444
+00:43:16,840 --> 00:43:17,840
+right.
+
+1445
+00:43:17,840 --> 00:43:18,840
+So
+
+1446
+00:43:18,840 --> 00:43:19,840
+let's
+
+1447
+00:43:19,840 --> 00:43:20,840
+move on
+
+1448
+00:43:20,840 --> 00:43:21,840
+to the
+
+1449
+00:43:21,840 --> 00:43:22,840
+more
+
+1450
+00:43:22,840 --> 00:43:23,840
+fun part
+
+1451
+00:43:23,840 --> 00:43:24,840
+of the
+
+1452
+00:43:24,840 --> 00:43:25,840
+class,
+
+1453
+00:43:25,840 --> 00:43:26,840
+which is
+
+1454
+00:43:26,840 --> 00:43:27,840
+performance.
+
+1455
+00:43:27,840 --> 00:43:28,840
+So
+
+1456
+00:43:28,840 --> 00:43:29,840
+which
+
+1457
+00:43:29,840 --> 00:43:30,840
+algorithms did
+
+1458
+00:43:30,840 --> 00:43:31,840
+we take a
+
+1459
+00:43:31,840 --> 00:43:32,840
+look at
+
+1460
+00:43:32,840 --> 00:43:33,840
+last time?
+
+1461
+00:43:33,840 --> 00:43:34,840
+Anybody
+
+1462
+00:43:34,840 --> 00:43:35,840
+remember?
+
+1463
+00:43:35,840 --> 00:43:36,840
+Or did
+
+1464
+00:43:36,840 --> 00:43:37,840
+everybody
+
+1465
+00:43:37,840 --> 00:43:38,840
+forget?
+
+1466
+00:43:38,840 --> 00:43:39,840
+Scan?
+
+1467
+00:43:39,840 --> 00:43:40,840
+Okay.
+
+1468
+00:43:40,840 --> 00:43:41,840
+Reduction?
+
+1469
+00:43:41,840 --> 00:43:42,840
+Radix sort?
+
+1470
+00:43:42,840 --> 00:43:43,840
+Some
+
+1471
+00:43:43,840 --> 00:43:44,840
+area
+
+1472
+00:43:44,840 --> 00:43:45,840
+table?
+
+1473
+00:43:45,840 --> 00:43:46,840
+Compaction?
+
+1474
+00:43:46,840 --> 00:43:47,840
+Yeah.
+
+1475
+00:43:47,840 --> 00:43:48,840
+That's
+
+1476
+00:43:48,840 --> 00:43:49,840
+about right.
+
+1477
+00:43:49,840 --> 00:43:50,840
+Okay.
+
+1478
+00:43:50,840 --> 00:43:51,840
+So today
+
+1479
+00:43:51,840 --> 00:43:52,840
+we're going
+
+1480
+00:43:52,840 --> 00:43:53,840
+to take a
+
+1481
+00:43:53,840 --> 00:43:54,840
+look at
+
+1482
+00:43:54,840 --> 00:43:55,840
+a bunch
+
+1483
+00:43:55,840 --> 00:43:56,840
+of these
+
+1484
+00:43:56,840 --> 00:43:57,840
+algorithms
+
+1485
+00:43:57,840 --> 00:43:58,840
+and performance
+
+1486
+00:43:58,840 --> 00:43:59,840
+trade-offs
+
+1487
+00:43:59,840 --> 00:44:00,840
+and how
+
+1488
+00:44:00,840 --> 00:44:01,840
+they help
+
+1489
+00:44:01,840 --> 00:44:02,840
+improve
+
+1490
+00:44:02,840 --> 00:44:03,840
+the algorithm.
+
+1491
+00:44:03,840 --> 00:44:04,840
+And while
+
+1492
+00:44:04,840 --> 00:44:05,840
+we may
+
+1493
+00:44:05,840 --> 00:44:06,840
+talk about
+
+1494
+00:44:06,840 --> 00:44:07,840
+specific
+
+1495
+00:44:07,840 --> 00:44:08,840
+algorithms
+
+1496
+00:44:08,840 --> 00:44:09,840
+at specific
+
+1497
+00:44:09,840 --> 00:44:10,840
+times,
+
+1498
+00:44:10,840 --> 00:44:11,840
+all these
+
+1499
+00:44:11,840 --> 00:44:12,840
+apply to
+
+1500
+00:44:12,840 --> 00:44:13,840
+all the
+
+1501
+00:44:13,840 --> 00:44:14,840
+algorithms
+
+1502
+00:44:14,840 --> 00:44:15,840
+in
+
+1503
+00:44:15,840 --> 00:44:16,840
+the
+
+1504
+00:44:16,840 --> 00:44:17,840
+world.
+
+1505
+00:44:17,840 --> 00:44:18,840
+You
+
+1506
+00:44:18,840 --> 00:44:19,840
+optimize it
+
+1507
+00:44:19,840 --> 00:44:20,840
+for the
+
+1508
+00:44:20,840 --> 00:44:21,840
+architecture
+
+1509
+00:44:21,840 --> 00:44:22,840
+and you
+
+1510
+00:44:22,840 --> 00:44:23,840
+get maximum
+
+1511
+00:44:23,840 --> 00:44:24,840
+performance out
+
+1512
+00:44:24,840 --> 00:44:25,840
+of it.
+
+1513
+00:44:25,840 --> 00:44:26,840
+If you
+
+1514
+00:44:26,840 --> 00:44:27,840
+remove this
+
+1515
+00:44:27,840 --> 00:44:28,840
+yellow box
+
+1516
+00:44:28,840 --> 00:44:29,840
+here,
+
+1517
+00:44:29,840 --> 00:44:30,840
+this is a
+
+1518
+00:44:30,840 --> 00:44:31,840
+key component
+
+1519
+00:44:31,840 --> 00:44:32,840
+of deriving
+
+1520
+00:44:32,840 --> 00:44:33,840
+maximum
+
+1521
+00:44:33,840 --> 00:44:34,840
+performance.
+
+1522
+00:44:34,840 --> 00:44:35,840
+So let's
+
+1523
+00:44:35,840 --> 00:44:36,840
+revisit
+
+1524
+00:44:36,840 --> 00:44:37,840
+parallel
+
+1525
+00:44:37,840 --> 00:44:38,840
+reduction.
+
+1526
+00:44:38,840 --> 00:44:39,840
+Okay?
+
+1527
+00:44:39,840 --> 00:44:40,840
+So in
+
+1528
+00:44:40,840 --> 00:44:41,840
+parallel
+
+1529
+00:44:41,840 --> 00:44:42,840
+reduction,
+
+1530
+00:44:42,840 --> 00:44:43,840
+what we
+
+1531
+00:44:43,840 --> 00:44:44,840
+did was
+
+1532
+00:44:44,840 --> 00:44:45,840
+we took
+
+1533
+00:44:45,840 --> 00:44:46,840
+this array
+
+1534
+00:44:46,840 --> 00:44:47,840
+of eight
+
+1535
+00:44:47,840 --> 00:44:48,840
+elements,
+
+1536
+00:44:48,840 --> 00:44:49,840
+we added
+
+1537
+00:44:49,840 --> 00:44:50,840
+them two
+
+1538
+00:44:50,840 --> 00:44:51,840
+at a
+
+1539
+00:44:51,840 --> 00:44:52,840
+time.
+
+1540
+00:44:52,840 --> 00:44:53,840
+What did
+
+1541
+00:44:53,840 --> 00:44:54,840
+we do
+
+1542
+00:44:54,840 --> 00:44:55,840
+next?
+
+1543
+00:44:55,840 --> 00:44:56,840
+Add them
+
+1544
+00:44:56,840 --> 00:44:57,840
+again and
+
+1545
+00:44:57,840 --> 00:44:58,840
+add them
+
+1546
+00:44:58,840 --> 00:44:59,840
+again.
+
+1547
+00:44:59,840 --> 00:45:00,840
+Everybody
+
+1548
+00:45:00,840 --> 00:45:01,840
+follow?
+
+1549
+00:45:01,840 --> 00:45:02,840
+Everybody
+
+1550
+00:45:02,840 --> 00:45:03,840
+on board
+
+1551
+00:45:03,840 --> 00:45:04,840
+with parallel
+
+1552
+00:45:04,840 --> 00:45:05,840
+reduction?
+
+1553
+00:45:05,840 --> 00:45:06,840
+Hopefully
+
+1554
+00:45:06,840 --> 00:45:07,840
+all of you
+
+1555
+00:45:07,840 --> 00:45:08,840
+implemented
+
+1556
+00:45:08,840 --> 00:45:09,840
+this in
+
+1557
+00:45:09,840 --> 00:45:10,840
+project 2
+
+1558
+00:45:10,840 --> 00:45:11,840
+already.
+
+1559
+00:45:11,840 --> 00:45:12,840
+Fingers
+
+1560
+00:45:12,840 --> 00:45:13,840
+crossed.
+
+1561
+00:45:13,840 --> 00:45:14,840
+The only
+
+1562
+00:45:14,840 --> 00:45:15,840
+thing is
+
+1563
+00:45:15,840 --> 00:45:16,840
+which index
+
+1564
+00:45:16,840 --> 00:45:17,840
+we are
+
+1565
+00:45:17,840 --> 00:45:18,840
+writing into.
+
+1566
+00:45:18,840 --> 00:45:19,840
+But they
+
+1567
+00:45:19,840 --> 00:45:20,840
+read the
+
+1568
+00:45:20,840 --> 00:45:21,840
+same data.
+
+1569
+00:45:21,840 --> 00:45:22,840
+Completely
+
+1570
+00:45:22,840 --> 00:45:23,840
+the same
+
+1571
+00:45:23,840 --> 00:45:24,840
+thing.
+
+1572
+00:45:24,840 --> 00:45:25,840
+This is
+
+1573
+00:45:25,840 --> 00:45:26,840
+kind of
+
+1574
+00:45:26,840 --> 00:45:27,840
+the code
+
+1575
+00:45:27,840 --> 00:45:28,840
+for this
+
+1576
+00:45:28,840 --> 00:45:29,840
+kind of
+
+1577
+00:45:29,840 --> 00:45:30,840
+indexing
+
+1578
+00:45:30,840 --> 00:45:31,840
+where you
+
+1579
+00:45:31,840 --> 00:45:32,840
+have this
+
+1580
+00:45:32,840 --> 00:45:33,840
+thread,
+
+1581
+00:45:33,840 --> 00:45:34,840
+this
+
+1582
+00:45:34,840 --> 00:45:35,840
+stride,
+
+1583
+00:45:35,840 --> 00:45:36,840
+which dictates
+
+1584
+00:45:36,840 --> 00:45:37,840
+what the
+
+1585
+00:45:37,840 --> 00:45:38,840
+difference in
+
+1586
+00:45:38,840 --> 00:45:39,840
+indexing is.
+
+1587
+00:45:39,840 --> 00:45:40,840
+If you're
+
+1588
+00:45:40,840 --> 00:45:41,840
+reading from
+
+1589
+00:45:41,840 --> 00:45:42,840
+one to
+
+1590
+00:45:42,840 --> 00:45:43,840
+four,
+
+1591
+00:45:43,840 --> 00:45:44,840
+you see
+
+1592
+00:45:44,840 --> 00:45:45,840
+how
+
+1593
+00:45:45,840 --> 00:45:46,840
+stride is
+
+1594
+00:45:46,840 --> 00:45:47,840
+less than
+
+1595
+00:45:47,840 --> 00:45:48,840
+block time
+
+1596
+00:45:48,840 --> 00:45:49,840
+and you're
+
+1597
+00:45:49,840 --> 00:45:50,840
+multiplying
+
+1598
+00:45:50,840 --> 00:45:51,840
+stride times
+
+1599
+00:45:51,840 --> 00:45:52,840
+two.
+
+1600
+00:45:52,840 --> 00:45:53,840
+In multiple
+
+1601
+00:45:53,840 --> 00:45:54,840
+blocks you
+
+1602
+00:45:54,840 --> 00:45:55,840
+want to be
+
+1603
+00:45:55,840 --> 00:45:56,840
+loading that
+
+1604
+00:45:56,840 --> 00:45:57,840
+into shared
+
+1605
+00:45:57,840 --> 00:45:58,840
+memory so
+
+1606
+00:45:58,840 --> 00:45:59,840
+you're not
+
+1607
+00:45:59,840 --> 00:46:00,840
+always reading
+
+1608
+00:46:00,840 --> 00:46:01,840
+from global
+
+1609
+00:46:01,840 --> 00:46:02,840
+memory every
+
+1610
+00:46:02,840 --> 00:46:03,840
+time you
+
+1611
+00:46:03,840 --> 00:46:04,840
+operate in
+
+1612
+00:46:04,840 --> 00:46:05,840
+shared memory.
+
+1613
+00:46:05,840 --> 00:46:06,840
+I don't
+
+1614
+00:46:06,840 --> 00:46:07,840
+know why
+
+1615
+00:46:07,840 --> 00:46:08,840
+my clicker
+
+1616
+00:46:08,840 --> 00:46:09,840
+is doing
+
+1617
+00:46:09,840 --> 00:46:10,840
+this.
+
+1618
+00:46:10,840 --> 00:46:11,840
+Where
+
+1619
+00:46:11,840 --> 00:46:12,840
+were we?
+
+1620
+00:46:12,840 --> 00:46:13,840
+I think
+
+1621
+00:46:13,840 --> 00:46:14,840
+we were
+
+1622
+00:46:14,840 --> 00:46:15,840
+here.
+
+1623
+00:46:15,840 --> 00:46:16,840
+So
+
+1624
+00:46:16,840 --> 00:46:17,840
+the stride
+
+1625
+00:46:17,840 --> 00:46:18,840
+you get
+
+1626
+00:46:18,840 --> 00:46:19,840
+one to
+
+1627
+00:46:19,840 --> 00:46:20,840
+four until
+
+1628
+00:46:20,840 --> 00:46:21,840
+it's less
+
+1629
+00:46:21,840 --> 00:46:22,840
+than block
+
+1630
+00:46:22,840 --> 00:46:23,840
+time.
+
+1631
+00:46:23,840 --> 00:46:24,840
+Why do
+
+1632
+00:46:24,840 --> 00:46:25,840
+we need
+
+1633
+00:46:25,840 --> 00:46:26,840
+signals?
+
+1634
+00:46:27,840 --> 00:46:28,840
+How is
+
+1635
+00:46:28,840 --> 00:46:29,840
+that wrong
+
+1636
+00:46:29,840 --> 00:46:30,840
+information
+
+1637
+00:46:30,840 --> 00:46:31,840
+coming up?
+
+1638
+00:46:31,840 --> 00:46:32,840
+Let's
+
+1639
+00:46:32,840 --> 00:46:33,840
+say you
+
+1640
+00:46:33,840 --> 00:46:34,840
+have a
+
+1641
+00:46:34,840 --> 00:46:35,840
+thread
+
+1642
+00:46:35,840 --> 00:46:36,840
+and you
+
+1643
+00:46:36,840 --> 00:46:37,840
+want to
+
+1644
+00:46:37,840 --> 00:46:38,840
+load
+
+1645
+00:46:38,840 --> 00:46:39,840
+that into
+
+1646
+00:46:39,840 --> 00:46:40,840
+shared
+
+1647
+00:46:40,840 --> 00:46:41,840
+memory.
+
+1648
+00:46:41,840 --> 00:46:42,840
+You
+
+1649
+00:46:42,840 --> 00:46:43,840
+want to
+
+1650
+00:46:43,840 --> 00:46:44,840
+load
+
+1651
+00:46:44,840 --> 00:46:45,840
+that into
+
+1652
+00:46:45,840 --> 00:46:46,840
+shared
+
+1653
+00:46:46,840 --> 00:46:47,840
+memory.
+
+1654
+00:46:47,840 --> 00:46:48,840
+You
+
+1655
+00:46:48,840 --> 00:46:49,840
+want to
+
+1656
+00:46:49,840 --> 00:46:50,840
+load
+
+1657
+00:46:50,840 --> 00:46:51,840
+that into
+
+1658
+00:46:51,840 --> 00:46:52,840
+shared
+
+1659
+00:46:52,840 --> 00:46:53,840
+memory.
+
+1660
+00:46:53,840 --> 00:46:54,840
+You
+
+1661
+00:46:54,840 --> 00:46:55,840
+want to
+
+1662
+00:46:55,840 --> 00:46:56,840
+load
+
+1663
+00:46:56,840 --> 00:46:57,840
+that into
+
+1664
+00:46:57,840 --> 00:46:58,840
+shared
+
+1665
+00:46:58,840 --> 00:46:59,840
+memory.
+
+1666
+00:46:59,840 --> 00:47:00,840
+Let's
+
+1667
+00:47:00,840 --> 00:47:01,840
+say you
+
+1668
+00:47:01,840 --> 00:47:02,840
+have a
+
+1669
+00:47:02,840 --> 00:47:03,840
+thread that
+
+1670
+00:47:03,840 --> 00:47:04,840
+is
+
+1671
+00:47:04,840 --> 00:47:05,840
+writing
+
+1672
+00:47:05,840 --> 00:47:06,840
+here and
+
+1673
+00:47:06,840 --> 00:47:07,840
+automatically
+
+1674
+00:47:07,840 --> 00:47:08,840
+jumping here.
+
+1675
+00:47:08,840 --> 00:47:09,840
+This is
+
+1676
+00:47:09,840 --> 00:47:10,840
+all
+
+1677
+00:47:10,840 --> 00:47:11,840
+computing.
+
+1678
+00:47:11,840 --> 00:47:12,840
+Now you're
+
+1679
+00:47:12,840 --> 00:47:13,840
+reading bad
+
+1680
+00:47:13,840 --> 00:47:14,840
+data.
+
+1681
+00:47:14,840 --> 00:47:15,840
+Every time
+
+1682
+00:47:15,840 --> 00:47:16,840
+you write
+
+1683
+00:47:16,840 --> 00:47:17,840
+to shared
+
+1684
+00:47:17,840 --> 00:47:18,840
+memory without
+
+1685
+00:47:18,840 --> 00:47:19,840
+fail, every
+
+1686
+00:47:19,840 --> 00:47:20,840
+time you
+
+1687
+00:47:20,840 --> 00:47:21,840
+write to
+
+1688
+00:47:21,840 --> 00:47:22,840
+shared
+
+1689
+00:47:22,840 --> 00:47:23,840
+memory,
+
+1690
+00:47:23,840 --> 00:47:24,840
+put a
+
+1691
+00:47:24,840 --> 00:47:25,840
+new thread
+
+1692
+00:47:25,840 --> 00:47:26,840
+into
+
+1693
+00:47:26,840 --> 00:47:27,840
+shared
+
+1694
+00:47:27,840 --> 00:47:28,840
+memory.
+
+1695
+00:47:28,840 --> 00:47:29,840
+So here's
+
+1696
+00:47:29,840 --> 00:47:30,840
+a question
+
+1697
+00:47:30,840 --> 00:47:31,840
+for you.
+
+1698
+00:47:31,840 --> 00:47:32,840
+As
+
+1699
+00:47:32,840 --> 00:47:33,840
+time increases,
+
+1700
+00:47:33,840 --> 00:47:34,840
+what do
+
+1701
+00:47:34,840 --> 00:47:35,840
+more and
+
+1702
+00:47:35,840 --> 00:47:36,840
+more threads
+
+1703
+00:47:36,840 --> 00:47:37,840
+do?
+
+1704
+00:47:37,840 --> 00:47:38,840
+Yeah?
+
+1705
+00:47:38,840 --> 00:47:39,840
+The
+
+1706
+00:47:39,840 --> 00:47:40,840
+idle?
+
+1707
+00:47:40,840 --> 00:47:41,840
+Yeah.
+
+1708
+00:47:41,840 --> 00:47:42,840
+Because
+
+1709
+00:47:42,840 --> 00:47:43,840
+they're not
+
+1710
+00:47:43,840 --> 00:47:44,840
+doing any
+
+1711
+00:47:44,840 --> 00:47:45,840
+work.
+
+1712
+00:47:45,840 --> 00:47:46,840
+If we
+
+1713
+00:47:46,840 --> 00:47:47,840
+come back
+
+1714
+00:47:47,840 --> 00:47:48,840
+and look at
+
+1715
+00:47:48,840 --> 00:47:49,840
+this,
+
+1716
+00:47:49,840 --> 00:47:50,840
+if we
+
+1717
+00:47:50,840 --> 00:47:51,840
+get to
+
+1718
+00:47:51,840 --> 00:47:52,840
+the last
+
+1719
+00:47:52,840 --> 00:47:53,840
+level,
+
+1720
+00:47:53,840 --> 00:47:54,840
+8 elements,
+
+1721
+00:47:54,840 --> 00:47:55,840
+even
+
+1722
+00:47:55,840 --> 00:47:56,840
+like in
+
+1723
+00:47:56,840 --> 00:47:57,840
+the first
+
+1724
+00:47:57,840 --> 00:47:58,840
+thing,
+
+1725
+00:47:58,840 --> 00:47:59,840
+you're going
+
+1726
+00:47:59,840 --> 00:48:00,840
+to see
+
+1727
+00:48:00,840 --> 00:48:01,840
+four threads
+
+1728
+00:48:01,840 --> 00:48:02,840
+are not
+
+1729
+00:48:02,840 --> 00:48:03,840
+doing any
+
+1730
+00:48:03,840 --> 00:48:04,840
+addition at
+
+1731
+00:48:04,840 --> 00:48:05,840
+all.
+
+1732
+00:48:05,840 --> 00:48:06,840
+Only four
+
+1733
+00:48:06,840 --> 00:48:07,840
+threads are.
+
+1734
+00:48:07,840 --> 00:48:08,840
+In the
+
+1735
+00:48:08,840 --> 00:48:09,840
+next iteration,
+
+1736
+00:48:09,840 --> 00:48:10,840
+only two
+
+1737
+00:48:10,840 --> 00:48:11,840
+threads are.
+
+1738
+00:48:11,840 --> 00:48:12,840
+In the
+
+1739
+00:48:12,840 --> 00:48:13,840
+next iteration,
+
+1740
+00:48:13,840 --> 00:48:14,840
+only one
+
+1741
+00:48:14,840 --> 00:48:15,840
+thread is
+
+1742
+00:48:15,840 --> 00:48:16,840
+doing
+
+1743
+00:48:16,840 --> 00:48:17,840
+something.
+
+1744
+00:48:17,840 --> 00:48:18,840
+So what
+
+1745
+00:48:18,840 --> 00:48:19,840
+does that
+
+1746
+00:48:19,840 --> 00:48:20,840
+mean?
+
+1747
+00:48:20,840 --> 00:48:21,840
+In
+
+1748
+00:48:21,840 --> 00:48:22,840
+general,
+
+1749
+00:48:22,840 --> 00:48:23,840
+the number
+
+1750
+00:48:23,840 --> 00:48:24,840
+of threads
+
+1751
+00:48:24,840 --> 00:48:25,840
+you use is
+
+1752
+00:48:25,840 --> 00:48:26,840
+half.
+
+1753
+00:48:26,840 --> 00:48:27,840
+By the time
+
+1754
+00:48:27,840 --> 00:48:28,840
+you get to
+
+1755
+00:48:28,840 --> 00:48:29,840
+the last
+
+1756
+00:48:29,840 --> 00:48:30,840
+iteration,
+
+1757
+00:48:30,840 --> 00:48:31,840
+most of
+
+1758
+00:48:31,840 --> 00:48:32,840
+your threads
+
+1759
+00:48:32,840 --> 00:48:33,840
+are not
+
+1760
+00:48:33,840 --> 00:48:34,840
+tweaking.
+
+1761
+00:48:34,840 --> 00:48:35,840
+So what if
+
+1762
+00:48:35,840 --> 00:48:36,840
+we tweak
+
+1763
+00:48:36,840 --> 00:48:37,840
+this algorithm?
+
+1764
+00:48:37,840 --> 00:48:38,840
+And how
+
+1765
+00:48:38,840 --> 00:48:39,840
+should we
+
+1766
+00:48:39,840 --> 00:48:40,840
+tweak it?
+
+1767
+00:48:40,840 --> 00:48:41,840
+So we
+
+1768
+00:48:41,840 --> 00:48:42,840
+have,
+
+1769
+00:48:42,840 --> 00:48:43,840
+how should
+
+1770
+00:48:43,840 --> 00:48:44,840
+we tweak
+
+1771
+00:48:44,840 --> 00:48:45,840
+this algorithm
+
+1772
+00:48:45,840 --> 00:48:46,840
+to make
+
+1773
+00:48:46,840 --> 00:48:47,840
+it a little
+
+1774
+00:48:47,840 --> 00:48:48,840
+better?
+
+1775
+00:48:48,840 --> 00:48:49,840
+What's an
+
+1776
+00:48:49,840 --> 00:48:50,840
+alternate way
+
+1777
+00:48:50,840 --> 00:48:51,840
+to do
+
+1778
+00:48:51,840 --> 00:48:52,840
+that?
+
+1779
+00:48:52,840 --> 00:48:53,840
+The same
+
+1780
+00:48:53,840 --> 00:48:54,840
+algorithm.
+
+1781
+00:48:54,840 --> 00:48:55,840
+The same
+
+1782
+00:48:55,840 --> 00:48:56,840
+add two
+
+1783
+00:48:56,840 --> 00:48:57,840
+elements and
+
+1784
+00:48:57,840 --> 00:48:58,840
+so on.
+
+1785
+00:48:58,840 --> 00:48:59,840
+Right?
+
+1786
+00:48:59,840 --> 00:49:00,840
+Like,
+
+1787
+00:49:00,840 --> 00:49:01,840
+naively,
+
+1788
+00:49:01,840 --> 00:49:02,840
+right?
+
+1789
+00:49:02,840 --> 00:49:03,840
+Like,
+
+1790
+00:49:03,840 --> 00:49:04,840
+dense them
+
+1791
+00:49:04,840 --> 00:49:05,840
+all.
+
+1792
+00:49:05,840 --> 00:49:06,840
+So,
+
+1793
+00:49:06,840 --> 00:49:07,840
+like,
+
+1794
+00:49:07,840 --> 00:49:08,840
+instead of
+
+1795
+00:49:08,840 --> 00:49:09,840
+one and
+
+1796
+00:49:09,840 --> 00:49:10,840
+then idle
+
+1797
+00:49:10,840 --> 00:49:11,840
+five,
+
+1798
+00:49:11,840 --> 00:49:12,840
+idle nine,
+
+1799
+00:49:12,840 --> 00:49:13,840
+idle 18,
+
+1800
+00:49:13,840 --> 00:49:14,840
+put all
+
+1801
+00:49:14,840 --> 00:49:15,840
+those together
+
+1802
+00:49:15,840 --> 00:49:16,840
+and the
+
+1803
+00:49:16,840 --> 00:49:17,840
+next time it
+
+1804
+00:49:17,840 --> 00:49:18,840
+will be
+
+1805
+00:49:18,840 --> 00:49:19,840
+systems pointing
+
+1806
+00:49:19,840 --> 00:49:20,840
+at each
+
+1807
+00:49:20,840 --> 00:49:21,840
+other.
+
+1808
+00:49:21,840 --> 00:49:22,840
+I like your
+
+1809
+00:49:22,840 --> 00:49:23,840
+idea.
+
+1810
+00:49:23,840 --> 00:49:24,840
+Tell me
+
+1811
+00:49:24,840 --> 00:49:25,840
+what happens
+
+1812
+00:49:25,840 --> 00:49:26,840
+with the
+
+1813
+00:49:26,840 --> 00:49:27,840
+arrows.
+
+1814
+00:49:27,840 --> 00:49:28,840
+Arrows,
+
+1815
+00:49:28,840 --> 00:49:29,840
+fade.
+
+1816
+00:49:29,840 --> 00:49:30,840
+So let's
+
+1817
+00:49:30,840 --> 00:49:31,840
+say zero.
+
+1818
+00:49:31,840 --> 00:49:32,840
+Let's start
+
+1819
+00:49:32,840 --> 00:49:33,840
+from zero.
+
+1820
+00:49:33,840 --> 00:49:34,840
+What should
+
+1821
+00:49:34,840 --> 00:49:35,840
+we add to
+
+1822
+00:49:35,840 --> 00:49:36,840
+zero in
+
+1823
+00:49:36,840 --> 00:49:37,840
+your idea?
+
+1824
+00:49:37,840 --> 00:49:38,840
+We should
+
+1825
+00:49:38,840 --> 00:49:39,840
+add one.
+
+1826
+00:49:39,840 --> 00:49:40,840
+Okay.
+
+1827
+00:49:40,840 --> 00:49:41,840
+Then we
+
+1828
+00:49:41,840 --> 00:49:42,840
+should make
+
+1829
+00:49:42,840 --> 00:49:43,840
+two and
+
+1830
+00:49:43,840 --> 00:49:44,840
+what should
+
+1831
+00:49:44,840 --> 00:49:45,840
+we add to
+
+1832
+00:49:45,840 --> 00:49:46,840
+two?
+
+1833
+00:49:46,840 --> 00:49:47,840
+But we
+
+1834
+00:49:47,840 --> 00:49:48,840
+are doing
+
+1835
+00:49:48,840 --> 00:49:49,840
+the same
+
+1836
+00:49:49,840 --> 00:49:50,840
+thing.
+
+1837
+00:49:50,840 --> 00:49:51,840
+So what
+
+1838
+00:49:51,840 --> 00:49:52,840
+should we
+
+1839
+00:49:52,840 --> 00:49:53,840
+add to
+
+1840
+00:49:53,840 --> 00:49:54,840
+zero?
+
+1841
+00:49:54,840 --> 00:49:55,840
+You're
+
+1842
+00:49:55,840 --> 00:49:56,840
+saying bunch
+
+1843
+00:49:56,840 --> 00:49:57,840
+them
+
+1844
+00:49:57,840 --> 00:49:58,840
+up.
+
+1845
+00:49:58,840 --> 00:49:59,840
+What if
+
+1846
+00:49:59,840 --> 00:50:00,840
+we did
+
+1847
+00:50:00,840 --> 00:50:01,840
+like,
+
+1848
+00:50:01,840 --> 00:50:02,840
+like,
+
+1849
+00:50:02,840 --> 00:50:03,840
+zero and
+
+1850
+00:50:03,840 --> 00:50:04,840
+seven?
+
+1851
+00:50:04,840 --> 00:50:05,840
+Zero and
+
+1852
+00:50:05,840 --> 00:50:06,840
+seven.
+
+1853
+00:50:06,840 --> 00:50:07,840
+Okay.
+
+1854
+00:50:07,840 --> 00:50:08,840
+And then
+
+1855
+00:50:08,840 --> 00:50:09,840
+like,
+
+1856
+00:50:09,840 --> 00:50:10,840
+one and
+
+1857
+00:50:10,840 --> 00:50:11,840
+six.
+
+1858
+00:50:11,840 --> 00:50:12,840
+Okay.
+
+1859
+00:50:12,840 --> 00:50:13,840
+And
+
+1860
+00:50:13,840 --> 00:50:14,840
+then
+
+1861
+00:50:14,840 --> 00:50:15,840
+one and
+
+1862
+00:50:15,840 --> 00:50:16,840
+six.
+
+1863
+00:50:16,840 --> 00:50:17,840
+Okay.
+
+1864
+00:50:17,840 --> 00:50:18,840
+And
+
+1865
+00:50:18,840 --> 00:50:19,840
+then five
+
+1866
+00:50:19,840 --> 00:50:20,840
+and four.
+
+1867
+00:50:20,840 --> 00:50:21,840
+I like
+
+1868
+00:50:21,840 --> 00:50:22,840
+that idea
+
+1869
+00:50:22,840 --> 00:50:23,840
+better.
+
+1870
+00:50:23,840 --> 00:50:24,840
+But flip
+
+1871
+00:50:24,840 --> 00:50:25,840
+it around.
+
+1872
+00:50:25,840 --> 00:50:26,840
+What if
+
+1873
+00:50:26,840 --> 00:50:27,840
+we do
+
+1874
+00:50:27,840 --> 00:50:28,840
+zero and
+
+1875
+00:50:28,840 --> 00:50:29,840
+four,
+
+1876
+00:50:29,840 --> 00:50:30,840
+one and
+
+1877
+00:50:30,840 --> 00:50:31,840
+five,
+
+1878
+00:50:31,840 --> 00:50:32,840
+two and
+
+1879
+00:50:32,840 --> 00:50:33,840
+six,
+
+1880
+00:50:33,840 --> 00:50:34,840
+three and
+
+1881
+00:50:34,840 --> 00:50:35,840
+seven?
+
+1882
+00:50:35,840 --> 00:50:36,840
+So let's
+
+1883
+00:50:36,840 --> 00:50:37,840
+take a look
+
+1884
+00:50:37,840 --> 00:50:38,840
+at that.
+
+1885
+00:50:38,840 --> 00:50:39,840
+So we
+
+1886
+00:50:39,840 --> 00:50:40,840
+have this,
+
+1887
+00:50:40,840 --> 00:50:41,840
+right?
+
+1888
+00:50:41,840 --> 00:50:42,840
+This is
+
+1889
+00:50:42,840 --> 00:50:43,840
+our input
+
+1890
+00:50:43,840 --> 00:50:44,840
+array.
+
+1891
+00:50:44,840 --> 00:50:45,840
+What if
+
+1892
+00:50:45,840 --> 00:50:46,840
+we do
+
+1893
+00:50:46,840 --> 00:50:47,840
+this?
+
+1894
+00:50:47,840 --> 00:50:48,840
+How
+
+1895
+00:50:48,840 --> 00:50:49,840
+about this
+
+1896
+00:50:49,840 --> 00:50:50,840
+now?
+
+1897
+00:50:50,840 --> 00:50:51,840
+What is
+
+1898
+00:50:51,840 --> 00:50:52,840
+this doing?
+
+1899
+00:50:52,840 --> 00:50:53,840
+Isolating
+
+1900
+00:50:53,840 --> 00:50:54,840
+the thread.
+
+1901
+00:50:54,840 --> 00:50:55,840
+You're
+
+1902
+00:50:55,840 --> 00:50:56,840
+isolating the
+
+1903
+00:50:56,840 --> 00:50:57,840
+thread.
+
+1904
+00:50:57,840 --> 00:50:58,840
+What's the
+
+1905
+00:50:58,840 --> 00:50:59,840
+next step
+
+1906
+00:50:59,840 --> 00:51:00,840
+for me?
+
+1907
+00:51:00,840 --> 00:51:01,840
+So you
+
+1908
+00:51:01,840 --> 00:51:02,840
+take those
+
+1909
+00:51:02,840 --> 00:51:03,840
+two
+
+1910
+00:51:03,840 --> 00:51:04,840
+threads,
+
+1911
+00:51:04,840 --> 00:51:05,840
+right?
+
+1912
+00:51:05,840 --> 00:51:06,840
+And
+
+1913
+00:51:06,840 --> 00:51:07,840
+you
+
+1914
+00:51:07,840 --> 00:51:08,840
+take the
+
+1915
+00:51:08,840 --> 00:51:09,840
+next
+
+1916
+00:51:09,840 --> 00:51:10,840
+thread,
+
+1917
+00:51:10,840 --> 00:51:11,840
+right?
+
+1918
+00:51:11,840 --> 00:51:12,840
+And
+
+1919
+00:51:12,840 --> 00:51:13,840
+you
+
+1920
+00:51:13,840 --> 00:51:14,840
+isolate
+
+1921
+00:51:14,840 --> 00:51:15,840
+the
+
+1922
+00:51:15,840 --> 00:51:16,840
+next
+
+1923
+00:51:16,840 --> 00:51:17,840
+thread,
+
+1924
+00:51:17,840 --> 00:51:18,840
+right?
+
+1925
+00:51:18,840 --> 00:51:19,840
+So you
+
+1926
+00:51:19,840 --> 00:51:20,840
+take those
+
+1927
+00:51:20,840 --> 00:51:21,840
+two and
+
+1928
+00:51:21,840 --> 00:51:22,840
+add it.
+
+1929
+00:51:22,840 --> 00:51:23,840
+The last
+
+1930
+00:51:23,840 --> 00:51:24,840
+step is
+
+1931
+00:51:24,840 --> 00:51:25,840
+likely going
+
+1932
+00:51:25,840 --> 00:51:26,840
+to be the
+
+1933
+00:51:26,840 --> 00:51:27,840
+same.
+
+1934
+00:51:27,840 --> 00:51:28,840
+So now
+
+1935
+00:51:28,840 --> 00:51:29,840
+what that
+
+1936
+00:51:29,840 --> 00:51:30,840
+allows us
+
+1937
+00:51:30,840 --> 00:51:31,840
+to do is
+
+1938
+00:51:31,840 --> 00:51:32,840
+a few
+
+1939
+00:51:32,840 --> 00:51:33,840
+things.
+
+1940
+00:51:33,840 --> 00:51:34,840
+I want you
+
+1941
+00:51:34,840 --> 00:51:35,840
+to pay
+
+1942
+00:51:35,840 --> 00:51:36,840
+attention.
+
+1943
+00:51:36,840 --> 00:51:37,840
+I'll go
+
+1944
+00:51:37,840 --> 00:51:38,840
+back and
+
+1945
+00:51:38,840 --> 00:51:39,840
+show you
+
+1946
+00:51:39,840 --> 00:51:40,840
+one thing
+
+1947
+00:51:40,840 --> 00:51:41,840
+in our
+
+1948
+00:51:41,840 --> 00:51:42,840
+code that
+
+1949
+00:51:42,840 --> 00:51:43,840
+we have.
+
+1950
+00:51:43,840 --> 00:51:44,840
+So this
+
+1951
+00:51:44,840 --> 00:51:45,840
+is our
+
+1952
+00:51:45,840 --> 00:51:46,840
+thread.
+
+1953
+00:51:46,840 --> 00:51:47,840
+So
+
+1954
+00:51:47,840 --> 00:51:48,840
+I want you
+
+1955
+00:51:48,840 --> 00:51:49,840
+to pay
+
+1956
+00:51:49,840 --> 00:51:50,840
+attention.
+
+1957
+00:51:50,840 --> 00:51:51,840
+See how
+
+1958
+00:51:51,840 --> 00:51:52,840
+big this
+
+1959
+00:51:52,840 --> 00:51:53,840
+condition
+
+1960
+00:51:53,840 --> 00:51:54,840
+is.
+
+1961
+00:51:54,840 --> 00:51:55,840
+T
+
+1962
+00:51:55,840 --> 00:51:56,840
+modulo
+
+1963
+00:51:56,840 --> 00:51:57,840
+two times
+
+1964
+00:51:57,840 --> 00:51:58,840
+prime.
+
+1965
+00:51:58,840 --> 00:51:59,840
+Where are
+
+1966
+00:51:59,840 --> 00:52:00,840
+we doing
+
+1967
+00:52:00,840 --> 00:52:01,840
+two times
+
+1968
+00:52:01,840 --> 00:52:02,840
+prime?
+
+1969
+00:52:02,840 --> 00:52:03,840
+We're
+
+1970
+00:52:03,840 --> 00:52:04,840
+doing it
+
+1971
+00:52:04,840 --> 00:52:05,840
+again.
+
+1972
+00:52:05,840 --> 00:52:06,840
+When we
+
+1973
+00:52:06,840 --> 00:52:07,840
+go up in
+
+1974
+00:52:07,840 --> 00:52:08,840
+the
+
+1975
+00:52:08,840 --> 00:52:09,840
+column,
+
+1976
+00:52:09,840 --> 00:52:10,840
+we're
+
+1977
+00:52:10,840 --> 00:52:11,840
+doing it
+
+1978
+00:52:11,840 --> 00:52:12,840
+again.
+
+1979
+00:52:12,840 --> 00:52:13,840
+We do
+
+1980
+00:52:13,840 --> 00:52:14,840
+it there
+
+1981
+00:52:14,840 --> 00:52:15,840
+and
+
+1982
+00:52:15,840 --> 00:52:16,840
+we're
+
+1983
+00:52:16,840 --> 00:52:17,840
+doing it
+
+1984
+00:52:17,840 --> 00:52:18,840
+again.
+
+1985
+00:52:18,840 --> 00:52:19,840
+Modulo
+
+1986
+00:52:19,840 --> 00:52:20,840
+is
+
+1987
+00:52:20,840 --> 00:52:21,840
+extremely
+
+1988
+00:52:21,840 --> 00:52:22,840
+bad.
+
+1989
+00:52:22,840 --> 00:52:23,840
+I can't
+
+1990
+00:52:23,840 --> 00:52:24,840
+tell you
+
+1991
+00:52:24,840 --> 00:52:25,840
+how bad
+
+1992
+00:52:25,840 --> 00:52:26,840
+it is.
+
+1993
+00:52:26,840 --> 00:52:27,840
+It is
+
+1994
+00:52:27,840 --> 00:52:28,840
+like
+
+1995
+00:52:28,840 --> 00:52:29,840
+compared
+
+1996
+00:52:29,840 --> 00:52:30,840
+to a
+
+1997
+00:52:30,840 --> 00:52:31,840
+floating
+
+1998
+00:52:31,840 --> 00:52:32,840
+point
+
+1999
+00:52:32,840 --> 00:52:33,840
+addition,
+
+2000
+00:52:33,840 --> 00:52:34,840
+it is
+
+2001
+00:52:34,840 --> 00:52:35,840
+probably
+
+2002
+00:52:35,840 --> 00:52:36,840
+20 to
+
+2003
+00:52:36,840 --> 00:52:37,840
+40 times
+
+2004
+00:52:37,840 --> 00:52:38,840
+lower than
+
+2005
+00:52:38,840 --> 00:52:39,840
+a
+
+2006
+00:52:39,840 --> 00:52:40,840
+multiplication
+
+2007
+00:52:40,840 --> 00:52:41,840
+because it
+
+2008
+00:52:41,840 --> 00:52:42,840
+is not in
+
+2009
+00:52:42,840 --> 00:52:43,840
+hardware.
+
+2010
+00:52:43,840 --> 00:52:44,840
+So
+
+2011
+00:52:44,840 --> 00:52:45,840
+remember
+
+2012
+00:52:45,840 --> 00:52:46,840
+those two.
+
+2013
+00:52:46,840 --> 00:52:47,840
+I will
+
+2014
+00:52:47,840 --> 00:52:48,840
+fast forward
+
+2015
+00:52:48,840 --> 00:52:49,840
+a little
+
+2016
+00:52:49,840 --> 00:52:50,840
+bit and
+
+2017
+00:52:50,840 --> 00:52:51,840
+see the
+
+2018
+00:52:51,840 --> 00:52:52,840
+code for
+
+2019
+00:52:52,840 --> 00:52:53,840
+this.
+
+2020
+00:52:53,840 --> 00:52:54,840
+So
+
+2021
+00:52:54,840 --> 00:52:55,840
+we are
+
+2022
+00:52:55,840 --> 00:52:56,840
+not changing
+
+2023
+00:52:56,840 --> 00:52:57,840
+any of
+
+2024
+00:52:57,840 --> 00:52:58,840
+that.
+
+2025
+00:52:58,840 --> 00:52:59,840
+But now
+
+2026
+00:52:59,840 --> 00:53:00,840
+look at
+
+2027
+00:53:00,840 --> 00:53:01,840
+this.
+
+2028
+00:53:01,840 --> 00:53:02,840
+We start
+
+2029
+00:53:02,840 --> 00:53:03,840
+with
+
+2030
+00:53:03,840 --> 00:53:04,840
+this.
+
+2031
+00:53:04,840 --> 00:53:05,840
+So if
+
+2032
+00:53:05,840 --> 00:53:06,840
+we look
+
+2033
+00:53:06,840 --> 00:53:07,840
+at
+
+2034
+00:53:07,840 --> 00:53:08,840
+this
+
+2035
+00:53:08,840 --> 00:53:09,840
+example
+
+2036
+00:53:09,840 --> 00:53:10,840
+here,
+
+2037
+00:53:10,840 --> 00:53:11,840
+the smaller
+
+2038
+00:53:11,840 --> 00:53:12,840
+version,
+
+2039
+00:53:12,840 --> 00:53:13,840
+our
+
+2040
+00:53:13,840 --> 00:53:14,840
+stride in
+
+2041
+00:53:14,840 --> 00:53:15,840
+this case
+
+2042
+00:53:15,840 --> 00:53:16,840
+in the
+
+2043
+00:53:16,840 --> 00:53:17,840
+first level
+
+2044
+00:53:17,840 --> 00:53:18,840
+is 4.
+
+2045
+00:53:18,840 --> 00:53:19,840
+You go
+
+2046
+00:53:19,840 --> 00:53:20,840
+from 0
+
+2047
+00:53:20,840 --> 00:53:21,840
+to 4,
+
+2048
+00:53:21,840 --> 00:53:22,840
+1 to
+
+2049
+00:53:22,840 --> 00:53:23,840
+5,
+
+2050
+00:53:23,840 --> 00:53:24,840
+2 to
+
+2051
+00:53:24,840 --> 00:53:25,840
+6,
+
+2052
+00:53:25,840 --> 00:53:26,840
+3 to
+
+2053
+00:53:26,840 --> 00:53:27,840
+7,
+
+2054
+00:53:27,840 --> 00:53:28,840
+and
+
+2055
+00:53:28,840 --> 00:53:29,840
+stride is
+
+2056
+00:53:29,840 --> 00:53:30,840
+4.
+
+2057
+00:53:30,840 --> 00:53:31,840
+So we
+
+2058
+00:53:31,840 --> 00:53:32,840
+want the
+
+2059
+00:53:32,840 --> 00:53:33,840
+stride to
+
+2060
+00:53:33,840 --> 00:53:34,840
+go from
+
+2061
+00:53:34,840 --> 00:53:35,840
+4 to
+
+2062
+00:53:35,840 --> 00:53:36,840
+1.
+
+2063
+00:53:36,840 --> 00:53:37,840
+So we
+
+2064
+00:53:37,840 --> 00:53:38,840
+start
+
+2065
+00:53:38,840 --> 00:53:39,840
+there.
+
+2066
+00:53:39,840 --> 00:53:40,840
+Our
+
+2067
+00:53:40,840 --> 00:53:41,840
+condition is
+
+2068
+00:53:41,840 --> 00:53:42,840
+very simple.
+
+2069
+00:53:42,840 --> 00:53:43,840
+We
+
+2070
+00:53:43,840 --> 00:53:44,840
+have our
+
+2071
+00:53:44,840 --> 00:53:45,840
+same
+
+2072
+00:53:45,840 --> 00:53:46,840
+strides,
+
+2073
+00:53:46,840 --> 00:53:47,840
+but now
+
+2074
+00:53:47,840 --> 00:53:48,840
+look at
+
+2075
+00:53:48,840 --> 00:53:49,840
+this
+
+2076
+00:53:49,840 --> 00:53:50,840
+condition.
+
+2077
+00:53:50,840 --> 00:53:51,840
+So
+
+2078
+00:53:51,840 --> 00:53:52,840
+simple.
+
+2079
+00:53:52,840 --> 00:53:53,840
+T less
+
+2080
+00:53:53,840 --> 00:53:54,840
+than
+
+2081
+00:53:54,840 --> 00:53:55,840
+stride.
+
+2082
+00:53:55,840 --> 00:53:56,840
+We
+
+2083
+00:53:56,840 --> 00:53:57,840
+add.
+
+2084
+00:53:57,840 --> 00:53:58,840
+So now
+
+2085
+00:53:58,840 --> 00:53:59,840
+this
+
+2086
+00:53:59,840 --> 00:54:00,840
+operation
+
+2087
+00:54:00,840 --> 00:54:01,840
+remains the
+
+2088
+00:54:01,840 --> 00:54:02,840
+same,
+
+2089
+00:54:02,840 --> 00:54:03,840
+but
+
+2090
+00:54:03,840 --> 00:54:04,840
+our
+
+2091
+00:54:04,840 --> 00:54:05,840
+condition is
+
+2092
+00:54:05,840 --> 00:54:06,840
+simpler.
+
+2093
+00:54:06,840 --> 00:54:07,840
+Our
+
+2094
+00:54:07,840 --> 00:54:08,840
+modular
+
+2095
+00:54:08,840 --> 00:54:09,840
+is lower
+
+2096
+00:54:09,840 --> 00:54:10,840
+and
+
+2097
+00:54:10,840 --> 00:54:11,840
+our
+
+2098
+00:54:11,840 --> 00:54:12,840
+stride is
+
+2099
+00:54:12,840 --> 00:54:13,840
+also
+
+2100
+00:54:13,840 --> 00:54:14,840
+simpler.
+
+2101
+00:54:14,840 --> 00:54:15,840
+So
+
+2102
+00:54:15,840 --> 00:54:16,840
+thinking
+
+2103
+00:54:16,840 --> 00:54:17,840
+we
+
+2104
+00:54:17,840 --> 00:54:18,840
+haven't
+
+2105
+00:54:18,840 --> 00:54:19,840
+even
+
+2106
+00:54:19,840 --> 00:54:20,840
+optimized it
+
+2107
+00:54:20,840 --> 00:54:21,840
+completely yet.
+
+2108
+00:54:21,840 --> 00:54:22,840
+We
+
+2109
+00:54:22,840 --> 00:54:23,840
+just went
+
+2110
+00:54:23,840 --> 00:54:24,840
+from
+
+2111
+00:54:24,840 --> 00:54:25,840
+addressing
+
+2112
+00:54:25,840 --> 00:54:26,840
+to
+
+2113
+00:54:26,840 --> 00:54:27,840
+stride
+
+2114
+00:54:27,840 --> 00:54:28,840
+addressing.
+
+2115
+00:54:28,840 --> 00:54:29,840
+And
+
+2116
+00:54:29,840 --> 00:54:30,840
+thinking
+
+2117
+00:54:30,840 --> 00:54:31,840
+about that
+
+2118
+00:54:31,840 --> 00:54:32,840
+will probably
+
+2119
+00:54:32,840 --> 00:54:33,840
+make our
+
+2120
+00:54:33,840 --> 00:54:34,840
+algorithm
+
+2121
+00:54:34,840 --> 00:54:35,840
+40%
+
+2122
+00:54:35,840 --> 00:54:36,840
+faster
+
+2123
+00:54:36,840 --> 00:54:37,840
+on a
+
+2124
+00:54:37,840 --> 00:54:38,840
+GPU.
+
+2125
+00:54:38,840 --> 00:54:39,840
+Any
+
+2126
+00:54:39,840 --> 00:54:40,840
+questions?
+
+2127
+00:54:40,840 --> 00:54:41,840
+So
+
+2128
+00:54:41,840 --> 00:54:42,840
+we
+
+2129
+00:54:42,840 --> 00:54:43,840
+actually
+
+2130
+00:54:43,840 --> 00:54:44,840
+haven't
+
+2131
+00:54:44,840 --> 00:54:45,840
+changed the
+
+2132
+00:54:45,840 --> 00:54:46,840
+number of
+
+2133
+00:54:46,840 --> 00:54:47,840
+threads we
+
+2134
+00:54:47,840 --> 00:54:48,840
+launched yet.
+
+2135
+00:54:48,840 --> 00:54:49,840
+We will get
+
+2136
+00:54:49,840 --> 00:54:50,840
+to that.
+
+2137
+00:54:50,840 --> 00:54:51,840
+But in
+
+2138
+00:54:51,840 --> 00:54:52,840
+this we
+
+2139
+00:54:52,840 --> 00:54:53,840
+haven't changed
+
+2140
+00:54:53,840 --> 00:54:54,840
+it.
+
+2141
+00:54:54,840 --> 00:54:55,840
+So if I go
+
+2142
+00:54:55,840 --> 00:54:56,840
+back there, we
+
+2143
+00:54:56,840 --> 00:54:57,840
+still launch
+
+2144
+00:54:57,840 --> 00:54:58,840
+eight threads.
+
+2145
+00:54:58,840 --> 00:54:59,840
+And
+
+2146
+00:54:59,840 --> 00:55:00,840
+eight threads
+
+2147
+00:55:00,840 --> 00:55:01,840
+load eight
+
+2148
+00:55:01,840 --> 00:55:02,840
+values into
+
+2149
+00:55:02,840 --> 00:55:03,840
+ShedMap.
+
+2150
+00:55:03,840 --> 00:55:04,840
+But when
+
+2151
+00:55:04,840 --> 00:55:05,840
+you get to
+
+2152
+00:55:05,840 --> 00:55:06,840
+the addition
+
+2153
+00:55:06,840 --> 00:55:07,840
+part, you
+
+2154
+00:55:07,840 --> 00:55:08,840
+will see
+
+2155
+00:55:08,840 --> 00:55:09,840
+how to
+
+2156
+00:55:09,840 --> 00:55:10,840
+optimize
+
+2157
+00:55:10,840 --> 00:55:11,840
+that.
+
+2158
+00:55:11,840 --> 00:55:12,840
+Any
+
+2159
+00:55:12,840 --> 00:55:13,840
+other
+
+2160
+00:55:13,840 --> 00:55:14,840
+questions on
+
+2161
+00:55:14,840 --> 00:55:15,840
+this?
+
+2162
+00:55:15,840 --> 00:55:16,840
+So
+
+2163
+00:55:16,840 --> 00:55:17,840
+next
+
+2164
+00:55:17,840 --> 00:55:18,840
+Wednesday we
+
+2165
+00:55:18,840 --> 00:55:19,840
+are going
+
+2166
+00:55:19,840 --> 00:55:20,840
+to have
+
+2167
+00:55:20,840 --> 00:55:21,840
+what I
+
+2168
+00:55:21,840 --> 00:55:22,840
+essentially
+
+2169
+00:55:22,840 --> 00:55:23,840
+call
+
+2170
+00:55:23,840 --> 00:55:24,840
+next
+
+2171
+00:55:24,840 --> 00:55:25,840
+Wednesday's
+
+2172
+00:55:25,840 --> 00:55:26,840
+presentation.
+
+2173
+00:55:26,840 --> 00:55:27,840
+At some
+
+2174
+00:55:27,840 --> 00:55:28,840
+point on
+
+2175
+00:55:28,840 --> 00:55:29,840
+the calendar
+
+2176
+00:55:29,840 --> 00:55:30,840
+I forget
+
+2177
+00:55:30,840 --> 00:55:31,840
+the exact
+
+2178
+00:55:31,840 --> 00:55:32,840
+date, we
+
+2179
+00:55:32,840 --> 00:55:33,840
+will have
+
+2180
+00:55:33,840 --> 00:55:34,840
+what I
+
+2181
+00:55:34,840 --> 00:55:35,840
+call
+
+2182
+00:55:35,840 --> 00:55:36,840
+performance
+
+2183
+00:55:36,840 --> 00:55:37,840
+optimization.
+
+2184
+00:55:37,840 --> 00:55:38,840
+I will
+
+2185
+00:55:38,840 --> 00:55:39,840
+run all
+
+2186
+00:55:39,840 --> 00:55:40,840
+of this
+
+2187
+00:55:40,840 --> 00:55:41,840
+code.
+
+2188
+00:55:41,840 --> 00:55:42,840
+I will
+
+2189
+00:55:42,840 --> 00:55:43,840
+run this
+
+2190
+00:55:43,840 --> 00:55:44,840
+version and
+
+2191
+00:55:44,840 --> 00:55:45,840
+we will see
+
+2192
+00:55:45,840 --> 00:55:46,840
+with each
+
+2193
+00:55:46,840 --> 00:55:47,840
+version how
+
+2194
+00:55:47,840 --> 00:55:48,840
+much it
+
+2195
+00:55:48,840 --> 00:55:49,840
+improved.
+
+2196
+00:55:49,840 --> 00:55:50,840
+I will send
+
+2197
+00:55:50,840 --> 00:55:51,840
+out instructions
+
+2198
+00:55:51,840 --> 00:55:52,840
+for you to
+
+2199
+00:55:52,840 --> 00:55:53,840
+bring your
+
+2200
+00:55:53,840 --> 00:55:54,840
+laptops to
+
+2201
+00:55:54,840 --> 00:55:55,840
+class and
+
+2202
+00:55:55,840 --> 00:55:56,840
+you can run
+
+2203
+00:55:56,840 --> 00:55:57,840
+it with
+
+2204
+00:55:57,840 --> 00:55:58,840
+me.
+
+2205
+00:55:58,840 --> 00:55:59,840
+We will
+
+2206
+00:55:59,840 --> 00:56:00,840
+see how
+
+2207
+00:56:00,840 --> 00:56:01,840
+much better
+
+2208
+00:56:01,840 --> 00:56:02,840
+it gets
+
+2209
+00:56:02,840 --> 00:56:03,840
+with simple
+
+2210
+00:56:03,840 --> 00:56:04,840
+modifications
+
+2211
+00:56:04,840 --> 00:56:05,840
+like this.
+
+2212
+00:56:05,840 --> 00:56:06,840
+Okay.
+
+2213
+00:56:06,840 --> 00:56:07,840
+So
+
+2214
+00:56:07,840 --> 00:56:08,840
+visually,
+
+2215
+00:56:08,840 --> 00:56:09,840
+what is this
+
+2216
+00:56:09,840 --> 00:56:10,840
+going to
+
+2217
+00:56:10,840 --> 00:56:11,840
+do?
+
+2218
+00:56:11,840 --> 00:56:12,840
+What happens
+
+2219
+00:56:12,840 --> 00:56:13,840
+in iteration
+
+2220
+00:56:13,840 --> 00:56:14,840
+1?
+
+2221
+00:56:14,840 --> 00:56:15,840
+What happens
+
+2222
+00:56:15,840 --> 00:56:16,840
+in iteration
+
+2223
+00:56:16,840 --> 00:56:17,840
+1 to
+
+2224
+00:56:17,840 --> 00:56:18,840
+our threads?
+
+2225
+00:56:18,840 --> 00:56:19,840
+Which threads
+
+2226
+00:56:19,840 --> 00:56:20,840
+are going to
+
+2227
+00:56:20,840 --> 00:56:21,840
+do the
+
+2228
+00:56:21,840 --> 00:56:22,840
+work and
+
+2229
+00:56:22,840 --> 00:56:23,840
+which threads
+
+2230
+00:56:23,840 --> 00:56:24,840
+are not?
+
+2231
+00:56:24,840 --> 00:56:25,840
+So before
+
+2232
+00:56:25,840 --> 00:56:26,840
+iteration 1
+
+2233
+00:56:26,840 --> 00:56:27,840
+they are all
+
+2234
+00:56:27,840 --> 00:56:28,840
+doing work
+
+2235
+00:56:28,840 --> 00:56:29,840
+by loading
+
+2236
+00:56:29,840 --> 00:56:30,840
+things into
+
+2237
+00:56:30,840 --> 00:56:31,840
+memory.
+
+2238
+00:56:31,840 --> 00:56:32,840
+At iteration
+
+2239
+00:56:32,840 --> 00:56:33,840
+1 only
+
+2240
+00:56:33,840 --> 00:56:34,840
+four threads
+
+2241
+00:56:34,840 --> 00:56:35,840
+are doing
+
+2242
+00:56:35,840 --> 00:56:36,840
+the work.
+
+2243
+00:56:36,840 --> 00:56:37,840
+So four threads
+
+2244
+00:56:37,840 --> 00:56:38,840
+are already
+
+2245
+00:56:38,840 --> 00:56:39,840
+kind of useless.
+
+2246
+00:56:39,840 --> 00:56:40,840
+Then in
+
+2247
+00:56:40,840 --> 00:56:41,840
+iteration 2,
+
+2248
+00:56:41,840 --> 00:56:42,840
+two more
+
+2249
+00:56:42,840 --> 00:56:43,840
+threads are
+
+2250
+00:56:43,840 --> 00:56:44,840
+doing the
+
+2251
+00:56:44,840 --> 00:56:45,840
+work.
+
+2252
+00:56:45,840 --> 00:56:46,840
+Iteration 3,
+
+2253
+00:56:46,840 --> 00:56:47,840
+only one
+
+2254
+00:56:47,840 --> 00:56:48,840
+thread is
+
+2255
+00:56:48,840 --> 00:56:49,840
+actually doing
+
+2256
+00:56:49,840 --> 00:56:50,840
+anything.
+
+2257
+00:56:50,840 --> 00:56:51,840
+So now
+
+2258
+00:56:51,840 --> 00:56:52,840
+if you look
+
+2259
+00:56:52,840 --> 00:56:53,840
+at this
+
+2260
+00:56:53,840 --> 00:56:54,840
+side by
+
+2261
+00:56:54,840 --> 00:56:55,840
+side,
+
+2262
+00:56:55,840 --> 00:56:56,840
+again,
+
+2263
+00:56:56,840 --> 00:56:57,840
+I told
+
+2264
+00:56:57,840 --> 00:56:58,840
+side by
+
+2265
+00:56:58,840 --> 00:56:59,840
+side is
+
+2266
+00:56:59,840 --> 00:57:00,840
+good,
+
+2267
+00:57:00,840 --> 00:57:01,840
+I am
+
+2268
+00:57:01,840 --> 00:57:02,840
+using
+
+2269
+00:57:02,840 --> 00:57:03,840
+side by
+
+2270
+00:57:03,840 --> 00:57:04,840
+side.
+
+2271
+00:57:04,840 --> 00:57:05,840
+And
+
+2272
+00:57:05,840 --> 00:57:06,840
+we have
+
+2273
+00:57:06,840 --> 00:57:07,840
+spoken about
+
+2274
+00:57:07,840 --> 00:57:08,840
+all of
+
+2275
+00:57:08,840 --> 00:57:09,840
+this.
+
+2276
+00:57:09,840 --> 00:57:10,840
+So I
+
+2277
+00:57:10,840 --> 00:57:11,840
+just want
+
+2278
+00:57:11,840 --> 00:57:12,840
+to make
+
+2279
+00:57:12,840 --> 00:57:13,840
+sure the
+
+2280
+00:57:13,840 --> 00:57:14,840
+memory is
+
+2281
+00:57:14,840 --> 00:57:15,840
+all there
+
+2282
+00:57:15,840 --> 00:57:16,840
+for all
+
+2283
+00:57:16,840 --> 00:57:17,840
+of you.
+
+2284
+00:57:17,840 --> 00:57:18,840
+Indexing is
+
+2285
+00:57:18,840 --> 00:57:19,840
+cleaner.
+
+2286
+00:57:19,840 --> 00:57:20,840
+The other
+
+2287
+00:57:20,840 --> 00:57:21,840
+thing we
+
+2288
+00:57:21,840 --> 00:57:22,840
+haven't spoken
+
+2289
+00:57:22,840 --> 00:57:23,840
+about yet
+
+2290
+00:57:23,840 --> 00:57:24,840
+is memory
+
+2291
+00:57:24,840 --> 00:57:25,840
+coalescing.
+
+2292
+00:57:25,840 --> 00:57:26,840
+You are
+
+2293
+00:57:26,840 --> 00:57:27,840
+reading
+
+2294
+00:57:27,840 --> 00:57:28,840
+continuous
+
+2295
+00:57:28,840 --> 00:57:29,840
+values here.
+
+2296
+00:57:29,840 --> 00:57:30,840
+These four
+
+2297
+00:57:30,840 --> 00:57:31,840
+read the
+
+2298
+00:57:31,840 --> 00:57:32,840
+same value
+
+2299
+00:57:32,840 --> 00:57:33,840
+here.
+
+2300
+00:57:33,840 --> 00:57:34,840
+The
+
+2301
+00:57:34,840 --> 00:57:35,840
+for loop
+
+2302
+00:57:35,840 --> 00:57:36,840
+is simpler.
+
+2303
+00:57:36,840 --> 00:57:37,840
+Lots of
+
+2304
+00:57:37,840 --> 00:57:38,840
+benefits.
+
+2305
+00:57:38,840 --> 00:57:39,840
+If you look
+
+2306
+00:57:39,840 --> 00:57:40,840
+at the
+
+2307
+00:57:40,840 --> 00:57:41,840
+code,
+
+2308
+00:57:41,840 --> 00:57:42,840
+I have
+
+2309
+00:57:42,840 --> 00:57:43,840
+highlighted
+
+2310
+00:57:43,840 --> 00:57:44,840
+this already,
+
+2311
+00:57:44,840 --> 00:57:45,840
+but this
+
+2312
+00:57:45,840 --> 00:57:46,840
+if statement
+
+2313
+00:57:46,840 --> 00:57:47,840
+is so much
+
+2314
+00:57:47,840 --> 00:57:48,840
+simpler than
+
+2315
+00:57:48,840 --> 00:57:49,840
+this.
+
+2316
+00:57:49,840 --> 00:57:50,840
+If we
+
+2317
+00:57:50,840 --> 00:57:51,840
+just make
+
+2318
+00:57:51,840 --> 00:57:52,840
+this change
+
+2319
+00:57:52,840 --> 00:57:53,840
+on a
+
+2320
+00:57:53,840 --> 00:57:54,840
+GPU
+
+2321
+00:57:54,840 --> 00:57:55,840
+algorithm,
+
+2322
+00:57:55,840 --> 00:57:56,840
+let's say
+
+2323
+00:57:56,840 --> 00:57:57,840
+for 10
+
+2324
+00:57:57,840 --> 00:57:58,840
+million elements,
+
+2325
+00:57:58,840 --> 00:57:59,840
+we are
+
+2326
+00:57:59,840 --> 00:58:00,840
+probably going
+
+2327
+00:58:00,840 --> 00:58:01,840
+to see
+
+2328
+00:58:01,840 --> 00:58:02,840
+this.
+
+2329
+00:58:02,840 --> 00:58:03,840
+That's
+
+2330
+00:58:03,840 --> 00:58:04,840
+how much
+
+2331
+00:58:04,840 --> 00:58:05,840
+overhead that
+
+2332
+00:58:05,840 --> 00:58:06,840
+kind of
+
+2333
+00:58:06,840 --> 00:58:07,840
+condition has
+
+2334
+00:58:07,840 --> 00:58:08,840
+every single
+
+2335
+00:58:08,840 --> 00:58:09,840
+time you do
+
+2336
+00:58:09,840 --> 00:58:10,840
+it.
+
+2337
+00:58:10,840 --> 00:58:11,840
+Any other
+
+2338
+00:58:11,840 --> 00:58:12,840
+questions so
+
+2339
+00:58:12,840 --> 00:58:13,840
+far?
+
+2340
+00:58:13,840 --> 00:58:14,840
+This is
+
+2341
+00:58:14,840 --> 00:58:15,840
+value reduction
+
+2342
+00:58:15,840 --> 00:58:16,840
+revisited.
+
+2343
+00:58:16,840 --> 00:58:17,840
+Any other
+
+2344
+00:58:17,840 --> 00:58:18,840
+questions?
+
+2345
+00:58:19,840 --> 00:58:20,840
+Is there
+
+2346
+00:58:20,840 --> 00:58:21,840
+any way
+
+2347
+00:58:21,840 --> 00:58:22,840
+to
+
+2348
+00:58:22,840 --> 00:58:23,840
+reuse
+
+2349
+00:58:23,840 --> 00:58:24,840
+that?
+
+2350
+00:58:24,840 --> 00:58:25,840
+Not in
+
+2351
+00:58:25,840 --> 00:58:26,840
+this
+
+2352
+00:58:26,840 --> 00:58:27,840
+algorithm,
+
+2353
+00:58:27,840 --> 00:58:28,840
+but in a
+
+2354
+00:58:28,840 --> 00:58:29,840
+moment I'm
+
+2355
+00:58:29,840 --> 00:58:30,840
+going to
+
+2356
+00:58:30,840 --> 00:58:31,840
+get to
+
+2357
+00:58:31,840 --> 00:58:32,840
+why you
+
+2358
+00:58:32,840 --> 00:58:33,840
+may actually
+
+2359
+00:58:33,840 --> 00:58:34,840
+want them
+
+2360
+00:58:34,840 --> 00:58:35,840
+to become
+
+2361
+00:58:35,840 --> 00:58:36,840
+useless.
+
+2362
+00:58:36,840 --> 00:58:37,840
+If they
+
+2363
+00:58:37,840 --> 00:58:38,840
+become useless
+
+2364
+00:58:38,840 --> 00:58:39,840
+like this
+
+2365
+00:58:39,840 --> 00:58:40,840
+left side,
+
+2366
+00:58:40,840 --> 00:58:41,840
+that's not
+
+2367
+00:58:41,840 --> 00:58:42,840
+good because
+
+2368
+00:58:42,840 --> 00:58:43,840
+now you are
+
+2369
+00:58:43,840 --> 00:58:44,840
+wasting time.
+
+2370
+00:58:44,840 --> 00:58:45,840
+Whereas
+
+2371
+00:58:45,840 --> 00:58:46,840
+here it
+
+2372
+00:58:46,840 --> 00:58:47,840
+could be
+
+2373
+00:58:47,840 --> 00:58:48,840
+strategically
+
+2374
+00:58:48,840 --> 00:58:49,840
+valuable.
+
+2375
+00:58:49,840 --> 00:58:50,840
+Yeah,
+
+2376
+00:58:50,840 --> 00:58:51,840
+absolutely.
+
+2377
+00:58:51,840 --> 00:58:52,840
+For
+
+2378
+00:58:52,840 --> 00:58:53,840
+example,
+
+2379
+00:58:53,840 --> 00:58:54,840
+if you
+
+2380
+00:58:54,840 --> 00:58:55,840
+were launching
+
+2381
+00:58:55,840 --> 00:58:56,840
+only half
+
+2382
+00:58:56,840 --> 00:58:57,840
+of the
+
+2383
+00:58:57,840 --> 00:58:58,840
+threads,
+
+2384
+00:58:58,840 --> 00:58:59,840
+it would
+
+2385
+00:58:59,840 --> 00:59:00,840
+still work
+
+2386
+00:59:00,840 --> 00:59:01,840
+the same.
+
+2387
+00:59:01,840 --> 00:59:02,840
+You would
+
+2388
+00:59:02,840 --> 00:59:03,840
+just have
+
+2389
+00:59:03,840 --> 00:59:04,840
+to load
+
+2390
+00:59:04,840 --> 00:59:05,840
+memory twice
+
+2391
+00:59:05,840 --> 00:59:06,840
+for each
+
+2392
+00:59:06,840 --> 00:59:07,840
+thread.
+
+2393
+00:59:07,840 --> 00:59:08,840
+Also,
+
+2394
+00:59:08,840 --> 00:59:09,840
+if you
+
+2395
+00:59:09,840 --> 00:59:10,840
+are still
+
+2396
+00:59:10,840 --> 00:59:11,840
+trying to
+
+2397
+00:59:11,840 --> 00:59:12,840
+make the
+
+2398
+00:59:12,840 --> 00:59:13,840
+first four
+
+2399
+00:59:13,840 --> 00:59:14,840
+threads,
+
+2400
+00:59:14,840 --> 00:59:15,840
+then can't
+
+2401
+00:59:15,840 --> 00:59:16,840
+you just
+
+2402
+00:59:16,840 --> 00:59:17,840
+add
+
+2403
+00:59:17,840 --> 00:59:18,840
+offsets
+
+2404
+00:59:18,840 --> 00:59:19,840
+to each
+
+2405
+00:59:19,840 --> 00:59:20,840
+thread?
+
+2406
+00:59:20,840 --> 00:59:21,840
+So it's
+
+2407
+00:59:21,840 --> 00:59:22,840
+not like
+
+2408
+00:59:22,840 --> 00:59:23,840
+the interleaving
+
+2409
+00:59:23,840 --> 00:59:24,840
+threads are
+
+2410
+00:59:24,840 --> 00:59:25,840
+useless,
+
+2411
+00:59:25,840 --> 00:59:26,840
+but the
+
+2412
+00:59:26,840 --> 00:59:27,840
+calculation
+
+2413
+00:59:27,840 --> 00:59:28,840
+is still
+
+2414
+00:59:28,840 --> 00:59:29,840
+that one,
+
+2415
+00:59:29,840 --> 00:59:30,840
+but you are
+
+2416
+00:59:30,840 --> 00:59:31,840
+just adding
+
+2417
+00:59:31,840 --> 00:59:32,840
+offsets to
+
+2418
+00:59:32,840 --> 00:59:33,840
+each.
+
+2419
+00:59:33,840 --> 00:59:34,840
+Wouldn't
+
+2420
+00:59:34,840 --> 00:59:35,840
+that be
+
+2421
+00:59:35,840 --> 00:59:36,840
+the same
+
+2422
+00:59:36,840 --> 00:59:37,840
+as this?
+
+2423
+00:59:37,840 --> 00:59:38,840
+Wouldn't
+
+2424
+00:59:38,840 --> 00:59:39,840
+that be
+
+2425
+00:59:39,840 --> 00:59:40,840
+the same
+
+2426
+00:59:40,840 --> 00:59:41,840
+as this?
+
+2427
+00:59:41,840 --> 00:59:42,840
+Yeah,
+
+2428
+00:59:42,840 --> 00:59:43,840
+in my
+
+2429
+00:59:43,840 --> 00:59:44,840
+mind it was
+
+2430
+00:59:44,840 --> 00:59:45,840
+the same
+
+2431
+00:59:45,840 --> 00:59:46,840
+as this.
+
+2432
+00:59:46,840 --> 00:59:47,840
+So if
+
+2433
+00:59:47,840 --> 00:59:48,840
+you are
+
+2434
+00:59:48,840 --> 00:59:49,840
+making the
+
+2435
+00:59:49,840 --> 00:59:50,840
+offset block
+
+2436
+00:59:50,840 --> 00:59:51,840
+them by
+
+2437
+00:59:51,840 --> 00:59:52,840
+two,
+
+2438
+00:59:52,840 --> 00:59:53,840
+you are
+
+2439
+00:59:53,840 --> 00:59:54,840
+suggesting
+
+2440
+00:59:54,840 --> 00:59:55,840
+why don't
+
+2441
+00:59:55,840 --> 00:59:56,840
+we just
+
+2442
+00:59:56,840 --> 00:59:57,840
+make it
+
+2443
+00:59:57,840 --> 00:59:58,840
+16 at
+
+2444
+00:59:58,840 --> 00:59:59,840
+a time
+
+2445
+00:59:59,840 --> 01:00:00,840
+and it
+
+2446
+01:00:00,840 --> 01:00:01,840
+would still
+
+2447
+01:00:01,840 --> 01:00:02,840
+be
+
+2448
+01:00:02,840 --> 01:00:03,840
+interleaved
+
+2449
+01:00:03,840 --> 01:00:04,840
+and then
+
+2450
+01:00:04,840 --> 01:00:05,840
+we would
+
+2451
+01:00:05,840 --> 01:00:06,840
+add them
+
+2452
+01:00:06,840 --> 01:00:07,840
+up.
+
+2453
+01:00:07,840 --> 01:00:08,840
+Yeah,
+
+2454
+01:00:08,840 --> 01:00:09,840
+the addition
+
+2455
+01:00:09,840 --> 01:00:10,840
+is still
+
+2456
+01:00:10,840 --> 01:00:11,840
+interleaved
+
+2457
+01:00:11,840 --> 01:00:12,840
+instead of
+
+2458
+01:00:12,840 --> 01:00:13,840
+doing it
+
+2459
+01:00:13,840 --> 01:00:14,840
+this way
+
+2460
+01:00:14,840 --> 01:00:15,840
+.
+
+2461
+01:00:15,840 --> 01:00:16,840
+Is there
+
+2462
+01:00:16,840 --> 01:00:17,840
+any reason
+
+2463
+01:00:17,840 --> 01:00:18,840
+why you are
+
+2464
+01:00:18,840 --> 01:00:19,840
+saying this
+
+2465
+01:00:19,840 --> 01:00:20,840
+kind of
+
+2466
+01:00:20,840 --> 01:00:21,840
+addition?
+
+2467
+01:00:21,840 --> 01:00:22,840
+Yeah,
+
+2468
+01:00:22,840 --> 01:00:23,840
+and that's
+
+2469
+01:00:23,840 --> 01:00:24,840
+the key
+
+2470
+01:00:24,840 --> 01:00:25,840
+point.
+
+2471
+01:00:25,840 --> 01:00:26,840
+If we are
+
+2472
+01:00:26,840 --> 01:00:27,840
+drawing a
+
+2473
+01:00:27,840 --> 01:00:28,840
+tree,
+
+2474
+01:00:28,840 --> 01:00:29,840
+we are
+
+2475
+01:00:29,840 --> 01:00:30,840
+not going
+
+2476
+01:00:30,840 --> 01:00:31,840
+to draw
+
+2477
+01:00:31,840 --> 01:00:32,840
+it like that,
+
+2478
+01:00:32,840 --> 01:00:33,840
+but the
+
+2479
+01:00:33,840 --> 01:00:34,840
+amount of
+
+2480
+01:00:34,840 --> 01:00:35,840
+computation
+
+2481
+01:00:35,840 --> 01:00:36,840
+that happens
+
+2482
+01:00:36,840 --> 01:00:37,840
+is exactly
+
+2483
+01:00:37,840 --> 01:00:38,840
+the same.
+
+2484
+01:00:38,840 --> 01:00:39,840
+Here you
+
+2485
+01:00:39,840 --> 01:00:40,840
+are probably
+
+2486
+01:00:40,840 --> 01:00:41,840
+doing index
+
+2487
+01:00:41,840 --> 01:00:42,840
+plus one,
+
+2488
+01:00:42,840 --> 01:00:43,840
+index plus
+
+2489
+01:00:43,840 --> 01:00:44,840
+two,
+
+2490
+01:00:44,840 --> 01:00:45,840
+and you
+
+2491
+01:00:45,840 --> 01:00:46,840
+are doing
+
+2492
+01:00:46,840 --> 01:00:47,840
+it as a
+
+2493
+01:00:47,840 --> 01:00:48,840
+simple
+
+2494
+01:00:48,840 --> 01:00:49,840
+condition.
+
+2495
+01:00:49,840 --> 01:00:50,840
+Any other
+
+2496
+01:00:50,840 --> 01:00:51,840
+questions on
+
+2497
+01:00:51,840 --> 01:00:52,840
+value
+
+2498
+01:00:52,840 --> 01:00:53,840
+deductions so
+
+2499
+01:00:53,840 --> 01:00:54,840
+far?
+
+2500
+01:00:54,840 --> 01:00:55,840
+So let's
+
+2501
+01:00:55,840 --> 01:00:56,840
+take it a
+
+2502
+01:00:56,840 --> 01:00:57,840
+step further
+
+2503
+01:00:57,840 --> 01:00:58,840
+and look at
+
+2504
+01:00:58,840 --> 01:00:59,840
+warp partitioning.
+
+2505
+01:00:59,840 --> 01:01:00,840
+Warp
+
+2506
+01:01:00,840 --> 01:01:01,840
+partitioning
+
+2507
+01:01:01,840 --> 01:01:02,840
+is how
+
+2508
+01:01:02,840 --> 01:01:03,840
+strands
+
+2509
+01:01:03,840 --> 01:01:04,840
+from a
+
+2510
+01:01:04,840 --> 01:01:05,840
+block
+
+2511
+01:01:05,840 --> 01:01:06,840
+are
+
+2512
+01:01:06,840 --> 01:01:07,840
+divided into
+
+2513
+01:01:07,840 --> 01:01:08,840
+warps.
+
+2514
+01:01:08,840 --> 01:01:09,840
+So we
+
+2515
+01:01:09,840 --> 01:01:10,840
+said if
+
+2516
+01:01:10,840 --> 01:01:11,840
+we go back
+
+2517
+01:01:11,840 --> 01:01:12,840
+to warps
+
+2518
+01:01:12,840 --> 01:01:13,840
+five years
+
+2519
+01:01:13,840 --> 01:01:14,840
+ago, we
+
+2520
+01:01:14,840 --> 01:01:15,840
+said that
+
+2521
+01:01:15,840 --> 01:01:16,840
+block size
+
+2522
+01:01:16,840 --> 01:01:17,840
+is defined
+
+2523
+01:01:17,840 --> 01:01:18,840
+by U,
+
+2524
+01:01:18,840 --> 01:01:19,840
+and then
+
+2525
+01:01:19,840 --> 01:01:20,840
+the threads
+
+2526
+01:01:20,840 --> 01:01:21,840
+in a
+
+2527
+01:01:21,840 --> 01:01:22,840
+block are
+
+2528
+01:01:22,840 --> 01:01:23,840
+subdivided
+
+2529
+01:01:23,840 --> 01:01:24,840
+into warps
+
+2530
+01:01:24,840 --> 01:01:25,840
+at the
+
+2531
+01:01:25,840 --> 01:01:26,840
+hardware level.
+
+2532
+01:01:26,840 --> 01:01:27,840
+You don't
+
+2533
+01:01:27,840 --> 01:01:28,840
+control that.
+
+2534
+01:01:28,840 --> 01:01:29,840
+Each warp
+
+2535
+01:01:29,840 --> 01:01:30,840
+has 32
+
+2536
+01:01:30,840 --> 01:01:31,840
+threads,
+
+2537
+01:01:31,840 --> 01:01:32,840
+and that's
+
+2538
+01:01:32,840 --> 01:01:33,840
+divided at
+
+2539
+01:01:33,840 --> 01:01:34,840
+the hardware
+
+2540
+01:01:34,840 --> 01:01:35,840
+level.
+
+2541
+01:01:35,840 --> 01:01:36,840
+Warp
+
+2542
+01:01:36,840 --> 01:01:37,840
+partitioning
+
+2543
+01:01:37,840 --> 01:01:38,840
+is about
+
+2544
+01:01:38,840 --> 01:01:39,840
+how you
+
+2545
+01:01:39,840 --> 01:01:40,840
+use the
+
+2546
+01:01:40,840 --> 01:01:41,840
+threads in
+
+2547
+01:01:41,840 --> 01:01:42,840
+a
+
+2548
+01:01:42,840 --> 01:01:43,840
+warp.
+
+2549
+01:01:43,840 --> 01:01:44,840
+You can
+
+2550
+01:01:44,840 --> 01:01:45,840
+strategically
+
+2551
+01:01:45,840 --> 01:01:46,840
+define your
+
+2552
+01:01:46,840 --> 01:01:47,840
+algorithm so
+
+2553
+01:01:47,840 --> 01:01:48,840
+that it's
+
+2554
+01:01:48,840 --> 01:01:49,840
+taking
+
+2555
+01:01:49,840 --> 01:01:50,840
+advantage of
+
+2556
+01:01:50,840 --> 01:01:51,840
+that.
+
+2557
+01:01:51,840 --> 01:01:52,840
+So there
+
+2558
+01:01:52,840 --> 01:01:53,840
+are two
+
+2559
+01:01:53,840 --> 01:01:54,840
+things that
+
+2560
+01:01:54,840 --> 01:01:55,840
+we'll cover
+
+2561
+01:01:55,840 --> 01:01:56,840
+today.
+
+2562
+01:01:56,840 --> 01:01:57,840
+Minimizing
+
+2563
+01:01:57,840 --> 01:01:58,840
+branch
+
+2564
+01:01:58,840 --> 01:01:59,840
+divergence.
+
+2565
+01:01:59,840 --> 01:02:00,840
+Why do
+
+2566
+01:02:00,840 --> 01:02:01,840
+we want to
+
+2567
+01:02:01,840 --> 01:02:02,840
+minimize
+
+2568
+01:02:02,840 --> 01:02:03,840
+branch
+
+2569
+01:02:03,840 --> 01:02:04,840
+divergence
+
+2570
+01:02:04,840 --> 01:02:05,840
+within a
+
+2571
+01:02:05,840 --> 01:02:06,840
+warp?
+
+2572
+01:02:06,840 --> 01:02:07,840
+Why do
+
+2573
+01:02:07,840 --> 01:02:08,840
+we want to
+
+2574
+01:02:08,840 --> 01:02:09,840
+minimize
+
+2575
+01:02:09,840 --> 01:02:10,840
+branch
+
+2576
+01:02:10,840 --> 01:02:11,840
+divergence
+
+2577
+01:02:11,840 --> 01:02:12,840
+within a
+
+2578
+01:02:12,840 --> 01:02:13,840
+warp?
+
+2579
+01:02:13,840 --> 01:02:14,840
+If you have
+
+2580
+01:02:14,840 --> 01:02:15,840
+branch
+
+2581
+01:02:15,840 --> 01:02:16,840
+divergence
+
+2582
+01:02:16,840 --> 01:02:17,840
+within a
+
+2583
+01:02:17,840 --> 01:02:18,840
+warp,
+
+2584
+01:02:18,840 --> 01:02:19,840
+you're going
+
+2585
+01:02:19,840 --> 01:02:20,840
+to do
+
+2586
+01:02:20,840 --> 01:02:21,840
+double the
+
+2587
+01:02:21,840 --> 01:02:22,840
+warp.
+
+2588
+01:02:22,840 --> 01:02:23,840
+In
+
+2589
+01:02:23,840 --> 01:02:24,840
+worst case
+
+2590
+01:02:24,840 --> 01:02:25,840
+you're doing
+
+2591
+01:02:25,840 --> 01:02:26,840
+n times
+
+2592
+01:02:26,840 --> 01:02:27,840
+the warp,
+
+2593
+01:02:27,840 --> 01:02:28,840
+even though
+
+2594
+01:02:28,840 --> 01:02:29,840
+you're not
+
+2595
+01:02:29,840 --> 01:02:30,840
+actually doing
+
+2596
+01:02:30,840 --> 01:02:31,840
+that.
+
+2597
+01:02:31,840 --> 01:02:32,840
+So you
+
+2598
+01:02:32,840 --> 01:02:33,840
+want to
+
+2599
+01:02:33,840 --> 01:02:34,840
+do that
+
+2600
+01:02:34,840 --> 01:02:35,840
+and you
+
+2601
+01:02:35,840 --> 01:02:36,840
+want to
+
+2602
+01:02:36,840 --> 01:02:37,840
+retire
+
+2603
+01:02:37,840 --> 01:02:38,840
+warp
+
+2604
+01:02:38,840 --> 01:02:39,840
+partitioning
+
+2605
+01:02:39,840 --> 01:02:40,840
+within
+
+2606
+01:02:40,840 --> 01:02:41,840
+a
+
+2607
+01:02:41,840 --> 01:02:42,840
+warp.
+
+2608
+01:02:42,840 --> 01:02:43,840
+Let's
+
+2609
+01:02:43,840 --> 01:02:44,840
+take a look
+
+2610
+01:02:44,840 --> 01:02:45,840
+at examples
+
+2611
+01:02:45,840 --> 01:02:46,840
+of how
+
+2612
+01:02:46,840 --> 01:02:47,840
+warps are
+
+2613
+01:02:47,840 --> 01:02:48,840
+structured.
+
+2614
+01:02:48,840 --> 01:02:49,840
+In a
+
+2615
+01:02:49,840 --> 01:02:50,840
+1D
+
+2616
+01:02:50,840 --> 01:02:51,840
+block,
+
+2617
+01:02:51,840 --> 01:02:52,840
+1024 is
+
+2618
+01:02:52,840 --> 01:02:53,840
+the maximum
+
+2619
+01:02:53,840 --> 01:02:54,840
+block size
+
+2620
+01:02:54,840 --> 01:02:55,840
+you can
+
+2621
+01:02:55,840 --> 01:02:56,840
+have.
+
+2622
+01:02:56,840 --> 01:02:57,840
+And
+
+2623
+01:02:57,840 --> 01:02:58,840
+warp n
+
+2624
+01:02:58,840 --> 01:02:59,840
+will start
+
+2625
+01:02:59,840 --> 01:03:00,840
+at 32n
+
+2626
+01:03:00,840 --> 01:03:01,840
+and end
+
+2627
+01:03:01,840 --> 01:03:02,840
+at 32n
+
+2628
+01:03:02,840 --> 01:03:03,840
+plus 1
+
+2629
+01:03:03,840 --> 01:03:04,840
+minus 1.
+
+2630
+01:03:04,840 --> 01:03:05,840
+Very
+
+2631
+01:03:05,840 --> 01:03:06,840
+simple,
+
+2632
+01:03:06,840 --> 01:03:07,840
+very
+
+2633
+01:03:07,840 --> 01:03:08,840
+straightforward.
+
+2634
+01:03:08,840 --> 01:03:09,840
+So
+
+2635
+01:03:09,840 --> 01:03:10,840
+1D
+
+2636
+01:03:10,840 --> 01:03:11,840
+warp
+
+2637
+01:03:11,840 --> 01:03:12,840
+structure.
+
+2638
+01:03:12,840 --> 01:03:13,840
+No
+
+2639
+01:03:13,840 --> 01:03:14,840
+questions?
+
+2640
+01:03:14,840 --> 01:03:15,840
+Okay.
+
+2641
+01:03:15,840 --> 01:03:16,840
+So let's
+
+2642
+01:03:16,840 --> 01:03:17,840
+look at a
+
+2643
+01:03:17,840 --> 01:03:18,840
+2D
+
+2644
+01:03:18,840 --> 01:03:19,840
+block.
+
+2645
+01:03:19,840 --> 01:03:20,840
+So in
+
+2646
+01:03:20,840 --> 01:03:21,840
+a 2D
+
+2647
+01:03:21,840 --> 01:03:22,840
+block,
+
+2648
+01:03:22,840 --> 01:03:23,840
+increasing
+
+2649
+01:03:23,840 --> 01:03:24,840
+thread
+
+2650
+01:03:24,840 --> 01:03:25,840
+IDX means
+
+2651
+01:03:25,840 --> 01:03:26,840
+increasing
+
+2652
+01:03:26,840 --> 01:03:27,840
+thread IDX
+
+2653
+01:03:27,840 --> 01:03:28,840
+dot X
+
+2654
+01:03:28,840 --> 01:03:29,840
+plus and
+
+2655
+01:03:29,840 --> 01:03:30,840
+start with
+
+2656
+01:03:30,840 --> 01:03:31,840
+thread IDX
+
+2657
+01:03:31,840 --> 01:03:32,840
+dot Y
+
+2658
+01:03:32,840 --> 01:03:33,840
+equals 0.
+
+2659
+01:03:33,840 --> 01:03:34,840
+And only
+
+2660
+01:03:34,840 --> 01:03:35,840
+when you
+
+2661
+01:03:35,840 --> 01:03:36,840
+hit the
+
+2662
+01:03:36,840 --> 01:03:37,840
+maximum
+
+2663
+01:03:37,840 --> 01:03:38,840
+of X
+
+2664
+01:03:38,840 --> 01:03:39,840
+you
+
+2665
+01:03:39,840 --> 01:03:40,840
+get
+
+2666
+01:03:40,840 --> 01:03:41,840
+32 to
+
+2667
+01:03:41,840 --> 01:03:42,840
+63 in
+
+2668
+01:03:42,840 --> 01:03:43,840
+X
+
+2669
+01:03:43,840 --> 01:03:44,840
+and still
+
+2670
+01:03:44,840 --> 01:03:45,840
+0 in
+
+2671
+01:03:45,840 --> 01:03:46,840
+Y.
+
+2672
+01:03:46,840 --> 01:03:47,840
+But at
+
+2673
+01:03:47,840 --> 01:03:48,840
+63 you
+
+2674
+01:03:48,840 --> 01:03:49,840
+hit the
+
+2675
+01:03:49,840 --> 01:03:50,840
+maximum
+
+2676
+01:03:50,840 --> 01:03:51,840
+of X.
+
+2677
+01:03:51,840 --> 01:03:52,840
+So in
+
+2678
+01:03:52,840 --> 01:03:53,840
+warp 2,
+
+2679
+01:03:53,840 --> 01:03:54,840
+X resets
+
+2680
+01:03:54,840 --> 01:03:55,840
+to go
+
+2681
+01:03:55,840 --> 01:03:56,840
+0 to
+
+2682
+01:03:56,840 --> 01:03:57,840
+31 and
+
+2683
+01:03:57,840 --> 01:03:58,840
+Y increases.
+
+2684
+01:03:58,840 --> 01:03:59,840
+Then you
+
+2685
+01:03:59,840 --> 01:04:00,840
+go to
+
+2686
+01:04:00,840 --> 01:04:01,840
+warp 3 and
+
+2687
+01:04:01,840 --> 01:04:02,840
+it's 32
+
+2688
+01:04:02,840 --> 01:04:03,840
+63 on
+
+2689
+01:04:03,840 --> 01:04:04,840
+X and
+
+2690
+01:04:04,840 --> 01:04:05,840
+warp Y
+
+2691
+01:04:05,840 --> 01:04:06,840
+is the
+
+2692
+01:04:06,840 --> 01:04:07,840
+maximum
+
+2693
+01:04:07,840 --> 01:04:08,840
+of X.
+
+2694
+01:04:08,840 --> 01:04:09,840
+What
+
+2695
+01:04:09,840 --> 01:04:10,840
+happens in
+
+2696
+01:04:10,840 --> 01:04:11,840
+warp 4?
+
+2697
+01:04:11,840 --> 01:04:12,840
+Y increases,
+
+2698
+01:04:12,840 --> 01:04:13,840
+X resets.
+
+2699
+01:04:13,840 --> 01:04:14,840
+Okay?
+
+2700
+01:04:14,840 --> 01:04:15,840
+So these
+
+2701
+01:04:15,840 --> 01:04:16,840
+threads in
+
+2702
+01:04:16,840 --> 01:04:17,840
+a warp will
+
+2703
+01:04:17,840 --> 01:04:18,840
+always be
+
+2704
+01:04:18,840 --> 01:04:19,840
+continuous.
+
+2705
+01:04:19,840 --> 01:04:20,840
+Okay?
+
+2706
+01:04:20,840 --> 01:04:21,840
+Any
+
+2707
+01:04:21,840 --> 01:04:22,840
+questions on
+
+2708
+01:04:22,840 --> 01:04:23,840
+this?
+
+2709
+01:04:23,840 --> 01:04:24,840
+So if
+
+2710
+01:04:24,840 --> 01:04:25,840
+you have a
+
+2711
+01:04:25,840 --> 01:04:26,840
+block of
+
+2712
+01:04:26,840 --> 01:04:27,840
+64 by
+
+2713
+01:04:27,840 --> 01:04:28,840
+8, how
+
+2714
+01:04:28,840 --> 01:04:29,840
+many warps
+
+2715
+01:04:29,840 --> 01:04:30,840
+are we
+
+2716
+01:04:30,840 --> 01:04:31,840
+getting?
+
+2717
+01:04:31,840 --> 01:04:32,840
+16.
+
+2718
+01:04:32,840 --> 01:04:33,840
+All
+
+2719
+01:04:33,840 --> 01:04:34,840
+right.
+
+2720
+01:04:34,840 --> 01:04:35,840
+The other
+
+2721
+01:04:35,840 --> 01:04:36,840
+thing to
+
+2722
+01:04:36,840 --> 01:04:37,840
+pay attention
+
+2723
+01:04:37,840 --> 01:04:38,840
+to is
+
+2724
+01:04:38,840 --> 01:04:39,840
+essentially
+
+2725
+01:04:39,840 --> 01:04:40,840
+how we
+
+2726
+01:04:40,840 --> 01:04:41,840
+got from
+
+2727
+01:04:41,840 --> 01:04:42,840
+here to
+
+2728
+01:04:42,840 --> 01:04:43,840
+here.
+
+2729
+01:04:43,840 --> 01:04:44,840
+Just remember
+
+2730
+01:04:44,840 --> 01:04:45,840
+that.
+
+2731
+01:04:45,840 --> 01:04:46,840
+In a 3D
+
+2732
+01:04:46,840 --> 01:04:47,840
+block you do
+
+2733
+01:04:47,840 --> 01:04:48,840
+the exact
+
+2734
+01:04:48,840 --> 01:04:49,840
+same thing
+
+2735
+01:04:49,840 --> 01:04:50,840
+as we did
+
+2736
+01:04:50,840 --> 01:04:51,840
+with 2D
+
+2737
+01:04:51,840 --> 01:04:52,840
+but now
+
+2738
+01:04:52,840 --> 01:04:53,840
+you have a
+
+2739
+01:04:53,840 --> 01:04:54,840
+Z component.
+
+2740
+01:04:54,840 --> 01:04:55,840
+You will
+
+2741
+01:04:55,840 --> 01:04:56,840
+rarely use
+
+2742
+01:04:56,840 --> 01:04:57,840
+3D blocks.
+
+2743
+01:04:57,840 --> 01:04:58,840
+I certainly
+
+2744
+01:04:58,840 --> 01:04:59,840
+don't recommend
+
+2745
+01:04:59,840 --> 01:05:00,840
+it.
+
+2746
+01:05:00,840 --> 01:05:01,840
+But if
+
+2747
+01:05:01,840 --> 01:05:02,840
+you ever do,
+
+2748
+01:05:02,840 --> 01:05:03,840
+that's how
+
+2749
+01:05:03,840 --> 01:05:04,840
+it will
+
+2750
+01:05:04,840 --> 01:05:05,840
+work.
+
+2751
+01:05:05,840 --> 01:05:06,840
+You will
+
+2752
+01:05:06,840 --> 01:05:07,840
+be doing
+
+2753
+01:05:07,840 --> 01:05:08,840
+double the
+
+2754
+01:05:08,840 --> 01:05:09,840
+work.
+
+2755
+01:05:09,840 --> 01:05:10,840
+If not
+
+2756
+01:05:10,840 --> 01:05:11,840
+N times
+
+2757
+01:05:11,840 --> 01:05:12,840
+the work
+
+2758
+01:05:12,840 --> 01:05:13,840
+based on
+
+2759
+01:05:13,840 --> 01:05:14,840
+how your
+
+2760
+01:05:14,840 --> 01:05:15,840
+branches
+
+2761
+01:05:15,840 --> 01:05:16,840
+diverge.
+
+2762
+01:05:16,840 --> 01:05:17,840
+Branch
+
+2763
+01:05:17,840 --> 01:05:18,840
+divergence
+
+2764
+01:05:18,840 --> 01:05:19,840
+within a
+
+2765
+01:05:19,840 --> 01:05:20,840
+block is
+
+2766
+01:05:20,840 --> 01:05:21,840
+bad.
+
+2767
+01:05:21,840 --> 01:05:22,840
+You don't
+
+2768
+01:05:22,840 --> 01:05:23,840
+want branches
+
+2769
+01:05:23,840 --> 01:05:24,840
+to diverge
+
+2770
+01:05:24,840 --> 01:05:25,840
+within a
+
+2771
+01:05:25,840 --> 01:05:26,840
+block.
+
+2772
+01:05:26,840 --> 01:05:27,840
+Not
+
+2773
+01:05:27,840 --> 01:05:28,840
+entirely
+
+2774
+01:05:28,840 --> 01:05:29,840
+true.
+
+2775
+01:05:29,840 --> 01:05:30,840
+Ideally,
+
+2776
+01:05:30,840 --> 01:05:31,840
+yes.
+
+2777
+01:05:31,840 --> 01:05:32,840
+But it
+
+2778
+01:05:32,840 --> 01:05:33,840
+is probably
+
+2779
+01:05:33,840 --> 01:05:34,840
+not okay
+
+2780
+01:05:34,840 --> 01:05:35,840
+for a
+
+2781
+01:05:35,840 --> 01:05:36,840
+branch in
+
+2782
+01:05:36,840 --> 01:05:37,840
+a block.
+
+2783
+01:05:37,840 --> 01:05:38,840
+So let's
+
+2784
+01:05:38,840 --> 01:05:39,840
+take a look
+
+2785
+01:05:39,840 --> 01:05:40,840
+at an
+
+2786
+01:05:40,840 --> 01:05:41,840
+example.
+
+2787
+01:05:41,840 --> 01:05:42,840
+So for
+
+2788
+01:05:42,840 --> 01:05:43,840
+what size
+
+2789
+01:05:43,840 --> 01:05:44,840
+people
+
+2790
+01:05:44,840 --> 01:05:45,840
+certainly
+
+2791
+01:05:45,840 --> 01:05:46,840
+do,
+
+2792
+01:05:46,840 --> 01:05:47,840
+which
+
+2793
+01:05:47,840 --> 01:05:48,840
+works have
+
+2794
+01:05:48,840 --> 01:05:49,840
+divergence
+
+2795
+01:05:49,840 --> 01:05:50,840
+or does
+
+2796
+01:05:50,840 --> 01:05:51,840
+any work
+
+2797
+01:05:51,840 --> 01:05:52,840
+have
+
+2798
+01:05:52,840 --> 01:05:53,840
+divergence
+
+2799
+01:05:53,840 --> 01:05:54,840
+for this
+
+2800
+01:05:54,840 --> 01:05:55,840
+condition?
+
+2801
+01:05:55,840 --> 01:05:56,840
+The first
+
+2802
+01:05:56,840 --> 01:05:57,840
+work,
+
+2803
+01:05:57,840 --> 01:05:58,840
+okay.
+
+2804
+01:05:58,840 --> 01:05:59,840
+What
+
+2805
+01:05:59,840 --> 01:06:00,840
+else?
+
+2806
+01:06:00,840 --> 01:06:01,840
+Or no
+
+2807
+01:06:01,840 --> 01:06:02,840
+other
+
+2808
+01:06:02,840 --> 01:06:03,840
+work?
+
+2809
+01:06:03,840 --> 01:06:04,840
+Divergence?
+
+2810
+01:06:04,840 --> 01:06:05,840
+So it
+
+2811
+01:06:05,840 --> 01:06:06,840
+depends.
+
+2812
+01:06:06,840 --> 01:06:07,840
+Let me
+
+2813
+01:06:07,840 --> 01:06:08,840
+come back
+
+2814
+01:06:08,840 --> 01:06:09,840
+to you.
+
+2815
+01:06:09,840 --> 01:06:10,840
+Exactly.
+
+2816
+01:06:10,840 --> 01:06:11,840
+Remember
+
+2817
+01:06:11,840 --> 01:06:12,840
+our 2D
+
+2818
+01:06:12,840 --> 01:06:13,840
+work, how
+
+2819
+01:06:13,840 --> 01:06:14,840
+y increases
+
+2820
+01:06:14,840 --> 01:06:15,840
+and x
+
+2821
+01:06:15,840 --> 01:06:16,840
+resets?
+
+2822
+01:06:16,840 --> 01:06:17,840
+Every time
+
+2823
+01:06:17,840 --> 01:06:18,840
+thread
+
+2824
+01:06:18,840 --> 01:06:19,840
+IDH.x,
+
+2825
+01:06:19,840 --> 01:06:20,840
+any book
+
+2826
+01:06:20,840 --> 01:06:21,840
+that has
+
+2827
+01:06:21,840 --> 01:06:22,840
+thread
+
+2828
+01:06:22,840 --> 01:06:23,840
+IDH.x in
+
+2829
+01:06:23,840 --> 01:06:24,840
+this book
+
+2830
+01:06:24,840 --> 01:06:25,840
+will
+
+2831
+01:06:25,840 --> 01:06:26,840
+have
+
+2832
+01:06:26,840 --> 01:06:27,840
+2D
+
+2833
+01:06:27,840 --> 01:06:28,840
+work.
+
+2834
+01:06:28,840 --> 01:06:29,840
+So
+
+2835
+01:06:29,840 --> 01:06:30,840
+2D
+
+2836
+01:06:30,840 --> 01:06:31,840
+works
+
+2837
+01:06:31,840 --> 01:06:32,840
+in
+
+2838
+01:06:32,840 --> 01:06:33,840
+this
+
+2839
+01:06:33,840 --> 01:06:34,840
+condition,
+
+2840
+01:06:34,840 --> 01:06:35,840
+you will
+
+2841
+01:06:35,840 --> 01:06:36,840
+have a
+
+2842
+01:06:36,840 --> 01:06:37,840
+branch
+
+2843
+01:06:37,840 --> 01:06:38,840
+divergence.
+
+2844
+01:06:38,840 --> 01:06:39,840
+It's not
+
+2845
+01:06:39,840 --> 01:06:40,840
+just the
+
+2846
+01:06:40,840 --> 01:06:41,840
+first work.
+
+2847
+01:06:41,840 --> 01:06:42,840
+It is
+
+2848
+01:06:42,840 --> 01:06:43,840
+any work
+
+2849
+01:06:43,840 --> 01:06:44,840
+that has
+
+2850
+01:06:44,840 --> 01:06:45,840
+this
+
+2851
+01:06:45,840 --> 01:06:46,840
+condition.
+
+2852
+01:06:46,840 --> 01:06:47,840
+Okay?
+
+2853
+01:06:47,840 --> 01:06:48,840
+What
+
+2854
+01:06:48,840 --> 01:06:49,840
+about
+
+2855
+01:06:49,840 --> 01:06:50,840
+this?
+
+2856
+01:06:50,840 --> 01:06:51,840
+Does
+
+2857
+01:06:51,840 --> 01:06:52,840
+this
+
+2858
+01:06:52,840 --> 01:06:53,840
+diverge?
+
+2859
+01:06:53,840 --> 01:06:54,840
+You're
+
+2860
+01:06:54,840 --> 01:06:55,840
+not
+
+2861
+01:06:55,840 --> 01:06:56,840
+shaking
+
+2862
+01:06:56,840 --> 01:06:57,840
+your head.
+
+2863
+01:06:57,840 --> 01:06:58,840
+Why
+
+2864
+01:06:58,840 --> 01:06:59,840
+does this
+
+2865
+01:06:59,840 --> 01:07:00,840
+work?
+
+2866
+01:07:00,840 --> 01:07:01,840
+This
+
+2867
+01:07:01,840 --> 01:07:02,840
+will
+
+2868
+01:07:02,840 --> 01:07:03,840
+never be
+
+2869
+01:07:03,840 --> 01:07:04,840
+true.
+
+2870
+01:07:04,840 --> 01:07:05,840
+Like,
+
+2871
+01:07:05,840 --> 01:07:06,840
+it may
+
+2872
+01:07:06,840 --> 01:07:07,840
+be true,
+
+2873
+01:07:07,840 --> 01:07:08,840
+so in
+
+2874
+01:07:08,840 --> 01:07:09,840
+the first
+
+2875
+01:07:09,840 --> 01:07:10,840
+work,
+
+2876
+01:07:10,840 --> 01:07:11,840
+let's
+
+2877
+01:07:11,840 --> 01:07:12,840
+take 1D
+
+2878
+01:07:12,840 --> 01:07:13,840
+example.
+
+2879
+01:07:13,840 --> 01:07:14,840
+In the
+
+2880
+01:07:14,840 --> 01:07:15,840
+first work,
+
+2881
+01:07:15,840 --> 01:07:16,840
+0 to
+
+2882
+01:07:16,840 --> 01:07:17,840
+31.
+
+2883
+01:07:17,840 --> 01:07:18,840
+Work
+
+2884
+01:07:18,840 --> 01:07:19,840
+sizes,
+
+2885
+01:07:19,840 --> 01:07:20,840
+32.
+
+2886
+01:07:20,840 --> 01:07:21,840
+Minus
+
+2887
+01:07:21,840 --> 01:07:22,840
+1 is
+
+2888
+01:07:22,840 --> 01:07:23,840
+31.
+
+2889
+01:07:23,840 --> 01:07:24,840
+Can
+
+2890
+01:07:24,840 --> 01:07:25,840
+any value
+
+2891
+01:07:25,840 --> 01:07:26,840
+between 0
+
+2892
+01:07:26,840 --> 01:07:27,840
+and 31
+
+2893
+01:07:27,840 --> 01:07:28,840
+be greater
+
+2894
+01:07:28,840 --> 01:07:29,840
+than 31?
+
+2895
+01:07:29,840 --> 01:07:30,840
+In work
+
+2896
+01:07:30,840 --> 01:07:31,840
+0,
+
+2897
+01:07:31,840 --> 01:07:32,840
+it's not
+
+2898
+01:07:32,840 --> 01:07:33,840
+divergent.
+
+2899
+01:07:33,840 --> 01:07:34,840
+Let's go
+
+2900
+01:07:34,840 --> 01:07:35,840
+to work
+
+2901
+01:07:35,840 --> 01:07:36,840
+1.
+
+2902
+01:07:36,840 --> 01:07:37,840
+What are
+
+2903
+01:07:37,840 --> 01:07:38,840
+the values
+
+2904
+01:07:38,840 --> 01:07:39,840
+in work
+
+2905
+01:07:39,840 --> 01:07:40,840
+1 in
+
+2906
+01:07:40,840 --> 01:07:41,840
+a 1D
+
+2907
+01:07:41,840 --> 01:07:42,840
+case?
+
+2908
+01:07:42,840 --> 01:07:43,840
+32 to
+
+2909
+01:07:43,840 --> 01:07:44,840
+64.
+
+2910
+01:07:44,840 --> 01:07:45,840
+Now what
+
+2911
+01:07:45,840 --> 01:07:46,840
+happens?
+
+2912
+01:07:46,840 --> 01:07:47,840
+32 to
+
+2913
+01:07:47,840 --> 01:07:48,840
+64,
+
+2914
+01:07:48,840 --> 01:07:49,840
+greater than
+
+2915
+01:07:49,840 --> 01:07:50,840
+31.
+
+2916
+01:07:50,840 --> 01:07:51,840
+All
+
+2917
+01:07:51,840 --> 01:07:52,840
+true.
+
+2918
+01:07:52,840 --> 01:07:53,840
+No
+
+2919
+01:07:53,840 --> 01:07:54,840
+divergence.
+
+2920
+01:07:54,840 --> 01:07:55,840
+There's a
+
+2921
+01:07:55,840 --> 01:07:56,840
+diff condition,
+
+2922
+01:07:56,840 --> 01:07:57,840
+but no
+
+2923
+01:07:57,840 --> 01:07:58,840
+divergence.
+
+2924
+01:07:58,840 --> 01:07:59,840
+No branch
+
+2925
+01:07:59,840 --> 01:08:00,840
+divergence
+
+2926
+01:08:00,840 --> 01:08:01,840
+here.
+
+2927
+01:08:01,840 --> 01:08:02,840
+Now let's
+
+2928
+01:08:02,840 --> 01:08:03,840
+say,
+
+2929
+01:08:03,840 --> 01:08:04,840
+let's say
+
+2930
+01:08:04,840 --> 01:08:05,840
+I have
+
+2931
+01:08:05,840 --> 01:08:06,840
+this.
+
+2932
+01:08:06,840 --> 01:08:07,840
+What
+
+2933
+01:08:07,840 --> 01:08:08,840
+happens now?
+
+2934
+01:08:08,840 --> 01:08:09,840
+So,
+
+2935
+01:08:09,840 --> 01:08:10,840
+work
+
+2936
+01:08:10,840 --> 01:08:11,840
+0,
+
+2937
+01:08:11,840 --> 01:08:12,840
+there won't
+
+2938
+01:08:12,840 --> 01:08:13,840
+be divergence.
+
+2939
+01:08:13,840 --> 01:08:14,840
+Okay?
+
+2940
+01:08:14,840 --> 01:08:15,840
+In work
+
+2941
+01:08:15,840 --> 01:08:16,840
+0,
+
+2942
+01:08:16,840 --> 01:08:17,840
+you go from
+
+2943
+01:08:17,840 --> 01:08:18,840
+0 to
+
+2944
+01:08:18,840 --> 01:08:19,840
+31,
+
+2945
+01:08:19,840 --> 01:08:20,840
+greater than
+
+2946
+01:08:20,840 --> 01:08:21,840
+32.
+
+2947
+01:08:21,840 --> 01:08:22,840
+Right?
+
+2948
+01:08:22,840 --> 01:08:23,840
+All false,
+
+2949
+01:08:23,840 --> 01:08:24,840
+it's fine.
+
+2950
+01:08:24,840 --> 01:08:25,840
+In work
+
+2951
+01:08:25,840 --> 01:08:26,840
+1,
+
+2952
+01:08:26,840 --> 01:08:27,840
+what happens?
+
+2953
+01:08:27,840 --> 01:08:28,840
+32 to
+
+2954
+01:08:28,840 --> 01:08:29,840
+64,
+
+2955
+01:08:29,840 --> 01:08:30,840
+compared to
+
+2956
+01:08:30,840 --> 01:08:31,840
+greater than
+
+2957
+01:08:31,840 --> 01:08:32,840
+31.
+
+2958
+01:08:32,840 --> 01:08:33,840
+Not greater than
+
+2959
+01:08:33,840 --> 01:08:34,840
+equals,
+
+2960
+01:08:34,840 --> 01:08:35,840
+greater than
+
+2961
+01:08:35,840 --> 01:08:36,840
+31.
+
+2962
+01:08:36,840 --> 01:08:37,840
+Is there
+
+2963
+01:08:37,840 --> 01:08:38,840
+divergence now?
+
+2964
+01:08:38,840 --> 01:08:39,840
+Yes,
+
+2965
+01:08:39,840 --> 01:08:40,840
+on the first
+
+2966
+01:08:40,840 --> 01:08:41,840
+thread,
+
+2967
+01:08:41,840 --> 01:08:42,840
+there is
+
+2968
+01:08:42,840 --> 01:08:43,840
+divergence.
+
+2969
+01:08:43,840 --> 01:08:44,840
+So you
+
+2970
+01:08:44,840 --> 01:08:45,840
+want to be
+
+2971
+01:08:45,840 --> 01:08:46,840
+paying attention
+
+2972
+01:08:46,840 --> 01:08:47,840
+to that.
+
+2973
+01:08:47,840 --> 01:08:48,840
+Those
+
+2974
+01:08:48,840 --> 01:08:49,840
+things matter,
+
+2975
+01:08:49,840 --> 01:08:50,840
+plus 1,
+
+2976
+01:08:50,840 --> 01:08:51,840
+minus 1,
+
+2977
+01:08:51,840 --> 01:08:52,840
+always
+
+2978
+01:08:52,840 --> 01:08:53,840
+matters.
+
+2979
+01:08:53,840 --> 01:08:54,840
+So now,
+
+2980
+01:08:54,840 --> 01:08:55,840
+given what
+
+2981
+01:08:55,840 --> 01:08:56,840
+we know
+
+2982
+01:08:56,840 --> 01:08:57,840
+about
+
+2983
+01:08:57,840 --> 01:08:58,840
+divergence,
+
+2984
+01:08:58,840 --> 01:08:59,840
+let's take
+
+2985
+01:08:59,840 --> 01:09:00,840
+it visually.
+
+2986
+01:09:00,840 --> 01:09:01,840
+So pretend
+
+2987
+01:09:01,840 --> 01:09:02,840
+our work
+
+2988
+01:09:02,840 --> 01:09:03,840
+size is 2.
+
+2989
+01:09:03,840 --> 01:09:04,840
+Okay?
+
+2990
+01:09:04,840 --> 01:09:05,840
+What can we
+
+2991
+01:09:05,840 --> 01:09:06,840
+say about
+
+2992
+01:09:06,840 --> 01:09:07,840
+this?
+
+2993
+01:09:07,840 --> 01:09:08,840
+What can
+
+2994
+01:09:08,840 --> 01:09:09,840
+we say
+
+2995
+01:09:09,840 --> 01:09:10,840
+about the
+
+2996
+01:09:10,840 --> 01:09:11,840
+left and
+
+2997
+01:09:11,840 --> 01:09:12,840
+the right?
+
+2998
+01:09:12,840 --> 01:09:13,840
+How many
+
+2999
+01:09:13,840 --> 01:09:14,840
+diverging
+
+3000
+01:09:14,840 --> 01:09:15,840
+works do
+
+3001
+01:09:15,840 --> 01:09:16,840
+we have?
+
+3002
+01:09:16,840 --> 01:09:17,840
+On the
+
+3003
+01:09:17,840 --> 01:09:18,840
+left,
+
+3004
+01:09:18,840 --> 01:09:19,840
+4,
+
+3005
+01:09:19,840 --> 01:09:20,840
+and on
+
+3006
+01:09:20,840 --> 01:09:21,840
+the right,
+
+3007
+01:09:21,840 --> 01:09:22,840
+1.
+
+3008
+01:09:22,840 --> 01:09:23,840
+On the
+
+3009
+01:09:23,840 --> 01:09:24,840
+4,
+
+3010
+01:09:24,840 --> 01:09:25,840
+we have
+
+3011
+01:09:25,840 --> 01:09:26,840
+4.
+
+3012
+01:09:26,840 --> 01:09:27,840
+On the
+
+3013
+01:09:27,840 --> 01:09:28,840
+left,
+
+3014
+01:09:28,840 --> 01:09:29,840
+we have
+
+3015
+01:09:29,840 --> 01:09:30,840
+4.
+
+3016
+01:09:30,840 --> 01:09:31,840
+On the
+
+3017
+01:09:31,840 --> 01:09:32,840
+right,
+
+3018
+01:09:32,840 --> 01:09:33,840
+we have
+
+3019
+01:09:33,840 --> 01:09:34,840
+0.
+
+3020
+01:09:34,840 --> 01:09:35,840
+No branches
+
+3021
+01:09:35,840 --> 01:09:36,840
+diverge.
+
+3022
+01:09:36,840 --> 01:09:37,840
+Second
+
+3023
+01:09:37,840 --> 01:09:38,840
+pass,
+
+3024
+01:09:38,840 --> 01:09:39,840
+we have
+
+3025
+01:09:39,840 --> 01:09:40,840
+two branches
+
+3026
+01:09:40,840 --> 01:09:41,840
+diverging
+
+3027
+01:09:41,840 --> 01:09:42,840
+here.
+
+3028
+01:09:42,840 --> 01:09:43,840
+0 on
+
+3029
+01:09:43,840 --> 01:09:44,840
+the right.
+
+3030
+01:09:44,840 --> 01:09:45,840
+And on
+
+3031
+01:09:45,840 --> 01:09:46,840
+the last
+
+3032
+01:09:46,840 --> 01:09:47,840
+one,
+
+3033
+01:09:47,840 --> 01:09:48,840
+how many
+
+3034
+01:09:48,840 --> 01:09:49,840
+will we
+
+3035
+01:09:49,840 --> 01:09:50,840
+have?
+
+3036
+01:09:50,840 --> 01:09:51,840
+One on
+
+3037
+01:09:51,840 --> 01:09:52,840
+the left,
+
+3038
+01:09:52,840 --> 01:09:53,840
+one on
+
+3039
+01:09:53,840 --> 01:09:54,840
+the right.
+
+3040
+01:09:54,840 --> 01:09:55,840
+There is
+
+3041
+01:09:55,840 --> 01:09:56,840
+no other
+
+3042
+01:09:56,840 --> 01:09:57,840
+way around
+
+3043
+01:09:57,840 --> 01:09:58,840
+it.
+
+3044
+01:09:58,840 --> 01:09:59,840
+But what
+
+3045
+01:09:59,840 --> 01:10:00,840
+we've
+
+3046
+01:10:00,840 --> 01:10:01,840
+essentially
+
+3047
+01:10:01,840 --> 01:10:02,840
+done is
+
+3048
+01:10:02,840 --> 01:10:03,840
+minimized
+
+3049
+01:10:03,840 --> 01:10:04,840
+how many
+
+3050
+01:10:04,840 --> 01:10:05,840
+divergent
+
+3051
+01:10:05,840 --> 01:10:06,840
+works we
+
+3052
+01:10:06,840 --> 01:10:07,840
+have.
+
+3053
+01:10:07,840 --> 01:10:08,840
+So if
+
+3054
+01:10:08,840 --> 01:10:09,840
+we take a
+
+3055
+01:10:09,840 --> 01:10:10,840
+look at
+
+3056
+01:10:10,840 --> 01:10:11,840
+this once
+
+3057
+01:10:11,840 --> 01:10:12,840
+again,
+
+3058
+01:10:12,840 --> 01:10:13,840
+what we
+
+3059
+01:10:13,840 --> 01:10:14,840
+also get
+
+3060
+01:10:14,840 --> 01:10:15,840
+from this
+
+3061
+01:10:15,840 --> 01:10:16,840
+is not
+
+3062
+01:10:16,840 --> 01:10:17,840
+just less
+
+3063
+01:10:17,840 --> 01:10:18,840
+diverging,
+
+3064
+01:10:18,840 --> 01:10:19,840
+but we
+
+3065
+01:10:19,840 --> 01:10:20,840
+can also
+
+3066
+01:10:20,840 --> 01:10:21,840
+get shorter
+
+3067
+01:10:21,840 --> 01:10:22,840
+time.
+
+3068
+01:10:22,840 --> 01:10:23,840
+So let's
+
+3069
+01:10:23,840 --> 01:10:24,840
+take a look
+
+3070
+01:10:24,840 --> 01:10:25,840
+at this.
+
+3071
+01:10:25,840 --> 01:10:26,840
+We can
+
+3072
+01:10:26,840 --> 01:10:27,840
+pretend a
+
+3073
+01:10:27,840 --> 01:10:28,840
+warp size
+
+3074
+01:10:28,840 --> 01:10:29,840
+is 2.
+
+3075
+01:10:29,840 --> 01:10:30,840
+In this
+
+3076
+01:10:30,840 --> 01:10:31,840
+case,
+
+3077
+01:10:31,840 --> 01:10:32,840
+no warps
+
+3078
+01:10:32,840 --> 01:10:33,840
+are there
+
+3079
+01:10:33,840 --> 01:10:34,840
+because all
+
+3080
+01:10:34,840 --> 01:10:35,840
+the warps
+
+3081
+01:10:35,840 --> 01:10:36,840
+are doing
+
+3082
+01:10:36,840 --> 01:10:37,840
+something or
+
+3083
+01:10:37,840 --> 01:10:38,840
+sticking around.
+
+3084
+01:10:38,840 --> 01:10:39,840
+Or at
+
+3085
+01:10:39,840 --> 01:10:40,840
+least one
+
+3086
+01:10:40,840 --> 01:10:41,840
+thread in
+
+3087
+01:10:41,840 --> 01:10:42,840
+the warp
+
+3088
+01:10:42,840 --> 01:10:43,840
+is doing
+
+3089
+01:10:43,840 --> 01:10:44,840
+something.
+
+3090
+01:10:44,840 --> 01:10:45,840
+So this
+
+3091
+01:10:45,840 --> 01:10:46,840
+thread,
+
+3092
+01:10:46,840 --> 01:10:47,840
+this thread,
+
+3093
+01:10:47,840 --> 01:10:48,840
+this thread
+
+3094
+01:10:48,840 --> 01:10:49,840
+is doing
+
+3095
+01:10:49,840 --> 01:10:50,840
+something.
+
+3096
+01:10:50,840 --> 01:10:51,840
+So you
+
+3097
+01:10:51,840 --> 01:10:52,840
+can't
+
+3098
+01:10:52,840 --> 01:10:53,840
+get rid
+
+3099
+01:10:53,840 --> 01:10:54,840
+of
+
+3100
+01:10:54,840 --> 01:10:55,840
+this.
+
+3101
+01:10:55,840 --> 01:10:56,840
+You
+
+3102
+01:10:56,840 --> 01:10:57,840
+can get
+
+3103
+01:10:57,840 --> 01:10:58,840
+rid of
+
+3104
+01:10:58,840 --> 01:10:59,840
+this.
+
+3105
+01:10:59,840 --> 01:11:00,840
+So the
+
+3106
+01:11:00,840 --> 01:11:01,840
+scheduler can
+
+3107
+01:11:01,840 --> 01:11:02,840
+get rid
+
+3108
+01:11:02,840 --> 01:11:03,840
+of this.
+
+3109
+01:11:03,840 --> 01:11:04,840
+The
+
+3110
+01:11:04,840 --> 01:11:05,840
+scheduler can
+
+3111
+01:11:05,840 --> 01:11:06,840
+be like,
+
+3112
+01:11:06,840 --> 01:11:07,840
+okay,
+
+3113
+01:11:07,840 --> 01:11:08,840
+you have
+
+3114
+01:11:08,840 --> 01:11:09,840
+no more
+
+3115
+01:11:09,840 --> 01:11:10,840
+useful
+
+3116
+01:11:10,840 --> 01:11:11,840
+code to
+
+3117
+01:11:11,840 --> 01:11:12,840
+execute,
+
+3118
+01:11:12,840 --> 01:11:13,840
+bye-bye,
+
+3119
+01:11:13,840 --> 01:11:14,840
+return,
+
+3120
+01:11:14,840 --> 01:11:15,840
+that's it.
+
+3121
+01:11:15,840 --> 01:11:16,840
+And just
+
+3122
+01:11:16,840 --> 01:11:17,840
+these two
+
+3123
+01:11:17,840 --> 01:11:18,840
+warps will
+
+3124
+01:11:18,840 --> 01:11:19,840
+actually do
+
+3125
+01:11:19,840 --> 01:11:20,840
+work,
+
+3126
+01:11:20,840 --> 01:11:21,840
+which is
+
+3127
+01:11:21,840 --> 01:11:22,840
+good.
+
+3128
+01:11:22,840 --> 01:11:23,840
+But
+
+3129
+01:11:23,840 --> 01:11:24,840
+once the
+
+3130
+01:11:24,840 --> 01:11:25,840
+waiting will
+
+3131
+01:11:25,840 --> 01:11:26,840
+come and
+
+3132
+01:11:26,840 --> 01:11:27,840
+fill it up
+
+3133
+01:11:27,840 --> 01:11:28,840
+in the
+
+3134
+01:11:28,840 --> 01:11:29,840
+code,
+
+3135
+01:11:29,840 --> 01:11:30,840
+in the
+
+3136
+01:11:30,840 --> 01:11:31,840
+hardware,
+
+3137
+01:11:31,840 --> 01:11:32,840
+they will
+
+3138
+01:11:32,840 --> 01:11:33,840
+actually do
+
+3139
+01:11:33,840 --> 01:11:34,840
+something instead
+
+3140
+01:11:34,840 --> 01:11:35,840
+of making
+
+3141
+01:11:35,840 --> 01:11:36,840
+half the
+
+3142
+01:11:36,840 --> 01:11:37,840
+threads wait
+
+3143
+01:11:37,840 --> 01:11:38,840
+like there
+
+3144
+01:11:38,840 --> 01:11:39,840
+is here.
+
+3145
+01:11:39,840 --> 01:11:40,840
+Does
+
+3146
+01:11:40,840 --> 01:11:41,840
+everybody get
+
+3147
+01:11:41,840 --> 01:11:42,840
+that?
+
+3148
+01:11:42,840 --> 01:11:43,840
+Okay?
+
+3149
+01:11:43,840 --> 01:11:44,840
+In the
+
+3150
+01:11:44,840 --> 01:11:45,840
+next step,
+
+3151
+01:11:45,840 --> 01:11:46,840
+now we
+
+3152
+01:11:46,840 --> 01:11:47,840
+see two
+
+3153
+01:11:47,840 --> 01:11:48,840
+warps
+
+3154
+01:11:48,840 --> 01:11:49,840
+retired because
+
+3155
+01:11:49,840 --> 01:11:50,840
+these two
+
+3156
+01:11:50,840 --> 01:11:51,840
+are
+
+3157
+01:11:51,840 --> 01:11:52,840
+working.
+
+3158
+01:11:52,840 --> 01:11:53,840
+And then
+
+3159
+01:11:53,840 --> 01:11:54,840
+in the
+
+3160
+01:11:54,840 --> 01:11:55,840
+final step,
+
+3161
+01:11:55,840 --> 01:11:56,840
+yeah,
+
+3162
+01:11:56,840 --> 01:11:57,840
+no warps are
+
+3163
+01:11:57,840 --> 01:11:58,840
+retired,
+
+3164
+01:11:58,840 --> 01:11:59,840
+but now
+
+3165
+01:11:59,840 --> 01:12:00,840
+the third
+
+3166
+01:12:00,840 --> 01:12:01,840
+warp is
+
+3167
+01:12:01,840 --> 01:12:02,840
+here.
+
+3168
+01:12:02,840 --> 01:12:03,840
+So
+
+3169
+01:12:03,840 --> 01:12:04,840
+after a
+
+3170
+01:12:04,840 --> 01:12:05,840
+full
+
+3171
+01:12:05,840 --> 01:12:06,840
+iteration.
+
+3172
+01:12:06,840 --> 01:12:07,840
+Okay?
+
+3173
+01:12:07,840 --> 01:12:08,840
+So
+
+3174
+01:12:08,840 --> 01:12:09,840
+everybody
+
+3175
+01:12:09,840 --> 01:12:10,840
+clear on
+
+3176
+01:12:10,840 --> 01:12:11,840
+how this
+
+3177
+01:12:11,840 --> 01:12:12,840
+works,
+
+3178
+01:12:12,840 --> 01:12:13,840
+how
+
+3179
+01:12:13,840 --> 01:12:14,840
+changing
+
+3180
+01:12:14,840 --> 01:12:15,840
+our
+
+3181
+01:12:15,840 --> 01:12:16,840
+indexing
+
+3182
+01:12:16,840 --> 01:12:17,840
+system is
+
+3183
+01:12:17,840 --> 01:12:18,840
+helping
+
+3184
+01:12:18,840 --> 01:12:19,840
+warps
+
+3185
+01:12:19,840 --> 01:12:20,840
+retire.
+
+3186
+01:12:20,840 --> 01:12:21,840
+In this
+
+3187
+01:12:21,840 --> 01:12:22,840
+case,
+
+3188
+01:12:22,840 --> 01:12:23,840
+in our
+
+3189
+01:12:23,840 --> 01:12:24,840
+right case
+
+3190
+01:12:24,840 --> 01:12:25,840
+where the
+
+3191
+01:12:25,840 --> 01:12:26,840
+warps are
+
+3192
+01:12:26,840 --> 01:12:27,840
+retiring,
+
+3193
+01:12:27,840 --> 01:12:28,840
+the same
+
+3194
+01:12:28,840 --> 01:12:29,840
+block or
+
+3195
+01:12:29,840 --> 01:12:30,840
+other block
+
+3196
+01:12:30,840 --> 01:12:31,840
+can fill
+
+3197
+01:12:31,840 --> 01:12:32,840
+it up.
+
+3198
+01:12:32,840 --> 01:12:33,840
+Whereas in
+
+3199
+01:12:33,840 --> 01:12:34,840
+this,
+
+3200
+01:12:34,840 --> 01:12:35,840
+even though
+
+3201
+01:12:35,840 --> 01:12:36,840
+you're using
+
+3202
+01:12:36,840 --> 01:12:37,840
+the same
+
+3203
+01:12:37,840 --> 01:12:38,840
+number of
+
+3204
+01:12:38,840 --> 01:12:39,840
+threads,
+
+3205
+01:12:39,840 --> 01:12:40,840
+the number
+
+3206
+01:12:40,840 --> 01:12:41,840
+of individual
+
+3207
+01:12:41,840 --> 01:12:42,840
+threads doesn't
+
+3208
+01:12:42,840 --> 01:12:43,840
+change.
+
+3209
+01:12:43,840 --> 01:12:44,840
+Remember
+
+3210
+01:12:44,840 --> 01:12:45,840
+that.
+
+3211
+01:12:45,840 --> 01:12:46,840
+But the
+
+3212
+01:12:46,840 --> 01:12:47,840
+number of
+
+3213
+01:12:47,840 --> 01:12:48,840
+threads and
+
+3214
+01:12:48,840 --> 01:12:49,840
+individual
+
+3215
+01:12:49,840 --> 01:12:50,840
+threads
+
+3216
+01:12:50,840 --> 01:12:51,840
+doesn't
+
+3217
+01:12:51,840 --> 01:12:52,840
+change.
+
+3218
+01:12:52,840 --> 01:12:53,840
+So
+
+3219
+01:12:53,840 --> 01:12:54,840
+essentially
+
+3220
+01:12:54,840 --> 01:12:55,840
+construct your
+
+3221
+01:12:55,840 --> 01:12:56,840
+algorithms.
+
+3222
+01:12:56,840 --> 01:12:57,840
+When you're
+
+3223
+01:12:57,840 --> 01:12:58,840
+thinking about
+
+3224
+01:12:58,840 --> 01:12:59,840
+your
+
+3225
+01:12:59,840 --> 01:13:00,840
+algorithms,
+
+3226
+01:13:00,840 --> 01:13:01,840
+you always
+
+3227
+01:13:01,840 --> 01:13:02,840
+want to
+
+3228
+01:13:02,840 --> 01:13:03,840
+think about
+
+3229
+01:13:03,840 --> 01:13:04,840
+what is
+
+3230
+01:13:04,840 --> 01:13:05,840
+easy versus
+
+3231
+01:13:05,840 --> 01:13:06,840
+how the
+
+3232
+01:13:06,840 --> 01:13:07,840
+GPU and
+
+3233
+01:13:07,840 --> 01:13:08,840
+even your
+
+3234
+01:13:08,840 --> 01:13:09,840
+CPU is
+
+3235
+01:13:09,840 --> 01:13:10,840
+going to be
+
+3236
+01:13:10,840 --> 01:13:11,840
+using that.
+
+3237
+01:13:11,840 --> 01:13:12,840
+You always
+
+3238
+01:13:12,840 --> 01:13:13,840
+want to keep
+
+3239
+01:13:13,840 --> 01:13:14,840
+that in
+
+3240
+01:13:14,840 --> 01:13:15,840
+mind.
+
+3241
+01:13:15,840 --> 01:13:16,840
+What is
+
+3242
+01:13:16,840 --> 01:13:17,840
+the easy
+
+3243
+01:13:17,840 --> 01:13:18,840
+versus how
+
+3244
+01:13:18,840 --> 01:13:19,840
+the GPU and
+
+3245
+01:13:19,840 --> 01:13:20,840
+even your
+
+3246
+01:13:20,840 --> 01:13:21,840
+CPU is
+
+3247
+01:13:21,840 --> 01:13:22,840
+going to be
+
+3248
+01:13:22,840 --> 01:13:23,840
+using that.
+
+3249
+01:13:23,840 --> 01:13:24,840
+Questions
+
+3250
+01:13:24,840 --> 01:13:25,840
+around warp
+
+3251
+01:13:25,840 --> 01:13:26,840
+partition?
+
+3252
+01:13:26,840 --> 01:13:27,840
+Yeah.
+
+3253
+01:13:27,840 --> 01:13:28,840
+Right.
+
+3254
+01:13:28,840 --> 01:13:29,840
+So what
+
+3255
+01:13:29,840 --> 01:13:30,840
+you said,
+
+3256
+01:13:30,840 --> 01:13:31,840
+I'll put it
+
+3257
+01:13:31,840 --> 01:13:32,840
+in another
+
+3258
+01:13:32,840 --> 01:13:33,840
+way.
+
+3259
+01:13:33,840 --> 01:13:34,840
+When you
+
+3260
+01:13:34,840 --> 01:13:35,840
+retire warp,
+
+3261
+01:13:35,840 --> 01:13:36,840
+you're retiring
+
+3262
+01:13:36,840 --> 01:13:37,840
+threads.
+
+3263
+01:13:37,840 --> 01:13:38,840
+Okay?
+
+3264
+01:13:38,840 --> 01:13:39,840
+You're retiring
+
+3265
+01:13:39,840 --> 01:13:40,840
+their context.
+
+3266
+01:13:40,840 --> 01:13:41,840
+You're retiring
+
+3267
+01:13:41,840 --> 01:13:42,840
+their memory.
+
+3268
+01:13:42,840 --> 01:13:43,840
+So you're
+
+3269
+01:13:43,840 --> 01:13:44,840
+freeing up
+
+3270
+01:13:44,840 --> 01:13:45,840
+hardware
+
+3271
+01:13:45,840 --> 01:13:46,840
+resources.
+
+3272
+01:13:46,840 --> 01:13:47,840
+So what
+
+3273
+01:13:47,840 --> 01:13:48,840
+happens is
+
+3274
+01:13:48,840 --> 01:13:49,840
+there are
+
+3275
+01:13:49,840 --> 01:13:50,840
+blocks waiting.
+
+3276
+01:13:50,840 --> 01:13:51,840
+So let's
+
+3277
+01:13:51,840 --> 01:13:52,840
+say you
+
+3278
+01:13:52,840 --> 01:13:53,840
+launch 10
+
+3279
+01:13:53,840 --> 01:13:54,840
+million elements.
+
+3280
+01:13:54,840 --> 01:13:55,840
+You can't
+
+3281
+01:13:55,840 --> 01:13:56,840
+fit 10
+
+3282
+01:13:56,840 --> 01:13:57,840
+million elements
+
+3283
+01:13:57,840 --> 01:13:58,840
+on 4,000
+
+3284
+01:13:58,840 --> 01:13:59,840
+ports,
+
+3285
+01:13:59,840 --> 01:14:00,840
+right?
+
+3286
+01:14:00,840 --> 01:14:01,840
+So when
+
+3287
+01:14:01,840 --> 01:14:02,840
+you retire
+
+3288
+01:14:02,840 --> 01:14:03,840
+those
+
+3289
+01:14:03,840 --> 01:14:04,840
+warps,
+
+3290
+01:14:04,840 --> 01:14:05,840
+those ports
+
+3291
+01:14:05,840 --> 01:14:06,840
+free up
+
+3292
+01:14:06,840 --> 01:14:07,840
+and new
+
+3293
+01:14:07,840 --> 01:14:08,840
+threads will
+
+3294
+01:14:08,840 --> 01:14:09,840
+fill them in.
+
+3295
+01:14:09,840 --> 01:14:10,840
+So it's
+
+3296
+01:14:10,840 --> 01:14:11,840
+not like
+
+3297
+01:14:11,840 --> 01:14:12,840
+you're using
+
+3298
+01:14:12,840 --> 01:14:13,840
+the same
+
+3299
+01:14:13,840 --> 01:14:14,840
+threads.
+
+3300
+01:14:14,840 --> 01:14:15,840
+You have
+
+3301
+01:14:15,840 --> 01:14:16,840
+the hardware
+
+3302
+01:14:16,840 --> 01:14:17,840
+executing
+
+3303
+01:14:17,840 --> 01:14:18,840
+those threads.
+
+3304
+01:14:18,840 --> 01:14:19,840
+So the
+
+3305
+01:14:19,840 --> 01:14:20,840
+hardware frees
+
+3306
+01:14:20,840 --> 01:14:21,840
+up and
+
+3307
+01:14:21,840 --> 01:14:22,840
+new threads
+
+3308
+01:14:22,840 --> 01:14:23,840
+will come
+
+3309
+01:14:23,840 --> 01:14:24,840
+and execute
+
+3310
+01:14:24,840 --> 01:14:25,840
+on that
+
+3311
+01:14:25,840 --> 01:14:26,840
+hardware.
+
+3312
+01:14:26,840 --> 01:14:27,840
+So think
+
+3313
+01:14:27,840 --> 01:14:28,840
+about threads
+
+3314
+01:14:28,840 --> 01:14:29,840
+as a
+
+3315
+01:14:29,840 --> 01:14:30,840
+software
+
+3316
+01:14:30,840 --> 01:14:31,840
+content.
+
+3317
+01:14:31,840 --> 01:14:32,840
+If you
+
+3318
+01:14:32,840 --> 01:14:33,840
+retire those
+
+3319
+01:14:33,840 --> 01:14:34,840
+warps,
+
+3320
+01:14:34,840 --> 01:14:35,840
+the GPU
+
+3321
+01:14:35,840 --> 01:14:36,840
+can be
+
+3322
+01:14:36,840 --> 01:14:37,840
+like,
+
+3323
+01:14:37,840 --> 01:14:38,840
+threads,
+
+3324
+01:14:38,840 --> 01:14:39,840
+you're done,
+
+3325
+01:14:39,840 --> 01:14:40,840
+go back,
+
+3326
+01:14:40,840 --> 01:14:41,840
+I don't
+
+3327
+01:14:41,840 --> 01:14:42,840
+need you
+
+3328
+01:14:42,840 --> 01:14:43,840
+in the
+
+3329
+01:14:43,840 --> 01:14:44,840
+scheduler,
+
+3330
+01:14:44,840 --> 01:14:45,840
+you're done.
+
+3331
+01:14:45,840 --> 01:14:46,840
+So
+
+3332
+01:14:46,840 --> 01:14:47,840
+that's
+
+3333
+01:14:47,840 --> 01:14:48,840
+essentially
+
+3334
+01:14:48,840 --> 01:14:49,840
+what happens.
+
+3335
+01:14:49,840 --> 01:14:50,840
+Yep?
+
+3336
+01:14:50,840 --> 01:14:51,840
+So even
+
+3337
+01:14:51,840 --> 01:14:52,840
+if they
+
+3338
+01:14:52,840 --> 01:14:53,840
+are not
+
+3339
+01:14:53,840 --> 01:14:54,840
+being
+
+3340
+01:14:54,840 --> 01:14:55,840
+used,
+
+3341
+01:14:55,840 --> 01:14:56,840
+since the
+
+3342
+01:14:56,840 --> 01:14:57,840
+scheduler has
+
+3343
+01:14:57,840 --> 01:14:58,840
+less
+
+3344
+01:14:58,840 --> 01:14:59,840
+warp
+
+3345
+01:14:59,840 --> 01:15:00,840
+advantage,
+
+3346
+01:15:00,840 --> 01:15:01,840
+so there
+
+3347
+01:15:01,840 --> 01:15:02,840
+will be
+
+3348
+01:15:02,840 --> 01:15:03,840
+less
+
+3349
+01:15:03,840 --> 01:15:04,840
+overhead.
+
+3350
+01:15:04,840 --> 01:15:05,840
+So we
+
+3351
+01:15:05,840 --> 01:15:06,840
+will still
+
+3352
+01:15:06,840 --> 01:15:07,840
+make the
+
+3353
+01:15:07,840 --> 01:15:08,840
+algorithm
+
+3354
+01:15:08,840 --> 01:15:09,840
+run
+
+3355
+01:15:09,840 --> 01:15:10,840
+the best.
+
+3356
+01:15:11,840 --> 01:15:12,840
+So when
+
+3357
+01:15:12,840 --> 01:15:13,840
+you are
+
+3358
+01:15:13,840 --> 01:15:14,840
+returning
+
+3359
+01:15:14,840 --> 01:15:15,840
+threads early,
+
+3360
+01:15:15,840 --> 01:15:16,840
+when you
+
+3361
+01:15:16,840 --> 01:15:17,840
+call return
+
+3362
+01:15:17,840 --> 01:15:18,840
+inside a
+
+3363
+01:15:18,840 --> 01:15:19,840
+kernel,
+
+3364
+01:15:19,840 --> 01:15:20,840
+which you
+
+3365
+01:15:20,840 --> 01:15:21,840
+absolutely
+
+3366
+01:15:21,840 --> 01:15:22,840
+can,
+
+3367
+01:15:22,840 --> 01:15:23,840
+and all
+
+3368
+01:15:23,840 --> 01:15:24,840
+consecutive
+
+3369
+01:15:24,840 --> 01:15:25,840
+threads
+
+3370
+01:15:25,840 --> 01:15:26,840
+are hit
+
+3371
+01:15:26,840 --> 01:15:27,840
+return,
+
+3372
+01:15:27,840 --> 01:15:28,840
+it will
+
+3373
+01:15:28,840 --> 01:15:29,840
+retire the
+
+3374
+01:15:29,840 --> 01:15:30,840
+warp.
+
+3375
+01:15:30,840 --> 01:15:31,840
+The scheduler
+
+3376
+01:15:31,840 --> 01:15:32,840
+will get
+
+3377
+01:15:32,840 --> 01:15:33,840
+rid of it.
+
+3378
+01:15:33,840 --> 01:15:34,840
+So that's
+
+3379
+01:15:34,840 --> 01:15:35,840
+what happens.
+
+3380
+01:15:35,840 --> 01:15:36,840
+So hitting
+
+3381
+01:15:36,840 --> 01:15:37,840
+return is
+
+3382
+01:15:37,840 --> 01:15:38,840
+important.
+
+3383
+01:15:38,840 --> 01:15:39,840
+And
+
+3384
+01:15:39,840 --> 01:15:40,840
+then we
+
+3385
+01:15:40,840 --> 01:15:41,840
+have another
+
+3386
+01:15:41,840 --> 01:15:42,840
+task that
+
+3387
+01:15:42,840 --> 01:15:43,840
+would require
+
+3388
+01:15:43,840 --> 01:15:44,840
+like 50
+
+3389
+01:15:44,840 --> 01:15:45,840
+blocks.
+
+3390
+01:15:45,840 --> 01:15:46,840
+So
+
+3391
+01:15:46,840 --> 01:15:47,840
+they will
+
+3392
+01:15:47,840 --> 01:15:48,840
+say like
+
+3393
+01:15:48,840 --> 01:15:49,840
+the first
+
+3394
+01:15:49,840 --> 01:15:50,840
+one, the
+
+3395
+01:15:50,840 --> 01:15:51,840
+second one,
+
+3396
+01:15:51,840 --> 01:15:52,840
+the main
+
+3397
+01:15:52,840 --> 01:15:53,840
+one.
+
+3398
+01:15:53,840 --> 01:15:54,840
+So
+
+3399
+01:15:54,840 --> 01:15:55,840
+initially
+
+3400
+01:15:55,840 --> 01:15:56,840
+they will
+
+3401
+01:15:56,840 --> 01:15:57,840
+require
+
+3402
+01:15:57,840 --> 01:15:58,840
+a block
+
+3403
+01:15:58,840 --> 01:15:59,840
+which
+
+3404
+01:15:59,840 --> 01:16:00,840
+was part
+
+3405
+01:16:00,840 --> 01:16:01,840
+of the
+
+3406
+01:16:01,840 --> 01:16:02,840
+doctrine
+
+3407
+01:16:02,840 --> 01:16:03,840
+that
+
+3408
+01:16:03,840 --> 01:16:04,840
+we
+
+3409
+01:16:04,840 --> 01:16:05,840
+were
+
+3410
+01:16:05,840 --> 01:16:06,840
+talking
+
+3411
+01:16:06,840 --> 01:16:07,840
+about.
+
+3412
+01:16:07,840 --> 01:16:08,840
+And
+
+3413
+01:16:08,840 --> 01:16:09,840
+then now
+
+3414
+01:16:09,840 --> 01:16:10,840
+we have
+
+3415
+01:16:10,840 --> 01:16:11,840
+three
+
+3416
+01:16:11,840 --> 01:16:12,840
+top
+
+3417
+01:16:12,840 --> 01:16:13,840
+blocks.
+
+3418
+01:16:13,840 --> 01:16:14,840
+So
+
+3419
+01:16:14,840 --> 01:16:15,840
+will
+
+3420
+01:16:15,840 --> 01:16:16,840
+the
+
+3421
+01:16:16,840 --> 01:16:17,840
+scheduler
+
+3422
+01:16:17,840 --> 01:16:18,840
+do
+
+3423
+01:16:18,840 --> 01:16:19,840
+okay?
+
+3424
+01:16:19,840 --> 01:16:20,840
+So I
+
+3425
+01:16:20,840 --> 01:16:21,840
+wouldn't
+
+3426
+01:16:21,840 --> 01:16:22,840
+put it
+
+3427
+01:16:22,840 --> 01:16:23,840
+that way.
+
+3428
+01:16:23,840 --> 01:16:24,840
+So let's
+
+3429
+01:16:24,840 --> 01:16:25,840
+say you're
+
+3430
+01:16:25,840 --> 01:16:26,840
+launching a
+
+3431
+01:16:26,840 --> 01:16:27,840
+million
+
+3432
+01:16:27,840 --> 01:16:28,840
+elements,
+
+3433
+01:16:28,840 --> 01:16:29,840
+okay, of
+
+3434
+01:16:29,840 --> 01:16:30,840
+10, 24
+
+3435
+01:16:30,840 --> 01:16:31,840
+blocks each.
+
+3436
+01:16:31,840 --> 01:16:32,840
+How many
+
+3437
+01:16:32,840 --> 01:16:33,840
+blocks do
+
+3438
+01:16:33,840 --> 01:16:34,840
+you have?
+
+3439
+01:16:34,840 --> 01:16:35,840
+You have
+
+3440
+01:16:35,840 --> 01:16:36,840
+1,000
+
+3441
+01:16:36,840 --> 01:16:37,840
+blocks.
+
+3442
+01:16:37,840 --> 01:16:38,840
+Can your
+
+3443
+01:16:38,840 --> 01:16:39,840
+1,000 blocks
+
+3444
+01:16:39,840 --> 01:16:40,840
+fit on the
+
+3445
+01:16:40,840 --> 01:16:41,840
+GPU?
+
+3446
+01:16:41,840 --> 01:16:42,840
+Yeah, they
+
+3447
+01:16:42,840 --> 01:16:43,840
+probably can.
+
+3448
+01:16:43,840 --> 01:16:44,840
+Doesn't mean
+
+3449
+01:16:44,840 --> 01:16:45,840
+they're executing
+
+3450
+01:16:45,840 --> 01:16:46,840
+at the same
+
+3451
+01:16:46,840 --> 01:16:47,840
+time in the
+
+3452
+01:16:47,840 --> 01:16:48,840
+GPU.
+
+3453
+01:16:48,840 --> 01:16:49,840
+Probably not.
+
+3454
+01:16:49,840 --> 01:16:50,840
+Okay.
+
+3455
+01:16:50,840 --> 01:16:51,840
+Just because
+
+3456
+01:16:51,840 --> 01:16:52,840
+they can be
+
+3457
+01:16:52,840 --> 01:16:53,840
+launched at
+
+3458
+01:16:53,840 --> 01:16:54,840
+once doesn't
+
+3459
+01:16:54,840 --> 01:16:55,840
+mean they're
+
+3460
+01:16:55,840 --> 01:16:56,840
+executing at
+
+3461
+01:16:56,840 --> 01:16:57,840
+once.
+
+3462
+01:16:57,840 --> 01:16:58,840
+They can be
+
+3463
+01:16:58,840 --> 01:16:59,840
+hitting stalls.
+
+3464
+01:16:59,840 --> 01:17:00,840
+Remember how we
+
+3465
+01:17:00,840 --> 01:17:01,840
+saw the stalls
+
+3466
+01:17:01,840 --> 01:17:02,840
+chart?
+
+3467
+01:17:02,840 --> 01:17:03,840
+They can be
+
+3468
+01:17:03,840 --> 01:17:04,840
+hitting the
+
+3469
+01:17:04,840 --> 01:17:05,840
+stalls which
+
+3470
+01:17:05,840 --> 01:17:06,840
+doesn't
+
+3471
+01:17:06,840 --> 01:17:07,840
+mean they're
+
+3472
+01:17:07,840 --> 01:17:08,840
+executing at
+
+3473
+01:17:08,840 --> 01:17:09,840
+once.
+
+3474
+01:17:09,840 --> 01:17:10,840
+So if
+
+3475
+01:17:10,840 --> 01:17:11,840
+you have a
+
+3476
+01:17:11,840 --> 01:17:12,840
+warp that
+
+3477
+01:17:12,840 --> 01:17:13,840
+is not
+
+3478
+01:17:13,840 --> 01:17:14,840
+going to be
+
+3479
+01:17:14,840 --> 01:17:15,840
+doing any
+
+3480
+01:17:15,840 --> 01:17:16,840
+work, come
+
+3481
+01:17:16,840 --> 01:17:17,840
+in and fill
+
+3482
+01:17:17,840 --> 01:17:18,840
+it.
+
+3483
+01:17:18,840 --> 01:17:19,840
+It's just
+
+3484
+01:17:19,840 --> 01:17:20,840
+wasting our
+
+3485
+01:17:20,840 --> 01:17:21,840
+time.
+
+3486
+01:17:21,840 --> 01:17:22,840
+So that's
+
+3487
+01:17:22,840 --> 01:17:23,840
+why we
+
+3488
+01:17:23,840 --> 01:17:24,840
+will retire
+
+3489
+01:17:24,840 --> 01:17:25,840
+those
+
+3490
+01:17:25,840 --> 01:17:26,840
+warps and
+
+3491
+01:17:26,840 --> 01:17:27,840
+if we
+
+3492
+01:17:27,840 --> 01:17:28,840
+retire them
+
+3493
+01:17:28,840 --> 01:17:29,840
+we can
+
+3494
+01:17:29,840 --> 01:17:30,840
+bring in
+
+3495
+01:17:30,840 --> 01:17:31,840
+the warps
+
+3496
+01:17:31,840 --> 01:17:32,840
+that are
+
+3497
+01:17:32,840 --> 01:17:33,840
+going to
+
+3498
+01:17:33,840 --> 01:17:34,840
+be doing
+
+3499
+01:17:34,840 --> 01:17:35,840
+the work.
+
+3500
+01:17:35,840 --> 01:17:36,840
+You don't
+
+3501
+01:17:36,840 --> 01:17:37,840
+want people
+
+3502
+01:17:37,840 --> 01:17:38,840
+who don't
+
+3503
+01:17:38,840 --> 01:17:39,840
+have any
+
+3504
+01:17:39,840 --> 01:17:40,840
+work to be
+
+3505
+01:17:40,840 --> 01:17:41,840
+coming and
+
+3506
+01:17:41,840 --> 01:17:42,840
+sitting at
+
+3507
+01:17:42,840 --> 01:17:43,840
+the bank
+
+3508
+01:17:43,840 --> 01:17:44,840
+counter.
+
+3509
+01:17:44,840 --> 01:17:45,840
+You want
+
+3510
+01:17:45,840 --> 01:17:46,840
+people who
+
+3511
+01:17:46,840 --> 01:17:47,840
+are going to
+
+3512
+01:17:47,840 --> 01:17:48,840
+be withdrawing
+
+3513
+01:17:48,840 --> 01:17:49,840
+money and
+
+3514
+01:17:49,840 --> 01:17:50,840
+making
+
+3515
+01:17:50,840 --> 01:17:51,840
+transactions
+
+3516
+01:17:51,840 --> 01:17:52,840
+to be doing
+
+3517
+01:17:52,840 --> 01:17:53,840
+that.
+
+3518
+01:17:53,840 --> 01:17:54,840
+If you
+
+3519
+01:17:54,840 --> 01:17:55,840
+tell people
+
+3520
+01:17:55,840 --> 01:17:56,840
+to go
+
+3521
+01:17:56,840 --> 01:17:57,840
+away, you
+
+3522
+01:17:57,840 --> 01:17:58,840
+can take
+
+3523
+01:17:58,840 --> 01:17:59,840
+new people.
+
+3524
+01:17:59,840 --> 01:18:00,840
+If you
+
+3525
+01:18:00,840 --> 01:18:01,840
+just keep
+
+3526
+01:18:01,840 --> 01:18:02,840
+people filling
+
+3527
+01:18:02,840 --> 01:18:03,840
+the form
+
+3528
+01:18:03,840 --> 01:18:04,840
+and
+
+3529
+01:18:04,840 --> 01:18:05,840
+letting
+
+3530
+01:18:05,840 --> 01:18:06,840
+them
+
+3531
+01:18:06,840 --> 01:18:07,840
+do the
+
+3532
+01:18:07,840 --> 01:18:08,840
+work,
+
+3533
+01:18:08,840 --> 01:18:09,840
+you can
+
+3534
+01:18:09,840 --> 01:18:10,840
+do that.
+
+3535
+01:18:10,840 --> 01:18:11,840
+What
+
+3536
+01:18:11,840 --> 01:18:12,840
+are the
+
+3537
+01:18:12,840 --> 01:18:13,840
+questions?
+
+3538
+01:18:13,840 --> 01:18:14,840
+Everybody
+
+3539
+01:18:14,840 --> 01:18:15,840
+understand?
+
+3540
+01:18:15,840 --> 01:18:16,840
+No more
+
+3541
+01:18:16,840 --> 01:18:17,840
+questions?
+
+3542
+01:18:17,840 --> 01:18:18,840
+All right.
+
+3543
+01:18:18,840 --> 01:18:19,840
+So before
+
+3544
+01:18:19,840 --> 01:18:20,840
+we start
+
+3545
+01:18:20,840 --> 01:18:21,840
+memory
+
+3546
+01:18:21,840 --> 01:18:22,840
+coalescing I
+
+3547
+01:18:22,840 --> 01:18:23,840
+think we
+
+3548
+01:18:23,840 --> 01:18:24,840
+can take a
+
+3549
+01:18:24,840 --> 01:18:25,840
+break.
+
+3550
+01:18:25,840 --> 01:18:26,840
+Let's come
+
+3551
+01:18:26,840 --> 01:18:27,840
+back at
+
+3552
+01:18:27,840 --> 01:18:28,840
+6.40.
+
+3553
+01:18:28,840 --> 01:18:29,840
+6.40.
+
+3554
+01:18:29,840 --> 01:18:30,840
+Thank
+
+3555
+01:18:30,840 --> 01:18:31,840
+you.
+

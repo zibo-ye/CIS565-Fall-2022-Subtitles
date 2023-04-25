@@ -1,0 +1,7932 @@
+1
+00:00:00,000 --> 00:00:25,440
+Just fiddling around with the Zoom settings. I'm surprised you can actually live stream
+
+2
+00:00:25,440 --> 00:00:29,760
+to Twitch and YouTube from Zoom. There's a button that says go live to...
+
+3
+00:00:31,920 --> 00:00:34,800
+I know Zoom has a lot of features that like no one asked for
+
+4
+00:00:34,800 --> 00:00:36,880
+and then doesn't add the features that everyone asks for.
+
+5
+00:00:40,400 --> 00:00:40,880
+Very weird.
+
+6
+00:00:46,800 --> 00:00:49,920
+Yeah, I was doing speech translation actually, which was...
+
+7
+00:00:49,920 --> 00:00:53,200
+Did you get to work on something cool I guess?
+
+8
+00:00:53,200 --> 00:00:59,280
+Yeah, yeah, it was really cool. The problem is that like there was nobody else at Roblox
+
+9
+00:00:59,840 --> 00:01:04,000
+that knew anything about speech. So the first two months was me just reading a bunch of papers.
+
+10
+00:01:04,800 --> 00:01:05,920
+That's research.
+
+11
+00:01:05,920 --> 00:01:11,520
+I mean it is right, but then you know it's like if you have managers and mentors that like...
+
+12
+00:01:13,200 --> 00:01:15,200
+So there was no one to really guide you.
+
+13
+00:01:15,200 --> 00:01:22,000
+Right, exactly. And then like literally five hours ago, Facebook published like four or five
+
+14
+00:01:22,000 --> 00:01:25,760
+papers at the same time. They just dropped it all at once. And the stuff that they did
+
+15
+00:01:25,760 --> 00:01:29,680
+is basically what my intern project was, but much better. So like, okay, well...
+
+16
+00:01:41,680 --> 00:01:45,120
+It's funny because their like metaverse bet is a bet on research.
+
+17
+00:01:45,680 --> 00:01:50,320
+So while Facebook like as a company's software engineer is flailing,
+
+18
+00:01:50,320 --> 00:01:54,000
+the research team has never been better. It's honestly been incredible.
+
+19
+00:01:56,400 --> 00:01:58,480
+I mean like it's not a bad bet.
+
+20
+00:02:01,040 --> 00:02:04,800
+I think they can translate those research into startup.
+
+21
+00:02:06,080 --> 00:02:06,720
+Yeah, yeah, 100%.
+
+22
+00:02:09,200 --> 00:02:10,080
+So we'll have to see.
+
+23
+00:02:11,280 --> 00:02:12,560
+So do you think it'll go back?
+
+24
+00:02:13,120 --> 00:02:14,240
+Through roadblocks? Possibly.
+
+25
+00:02:16,320 --> 00:02:22,800
+It's hard to know at this point in the year, but they have been funding my PhD actually
+
+26
+00:02:23,520 --> 00:02:28,640
+because they want to continue the intern project. But it's been really hard to make progress on it
+
+27
+00:02:28,640 --> 00:02:32,080
+when taking a bunch of classes and giving talks and submitting papers for other things. So
+
+28
+00:02:32,880 --> 00:02:37,680
+I haven't done that much since I left internship. So I don't even know if they'll let me back
+
+29
+00:02:37,680 --> 00:02:42,640
+because they're not getting a good ROI for the first month of the semester.
+
+30
+00:02:46,720 --> 00:02:48,560
+I actually moved to the art museum.
+
+31
+00:02:58,960 --> 00:02:59,440
+That's nice.
+
+32
+00:03:01,040 --> 00:03:03,120
+You don't have to deal with the package room closing at 5 p.m.
+
+33
+00:03:03,840 --> 00:03:07,440
+Yeah, or like my window was too thin.
+
+34
+00:03:14,000 --> 00:03:15,840
+Don't even get me started on the fire alarm.
+
+35
+00:03:20,240 --> 00:03:23,760
+The problem is my commute is a lot longer. It's like a 40-minute walk.
+
+36
+00:03:28,480 --> 00:03:32,880
+That's another bad thing, which I'm only now starting to realize given that it's getting cold.
+
+37
+00:03:33,120 --> 00:03:39,440
+And the bus is nice when it was freezing.
+
+38
+00:04:34,080 --> 00:04:39,280
+As of the last two or three weeks, he's been showing up to the weekly meetings
+
+39
+00:04:39,840 --> 00:04:44,240
+where I present what I've done in the last week, which is intensely stressful.
+
+40
+00:04:45,840 --> 00:04:50,240
+I mean, it's a good pressure because it forces me to have something substantial each week,
+
+41
+00:04:50,240 --> 00:04:53,440
+but it's also a lot of pressure.
+
+42
+00:04:56,480 --> 00:04:58,960
+I didn't, but Roblox sent a lot of people to sit down.
+
+43
+00:04:59,280 --> 00:04:59,920
+I wish I'd gone.
+
+44
+00:05:02,240 --> 00:05:02,960
+Yeah, I heard it was.
+
+45
+00:05:05,200 --> 00:05:08,400
+They brought like 50 people to SIGGRAPH and only like 10 of them are researchers.
+
+46
+00:05:08,400 --> 00:05:09,760
+The rest of them are all software engineers.
+
+47
+00:05:13,440 --> 00:05:15,360
+My manager was saying something like,
+
+48
+00:05:15,360 --> 00:05:18,240
+are we sure it's a good idea to send so many people to SIGGRAPH?
+
+49
+00:05:18,240 --> 00:05:19,200
+Like, there's a lot of money.
+
+50
+00:05:23,840 --> 00:05:24,240
+It's fun.
+
+51
+00:05:28,960 --> 00:05:29,840
+That's not what that means.
+
+52
+00:05:33,360 --> 00:05:34,080
+It definitely isn't.
+
+53
+00:05:34,080 --> 00:05:37,680
+I love that because over the past 10 or 15 years,
+
+54
+00:05:37,680 --> 00:05:39,040
+I've got people coming in and they wanna wake me up
+
+55
+00:05:39,040 --> 00:05:39,760
+and come back.
+
+56
+00:05:41,040 --> 00:05:42,160
+But I don't wanna accompany them.
+
+57
+00:05:45,600 --> 00:05:48,800
+I feel like it's a privilege to have Robert and Russell
+
+58
+00:05:48,800 --> 00:05:49,120
+coming into work you know,
+
+59
+00:05:49,120 --> 00:05:51,440
+and paying attention to issues that we all want them to pay attention to.
+
+60
+00:05:51,440 --> 00:05:53,280
+And they're so kind.
+
+61
+00:05:53,280 --> 00:05:58,200
+They're aware that we passed
+
+62
+00:05:58,200 --> 00:05:58,640
+Biden guidelines in Washington.
+
+63
+00:05:58,640 --> 00:06:16,740
+We're gonna help them through that.
+
+64
+00:06:22,280 --> 00:06:23,020
+We're gonna help them,
+
+65
+00:06:23,020 --> 00:06:23,540
+Babe I think they're gonna kiss tonight.
+
+66
+00:06:23,540 --> 00:06:26,580
+She has a
+
+67
+00:06:26,820 --> 00:06:30,340
+Are you, you were giving the recitation for the, for the Vulcan assignment.
+
+68
+00:06:32,580 --> 00:06:37,380
+It's like October 19th. How, how fast is this class going nowadays?
+
+69
+00:06:38,180 --> 00:06:42,420
+It's, I mean, the assignment has already been, they're gonna release it in school.
+
+70
+00:06:42,420 --> 00:06:45,940
+Yeah, but like, I don't, isn't that assignment like five or six?
+
+71
+00:06:47,780 --> 00:06:48,500
+That's fast.
+
+72
+00:06:51,620 --> 00:06:53,540
+That's, that's fast.
+
+73
+00:06:53,620 --> 00:06:57,380
+I feel like this church is like, okay, I have a question.
+
+74
+00:06:57,380 --> 00:07:00,100
+Like, do we not have two weeks to do the wizard?
+
+75
+00:07:00,100 --> 00:07:05,060
+And like, I feel like, like, I appreciate the extra time, but like,
+
+76
+00:07:06,260 --> 00:07:12,580
+I feel like the Vulcan, whatever, or like, you know, whatever will take longer than one week to do.
+
+77
+00:07:13,540 --> 00:07:15,140
+You only have one week for the Vulcan assignment?
+
+78
+00:07:15,140 --> 00:07:16,020
+I've done this before.
+
+79
+00:07:16,820 --> 00:07:18,900
+Is this someone's credit card?
+
+80
+00:07:18,900 --> 00:07:20,260
+Oh, we're not doing this class.
+
+81
+00:07:20,260 --> 00:07:21,860
+Like, and it's not like the Easter.
+
+82
+00:07:22,820 --> 00:07:26,020
+Thanks for bringing this in. I'll, I'll try to find somebody to hand this to.
+
+83
+00:07:26,900 --> 00:07:29,700
+Okay. I don't know what this class is before here.
+
+84
+00:07:29,700 --> 00:07:31,860
+I don't know. Maybe it's physics or something, but yeah.
+
+85
+00:07:43,140 --> 00:07:45,540
+That would be a very good question to ask Shazan.
+
+86
+00:07:46,500 --> 00:07:50,580
+It's a very reasonable opinion though.
+
+87
+00:07:52,740 --> 00:07:52,980
+Okay.
+
+88
+00:07:56,500 --> 00:07:56,580
+Cool.
+
+89
+00:08:04,580 --> 00:08:04,900
+All right.
+
+90
+00:08:06,660 --> 00:08:06,900
+So.
+
+91
+00:08:10,660 --> 00:08:13,380
+No, no, I'm gonna, I'm gonna decide to start at some point.
+
+92
+00:08:13,380 --> 00:08:16,580
+I'm just giving people like a minute or two to get settled.
+
+93
+00:08:22,660 --> 00:08:27,940
+Okay, cool.
+
+94
+00:08:27,940 --> 00:08:29,700
+So hello everyone.
+
+95
+00:08:31,140 --> 00:08:31,860
+Did you miss me?
+
+96
+00:08:31,860 --> 00:08:32,260
+I don't know.
+
+97
+00:08:34,340 --> 00:08:38,500
+So yesterday's lecture, I realized looking back on it was really, really fast.
+
+98
+00:08:38,500 --> 00:08:41,940
+And I did not give people enough time for breaks, especially for people
+
+99
+00:08:41,940 --> 00:08:44,340
+that like haven't seen machine learning before.
+
+100
+00:08:44,340 --> 00:08:48,340
+I can imagine that that was approximately like a month and a half of course content
+
+101
+00:08:48,340 --> 00:08:49,140
+in like two hours.
+
+102
+00:08:50,020 --> 00:08:54,500
+So I'm making a pledge to myself to go a lot slower in this lecture
+
+103
+00:08:54,500 --> 00:08:55,860
+and then give people a lot more breaks.
+
+104
+00:08:56,500 --> 00:09:00,580
+And so hopefully that will help out alleviate some of the mental burden.
+
+105
+00:09:01,300 --> 00:09:05,540
+But yeah, this lecture is super exciting because it's a topic that really doesn't
+
+106
+00:09:05,540 --> 00:09:09,780
+get talked about a whole lot in machine learning classes in other areas,
+
+107
+00:09:09,780 --> 00:09:13,380
+both in the actual theory machine learning classes at Penn
+
+108
+00:09:13,380 --> 00:09:15,300
+and also the applied machine learning classes.
+
+109
+00:09:15,300 --> 00:09:18,660
+So like computer vision, computational linguistics and whatnot.
+
+110
+00:09:18,660 --> 00:09:20,580
+And that's how do you make machine learning fast?
+
+111
+00:09:21,540 --> 00:09:25,780
+And if you are attempting to go get an industry job writing GPU code,
+
+112
+00:09:25,780 --> 00:09:31,060
+I would argue that a lot of industry jobs are writing GPU code to do machine learning
+
+113
+00:09:31,700 --> 00:09:33,060
+as well as do graphics.
+
+114
+00:09:33,060 --> 00:09:34,180
+So I'm super excited.
+
+115
+00:09:34,740 --> 00:09:40,100
+I had a lot of help from friends at NVIDIA and other places in compiling
+
+116
+00:09:40,100 --> 00:09:41,620
+the stuff for this lecture.
+
+117
+00:09:41,620 --> 00:09:43,460
+So I'm excited to show it to you.
+
+118
+00:09:43,460 --> 00:09:43,960
+Okay.
+
+119
+00:09:44,980 --> 00:09:46,580
+So the topics we're going to cover today.
+
+120
+00:09:46,580 --> 00:09:49,300
+First, I'm going to start by quickly reviewing what I talked about on Monday,
+
+121
+00:09:49,300 --> 00:09:52,820
+which is just kind of like the groundworks that we can talk about this stuff,
+
+122
+00:09:52,820 --> 00:09:53,620
+which is the good stuff.
+
+123
+00:09:54,740 --> 00:09:57,620
+Then we're going to go into implementing a neural network in CUDA.
+
+124
+00:09:57,620 --> 00:10:01,300
+We're going to walk through the CUDA code for a very simple neural network example.
+
+125
+00:10:01,300 --> 00:10:05,380
+And I'll also provide the GitHub link so that you all can download it, run it,
+
+126
+00:10:06,180 --> 00:10:09,860
+verify to yourselves that it works and also look at the code in more detail.
+
+127
+00:10:10,820 --> 00:10:14,340
+Then we're going to talk about ways to speed up neural network inference.
+
+128
+00:10:14,340 --> 00:10:18,740
+So the optimizations you can make directly in your CUDA code to make neural networks faster.
+
+129
+00:10:18,740 --> 00:10:21,140
+And then also talk about kublas and cuDNN,
+
+130
+00:10:21,140 --> 00:10:25,380
+which are two really important libraries for making machine learning code much faster.
+
+131
+00:10:26,420 --> 00:10:30,180
+And then we'll go on to talk about things like PyTorch and TensorFlow,
+
+132
+00:10:30,180 --> 00:10:32,420
+which some of you may be familiar with.
+
+133
+00:10:32,420 --> 00:10:36,660
+They're the primary way to train and deploy neural networks.
+
+134
+00:10:37,380 --> 00:10:39,700
+And then I'll talk about TensorRT for a little bit.
+
+135
+00:10:41,140 --> 00:10:41,640
+Cool.
+
+136
+00:10:42,360 --> 00:10:46,280
+So let's review what we were talking about last time super quick.
+
+137
+00:10:46,920 --> 00:10:47,420
+Okay.
+
+138
+00:10:48,120 --> 00:10:52,200
+So like we said before, neural networks are just high dimensional functions.
+
+139
+00:10:52,200 --> 00:10:57,160
+They'll take an input vector, which would be a representation of some input.
+
+140
+00:10:57,160 --> 00:10:58,920
+Let's say in this case, it was handwritten digits,
+
+141
+00:10:58,920 --> 00:11:02,840
+but you can also do this for sentences, for videos, for whatever you want.
+
+142
+00:11:03,880 --> 00:11:06,520
+And then they pass it through a giant function,
+
+143
+00:11:06,520 --> 00:11:11,320
+which is parameterized by weights and biases that can have various different architectures.
+
+144
+00:11:11,320 --> 00:11:12,920
+And then it outputs a vector.
+
+145
+00:11:12,920 --> 00:11:14,680
+Sometimes this is classification.
+
+146
+00:11:14,680 --> 00:11:17,720
+So each of the points in the vector correspond to classes.
+
+147
+00:11:17,720 --> 00:11:21,160
+Sometimes this is a vector that is the same size as the input,
+
+148
+00:11:21,160 --> 00:11:23,160
+but denoised, so on and so forth.
+
+149
+00:11:23,160 --> 00:11:25,320
+You can have this be anything you want.
+
+150
+00:11:25,320 --> 00:11:26,680
+It's just a vector to a vector.
+
+151
+00:11:29,160 --> 00:11:32,440
+The cost or loss function is the function that tells us
+
+152
+00:11:32,440 --> 00:11:35,240
+how bad our network is doing for a given input.
+
+153
+00:11:35,240 --> 00:11:37,480
+And you can use a lot of different functions for this,
+
+154
+00:11:37,480 --> 00:11:39,480
+but a very common one is to do mean squared error.
+
+155
+00:11:40,040 --> 00:11:43,080
+We also talked about cross entropy loss for classification as well.
+
+156
+00:11:44,440 --> 00:11:47,480
+And what we want to do when we are training a neural network
+
+157
+00:11:48,280 --> 00:11:52,280
+is to try to minimize this cost function.
+
+158
+00:11:52,280 --> 00:11:55,320
+So to learn our parameters, we iteratively step in the direction
+
+159
+00:11:55,320 --> 00:11:57,800
+of the negative gradient of the cost function.
+
+160
+00:11:57,800 --> 00:12:02,760
+So the gradient is the direction of steepest ascent for a given function,
+
+161
+00:12:02,760 --> 00:12:07,560
+and we take the derivative with respect to all of the different parameters to get the gradient.
+
+162
+00:12:07,560 --> 00:12:09,400
+And then in order to minimize the cost function,
+
+163
+00:12:09,400 --> 00:12:11,800
+we just step in the direction of the gradient over and over again,
+
+164
+00:12:11,800 --> 00:12:13,480
+and then we find some minimum cost.
+
+165
+00:12:14,280 --> 00:12:14,780
+Cool.
+
+166
+00:12:15,560 --> 00:12:16,520
+Any questions so far?
+
+167
+00:12:17,240 --> 00:12:18,120
+This is all review.
+
+168
+00:12:21,000 --> 00:12:21,500
+Cool.
+
+169
+00:12:23,880 --> 00:12:26,200
+We calculate the gradient using backpropagation,
+
+170
+00:12:26,200 --> 00:12:27,960
+which is just derivative chain rule.
+
+171
+00:12:27,960 --> 00:12:32,840
+And so you apply the derivative with respect to each portion of the neural network
+
+172
+00:12:32,840 --> 00:12:34,760
+over and over again, and then just multiply backwards
+
+173
+00:12:34,760 --> 00:12:37,000
+to get the derivative for any one spot in the neural network.
+
+174
+00:12:38,200 --> 00:12:43,320
+And the small caveat is that for fully connected layers,
+
+175
+00:12:43,320 --> 00:12:45,720
+you have to sum over all of the activations of the previous layers.
+
+176
+00:12:46,920 --> 00:12:50,200
+And also, worth noting that all of these formulas change completely
+
+177
+00:12:50,200 --> 00:12:51,480
+when you change your architecture.
+
+178
+00:12:51,480 --> 00:12:55,240
+So these are the formulas for a fully connected linear layer.
+
+179
+00:12:55,880 --> 00:12:58,040
+But if you were trying to do a convolutional neural network,
+
+180
+00:12:58,040 --> 00:12:59,240
+these formulas would change.
+
+181
+00:12:59,240 --> 00:13:02,520
+The fundamental principle of applying the chain rule over and over again still holds.
+
+182
+00:13:04,200 --> 00:13:04,700
+Okay.
+
+183
+00:13:04,700 --> 00:13:09,260
+So things that we do to improve performance.
+
+184
+00:13:09,260 --> 00:13:10,380
+Add more depth.
+
+185
+00:13:10,380 --> 00:13:12,220
+More layers always works.
+
+186
+00:13:12,220 --> 00:13:14,780
+Almost always, but always.
+
+187
+00:13:15,900 --> 00:13:17,420
+And this is very expensive.
+
+188
+00:13:17,420 --> 00:13:20,620
+And the theory behind this is very unclear.
+
+189
+00:13:21,420 --> 00:13:23,580
+But it seems to be that the more layers you add,
+
+190
+00:13:23,580 --> 00:13:25,260
+the better the network learns to generalize
+
+191
+00:13:25,260 --> 00:13:28,140
+and map complicated functions and distributions.
+
+192
+00:13:31,500 --> 00:13:34,380
+When comparing probability distributions, we use cross-entropy loss.
+
+193
+00:13:34,380 --> 00:13:37,820
+You can use mean-squared error when doing other things like image denoising.
+
+194
+00:13:38,620 --> 00:13:39,260
+But yes.
+
+195
+00:13:39,260 --> 00:13:41,500
+AUDIENCE MEMBER 2
+
+196
+00:13:41,500 --> 00:13:44,220
+Does it change the type of inputs also?
+
+197
+00:13:44,220 --> 00:13:48,460
+Like, do you do what makes the input really...
+
+198
+00:13:48,460 --> 00:13:49,100
+Yeah, exactly.
+
+199
+00:13:49,100 --> 00:13:50,780
+So when you say number of inputs,
+
+200
+00:13:50,780 --> 00:13:53,900
+do you mean the size of the vector representation of each input?
+
+201
+00:13:53,900 --> 00:13:54,460
+Yeah, exactly.
+
+202
+00:13:54,460 --> 00:13:55,180
+And that would...
+
+203
+00:13:57,020 --> 00:14:00,540
+A larger input vector size means that you have more weights to learn.
+
+204
+00:14:01,660 --> 00:14:04,220
+However, it depends on the representation.
+
+205
+00:14:05,100 --> 00:14:07,980
+So if by making the input a larger size,
+
+206
+00:14:07,980 --> 00:14:09,740
+you make the function easier to learn,
+
+207
+00:14:09,740 --> 00:14:11,500
+like you make it a more simple function,
+
+208
+00:14:11,500 --> 00:14:13,980
+then yeah, absolutely, it would make that a lot easier to learn.
+
+209
+00:14:17,580 --> 00:14:18,860
+Right, because if you're doing some...
+
+210
+00:14:20,060 --> 00:14:20,620
+Yeah, yeah, yeah.
+
+211
+00:14:20,620 --> 00:14:21,120
+Right.
+
+212
+00:14:23,580 --> 00:14:24,140
+Cool.
+
+213
+00:14:24,140 --> 00:14:27,980
+And just as a reminder, cross-entropy loss is p,
+
+214
+00:14:27,980 --> 00:14:31,100
+which in our cases would be like the correct answer,
+
+215
+00:14:31,100 --> 00:14:33,820
+times log of q, which is our predicted answer.
+
+216
+00:14:34,940 --> 00:14:37,180
+AUDIENCE MEMBER 3
+
+217
+00:14:37,180 --> 00:14:38,700
+We use ReLU instead of sigmoid.
+
+218
+00:14:38,700 --> 00:14:39,740
+We talked about this.
+
+219
+00:14:39,740 --> 00:14:41,020
+Why is this important?
+
+220
+00:14:42,060 --> 00:14:43,260
+People that remember from one day?
+
+221
+00:14:46,780 --> 00:14:47,340
+Yeah, exactly.
+
+222
+00:14:47,340 --> 00:14:48,380
+The vanishing gradient problem.
+
+223
+00:14:48,380 --> 00:14:51,980
+With sigmoid, if you have very high activations going into sigmoid,
+
+224
+00:14:51,980 --> 00:14:53,980
+the gradient becomes very, very small.
+
+225
+00:14:53,980 --> 00:14:56,940
+And this is a really big problem if you have random initializations
+
+226
+00:14:56,940 --> 00:14:59,820
+because you might randomly initialize to some point
+
+227
+00:14:59,820 --> 00:15:01,020
+and then the gradient is very small.
+
+228
+00:15:01,020 --> 00:15:01,820
+So it's hard to come back.
+
+229
+00:15:01,980 --> 00:15:02,480
+Mm-hmm.
+
+230
+00:15:03,980 --> 00:15:04,480
+Cool.
+
+231
+00:15:07,420 --> 00:15:08,860
+Instead of using vanilla gradient descent,
+
+232
+00:15:08,860 --> 00:15:11,420
+you can use momentum or the more common option,
+
+233
+00:15:11,420 --> 00:15:12,540
+which is adaptive moment.
+
+234
+00:15:13,500 --> 00:15:15,260
+And don't forget to pick a good learning rate.
+
+235
+00:15:15,260 --> 00:15:16,940
+Just because you use adaptive moment
+
+236
+00:15:16,940 --> 00:15:19,420
+doesn't mean you don't have a learning rate to tune.
+
+237
+00:15:19,420 --> 00:15:22,300
+Like these beta parameters are hyperparameters.
+
+238
+00:15:22,300 --> 00:15:23,340
+So they're just like the learning rate.
+
+239
+00:15:23,340 --> 00:15:25,180
+And because they're included in gradient descent,
+
+240
+00:15:25,180 --> 00:15:27,500
+you can't learn them and you have to just choose them.
+
+241
+00:15:27,500 --> 00:15:30,540
+So sweep over values, find a good learning rate,
+
+242
+00:15:30,540 --> 00:15:31,740
+and then you can do it.
+
+243
+00:15:33,420 --> 00:15:33,920
+Cool.
+
+244
+00:15:35,900 --> 00:15:36,860
+When dealing with images,
+
+245
+00:15:36,860 --> 00:15:39,980
+we want to use convolutional layers and max pooling layers.
+
+246
+00:15:39,980 --> 00:15:41,180
+The reason why we do this
+
+247
+00:15:41,980 --> 00:15:44,940
+is because we want to reduce the number of trainable parameters
+
+248
+00:15:44,940 --> 00:15:47,260
+so that we can reduce the amount of time it takes to train the network
+
+249
+00:15:47,260 --> 00:15:49,180
+and also the amount of data it takes to train the network.
+
+250
+00:15:49,820 --> 00:15:51,180
+The way that convolutional layers work
+
+251
+00:15:51,180 --> 00:15:52,940
+is that we run a filter over the image
+
+252
+00:15:52,940 --> 00:15:54,780
+and we only learn the weights of the filter
+
+253
+00:15:54,780 --> 00:15:56,620
+rather than learning a full linear layer.
+
+254
+00:15:57,580 --> 00:16:00,780
+And both of these are taking advantage of translational invariance,
+
+255
+00:16:00,780 --> 00:16:03,900
+aka an object anywhere in the image is the same object.
+
+256
+00:16:03,900 --> 00:16:06,380
+So learning a filter allows you to apply the same filter
+
+257
+00:16:06,380 --> 00:16:08,060
+no matter where the object is in the image.
+
+258
+00:16:08,620 --> 00:16:09,120
+Cool.
+
+259
+00:16:10,940 --> 00:16:13,820
+And then this is just the diagram from before of AlexNet,
+
+260
+00:16:13,820 --> 00:16:17,340
+which is what many people would consider to be
+
+261
+00:16:17,340 --> 00:16:19,660
+the beginning of like the deep learning revolution
+
+262
+00:16:19,660 --> 00:16:25,180
+where Alex implemented this network on the GPU in CUDA
+
+263
+00:16:25,260 --> 00:16:28,860
+and showed that you can make networks with 9 or 10 layers
+
+264
+00:16:28,860 --> 00:16:30,300
+train in a reasonable amount of time
+
+265
+00:16:30,300 --> 00:16:32,620
+and then get incredible performance improvements.
+
+266
+00:16:32,620 --> 00:16:35,660
+And we're going to talk about AlexNet more in this lecture in more detail.
+
+267
+00:16:37,260 --> 00:16:37,760
+Cool.
+
+268
+00:16:38,940 --> 00:16:40,460
+And also just to be very clear,
+
+269
+00:16:40,460 --> 00:16:44,220
+convolutional neural networks do not have to be only convolutions.
+
+270
+00:16:44,220 --> 00:16:47,580
+It's very typical to have some convolutional layers.
+
+271
+00:16:47,580 --> 00:16:49,180
+And then once you get towards the end,
+
+272
+00:16:49,180 --> 00:16:50,620
+you have these dense layers.
+
+273
+00:16:50,620 --> 00:16:51,420
+These are linear layers.
+
+274
+00:16:51,420 --> 00:16:53,660
+There's a lot of names for this.
+
+275
+00:16:53,660 --> 00:16:55,500
+But you have these dense layers at the end
+
+276
+00:16:55,500 --> 00:16:57,180
+where after you take all of the convolutions,
+
+277
+00:16:57,180 --> 00:17:01,180
+then you can start to use the fully connected linear layers at the end.
+
+278
+00:17:02,460 --> 00:17:02,960
+Okay.
+
+279
+00:17:08,140 --> 00:17:09,420
+It's the same exact thing.
+
+280
+00:17:09,420 --> 00:17:10,780
+Yeah, they're just different names for it.
+
+281
+00:17:11,740 --> 00:17:14,300
+Linear layers are dense because they have,
+
+282
+00:17:14,860 --> 00:17:17,420
+like we said earlier, n times k weights per layer.
+
+283
+00:17:17,420 --> 00:17:18,860
+So some people call them dense layers
+
+284
+00:17:18,860 --> 00:17:20,380
+because they're densely connected
+
+285
+00:17:20,380 --> 00:17:22,220
+to distinguish it from convolution layers,
+
+286
+00:17:22,220 --> 00:17:24,060
+which aren't as densely connected.
+
+287
+00:17:24,620 --> 00:17:25,500
+Same thing as linear.
+
+288
+00:17:27,260 --> 00:17:29,740
+Well, what about if you drop out?
+
+289
+00:17:30,540 --> 00:17:32,940
+Would they still be called dense?
+
+290
+00:17:32,940 --> 00:17:34,300
+They would still be called dense,
+
+291
+00:17:34,940 --> 00:17:36,300
+partially because dropout only...
+
+292
+00:17:37,100 --> 00:17:40,700
+The percentage of times that you drop out a weight
+
+293
+00:17:40,700 --> 00:17:42,620
+is going to be less than 10% usually.
+
+294
+00:17:43,660 --> 00:17:45,820
+Sometimes people would put it more towards 20.
+
+295
+00:17:45,820 --> 00:17:49,820
+But even then, a 20% decrease in n times k is still...
+
+296
+00:17:49,820 --> 00:17:51,900
+There's still a lot of weights, way more than convolution.
+
+297
+00:17:53,100 --> 00:17:54,620
+But yeah, I don't love the name,
+
+298
+00:17:54,620 --> 00:17:56,460
+which is why I haven't been calling it dense layers.
+
+299
+00:17:57,180 --> 00:17:59,500
+But yeah, they're the same as linear layers.
+
+300
+00:18:01,980 --> 00:18:02,780
+Cool.
+
+301
+00:18:02,780 --> 00:18:03,280
+All right.
+
+302
+00:18:05,740 --> 00:18:09,420
+Convolutional filters at the beginning of the network
+
+303
+00:18:09,420 --> 00:18:13,020
+will learn very low level filters.
+
+304
+00:18:13,020 --> 00:18:15,820
+They're just sort of horizontal lines or vertical lines.
+
+305
+00:18:15,820 --> 00:18:17,900
+But as you get further and further into the network,
+
+306
+00:18:17,900 --> 00:18:19,260
+the later convolutional filters
+
+307
+00:18:19,260 --> 00:18:21,420
+will be learning really high level things.
+
+308
+00:18:21,420 --> 00:18:22,940
+So down at the bottom here,
+
+309
+00:18:22,940 --> 00:18:24,220
+you see something that looks vaguely
+
+310
+00:18:24,220 --> 00:18:26,140
+like a pelican or something.
+
+311
+00:18:26,940 --> 00:18:28,860
+This would clearly be very good at detecting
+
+312
+00:18:28,860 --> 00:18:30,380
+whether or not there was a pelican in an image.
+
+313
+00:18:30,940 --> 00:18:33,900
+Because if that filter output something really, really high,
+
+314
+00:18:33,900 --> 00:18:35,980
+you can have very high confidence that there's a pelican.
+
+315
+00:18:37,260 --> 00:18:37,760
+Cool.
+
+316
+00:18:40,060 --> 00:18:41,900
+Oh, and one more thing to mention, by the way, about this.
+
+317
+00:18:42,700 --> 00:18:44,860
+This completely depends on the data
+
+318
+00:18:44,860 --> 00:18:46,220
+that you're training the neural network for.
+
+319
+00:18:47,180 --> 00:18:52,060
+So these filters, the reason why you would learn something
+
+320
+00:18:52,060 --> 00:18:54,860
+like this filter for the pelican looking bird
+
+321
+00:18:54,860 --> 00:18:58,460
+is because you're training the network to classify birds.
+
+322
+00:18:59,020 --> 00:19:00,540
+If you were training the network to do something else,
+
+323
+00:19:00,540 --> 00:19:02,380
+like denoising, you would learn a completely different set
+
+324
+00:19:02,380 --> 00:19:03,260
+of filters.
+
+325
+00:19:03,260 --> 00:19:05,740
+And even if you're doing the same neural network
+
+326
+00:19:05,740 --> 00:19:07,420
+more than once on the same set of data,
+
+327
+00:19:07,420 --> 00:19:10,460
+your initialization will change what these filters end up being.
+
+328
+00:19:10,460 --> 00:19:13,180
+It's just because there's not one local minima.
+
+329
+00:19:13,180 --> 00:19:14,540
+So these filters are not always going
+
+330
+00:19:14,540 --> 00:19:15,900
+to look something like this.
+
+331
+00:19:15,980 --> 00:19:18,540
+But generally, the trend is that they get higher and higher
+
+332
+00:19:18,540 --> 00:19:19,500
+level as the network goes.
+
+333
+00:19:24,780 --> 00:19:25,260
+Yeah, yeah, yeah.
+
+334
+00:19:25,260 --> 00:19:26,220
+That's a great question.
+
+335
+00:19:26,220 --> 00:19:28,460
+So these images are generated.
+
+336
+00:19:28,460 --> 00:19:30,060
+I should have mentioned this earlier.
+
+337
+00:19:30,060 --> 00:19:31,340
+Apologies if I did not.
+
+338
+00:19:32,380 --> 00:19:35,580
+These images are generated by finding
+
+339
+00:19:35,580 --> 00:19:38,700
+the input that would maximally activate a given filter.
+
+340
+00:19:39,340 --> 00:19:41,660
+So if I looked at the filter weights,
+
+341
+00:19:42,540 --> 00:19:44,940
+I say, what image could I generate
+
+342
+00:19:45,020 --> 00:19:46,700
+that would maximally activate this filter?
+
+343
+00:19:46,700 --> 00:19:48,860
+And there are also other visualization techniques
+
+344
+00:19:48,860 --> 00:19:52,460
+that they use to make it so that it looks vaguely
+
+345
+00:19:52,460 --> 00:19:54,620
+like, for example, the gray outlines.
+
+346
+00:19:54,620 --> 00:19:56,940
+Like if the weight is under a certain amount,
+
+347
+00:19:56,940 --> 00:19:57,740
+just gray it out.
+
+348
+00:19:57,740 --> 00:19:59,500
+And so that makes the picture look prettier.
+
+349
+00:19:59,500 --> 00:20:02,700
+But generally speaking, it's whatever maximally
+
+350
+00:20:02,700 --> 00:20:03,980
+activates a given filter.
+
+351
+00:20:07,580 --> 00:20:08,080
+OK.
+
+352
+00:20:09,660 --> 00:20:11,180
+There are lots of different architectures.
+
+353
+00:20:11,180 --> 00:20:12,460
+I won't go into detail of these.
+
+354
+00:20:12,460 --> 00:20:15,820
+But please send me an email or come up to me after class
+
+355
+00:20:15,820 --> 00:20:17,260
+if you're curious of any of these.
+
+356
+00:20:19,820 --> 00:20:20,320
+OK.
+
+357
+00:20:20,780 --> 00:20:24,060
+Final thing is very important for final projects
+
+358
+00:20:24,060 --> 00:20:28,220
+is that you can learn a CNN for many useful image tasks.
+
+359
+00:20:28,220 --> 00:20:30,620
+So denoising can be learned with a CNN.
+
+360
+00:20:31,420 --> 00:20:33,500
+Resolution upscaling can be learned with a CNN.
+
+361
+00:20:33,500 --> 00:20:35,820
+And frame interpolation can be learned with a CNN.
+
+362
+00:20:37,180 --> 00:20:38,380
+And the paper links are here.
+
+363
+00:20:38,380 --> 00:20:40,700
+And I'll post the slides later so that you can check it out.
+
+364
+00:20:42,540 --> 00:20:43,020
+All right.
+
+365
+00:20:43,740 --> 00:20:45,180
+So now let's get on to the good stuff.
+
+366
+00:20:45,180 --> 00:20:49,180
+So how do we actually implement a neural network?
+
+367
+00:20:49,180 --> 00:20:51,340
+It's great to talk about this in general terms.
+
+368
+00:20:51,340 --> 00:20:56,220
+But if I had a blank terminal or a blank VS Code file,
+
+369
+00:20:56,220 --> 00:20:57,180
+what would I actually write?
+
+370
+00:20:57,180 --> 00:20:58,300
+How would I implement this?
+
+371
+00:20:58,300 --> 00:20:59,260
+And how do I make it fast?
+
+372
+00:20:59,260 --> 00:21:02,380
+How do I make it take maximum advantage of GPU parallelism?
+
+373
+00:21:04,380 --> 00:21:04,860
+OK.
+
+374
+00:21:04,860 --> 00:21:06,460
+So first off, let's define some tasks
+
+375
+00:21:06,460 --> 00:21:07,580
+that we're going to try to solve.
+
+376
+00:21:07,580 --> 00:21:09,660
+I'm going to keep it super duper simple, even more simple
+
+377
+00:21:09,660 --> 00:21:10,620
+than handwritten digits.
+
+378
+00:21:10,860 --> 00:21:13,980
+We're going to try to write a neural network that
+
+379
+00:21:13,980 --> 00:21:17,900
+will learn the task of determining which coordinate
+
+380
+00:21:18,540 --> 00:21:20,620
+a point is on a 2D plane.
+
+381
+00:21:20,620 --> 00:21:22,380
+So it's not just which coordinate,
+
+382
+00:21:22,380 --> 00:21:25,020
+but which diagonal set of quadrants.
+
+383
+00:21:25,740 --> 00:21:28,380
+So whether or not a point is in the first and third quadrant
+
+384
+00:21:28,380 --> 00:21:29,820
+or in the second and fourth quadrant.
+
+385
+00:21:31,500 --> 00:21:34,460
+So first things first, what is our input representation
+
+386
+00:21:34,460 --> 00:21:36,140
+for a point in the 2D plane?
+
+387
+00:21:38,700 --> 00:21:39,180
+Yeah, exactly.
+
+388
+00:21:39,180 --> 00:21:40,060
+So it would be a tuple.
+
+389
+00:21:40,060 --> 00:21:42,220
+You have the x-coordinate and y-coordinate.
+
+390
+00:21:42,220 --> 00:21:45,020
+You can think of this as a 1 by 2 column vector
+
+391
+00:21:45,020 --> 00:21:45,900
+if you really want to.
+
+392
+00:21:46,860 --> 00:21:48,700
+But yeah, it's just x and y-coordinate.
+
+393
+00:21:48,700 --> 00:21:50,060
+And then what's our output look like?
+
+394
+00:21:55,580 --> 00:21:57,180
+Yeah, just one value.
+
+395
+00:21:57,980 --> 00:22:00,060
+And since we're doing binary classification,
+
+396
+00:22:00,060 --> 00:22:01,980
+that would be 0 or 1.
+
+397
+00:22:01,980 --> 00:22:03,900
+And we can arbitrarily choose that 1
+
+398
+00:22:03,900 --> 00:22:06,460
+means first and third quadrant.
+
+399
+00:22:06,460 --> 00:22:06,940
+I should say.
+
+400
+00:22:08,140 --> 00:22:11,660
+So we can pretty easily write a function ourselves to do this.
+
+401
+00:22:12,860 --> 00:22:14,780
+It's just a couple of if statements.
+
+402
+00:22:14,780 --> 00:22:19,420
+If the point is both positive or both negative, give 1.
+
+403
+00:22:19,420 --> 00:22:21,900
+Otherwise, if one of them is positive
+
+404
+00:22:21,900 --> 00:22:23,740
+and the other is negative, give 0.
+
+405
+00:22:24,780 --> 00:22:30,300
+But let's think of a function that would solve this task.
+
+406
+00:22:31,180 --> 00:22:35,740
+So what I mean by a function is like function notation.
+
+407
+00:22:35,740 --> 00:22:39,820
+So f of x1, x2 equals some implementation.
+
+408
+00:22:39,820 --> 00:22:42,860
+And then that function would output either 0 or 1
+
+409
+00:22:42,860 --> 00:22:43,740
+for these points.
+
+410
+00:22:44,620 --> 00:22:48,060
+OK, so importantly, could I write that function?
+
+411
+00:22:48,060 --> 00:22:49,900
+I'm going to slightly write on the board here.
+
+412
+00:22:49,900 --> 00:22:51,900
+Can I write this function in the form?
+
+413
+00:22:57,900 --> 00:22:59,980
+I'm running out of space because there's always something.
+
+414
+00:23:00,460 --> 00:23:02,700
+So for those of you who can't see my tiny handwriting,
+
+415
+00:23:03,900 --> 00:23:06,700
+could you write this function in terms of a linear combination
+
+416
+00:23:06,700 --> 00:23:07,580
+of the input points?
+
+417
+00:23:07,580 --> 00:23:11,740
+So weight 1 times x1 plus weight 2 times x2 plus a bias term,
+
+418
+00:23:11,740 --> 00:23:14,540
+a.k.a. what I'm asking is, is this actually a linear function?
+
+419
+00:23:14,540 --> 00:23:15,020
+Is this?
+
+420
+00:23:30,460 --> 00:23:36,140
+Can you give me the weights for it?
+
+421
+00:23:37,420 --> 00:23:40,220
+OK, it's not easy.
+
+422
+00:23:40,220 --> 00:23:42,140
+This is not a straightforward question.
+
+423
+00:23:42,140 --> 00:23:46,620
+This is actually a difficult one, right?
+
+424
+00:23:46,620 --> 00:23:49,980
+Because it's hard to be confident in a no answer
+
+425
+00:23:50,620 --> 00:23:54,780
+because there could be a set of weights that does this.
+
+426
+00:23:54,780 --> 00:23:56,540
+And maybe you just haven't thought of it yet.
+
+427
+00:23:56,700 --> 00:23:58,700
+I will spoil the answer in a bit.
+
+428
+00:24:05,420 --> 00:24:11,020
+One way to know whether or not a task is a linear function
+
+429
+00:24:11,020 --> 00:24:12,460
+is whether or not you can actually
+
+430
+00:24:12,460 --> 00:24:16,060
+draw a line that can separate two points.
+
+431
+00:24:16,940 --> 00:24:18,620
+Because if you can draw a line, then you
+
+432
+00:24:18,620 --> 00:24:20,860
+can say all points on one side of this line get 1,
+
+433
+00:24:20,860 --> 00:24:23,580
+and all points on the other side of this line get 0.
+
+434
+00:24:23,580 --> 00:24:25,820
+And then you can make that line a linear function.
+
+435
+00:24:27,260 --> 00:24:29,980
+Be positive for points that are over it and negative otherwise.
+
+436
+00:24:30,620 --> 00:24:33,820
+And that's pretty easily writable as an equation.
+
+437
+00:24:34,860 --> 00:24:38,460
+This is actually a very famous example of a function that
+
+438
+00:24:38,460 --> 00:24:40,780
+is very simple but non-linear.
+
+439
+00:24:40,780 --> 00:24:43,660
+And so back in the 50s and 60s, when people started learning
+
+440
+00:24:43,660 --> 00:24:46,380
+neural networks, all of the neural networks had one layer.
+
+441
+00:24:46,380 --> 00:24:48,140
+And they did not have any activation functions.
+
+442
+00:24:48,860 --> 00:24:52,140
+But then the skeptics of machine learning,
+
+443
+00:24:52,140 --> 00:24:54,220
+which at the time this was just called the perceptron,
+
+444
+00:24:54,220 --> 00:24:57,180
+gave this example and say, you can't learn this function,
+
+445
+00:24:57,900 --> 00:25:00,460
+as simple of a function as this, because it's non-linear,
+
+446
+00:25:00,460 --> 00:25:02,300
+and you have only linear layers.
+
+447
+00:25:02,300 --> 00:25:04,700
+This is actually the XOR function.
+
+448
+00:25:06,060 --> 00:25:08,860
+So whether or not both inputs are positive or both negative
+
+449
+00:25:09,500 --> 00:25:12,540
+gives 1, and then the opposite gives 0.
+
+450
+00:25:12,540 --> 00:25:18,460
+If this is 0, you need 2 times 2 divided by 2.
+
+451
+00:25:18,460 --> 00:25:18,860
+Exactly.
+
+452
+00:25:20,220 --> 00:25:22,060
+So this is a non-linear function.
+
+453
+00:25:22,060 --> 00:25:25,180
+And so the smallest neural network that could feasibly
+
+454
+00:25:25,180 --> 00:25:26,540
+learn this would be two layers.
+
+455
+00:25:27,340 --> 00:25:29,500
+Because if we had only one layer, we can only learn linear functions.
+
+456
+00:25:30,860 --> 00:25:31,980
+OK, everyone clear?
+
+457
+00:25:32,700 --> 00:25:33,740
+So that's what we're going to do.
+
+458
+00:25:36,060 --> 00:25:39,420
+So we're going to implement the smallest neural network
+
+459
+00:25:39,420 --> 00:25:40,460
+that could learn this function.
+
+460
+00:25:41,420 --> 00:25:43,580
+And we're going to walk through an implementation of this
+
+461
+00:25:43,580 --> 00:25:45,020
+in CUDA to do this task.
+
+462
+00:25:45,660 --> 00:25:48,540
+So our loss function here will be binary cross-entropy loss,
+
+463
+00:25:49,020 --> 00:25:54,220
+where we have y log y plus 1 minus y log 1 minus y,
+
+464
+00:25:54,220 --> 00:25:57,980
+y being the confidence in the probability of the class.
+
+465
+00:25:58,940 --> 00:26:03,020
+So if I have 90% probability of it being output 1,
+
+466
+00:26:03,020 --> 00:26:08,300
+then we have 0.9 log 0.9 plus 1 minus 0.9,
+
+467
+00:26:08,300 --> 00:26:10,220
+which is the probability of the opposite class.
+
+468
+00:26:12,700 --> 00:26:14,940
+And then our network architecture is going to look like this.
+
+469
+00:26:14,940 --> 00:26:17,820
+We have linear, ReLU as our non-linearity,
+
+470
+00:26:17,820 --> 00:26:19,260
+and then linear, and then sigmoid,
+
+471
+00:26:19,260 --> 00:26:21,980
+which functions identically to softmax in the binary case.
+
+472
+00:26:33,100 --> 00:26:39,980
+Yeah, so this sigmoid here, it's not acting as our non-linearity.
+
+473
+00:26:39,980 --> 00:26:41,900
+It's acting as basically softmax.
+
+474
+00:26:42,860 --> 00:26:45,420
+So instead of doing softmax, we're doing sigmoid.
+
+475
+00:26:45,420 --> 00:26:47,900
+I would almost forget that sigmoid is here.
+
+476
+00:26:47,900 --> 00:26:50,060
+We're going to actually go into the implementation.
+
+477
+00:26:50,060 --> 00:26:53,180
+But the non-linearity we are using is ReLU
+
+478
+00:26:53,180 --> 00:26:55,180
+for the reasons that I talked about yesterday.
+
+479
+00:26:59,180 --> 00:27:00,220
+Cool, all right.
+
+480
+00:27:01,900 --> 00:27:03,580
+So how will this network actually work?
+
+481
+00:27:03,580 --> 00:27:05,580
+First off, I think it's really important to start out,
+
+482
+00:27:05,580 --> 00:27:08,540
+before we get into the code, to talk about the fact
+
+483
+00:27:08,540 --> 00:27:11,260
+that we're going to be passing all of our inputs in in batches.
+
+484
+00:27:12,060 --> 00:27:14,940
+So before I was talking about, we did mini-batch stochastic gradient descent,
+
+485
+00:27:14,940 --> 00:27:20,060
+where we passed a batch of examples through the neural network in parallel,
+
+486
+00:27:20,060 --> 00:27:21,980
+and then computed the gradient for all of those examples,
+
+487
+00:27:21,980 --> 00:27:25,660
+and then averaged over all of them to get the actual gradient that we would apply.
+
+488
+00:27:27,100 --> 00:27:30,300
+In this code, everything is going to be in terms of batches.
+
+489
+00:27:30,300 --> 00:27:34,540
+And so if our batch is size m, what is the dimensionality
+
+490
+00:27:34,540 --> 00:27:38,460
+of the input we're going to get to our neural network?
+
+491
+00:27:38,460 --> 00:27:42,220
+So one point, a reminder, is just some tuple.
+
+492
+00:27:42,220 --> 00:27:50,700
+And if we had m examples in a batch, the dimensions of the input would be,
+
+493
+00:27:51,820 --> 00:27:54,540
+yeah, it is 2m, but it's like 2 by m.
+
+494
+00:27:54,540 --> 00:27:55,340
+Yeah, exactly.
+
+495
+00:27:56,380 --> 00:27:57,340
+And so this is a matrix.
+
+496
+00:27:57,340 --> 00:28:02,540
+So when you see things like the input value being represented as a matrix,
+
+497
+00:28:03,180 --> 00:28:04,460
+don't get confused.
+
+498
+00:28:04,460 --> 00:28:08,140
+It is still a vector, but it's a matrix of many vectors,
+
+499
+00:28:08,140 --> 00:28:09,260
+because we're doing it all batched.
+
+500
+00:28:12,460 --> 00:28:14,620
+What we're going to do is we're going to pass the input through our network
+
+501
+00:28:14,620 --> 00:28:16,140
+to get m different predictions.
+
+502
+00:28:16,140 --> 00:28:18,540
+We're going to compute the loss for all of those m examples,
+
+503
+00:28:18,540 --> 00:28:21,260
+and then we're going to compute the gradient and average them.
+
+504
+00:28:21,260 --> 00:28:23,020
+And then we'll update the weights and biases accordingly.
+
+505
+00:28:24,540 --> 00:28:28,220
+OK, so what classes would we want to implement in order to do this?
+
+506
+00:28:28,220 --> 00:28:30,140
+The first thing is we have a matrix class.
+
+507
+00:28:30,140 --> 00:28:35,900
+And this is very useful, because you can save the weights of the matrix,
+
+508
+00:28:35,900 --> 00:28:37,900
+and you can also save the gradients.
+
+509
+00:28:37,900 --> 00:28:40,060
+And then you can have a function to apply the gradients.
+
+510
+00:28:40,060 --> 00:28:44,460
+You can also have functions to copy them from host to device and device to host.
+
+511
+00:28:44,460 --> 00:28:46,780
+Also good for memory management, all that good stuff.
+
+512
+00:28:47,900 --> 00:28:50,860
+We also have to implement the three layers, so sigmoid, ReLU, and linear.
+
+513
+00:28:51,500 --> 00:28:55,100
+Our cost function, and then we have some parent class for the whole neural network
+
+514
+00:28:55,100 --> 00:28:57,980
+that will implement a dot train function or something.
+
+515
+00:28:59,260 --> 00:28:59,760
+Cool.
+
+516
+00:29:01,020 --> 00:29:03,420
+Why are we making classes, though, for all of these?
+
+517
+00:29:03,420 --> 00:29:07,260
+Especially something like, I don't know, a sigmoid activation function.
+
+518
+00:29:07,260 --> 00:29:11,420
+Couldn't you just apply the sigmoid function without having to make a whole class for it?
+
+519
+00:29:13,740 --> 00:29:15,180
+This is a difficult question, though.
+
+520
+00:29:23,900 --> 00:29:29,180
+It's not just that we're happy and we want to make everything a class, because it's pretty.
+
+521
+00:29:38,220 --> 00:29:38,940
+Any thoughts?
+
+522
+00:29:43,260 --> 00:29:50,380
+Yeah, so the reason why we want to make classes for these is because when we pass things through
+
+523
+00:29:50,380 --> 00:29:56,700
+the network in the forward pass, we want to remember what the activations were for all
+
+524
+00:29:56,700 --> 00:30:00,380
+of the different neurons on the forward pass, so that when we go to compute the gradient,
+
+525
+00:30:01,340 --> 00:30:03,580
+we know what we're actually taking the derivative of.
+
+526
+00:30:03,580 --> 00:30:05,340
+So we can evaluate the actual value.
+
+527
+00:30:06,300 --> 00:30:11,020
+And so all of this allows us to be stateful about our sigmoid function,
+
+528
+00:30:11,020 --> 00:30:13,820
+so we can remember what the input was and what the output was,
+
+529
+00:30:13,820 --> 00:30:15,420
+as well as for linear layers, of course.
+
+530
+00:30:16,540 --> 00:30:19,980
+Of course, we have to save the weights and biases for the linear layer, but also remember
+
+531
+00:30:19,980 --> 00:30:23,900
+what the input and the output was to the linear layer, so that when we go to take the derivative,
+
+532
+00:30:23,900 --> 00:30:24,540
+we can remember.
+
+533
+00:30:25,180 --> 00:30:26,060
+Cool, all right.
+
+534
+00:30:27,980 --> 00:30:29,660
+So we're now going to step through the CUDA code.
+
+535
+00:30:29,660 --> 00:30:33,660
+It's not important to understand every single line of this code.
+
+536
+00:30:33,660 --> 00:30:37,260
+I'm going to be flashing a lot of code on screen, but I'll point out the stuff that's important.
+
+537
+00:30:37,260 --> 00:30:42,060
+And what I want to get out of this is I want to give you all a solid foundation, right?
+
+538
+00:30:42,060 --> 00:30:46,220
+So if you were looking at this code yourself, would you be able to reasonably understand
+
+539
+00:30:46,220 --> 00:30:50,460
+what's going on, and also to highlight some of the nice optimizations that they make,
+
+540
+00:30:50,460 --> 00:30:51,900
+even in this simple code base?
+
+541
+00:30:53,260 --> 00:30:54,460
+Again, the link is here.
+
+542
+00:30:54,460 --> 00:30:55,580
+These slides will be posted.
+
+543
+00:30:56,140 --> 00:30:59,340
+Highly encourage you to download this code and run it yourself.
+
+544
+00:30:59,340 --> 00:31:03,420
+And also, you might want to try it around and implement a few of the improvements,
+
+545
+00:31:03,820 --> 00:31:07,020
+maybe use mean squared error and see if that does worse, something like that.
+
+546
+00:31:08,060 --> 00:31:08,780
+Cool, all right.
+
+547
+00:31:09,740 --> 00:31:10,620
+So let's start.
+
+548
+00:31:10,620 --> 00:31:13,180
+So first off, I'm going to talk about the matrix class.
+
+549
+00:31:14,380 --> 00:31:18,220
+One of the important things about the matrix class that I thought was cool is that they
+
+550
+00:31:18,220 --> 00:31:23,900
+have Booleans to denote where the matrix is allocated.
+
+551
+00:31:23,900 --> 00:31:27,180
+So one of them is whether or not it's allocated on device, and the other one is whether or
+
+552
+00:31:27,180 --> 00:31:28,460
+not it's allocated on the host.
+
+553
+00:31:29,340 --> 00:31:33,260
+And note that they have functions for allocating the memory.
+
+554
+00:31:34,300 --> 00:31:39,260
+What this means is that when you first instantiate a matrix, it doesn't automatically allocate
+
+555
+00:31:39,260 --> 00:31:41,660
+memory for the contents of the matrix.
+
+556
+00:31:41,660 --> 00:31:45,420
+You have to explicitly call this allocate memory function, which is good because that's
+
+557
+00:31:46,620 --> 00:31:47,500
+more just in time.
+
+558
+00:31:48,380 --> 00:31:51,500
+When you go to initialize your neural network, you're not going to initialize the entirety
+
+559
+00:31:51,500 --> 00:31:52,940
+of every matrix in the whole network.
+
+560
+00:31:53,420 --> 00:31:57,900
+Another thing is that the data is a shared pointer.
+
+561
+00:31:58,780 --> 00:32:02,380
+So I'm sure you all already know what shared pointers do.
+
+562
+00:32:02,380 --> 00:32:05,900
+But just in case, can anyone tell me what a shared pointer does?
+
+563
+00:32:23,900 --> 00:32:26,700
+Yeah, exactly.
+
+564
+00:32:27,260 --> 00:32:30,940
+And my understanding of why shared pointers are used here is probably just because they
+
+565
+00:32:30,940 --> 00:32:33,740
+want to make sure that things are freed when the matrix is deconstructed.
+
+566
+00:32:34,380 --> 00:32:34,940
+That's fine.
+
+567
+00:32:35,820 --> 00:32:39,900
+But yeah, so we have a pointer, both host and device pointers here.
+
+568
+00:32:40,460 --> 00:32:44,780
+And we also, of course, we overload the array index operator for easy access.
+
+569
+00:32:45,740 --> 00:32:45,980
+Cool.
+
+570
+00:32:46,780 --> 00:32:52,220
+Side note, this shape class is just like a struct of shape.x, shape.y.
+
+571
+00:32:52,940 --> 00:32:53,660
+OK, cool.
+
+572
+00:32:55,820 --> 00:32:59,980
+The layer class, this is the parent class that all of the different layers will inherit
+
+573
+00:32:59,980 --> 00:33:00,220
+from.
+
+574
+00:33:00,860 --> 00:33:04,220
+The only thing you need to inherit when you're a layer is you need to have a forward and
+
+575
+00:33:04,220 --> 00:33:05,580
+you need to have a backward.
+
+576
+00:33:05,580 --> 00:33:06,780
+So forward and back propagate.
+
+577
+00:33:07,820 --> 00:33:08,940
+Name is also convenient.
+
+578
+00:33:11,340 --> 00:33:12,620
+OK, so let's get into our first layer.
+
+579
+00:33:12,620 --> 00:33:13,900
+So we're going to start off with sigmoid.
+
+580
+00:33:17,020 --> 00:33:20,060
+For the class variables of sigmoid, we have a, z, and dz.
+
+581
+00:33:20,940 --> 00:33:23,740
+Reminder that a usually stands for activation.
+
+582
+00:33:23,740 --> 00:33:25,420
+So it's usually the output of a full layer.
+
+583
+00:33:25,420 --> 00:33:28,940
+And the layer is usually considered the linear part plus the nonlinearity.
+
+584
+00:33:28,940 --> 00:33:30,620
+So a would be the output of sigmoid.
+
+585
+00:33:30,620 --> 00:33:32,140
+And the z is the input of sigmoid.
+
+586
+00:33:32,940 --> 00:33:36,620
+And then, of course, we have dz for when we do back propagation, which is the derivative
+
+587
+00:33:36,620 --> 00:33:38,860
+of the cost with respect to the input of sigmoid.
+
+588
+00:33:39,820 --> 00:33:40,140
+Cool.
+
+589
+00:33:40,140 --> 00:33:41,740
+And of course, it has forward and back prop.
+
+590
+00:33:42,780 --> 00:33:44,860
+So forward takes in the z and outputs the a.
+
+591
+00:33:44,860 --> 00:33:47,020
+And back prop takes in da and outputs dz.
+
+592
+00:33:49,420 --> 00:33:49,660
+Cool.
+
+593
+00:33:50,860 --> 00:33:55,740
+OK, so this is the only time I'm going to show you the host function for forward and
+
+594
+00:33:55,740 --> 00:33:57,820
+backward, the host function that calls the CUDA kernel.
+
+595
+00:33:58,380 --> 00:34:01,740
+So here, we have the z, which is the input.
+
+596
+00:34:01,740 --> 00:34:03,660
+And we save it to the sigmoid class.
+
+597
+00:34:04,380 --> 00:34:07,180
+We allocate memory, if not already allocated, for the output a.
+
+598
+00:34:07,980 --> 00:34:09,900
+We define the block size, number of blocks.
+
+599
+00:34:09,900 --> 00:34:12,220
+And then we call the CUDA kernel sigmoid activation forward.
+
+600
+00:34:14,140 --> 00:34:17,020
+Likewise, for back prop, I'm only going to show this for sigmoid.
+
+601
+00:34:17,020 --> 00:34:20,620
+For all of the future layers, I'm just going to talk about the CUDA kernel.
+
+602
+00:34:22,220 --> 00:34:26,140
+So again, the back prop function takes in da and outputs dz.
+
+603
+00:34:26,140 --> 00:34:28,940
+So allocate memory, if not already allocated, for dz.
+
+604
+00:34:28,940 --> 00:34:30,140
+Get the size.
+
+605
+00:34:30,140 --> 00:34:31,820
+Call the CUDA kernel.
+
+606
+00:34:31,820 --> 00:34:33,180
+OK, so let's look at the CUDA kernel.
+
+607
+00:34:36,060 --> 00:34:37,260
+Pretty straightforward, right?
+
+608
+00:34:37,260 --> 00:34:41,020
+So as a reminder, sigmoid is 1 over 1 plus e to the minus x.
+
+609
+00:34:41,020 --> 00:34:43,100
+So we have our device function, which is just sigmoid.
+
+610
+00:34:43,900 --> 00:34:49,500
+And then we have our forward pass, which you find the index in the matrix.
+
+611
+00:34:49,500 --> 00:34:50,940
+And then you just compute sigmoid.
+
+612
+00:34:50,940 --> 00:34:52,780
+So sigmoid of z is a.
+
+613
+00:34:54,860 --> 00:34:55,360
+Simple.
+
+614
+00:34:58,060 --> 00:34:58,700
+Any questions?
+
+615
+00:35:00,940 --> 00:35:01,440
+All right.
+
+616
+00:35:03,980 --> 00:35:06,380
+Back prop kernel, similarly simple.
+
+617
+00:35:06,940 --> 00:35:12,620
+One thing worth noting is that the derivative of sigmoid is sigmoid times 1 minus sigmoid.
+
+618
+00:35:12,700 --> 00:35:14,460
+It's a very, very clean way of writing it.
+
+619
+00:35:15,820 --> 00:35:17,020
+And so same thing.
+
+620
+00:35:17,020 --> 00:35:22,860
+So dz is da times sigmoid of z times 1 minus sigmoid of z.
+
+621
+00:35:23,900 --> 00:35:25,180
+So where is this da coming from?
+
+622
+00:35:29,020 --> 00:35:30,300
+And why is it being multiplied?
+
+623
+00:35:30,300 --> 00:35:32,300
+Our derivative should be sigmoid times 1 minus sigmoid.
+
+624
+00:35:42,620 --> 00:35:49,740
+Activation from forward pass.
+
+625
+00:35:49,740 --> 00:35:51,740
+Well, so z is the activation from the forward pass, though.
+
+626
+00:35:53,100 --> 00:35:54,220
+Where's da coming from?
+
+627
+00:36:01,180 --> 00:36:03,660
+The derivative from the previous layer?
+
+628
+00:36:03,660 --> 00:36:04,700
+Exactly, yeah, yeah, yeah.
+
+629
+00:36:05,580 --> 00:36:09,260
+So when we're doing the chain rule, we have to multiply the derivative from the previous layer
+
+630
+00:36:09,260 --> 00:36:11,180
+times the derivative of the current layer.
+
+631
+00:36:11,180 --> 00:36:15,740
+So da is the derivative of cost with respect to the activation.
+
+632
+00:36:15,740 --> 00:36:17,340
+So cost to the output of sigmoid.
+
+633
+00:36:18,220 --> 00:36:21,660
+And then this is the derivative of a with respect to z.
+
+634
+00:36:21,660 --> 00:36:24,540
+So when you multiply them together, you get the output, which is the derivative of cost
+
+635
+00:36:24,540 --> 00:36:25,660
+with respect to z.
+
+636
+00:36:25,660 --> 00:36:26,160
+Exactly.
+
+637
+00:36:26,700 --> 00:36:29,500
+And so we'll be doing this for every back prop layer.
+
+638
+00:36:29,500 --> 00:36:34,220
+We have this da, which is passed in, and that's the derivative from the previous layer.
+
+639
+00:36:34,220 --> 00:36:37,820
+And we multiply that by the derivative of what the actual layer itself was.
+
+640
+00:36:39,820 --> 00:36:40,320
+Cool.
+
+641
+00:36:41,740 --> 00:36:44,220
+All right, so the ReLU class header is identical to sigmoid.
+
+642
+00:36:44,220 --> 00:36:47,420
+This is still the sigmoid class header, but you get the idea.
+
+643
+00:36:47,420 --> 00:36:49,180
+ReLU looks exactly like this.
+
+644
+00:36:49,180 --> 00:36:51,180
+We have az, dz, forward, and back prop.
+
+645
+00:36:52,860 --> 00:36:57,740
+All right, forward kernel for ReLU, it's just a reminder that ReLU is max x and 0.
+
+646
+00:36:57,740 --> 00:37:01,500
+So we have a float max of z and 0, and that gives us our activations.
+
+647
+00:37:03,580 --> 00:37:08,700
+The back prop kernel is interesting because the derivative of ReLU is interesting.
+
+648
+00:37:09,340 --> 00:37:13,100
+If x is greater than 0, the derivative is 1.
+
+649
+00:37:13,100 --> 00:37:14,060
+Otherwise, it is 0.
+
+650
+00:37:14,620 --> 00:37:18,060
+And so we have this if statement here, where if x is greater than 0,
+
+651
+00:37:18,060 --> 00:37:20,220
+then the derivative is just da.
+
+652
+00:37:20,220 --> 00:37:21,500
+So da times 1 is da.
+
+653
+00:37:22,140 --> 00:37:23,100
+Otherwise, it's 0.
+
+654
+00:37:24,060 --> 00:37:28,700
+And so generally speaking, you're not supposed to make if statements in CUDA kernels.
+
+655
+00:37:30,460 --> 00:37:31,660
+Is this a bad if statement?
+
+656
+00:37:38,700 --> 00:37:39,200
+Why not?
+
+657
+00:37:46,380 --> 00:37:47,420
+That's fair, yeah.
+
+658
+00:37:47,980 --> 00:37:51,100
+Not only do we not have any way around it, but these two operations take
+
+659
+00:37:51,100 --> 00:37:52,780
+approximately the same amount of time.
+
+660
+00:37:52,780 --> 00:37:55,340
+I mean, not really, because you're accessing memory here.
+
+661
+00:37:56,220 --> 00:38:03,500
+But your weakest link is not significantly worse than the other branches of the if statement.
+
+662
+00:38:04,780 --> 00:38:05,740
+You had a question?
+
+663
+00:38:06,620 --> 00:38:12,940
+Because it's the, I mean, I was just wondering if all the,
+
+664
+00:38:14,060 --> 00:38:18,860
+if all the values inside of this block would value the same thing.
+
+665
+00:38:18,860 --> 00:38:21,180
+But maybe, probably not actually.
+
+666
+00:38:21,180 --> 00:38:21,820
+Probably not.
+
+667
+00:38:23,340 --> 00:38:25,740
+But that is a good, that is a possible optimization.
+
+668
+00:38:25,740 --> 00:38:28,300
+It would be pretty tricky to sort of do on the fly.
+
+669
+00:38:28,940 --> 00:38:31,180
+But it could be the case that if you knew everything was 0 already,
+
+670
+00:38:31,180 --> 00:38:32,380
+we don't even call a CUDA kernel.
+
+671
+00:38:32,380 --> 00:38:33,980
+We just know it's 0 instead of 0.
+
+672
+00:38:34,700 --> 00:38:37,500
+And that could possibly happen if you dropped out certain chunks of the neural network.
+
+673
+00:38:37,500 --> 00:38:39,100
+We can know not to call CUDA kernels.
+
+674
+00:38:40,780 --> 00:38:41,500
+Cool, all right.
+
+675
+00:38:43,420 --> 00:38:47,340
+So now let's get to the slightly more difficult class, the linear layer.
+
+676
+00:38:47,340 --> 00:38:50,060
+So the linear layer has these five variables.
+
+677
+00:38:50,060 --> 00:38:53,100
+So you have the weight, bias, and then z, a, and da.
+
+678
+00:38:53,740 --> 00:39:01,420
+Reminder that a here would be the activation from the layer before this linear layer as our input.
+
+679
+00:39:01,420 --> 00:39:03,180
+So we have the activations from the previous layer,
+
+680
+00:39:03,180 --> 00:39:04,860
+and they get passed into the linear layer.
+
+681
+00:39:04,860 --> 00:39:10,220
+And then the equation for a linear layer is w times x, in this case a, plus b.
+
+682
+00:39:10,860 --> 00:39:12,140
+And then the output is z.
+
+683
+00:39:14,140 --> 00:39:18,060
+And right, so updating weights and biases, you get dz passed in,
+
+684
+00:39:18,700 --> 00:39:20,620
+which is the derivative from the previous layer.
+
+685
+00:39:22,620 --> 00:39:26,700
+Okay, and then it again implements forward, backward,
+
+686
+00:39:26,700 --> 00:39:28,380
+and then you have some getter functions.
+
+687
+00:39:29,260 --> 00:39:30,540
+Okay, forward kernel.
+
+688
+00:39:32,940 --> 00:39:38,940
+Again, equation wx plus b, you see w times x, or a, equals z.
+
+689
+00:39:39,740 --> 00:39:44,540
+Now, one important thing to note is that when they're doing this sum,
+
+690
+00:39:44,540 --> 00:39:47,740
+this is a dot product, right, they are actually doing a for loop.
+
+691
+00:39:47,740 --> 00:39:50,300
+And they're updating the z value variable over and over and over again.
+
+692
+00:39:51,980 --> 00:39:55,900
+Instead of updating the value in the z matrix over and over and over again,
+
+693
+00:39:55,980 --> 00:39:58,140
+over and over and over again, and incrementing it,
+
+694
+00:39:59,020 --> 00:40:01,660
+they have a separate variable, which they increment.
+
+695
+00:40:01,660 --> 00:40:05,020
+And then at the end, do the update to memory, right.
+
+696
+00:40:05,020 --> 00:40:10,620
+Because you don't want to update memory, you know, what is this, wxdm times.
+
+697
+00:40:11,740 --> 00:40:12,780
+You want to update memory once.
+
+698
+00:40:12,780 --> 00:40:14,780
+And so you have some accumulator, and then you update memory.
+
+699
+00:40:15,340 --> 00:40:22,860
+Another important thing to note here is that a here is not just a vector, it's a matrix.
+
+700
+00:40:23,820 --> 00:40:26,540
+And so when we're looping here, we're looping from the columns of a
+
+701
+00:40:27,740 --> 00:40:30,860
+to the rows of w, because we're doing a dot product with one
+
+702
+00:40:30,860 --> 00:40:33,980
+vector of activations by one row of weights.
+
+703
+00:40:34,860 --> 00:40:36,220
+So, cool.
+
+704
+00:40:39,420 --> 00:40:42,060
+All right, so the backpropagation is slightly more difficult,
+
+705
+00:40:42,060 --> 00:40:44,060
+because we have to compute three different derivatives.
+
+706
+00:40:46,140 --> 00:40:50,540
+Can someone tell me why we have to compute three different derivatives,
+
+707
+00:40:50,540 --> 00:40:52,700
+and it's not just one derivative like the previous layers?
+
+708
+00:40:53,740 --> 00:40:55,740
+Okay.
+
+709
+00:41:13,740 --> 00:41:19,740
+You might get some hits from da, dw, and db.
+
+710
+00:41:23,580 --> 00:41:26,380
+Yeah, exactly.
+
+711
+00:41:26,380 --> 00:41:29,420
+So we compute the derivative with respect to the weights and biases,
+
+712
+00:41:29,420 --> 00:41:31,740
+so that we can do a gradient descent update.
+
+713
+00:41:33,100 --> 00:41:35,740
+We compute the derivative with respect to the activations,
+
+714
+00:41:35,740 --> 00:41:37,980
+so that we can propagate it to the layers behind us,
+
+715
+00:41:37,980 --> 00:41:40,140
+so that they can update their weights and biases.
+
+716
+00:41:40,140 --> 00:41:46,220
+So for the very first layer, aka the last layer that you get to in backpropagation,
+
+717
+00:41:46,220 --> 00:41:48,940
+you don't have to compute this da, because there's nothing behind you.
+
+718
+00:41:48,940 --> 00:41:51,420
+You just have to finally compute your dw and db.
+
+719
+00:41:53,020 --> 00:41:57,900
+I'm sure the code does not have a special case for when you are the very first layer,
+
+720
+00:41:57,900 --> 00:42:00,060
+but theoretically you do not have to compute it.
+
+721
+00:42:01,500 --> 00:42:02,300
+These are the equations.
+
+722
+00:42:04,780 --> 00:42:07,740
+Last time I gave this lecture, I actually went and derived these,
+
+723
+00:42:07,740 --> 00:42:09,980
+but it was very boring and not necessary.
+
+724
+00:42:11,660 --> 00:42:13,500
+It's straightforward to derive these.
+
+725
+00:42:13,500 --> 00:42:14,620
+You have w times x.
+
+726
+00:42:14,620 --> 00:42:18,540
+The derivative with respect to the x, aka a, is w,
+
+727
+00:42:18,540 --> 00:42:22,220
+and the derivative with respect to w is x, aka a.
+
+728
+00:42:22,220 --> 00:42:25,900
+We have w times a, so the derivative of a is w times the previous thing,
+
+729
+00:42:25,900 --> 00:42:28,380
+and the derivative with respect to w is a times the previous thing,
+
+730
+00:42:28,380 --> 00:42:31,260
+and then db is just the previous thing.
+
+731
+00:42:32,060 --> 00:42:35,900
+And the reason why we're doing this sum is very subtle,
+
+732
+00:42:35,900 --> 00:42:37,980
+but reminder that our batches are of size m.
+
+733
+00:42:39,340 --> 00:42:44,780
+So because we want to do a gradient step which averages over all of the examples in the batch,
+
+734
+00:42:45,420 --> 00:42:49,740
+it's not that db is just dz, it's actually the average of all of the dz's.
+
+735
+00:42:49,740 --> 00:42:54,380
+And likewise for the weights, we are also taking the average of all of the weights,
+
+736
+00:42:54,380 --> 00:42:57,740
+except the sum is not explicitly written here, it should be.
+
+737
+00:42:57,740 --> 00:42:59,740
+So this is a slight typo, but yeah.
+
+738
+00:43:01,580 --> 00:43:05,500
+And then this dj dz is weird notation.
+
+739
+00:43:06,060 --> 00:43:09,740
+Oftentimes the cost function is called c, but the loss function is called j.
+
+740
+00:43:10,300 --> 00:43:12,540
+Both of them refer to the exact same thing,
+
+741
+00:43:12,540 --> 00:43:15,660
+and I don't know why they do j for loss, it makes zero sense.
+
+742
+00:43:15,660 --> 00:43:20,460
+But if you see j, just know that that's derivative of loss slash cost with respect.
+
+743
+00:43:21,420 --> 00:43:21,660
+Cool.
+
+744
+00:43:23,500 --> 00:43:25,020
+All right, first, activations.
+
+745
+00:43:25,580 --> 00:43:30,300
+Note w transpose times dz, we have w times dz, and then da is the value.
+
+746
+00:43:30,300 --> 00:43:34,060
+Again, we do the thing where we accumulate in da, and then only access memory once.
+
+747
+00:43:35,340 --> 00:43:35,580
+Cool.
+
+748
+00:43:37,260 --> 00:43:41,660
+Next, for the weights, we sum, we have dz times a first,
+
+749
+00:43:42,300 --> 00:43:47,420
+and then weights equals weights minus learning rate times dw divided by ax dim.
+
+750
+00:43:47,420 --> 00:43:52,540
+Ax dim here is m, because this is the x dimension of our activation matrix,
+
+751
+00:43:52,540 --> 00:43:53,820
+which is columns, one for each.
+
+752
+00:43:54,620 --> 00:43:58,140
+And when we do the update, we're literally doing, this is literally gradient descent,
+
+753
+00:43:58,140 --> 00:43:59,580
+so it's learning rate times this.
+
+754
+00:43:59,580 --> 00:44:01,580
+There's no atom, no nothing here.
+
+755
+00:44:01,580 --> 00:44:04,620
+But if you wanted to implement atom, this is the line that you could change.
+
+756
+00:44:05,420 --> 00:44:09,180
+Finally, doing the biases, this is quite interesting, I think.
+
+757
+00:44:10,780 --> 00:44:17,580
+In the previous update, we actually explicitly did a for loop inside of our thread.
+
+758
+00:44:17,580 --> 00:44:20,620
+So we had a thread compute an entire dot product, and then we updated.
+
+759
+00:44:21,740 --> 00:44:27,180
+In the bias calculation, they decided to, instead of doing a for loop within one thread,
+
+760
+00:44:27,180 --> 00:44:31,020
+they decided to have each term in the dot product computed by a different thread.
+
+761
+00:44:31,100 --> 00:44:34,940
+They decided to have each term in the dot product computed by a different thread,
+
+762
+00:44:34,940 --> 00:44:37,740
+and then atomic add them to the value.
+
+763
+00:44:37,740 --> 00:44:40,940
+And note that atomic add is a thread safe add.
+
+764
+00:44:40,940 --> 00:44:43,900
+So all of the threads are trying to atomic add to the same value,
+
+765
+00:44:43,900 --> 00:44:45,260
+they will serialize themselves.
+
+766
+00:44:45,260 --> 00:44:47,980
+Or I should say that atomic add can't be interrupted.
+
+767
+00:44:47,980 --> 00:44:49,180
+So it's thread safe.
+
+768
+00:44:49,980 --> 00:44:51,900
+But yes, this computes one of them.
+
+769
+00:44:54,060 --> 00:44:54,380
+Okay.
+
+770
+00:44:56,860 --> 00:44:58,060
+Finally, we have our loss function.
+
+771
+00:44:58,620 --> 00:45:00,780
+Binary cross entropy loss, I'm just writing the equation out.
+
+772
+00:45:00,780 --> 00:45:05,980
+Again, which is y log y plus 1 minus y log 1 minus y.
+
+773
+00:45:05,980 --> 00:45:11,260
+If we had more than two classes, we would have more than these two terms.
+
+774
+00:45:12,540 --> 00:45:16,460
+We would have one y log y term for each of the classes.
+
+775
+00:45:17,180 --> 00:45:21,100
+And then, of course, the derivative is, we know the derivative of log is 1 over,
+
+776
+00:45:21,100 --> 00:45:22,140
+by the way, this is natural log.
+
+777
+00:45:23,020 --> 00:45:27,260
+And so we have y over y minus 1 minus y over 1 minus y.
+
+778
+00:45:27,260 --> 00:45:30,940
+And so here, we have y times log y, 1 minus times log 1 minus,
+
+779
+00:45:30,940 --> 00:45:31,980
+and then we atomic add.
+
+780
+00:45:31,980 --> 00:45:33,900
+So it does the same thing as the biases,
+
+781
+00:45:33,900 --> 00:45:39,660
+where you do one thread per computation of a single index.
+
+782
+00:45:39,660 --> 00:45:47,340
+And then instead of having all of the threads sum over all of the batches,
+
+783
+00:45:47,340 --> 00:45:52,460
+you can take the value divided by m and just atomic add them from m different threads.
+
+784
+00:45:53,180 --> 00:45:57,100
+And then we have the backward kernel, which is 1 times whatever,
+
+785
+00:45:57,100 --> 00:45:59,500
+y hat minus 1 minus y, 1 minus y hat.
+
+786
+00:45:59,500 --> 00:45:59,900
+Cool.
+
+787
+00:46:01,900 --> 00:46:04,540
+Finally, we get to the satisfying part.
+
+788
+00:46:04,540 --> 00:46:06,300
+So now that we've gotten all the machinery down,
+
+789
+00:46:06,300 --> 00:46:08,140
+we have the parent class, which is the neural network class.
+
+790
+00:46:09,260 --> 00:46:11,980
+And what does the neural network class contain?
+
+791
+00:46:11,980 --> 00:46:13,900
+So we have a vector of layers.
+
+792
+00:46:13,900 --> 00:46:16,780
+This is a pointer to the parent class neural network layer.
+
+793
+00:46:18,060 --> 00:46:19,660
+And then we have a function called add layer,
+
+794
+00:46:20,060 --> 00:46:22,380
+which allows us to add as many layers as we want.
+
+795
+00:46:22,380 --> 00:46:25,180
+So again, once you've implemented all of these layers properly,
+
+796
+00:46:25,180 --> 00:46:27,660
+you can actually just make the network as deep as you want
+
+797
+00:46:27,660 --> 00:46:28,940
+without really writing any more code,
+
+798
+00:46:28,940 --> 00:46:31,100
+because you just call add layer like 10 more times.
+
+799
+00:46:32,540 --> 00:46:36,460
+We also have y and dy as part of the parent class.
+
+800
+00:46:36,460 --> 00:46:40,220
+This is our predictions and then the derivative with respect to the predictions.
+
+801
+00:46:41,260 --> 00:46:43,500
+We also have forward and backprop,
+
+802
+00:46:44,780 --> 00:46:47,500
+which are the parent classes forward and backprop.
+
+803
+00:46:48,460 --> 00:46:51,340
+So that forward would call all of the forward functions of all of the layers.
+
+804
+00:46:52,700 --> 00:46:53,020
+OK.
+
+805
+00:46:58,060 --> 00:46:58,860
+This is satisfying.
+
+806
+00:46:58,860 --> 00:47:00,060
+I think this is very satisfying.
+
+807
+00:47:00,780 --> 00:47:02,940
+This is the forward pass of the parent neural network class.
+
+808
+00:47:05,260 --> 00:47:06,300
+Any questions?
+
+809
+00:47:06,300 --> 00:47:12,460
+You just take the input, four layers, call forward pass, and then return.
+
+810
+00:47:13,260 --> 00:47:17,500
+I don't think you necessarily need to rename this x to be z and this z to be y.
+
+811
+00:47:18,140 --> 00:47:19,420
+They could have just returned z.
+
+812
+00:47:19,420 --> 00:47:19,900
+That's fine.
+
+813
+00:47:20,780 --> 00:47:22,380
+But it is still very satisfying.
+
+814
+00:47:22,380 --> 00:47:23,980
+That's like two more lines than I would have liked.
+
+815
+00:47:23,980 --> 00:47:25,500
+I would have three line function here.
+
+816
+00:47:27,100 --> 00:47:31,420
+Backprop is slightly less pretty, partially because the for loop is annoying.
+
+817
+00:47:31,420 --> 00:47:31,900
+Oh, oops.
+
+818
+00:47:32,700 --> 00:47:36,060
+The for loop is annoying because you have to backwards loop over the layers.
+
+819
+00:47:36,700 --> 00:47:42,540
+But it's still similar because we take backprop of all of the layers in the reverse direction.
+
+820
+00:47:43,500 --> 00:47:45,740
+We compute the cost explicitly here.
+
+821
+00:47:45,740 --> 00:47:49,980
+So we get the predictions as the input, compute the cost with respect to target,
+
+822
+00:47:49,980 --> 00:47:51,180
+aka the correct answer.
+
+823
+00:47:51,900 --> 00:47:58,460
+And then we have dy, which is not returned from the function, but populated by the function.
+
+824
+00:47:58,460 --> 00:48:00,460
+And then we pass that over and over again.
+
+825
+00:48:02,060 --> 00:48:04,220
+And then note this CUDA device synchronize here.
+
+826
+00:48:04,860 --> 00:48:08,700
+This is actually super important, and it's kind of subtle why it's here.
+
+827
+00:48:08,700 --> 00:48:13,420
+So when we do this backpropagate, we don't actually do the gradient update.
+
+828
+00:48:14,300 --> 00:48:18,140
+And the reason why is because there was a small implementation detail, which is
+
+829
+00:48:18,140 --> 00:48:21,900
+they save the gradient updates, but they don't necessarily apply it until you say apply.
+
+830
+00:48:21,900 --> 00:48:26,700
+Because sometimes you might want to pass through points, but not update the gradients.
+
+831
+00:48:26,700 --> 00:48:29,420
+Like, for example, when you want to actually do prediction after your network is trained.
+
+832
+00:48:30,380 --> 00:48:34,460
+And so we want to do CUDA device synchronized so that when we go to, say,
+
+833
+00:48:34,460 --> 00:48:37,420
+apply all the gradients, we know that all of them have been finished.
+
+834
+00:48:38,220 --> 00:48:40,140
+Like, the computation for all of them are finished.
+
+835
+00:48:41,980 --> 00:48:50,460
+So all this does is calculate the error of just a pass in these current weights.
+
+836
+00:48:51,980 --> 00:48:54,380
+Where is that information sent?
+
+837
+00:48:54,860 --> 00:48:59,100
+This error is just defined within the method.
+
+838
+00:49:01,260 --> 00:49:01,900
+Yeah, exactly.
+
+839
+00:49:01,900 --> 00:49:05,980
+So this error is the error of our predictions.
+
+840
+00:49:07,500 --> 00:49:10,460
+We pass this through backprop function for each one of these layers.
+
+841
+00:49:11,260 --> 00:49:15,500
+And if you remember from our implementation of, let's just say the linear layer.
+
+842
+00:49:18,700 --> 00:49:19,500
+Right here.
+
+843
+00:49:25,020 --> 00:49:28,060
+Now, I guess I didn't show the actual backprop kernel because there's three different ones.
+
+844
+00:49:28,940 --> 00:49:33,340
+But when we pass the error through the linear layer, it gets saved into
+
+845
+00:49:34,540 --> 00:49:37,180
+the variables of the linear layer class here.
+
+846
+00:49:38,220 --> 00:49:39,820
+So we have DA, for example.
+
+847
+00:49:39,820 --> 00:49:43,900
+And this is the derivative of that error with respect to the weights.
+
+848
+00:49:43,900 --> 00:49:47,660
+And then we can decide to say update weights and update bias.
+
+849
+00:49:47,660 --> 00:49:50,060
+And this is actually doing the gradient update.
+
+850
+00:49:51,420 --> 00:49:53,980
+So that's where all of the error information is saved.
+
+851
+00:49:53,980 --> 00:49:57,180
+It's saved statefully within the classes for all of the different layers.
+
+852
+00:50:00,380 --> 00:50:04,540
+And I think that that design choice makes the parent functions very, very clean.
+
+853
+00:50:07,100 --> 00:50:07,600
+OK.
+
+854
+00:50:08,940 --> 00:50:10,540
+Any other questions with this?
+
+855
+00:50:11,340 --> 00:50:14,220
+It seems pretty straightforward, right?
+
+856
+00:50:14,220 --> 00:50:15,260
+You have each layer.
+
+857
+00:50:15,260 --> 00:50:17,100
+Every one of them implements forward and backward.
+
+858
+00:50:17,100 --> 00:50:20,860
+And then to train the network, call the forwards and then call the backwards.
+
+859
+00:50:20,860 --> 00:50:21,360
+And you're done.
+
+860
+00:50:22,540 --> 00:50:23,040
+OK.
+
+861
+00:50:24,860 --> 00:50:28,540
+Initializing the neural network is as simple as just calling dot add layer,
+
+862
+00:50:29,260 --> 00:50:31,340
+new, linear, ReLU, linear, sigmoid.
+
+863
+00:50:31,340 --> 00:50:32,700
+This is the architecture that we laid out.
+
+864
+00:50:33,740 --> 00:50:35,340
+Why do we have 30 here?
+
+865
+00:50:35,340 --> 00:50:37,340
+Like, what is this 30 representing?
+
+866
+00:50:40,060 --> 00:50:41,100
+Not batch size.
+
+867
+00:50:45,180 --> 00:50:47,820
+Yeah, it's the number of nodes in your linear layer.
+
+868
+00:50:47,820 --> 00:50:50,940
+So this number can be whatever you want it to be.
+
+869
+00:50:51,740 --> 00:50:56,860
+And the larger the layer, the more different functions it can learn.
+
+870
+00:50:57,420 --> 00:51:03,020
+So if you have, like, say we characterize, we say one linear function is one weight and bias.
+
+871
+00:51:03,740 --> 00:51:08,300
+If we make the layer wider, we can learn more different linear functions.
+
+872
+00:51:09,180 --> 00:51:12,700
+For a task as easy as this one, 30 is plenty.
+
+873
+00:51:12,700 --> 00:51:14,700
+If anything, 30 is a bit much.
+
+874
+00:51:14,700 --> 00:51:17,580
+You probably only need to do maybe four, right?
+
+875
+00:51:17,580 --> 00:51:19,660
+No guarantees that that would train very well.
+
+876
+00:51:19,660 --> 00:51:21,260
+But you probably only need to do four.
+
+877
+00:51:21,260 --> 00:51:24,540
+However, you can make this, like, 10,000 if you want.
+
+878
+00:51:24,540 --> 00:51:28,540
+And there's a lot of experimental evidence to show that the wider your layers are,
+
+879
+00:51:28,540 --> 00:51:29,740
+the more powerful.
+
+880
+00:51:29,740 --> 00:51:32,060
+But depth is usually more effective than width.
+
+881
+00:51:32,060 --> 00:51:33,100
+But width can help, too.
+
+882
+00:51:35,180 --> 00:51:35,500
+Right?
+
+883
+00:51:35,500 --> 00:51:37,980
+So we take in an input of size 2.
+
+884
+00:51:38,620 --> 00:51:40,780
+And then we project it to 30 different neurons.
+
+885
+00:51:40,780 --> 00:51:43,260
+And then back down from those 30 to 1.
+
+886
+00:51:45,820 --> 00:51:46,320
+Cool.
+
+887
+00:51:47,280 --> 00:51:53,040
+Just as a side note, this problem is very easy to generate data for.
+
+888
+00:51:53,040 --> 00:51:57,600
+So there's a coordinates dataset class in this code that just generates coordinates
+
+889
+00:51:57,600 --> 00:51:59,520
+on a 2D plane and gives them labels.
+
+890
+00:52:00,720 --> 00:52:03,040
+And then batches contain 100 data points.
+
+891
+00:52:03,040 --> 00:52:04,640
+This is also a design decision.
+
+892
+00:52:04,640 --> 00:52:07,920
+You can pick whatever doesn't make your GPU CUDA out of memory.
+
+893
+00:52:07,920 --> 00:52:18,160
+But this neural network, aside from the fact that it only currently takes in inputs of size,
+
+894
+00:52:18,800 --> 00:52:28,240
+you know, like, 2 by n, it can generalize to any problem with an input of 2.
+
+895
+00:52:28,240 --> 00:52:28,720
+That's true.
+
+896
+00:52:29,520 --> 00:52:30,080
+Yeah, 100%.
+
+897
+00:52:30,640 --> 00:52:34,720
+Yeah, I think that's also really important to stress, is that just because we decided
+
+898
+00:52:34,720 --> 00:52:38,960
+to make a neural network for this task does not mean that it's limited to this task.
+
+899
+00:52:38,960 --> 00:52:44,320
+Like, you could directly apply all of this code to whatever problem you want and then
+
+900
+00:52:44,320 --> 00:52:50,080
+just change this dimension from 2 to whatever the size of your input is.
+
+901
+00:52:50,080 --> 00:52:54,240
+Like, the only engineering work that you have to do is getting your input into a vector
+
+902
+00:52:54,240 --> 00:52:55,360
+of that size.
+
+903
+00:52:55,360 --> 00:52:57,760
+And then all of this code works perfectly well for any function.
+
+904
+00:52:58,640 --> 00:52:59,920
+Thus the magic of machine learning.
+
+905
+00:52:59,920 --> 00:53:02,080
+You write one function, and it does every task.
+
+906
+00:53:05,680 --> 00:53:06,180
+OK.
+
+907
+00:53:08,240 --> 00:53:11,040
+Training, straightforward, right?
+
+908
+00:53:11,840 --> 00:53:18,160
+We have epochs, and epochs are generally, one epoch is generally one pass over the entirety
+
+909
+00:53:18,160 --> 00:53:19,120
+of your training dataset.
+
+910
+00:53:19,920 --> 00:53:22,480
+And so here we've defined 1,000 epochs.
+
+911
+00:53:23,040 --> 00:53:27,120
+So we're going to be training by looping over the entirety of our dataset 1,000 times.
+
+912
+00:53:28,960 --> 00:53:33,120
+And then for each one of the batches, and we have some implementation of, you know,
+
+913
+00:53:33,200 --> 00:53:38,000
+getting a batch from our dataset, we call forward, we call backward, and then we increment
+
+914
+00:53:38,000 --> 00:53:39,920
+the total cost for the entire batch.
+
+915
+00:53:39,920 --> 00:53:45,520
+And then if we have an even multiple of 100, we will print out the epoch and then the cost.
+
+916
+00:53:48,000 --> 00:53:51,040
+So importantly, this is an important question.
+
+917
+00:53:52,160 --> 00:53:55,600
+If you look at the for loop, we loop until we have number of batches minus 1.
+
+918
+00:53:56,160 --> 00:54:00,160
+So we only loop through n minus 1 batches instead of the full n.
+
+919
+00:54:00,400 --> 00:54:02,400
+Why do we do that instead of looping over the full n?
+
+920
+00:54:04,400 --> 00:54:05,680
+And then shouldn't we use all of our training data?
+
+921
+00:54:05,680 --> 00:54:08,160
+Use the last bit of it.
+
+922
+00:54:08,160 --> 00:54:09,200
+Yeah, exactly.
+
+923
+00:54:09,200 --> 00:54:12,400
+So this code does not have a train dev test split.
+
+924
+00:54:12,400 --> 00:54:14,000
+It only has a train test split.
+
+925
+00:54:14,000 --> 00:54:16,960
+They use the last batch as their test data.
+
+926
+00:54:18,560 --> 00:54:20,640
+That's not good practice, but this is a toy example.
+
+927
+00:54:20,640 --> 00:54:26,400
+Anyway, it would be fairly straightforward to have a different held out batch from even
+
+928
+00:54:26,400 --> 00:54:28,880
+that one that you don't test on until the very end.
+
+929
+00:54:29,120 --> 00:54:29,840
+But yes, exactly.
+
+930
+00:54:29,840 --> 00:54:32,160
+You need to evaluate on some held out data that was not trained.
+
+931
+00:54:33,920 --> 00:54:34,720
+Any questions about that?
+
+932
+00:54:38,960 --> 00:54:41,280
+Computing accuracy, also very straightforward.
+
+933
+00:54:42,000 --> 00:54:47,200
+We just pass the batch forward, and then we have a compute accuracy function, which I
+
+934
+00:54:47,200 --> 00:54:49,760
+didn't explain up here, but it's fairly straightforward.
+
+935
+00:54:49,760 --> 00:54:50,320
+You just do it all.
+
+936
+00:54:54,000 --> 00:54:56,720
+And if we put it all together, training actually works.
+
+937
+00:54:57,600 --> 00:55:01,600
+We have cost, and it goes down every single set of 100 epochs.
+
+938
+00:55:01,600 --> 00:55:06,480
+So we start out at 0.66, which is, again, cross entropy loss of our predictions, and
+
+939
+00:55:06,480 --> 00:55:08,320
+then we get down to 0.34.
+
+940
+00:55:08,320 --> 00:55:13,280
+And then the accuracy is printed out at the end, and we get 93% accuracy on our points.
+
+941
+00:55:14,000 --> 00:55:18,320
+Now, this is a low accuracy for something that's this simple.
+
+942
+00:55:21,520 --> 00:55:26,480
+Why, if people have either machine learning intuition or are basing off of stuff I said
+
+943
+00:55:26,480 --> 00:55:28,880
+on Monday, why do you think this accuracy is not 100%?
+
+944
+00:55:29,920 --> 00:55:31,040
+Neural networks are powerful.
+
+945
+00:55:31,040 --> 00:55:32,720
+Why can't they learn this simple task?
+
+946
+00:55:41,120 --> 00:55:43,280
+That's a very, very strong possibility.
+
+947
+00:55:43,920 --> 00:55:48,960
+If your learning rate was too low or too high, you might either take way too long to converge
+
+948
+00:55:48,960 --> 00:55:52,240
+to the minimum, or you bounce around the minimum and never get higher than a certain level
+
+949
+00:55:52,240 --> 00:55:52,880
+of accuracy.
+
+950
+00:55:53,600 --> 00:55:58,320
+My gut says that the learning rate is very likely too high for this example.
+
+951
+00:55:59,360 --> 00:56:03,200
+There's also another thing here that is suspicious.
+
+952
+00:56:03,200 --> 00:56:20,000
+So do you have a bad randomization because the first 400 all hover before they start
+
+953
+00:56:20,000 --> 00:56:20,480
+going down?
+
+954
+00:56:21,680 --> 00:56:23,840
+Yeah, that's a very, very strong possibility too.
+
+955
+00:56:23,840 --> 00:56:28,480
+So if we just randomly initialize this badly, then this training run is going to be bad.
+
+956
+00:56:28,480 --> 00:56:32,640
+And if we ran this same exact training run 10 more times, we might get lucky and have
+
+957
+00:56:32,640 --> 00:56:33,520
+accuracy much higher.
+
+958
+00:56:34,320 --> 00:56:41,680
+Another thing is that our data set we generated, we passed over 1,000 times, the same data
+
+959
+00:56:41,680 --> 00:56:43,520
+points 1,000 different times.
+
+960
+00:56:44,640 --> 00:56:48,160
+There's a high chance that we're actually overfitting to this training data set.
+
+961
+00:56:48,160 --> 00:56:53,040
+And what overfitting is, I mentioned it very briefly on Monday, is if you give a neural
+
+962
+00:56:53,040 --> 00:56:56,640
+network the same data over and over again and train it for too long, it will learn to
+
+963
+00:56:56,640 --> 00:57:00,160
+just memorize the data rather than generalizing to the function that you wanted to learn.
+
+964
+00:57:01,040 --> 00:57:05,040
+So another gut feeling of mine is that it might be actually overfitting.
+
+965
+00:57:05,040 --> 00:57:09,520
+If we had stopped this at epoch maybe 50, I wonder if the accuracy would have been higher.
+
+966
+00:57:09,520 --> 00:57:11,920
+Now, clearly the cost didn't go down until later.
+
+967
+00:57:11,920 --> 00:57:16,400
+So probably a combination of learning rate plus too many epochs.
+
+968
+00:57:16,400 --> 00:57:20,720
+But also generating a larger data set would be helpful because we can generate as much
+
+969
+00:57:20,720 --> 00:57:21,360
+data as we want.
+
+970
+00:57:21,360 --> 00:57:23,680
+So many things that you could do to improve accuracy.
+
+971
+00:57:23,680 --> 00:57:28,160
+Again, highly recommend downloading this code and running it and then tweaking it and see
+
+972
+00:57:28,160 --> 00:57:29,600
+if you can get higher accuracy.
+
+973
+00:57:31,120 --> 00:57:31,620
+Cool.
+
+974
+00:57:32,240 --> 00:57:32,740
+All right.
+
+975
+00:57:33,680 --> 00:57:34,800
+So recap.
+
+976
+00:57:34,800 --> 00:57:37,280
+Neural networks are actually pretty simple to implement in CUDA.
+
+977
+00:57:37,280 --> 00:57:40,640
+I just ran through all of the code in, you know, what, 50 minutes?
+
+978
+00:57:41,200 --> 00:57:42,560
+Straightforward to understand.
+
+979
+00:57:42,560 --> 00:57:46,080
+And for each type of layer, when you're implementing a neural network in CUDA, you want a forward
+
+980
+00:57:46,080 --> 00:57:47,200
+pass and a backwards pass.
+
+981
+00:57:47,760 --> 00:57:52,160
+The backwards pass should update the gradients or at least save the gradient updates so you
+
+982
+00:57:52,160 --> 00:57:54,080
+can later select update gradients.
+
+983
+00:57:54,880 --> 00:57:58,160
+And it also is very important that you batch your training.
+
+984
+00:57:58,160 --> 00:58:01,280
+So you want to be able to do all of the examples in a batch in parallel.
+
+985
+00:58:02,640 --> 00:58:06,160
+For the full neural networks forward backward pass, you just call all of the different layers
+
+986
+00:58:06,160 --> 00:58:08,640
+forward pass and then call their backwards pass.
+
+987
+00:58:08,640 --> 00:58:12,720
+And then when training, you loop over all of your batches and then call the parent classes
+
+988
+00:58:12,720 --> 00:58:13,680
+forward and backward for each.
+
+989
+00:58:15,280 --> 00:58:15,780
+Cool.
+
+990
+00:58:17,760 --> 00:58:18,640
+All right.
+
+991
+00:58:18,640 --> 00:58:24,240
+So we can take a short break before we get into the more high-level part of this lecture.
+
+992
+00:58:24,240 --> 00:58:25,600
+That was like the most dense part.
+
+993
+00:58:25,600 --> 00:58:38,080
+So it's a 5-10 minute break and then we'll start again.
+
+994
+00:59:25,600 --> 00:59:50,080
+Hi, how are you?
+
+995
+01:00:26,560 --> 01:00:27,680
+Yeah, for sure.
+
+996
+01:00:32,960 --> 01:00:33,520
+Yeah, 100%.
+
+997
+01:00:37,200 --> 01:00:37,680
+No, no, no.
+
+998
+01:00:37,680 --> 01:00:41,600
+That's exactly how I would have attempted it.
+
+999
+01:00:42,240 --> 01:00:47,600
+The difficult part is that you kind of want to know the depth mapping of your surroundings
+
+1000
+01:00:47,600 --> 01:00:49,280
+so that you can actually properly like...
+
+1001
+01:00:49,280 --> 01:00:55,200
+I know there's something called a Kalman filter, which will take, let's say, some camera
+
+1002
+01:00:55,280 --> 01:00:59,120
+that has depth information and create some sort of 3D scene.
+
+1003
+01:00:59,120 --> 01:01:01,120
+And then you can be fairly sure where you're going.
+
+1004
+01:01:01,120 --> 01:01:04,480
+If you don't have depth information, it's definitely a machine learning task for sure.
+
+1005
+01:01:15,840 --> 01:01:19,040
+Is that only for two cameras or does that also work for one camera?
+
+1006
+01:01:19,600 --> 01:01:21,760
+No, just your mobile camera.
+
+1007
+01:01:21,760 --> 01:01:22,320
+OK, so yeah.
+
+1008
+01:01:22,320 --> 01:01:24,880
+But mobile cameras tend to have two.
+
+1009
+01:01:25,600 --> 01:01:26,240
+I have one.
+
+1010
+01:01:27,280 --> 01:01:28,800
+That's probably also using machine learning.
+
+1011
+01:01:28,800 --> 01:01:30,080
+Yes, I know that.
+
+1012
+01:01:31,040 --> 01:01:31,680
+OK, then yeah.
+
+1013
+01:01:32,640 --> 01:01:37,920
+So I would say even without the depth information, I would just do what you were saying.
+
+1014
+01:01:39,440 --> 01:01:40,160
+Yeah, no, 100%.
+
+1015
+01:01:40,960 --> 01:01:44,640
+Like even something as simple as taking the difference between this frame and that frame.
+
+1016
+01:01:44,640 --> 01:01:45,520
+That's what I was thinking.
+
+1017
+01:01:45,520 --> 01:01:47,360
+Yeah, 100% possible.
+
+1018
+01:01:49,760 --> 01:01:53,360
+Yeah, yeah, exactly.
+
+1019
+01:01:54,480 --> 01:01:55,200
+Absolutely.
+
+1020
+01:01:56,560 --> 01:02:00,160
+In terms of whether or not it could be a final project, that's obviously Shehzad's discretion.
+
+1021
+01:02:00,160 --> 01:02:03,200
+It can definitely be a project and totally be worth working on.
+
+1022
+01:02:04,000 --> 01:02:07,920
+I would imagine that a CNN would work really well for that because...
+
+1023
+01:02:07,920 --> 01:02:10,240
+Because you were talking about...
+
+1024
+01:02:13,520 --> 01:02:14,560
+Right, well, so...
+
+1025
+01:02:16,640 --> 01:02:17,140
+Yeah.
+
+1026
+01:02:19,200 --> 01:02:23,280
+Yeah, so as like a quick disclaimer, I'm not a computer vision person.
+
+1027
+01:02:24,720 --> 01:02:31,120
+But I know people in computer vision and I can quick ask what makes the most sense to implement
+
+1028
+01:02:31,120 --> 01:02:32,000
+for a task like that.
+
+1029
+01:02:32,800 --> 01:02:36,240
+I think taking the difference between frames or at the very least just having two frames
+
+1030
+01:02:36,240 --> 01:02:40,720
+as your input, both frames like concatenated together as your input embedding.
+
+1031
+01:02:40,720 --> 01:02:46,800
+And then you can say something like predict the vector like r and theta, let's say,
+
+1032
+01:02:47,280 --> 01:02:50,880
+of where the person is actually turning.
+
+1033
+01:02:50,880 --> 01:02:56,000
+You can also do left or right as zero, one, and then speed maybe of turn.
+
+1034
+01:02:56,880 --> 01:02:57,280
+Right.
+
+1035
+01:02:57,280 --> 01:02:58,240
+But yeah, like...
+
+1036
+01:02:58,240 --> 01:03:01,280
+Try to let them know that they're doing the project.
+
+1037
+01:03:01,280 --> 01:03:03,120
+Exactly, yeah, yeah, yeah.
+
+1038
+01:03:03,120 --> 01:03:06,960
+A lot of the complexities in machine learning projects are input representation questions
+
+1039
+01:03:07,520 --> 01:03:09,120
+and then architecture questions.
+
+1040
+01:03:09,120 --> 01:03:16,160
+And I think the architecture is 99% chance going to be CNN, possibly Transformer,
+
+1041
+01:03:16,160 --> 01:03:17,360
+but I think CNN is better.
+
+1042
+01:03:18,640 --> 01:03:21,200
+And then it just now becomes a question of how do you represent the input?
+
+1043
+01:03:21,200 --> 01:03:24,880
+Like, do you do edge detection or do you just concatenate the frames
+
+1044
+01:03:24,880 --> 01:03:26,720
+or you take the difference between the frames?
+
+1045
+01:03:26,720 --> 01:03:29,120
+And then what's your output representation look like?
+
+1046
+01:03:29,120 --> 01:03:32,320
+Like, do you predict zero or one for left or right?
+
+1047
+01:03:32,320 --> 01:03:34,640
+Or do you predict speed as well?
+
+1048
+01:03:34,640 --> 01:03:37,280
+Do you predict like vector of momentum or whatever?
+
+1049
+01:03:37,280 --> 01:03:38,400
+Okay, yeah.
+
+1050
+01:03:39,040 --> 01:03:41,200
+What is it that we are trying to find out from...
+
+1051
+01:03:41,200 --> 01:03:41,840
+Right, right.
+
+1052
+01:03:41,840 --> 01:03:43,920
+And then the final thing that is super, super important...
+
+1053
+01:03:43,920 --> 01:03:44,420
+How would we...
+
+1054
+01:03:45,140 --> 01:03:46,420
+Is the data.
+
+1055
+01:03:47,300 --> 01:03:49,220
+If you don't have data, you can't do anything.
+
+1056
+01:03:51,300 --> 01:03:54,580
+You could theoretically record accelerometer data
+
+1057
+01:03:54,580 --> 01:03:57,060
+if you could access it from some VR headset or...
+
+1058
+01:03:57,060 --> 01:03:58,020
+Sorry, some VR headset.
+
+1059
+01:03:59,380 --> 01:04:01,780
+Or just like, I don't know, tape a phone to someone's head
+
+1060
+01:04:01,780 --> 01:04:05,140
+and then read out the gyroscope data and accelerometer data
+
+1061
+01:04:05,140 --> 01:04:07,940
+and then have them just turn and then generate a bunch of data for you.
+
+1062
+01:04:07,940 --> 01:04:09,780
+But you'd have to do that for a lot of hours.
+
+1063
+01:04:11,060 --> 01:04:13,620
+And you also want to get a bunch of different scenes
+
+1064
+01:04:13,620 --> 01:04:15,540
+so that your network can generalize to any...
+
+1065
+01:04:15,540 --> 01:04:19,220
+So we better first have to start with generating a dataset.
+
+1066
+01:04:19,220 --> 01:04:20,660
+Yeah, yeah, exactly.
+
+1067
+01:04:20,660 --> 01:04:23,460
+But for all I know, there might be a dataset out there.
+
+1068
+01:04:23,460 --> 01:04:26,340
+Like, one of my roommates from undergrad
+
+1069
+01:04:26,340 --> 01:04:29,220
+does pose estimation from head-mounted cameras.
+
+1070
+01:04:29,780 --> 01:04:32,820
+And I imagine that he didn't go and collect all the data or something.
+
+1071
+01:04:32,820 --> 01:04:34,580
+So I get the feeling that it's out there.
+
+1072
+01:04:34,580 --> 01:04:36,020
+But yeah, if you...
+
+1073
+01:04:36,020 --> 01:04:36,660
+Do you have my email?
+
+1074
+01:04:37,700 --> 01:04:40,100
+Okay, I'll give it to...
+
+1075
+01:04:40,660 --> 01:04:41,860
+I should have it on the slides.
+
+1076
+01:04:41,860 --> 01:04:43,300
+It's just bad that I don't have it on the slides.
+
+1077
+01:04:43,860 --> 01:04:48,740
+But I'll follow up with either Wayne or Rachel
+
+1078
+01:04:48,740 --> 01:04:51,220
+and ask them to sort of get my email out.
+
+1079
+01:04:51,220 --> 01:04:52,340
+And then if you want to,
+
+1080
+01:04:52,340 --> 01:04:54,500
+you can just give the overview of the project
+
+1081
+01:04:54,500 --> 01:04:57,060
+so I can have the details and I can ask people.
+
+1082
+01:04:58,260 --> 01:04:59,940
+Yeah, no problem.
+
+1083
+01:05:02,420 --> 01:05:02,920
+Okay.
+
+1084
+01:05:05,940 --> 01:05:09,460
+So I'm going to continue on with the lecture now
+
+1085
+01:05:09,460 --> 01:05:11,940
+because I want to make sure I give Wayne enough time at the end.
+
+1086
+01:05:14,260 --> 01:05:15,540
+Yeah, basically halfway.
+
+1087
+01:05:15,540 --> 01:05:16,500
+So, all right.
+
+1088
+01:05:17,220 --> 01:05:21,460
+So if we want to speed up our neural network,
+
+1089
+01:05:21,460 --> 01:05:22,260
+how are we going to do it?
+
+1090
+01:05:22,260 --> 01:05:23,780
+What are the optimizations that we can make
+
+1091
+01:05:23,780 --> 01:05:26,020
+both to the code that we just talked about
+
+1092
+01:05:26,020 --> 01:05:30,660
+and then also to general applications of neural networks
+
+1093
+01:05:30,660 --> 01:05:31,860
+that could speed things up?
+
+1094
+01:05:33,220 --> 01:05:37,140
+Okay, so the implementation that we just talked about is pretty good.
+
+1095
+01:05:37,940 --> 01:05:39,540
+But it's definitely not the best we can do.
+
+1096
+01:05:39,540 --> 01:05:40,260
+Definitely not.
+
+1097
+01:05:41,220 --> 01:05:43,060
+One easy way to improve performance
+
+1098
+01:05:43,060 --> 01:05:45,220
+is to improve the performance of matrix multiply.
+
+1099
+01:05:45,220 --> 01:05:46,740
+Like this is an obvious one.
+
+1100
+01:05:47,300 --> 01:05:50,740
+Matrix multiply is used in every single layer constantly.
+
+1101
+01:05:50,740 --> 01:05:53,060
+So if we can make our matrix multiply faster,
+
+1102
+01:05:53,060 --> 01:05:54,260
+we're going to get a huge speed up.
+
+1103
+01:05:54,820 --> 01:05:56,180
+So remember back to,
+
+1104
+01:05:56,180 --> 01:05:58,020
+I'm assuming you guys have already done the performance lab
+
+1105
+01:05:58,020 --> 01:06:01,380
+where Shazon talked about improving matrix multiply.
+
+1106
+01:06:02,420 --> 01:06:05,300
+This is a fantastic example of why that would be very useful.
+
+1107
+01:06:06,740 --> 01:06:07,620
+One thing here,
+
+1108
+01:06:07,620 --> 01:06:10,500
+and I'm going to pick on this example code for a bit,
+
+1109
+01:06:11,300 --> 01:06:12,980
+is memory coalescing.
+
+1110
+01:06:12,980 --> 01:06:15,140
+So when we're reading from GPU memory,
+
+1111
+01:06:15,140 --> 01:06:18,340
+we want to read sequential indices in memory
+
+1112
+01:06:18,340 --> 01:06:19,460
+so that we can batch the reads.
+
+1113
+01:06:20,260 --> 01:06:23,300
+Here, when we're looping over the activations,
+
+1114
+01:06:24,100 --> 01:06:25,860
+what's our access pattern looking like?
+
+1115
+01:06:30,420 --> 01:06:31,860
+All right, we have our for loop I,
+
+1116
+01:06:32,660 --> 01:06:33,540
+and then how do we index?
+
+1117
+01:06:37,620 --> 01:06:52,420
+So we're looping over a column in the matrix.
+
+1118
+01:06:53,300 --> 01:06:56,500
+But if this matrix is column major, that's fine.
+
+1119
+01:06:56,500 --> 01:06:58,260
+But if it's row major, it's not fine.
+
+1120
+01:06:58,260 --> 01:07:00,660
+And we have the same matrix class for both W and A.
+
+1121
+01:07:00,660 --> 01:07:03,540
+W we access by row, and A we access by column.
+
+1122
+01:07:04,180 --> 01:07:07,220
+And one of the two is definitely not coalesced.
+
+1123
+01:07:07,620 --> 01:07:09,700
+Very straightforward implementation would be
+
+1124
+01:07:09,700 --> 01:07:12,100
+transpose this first, then access it.
+
+1125
+01:07:12,100 --> 01:07:13,140
+Something like that, right?
+
+1126
+01:07:13,140 --> 01:07:17,860
+Or at the very least, don't do one read per for loop
+
+1127
+01:07:17,860 --> 01:07:20,180
+at random points in the matrix.
+
+1128
+01:07:20,980 --> 01:07:22,260
+So super easy speed up.
+
+1129
+01:07:23,540 --> 01:07:26,100
+Next speed up, shared memory, everyone's favorite.
+
+1130
+01:07:26,100 --> 01:07:29,700
+So if you copy large portions of a matrix into shared memory,
+
+1131
+01:07:29,700 --> 01:07:31,940
+you don't have to worry about a bunch of different accesses
+
+1132
+01:07:33,060 --> 01:07:36,020
+not being coalesced because everything is also in shared memory.
+
+1133
+01:07:36,020 --> 01:07:39,140
+So I know Shazon talked about this in the performance lab as well.
+
+1134
+01:07:39,140 --> 01:07:42,180
+But copy in shared memory, do matrix multiply within shared memory,
+
+1135
+01:07:42,180 --> 01:07:43,700
+and then write it back out all at once.
+
+1136
+01:07:45,860 --> 01:07:49,300
+So I promised I was going to talk about AlexNet, and here I go.
+
+1137
+01:07:50,260 --> 01:07:53,220
+The AlexNet source code actually does a ton of these optimizations.
+
+1138
+01:07:53,860 --> 01:07:56,820
+This is the main workhorse function of the code,
+
+1139
+01:07:56,820 --> 01:07:58,580
+and this is to implement a convolution.
+
+1140
+01:08:00,100 --> 01:08:03,380
+Note that they preload all of the filters
+
+1141
+01:08:03,380 --> 01:08:05,620
+and all of the images into shared memory.
+
+1142
+01:08:05,780 --> 01:08:07,780
+Then they do the matrix multiply within shared memory.
+
+1143
+01:08:10,420 --> 01:08:12,900
+This is the main part of the convolution,
+
+1144
+01:08:12,900 --> 01:08:16,260
+and they have, note the pragma unroll here.
+
+1145
+01:08:16,260 --> 01:08:18,100
+So we know these by compile time,
+
+1146
+01:08:18,100 --> 01:08:19,940
+and we can unroll all of the things in the loop.
+
+1147
+01:08:20,500 --> 01:08:23,380
+And then these writes are actually coalesced here.
+
+1148
+01:08:26,500 --> 01:08:30,100
+Yeah, so I took time to read this code
+
+1149
+01:08:30,820 --> 01:08:33,780
+and figure out these are coalesced, but that was last year.
+
+1150
+01:08:33,780 --> 01:08:37,380
+So I can't point to exactly where in this it is coalesced.
+
+1151
+01:08:37,380 --> 01:08:41,060
+But trust me, if you take an hour out of your day
+
+1152
+01:08:41,060 --> 01:08:42,980
+to go figure out what all these variables are,
+
+1153
+01:08:44,100 --> 01:08:45,620
+they are, in fact, coalesced.
+
+1154
+01:08:45,620 --> 01:08:48,180
+It does make the code significantly harder to read, though,
+
+1155
+01:08:48,180 --> 01:08:50,340
+because they're indexing in really, really weird ways,
+
+1156
+01:08:50,340 --> 01:08:53,780
+and indexing is already kind of difficult when it gets complicated.
+
+1157
+01:08:53,780 --> 01:08:55,220
+But yes, all right.
+
+1158
+01:08:55,220 --> 01:08:57,140
+And then note that they also have sync threads here.
+
+1159
+01:08:58,020 --> 01:09:00,340
+So they take all of the different threads
+
+1160
+01:09:00,340 --> 01:09:03,460
+and make sure that they all are waiting on each other at the end
+
+1161
+01:09:03,460 --> 01:09:07,140
+so that they can do one big kernel to compute many things
+
+1162
+01:09:07,140 --> 01:09:10,260
+rather than calling multiple kernels over and over again.
+
+1163
+01:09:10,260 --> 01:09:12,580
+This is something that's called layer fusion,
+
+1164
+01:09:12,580 --> 01:09:16,260
+where you have one CUDA kernel that computes many layers at once.
+
+1165
+01:09:17,140 --> 01:09:19,700
+Just to quiz you really quickly,
+
+1166
+01:09:19,700 --> 01:09:22,100
+what's a very simple layer fusion technique
+
+1167
+01:09:22,100 --> 01:09:24,020
+that we could use on our previous code base
+
+1168
+01:09:25,220 --> 01:09:26,820
+to speed up substantially?
+
+1169
+01:09:29,540 --> 01:09:32,340
+Having one kernel compute multiple functions in a row.
+
+1170
+01:09:33,460 --> 01:09:49,220
+So that's a quick reminder.
+
+1171
+01:09:49,860 --> 01:09:52,500
+We called CUDA kernels for linear layer,
+
+1172
+01:09:53,620 --> 01:09:55,620
+and then for sigmoid, and then for ReLU.
+
+1173
+01:10:00,900 --> 01:10:02,980
+Especially for some of those smaller CUDA kernels,
+
+1174
+01:10:03,060 --> 01:10:06,500
+especially the ones that just basically call sigmoid and then end,
+
+1175
+01:10:07,780 --> 01:10:10,340
+makes a lot of sense to have that as part of the linear layer.
+
+1176
+01:10:11,300 --> 01:10:14,580
+So instead of just having a kernel that computes the linear layer,
+
+1177
+01:10:14,580 --> 01:10:17,140
+and then another kernel that computes sigmoid,
+
+1178
+01:10:17,140 --> 01:10:19,300
+just compute sigmoid within the linear layer.
+
+1179
+01:10:19,300 --> 01:10:21,700
+Especially because sigmoid doesn't have any state to update.
+
+1180
+01:10:23,060 --> 01:10:24,820
+It seems like you could definitely get away
+
+1181
+01:10:24,820 --> 01:10:26,660
+with just putting it directly in the linear layer.
+
+1182
+01:10:26,820 --> 01:10:31,060
+Doesn't that only give us one layer though, the sigmoid and the end?
+
+1183
+01:10:31,860 --> 01:10:32,340
+That's true.
+
+1184
+01:10:33,060 --> 01:10:33,780
+But I'll talk about...
+
+1185
+01:10:33,780 --> 01:10:37,620
+So there's obviously a limit to how much you can do layer fusion.
+
+1186
+01:10:37,620 --> 01:10:39,860
+Like you can't implement the entirety of the neural network
+
+1187
+01:10:39,860 --> 01:10:41,940
+in one gigantic CUDA kernel,
+
+1188
+01:10:41,940 --> 01:10:46,100
+because you'd have to load so many weights and biases into memory to do that,
+
+1189
+01:10:46,100 --> 01:10:48,420
+that it would then hurt performance.
+
+1190
+01:10:48,420 --> 01:10:52,500
+However, you can do this for specifically the nonlinearities
+
+1191
+01:10:52,500 --> 01:10:56,020
+on layers is very common to have in the same kernel call.
+
+1192
+01:10:57,540 --> 01:11:02,100
+It's like a ReLU with linear?
+
+1193
+01:11:02,100 --> 01:11:02,420
+Exactly.
+
+1194
+01:11:03,700 --> 01:11:05,860
+Each of those becomes compound one.
+
+1195
+01:11:05,860 --> 01:11:06,260
+Exactly.
+
+1196
+01:11:10,660 --> 01:11:13,620
+But what about like, I guess there'd be two, right?
+
+1197
+01:11:13,620 --> 01:11:15,780
+It'd be like linear ReLU and then linear sigmoid.
+
+1198
+01:11:15,780 --> 01:11:16,180
+Exactly.
+
+1199
+01:11:17,540 --> 01:11:22,260
+So we can reduce our number of kernel calls to two instead of four.
+
+1200
+01:11:22,260 --> 01:11:24,900
+And as I'm sure you guys know,
+
+1201
+01:11:24,900 --> 01:11:27,700
+actually calling a CUDA kernel takes a lot of overhead
+
+1202
+01:11:27,700 --> 01:11:29,620
+because you have to copy code to the GPU
+
+1203
+01:11:29,620 --> 01:11:32,980
+and then it has to like initialize all of its whatever operating system state.
+
+1204
+01:11:33,540 --> 01:11:35,380
+So this actually gets a very large speed up.
+
+1205
+01:11:35,380 --> 01:11:38,420
+So another easy thing to pick on about the previous code base
+
+1206
+01:11:38,420 --> 01:11:41,220
+is that it definitely sacrifices speed for ease of readability.
+
+1207
+01:11:42,500 --> 01:11:45,460
+That would be another good exercise is to fuse those two kernels
+
+1208
+01:11:45,460 --> 01:11:47,140
+and then see how much speed up you get.
+
+1209
+01:11:48,420 --> 01:11:49,140
+Cool. Okay.
+
+1210
+01:11:49,140 --> 01:11:53,060
+So can we do better than AlexNet's implementation of convolutions?
+
+1211
+01:11:53,940 --> 01:11:55,780
+Any ideas on how to improve over this?
+
+1212
+01:11:59,860 --> 01:12:02,580
+Don't think too hard about that question because it's a trick question.
+
+1213
+01:12:03,220 --> 01:12:04,260
+No, we actually can't.
+
+1214
+01:12:05,140 --> 01:12:08,820
+And the reason why we can't is because in the 10 years
+
+1215
+01:12:08,820 --> 01:12:10,260
+since this paper has been published,
+
+1216
+01:12:10,260 --> 01:12:13,700
+this is like the go-to implementation of convolutions, right?
+
+1217
+01:12:13,700 --> 01:12:17,780
+It actually turns out that Alex was a pretty talented GPU programmer
+
+1218
+01:12:17,780 --> 01:12:19,220
+and also that machine learning researchers
+
+1219
+01:12:19,220 --> 01:12:21,540
+don't want to think about this GPU optimization stuff,
+
+1220
+01:12:21,540 --> 01:12:23,300
+which is more jobs for us, I guess.
+
+1221
+01:12:25,300 --> 01:12:28,260
+However, one way to speed this up even further
+
+1222
+01:12:28,900 --> 01:12:32,580
+is by calling other people's code that have more access
+
+1223
+01:12:32,580 --> 01:12:37,060
+to sort of more low-level implementation capabilities.
+
+1224
+01:12:37,060 --> 01:12:42,740
+So I'm going to introduce this concept of a basic linear algebra subroutine or BLAS.
+
+1225
+01:12:43,540 --> 01:12:47,380
+This is a standard set of functions for fast matrix operations.
+
+1226
+01:12:47,380 --> 01:12:50,020
+And it's kind of like there's like a spec
+
+1227
+01:12:50,020 --> 01:12:52,500
+for what you need to implement to be BLAS compliant.
+
+1228
+01:12:52,500 --> 01:12:57,780
+And almost every machine implements their version of these BLAS functions.
+
+1229
+01:12:59,140 --> 01:13:01,540
+They're often optimized by hardware manufacturers
+
+1230
+01:13:01,540 --> 01:13:03,140
+for speed on a particular machine.
+
+1231
+01:13:03,140 --> 01:13:05,860
+So you'll have Intel implements their own BLAS.
+
+1232
+01:13:05,860 --> 01:13:08,020
+You have AMD implements their own BLAS, all of this stuff.
+
+1233
+01:13:08,580 --> 01:13:10,900
+And then they'll use things like the vector registers
+
+1234
+01:13:10,900 --> 01:13:12,980
+and special SIMD instructions,
+
+1235
+01:13:12,980 --> 01:13:14,820
+which would be single instruction, multiple data.
+
+1236
+01:13:15,460 --> 01:13:20,020
+And they try to make the best possible matrix multiply on their hardware.
+
+1237
+01:13:20,740 --> 01:13:24,500
+And if you just call these functions that the hardware manufacturers provide,
+
+1238
+01:13:24,500 --> 01:13:26,340
+you're going to get way faster matrix multiply
+
+1239
+01:13:26,980 --> 01:13:29,700
+than doing these matrix multiply operations yourself.
+
+1240
+01:13:29,700 --> 01:13:34,420
+So there should be no reason to actually write matrix multiply yourself in CUDA.
+
+1241
+01:13:34,420 --> 01:13:38,420
+You should almost always call a basic linear algebra subroutine.
+
+1242
+01:13:38,420 --> 01:13:42,580
+In fact, libraries like MATLAB, NumPy, R,
+
+1243
+01:13:42,580 --> 01:13:44,180
+and then of course you guys have been using GLM.
+
+1244
+01:13:44,740 --> 01:13:46,180
+They all call these under the hood.
+
+1245
+01:13:46,180 --> 01:13:49,300
+The reason why MATLAB is fast at computing matrix multiply
+
+1246
+01:13:49,300 --> 01:13:50,980
+is because it's calling BLAS under the hood.
+
+1247
+01:13:54,020 --> 01:13:55,940
+So all of the scientific computing libraries,
+
+1248
+01:13:55,940 --> 01:13:57,780
+they're all doing this and that's why they're fast.
+
+1249
+01:13:58,500 --> 01:14:02,340
+And this is, you can have CPU-based BLAS implementations,
+
+1250
+01:14:02,340 --> 01:14:04,900
+and then you can also have GPU-based BLAS implementations.
+
+1251
+01:14:07,540 --> 01:14:09,700
+So in the BLAS spec, there are three levels.
+
+1252
+01:14:10,260 --> 01:14:12,100
+Level one is vector operations.
+
+1253
+01:14:12,180 --> 01:14:15,300
+So AXPY is short for AX plus Y.
+
+1254
+01:14:15,300 --> 01:14:18,260
+You can see X and Y would be both vectors,
+
+1255
+01:14:18,260 --> 01:14:19,780
+and then A is just some constant.
+
+1256
+01:14:20,900 --> 01:14:25,780
+So this is very useful for computing linear functions with one constant.
+
+1257
+01:14:27,620 --> 01:14:30,580
+Level two is vector times matrix operations.
+
+1258
+01:14:30,580 --> 01:14:33,940
+So we have GEMV, which is generalized matrix vector product,
+
+1259
+01:14:34,500 --> 01:14:39,540
+and that's Y equals some constant times matrix A vector X plus some constant Y.
+
+1260
+01:14:40,020 --> 01:14:40,740
+All right.
+
+1261
+01:14:40,740 --> 01:14:42,980
+These two levels are very niche.
+
+1262
+01:14:43,780 --> 01:14:46,020
+It's very unusual to be using these two
+
+1263
+01:14:46,020 --> 01:14:53,140
+because you're trying to take advantage of massively parallel computer architecture.
+
+1264
+01:14:53,140 --> 01:14:54,020
+If you're going to go parallel,
+
+1265
+01:14:54,020 --> 01:14:57,300
+you might as well go to matrix matrix and compute many things in parallel.
+
+1266
+01:14:58,020 --> 01:15:01,140
+This level three, aka the GEMM, some people call it GEM.
+
+1267
+01:15:02,340 --> 01:15:03,540
+I don't know how I feel about that.
+
+1268
+01:15:03,540 --> 01:15:06,020
+But yeah, so GEMM is generalized matrix multiply.
+
+1269
+01:15:06,020 --> 01:15:07,380
+And oftentimes when you think about BLAS,
+
+1270
+01:15:07,380 --> 01:15:08,740
+you're going to hear people talk about GEM.
+
+1271
+01:15:09,860 --> 01:15:12,580
+And this is matrix A times matrix B plus some matrix C.
+
+1272
+01:15:13,220 --> 01:15:18,100
+And this is what is like the backbone of every scientific computing environment.
+
+1273
+01:15:21,220 --> 01:15:21,620
+Cool.
+
+1274
+01:15:21,620 --> 01:15:23,060
+Any questions about BLAS?
+
+1275
+01:15:23,060 --> 01:15:28,260
+Do you work with NavMesh in NumPy at all?
+
+1276
+01:15:28,260 --> 01:15:29,540
+I've never worked with NavMesh.
+
+1277
+01:15:29,540 --> 01:15:32,100
+Is that like a library on top of NumPy?
+
+1278
+01:15:32,420 --> 01:15:39,780
+Because in the CV class, they also ask us to parallelize their code.
+
+1279
+01:15:40,740 --> 01:15:43,300
+But it's not like this.
+
+1280
+01:15:43,940 --> 01:15:50,820
+So MeshGrid basically generates a 2D, because it's for images,
+
+1281
+01:15:50,820 --> 01:15:52,340
+but it generates a 2D array.
+
+1282
+01:15:52,340 --> 01:15:57,220
+And it goes like 0, 0, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3 for like x.
+
+1283
+01:15:57,780 --> 01:16:01,380
+Like 0, 0, 0, 1, 1, 1, 1, 2, 2, 2 for like y.
+
+1284
+01:16:01,380 --> 01:16:09,940
+And then to do image-wide applications, you pass in the x NavMesh as the x-coordinate,
+
+1285
+01:16:09,940 --> 01:16:12,340
+and the y NavMesh as the y-coordinate.
+
+1286
+01:16:12,340 --> 01:16:16,420
+I'm guessing there's a bunch of GPU optimization under the hood.
+
+1287
+01:16:16,420 --> 01:16:17,060
+Yeah.
+
+1288
+01:16:17,060 --> 01:16:17,620
+Yeah, for sure.
+
+1289
+01:16:17,620 --> 01:16:22,100
+So oftentimes, when you'll hear people say that you should vectorize your code with NumPy,
+
+1290
+01:16:22,100 --> 01:16:26,980
+for example, or pretty much exactly what you're talking about,
+
+1291
+01:16:26,980 --> 01:16:29,860
+where they'll create matrices with these index indices.
+
+1292
+01:16:29,940 --> 01:16:34,260
+It's almost always because that's going to be used as input to some library,
+
+1293
+01:16:34,260 --> 01:16:36,260
+which under the hood, calls gem.
+
+1294
+01:16:37,780 --> 01:16:42,260
+Any vectorized code, any fast matrix multiply on either CPU or GPU
+
+1295
+01:16:42,260 --> 01:16:44,100
+always calls some gem implementation.
+
+1296
+01:16:44,820 --> 01:16:47,220
+And that is hardware-specific.
+
+1297
+01:16:47,220 --> 01:16:52,500
+So when some library calls gem, that accesses Intel's implementation of gem,
+
+1298
+01:16:52,500 --> 01:16:53,620
+which is written in machine code.
+
+1299
+01:16:55,700 --> 01:16:56,200
+Cool.
+
+1300
+01:16:57,940 --> 01:16:58,500
+All right.
+
+1301
+01:16:58,500 --> 01:17:03,060
+So as I'm sure you could guess, there is a CUDA implementation of BLOS.
+
+1302
+01:17:03,060 --> 01:17:05,940
+So BLOS on the GPU, which is even faster than CPU BLOS.
+
+1303
+01:17:07,300 --> 01:17:09,220
+CUBLOS is closed source, unfortunately.
+
+1304
+01:17:10,020 --> 01:17:11,860
+We don't actually know how it's implemented.
+
+1305
+01:17:11,860 --> 01:17:14,980
+And I'm sure that the way it's implemented is a trade secret.
+
+1306
+01:17:15,940 --> 01:17:21,620
+Because this is the backbone of why NVIDIA can claim that they get x speed up on x architecture,
+
+1307
+01:17:21,620 --> 01:17:25,300
+because you make an improvement to matrix multiply, and everything is fast.
+
+1308
+01:17:25,620 --> 01:17:29,140
+But there's a lot of effort put into CUBLOS optimization,
+
+1309
+01:17:29,140 --> 01:17:33,220
+and every major ML framework that runs on NVIDIA GPUs uses this under the hood.
+
+1310
+01:17:33,940 --> 01:17:38,180
+I have seen niche blog posts about people being able to beat a CUBLOS implementation
+
+1311
+01:17:38,180 --> 01:17:40,100
+with something very clever, but do not try.
+
+1312
+01:17:40,740 --> 01:17:42,100
+That's a PhD thesis, for sure.
+
+1313
+01:17:43,140 --> 01:17:43,640
+Cool.
+
+1314
+01:17:44,980 --> 01:17:48,020
+There are a bunch of different gem functions for different data types,
+
+1315
+01:17:48,020 --> 01:17:50,340
+because, of course, you can get bits of performance
+
+1316
+01:17:50,340 --> 01:17:52,660
+if you know that you're dealing with shorts rather than longs.
+
+1317
+01:17:53,300 --> 01:17:58,980
+When in doubt, just do SGEM, because people don't tend to use the full precision of longs.
+
+1318
+01:17:59,620 --> 01:18:03,700
+But technically, you have real values and complex values that you can use,
+
+1319
+01:18:03,700 --> 01:18:05,140
+and you have short and long precision.
+
+1320
+01:18:06,340 --> 01:18:10,420
+And over here is the spec, naturally, for a very fast and optimized function.
+
+1321
+01:18:10,420 --> 01:18:12,420
+There's a bunch of different inputs, and it's a pain to use,
+
+1322
+01:18:14,580 --> 01:18:15,860
+to sacrifice for performance.
+
+1323
+01:18:18,740 --> 01:18:22,100
+Yeah, on the same note, directly using CUBLOS is actually pretty cumbersome.
+
+1324
+01:18:22,100 --> 01:18:24,580
+There's a lot of state to set up beforehand.
+
+1325
+01:18:24,580 --> 01:18:28,580
+As you can see, this is where I call the SGEM from CUBLOS,
+
+1326
+01:18:28,580 --> 01:18:32,020
+but you have to create the handles, you have to initialize this,
+
+1327
+01:18:32,660 --> 01:18:34,740
+and then you have to, of course, check errors if you're being safe.
+
+1328
+01:18:36,900 --> 01:18:38,020
+If you want a sample program,
+
+1329
+01:18:40,580 --> 01:18:44,100
+when you have your CUDA install and program data,
+
+1330
+01:18:44,100 --> 01:18:45,060
+they have a bunch of samples.
+
+1331
+01:18:45,060 --> 01:18:48,340
+So if you go check the samples, I think CUDA version is now 11.7 or something,
+
+1332
+01:18:49,140 --> 01:18:50,500
+maybe even higher than that.
+
+1333
+01:18:50,500 --> 01:18:52,100
+But if you just go to the samples directory,
+
+1334
+01:18:52,100 --> 01:18:54,980
+you should be able to find examples of SGEM.
+
+1335
+01:18:56,020 --> 01:19:01,380
+Also, a GitHub link to a 2015 version of the sample is available.
+
+1336
+01:19:01,380 --> 01:19:05,540
+I wouldn't go there for the most updated sample that runs CUBLOS.
+
+1337
+01:19:05,540 --> 01:19:06,660
+This is the 2015 version.
+
+1338
+01:19:06,660 --> 01:19:08,820
+But if you check this directory on your computer,
+
+1339
+01:19:08,820 --> 01:19:10,500
+and you have CUDA installed, you'll have it.
+
+1340
+01:19:14,100 --> 01:19:17,140
+So what about for other layers that aren't matrix multiply?
+
+1341
+01:19:17,140 --> 01:19:18,820
+Like, great that we have matrix multiply,
+
+1342
+01:19:18,900 --> 01:19:20,900
+but what about speeding up stuff like convolutions?
+
+1343
+01:19:20,900 --> 01:19:22,340
+What about speeding up MaxPool?
+
+1344
+01:19:23,780 --> 01:19:27,620
+So there's another library that's also very important called CUDDNN,
+
+1345
+01:19:27,620 --> 01:19:29,380
+which stands for CUDA Deep Neural Network.
+
+1346
+01:19:30,100 --> 01:19:33,380
+And it's another closed source library built on top of CUBLOS.
+
+1347
+01:19:33,940 --> 01:19:37,220
+And it provides functions, both forward and backward passes,
+
+1348
+01:19:37,220 --> 01:19:42,740
+for convolution, MaxPool, Softmax, Sigmoid, Relu, Tanh,
+
+1349
+01:19:42,740 --> 01:19:44,900
+even though no one uses hyperbolic tangent anymore.
+
+1350
+01:19:45,700 --> 01:19:47,460
+It does not provide a linear layer, importantly,
+
+1351
+01:19:47,460 --> 01:19:50,740
+because that's literally just calling sgem once.
+
+1352
+01:19:51,460 --> 01:19:54,260
+So they force you to use CUBLOS at least once.
+
+1353
+01:19:54,260 --> 01:19:55,380
+But for everything else,
+
+1354
+01:19:55,380 --> 01:19:59,060
+they have specifically optimized versions of convolutions.
+
+1355
+01:19:59,060 --> 01:20:02,180
+And so packages like PyTorch and TensorFlow
+
+1356
+01:20:02,820 --> 01:20:04,740
+call this for their CUDA implementation.
+
+1357
+01:20:05,380 --> 01:20:08,180
+And this is obviously, again, very optimized.
+
+1358
+01:20:10,580 --> 01:20:12,740
+So CUDDNN is also here.
+
+1359
+01:20:12,740 --> 01:20:13,380
+Sorry, go ahead, yeah.
+
+1360
+01:20:13,620 --> 01:20:19,780
+General question, who owns TensorFlow or Keras?
+
+1361
+01:20:19,780 --> 01:20:20,740
+Is this a company?
+
+1362
+01:20:22,180 --> 01:20:23,380
+Yeah, Google owns TensorFlow.
+
+1363
+01:20:24,020 --> 01:20:25,220
+And Facebook owns PyTorch.
+
+1364
+01:20:26,820 --> 01:20:29,780
+I think Google also owns Jax, which is another employee.
+
+1365
+01:20:30,740 --> 01:20:31,460
+That's a good question.
+
+1366
+01:20:31,460 --> 01:20:34,980
+I don't, I feel like it's one of either Google or Facebook,
+
+1367
+01:20:34,980 --> 01:20:37,220
+or maybe, I don't know.
+
+1368
+01:20:38,020 --> 01:20:40,420
+But I haven't seen Keras in a long time.
+
+1369
+01:20:41,300 --> 01:20:44,980
+So whoever did own Keras got a bad return on investment.
+
+1370
+01:20:44,980 --> 01:20:49,540
+Who owns Scikit?
+
+1371
+01:20:49,540 --> 01:20:50,020
+Scikit?
+
+1372
+01:20:50,020 --> 01:20:50,740
+That's a good question.
+
+1373
+01:20:50,740 --> 01:20:52,500
+I have no idea who owns Scikit Learn.
+
+1374
+01:20:53,700 --> 01:20:56,100
+But they're less of a deep learning framework
+
+1375
+01:20:56,100 --> 01:20:58,980
+and more of if you want to implement linear regression
+
+1376
+01:20:58,980 --> 01:21:02,020
+or something that's easy to do on the CPU.
+
+1377
+01:21:02,020 --> 01:21:04,340
+And I also imagine that they probably call
+
+1378
+01:21:04,340 --> 01:21:06,180
+the CPU loss routines under the hood as well.
+
+1379
+01:21:07,220 --> 01:21:08,500
+But yeah, that's a good question.
+
+1380
+01:21:08,500 --> 01:21:11,140
+I think it's some non-profit collective or something.
+
+1381
+01:21:14,660 --> 01:21:16,420
+ONNX, I think, is also an open source.
+
+1382
+01:21:16,420 --> 01:21:18,260
+It's like, I'll talk about ONNX later in the lecture.
+
+1383
+01:21:18,260 --> 01:21:21,220
+But I think it's just a standard.
+
+1384
+01:21:21,220 --> 01:21:23,700
+And so they have some spec that they write up.
+
+1385
+01:21:23,700 --> 01:21:28,180
+And it's some inter-company designed specific spec.
+
+1386
+01:21:28,820 --> 01:21:31,220
+And then that's just operated by everyone.
+
+1387
+01:21:31,220 --> 01:21:34,980
+So similar to Linux, where it's just kind of open source.
+
+1388
+01:21:39,460 --> 01:21:39,940
+Cool.
+
+1389
+01:21:41,460 --> 01:21:46,340
+Right, so talking about CUDNN as well,
+
+1390
+01:21:46,340 --> 01:21:48,420
+it's pretty cumbersome to use.
+
+1391
+01:21:48,980 --> 01:21:50,820
+Again, that's the price you pay for performance.
+
+1392
+01:21:50,820 --> 01:21:53,460
+But there are a lot of resources on CUDNN.
+
+1393
+01:21:53,460 --> 01:21:55,940
+And it's also a really nice niche skill to learn.
+
+1394
+01:21:55,940 --> 01:21:57,780
+Like, very few people get experience
+
+1395
+01:21:57,780 --> 01:21:59,300
+writing CUDNN directly that aren't
+
+1396
+01:21:59,300 --> 01:22:00,900
+in machine learning performance.
+
+1397
+01:22:00,900 --> 01:22:02,580
+And that type of thing is great to have on a resume.
+
+1398
+01:22:03,700 --> 01:22:06,980
+C++ code with Kuboas and CUDNN is the industry standard
+
+1399
+01:22:06,980 --> 01:22:08,100
+for machine learning performance.
+
+1400
+01:22:08,820 --> 01:22:13,220
+I have on very good confidence that things like DLSS
+
+1401
+01:22:13,860 --> 01:22:19,060
+and things like most of the performance-critical machine
+
+1402
+01:22:19,060 --> 01:22:22,180
+learning applications are all written directly in C++
+
+1403
+01:22:22,180 --> 01:22:23,940
+by calling CUDNN code.
+
+1404
+01:22:23,940 --> 01:22:26,100
+So if you want to have the fastest possible code,
+
+1405
+01:22:26,100 --> 01:22:26,900
+this is what you want to do.
+
+1406
+01:22:30,340 --> 01:22:31,140
+Cool, all right.
+
+1407
+01:22:32,980 --> 01:22:35,460
+So here's a sample of an improvement
+
+1408
+01:22:35,460 --> 01:22:38,260
+that CUDNN likely, again, we don't know the source code.
+
+1409
+01:22:38,340 --> 01:22:39,780
+But likely makes.
+
+1410
+01:22:39,780 --> 01:22:41,940
+So normally, to do a convolution,
+
+1411
+01:22:41,940 --> 01:22:43,860
+you need to take the filter and apply it
+
+1412
+01:22:43,860 --> 01:22:45,860
+to each position in the image.
+
+1413
+01:22:45,860 --> 01:22:48,100
+You sort of sweep the filter across the image.
+
+1414
+01:22:48,100 --> 01:22:49,700
+And that's some big for loop.
+
+1415
+01:22:49,700 --> 01:22:50,980
+And we for loop over the indices.
+
+1416
+01:22:50,980 --> 01:22:51,860
+And then we sweep the filter.
+
+1417
+01:22:52,900 --> 01:22:58,980
+But can we improve this by framing it as a matrix multiply
+
+1418
+01:22:58,980 --> 01:23:00,260
+rather than sweeping the filter?
+
+1419
+01:23:01,220 --> 01:23:04,020
+So if you unroll the pixels that would
+
+1420
+01:23:04,020 --> 01:23:05,380
+be multiplied by the filter.
+
+1421
+01:23:05,380 --> 01:23:10,260
+So the pixels of the image that are under this patch,
+
+1422
+01:23:10,260 --> 01:23:13,860
+for example, into columns.
+
+1423
+01:23:13,860 --> 01:23:17,940
+So instead of a, let's say, 3 by 3 by 5 block,
+
+1424
+01:23:17,940 --> 01:23:22,340
+you have just one vector of 3 times 3 times 5 pixels.
+
+1425
+01:23:23,140 --> 01:23:24,260
+And then you take the filter.
+
+1426
+01:23:24,260 --> 01:23:26,660
+And you unroll that into one column vector
+
+1427
+01:23:26,660 --> 01:23:28,420
+of 3 by 3 by 5 pixels.
+
+1428
+01:23:28,980 --> 01:23:31,940
+You can then frame a convolution as a gigantic matrix multiply
+
+1429
+01:23:31,940 --> 01:23:35,140
+where each of the patches get their own row vector.
+
+1430
+01:23:35,140 --> 01:23:37,540
+And the filter is just the same column vector
+
+1431
+01:23:37,540 --> 01:23:38,820
+copied a bunch of times.
+
+1432
+01:23:39,620 --> 01:23:40,900
+And then you could just matrix multiply.
+
+1433
+01:23:42,420 --> 01:23:44,660
+So this is way, way, way faster, especially
+
+1434
+01:23:44,660 --> 01:23:49,060
+when you don't have that many patches to go through
+
+1435
+01:23:49,060 --> 01:23:50,100
+when you're doing convolution.
+
+1436
+01:23:50,740 --> 01:23:52,740
+What are the drawbacks of doing this?
+
+1437
+01:23:53,620 --> 01:23:54,340
+Can anyone tell me?
+
+1438
+01:24:00,660 --> 01:24:02,900
+Is this just faster in every possible scenario?
+
+1439
+01:24:05,940 --> 01:24:10,100
+I guess that if it's a simple case,
+
+1440
+01:24:10,100 --> 01:24:12,340
+it's like the overhead is basically not worth it.
+
+1441
+01:24:14,020 --> 01:24:14,500
+Possibly.
+
+1442
+01:24:15,060 --> 01:24:17,540
+But there's another subtle detail to this.
+
+1443
+01:24:17,540 --> 01:24:19,860
+I think directly when you read about
+
+1444
+01:24:21,220 --> 01:24:25,300
+use these sorts of unrolls, it has to be done at compile time.
+
+1445
+01:24:25,300 --> 01:24:26,020
+That's also true.
+
+1446
+01:24:26,020 --> 01:24:28,740
+But we do know the bounds of our input.
+
+1447
+01:24:28,740 --> 01:24:30,980
+We know our input size is a fixed size at compile time.
+
+1448
+01:24:30,980 --> 01:24:31,940
+So we would know the bounds.
+
+1449
+01:24:31,940 --> 01:24:33,140
+But yes, that's another important point.
+
+1450
+01:24:35,380 --> 01:24:41,860
+So maybe I could turn your attention to this kernel matrix.
+
+1451
+01:24:41,860 --> 01:24:47,940
+And if you have one filter and you have that as per column,
+
+1452
+01:24:50,100 --> 01:24:52,260
+in order to apply the same filter to every patch,
+
+1453
+01:24:53,140 --> 01:24:55,860
+what you're doing is you're actually OK.
+
+1454
+01:24:55,860 --> 01:24:59,300
+Instead of this, what happens when your patches overlap?
+
+1455
+01:25:06,020 --> 01:25:06,520
+Yeah.
+
+1456
+01:25:08,180 --> 01:25:11,860
+So in your input matrix, if you're unrolling every patch
+
+1457
+01:25:11,860 --> 01:25:15,060
+and some patches overlap, this input matrix
+
+1458
+01:25:15,060 --> 01:25:17,140
+is going to be very large.
+
+1459
+01:25:18,100 --> 01:25:21,300
+Because you will include the same data multiple times
+
+1460
+01:25:21,860 --> 01:25:23,860
+for every overlapping portion of the patches.
+
+1461
+01:25:24,420 --> 01:25:26,340
+So if memory is your bottleneck, like say
+
+1462
+01:25:26,340 --> 01:25:27,700
+you're running on a small device,
+
+1463
+01:25:28,260 --> 01:25:31,780
+you might not be able to do this for convolutions
+
+1464
+01:25:31,780 --> 01:25:33,620
+because you actually don't have enough space.
+
+1465
+01:25:33,620 --> 01:25:36,180
+And it's also very common that filters are large.
+
+1466
+01:25:36,180 --> 01:25:37,380
+Let's say 7 by 7.
+
+1467
+01:25:37,380 --> 01:25:38,980
+And then their stride is 1.
+
+1468
+01:25:38,980 --> 01:25:42,580
+So 6 of the 7 indices are actual overlaps.
+
+1469
+01:25:42,580 --> 01:25:46,500
+So you might blow up your memory usage to 6 or 7 times
+
+1470
+01:25:46,500 --> 01:25:47,780
+just to get the small speed up.
+
+1471
+01:25:47,780 --> 01:25:50,660
+And also, that involves copying all of that information.
+
+1472
+01:25:51,940 --> 01:25:55,540
+So you can see why for large filters that have short strides,
+
+1473
+01:25:55,540 --> 01:25:57,540
+this would be suboptimal.
+
+1474
+01:25:57,540 --> 01:25:59,380
+But especially in a case like this,
+
+1475
+01:25:59,380 --> 01:26:02,660
+where the filters do not have any overlap, perfectly fine.
+
+1476
+01:26:02,660 --> 01:26:05,700
+And if anything, this is a very, very, very good
+
+1477
+01:26:05,700 --> 01:26:06,580
+optimization of this.
+
+1478
+01:26:08,740 --> 01:26:09,240
+Cool.
+
+1479
+01:26:10,660 --> 01:26:13,940
+And of course, when you're calling convolutions in cuDNN,
+
+1480
+01:26:13,940 --> 01:26:15,940
+they would check what your filter size is
+
+1481
+01:26:15,940 --> 01:26:17,220
+and what your image size is.
+
+1482
+01:26:17,220 --> 01:26:18,900
+And they would know whether or not
+
+1483
+01:26:18,900 --> 01:26:20,580
+to implement an optimization like this
+
+1484
+01:26:20,580 --> 01:26:21,620
+based on what you've passed it.
+
+1485
+01:26:22,260 --> 01:26:25,460
+And fairly confident that this is,
+
+1486
+01:26:26,420 --> 01:26:28,500
+at least some version of this is going on in cuDNN,
+
+1487
+01:26:28,500 --> 01:26:29,300
+but we can never be sure.
+
+1488
+01:26:31,700 --> 01:26:32,180
+Cool.
+
+1489
+01:26:32,260 --> 01:26:35,860
+So again, my text-filled recap slide.
+
+1490
+01:26:35,860 --> 01:26:38,420
+So BLOS is a standard set of linear algebra subroutines
+
+1491
+01:26:38,420 --> 01:26:41,780
+that are typically implemented by manufacturers
+
+1492
+01:26:41,780 --> 01:26:42,420
+on different machines.
+
+1493
+01:26:43,780 --> 01:26:46,100
+cuBLOS is a parallel BLOS implementation
+
+1494
+01:26:46,100 --> 01:26:48,340
+that NVIDIA takes a lot of pains to optimize.
+
+1495
+01:26:48,900 --> 01:26:51,380
+And then cuDNN is a library that uses cuBLOS
+
+1496
+01:26:52,100 --> 01:26:55,700
+to do convolutions and compute forward and backward passes.
+
+1497
+01:26:55,700 --> 01:26:58,420
+And all of the modern GPU-based deep learning
+
+1498
+01:26:58,420 --> 01:26:59,860
+is built on cuBLOS and cuDNN.
+
+1499
+01:27:00,820 --> 01:27:03,620
+And so both PyTorch and TensorFlow both call it.
+
+1500
+01:27:04,500 --> 01:27:07,300
+Can these things be patented or...
+
+1501
+01:27:07,300 --> 01:27:08,180
+Probably.
+
+1502
+01:27:08,180 --> 01:27:12,420
+So you can patent an implementation
+
+1503
+01:27:12,420 --> 01:27:13,620
+for an optimization?
+
+1504
+01:27:14,500 --> 01:27:14,900
+Yeah.
+
+1505
+01:27:14,900 --> 01:27:17,700
+In machine learning, it's very, very taboo
+
+1506
+01:27:17,700 --> 01:27:19,380
+to patent basic techniques
+
+1507
+01:27:20,020 --> 01:27:22,340
+because that kind of slows down the progress of the field.
+
+1508
+01:27:22,340 --> 01:27:23,620
+Like I talked about on Monday
+
+1509
+01:27:23,620 --> 01:27:25,380
+where Google attempted to patent Dropout
+
+1510
+01:27:25,380 --> 01:27:26,580
+and got huge blowback.
+
+1511
+01:27:27,140 --> 01:27:28,740
+I would assume that the reason
+
+1512
+01:27:28,740 --> 01:27:31,780
+why techniques like this aren't patented
+
+1513
+01:27:31,780 --> 01:27:33,780
+is partially that,
+
+1514
+01:27:33,780 --> 01:27:35,220
+because they don't want to get the blowback,
+
+1515
+01:27:35,220 --> 01:27:36,660
+and also partially because
+
+1516
+01:27:36,660 --> 01:27:38,580
+when researchers come up with a good technique,
+
+1517
+01:27:38,580 --> 01:27:40,020
+they want to publish a paper about it.
+
+1518
+01:27:40,660 --> 01:27:43,300
+And patenting is like a sort of alternative
+
+1519
+01:27:43,300 --> 01:27:44,260
+to publishing a paper
+
+1520
+01:27:44,260 --> 01:27:47,620
+where you give the information out,
+
+1521
+01:27:47,620 --> 01:27:49,140
+but it's in a patented form.
+
+1522
+01:27:49,140 --> 01:27:49,940
+Whereas paper is just,
+
+1523
+01:27:49,940 --> 01:27:51,700
+you give the information out, free to use.
+
+1524
+01:27:51,700 --> 01:27:53,300
+And luckily for us,
+
+1525
+01:27:53,300 --> 01:27:54,820
+machine learning research culture
+
+1526
+01:27:54,820 --> 01:27:58,500
+is one that prioritizes giving information out.
+
+1527
+01:27:58,740 --> 01:28:00,420
+Even the big company research teams
+
+1528
+01:28:00,420 --> 01:28:01,700
+tend to publish all of their research,
+
+1529
+01:28:01,700 --> 01:28:02,260
+which is great
+
+1530
+01:28:03,060 --> 01:28:04,100
+because that's the reason
+
+1531
+01:28:04,100 --> 01:28:06,100
+why machine learning is progressing so quickly.
+
+1532
+01:28:06,100 --> 01:28:07,060
+But yeah, to your point,
+
+1533
+01:28:07,060 --> 01:28:08,420
+you totally could patent something like this.
+
+1534
+01:28:10,420 --> 01:28:11,620
+Why is that the case?
+
+1535
+01:28:11,620 --> 01:28:16,100
+Because I took an IT class
+
+1536
+01:28:16,100 --> 01:28:17,940
+that I don't remember that much from,
+
+1537
+01:28:17,940 --> 01:28:23,940
+but in, say, modalities with the Swiffer,
+
+1538
+01:28:24,100 --> 01:28:30,980
+or that stuff is all very competitively patented.
+
+1539
+01:28:30,980 --> 01:28:34,020
+I think also Google tried to patent PageRank.
+
+1540
+01:28:35,860 --> 01:28:37,060
+I think that was overturned
+
+1541
+01:28:37,060 --> 01:28:39,140
+because new legislation came out
+
+1542
+01:28:39,140 --> 01:28:41,300
+about how abstract that can be.
+
+1543
+01:28:41,300 --> 01:28:42,580
+Right.
+
+1544
+01:28:42,580 --> 01:28:45,540
+Yeah, I imagine that the reason
+
+1545
+01:28:45,540 --> 01:28:48,340
+why it's not typical for machine learning
+
+1546
+01:28:49,460 --> 01:28:50,820
+patents to happen
+
+1547
+01:28:50,820 --> 01:28:52,740
+is because machine learning is moving so quickly
+
+1548
+01:28:53,300 --> 01:28:55,460
+that things that you patent,
+
+1549
+01:28:55,460 --> 01:28:56,740
+you can't release.
+
+1550
+01:28:56,740 --> 01:28:58,340
+And by the time your patent goes through,
+
+1551
+01:28:58,340 --> 01:28:59,380
+it might be obsolete.
+
+1552
+01:28:59,380 --> 01:29:00,900
+Like dropout is one of those rare techniques
+
+1553
+01:29:00,900 --> 01:29:03,140
+that we know is going to be relevant basically forever.
+
+1554
+01:29:03,940 --> 01:29:04,340
+Right.
+
+1555
+01:29:04,340 --> 01:29:06,820
+But it's very hard to confidently say like,
+
+1556
+01:29:06,820 --> 01:29:09,940
+ah, yes, my convolutional neural net optimization
+
+1557
+01:29:09,940 --> 01:29:11,460
+is going to be relevant forever
+
+1558
+01:29:11,460 --> 01:29:13,220
+when convolutional neural nets
+
+1559
+01:29:13,220 --> 01:29:15,860
+might go obsolete by some new architecture suddenly
+
+1560
+01:29:15,860 --> 01:29:17,620
+within five years, right?
+
+1561
+01:29:17,620 --> 01:29:19,460
+Like it's already somewhat starting to happen
+
+1562
+01:29:19,460 --> 01:29:21,220
+with transformers, right?
+
+1563
+01:29:21,220 --> 01:29:23,620
+Convolutional neural nets have a lot of competition now.
+
+1564
+01:29:23,620 --> 01:29:27,220
+So yeah, it's probably from that,
+
+1565
+01:29:27,220 --> 01:29:28,420
+but also at the same time,
+
+1566
+01:29:28,420 --> 01:29:30,180
+it's just such a fast field.
+
+1567
+01:29:30,180 --> 01:29:31,940
+And I think the culture is mainly the reason.
+
+1568
+01:29:33,540 --> 01:29:36,500
+Anyway, right.
+
+1569
+01:29:36,500 --> 01:29:39,380
+So going beyond KUBLAS and QDNN,
+
+1570
+01:29:40,580 --> 01:29:43,780
+is there any easier way to implement neural networks?
+
+1571
+01:29:43,780 --> 01:29:44,980
+Of course, the answer is yes.
+
+1572
+01:29:44,980 --> 01:29:46,500
+I've been alluding to PyTorch and TensorFlow,
+
+1573
+01:29:46,500 --> 01:29:47,700
+but we're going to finally talk about it.
+
+1574
+01:29:48,420 --> 01:29:50,420
+So C++ code that directly calls KUBLAS,
+
+1575
+01:29:50,660 --> 01:29:52,260
+QDNN is the best performance you can get,
+
+1576
+01:29:52,260 --> 01:29:53,780
+but it's super cumbersome to write.
+
+1577
+01:29:54,500 --> 01:29:56,020
+So what if we don't care too much
+
+1578
+01:29:56,020 --> 01:29:57,860
+about speed of prediction, right?
+
+1579
+01:29:57,860 --> 01:29:59,700
+Like what if we just want to rapidly prototype
+
+1580
+01:29:59,700 --> 01:30:02,020
+a new network and then check its accuracy
+
+1581
+01:30:02,020 --> 01:30:03,780
+and then sort of iterate really quickly?
+
+1582
+01:30:03,780 --> 01:30:04,980
+Is there a less cumbersome option?
+
+1583
+01:30:06,260 --> 01:30:12,100
+So the two biggest frameworks are PyTorch and TensorFlow.
+
+1584
+01:30:12,100 --> 01:30:16,420
+PyTorch is the bigger of the two frameworks,
+
+1585
+01:30:16,420 --> 01:30:18,180
+but TensorFlow is very substantial.
+
+1586
+01:30:18,180 --> 01:30:20,740
+And most all of the Google teams use TensorFlow.
+
+1587
+01:30:22,420 --> 01:30:24,740
+Both have C++ and Python bindings.
+
+1588
+01:30:24,740 --> 01:30:27,060
+It's much more common for people to use the Python bindings
+
+1589
+01:30:27,060 --> 01:30:29,460
+because it's less code to write, easier to iterate on.
+
+1590
+01:30:30,260 --> 01:30:31,860
+But if you want to have faster performance,
+
+1591
+01:30:31,860 --> 01:30:33,620
+of course, you're going to use the C++ bindings.
+
+1592
+01:30:34,340 --> 01:30:36,900
+And they both call QDNN under the surface
+
+1593
+01:30:36,900 --> 01:30:38,100
+when running on NVIDIA GPUs,
+
+1594
+01:30:38,100 --> 01:30:40,180
+but they will call other things under the hood
+
+1595
+01:30:40,180 --> 01:30:41,780
+when running on, let's say, TPUs
+
+1596
+01:30:41,780 --> 01:30:44,180
+or running without access to a CUDA GPU.
+
+1597
+01:30:44,180 --> 01:30:46,900
+They'll sort of abstract away that.
+
+1598
+01:30:47,540 --> 01:30:52,100
+So is this the standard or do they just prototype it?
+
+1599
+01:30:52,100 --> 01:30:54,100
+They're research standard, for sure.
+
+1600
+01:30:54,820 --> 01:30:56,980
+And so I guess that answers your question, right?
+
+1601
+01:30:56,980 --> 01:30:58,420
+They're mainly used for prototyping
+
+1602
+01:30:59,140 --> 01:31:02,020
+and in companies that don't know better.
+
+1603
+01:31:03,380 --> 01:31:05,300
+So if someone's trying to deploy
+
+1604
+01:31:05,300 --> 01:31:06,420
+some machine learning application
+
+1605
+01:31:06,420 --> 01:31:07,860
+and has PyTorch code to run it
+
+1606
+01:31:07,860 --> 01:31:09,700
+and they don't know that you can get
+
+1607
+01:31:09,700 --> 01:31:11,220
+like 100x speed up or whatever,
+
+1608
+01:31:11,220 --> 01:31:12,100
+then yeah, they would use it.
+
+1609
+01:31:12,900 --> 01:31:15,540
+And again, like PyTorch is not actually that slow.
+
+1610
+01:31:15,620 --> 01:31:17,220
+And I'll get into some of the reasons why.
+
+1611
+01:31:17,220 --> 01:31:19,300
+There's small optimizations you can make
+
+1612
+01:31:19,300 --> 01:31:22,580
+if you really need the extra, let's say, 30, 40%.
+
+1613
+01:31:23,540 --> 01:31:26,500
+You want to do C++, QDNN, Kubas,
+
+1614
+01:31:26,500 --> 01:31:28,420
+but like, it's really not that bad.
+
+1615
+01:31:28,420 --> 01:31:29,780
+So some companies are like,
+
+1616
+01:31:29,780 --> 01:31:32,260
+fine, it's not mission critical for this to run
+
+1617
+01:31:32,260 --> 01:31:33,700
+in 0.001 seconds.
+
+1618
+01:31:33,700 --> 01:31:34,200
+So, yeah.
+
+1619
+01:31:34,200 --> 01:31:38,740
+Does that mean that like NVIDIA GPUs
+
+1620
+01:31:38,740 --> 01:31:42,980
+have their own like QDNN, like?
+
+1621
+01:31:42,980 --> 01:31:43,540
+Yeah.
+
+1622
+01:31:43,540 --> 01:31:44,900
+So I don't know off the top of my head
+
+1623
+01:31:44,900 --> 01:31:45,540
+what it's called,
+
+1624
+01:31:45,540 --> 01:31:49,540
+but I imagine that they do have it.
+
+1625
+01:31:50,500 --> 01:31:54,580
+It's just not common to run machine learning
+
+1626
+01:31:54,580 --> 01:31:55,780
+on AMD GPUs.
+
+1627
+01:31:55,780 --> 01:32:00,020
+So do like, is research like never run on an AMD GPU?
+
+1628
+01:32:00,020 --> 01:32:01,060
+Almost never.
+
+1629
+01:32:01,060 --> 01:32:03,060
+And is it just because it's-
+
+1630
+01:32:03,060 --> 01:32:03,780
+Correct.
+
+1631
+01:32:03,780 --> 01:32:04,280
+Exactly.
+
+1632
+01:32:04,980 --> 01:32:05,480
+Yeah.
+
+1633
+01:32:06,100 --> 01:32:08,180
+And NVIDIA has been writing that all the way
+
+1634
+01:32:08,180 --> 01:32:09,380
+for the last at least 10 years.
+
+1635
+01:32:12,340 --> 01:32:12,980
+Cool. All right.
+
+1636
+01:32:15,140 --> 01:32:17,780
+Both PyTorch and TensorFlow are amazingly easy to use.
+
+1637
+01:32:18,420 --> 01:32:19,140
+I love them.
+
+1638
+01:32:19,140 --> 01:32:20,260
+Everyone does.
+
+1639
+01:32:20,260 --> 01:32:22,500
+And they're built-in classes for every single type of layer
+
+1640
+01:32:22,500 --> 01:32:23,380
+that you could ever need.
+
+1641
+01:32:23,380 --> 01:32:25,060
+So if you want a linear layer, they have it.
+
+1642
+01:32:25,060 --> 01:32:26,500
+If they want convolution, they have it.
+
+1643
+01:32:27,060 --> 01:32:28,100
+Very simple API.
+
+1644
+01:32:28,100 --> 01:32:30,820
+There's not a lot of overhead, no state setup.
+
+1645
+01:32:30,820 --> 01:32:32,420
+Tons of resources in blog posts.
+
+1646
+01:32:32,420 --> 01:32:36,260
+There's very comparatively little on Kubas, QDNN,
+
+1647
+01:32:36,260 --> 01:32:38,420
+and there's an unbelievable amount of resources
+
+1648
+01:32:38,420 --> 01:32:39,540
+for PyTorch, TensorFlow.
+
+1649
+01:32:40,260 --> 01:32:41,700
+And there's also lots of built-in models.
+
+1650
+01:32:41,700 --> 01:32:43,700
+Like for example, this is one of the built-in models
+
+1651
+01:32:43,700 --> 01:32:44,740
+that comes with PyTorch.
+
+1652
+01:32:45,940 --> 01:32:47,860
+Does anyone recognize this architecture?
+
+1653
+01:32:53,860 --> 01:32:57,620
+We have Conv, ReLU, MaxPool, Conv, ReLU, MaxPool,
+
+1654
+01:32:57,620 --> 01:32:59,620
+Conv, ReLU, MaxPool over and over again.
+
+1655
+01:32:59,620 --> 01:33:01,940
+And then we have a couple of linear layers at the end.
+
+1656
+01:33:03,060 --> 01:33:03,860
+Yeah, this is AlexNet.
+
+1657
+01:33:03,860 --> 01:33:04,180
+Yeah.
+
+1658
+01:33:04,180 --> 01:33:05,540
+So this is the implementation.
+
+1659
+01:33:05,540 --> 01:33:06,900
+Look at how nice this is, right?
+
+1660
+01:33:06,900 --> 01:33:07,620
+They have the size.
+
+1661
+01:33:08,580 --> 01:33:10,260
+All you have to do is make sure the dimensions match, right?
+
+1662
+01:33:10,260 --> 01:33:13,620
+So you have 64, 64, 192, 192, so on and so forth.
+
+1663
+01:33:14,100 --> 01:33:16,180
+Each of these layers have the kernel size.
+
+1664
+01:33:16,180 --> 01:33:17,540
+So that's the size of the filter.
+
+1665
+01:33:17,540 --> 01:33:18,180
+So that's three.
+
+1666
+01:33:18,180 --> 01:33:22,980
+And then the stride, which is how many pixels the filter moves
+
+1667
+01:33:22,980 --> 01:33:24,340
+when it goes to sweep across the image.
+
+1668
+01:33:25,060 --> 01:33:26,660
+And as long as you match the dimensions up,
+
+1669
+01:33:26,660 --> 01:33:29,540
+you can prototype neural nets really, really fast.
+
+1670
+01:33:33,460 --> 01:33:35,540
+So again, the only thing you need to implement
+
+1671
+01:33:35,540 --> 01:33:36,980
+for a new model is the forward pass.
+
+1672
+01:33:39,140 --> 01:33:41,460
+Self.features here is the concatenation
+
+1673
+01:33:41,460 --> 01:33:42,500
+of all of these different layers.
+
+1674
+01:33:42,500 --> 01:33:44,340
+And then self.classifier is the concatenation
+
+1675
+01:33:44,340 --> 01:33:45,540
+of the linear layers.
+
+1676
+01:33:45,540 --> 01:33:47,540
+So this is the forward pass for AlexNet,
+
+1677
+01:33:47,540 --> 01:33:51,700
+which calls the features pool and then the classifier,
+
+1678
+01:33:51,700 --> 01:33:55,540
+which is calling the convolutions and then the linear layers.
+
+1679
+01:33:55,540 --> 01:33:56,500
+And that's the forward pass.
+
+1680
+01:33:57,460 --> 01:34:00,820
+Even more interesting is that you don't even
+
+1681
+01:34:00,820 --> 01:34:02,500
+have to implement the backward pass
+
+1682
+01:34:02,500 --> 01:34:04,100
+because the backward pass is completely
+
+1683
+01:34:04,100 --> 01:34:05,780
+determined by the forward pass.
+
+1684
+01:34:05,780 --> 01:34:08,340
+So PyTorch, to use as an example,
+
+1685
+01:34:08,340 --> 01:34:09,460
+TensorFlow also does this.
+
+1686
+01:34:09,460 --> 01:34:11,940
+But PyTorch will completely abstract away
+
+1687
+01:34:11,940 --> 01:34:13,380
+writing the backwards function because it
+
+1688
+01:34:13,380 --> 01:34:14,900
+can figure out what the backwards function is
+
+1689
+01:34:14,900 --> 01:34:16,580
+by what you wrote in the forward function.
+
+1690
+01:34:16,580 --> 01:34:21,220
+So all you have to do here is, so if you have the forward pass,
+
+1691
+01:34:21,220 --> 01:34:23,460
+you just call it on inputs.
+
+1692
+01:34:23,460 --> 01:34:24,580
+You get your outputs.
+
+1693
+01:34:24,580 --> 01:34:25,620
+You calculate the loss.
+
+1694
+01:34:26,180 --> 01:34:29,940
+And then you call loss.backward for the backward pass.
+
+1695
+01:34:29,940 --> 01:34:31,060
+And then you're done.
+
+1696
+01:34:31,060 --> 01:34:31,700
+It's fantastic.
+
+1697
+01:34:31,700 --> 01:34:35,300
+And then optimizer also is what gradient descent you're using.
+
+1698
+01:34:35,300 --> 01:34:36,820
+So when you call optimizer.step, that
+
+1699
+01:34:36,820 --> 01:34:40,100
+is update the weights and biases from what
+
+1700
+01:34:40,100 --> 01:34:41,540
+we calculated with the gradient.
+
+1701
+01:34:42,820 --> 01:34:44,420
+And it gets even worse.
+
+1702
+01:34:45,460 --> 01:34:47,860
+So in this next part, shield your eyes.
+
+1703
+01:34:48,660 --> 01:34:51,540
+So if you want to send data to the GPU, what you do
+
+1704
+01:34:52,180 --> 01:34:54,100
+is you first initialize the data on the CPU.
+
+1705
+01:34:54,100 --> 01:34:56,020
+So this is a vector of all ones.
+
+1706
+01:34:56,020 --> 01:34:57,700
+And let's say you initialize your neural net.
+
+1707
+01:34:57,700 --> 01:34:59,220
+And then you call .CUDA.
+
+1708
+01:35:00,740 --> 01:35:02,180
+And then it moves to the GPU.
+
+1709
+01:35:02,180 --> 01:35:03,460
+And that's all you have to do.
+
+1710
+01:35:03,460 --> 01:35:04,660
+It's just .CUDA.
+
+1711
+01:35:04,660 --> 01:35:08,660
+No memory management, no dimension calculations,
+
+1712
+01:35:08,660 --> 01:35:09,940
+no shared memory, no nothing.
+
+1713
+01:35:09,940 --> 01:35:11,460
+It's just .CUDA, and it'll take care of it.
+
+1714
+01:35:12,100 --> 01:35:14,660
+So this is painfully easy if you've
+
+1715
+01:35:14,660 --> 01:35:17,380
+had to deal with all of these indices and stuff
+
+1716
+01:35:17,380 --> 01:35:18,420
+that we do in this class.
+
+1717
+01:35:18,420 --> 01:35:20,980
+So no wonder people don't use CUDA directly.
+
+1718
+01:35:22,260 --> 01:35:24,180
+But yeah, nothing about the code changes at all.
+
+1719
+01:35:24,180 --> 01:35:26,260
+If you want to train on the GPU, all you have to do
+
+1720
+01:35:26,900 --> 01:35:31,380
+is as long as your network has been like you have network
+
+1721
+01:35:31,380 --> 01:35:32,580
+equals network.CUDA.
+
+1722
+01:35:32,580 --> 01:35:35,460
+So this updates the state of the network class
+
+1723
+01:35:35,460 --> 01:35:37,300
+just to say that it's on the GPU.
+
+1724
+01:35:37,860 --> 01:35:39,540
+Call all of the code normally.
+
+1725
+01:35:40,420 --> 01:35:41,700
+And it will run on the GPU.
+
+1726
+01:35:42,340 --> 01:35:44,740
+And then all you have to do is run .CPU
+
+1727
+01:35:44,740 --> 01:35:46,580
+after you're done to get things back on the CPU.
+
+1728
+01:35:46,580 --> 01:35:47,620
+And that's done.
+
+1729
+01:35:47,620 --> 01:35:48,740
+So there's got to be a catch here.
+
+1730
+01:35:48,740 --> 01:35:49,460
+This is way too quick.
+
+1731
+01:35:51,620 --> 01:35:53,780
+For training and prototyping, there's actually not a catch.
+
+1732
+01:35:53,780 --> 01:35:54,980
+This is really, really fast.
+
+1733
+01:35:56,260 --> 01:35:57,700
+They use kubos and cuDNN.
+
+1734
+01:35:57,700 --> 01:35:59,300
+So once you start the training loop,
+
+1735
+01:35:59,300 --> 01:36:01,460
+and once everything is settled, it's still fast.
+
+1736
+01:36:02,500 --> 01:36:04,580
+Unless you're trying to build the world's biggest
+
+1737
+01:36:04,580 --> 01:36:05,940
+neural network, like you're trying
+
+1738
+01:36:05,940 --> 01:36:07,940
+to push the boundaries of what is possible
+
+1739
+01:36:07,940 --> 01:36:10,500
+on modern hardware, this should be totally fine.
+
+1740
+01:36:11,940 --> 01:36:14,100
+But what if we want to do fast prediction?
+
+1741
+01:36:14,100 --> 01:36:15,700
+What if we want mission-critical prediction?
+
+1742
+01:36:17,060 --> 01:36:20,260
+So to better understand where PyTorch and TensorFlow are weak,
+
+1743
+01:36:20,900 --> 01:36:22,340
+I'm going to introduce this idea called
+
+1744
+01:36:22,340 --> 01:36:23,620
+the computational graph model.
+
+1745
+01:36:24,420 --> 01:36:26,660
+Really, all this is, it's just a graphical representation
+
+1746
+01:36:26,660 --> 01:36:28,340
+of what's going on in a neural network.
+
+1747
+01:36:28,340 --> 01:36:30,580
+So the forward arrows, these black arrows,
+
+1748
+01:36:30,580 --> 01:36:33,620
+are inputs into different layers.
+
+1749
+01:36:33,620 --> 01:36:34,980
+These boxes are the different layers.
+
+1750
+01:36:36,100 --> 01:36:37,060
+And they're not just the different layers.
+
+1751
+01:36:37,060 --> 01:36:38,100
+They're actually just operations.
+
+1752
+01:36:38,100 --> 01:36:39,460
+So x would be the input.
+
+1753
+01:36:39,460 --> 01:36:42,420
+x times weight, this is multiplication, plus bias.
+
+1754
+01:36:42,420 --> 01:36:43,860
+Then we do the non-linearity.
+
+1755
+01:36:43,860 --> 01:36:48,420
+And this is times weight plus bias, non-linearity output.
+
+1756
+01:36:48,420 --> 01:36:52,100
+So this is just an example of a two-layer neural network
+
+1757
+01:36:52,100 --> 01:36:53,220
+in graphical format.
+
+1758
+01:36:53,220 --> 01:36:55,860
+And these red arrows are the gradients.
+
+1759
+01:36:58,340 --> 01:37:00,020
+Computational graphs are a nice way
+
+1760
+01:37:00,020 --> 01:37:02,020
+of representing a neural network flow of information.
+
+1761
+01:37:02,020 --> 01:37:03,300
+It helps us understand what derivatives
+
+1762
+01:37:03,300 --> 01:37:04,340
+get backpropagated where.
+
+1763
+01:37:05,700 --> 01:37:07,380
+Important question, does the computational graph
+
+1764
+01:37:07,380 --> 01:37:09,140
+fully describe a network architecture?
+
+1765
+01:37:09,460 --> 01:37:10,740
+Or is there things that it leaves out?
+
+1766
+01:37:16,820 --> 01:37:18,580
+So if you have, well, as long as you
+
+1767
+01:37:18,580 --> 01:37:21,780
+have nodes for the activation functions themselves, then yeah.
+
+1768
+01:37:21,780 --> 01:37:23,380
+And it's very typical to have it.
+
+1769
+01:37:24,180 --> 01:37:25,220
+So not quite.
+
+1770
+01:37:33,540 --> 01:37:36,500
+So it turns out that the computational graph does
+
+1771
+01:37:36,500 --> 01:37:38,980
+actually fully describe a neural network architecture
+
+1772
+01:37:38,980 --> 01:37:39,940
+with small additions.
+
+1773
+01:37:39,940 --> 01:37:41,780
+So as long as you have the input dimensions
+
+1774
+01:37:41,780 --> 01:37:44,100
+and everything is fine, yeah, this completely describes it.
+
+1775
+01:37:44,100 --> 01:37:45,860
+And you mentioned ONNX.
+
+1776
+01:37:45,860 --> 01:37:48,260
+ONNX is a format for representing
+
+1777
+01:37:48,260 --> 01:37:50,100
+the computational graph of a neural network.
+
+1778
+01:37:50,100 --> 01:37:52,180
+So it's just some sort of serialized format
+
+1779
+01:37:52,180 --> 01:37:55,620
+that you can print out what the computational graph looks like.
+
+1780
+01:37:55,620 --> 01:37:58,260
+And then you can load that in to other frameworks.
+
+1781
+01:37:58,260 --> 01:38:01,780
+And if they support ONNX, that will fully
+
+1782
+01:38:01,780 --> 01:38:03,700
+describe what the neural network is.
+
+1783
+01:38:03,700 --> 01:38:05,700
+So they can initialize whatever state they want.
+
+1784
+01:38:05,700 --> 01:38:06,200
+So yeah.
+
+1785
+01:38:08,980 --> 01:38:13,300
+So PyTorch and TensorFlow both allow dynamic just-in-time
+
+1786
+01:38:13,300 --> 01:38:15,940
+updates to the computational graph mid-training.
+
+1787
+01:38:15,940 --> 01:38:18,420
+So what this means is that you can stop halfway
+
+1788
+01:38:18,420 --> 01:38:20,260
+through a training run and add a new layer.
+
+1789
+01:38:20,260 --> 01:38:22,500
+Or you can add conditional layers.
+
+1790
+01:38:22,500 --> 01:38:23,700
+And the main reason why they do that
+
+1791
+01:38:23,700 --> 01:38:24,980
+is because of this conditional thing.
+
+1792
+01:38:24,980 --> 01:38:28,100
+It's very nice to be able to add debug prints.
+
+1793
+01:38:28,100 --> 01:38:29,940
+Let's say if weight is over a certain amount,
+
+1794
+01:38:30,580 --> 01:38:31,300
+do this instead.
+
+1795
+01:38:31,300 --> 01:38:33,220
+Or if weight is over a certain amount, stop.
+
+1796
+01:38:34,740 --> 01:38:38,180
+TensorFlow v1 used to not allow this just-in-time updates.
+
+1797
+01:38:38,180 --> 01:38:40,820
+But now TensorFlow v2 does because they
+
+1798
+01:38:40,820 --> 01:38:43,540
+need to optimize for the main use case, which is researchers.
+
+1799
+01:38:43,540 --> 01:38:45,220
+And they don't care as much about performance.
+
+1800
+01:38:46,180 --> 01:38:48,180
+Why would this be really bad for optimization?
+
+1801
+01:38:48,180 --> 01:38:50,340
+Like, if we can change the computational graph whenever
+
+1802
+01:38:50,340 --> 01:38:52,740
+we want, what can't we do?
+
+1803
+01:38:54,260 --> 01:38:55,780
+Like, what sort of optimizations can we
+
+1804
+01:38:55,780 --> 01:38:58,740
+make if we know the computational graph will never, ever change?
+
+1805
+01:39:08,580 --> 01:39:10,900
+So one optimization we talked about earlier
+
+1806
+01:39:11,700 --> 01:39:14,980
+was trying to combine things in the same CUDA kernel.
+
+1807
+01:39:16,580 --> 01:39:17,140
+Right?
+
+1808
+01:39:17,140 --> 01:39:19,540
+So that's generally called layer fusion.
+
+1809
+01:39:21,540 --> 01:39:24,340
+If the computational graph can change,
+
+1810
+01:39:25,940 --> 01:39:28,580
+it might change in ways that do not
+
+1811
+01:39:28,580 --> 01:39:29,860
+allow us to fuse two layers.
+
+1812
+01:39:29,860 --> 01:39:31,780
+Like, let's say we fuse two layers,
+
+1813
+01:39:31,780 --> 01:39:34,660
+and then the user decided that the computational graph can
+
+1814
+01:39:34,900 --> 01:39:36,740
+Like, let's say we fuse two layers,
+
+1815
+01:39:36,740 --> 01:39:38,740
+and then the user decided that they actually
+
+1816
+01:39:38,740 --> 01:39:40,500
+wanted a different layer in between those two layers.
+
+1817
+01:39:41,140 --> 01:39:41,620
+Right?
+
+1818
+01:39:41,620 --> 01:39:42,420
+Then we are screwed.
+
+1819
+01:39:42,980 --> 01:39:45,540
+Because we fuse those two layers, we can no longer separate them.
+
+1820
+01:39:45,540 --> 01:39:48,180
+Or at least it's very difficult to separate them again.
+
+1821
+01:39:49,060 --> 01:39:50,020
+It's easy to fuse things.
+
+1822
+01:39:50,020 --> 01:39:51,940
+It's kind of hard to, like, un-fuse things.
+
+1823
+01:39:53,140 --> 01:39:57,300
+So this is actually a pretty big area for optimization
+
+1824
+01:39:57,300 --> 01:39:58,420
+for PyTorch and TensorFlow.
+
+1825
+01:39:58,420 --> 01:40:00,260
+And again, it's not like they don't know this.
+
+1826
+01:40:00,260 --> 01:40:01,700
+This is a design decision that they
+
+1827
+01:40:01,700 --> 01:40:03,300
+made so that it's easier to use.
+
+1828
+01:40:03,300 --> 01:40:05,860
+But if you're looking for the extra boost in performance,
+
+1829
+01:40:05,860 --> 01:40:06,820
+this is what you can do.
+
+1830
+01:40:06,820 --> 01:40:08,660
+When you make everything into one big kernel,
+
+1831
+01:40:08,660 --> 01:40:09,540
+you can get a big speedup.
+
+1832
+01:40:11,460 --> 01:40:12,740
+And there's a lot of other optimizations
+
+1833
+01:40:12,740 --> 01:40:14,580
+that can be done on the computational graphs.
+
+1834
+01:40:14,580 --> 01:40:15,620
+Layer fusion is the big one.
+
+1835
+01:40:15,620 --> 01:40:17,860
+But you can also prune different branches
+
+1836
+01:40:17,860 --> 01:40:20,260
+if you know that you're not going to go down.
+
+1837
+01:40:20,260 --> 01:40:21,540
+So like what you were saying earlier,
+
+1838
+01:40:21,540 --> 01:40:23,060
+if you had a whole chunk of an image,
+
+1839
+01:40:23,060 --> 01:40:24,820
+let's say, that got relu'd out to zero,
+
+1840
+01:40:24,820 --> 01:40:26,740
+you can decide not to call the kernel.
+
+1841
+01:40:26,740 --> 01:40:29,700
+That is not easy to computational graph,
+
+1842
+01:40:29,700 --> 01:40:30,980
+because you don't know if someone's ever
+
+1843
+01:40:30,980 --> 01:40:32,260
+going to put a new layer in there.
+
+1844
+01:40:33,300 --> 01:40:34,820
+Another thing is quantizing the weights.
+
+1845
+01:40:36,340 --> 01:40:37,940
+So these optimizations are actually
+
+1846
+01:40:37,940 --> 01:40:39,700
+impossible on PyTorch and TensorFlow.
+
+1847
+01:40:41,060 --> 01:40:42,660
+But what if we want fast inference
+
+1848
+01:40:42,660 --> 01:40:44,340
+on a PyTorch model anyway?
+
+1849
+01:40:45,140 --> 01:40:47,300
+Is there any way that we can make these optimizations?
+
+1850
+01:40:48,740 --> 01:40:51,620
+And so now I get to talk about TensorRT.
+
+1851
+01:40:51,620 --> 01:40:53,460
+So one of my friends from undergrad
+
+1852
+01:40:53,460 --> 01:40:54,740
+is on the TensorRT team.
+
+1853
+01:40:54,740 --> 01:40:58,020
+And I was talking to him in preparing for this lecture.
+
+1854
+01:40:58,020 --> 01:41:01,220
+And TensorRT is a really great resource.
+
+1855
+01:41:01,220 --> 01:41:03,140
+So I'm kind of both plugging it
+
+1856
+01:41:03,140 --> 01:41:04,580
+and also educating people about it,
+
+1857
+01:41:04,580 --> 01:41:05,780
+because not enough people use it.
+
+1858
+01:41:06,500 --> 01:41:08,740
+But it's an SDK for fast model inference.
+
+1859
+01:41:08,740 --> 01:41:11,460
+So what you can do is you basically output
+
+1860
+01:41:11,460 --> 01:41:13,380
+your model in ONNX, as I was saying earlier.
+
+1861
+01:41:14,180 --> 01:41:16,420
+And it can basically run a bunch
+
+1862
+01:41:16,420 --> 01:41:17,700
+of different optimizations on it.
+
+1863
+01:41:17,700 --> 01:41:19,300
+Once you print a model to ONNX,
+
+1864
+01:41:20,180 --> 01:41:21,860
+that's fixed computational graph.
+
+1865
+01:41:22,660 --> 01:41:24,180
+There's no just-in-time updates to that.
+
+1866
+01:41:24,180 --> 01:41:25,380
+That is what the graph is.
+
+1867
+01:41:25,380 --> 01:41:26,740
+So once we know what the graph is
+
+1868
+01:41:26,740 --> 01:41:28,180
+and we know it doesn't change,
+
+1869
+01:41:28,180 --> 01:41:29,540
+then you can make updates.
+
+1870
+01:41:29,540 --> 01:41:32,180
+So TensorRT will go through and do
+
+1871
+01:41:32,180 --> 01:41:34,420
+these plus extra optimizations.
+
+1872
+01:41:34,420 --> 01:41:36,020
+So quantization is a big one.
+
+1873
+01:41:36,020 --> 01:41:37,620
+You don't have to always have 32-bit
+
+1874
+01:41:37,620 --> 01:41:38,660
+floating points for every weight.
+
+1875
+01:41:38,660 --> 01:41:40,740
+You can do int8, even, in the worst case.
+
+1876
+01:41:41,540 --> 01:41:42,900
+You can do layer fusion.
+
+1877
+01:41:43,540 --> 01:41:45,140
+You can auto-tune the different kernels.
+
+1878
+01:41:45,140 --> 01:41:47,460
+So they have different, say, convolution kernels.
+
+1879
+01:41:47,460 --> 01:41:49,620
+You have the matrix multiply version versus others.
+
+1880
+01:41:49,620 --> 01:41:50,660
+And then they can sort of test
+
+1881
+01:41:50,660 --> 01:41:51,780
+to see which one works best.
+
+1882
+01:41:52,340 --> 01:41:54,420
+Also, the memory thing is another big one,
+
+1883
+01:41:54,420 --> 01:41:55,940
+like dynamically resizing memory
+
+1884
+01:41:55,940 --> 01:41:59,780
+to get the best sort of tiling of memory
+
+1885
+01:41:59,780 --> 01:42:01,060
+so that you can get the fastest reads.
+
+1886
+01:42:02,180 --> 01:42:02,740
+It's really cool.
+
+1887
+01:42:05,780 --> 01:42:07,940
+And so why bother with kubelos and cuDNN
+
+1888
+01:42:07,940 --> 01:42:09,940
+if TensorRT is so great, right?
+
+1889
+01:42:10,820 --> 01:42:13,540
+And I asked this question to my friend,
+
+1890
+01:42:13,540 --> 01:42:16,100
+and I summarized his bullet points here.
+
+1891
+01:42:16,100 --> 01:42:18,020
+So TensorRT doesn't actually guarantee
+
+1892
+01:42:18,020 --> 01:42:19,860
+anything about the accuracy of your model.
+
+1893
+01:42:19,860 --> 01:42:22,420
+So for example, if we did quantize the weights
+
+1894
+01:42:22,420 --> 01:42:24,420
+from floating point 32 to int8,
+
+1895
+01:42:24,420 --> 01:42:25,540
+there's no guarantee that we're going
+
+1896
+01:42:25,540 --> 01:42:26,740
+to get the same prediction.
+
+1897
+01:42:26,740 --> 01:42:28,740
+And that might actually cost us a lot,
+
+1898
+01:42:28,740 --> 01:42:29,860
+especially if we're doing something
+
+1899
+01:42:29,860 --> 01:42:32,820
+that's actually really critical, performance critical.
+
+1900
+01:42:33,380 --> 01:42:35,220
+We would want to implement this ourselves
+
+1901
+01:42:35,220 --> 01:42:37,620
+because we don't want the sort of loss in performance.
+
+1902
+01:42:38,340 --> 01:42:40,740
+Also, TensorRT, as a design decision,
+
+1903
+01:42:40,740 --> 01:42:42,020
+is a giant black box, right?
+
+1904
+01:42:42,020 --> 01:42:44,500
+So it decides what optimizations it's going to make.
+
+1905
+01:42:44,500 --> 01:42:46,020
+And you have very little control
+
+1906
+01:42:46,020 --> 01:42:48,500
+over what TensorRT decides to do to your model.
+
+1907
+01:42:48,500 --> 01:42:49,620
+So if you want to specify,
+
+1908
+01:42:49,620 --> 01:42:51,060
+I don't want you to fuse these layers
+
+1909
+01:42:51,060 --> 01:42:53,700
+or I don't want you to quantize, you really can't.
+
+1910
+01:42:55,700 --> 01:42:56,740
+But despite these drawbacks,
+
+1911
+01:42:56,740 --> 01:42:58,580
+it's actually pretty useful as a baseline.
+
+1912
+01:42:58,580 --> 01:43:01,700
+So if you were going to try to improve inference speed
+
+1913
+01:43:01,700 --> 01:43:03,060
+on a model that exists,
+
+1914
+01:43:03,060 --> 01:43:06,420
+which has been a very popular topic for final projects,
+
+1915
+01:43:07,060 --> 01:43:08,340
+this is a good baseline to run.
+
+1916
+01:43:08,340 --> 01:43:10,020
+So you just take the model, print it out to ONNX,
+
+1917
+01:43:10,020 --> 01:43:11,220
+run it through TensorRT,
+
+1918
+01:43:11,220 --> 01:43:12,500
+and then that's your baseline.
+
+1919
+01:43:12,500 --> 01:43:14,740
+So you could try to write CUDNN to beat that.
+
+1920
+01:43:16,820 --> 01:43:18,820
+Okay, final recap slide.
+
+1921
+01:43:18,820 --> 01:43:21,940
+So C++ code that directly calls Kugloss CUDNN
+
+1922
+01:43:21,940 --> 01:43:23,780
+is the industry standard for ML performance.
+
+1923
+01:43:23,780 --> 01:43:26,660
+However, unless you're trying to push the limits
+
+1924
+01:43:26,660 --> 01:43:28,340
+of scale slash inference speed,
+
+1925
+01:43:29,060 --> 01:43:31,460
+training time is generally cheaper than inference time.
+
+1926
+01:43:32,260 --> 01:43:33,620
+Right, and what I mean by that is,
+
+1927
+01:43:34,260 --> 01:43:36,180
+the more time you spend in production
+
+1928
+01:43:36,180 --> 01:43:37,700
+trying to get your model to actually run,
+
+1929
+01:43:38,500 --> 01:43:40,740
+the less time it is actually out there running.
+
+1930
+01:43:40,740 --> 01:43:43,380
+And so if you are willing to spend extra time,
+
+1931
+01:43:45,460 --> 01:43:47,780
+like if it's not important to have the inference speed,
+
+1932
+01:43:47,780 --> 01:43:50,580
+you should have faster iteration on the models.
+
+1933
+01:43:51,460 --> 01:43:52,740
+For training small models also,
+
+1934
+01:43:52,740 --> 01:43:54,180
+PyTorch and TensorFlow are fantastic.
+
+1935
+01:43:54,180 --> 01:43:55,620
+There are lots of resources,
+
+1936
+01:43:55,620 --> 01:43:57,060
+easy to prototype, flexible.
+
+1937
+01:43:57,060 --> 01:43:59,300
+But for inference, aka prediction,
+
+1938
+01:43:59,300 --> 01:44:01,380
+PyTorch and TensorFlow are not great
+
+1939
+01:44:01,380 --> 01:44:03,940
+because of this just-in-time computational graph
+
+1940
+01:44:05,380 --> 01:44:06,420
+design decision.
+
+1941
+01:44:06,420 --> 01:44:08,900
+And TensorRT is a pretty good middle ground
+
+1942
+01:44:08,900 --> 01:44:10,820
+where you can train a model with PyTorch and TensorFlow,
+
+1943
+01:44:10,820 --> 01:44:12,420
+and then you export the graph to ONNX
+
+1944
+01:44:12,420 --> 01:44:13,540
+and then run with TensorRT.
+
+1945
+01:44:13,540 --> 01:44:14,900
+And it does a lot of the optimizations
+
+1946
+01:44:14,900 --> 01:44:16,660
+that are missing from PyTorch and TensorFlow.
+
+1947
+01:44:18,740 --> 01:44:19,540
+Cool, all right.
+
+1948
+01:44:21,140 --> 01:44:22,420
+So that's the end.
+
+1949
+01:44:22,420 --> 01:44:24,180
+Many thanks to these three people
+
+1950
+01:44:24,180 --> 01:44:26,500
+for helping me out with researching this talk.
+
+1951
+01:44:27,380 --> 01:44:29,460
+It was really fun to get to dive
+
+1952
+01:44:29,460 --> 01:44:32,420
+into the actual machine learning performance field.
+
+1953
+01:44:33,220 --> 01:44:36,020
+And yeah, so I don't have my email on this slide,
+
+1954
+01:44:36,020 --> 01:44:37,380
+which I've lamented earlier.
+
+1955
+01:44:37,380 --> 01:44:39,060
+But if you want it,
+
+1956
+01:44:39,060 --> 01:44:44,020
+I'm sure that I can send it to Shazan, Wayne, and Rachel.
+
+1957
+01:44:44,020 --> 01:44:46,020
+And then also I'll be around for final projects
+
+1958
+01:44:46,020 --> 01:44:47,140
+and will mentor any team
+
+1959
+01:44:47,140 --> 01:44:48,580
+that wants to do machine learning stuff.
+
+1960
+01:44:48,580 --> 01:44:51,140
+So feel free to let me know if you have project ideas
+
+1961
+01:44:51,140 --> 01:44:51,780
+and we can talk.
+
+1962
+01:44:52,500 --> 01:44:53,700
+And yeah, cool.
+
+1963
+01:44:53,700 --> 01:44:54,260
+Thanks a bunch.
+
+1964
+01:45:01,460 --> 01:45:04,900
+So I think that we can take a break,
+
+1965
+01:45:04,900 --> 01:45:06,340
+maybe 10, 15 minutes, and then-
+
+1966
+01:45:06,340 --> 01:45:08,020
+Yeah, we'll start at seven.
+
+1967
+01:45:08,020 --> 01:45:08,740
+Okay.
+
+1968
+01:45:08,740 --> 01:45:10,740
+We're supposed to help you get off in one,
+
+1969
+01:45:10,740 --> 01:45:13,860
+and then Rachel's gonna come in to do web sharing.
+
+1970
+01:45:15,700 --> 01:45:16,500
+Yeah, she did on Monday.
+
+1971
+01:45:16,500 --> 01:45:18,900
+She did the WebGL API,
+
+1972
+01:45:18,900 --> 01:45:21,060
+so this time it's actually in Python as well.
+
+1973
+01:45:23,060 --> 01:45:23,540
+Okay.
+
+1974
+01:45:27,700 --> 01:45:30,020
+There was only one decision you had to worry about today,
+
+1975
+01:45:30,020 --> 01:45:31,380
+just the one that she's on the same page.
+
+1976
+01:45:32,020 --> 01:45:32,820
+Only one what?
+
+1977
+01:45:32,820 --> 01:45:33,940
+The Zoom one.
+
+1978
+01:45:33,940 --> 01:45:34,660
+Yeah, exactly.
+
+1979
+01:45:34,660 --> 01:45:36,020
+It's the one that she's on the same page now.
+
+1980
+01:45:37,620 --> 01:45:39,060
+And there's like no one on the Zoom,
+
+1981
+01:45:39,060 --> 01:45:39,860
+it's just her recording.
+
+1982
+01:45:41,860 --> 01:45:42,260
+Yeah, you're right.
+
+1983
+01:45:42,260 --> 01:45:43,300
+There's no one on the Zoom.
+

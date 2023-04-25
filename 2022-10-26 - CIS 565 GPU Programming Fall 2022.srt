@@ -1,0 +1,6988 @@
+1
+00:00:00,000 --> 00:00:05,000
+Let's make sure I'm not on mute, okay.
+
+2
+00:00:08,640 --> 00:00:11,440
+All right, so with today's class,
+
+3
+00:00:11,440 --> 00:00:15,840
+we essentially move into what I'll call loosely
+
+4
+00:00:15,840 --> 00:00:19,640
+the last trimester of our semester.
+
+5
+00:00:19,640 --> 00:00:21,920
+So for me, when I'm teaching this class,
+
+6
+00:00:21,920 --> 00:00:23,920
+the first trimester is getting you guys up to speed
+
+7
+00:00:23,920 --> 00:00:27,160
+on CUDA, leading up to project three.
+
+8
+00:00:27,160 --> 00:00:28,840
+Then I would say the second trimester
+
+9
+00:00:28,840 --> 00:00:32,440
+is project three and project four and project five.
+
+10
+00:00:32,440 --> 00:00:33,760
+You've got that experience
+
+11
+00:00:33,760 --> 00:00:37,600
+with hands-on computer GPU programming.
+
+12
+00:00:37,600 --> 00:00:40,140
+And now I'm only like teaching that one stuff
+
+13
+00:00:40,140 --> 00:00:42,440
+and the guest lectures I've started.
+
+14
+00:00:42,440 --> 00:00:44,120
+And now we go into the final trimester,
+
+15
+00:00:44,120 --> 00:00:47,040
+which is probably the most exciting part for me.
+
+16
+00:00:50,680 --> 00:00:52,360
+So in this class today, what I'm gonna do
+
+17
+00:00:52,360 --> 00:00:55,700
+is I'm gonna be sharing really more
+
+18
+00:00:55,700 --> 00:00:58,820
+about the motivation behind final projects,
+
+19
+00:00:58,820 --> 00:01:01,260
+what to expect, what the grading looks like,
+
+20
+00:01:01,260 --> 00:01:02,220
+because that matters to you.
+
+21
+00:01:02,220 --> 00:01:04,540
+For me, it's more about the work
+
+22
+00:01:04,540 --> 00:01:06,100
+and what you guys should be looking for
+
+23
+00:01:06,100 --> 00:01:07,980
+when doing these projects.
+
+24
+00:01:07,980 --> 00:01:10,100
+And feel free to stop me at any time.
+
+25
+00:01:10,100 --> 00:01:13,420
+I'm more than happy to take any questions at any point.
+
+26
+00:01:13,420 --> 00:01:14,860
+I know I don't need to say that again,
+
+27
+00:01:14,860 --> 00:01:18,220
+given that we've been in probably 20 lectures by now,
+
+28
+00:01:18,220 --> 00:01:22,460
+but feel free to pause me at any time and ask questions.
+
+29
+00:01:26,180 --> 00:01:27,380
+Why are you not working?
+
+30
+00:01:34,620 --> 00:01:35,980
+All right, that should work.
+
+31
+00:01:35,980 --> 00:01:39,220
+Okay, so the first thing is what are final projects?
+
+32
+00:01:39,220 --> 00:01:41,180
+What is expected of final projects?
+
+33
+00:01:42,620 --> 00:01:46,500
+Final projects in 5.635 are gonna be large,
+
+34
+00:01:46,500 --> 00:01:50,140
+and I really mean large, path traces, not large.
+
+35
+00:01:50,140 --> 00:01:53,180
+GPU programming projects of your choice, okay?
+
+36
+00:01:54,180 --> 00:01:58,140
+They can be graphics, computing, machine learning,
+
+37
+00:01:58,140 --> 00:01:59,140
+whatever you may want,
+
+38
+00:01:59,140 --> 00:02:03,740
+as long as they have a GPU component in them.
+
+39
+00:02:03,740 --> 00:02:06,420
+And this doesn't mean you're writing CUDA necessarily.
+
+40
+00:02:06,420 --> 00:02:09,140
+It could be using any type of API that you want.
+
+41
+00:02:10,180 --> 00:02:13,140
+It will be two to three times harder
+
+42
+00:02:13,140 --> 00:02:14,220
+than the hardest project,
+
+43
+00:02:14,220 --> 00:02:16,340
+or it is expected to be two to three times harder
+
+44
+00:02:16,340 --> 00:02:19,260
+than your hardest project, which is generally path tracer.
+
+45
+00:02:19,260 --> 00:02:20,740
+But you also get to work in teams,
+
+46
+00:02:20,740 --> 00:02:23,740
+so it's not like you're necessarily overworking yourselves.
+
+47
+00:02:24,940 --> 00:02:29,060
+The best projects require about 100 hours of time commitment
+
+48
+00:02:29,060 --> 00:02:30,940
+based on the feedback we've received.
+
+49
+00:02:30,940 --> 00:02:33,700
+But if you think about it, it's not 100 hours in a week,
+
+50
+00:02:33,700 --> 00:02:36,580
+it's 100 hours spread over four and a half,
+
+51
+00:02:36,580 --> 00:02:38,700
+I think it's five weeks at this point.
+
+52
+00:02:38,700 --> 00:02:41,140
+So you're giving 20 hours a week,
+
+53
+00:02:41,140 --> 00:02:43,500
+which is probably generally what you've given
+
+54
+00:02:43,500 --> 00:02:45,260
+to this class for the most part.
+
+55
+00:02:46,900 --> 00:02:50,700
+Okay, so final projects themselves,
+
+56
+00:02:51,540 --> 00:02:52,460
+must be some combination of this.
+
+57
+00:02:52,460 --> 00:02:55,580
+It can't be just one, it doesn't have to be all of them,
+
+58
+00:02:55,580 --> 00:02:57,340
+but it has to be some combination of this.
+
+59
+00:02:57,340 --> 00:03:00,420
+It needs to serve a real need in the community.
+
+60
+00:03:00,420 --> 00:03:03,140
+And I'll keep giving examples, okay?
+
+61
+00:03:03,140 --> 00:03:05,300
+A need in a community, for example,
+
+62
+00:03:05,300 --> 00:03:08,660
+is you do an amazing project for WebGPU
+
+63
+00:03:08,660 --> 00:03:10,740
+that has driver adoption.
+
+64
+00:03:10,740 --> 00:03:13,180
+You make amazing samples for WebGPU,
+
+65
+00:03:13,180 --> 00:03:15,940
+and that's now the de facto,
+
+66
+00:03:15,940 --> 00:03:18,220
+okay, if you want to learn WebGPU, you go to that project.
+
+67
+00:03:18,220 --> 00:03:20,580
+So that's like serving a need in the community.
+
+68
+00:03:21,700 --> 00:03:23,140
+Exploring a new API.
+
+69
+00:03:25,060 --> 00:03:28,580
+CUDA at this point is not a new API to you, okay?
+
+70
+00:03:28,580 --> 00:03:30,780
+You may want to explore metal, right?
+
+71
+00:03:30,780 --> 00:03:33,620
+You may want to explore one API from Intel.
+
+72
+00:03:33,620 --> 00:03:36,380
+So that again is encouraged.
+
+73
+00:03:37,460 --> 00:03:38,700
+It can be recent research,
+
+74
+00:03:38,700 --> 00:03:40,620
+like graph papers, graph Asia papers,
+
+75
+00:03:40,620 --> 00:03:42,260
+high performance graphics,
+
+76
+00:03:42,260 --> 00:03:45,020
+you know, anything that you find interesting.
+
+77
+00:03:45,900 --> 00:03:48,020
+It could be extensions to existing work.
+
+78
+00:03:48,820 --> 00:03:50,380
+This could be, you know,
+
+79
+00:03:50,380 --> 00:03:52,340
+improving the performance significantly,
+
+80
+00:03:52,340 --> 00:03:54,860
+or adding, combining two different techniques
+
+81
+00:03:54,860 --> 00:03:56,700
+to bring something new to the table.
+
+82
+00:03:57,620 --> 00:03:59,300
+Or it could be something completely original.
+
+83
+00:03:59,300 --> 00:04:01,180
+You have an idea that you're coming up with,
+
+84
+00:04:01,180 --> 00:04:02,020
+and you're like,
+
+85
+00:04:02,020 --> 00:04:05,100
+hey, I'm interested in the super niche thing.
+
+86
+00:04:05,100 --> 00:04:06,940
+Maybe you're researching that in your PhD,
+
+87
+00:04:06,940 --> 00:04:10,340
+but you want to test it out on the GPU in the first,
+
+88
+00:04:10,340 --> 00:04:12,500
+more than happy to accept that as well.
+
+89
+00:04:12,500 --> 00:04:14,860
+So some combination of all these, okay?
+
+90
+00:04:14,860 --> 00:04:16,900
+We're not saying it has to be two out of five,
+
+91
+00:04:16,900 --> 00:04:19,140
+and we're not saying it has to be three out of five.
+
+92
+00:04:19,140 --> 00:04:21,860
+It depends on what your idea is,
+
+93
+00:04:21,860 --> 00:04:25,860
+that it has to pick some of these boxes,
+
+94
+00:04:25,860 --> 00:04:27,980
+and that is generally accepted.
+
+95
+00:04:28,900 --> 00:04:30,100
+Any questions on this?
+
+96
+00:04:36,140 --> 00:04:37,100
+Okay.
+
+97
+00:04:37,100 --> 00:04:38,420
+Either I'm doing a really good job,
+
+98
+00:04:38,420 --> 00:04:40,460
+or I've scared all of you already.
+
+99
+00:04:43,780 --> 00:04:45,220
+No questions?
+
+100
+00:04:45,220 --> 00:04:46,660
+Okay.
+
+101
+00:04:47,420 --> 00:04:48,580
+So, like I said,
+
+102
+00:04:48,580 --> 00:04:50,740
+you'd be working in teams of two or three.
+
+103
+00:04:50,740 --> 00:04:53,580
+That's the recommended approach, okay?
+
+104
+00:04:53,580 --> 00:04:56,700
+All of you will receive the same grade, okay?
+
+105
+00:04:58,140 --> 00:05:01,220
+Teams of four, I've never had a team of four,
+
+106
+00:05:01,220 --> 00:05:03,900
+but if you are trying to do a team of four,
+
+107
+00:05:03,900 --> 00:05:07,660
+the level of work that is required is extremely high.
+
+108
+00:05:08,620 --> 00:05:10,500
+And yes, please get pre-approval.
+
+109
+00:05:11,780 --> 00:05:14,100
+If you're trying to do something alone,
+
+110
+00:05:14,100 --> 00:05:15,940
+that is discouraged,
+
+111
+00:05:15,980 --> 00:05:19,860
+because the amount of work you're able to do
+
+112
+00:05:19,860 --> 00:05:23,660
+as a single person team is not gonna be as big
+
+113
+00:05:23,660 --> 00:05:26,460
+as something that two to three people will do.
+
+114
+00:05:29,060 --> 00:05:30,820
+That's not necessarily a detriment to you,
+
+115
+00:05:30,820 --> 00:05:33,220
+like the amount of work you might put together
+
+116
+00:05:33,220 --> 00:05:34,740
+is probably equivalent,
+
+117
+00:05:34,740 --> 00:05:38,220
+but the impact you're creating as a single contributor
+
+118
+00:05:38,220 --> 00:05:40,940
+versus working in a team of two or three
+
+119
+00:05:40,940 --> 00:05:41,940
+is gonna be a lot less,
+
+120
+00:05:41,940 --> 00:05:44,060
+because you're gonna be putting in less time.
+
+121
+00:05:44,060 --> 00:05:46,300
+So, it is in your favor,
+
+122
+00:05:46,300 --> 00:05:48,620
+it is for your betterment that you work
+
+123
+00:05:48,620 --> 00:05:51,220
+in a team of people.
+
+124
+00:05:52,060 --> 00:05:55,100
+So, if you absolutely want to work alone
+
+125
+00:05:55,100 --> 00:05:57,300
+and you have good reason for it,
+
+126
+00:05:57,300 --> 00:05:58,860
+you can get pre-approval,
+
+127
+00:05:58,860 --> 00:06:01,780
+but it's not guaranteed that we will approve it, okay?
+
+128
+00:06:01,780 --> 00:06:03,780
+So, if you're thinking about it,
+
+129
+00:06:03,780 --> 00:06:04,620
+please reach out early,
+
+130
+00:06:04,620 --> 00:06:06,700
+don't wait until last minute to ask,
+
+131
+00:06:06,700 --> 00:06:09,620
+hey, can I work alone kind of thing, okay?
+
+132
+00:06:09,620 --> 00:06:10,580
+Any questions here?
+
+133
+00:06:15,020 --> 00:06:15,860
+No?
+
+134
+00:06:17,660 --> 00:06:19,500
+I do not control how you form things at all,
+
+135
+00:06:19,500 --> 00:06:20,660
+it's completely up to you.
+
+136
+00:06:20,660 --> 00:06:22,020
+If you want to use that discussions
+
+137
+00:06:22,020 --> 00:06:23,940
+that's absolutely available,
+
+138
+00:06:23,940 --> 00:06:26,020
+you can be like, hey, I have these ideas,
+
+139
+00:06:26,020 --> 00:06:28,740
+if is anybody interested, please do that.
+
+140
+00:06:28,740 --> 00:06:31,300
+You can use private messages to reply if you want,
+
+141
+00:06:31,300 --> 00:06:32,460
+I think that's enabled.
+
+142
+00:06:33,580 --> 00:06:37,460
+But yeah, I don't play any part in how teams are formed,
+
+143
+00:06:37,460 --> 00:06:39,860
+because I don't want to get into those dynamics.
+
+144
+00:06:41,060 --> 00:06:42,100
+Any other questions?
+
+145
+00:06:45,060 --> 00:06:45,900
+Okay.
+
+146
+00:06:45,900 --> 00:06:48,020
+The other thing you can do to form teams is,
+
+147
+00:06:48,940 --> 00:06:50,060
+I'll come to it in a bit,
+
+148
+00:06:50,060 --> 00:06:51,460
+but as teams are being formed,
+
+149
+00:06:51,460 --> 00:06:55,300
+they're gonna put their names on a spreadsheet.
+
+150
+00:06:55,300 --> 00:06:56,780
+If you are interested in an idea,
+
+151
+00:06:56,780 --> 00:06:58,700
+you can be like, hey, can I join your team as well?
+
+152
+00:06:58,700 --> 00:06:59,540
+That's fine with me,
+
+153
+00:06:59,540 --> 00:07:02,140
+but it's up to the team itself to say yes or no,
+
+154
+00:07:02,140 --> 00:07:03,620
+that's not under my control.
+
+155
+00:07:05,340 --> 00:07:06,380
+Okay.
+
+156
+00:07:06,380 --> 00:07:09,060
+So, other guidelines, use GitHub, I think,
+
+157
+00:07:09,060 --> 00:07:11,220
+that's generally worked well for everybody.
+
+158
+00:07:11,220 --> 00:07:14,380
+You may use private repos,
+
+159
+00:07:14,380 --> 00:07:17,460
+but it's not encouraged or required.
+
+160
+00:07:18,980 --> 00:07:21,580
+Again, like I said before,
+
+161
+00:07:21,580 --> 00:07:25,740
+the programming language, graphics, whatever you want,
+
+162
+00:07:25,740 --> 00:07:28,820
+the platforms completely up to you.
+
+163
+00:07:28,820 --> 00:07:29,660
+Okay.
+
+164
+00:07:29,660 --> 00:07:34,660
+Again, I'm giving you the freedom to pick your interests,
+
+165
+00:07:34,820 --> 00:07:36,860
+but I'm expecting good work out of it.
+
+166
+00:07:36,860 --> 00:07:37,700
+Okay.
+
+167
+00:07:37,700 --> 00:07:39,260
+I want you to be able to pay that back
+
+168
+00:07:39,260 --> 00:07:40,940
+for what you are interested in.
+
+169
+00:07:42,660 --> 00:07:44,580
+To be completely honest,
+
+170
+00:07:44,580 --> 00:07:46,500
+this is work you may be doing in the class,
+
+171
+00:07:46,500 --> 00:07:47,660
+but you're not doing it for me,
+
+172
+00:07:47,660 --> 00:07:49,380
+you're doing it for yourselves, right?
+
+173
+00:07:49,380 --> 00:07:54,380
+This is like your highlight of your time at Penn almost,
+
+174
+00:07:54,580 --> 00:07:57,620
+and you have the freedom to do pretty much anything you want
+
+175
+00:07:57,620 --> 00:07:59,820
+as long as it's related to the GPU.
+
+176
+00:07:59,820 --> 00:08:01,780
+So, you get to pick what you want.
+
+177
+00:08:03,900 --> 00:08:05,660
+Like other projects,
+
+178
+00:08:05,660 --> 00:08:07,700
+you are allowed to use existing libraries.
+
+179
+00:08:07,740 --> 00:08:08,580
+So, for example,
+
+180
+00:08:08,580 --> 00:08:12,340
+you use TinyOBJ or TinyGLTF for PathTracer.
+
+181
+00:08:12,340 --> 00:08:15,300
+You can use similar libraries here as well.
+
+182
+00:08:15,300 --> 00:08:18,220
+The key thing is that they must not be solving the problem
+
+183
+00:08:18,220 --> 00:08:20,260
+that you are trying to implement itself.
+
+184
+00:08:20,260 --> 00:08:21,100
+Like in PathTracer,
+
+185
+00:08:21,100 --> 00:08:22,460
+you are trying to implement a PathTracer,
+
+186
+00:08:22,460 --> 00:08:24,660
+you're not trying to read an OBJ,
+
+187
+00:08:24,660 --> 00:08:26,540
+so it's fine to use a library for that.
+
+188
+00:08:26,540 --> 00:08:31,140
+So, in similar way, that is fine here as well.
+
+189
+00:08:32,020 --> 00:08:33,300
+So, any questions so far?
+
+190
+00:08:37,740 --> 00:08:38,940
+No?
+
+191
+00:08:38,940 --> 00:08:40,180
+Okay.
+
+192
+00:08:40,180 --> 00:08:43,180
+So, here's what the tentative schedule looks like, okay?
+
+193
+00:08:44,820 --> 00:08:46,020
+And pay attention here.
+
+194
+00:08:47,460 --> 00:08:50,860
+So, what you're going to get started with
+
+195
+00:08:50,860 --> 00:08:53,260
+is what I'll call a pitch.
+
+196
+00:08:53,260 --> 00:08:57,900
+And I will use here in final projects
+
+197
+00:08:57,900 --> 00:09:01,580
+are essentially what people do in the industry, okay?
+
+198
+00:09:01,580 --> 00:09:04,020
+If you want to,
+
+199
+00:09:04,020 --> 00:09:07,380
+if you are looking for something new that can change
+
+200
+00:09:08,060 --> 00:09:09,620
+how your company operates in the future
+
+201
+00:09:09,620 --> 00:09:11,180
+or build a new product,
+
+202
+00:09:11,180 --> 00:09:14,860
+you are going to have to write a document or some idea,
+
+203
+00:09:14,860 --> 00:09:17,580
+formulate your idea and communicate that to your manager
+
+204
+00:09:17,580 --> 00:09:19,060
+so that you get approval.
+
+205
+00:09:19,060 --> 00:09:21,460
+That's gonna be your pitch, okay?
+
+206
+00:09:21,460 --> 00:09:23,380
+You're gonna be doing that.
+
+207
+00:09:23,380 --> 00:09:26,900
+So, that's you on, I believe it's a Sunday, November 6th.
+
+208
+00:09:28,300 --> 00:09:30,620
+On November 7th, you'll pitch it.
+
+209
+00:09:30,620 --> 00:09:34,180
+You'll pitch it to me and a few others, including the TAs,
+
+210
+00:09:34,180 --> 00:09:36,260
+about why you want to do this idea,
+
+211
+00:09:37,100 --> 00:09:37,940
+you know, what's important,
+
+212
+00:09:37,940 --> 00:09:39,460
+what are the different components of it
+
+213
+00:09:39,460 --> 00:09:42,500
+and why it should be accepted as a final project.
+
+214
+00:09:44,540 --> 00:09:47,140
+November 12th is shadow team selection.
+
+215
+00:09:47,140 --> 00:09:49,940
+And I'll come back to shadow teams in a little bit.
+
+216
+00:09:49,940 --> 00:09:51,620
+And then we have three milestones
+
+217
+00:09:51,620 --> 00:09:53,260
+before the final presentations.
+
+218
+00:09:53,260 --> 00:09:56,140
+These milestones are key checkpoints
+
+219
+00:09:56,140 --> 00:09:58,980
+for when you will show your progress in the class
+
+220
+00:10:00,140 --> 00:10:03,060
+with demos, videos, whatever it might be.
+
+221
+00:10:03,060 --> 00:10:04,660
+So, these will be presentations,
+
+222
+00:10:04,660 --> 00:10:06,820
+but generally very short.
+
+223
+00:10:06,820 --> 00:10:08,780
+And I'll give you guidelines for these as well.
+
+224
+00:10:08,780 --> 00:10:11,980
+So, we'll have three of those on November 16th,
+
+225
+00:10:11,980 --> 00:10:14,340
+November 28th, which is after Thanksgiving
+
+226
+00:10:14,340 --> 00:10:15,460
+and December 5th.
+
+227
+00:10:16,620 --> 00:10:20,740
+December 11th, I didn't change the year, did I?
+
+228
+00:10:20,740 --> 00:10:21,780
+I should be changing the year.
+
+229
+00:10:21,780 --> 00:10:22,620
+I changed the dates.
+
+230
+00:10:22,620 --> 00:10:23,820
+I didn't change the year.
+
+231
+00:10:25,380 --> 00:10:30,380
+December 11th will be your court submission, essentially.
+
+232
+00:10:31,220 --> 00:10:35,740
+That's when your code is done, your readme is done.
+
+233
+00:10:35,740 --> 00:10:38,540
+You don't touch GitHub after that.
+
+234
+00:10:40,140 --> 00:10:41,780
+On December 12th at 4 p.m.,
+
+235
+00:10:41,780 --> 00:10:44,260
+that's when your final presentations are due.
+
+236
+00:10:44,260 --> 00:10:47,500
+That means your slides are due at that time.
+
+237
+00:10:47,500 --> 00:10:49,540
+And then at 5.30 approximately
+
+238
+00:10:49,540 --> 00:10:53,140
+is when we'll do the presentations themselves.
+
+239
+00:10:53,140 --> 00:10:54,420
+And these will be live.
+
+240
+00:10:54,420 --> 00:10:56,660
+And I'll share details on each one of these with you.
+
+241
+00:10:56,660 --> 00:10:59,860
+But any questions on this other than the year?
+
+242
+00:11:01,380 --> 00:11:03,900
+Does anyone have any feedback?
+
+243
+00:11:07,220 --> 00:11:09,180
+We'll do, we'll ask you to make changes
+
+244
+00:11:09,180 --> 00:11:10,140
+and give you feedback.
+
+245
+00:11:10,140 --> 00:11:13,060
+And depending on how much changes are required,
+
+246
+00:11:13,060 --> 00:11:16,580
+you may either be able to just resubmit the document
+
+247
+00:11:16,580 --> 00:11:17,700
+with those edits,
+
+248
+00:11:17,700 --> 00:11:19,380
+or if it's completely out of the park
+
+249
+00:11:19,380 --> 00:11:20,900
+and we need you to submit a new idea,
+
+250
+00:11:20,900 --> 00:11:23,340
+then we'll do a follow-up that Wednesday.
+
+251
+00:11:24,500 --> 00:11:25,780
+Edward?
+
+252
+00:11:25,780 --> 00:11:29,540
+Are the pitches with pre-formed groups
+
+253
+00:11:29,540 --> 00:11:33,020
+or do you just do that with a new idea?
+
+254
+00:11:33,020 --> 00:11:34,540
+No, you'd be pitching as a team.
+
+255
+00:11:34,540 --> 00:11:37,460
+You'd be forming your team and then pitching it as a team.
+
+256
+00:11:43,860 --> 00:11:44,740
+Yes.
+
+257
+00:11:44,740 --> 00:11:47,740
+So essentially you don't touch GitHub after this.
+
+258
+00:11:47,740 --> 00:11:48,580
+And no late days.
+
+259
+00:11:48,580 --> 00:11:50,780
+If you save late days, use it for final project
+
+260
+00:11:50,780 --> 00:11:53,820
+or project five, use all the extra credit.
+
+261
+00:11:53,820 --> 00:11:56,420
+You don't have any late days for final projects.
+
+262
+00:11:58,220 --> 00:11:59,460
+Any other questions here?
+
+263
+00:12:01,140 --> 00:12:01,980
+No?
+
+264
+00:12:01,980 --> 00:12:06,980
+We already have teams for final project pitching as well.
+
+265
+00:12:08,300 --> 00:12:09,140
+I'll get to that.
+
+266
+00:12:10,740 --> 00:12:12,180
+So this is just an overview.
+
+267
+00:12:12,180 --> 00:12:14,100
+I'll confirm all of,
+
+268
+00:12:14,100 --> 00:12:17,060
+I'll get into the details of all of this.
+
+269
+00:12:17,060 --> 00:12:19,180
+But any questions here on an overview?
+
+270
+00:12:20,260 --> 00:12:21,580
+Okay.
+
+271
+00:12:21,580 --> 00:12:22,420
+All right.
+
+272
+00:12:22,420 --> 00:12:23,940
+So final project pitches itself.
+
+273
+00:12:23,940 --> 00:12:26,260
+The first thing you're gonna want to do
+
+274
+00:12:26,260 --> 00:12:28,220
+because it's first come first serve
+
+275
+00:12:28,220 --> 00:12:30,300
+is put your team name in this document.
+
+276
+00:12:30,300 --> 00:12:31,940
+It's an Excel spreadsheet.
+
+277
+00:12:31,940 --> 00:12:34,540
+I'll bring it up here so that all of you can see it.
+
+278
+00:12:40,620 --> 00:12:44,140
+So what you're gonna do for the first thing,
+
+279
+00:12:44,140 --> 00:12:45,500
+like even right away,
+
+280
+00:12:45,500 --> 00:12:47,540
+if you know who your team is,
+
+281
+00:12:47,540 --> 00:12:50,740
+who you want to be teaming up with, put your names.
+
+282
+00:12:50,740 --> 00:12:52,820
+You don't even have to put your idea.
+
+283
+00:12:52,820 --> 00:12:56,180
+Just put your name on the time that works for you.
+
+284
+00:12:56,180 --> 00:12:57,340
+And the time may change.
+
+285
+00:12:57,340 --> 00:12:58,980
+Like if we get enough teams,
+
+286
+00:12:58,980 --> 00:13:01,100
+we may have to start around like 4.30 or something.
+
+287
+00:13:01,100 --> 00:13:02,820
+So the time may change,
+
+288
+00:13:02,820 --> 00:13:04,980
+but essentially put your names on there
+
+289
+00:13:04,980 --> 00:13:07,500
+because if once a team puts their name,
+
+290
+00:13:07,500 --> 00:13:09,060
+that's their slot, okay?
+
+291
+00:13:10,860 --> 00:13:14,100
+The time is essentially when you're gonna be pitching.
+
+292
+00:13:14,100 --> 00:13:15,740
+And I'll come to this in a little bit,
+
+293
+00:13:15,740 --> 00:13:18,260
+but essentially your team is gonna come,
+
+294
+00:13:18,260 --> 00:13:19,500
+you're gonna sit down.
+
+295
+00:13:19,940 --> 00:13:22,380
+We would have already read your pitch,
+
+296
+00:13:22,380 --> 00:13:23,860
+but we'll ask a few questions.
+
+297
+00:13:23,860 --> 00:13:25,940
+We'll ask for your motivation and stuff.
+
+298
+00:13:26,780 --> 00:13:28,820
+And it's about 20 minutes per team.
+
+299
+00:13:30,020 --> 00:13:31,900
+So yeah, that's...
+
+300
+00:13:31,900 --> 00:13:35,660
+And then once you put your names there
+
+301
+00:13:35,660 --> 00:13:37,420
+and you're working through your ideas,
+
+302
+00:13:37,420 --> 00:13:39,420
+eventually you're gonna create a pitch document,
+
+303
+00:13:39,420 --> 00:13:40,820
+which again, I'll get to,
+
+304
+00:13:40,820 --> 00:13:43,660
+and you're gonna link it here in this column, okay?
+
+305
+00:13:43,660 --> 00:13:45,420
+So those are the first two steps you need to do
+
+306
+00:13:45,420 --> 00:13:47,420
+before the pitches.
+
+307
+00:13:47,420 --> 00:13:48,540
+Any questions on this?
+
+308
+00:13:50,500 --> 00:13:55,500
+Okay, so again, we'll have a special office hours
+
+309
+00:13:58,540 --> 00:14:01,700
+next Monday to help answer your questions and stuff.
+
+310
+00:14:02,980 --> 00:14:05,100
+You don't come with like 50 ideas
+
+311
+00:14:06,140 --> 00:14:10,340
+because I almost never say,
+
+312
+00:14:12,300 --> 00:14:13,980
+hey, do this exact project.
+
+313
+00:14:13,980 --> 00:14:16,100
+I will say, if you are interested in this,
+
+314
+00:14:16,100 --> 00:14:18,540
+here are the things to think about.
+
+315
+00:14:18,540 --> 00:14:20,220
+And if you're interested, go forward.
+
+316
+00:14:20,220 --> 00:14:21,540
+I'm gonna give you guidelines
+
+317
+00:14:21,540 --> 00:14:25,540
+around how to think about these projects, okay?
+
+318
+00:14:25,540 --> 00:14:28,420
+So come with like three at most.
+
+319
+00:14:28,420 --> 00:14:29,420
+If you're coming with five,
+
+320
+00:14:29,420 --> 00:14:31,340
+then you need to narrow it down yourself first
+
+321
+00:14:31,340 --> 00:14:35,900
+about why you want to do all of the five, okay?
+
+322
+00:14:35,900 --> 00:14:37,300
+Narrow it down to two to three,
+
+323
+00:14:37,300 --> 00:14:40,580
+and then we can have more discussions.
+
+324
+00:14:43,020 --> 00:14:44,140
+The pitches themselves,
+
+325
+00:14:44,140 --> 00:14:46,500
+this year is gonna be really special
+
+326
+00:14:46,500 --> 00:14:48,180
+because I'm gonna be hosting these
+
+327
+00:14:48,180 --> 00:14:50,100
+in the brand new CGU office.
+
+328
+00:14:50,100 --> 00:14:51,340
+And I say brand new
+
+329
+00:14:51,340 --> 00:14:55,860
+because we are literally gonna move into it on Tuesday.
+
+330
+00:14:55,860 --> 00:14:57,900
+So we're gonna move into it Tuesday
+
+331
+00:14:57,900 --> 00:14:59,340
+and the following Monday,
+
+332
+00:14:59,340 --> 00:15:01,740
+you guys are gonna come in there.
+
+333
+00:15:01,740 --> 00:15:04,300
+And I'm doing this because I wanna give a feel for,
+
+334
+00:15:04,300 --> 00:15:06,700
+again, the motivation is to work,
+
+335
+00:15:06,700 --> 00:15:08,620
+how it's like to work in the industry.
+
+336
+00:15:10,220 --> 00:15:12,260
+I've said that from day one.
+
+337
+00:15:12,260 --> 00:15:14,060
+I wanna give you guys that feel.
+
+338
+00:15:14,060 --> 00:15:18,260
+And we'll make a great environment that we'll have pizza,
+
+339
+00:15:18,260 --> 00:15:21,220
+we'll have some drinks, cookies, and those kinds of things.
+
+340
+00:15:21,220 --> 00:15:22,660
+You're free to come at any time,
+
+341
+00:15:22,660 --> 00:15:26,260
+depending on like your pitch time may be one thing,
+
+342
+00:15:26,260 --> 00:15:28,020
+but you are free to come in at any time.
+
+343
+00:15:28,020 --> 00:15:29,860
+You're free to hang out, eat.
+
+344
+00:15:29,860 --> 00:15:31,580
+And we also have a really good arcade,
+
+345
+00:15:31,580 --> 00:15:36,580
+including an NES, a Nintendo Switch, a PlayStation 1,
+
+346
+00:15:37,580 --> 00:15:40,100
+a Super NES, and a bunch of arcade games there.
+
+347
+00:15:40,100 --> 00:15:42,500
+I think that's Ridge Racer, Pac-Man,
+
+348
+00:15:42,500 --> 00:15:44,420
+and a digital Marvel.
+
+349
+00:15:44,420 --> 00:15:47,260
+You can play Spider-Man pinball and all that.
+
+350
+00:15:47,260 --> 00:15:49,020
+It's brilliant, trust me.
+
+351
+00:15:49,020 --> 00:15:51,100
+That's where I'm coming from today.
+
+352
+00:15:52,660 --> 00:15:54,900
+So yeah, we'll be doing these.
+
+353
+00:15:54,900 --> 00:15:57,020
+You are free to take whatever transport you want.
+
+354
+00:15:57,020 --> 00:16:01,660
+I'm not taking care of that, but it's not too bad.
+
+355
+00:16:01,660 --> 00:16:05,420
+You take the subway from like 34th street to 5th street,
+
+356
+00:16:05,420 --> 00:16:06,540
+and then it's a block from there.
+
+357
+00:16:06,540 --> 00:16:07,860
+So it's pretty convenient.
+
+358
+00:16:09,460 --> 00:16:10,740
+Any questions on this?
+
+359
+00:16:13,500 --> 00:16:16,820
+No?
+
+360
+00:16:16,820 --> 00:16:19,700
+How many of you are excited to play that arcade?
+
+361
+00:16:19,700 --> 00:16:20,740
+All right, good.
+
+362
+00:16:26,260 --> 00:16:27,300
+Come early.
+
+363
+00:16:27,300 --> 00:16:29,420
+I'm telling you, you can come early.
+
+364
+00:16:29,420 --> 00:16:31,100
+Don't make it that tight.
+
+365
+00:16:31,100 --> 00:16:32,780
+That's my recommendation.
+
+366
+00:16:32,780 --> 00:16:34,500
+You are free to select those times.
+
+367
+00:16:34,500 --> 00:16:36,900
+I'm not giving you those times.
+
+368
+00:16:36,900 --> 00:16:38,140
+You're free to select those times.
+
+369
+00:16:38,140 --> 00:16:40,500
+So if you have a class that ends at 5 p.m.,
+
+370
+00:16:40,500 --> 00:16:41,940
+don't pick the 5.30 slot.
+
+371
+00:16:42,300 --> 00:16:43,380
+Pick the 6 p.m. slot.
+
+372
+00:16:44,300 --> 00:16:46,660
+So that's my recommendation around that.
+
+373
+00:16:48,060 --> 00:16:49,060
+Any questions?
+
+374
+00:16:52,100 --> 00:16:52,940
+Okay.
+
+375
+00:16:53,900 --> 00:16:56,700
+All right, grading which I know all of you care about.
+
+376
+00:16:58,100 --> 00:17:00,900
+Your project, this final project is worth 50%
+
+377
+00:17:00,900 --> 00:17:03,420
+of all the grade in the class.
+
+378
+00:17:03,420 --> 00:17:05,780
+Imagine all the work you've done so far.
+
+379
+00:17:05,780 --> 00:17:09,700
+Voids, stream compaction, path tracer,
+
+380
+00:17:10,700 --> 00:17:14,700
+denoiser, and now you're either doing Vulkan or WebGL.
+
+381
+00:17:14,700 --> 00:17:17,700
+You've done all of that work and that is only worth half.
+
+382
+00:17:17,700 --> 00:17:19,820
+This is what the other half.
+
+383
+00:17:19,820 --> 00:17:21,020
+It may not be as much work
+
+384
+00:17:21,020 --> 00:17:22,540
+as all of those five projects combined,
+
+385
+00:17:22,540 --> 00:17:26,220
+but it's still like very, very important, okay?
+
+386
+00:17:26,220 --> 00:17:28,620
+So that's 50% of your grade.
+
+387
+00:17:28,620 --> 00:17:31,340
+It'll be divided into four parts.
+
+388
+00:17:31,340 --> 00:17:33,140
+Each of the milestones will account for,
+
+389
+00:17:33,140 --> 00:17:34,780
+or five parts technically.
+
+390
+00:17:34,780 --> 00:17:36,340
+Each of the progress you make,
+
+391
+00:17:36,340 --> 00:17:39,820
+that is the core progress you make in the milestones
+
+392
+00:17:39,820 --> 00:17:43,100
+will be about 20% each, okay?
+
+393
+00:17:43,100 --> 00:17:46,580
+And then the final submission that you do is additional 20%.
+
+394
+00:17:46,580 --> 00:17:48,340
+And then the presentations that you give
+
+395
+00:17:48,340 --> 00:17:50,740
+for each of the milestones and the final presentation
+
+396
+00:17:50,740 --> 00:17:52,140
+will be worth 20%.
+
+397
+00:17:52,140 --> 00:17:53,860
+So it's not just the code that counts,
+
+398
+00:17:53,860 --> 00:17:55,580
+which I've always said, you know,
+
+399
+00:17:55,580 --> 00:17:57,380
+in your projects it's the readme,
+
+400
+00:17:57,380 --> 00:17:59,580
+here it's gonna be the presentations.
+
+401
+00:17:59,580 --> 00:18:01,620
+Those are going to count for 20% too.
+
+402
+00:18:03,060 --> 00:18:05,620
+Any questions around this grading?
+
+403
+00:18:05,620 --> 00:18:07,220
+And a reminder that everybody,
+
+404
+00:18:07,220 --> 00:18:09,420
+the entire team receives the same grade.
+
+405
+00:18:09,420 --> 00:18:11,100
+If any of you have a questions about,
+
+406
+00:18:11,100 --> 00:18:14,980
+hey, my class disappeared and I don't know what to do.
+
+407
+00:18:14,980 --> 00:18:16,260
+Don't wait till the final submission,
+
+408
+00:18:16,260 --> 00:18:17,620
+tell me when that happens, okay?
+
+409
+00:18:17,620 --> 00:18:19,380
+So that we can help resolve it.
+
+410
+00:18:19,380 --> 00:18:20,980
+Ideally that situation never,
+
+411
+00:18:22,620 --> 00:18:24,420
+if it happens, you know, please communicate early.
+
+412
+00:18:24,420 --> 00:18:25,980
+Don't wait for the last minute.
+
+413
+00:18:26,900 --> 00:18:28,140
+Any other questions here?
+
+414
+00:18:28,140 --> 00:18:28,980
+Okay.
+
+415
+00:18:34,900 --> 00:18:36,580
+Nobody cares about grades anymore?
+
+416
+00:18:37,580 --> 00:18:39,020
+Okay.
+
+417
+00:18:39,020 --> 00:18:40,260
+That's a good thing.
+
+418
+00:18:40,260 --> 00:18:41,100
+All right.
+
+419
+00:18:42,180 --> 00:18:44,380
+So the project pitches themselves.
+
+420
+00:18:44,380 --> 00:18:46,300
+Okay, here's the do's and don'ts.
+
+421
+00:18:47,900 --> 00:18:51,260
+You want to either write a one page document
+
+422
+00:18:51,260 --> 00:18:52,780
+or five slides.
+
+423
+00:18:52,780 --> 00:18:53,660
+It is up to you.
+
+424
+00:18:54,700 --> 00:18:56,620
+You can do a Google Doc,
+
+425
+00:18:56,620 --> 00:18:58,140
+you can do Word,
+
+426
+00:18:58,140 --> 00:18:59,980
+or you can do PowerPoint or Google Sites.
+
+427
+00:18:59,980 --> 00:19:01,020
+Completely up to you.
+
+428
+00:19:01,020 --> 00:19:03,380
+Submit a PDF for all it's worth.
+
+429
+00:19:03,380 --> 00:19:05,940
+Conciseness is best, you know?
+
+430
+00:19:05,940 --> 00:19:07,900
+Give the key information that's useful.
+
+431
+00:19:09,100 --> 00:19:10,620
+Have clear goals and outcomes.
+
+432
+00:19:10,620 --> 00:19:12,620
+Talk about why you want to do the project,
+
+433
+00:19:12,620 --> 00:19:14,780
+what is expected out of the project,
+
+434
+00:19:14,780 --> 00:19:17,500
+what each of the milestones should be
+
+435
+00:19:17,500 --> 00:19:19,100
+and what you wish to accomplish.
+
+436
+00:19:19,980 --> 00:19:22,060
+Include any programming languages,
+
+437
+00:19:22,060 --> 00:19:24,540
+APIs, platforms that you wish to use,
+
+438
+00:19:24,540 --> 00:19:26,580
+game engines that you might want to use,
+
+439
+00:19:27,620 --> 00:19:29,900
+references to any papers, inspiration,
+
+440
+00:19:29,900 --> 00:19:31,260
+those kinds of things,
+
+441
+00:19:31,260 --> 00:19:32,820
+and any third party code.
+
+442
+00:19:33,900 --> 00:19:35,300
+Now, what you shouldn't do,
+
+443
+00:19:36,260 --> 00:19:38,420
+don't include math equations.
+
+444
+00:19:38,420 --> 00:19:41,100
+I won't understand them, nobody will understand them.
+
+445
+00:19:41,100 --> 00:19:41,940
+Okay?
+
+446
+00:19:41,940 --> 00:19:43,300
+Don't include it, they're not useful.
+
+447
+00:19:44,340 --> 00:19:48,220
+Don't exceed two pages and five slides
+
+448
+00:19:48,220 --> 00:19:49,660
+and or five slides.
+
+449
+00:19:49,660 --> 00:19:51,540
+Because again, if it's more than two pages,
+
+450
+00:19:51,540 --> 00:19:52,620
+I'm not going to read.
+
+451
+00:19:53,540 --> 00:19:55,900
+That means you're not writing it concisely.
+
+452
+00:19:57,380 --> 00:19:58,220
+You can,
+
+453
+00:20:00,180 --> 00:20:02,660
+don't bring repeat ideas.
+
+454
+00:20:02,660 --> 00:20:07,660
+For example, we had a WebGPU based GLTF viewer last year.
+
+455
+00:20:08,180 --> 00:20:09,380
+Don't do the same thing.
+
+456
+00:20:09,380 --> 00:20:10,220
+That's done.
+
+457
+00:20:10,220 --> 00:20:11,180
+You're not doing anything new.
+
+458
+00:20:11,180 --> 00:20:12,580
+You're a year ahead.
+
+459
+00:20:12,580 --> 00:20:14,820
+You should be moving the class forward.
+
+460
+00:20:14,820 --> 00:20:15,940
+Okay?
+
+461
+00:20:15,940 --> 00:20:17,620
+And lastly, don't come unprepared.
+
+462
+00:20:18,500 --> 00:20:20,660
+Understand why you want to do this project.
+
+463
+00:20:20,660 --> 00:20:23,060
+I'm telling you the questions that I'm going to ask.
+
+464
+00:20:23,060 --> 00:20:25,660
+If you come unprepared, then it's going to look sloppy
+
+465
+00:20:25,660 --> 00:20:28,340
+and I'm going to be like, okay, go rework that.
+
+466
+00:20:28,340 --> 00:20:30,100
+And while you're reworking it
+
+467
+00:20:30,100 --> 00:20:32,260
+between the Monday and the Wednesday,
+
+468
+00:20:32,260 --> 00:20:35,060
+other teams have already gotten started on the projects.
+
+469
+00:20:35,060 --> 00:20:37,220
+So it's going to put you at a disadvantage.
+
+470
+00:20:39,740 --> 00:20:41,460
+Any questions about these pitches?
+
+471
+00:20:45,980 --> 00:20:48,740
+Wayne, any recommendations from your pitch last year?
+
+472
+00:20:50,700 --> 00:20:51,540
+Yeah.
+
+473
+00:20:51,540 --> 00:20:52,380
+If you remember.
+
+474
+00:20:56,100 --> 00:20:58,900
+Your pitch was probably one of the easy ones last year.
+
+475
+00:20:58,900 --> 00:20:59,740
+Yeah.
+
+476
+00:21:01,300 --> 00:21:02,860
+Yours, Matt's, and Ashley's.
+
+477
+00:21:04,180 --> 00:21:05,020
+Yeah.
+
+478
+00:21:09,180 --> 00:21:10,220
+The project wasn't easy.
+
+479
+00:21:10,220 --> 00:21:11,420
+The pitch was well done.
+
+480
+00:21:12,820 --> 00:21:14,500
+Wait, were you saying my project?
+
+481
+00:21:14,500 --> 00:21:15,340
+Your pitch.
+
+482
+00:21:15,340 --> 00:21:16,780
+Okay, yeah, yeah.
+
+483
+00:21:16,780 --> 00:21:17,780
+It was well done, yes.
+
+484
+00:21:17,940 --> 00:21:18,780
+Yeah.
+
+485
+00:21:19,940 --> 00:21:21,740
+But any recommendations you have
+
+486
+00:21:21,740 --> 00:21:23,500
+as a student who's written a pitch?
+
+487
+00:21:24,420 --> 00:21:27,020
+Yeah, I think that's a stupid short.
+
+488
+00:21:30,020 --> 00:21:31,460
+Say you're implementing a paper,
+
+489
+00:21:31,460 --> 00:21:33,500
+you don't really have to talk a lot about the paper,
+
+490
+00:21:33,500 --> 00:21:37,700
+but really focus on what's novel about your project.
+
+491
+00:21:37,700 --> 00:21:39,580
+I think that's the most important thing.
+
+492
+00:21:39,580 --> 00:21:40,580
+Yeah.
+
+493
+00:21:40,580 --> 00:21:43,940
+So again, I'm coming from the industry.
+
+494
+00:21:43,940 --> 00:21:45,940
+I understand things would move.
+
+495
+00:21:45,940 --> 00:21:47,580
+When I ask you to write a schedule
+
+496
+00:21:47,580 --> 00:21:50,020
+for milestone one to three on the final,
+
+497
+00:21:50,020 --> 00:21:52,820
+I am asking based on what is your expectation.
+
+498
+00:21:56,180 --> 00:22:00,380
+If let's say one feature as part of one of these milestones
+
+499
+00:22:00,380 --> 00:22:02,300
+is like, hey, we spend more time on this,
+
+500
+00:22:02,300 --> 00:22:04,740
+so we are not able to accomplish it, it's fine.
+
+501
+00:22:04,740 --> 00:22:05,700
+Don't worry about it.
+
+502
+00:22:05,700 --> 00:22:08,940
+I want to make sure that you understand
+
+503
+00:22:08,940 --> 00:22:11,420
+what the requirements are and how much time it takes.
+
+504
+00:22:11,420 --> 00:22:13,500
+And if I don't see that to be realistic,
+
+505
+00:22:13,500 --> 00:22:15,500
+I will tell you, hey, this is not realistic,
+
+506
+00:22:16,100 --> 00:22:17,420
+move these things around.
+
+507
+00:22:17,420 --> 00:22:21,220
+Again, I want to help you do amazing things, okay?
+
+508
+00:22:21,220 --> 00:22:23,700
+This is not a test, okay?
+
+509
+00:22:23,700 --> 00:22:27,060
+So be very conscious, be very pragmatic
+
+510
+00:22:27,060 --> 00:22:28,540
+about what you're taking on
+
+511
+00:22:28,540 --> 00:22:30,780
+and you're understanding the problem
+
+512
+00:22:30,780 --> 00:22:32,420
+that you want to implement.
+
+513
+00:22:32,420 --> 00:22:35,260
+And what I'm asking you to do here
+
+514
+00:22:35,260 --> 00:22:38,780
+is essentially a sanity check that you understand it
+
+515
+00:22:38,780 --> 00:22:40,900
+and I can confirm it from my side.
+
+516
+00:22:40,900 --> 00:22:43,900
+I'm not gonna understand all the problems you come up with.
+
+517
+00:22:43,900 --> 00:22:44,740
+You may come up with,
+
+518
+00:22:44,740 --> 00:22:46,100
+hey, I want to do machine learning
+
+519
+00:22:46,100 --> 00:22:51,100
+that understands when it'll rain in not great weather.
+
+520
+00:22:53,260 --> 00:22:55,380
+Sure, like write a machine learning algorithm.
+
+521
+00:22:55,380 --> 00:22:56,860
+Do I know much about machine learning?
+
+522
+00:22:56,860 --> 00:22:57,700
+Probably not.
+
+523
+00:22:57,700 --> 00:22:58,860
+Can I connect you with Liam
+
+524
+00:22:58,860 --> 00:23:00,660
+who knows a lot about machine learning?
+
+525
+00:23:00,660 --> 00:23:01,500
+Yes.
+
+526
+00:23:01,500 --> 00:23:03,140
+Can I connect you with industry people?
+
+527
+00:23:03,140 --> 00:23:04,460
+Absolutely.
+
+528
+00:23:04,460 --> 00:23:07,060
+But the fact is I want to make sure
+
+529
+00:23:07,060 --> 00:23:09,580
+that you understand what you're doing, okay?
+
+530
+00:23:11,580 --> 00:23:12,540
+Anything else here?
+
+531
+00:23:13,900 --> 00:23:14,740
+Yeah.
+
+532
+00:23:20,260 --> 00:23:21,700
+Are you asking about the milestone date
+
+533
+00:23:21,700 --> 00:23:24,260
+or the amount of progress to make in the milestone?
+
+534
+00:23:25,820 --> 00:23:29,220
+Again, they should be reasonably set.
+
+535
+00:23:29,220 --> 00:23:33,900
+Like again, if you plan to do three things in milestone two
+
+536
+00:23:33,900 --> 00:23:36,820
+and you do two and a half, fine, I don't really care.
+
+537
+00:23:37,740 --> 00:23:39,940
+You're not gonna get dark points for that.
+
+538
+00:23:39,940 --> 00:23:41,500
+Again, I live in a realistic world.
+
+539
+00:23:41,500 --> 00:23:43,660
+I see deadlines slipping every day.
+
+540
+00:23:44,500 --> 00:23:46,020
+So that's not the worst thing.
+
+541
+00:23:46,020 --> 00:23:48,740
+Now, if you come from milestone one to milestone two
+
+542
+00:23:48,740 --> 00:23:50,700
+and you're like, I haven't made any progress.
+
+543
+00:23:50,700 --> 00:23:53,060
+Yes, that is a problem, okay?
+
+544
+00:23:53,060 --> 00:23:55,820
+So I will be as reasonable as I can be.
+
+545
+00:23:55,820 --> 00:23:57,380
+I'm here to guide you,
+
+546
+00:23:57,380 --> 00:24:00,260
+but ultimately you have to do the work, okay?
+
+547
+00:24:07,940 --> 00:24:10,980
+You are free to change it if you have good reason.
+
+548
+00:24:11,580 --> 00:24:14,980
+Let's say you do milestone one and you're like,
+
+549
+00:24:14,980 --> 00:24:16,980
+hey, we did made a lot of progress,
+
+550
+00:24:16,980 --> 00:24:18,340
+but while making the progress,
+
+551
+00:24:18,340 --> 00:24:19,900
+we realized like all of these things
+
+552
+00:24:19,900 --> 00:24:22,140
+that completely throw a plan out of the window
+
+553
+00:24:22,140 --> 00:24:24,380
+and here's a new plan and you've thought about it.
+
+554
+00:24:24,380 --> 00:24:26,300
+Fine, no problem, okay?
+
+555
+00:24:26,300 --> 00:24:29,540
+But being able to articulate what happened
+
+556
+00:24:29,540 --> 00:24:32,420
+and what your new plan is and doing that well,
+
+557
+00:24:32,420 --> 00:24:33,780
+that is the important part.
+
+558
+00:24:36,940 --> 00:24:39,460
+Make sure you're not coming into the class
+
+559
+00:24:39,460 --> 00:24:40,900
+and saying I have no progress, okay?
+
+560
+00:24:41,700 --> 00:24:42,540
+If you're running into problems,
+
+561
+00:24:42,540 --> 00:24:45,860
+communicate that so that when we come into the milestones,
+
+562
+00:24:45,860 --> 00:24:48,580
+we know what to expect and we are just there to see,
+
+563
+00:24:48,580 --> 00:24:49,580
+okay, you've thought about it
+
+564
+00:24:49,580 --> 00:24:51,420
+and you know what the way forward is.
+
+565
+00:24:54,380 --> 00:24:56,140
+Any other questions on the pitches?
+
+566
+00:24:59,060 --> 00:25:01,860
+Okay, all right.
+
+567
+00:25:01,860 --> 00:25:03,420
+Coming to the milestone presentations,
+
+568
+00:25:03,420 --> 00:25:04,700
+this is when you're gonna be up here
+
+569
+00:25:04,700 --> 00:25:05,540
+and you're gonna talk.
+
+570
+00:25:05,540 --> 00:25:08,660
+So I'm gonna be sitting there pretty much the entire class.
+
+571
+00:25:09,660 --> 00:25:12,340
+You will have time limits, okay?
+
+572
+00:25:12,340 --> 00:25:14,700
+We will, before the presentations,
+
+573
+00:25:14,700 --> 00:25:17,180
+a few days, at least a few days before the presentations,
+
+574
+00:25:17,180 --> 00:25:19,980
+we'll tell you how many minutes you have
+
+575
+00:25:19,980 --> 00:25:22,940
+and this is gonna be generally between five and eight.
+
+576
+00:25:22,940 --> 00:25:24,020
+It's not gonna be very long.
+
+577
+00:25:24,020 --> 00:25:26,020
+You're not gonna be giving a 20 minute presentation.
+
+578
+00:25:26,020 --> 00:25:27,820
+I don't think we'd be able to sit through
+
+579
+00:25:27,820 --> 00:25:29,260
+that many presentations.
+
+580
+00:25:30,260 --> 00:25:35,140
+So if I say the limit is five minutes, it is five minutes.
+
+581
+00:25:35,140 --> 00:25:38,140
+You go over, you get doc points, okay?
+
+582
+00:25:38,860 --> 00:25:41,260
+Again, I am not looking for you to tell me
+
+583
+00:25:41,260 --> 00:25:43,500
+the entire history of your week.
+
+584
+00:25:43,500 --> 00:25:44,980
+Tell me the main points.
+
+585
+00:25:44,980 --> 00:25:45,820
+That's the key thing.
+
+586
+00:25:45,820 --> 00:25:49,500
+Show me the progress that you've made since last milestone.
+
+587
+00:25:49,500 --> 00:25:54,140
+These can be videos, images, demos, including live demos.
+
+588
+00:25:55,220 --> 00:25:58,260
+And then tell me what your goals for the next milestone are,
+
+589
+00:25:58,260 --> 00:25:59,900
+if they're consistent with your pitch
+
+590
+00:25:59,900 --> 00:26:01,820
+or you're planning to change them a little bit.
+
+591
+00:26:01,820 --> 00:26:03,620
+Again, perfectly fine.
+
+592
+00:26:04,620 --> 00:26:09,140
+The audience here now,
+
+593
+00:26:09,140 --> 00:26:11,780
+from when you start doing these milestones
+
+594
+00:26:11,780 --> 00:26:13,660
+is not just gonna be me and the TAs.
+
+595
+00:26:13,660 --> 00:26:15,700
+Don't look at us when you're talking.
+
+596
+00:26:15,700 --> 00:26:17,780
+You're sharing this with the entire class.
+
+597
+00:26:17,780 --> 00:26:21,460
+Your class is there to understand what you're doing
+
+598
+00:26:21,460 --> 00:26:23,980
+and be inspired by it, okay?
+
+599
+00:26:23,980 --> 00:26:27,780
+So the audience is all of us
+
+600
+00:26:27,780 --> 00:26:29,900
+and you wanna take that into account.
+
+601
+00:26:31,060 --> 00:26:33,260
+And then once you're done with the milestone,
+
+602
+00:26:33,900 --> 00:26:36,260
+add that presentation to your GitHub repo, okay?
+
+603
+00:26:38,180 --> 00:26:41,540
+Other do's, use social media.
+
+604
+00:26:41,540 --> 00:26:43,980
+I've seen some of you use social media, props for it.
+
+605
+00:26:43,980 --> 00:26:45,660
+I've liked it, I've shared it.
+
+606
+00:26:45,660 --> 00:26:48,660
+Use social media more and more, okay?
+
+607
+00:26:48,660 --> 00:26:49,860
+Get in touch with the authors.
+
+608
+00:26:49,860 --> 00:26:51,060
+Eric Haynes shared this before.
+
+609
+00:26:51,060 --> 00:26:54,060
+Brandon asked you to reach out if you're doing WebGPU.
+
+610
+00:26:54,060 --> 00:26:55,100
+Reach out to the authors.
+
+611
+00:26:55,100 --> 00:26:59,420
+They love it if people are trying to replicate their work
+
+612
+00:26:59,420 --> 00:27:01,060
+and advance their work.
+
+613
+00:27:01,060 --> 00:27:04,100
+None of the people whose work you will try to recreate
+
+614
+00:27:04,100 --> 00:27:09,100
+or advance will have even a sense of ego or jealousy
+
+615
+00:27:09,220 --> 00:27:11,460
+that, hey, why is this person doing my work?
+
+616
+00:27:11,460 --> 00:27:13,220
+No, they will in fact take pride that,
+
+617
+00:27:13,220 --> 00:27:15,740
+hey, I've done something that is inspiring other people
+
+618
+00:27:15,740 --> 00:27:17,540
+to do the same thing, okay?
+
+619
+00:27:19,340 --> 00:27:20,740
+There are presentation guides.
+
+620
+00:27:20,740 --> 00:27:21,980
+Again, this is also guides.
+
+621
+00:27:21,980 --> 00:27:25,420
+So please watch that and prepare for the presentations.
+
+622
+00:27:25,420 --> 00:27:27,100
+Don't come in sloppily.
+
+623
+00:27:27,100 --> 00:27:28,980
+How the quality of your presentation
+
+624
+00:27:28,980 --> 00:27:31,380
+determines that final 20% of your grade.
+
+625
+00:27:31,380 --> 00:27:33,260
+Remember that, okay?
+
+626
+00:27:35,580 --> 00:27:38,500
+I'll take questions after I do the don'ts part.
+
+627
+00:27:38,500 --> 00:27:39,740
+Now, don't.
+
+628
+00:27:39,740 --> 00:27:41,020
+Don't exceed the time.
+
+629
+00:27:41,020 --> 00:27:43,700
+Again, reiterating that happens every year.
+
+630
+00:27:43,700 --> 00:27:44,540
+Don't do it.
+
+631
+00:27:44,540 --> 00:27:45,540
+Please try not to do it.
+
+632
+00:27:46,540 --> 00:27:49,580
+Don't include code and math equations in your presentation.
+
+633
+00:27:49,580 --> 00:27:50,500
+It's not useful.
+
+634
+00:27:52,140 --> 00:27:54,740
+You're gonna be presenting for five minutes, right?
+
+635
+00:27:54,740 --> 00:27:55,900
+To read five lines of code,
+
+636
+00:27:55,900 --> 00:27:58,700
+I'm gonna take more time than that, okay?
+
+637
+00:27:59,420 --> 00:28:01,620
+Include a math equation that shows how,
+
+638
+00:28:01,620 --> 00:28:03,500
+let's say the rendering equation works.
+
+639
+00:28:03,500 --> 00:28:05,140
+You're gonna need way more time to explain
+
+640
+00:28:05,140 --> 00:28:07,380
+what the math equation is than you have time.
+
+641
+00:28:07,380 --> 00:28:10,060
+So don't include them unless there is something
+
+642
+00:28:10,060 --> 00:28:12,060
+very, very, very exceptional about it.
+
+643
+00:28:14,140 --> 00:28:16,100
+Sharing that equation is a required part
+
+644
+00:28:16,100 --> 00:28:18,260
+of explaining what happens next, okay?
+
+645
+00:28:19,260 --> 00:28:20,740
+You don't need to open Visual Studio.
+
+646
+00:28:20,740 --> 00:28:23,020
+You don't need to walk through the code.
+
+647
+00:28:23,020 --> 00:28:24,180
+You want to do demos?
+
+648
+00:28:24,180 --> 00:28:25,740
+Awesome, do demos.
+
+649
+00:28:25,740 --> 00:28:26,580
+But have it ready.
+
+650
+00:28:26,580 --> 00:28:27,820
+Compile it, have it ready.
+
+651
+00:28:27,820 --> 00:28:29,260
+Don't compile in front of it
+
+652
+00:28:29,260 --> 00:28:31,980
+because that's using up your time, okay?
+
+653
+00:28:31,980 --> 00:28:33,460
+You don't get free,
+
+654
+00:28:33,460 --> 00:28:35,620
+you don't get additional 30 seconds for compiling time.
+
+655
+00:28:35,620 --> 00:28:38,340
+That's five minutes, if I say five minutes, okay?
+
+656
+00:28:40,100 --> 00:28:43,820
+So any questions on the milestone presentations?
+
+657
+00:28:49,740 --> 00:28:50,580
+No?
+
+658
+00:28:53,220 --> 00:28:54,540
+I'm sure there'll be some.
+
+659
+00:28:58,660 --> 00:29:00,300
+Okay, I'll move on.
+
+660
+00:29:01,780 --> 00:29:04,900
+So final presentations are a bit special.
+
+661
+00:29:04,900 --> 00:29:06,140
+So you have milestone one, two, three,
+
+662
+00:29:06,140 --> 00:29:07,660
+which will be the milestone presentations.
+
+663
+00:29:07,660 --> 00:29:09,980
+Then we'll have the final presentations.
+
+664
+00:29:09,980 --> 00:29:10,900
+And they're gonna be special
+
+665
+00:29:10,900 --> 00:29:12,740
+because I'm going to invite
+
+666
+00:29:12,740 --> 00:29:15,660
+not just guest speakers from this year.
+
+667
+00:29:15,660 --> 00:29:18,260
+I'm gonna be inviting guest speakers from last year,
+
+668
+00:29:18,260 --> 00:29:20,220
+friends of the course,
+
+669
+00:29:20,220 --> 00:29:22,100
+and anybody who takes an interest
+
+670
+00:29:22,100 --> 00:29:23,860
+in the final projects in this class.
+
+671
+00:29:23,860 --> 00:29:25,940
+And trust me, there are a lot of people.
+
+672
+00:29:25,980 --> 00:29:30,980
+I think last year we had at least 25 people join.
+
+673
+00:29:31,820 --> 00:29:33,980
+And this is all people like Brandon Jones
+
+674
+00:29:34,980 --> 00:29:38,300
+who are joining, and Eric Haynes joins every year.
+
+675
+00:29:38,300 --> 00:29:40,900
+So these are people who take an active interest
+
+676
+00:29:40,900 --> 00:29:43,100
+in the final projects of this class
+
+677
+00:29:43,100 --> 00:29:45,300
+because, and this is important,
+
+678
+00:29:45,300 --> 00:29:49,140
+they know the final projects in this class are amazing, okay?
+
+679
+00:29:49,140 --> 00:29:51,820
+So there is a bar that has been set
+
+680
+00:29:51,820 --> 00:29:55,260
+by the former students of this class
+
+681
+00:29:55,820 --> 00:29:57,820
+that has put up a standard
+
+682
+00:29:57,820 --> 00:30:00,820
+that people take an interest on what this class does.
+
+683
+00:30:00,820 --> 00:30:02,980
+And that directly leads to interviews and jobs.
+
+684
+00:30:02,980 --> 00:30:04,980
+And it has happened and happens continuously.
+
+685
+00:30:04,980 --> 00:30:06,780
+I expect it to happen this year too.
+
+686
+00:30:08,020 --> 00:30:12,060
+So because we have people coming from the outside,
+
+687
+00:30:13,220 --> 00:30:15,940
+your audience then becomes the entire world, right?
+
+688
+00:30:17,180 --> 00:30:20,020
+The people from different fields, different technologies,
+
+689
+00:30:20,020 --> 00:30:21,700
+they're all gonna be watching.
+
+690
+00:30:21,700 --> 00:30:23,460
+So first of all,
+
+691
+00:30:23,460 --> 00:30:25,220
+your presentation should be a lot more polished,
+
+692
+00:30:25,220 --> 00:30:26,220
+practice it more.
+
+693
+00:30:26,220 --> 00:30:29,300
+Again, that's why the submission is on the Sunday.
+
+694
+00:30:29,300 --> 00:30:30,500
+And then you have the Monday
+
+695
+00:30:30,500 --> 00:30:32,540
+to practice your presentations if needed.
+
+696
+00:30:33,660 --> 00:30:36,900
+Don't include information about our logistics.
+
+697
+00:30:36,900 --> 00:30:38,500
+Our milestones are logistics.
+
+698
+00:30:38,500 --> 00:30:40,500
+Our pitches are logistics, right?
+
+699
+00:30:40,500 --> 00:30:43,780
+It's a way for me to keep a check on you saying,
+
+700
+00:30:43,780 --> 00:30:45,100
+hey guys, I've given you five weeks.
+
+701
+00:30:45,100 --> 00:30:46,140
+What have you come up with?
+
+702
+00:30:46,140 --> 00:30:48,380
+You know, that'll be dangerous if I try to do that.
+
+703
+00:30:48,380 --> 00:30:51,580
+So the milestones are kind of like a checkpoint for us.
+
+704
+00:30:51,580 --> 00:30:53,460
+But when you are showing this to the world,
+
+705
+00:30:53,460 --> 00:30:55,660
+show it as one complete thing.
+
+706
+00:30:55,660 --> 00:30:58,500
+You've done this project and here's the outcome of it.
+
+707
+00:30:58,500 --> 00:30:59,900
+So that's what we wanna show.
+
+708
+00:31:01,340 --> 00:31:02,620
+Most likely five minutes,
+
+709
+00:31:02,620 --> 00:31:06,180
+but I'll let you know what the exact time is for that.
+
+710
+00:31:06,180 --> 00:31:08,180
+And pretty much the same,
+
+711
+00:31:08,180 --> 00:31:10,500
+otherwise it's the same do's and don'ts
+
+712
+00:31:10,500 --> 00:31:12,900
+as the milestone presentations.
+
+713
+00:31:14,900 --> 00:31:18,140
+What you should expect to do in the final presentation.
+
+714
+00:31:18,980 --> 00:31:21,060
+Give an overview of the problem,
+
+715
+00:31:21,460 --> 00:31:24,980
+use one to two slides of the technical approach.
+
+716
+00:31:26,380 --> 00:31:30,100
+Absolutely show a demo if you can, a live demo.
+
+717
+00:31:30,100 --> 00:31:31,380
+And I will give you extra time
+
+718
+00:31:31,380 --> 00:31:32,900
+if you want to do a live demo.
+
+719
+00:31:32,900 --> 00:31:35,340
+I will add information about this
+
+720
+00:31:35,340 --> 00:31:37,460
+as we lead up to final presentations.
+
+721
+00:31:37,460 --> 00:31:40,940
+But if you plan to do a live demo, I will give you more time.
+
+722
+00:31:40,940 --> 00:31:44,460
+If you wanna include videos, again, well-recommended.
+
+723
+00:31:44,460 --> 00:31:46,220
+Include some performance analysis
+
+724
+00:31:46,220 --> 00:31:48,020
+about what the performance is,
+
+725
+00:31:48,020 --> 00:31:50,460
+what was expected, what you came up with.
+
+726
+00:31:50,460 --> 00:31:52,780
+And then any shortcomings of future work
+
+727
+00:31:52,780 --> 00:31:55,340
+that you may not have been able to achieve
+
+728
+00:31:55,340 --> 00:31:57,180
+or expect to do in the future.
+
+729
+00:32:00,020 --> 00:32:03,140
+You can do this as slides with the demo video
+
+730
+00:32:03,140 --> 00:32:06,500
+or prepare a video for the entire presentation.
+
+731
+00:32:09,020 --> 00:32:10,660
+But it's important that when you come up here,
+
+732
+00:32:10,660 --> 00:32:11,500
+you are talking.
+
+733
+00:32:11,500 --> 00:32:13,860
+You can have the presentation run as a video,
+
+734
+00:32:13,860 --> 00:32:15,100
+but you will have to speak.
+
+735
+00:32:15,100 --> 00:32:17,180
+You can't just record yourself talking
+
+736
+00:32:17,180 --> 00:32:18,380
+and just play the video.
+
+737
+00:32:19,380 --> 00:32:22,780
+So again, final project submissions are due
+
+738
+00:32:22,780 --> 00:32:23,900
+on December 11th.
+
+739
+00:32:25,020 --> 00:32:28,100
+And then final presentations would be Monday evening.
+
+740
+00:32:28,100 --> 00:32:29,820
+And between that,
+
+741
+00:32:29,820 --> 00:32:31,820
+I recommend that you take the time to sleep.
+
+742
+00:32:31,820 --> 00:32:33,100
+I know this is not the only class
+
+743
+00:32:33,100 --> 00:32:34,140
+and you'll have other classes,
+
+744
+00:32:34,140 --> 00:32:36,700
+but try to take the time to sleep.
+
+745
+00:32:36,700 --> 00:32:37,940
+Practice your presentations.
+
+746
+00:32:37,940 --> 00:32:39,380
+That'll be important.
+
+747
+00:32:39,380 --> 00:32:40,900
+And then work on any demo videos.
+
+748
+00:32:40,900 --> 00:32:43,300
+Again, the demo videos don't have to be submitted
+
+749
+00:32:43,300 --> 00:32:45,980
+to GitHub, so you're free to work on those.
+
+750
+00:32:45,980 --> 00:32:48,740
+Make changes to GitHub only if you find a serious bug
+
+751
+00:32:48,740 --> 00:32:50,940
+and let us know if you're doing that, okay?
+
+752
+00:32:52,620 --> 00:32:56,580
+So those are my notes for presentations, milestone,
+
+753
+00:32:56,580 --> 00:32:58,140
+and the final project presentation.
+
+754
+00:32:58,140 --> 00:32:59,420
+So any questions on this?
+
+755
+00:33:07,420 --> 00:33:08,260
+No?
+
+756
+00:33:12,460 --> 00:33:14,140
+You guys are awfully silent today.
+
+757
+00:33:16,580 --> 00:33:20,660
+All right, I'm sure there'll be something
+
+758
+00:33:20,660 --> 00:33:22,220
+and we'll come back.
+
+759
+00:33:22,220 --> 00:33:23,060
+All right.
+
+760
+00:33:24,060 --> 00:33:24,900
+Shadow teams.
+
+761
+00:33:24,900 --> 00:33:28,700
+So shadow teams was an idea I started in 2020,
+
+762
+00:33:31,380 --> 00:33:33,260
+I think, when the pandemic hit,
+
+763
+00:33:33,260 --> 00:33:36,300
+or it may have been 2019, I can't remember.
+
+764
+00:33:36,300 --> 00:33:38,940
+Essentially, the goal of a shadow team
+
+765
+00:33:38,940 --> 00:33:42,940
+is to be able to have a paired team.
+
+766
+00:33:42,940 --> 00:33:45,980
+So you are a team and there'll be your shadow team
+
+767
+00:33:45,980 --> 00:33:48,460
+who you can either bounce ideas off of,
+
+768
+00:33:48,460 --> 00:33:51,100
+you can be like, hey guys, you're trying to do this,
+
+769
+00:33:51,100 --> 00:33:53,180
+do you have any other suggestions?
+
+770
+00:33:53,180 --> 00:33:55,820
+And then you can practice your presentations with them.
+
+771
+00:33:55,820 --> 00:33:58,020
+Okay, so both of you should be like,
+
+772
+00:33:58,020 --> 00:33:59,980
+hey, let's practice our presentation.
+
+773
+00:33:59,980 --> 00:34:01,860
+Okay, you do your presentation.
+
+774
+00:34:01,860 --> 00:34:03,740
+The limit is five minutes, you go to eight minutes
+
+775
+00:34:03,740 --> 00:34:04,940
+and you're asking your shadow team,
+
+776
+00:34:04,940 --> 00:34:06,020
+okay, what should we cut down?
+
+777
+00:34:06,020 --> 00:34:07,420
+What is not important?
+
+778
+00:34:07,420 --> 00:34:09,660
+What went over your head that makes no sense
+
+779
+00:34:09,660 --> 00:34:11,300
+to put in this presentation?
+
+780
+00:34:11,300 --> 00:34:14,020
+Those kinds of things have become very, very important.
+
+781
+00:34:16,740 --> 00:34:19,740
+We recommend that you meet once a week,
+
+782
+00:34:19,740 --> 00:34:22,180
+at least for 30 to 60 minutes.
+
+783
+00:34:22,180 --> 00:34:25,140
+And if for nothing else to practice your presentation.
+
+784
+00:34:25,140 --> 00:34:25,980
+Okay.
+
+785
+00:34:29,220 --> 00:34:32,660
+Generally, you will be allowed to select your shadow team.
+
+786
+00:34:32,660 --> 00:34:34,500
+So once you do your pitches,
+
+787
+00:34:34,500 --> 00:34:37,140
+you will know what the other teams are doing.
+
+788
+00:34:37,140 --> 00:34:40,220
+So for example, if there are two teams doing web GPU,
+
+789
+00:34:40,220 --> 00:34:41,780
+you'll be shadow teams.
+
+790
+00:34:41,780 --> 00:34:43,860
+If there are two teams doing machine learning,
+
+791
+00:34:43,860 --> 00:34:45,820
+you'll likely be shadow teams, okay?
+
+792
+00:34:45,820 --> 00:34:47,900
+So the shadow teams should generally be relevant
+
+793
+00:34:47,900 --> 00:34:48,740
+to your topic.
+
+794
+00:34:50,300 --> 00:34:54,420
+And in the past years when we've done this,
+
+795
+00:34:54,420 --> 00:34:57,660
+shadow teams have always helped make presentations better.
+
+796
+00:34:57,660 --> 00:34:59,260
+And this is extremely clear.
+
+797
+00:35:00,100 --> 00:35:04,060
+Teams who come up here and do a sloppy presentation
+
+798
+00:35:04,060 --> 00:35:06,620
+will have never practiced with their shadow team.
+
+799
+00:35:06,620 --> 00:35:08,700
+The teams who come up here and do an amazing job
+
+800
+00:35:08,780 --> 00:35:11,660
+of the presentations, practice with their shadow teams.
+
+801
+00:35:12,540 --> 00:35:14,100
+And it has nothing to do with
+
+802
+00:35:14,100 --> 00:35:16,060
+whether you're an English native speaker
+
+803
+00:35:16,060 --> 00:35:18,220
+or how confident you are about speaking.
+
+804
+00:35:18,220 --> 00:35:20,500
+It is about the information you share
+
+805
+00:35:20,500 --> 00:35:22,260
+and bouncing it off of somebody
+
+806
+00:35:22,260 --> 00:35:24,940
+who is not doing what you're doing.
+
+807
+00:35:24,940 --> 00:35:26,660
+When you're doing these final projects,
+
+808
+00:35:26,660 --> 00:35:28,660
+you're gonna be knee deep in them.
+
+809
+00:35:28,660 --> 00:35:29,500
+Okay.
+
+810
+00:35:29,500 --> 00:35:30,700
+You're gonna be debugging them.
+
+811
+00:35:30,700 --> 00:35:32,820
+You're gonna be reading the papers.
+
+812
+00:35:32,820 --> 00:35:35,420
+And at some point what happens is
+
+813
+00:35:35,420 --> 00:35:38,260
+you forget what the basics are, right?
+
+814
+00:35:38,860 --> 00:35:41,580
+You forget that the things you understand,
+
+815
+00:35:41,580 --> 00:35:44,100
+the person in front of you doesn't understand
+
+816
+00:35:44,100 --> 00:35:46,460
+because they haven't read those same papers.
+
+817
+00:35:46,460 --> 00:35:50,220
+So the shadow teams will help you bring it up to a context
+
+818
+00:35:50,220 --> 00:35:51,700
+that other people will understand.
+
+819
+00:35:51,700 --> 00:35:55,420
+So it's absolutely vital that you meet
+
+820
+00:35:55,420 --> 00:35:57,780
+with their shadow teams and practice with them.
+
+821
+00:35:58,980 --> 00:36:02,220
+Now, again, it's not a free hand.
+
+822
+00:36:02,220 --> 00:36:03,940
+I will be checking in.
+
+823
+00:36:03,940 --> 00:36:07,620
+And the way I check in is through the shadow team surveys.
+
+824
+00:36:07,620 --> 00:36:11,380
+All of you filled out my pre-class survey, right?
+
+825
+00:36:11,380 --> 00:36:14,300
+When I asked for your information and your interest.
+
+826
+00:36:14,300 --> 00:36:16,140
+This is gonna be similar to that,
+
+827
+00:36:16,140 --> 00:36:17,660
+but it's gonna be very short.
+
+828
+00:36:17,660 --> 00:36:21,460
+It will take no more than three minutes for you to fill out.
+
+829
+00:36:21,460 --> 00:36:24,300
+The information I'm looking for is when you met,
+
+830
+00:36:25,180 --> 00:36:26,820
+how was your interaction?
+
+831
+00:36:26,820 --> 00:36:28,620
+What were some of the highlights?
+
+832
+00:36:28,620 --> 00:36:29,620
+And that's about it.
+
+833
+00:36:30,580 --> 00:36:31,660
+Okay.
+
+834
+00:36:31,660 --> 00:36:36,660
+So not filling these is a penalty.
+
+835
+00:36:37,500 --> 00:36:39,420
+It will go off your milestone points.
+
+836
+00:36:39,420 --> 00:36:41,780
+And sadly, I've had to do this in the past.
+
+837
+00:36:42,900 --> 00:36:44,620
+Again, it takes no more than three minutes.
+
+838
+00:36:44,620 --> 00:36:46,140
+While you're meeting with your shadow team,
+
+839
+00:36:46,140 --> 00:36:48,060
+you're ending your meeting, just type it out.
+
+840
+00:36:48,060 --> 00:36:48,900
+Okay.
+
+841
+00:36:53,100 --> 00:36:56,740
+And so any questions on, what did we do?
+
+842
+00:36:56,740 --> 00:37:00,380
+We did final presentations was done on shadow teams.
+
+843
+00:37:00,380 --> 00:37:01,940
+Any questions on shadow teams?
+
+844
+00:37:01,940 --> 00:37:02,780
+No.
+
+845
+00:37:08,620 --> 00:37:10,940
+I do deserve the right to change the shadow teams,
+
+846
+00:37:10,940 --> 00:37:11,980
+by the way.
+
+847
+00:37:11,980 --> 00:37:16,660
+Because there are times when just a group of friends
+
+848
+00:37:16,660 --> 00:37:18,300
+want to be each other's shadow teams
+
+849
+00:37:18,300 --> 00:37:21,740
+and have no sense of relations and topics.
+
+850
+00:37:21,740 --> 00:37:23,220
+So I will keep an eye on that,
+
+851
+00:37:23,220 --> 00:37:26,380
+but otherwise you are generally free to choose
+
+852
+00:37:26,380 --> 00:37:28,620
+as long as you're making conscious decisions.
+
+853
+00:37:30,660 --> 00:37:31,700
+Any other questions?
+
+854
+00:37:32,700 --> 00:37:33,540
+No.
+
+855
+00:37:34,900 --> 00:37:35,740
+Okay.
+
+856
+00:37:38,140 --> 00:37:39,540
+So shadow team service is done.
+
+857
+00:37:39,540 --> 00:37:41,380
+So what do you need to deliver?
+
+858
+00:37:42,660 --> 00:37:44,580
+So there are a few things.
+
+859
+00:37:44,580 --> 00:37:48,420
+The project pitch is due on November 6th.
+
+860
+00:37:48,420 --> 00:37:50,460
+So that's the first deliverable.
+
+861
+00:37:50,460 --> 00:37:52,700
+Your three milestone presentations are deliverable
+
+862
+00:37:52,700 --> 00:37:53,900
+on the day of the milestone,
+
+863
+00:37:53,900 --> 00:37:56,140
+and then you add them to GitHub.
+
+864
+00:37:56,140 --> 00:37:58,060
+Your final presentation,
+
+865
+00:37:58,060 --> 00:38:00,380
+your final code submission on GitHub,
+
+866
+00:38:00,380 --> 00:38:03,740
+and then four shadow team surveys, one for each week.
+
+867
+00:38:03,740 --> 00:38:04,580
+Okay.
+
+868
+00:38:06,060 --> 00:38:08,420
+You missed shadow team surveys.
+
+869
+00:38:08,420 --> 00:38:09,980
+I take no pride in docking points,
+
+870
+00:38:09,980 --> 00:38:11,540
+but please just finish it.
+
+871
+00:38:11,540 --> 00:38:14,660
+It's, you know, it's not a complex problem.
+
+872
+00:38:14,660 --> 00:38:16,220
+Just add the information there.
+
+873
+00:38:18,780 --> 00:38:20,140
+So any questions here?
+
+874
+00:38:24,100 --> 00:38:25,180
+Yeah.
+
+875
+00:38:25,180 --> 00:38:26,580
+All right.
+
+876
+00:38:26,580 --> 00:38:29,900
+So for your reference,
+
+877
+00:38:30,420 --> 00:38:33,260
+I've put in a bunch of final projects
+
+878
+00:38:33,260 --> 00:38:35,260
+for you to take a look at.
+
+879
+00:38:35,260 --> 00:38:37,420
+And this is, these can be good
+
+880
+00:38:37,420 --> 00:38:40,700
+because they did something technically amazing.
+
+881
+00:38:40,700 --> 00:38:43,140
+They can be good because they captured a really nice video
+
+882
+00:38:43,140 --> 00:38:44,260
+from the work they've done.
+
+883
+00:38:44,260 --> 00:38:46,180
+They could have written a great readme.
+
+884
+00:38:46,180 --> 00:38:49,740
+So these are all really, really good final projects.
+
+885
+00:38:49,740 --> 00:38:51,980
+This one up left is Wayne's.
+
+886
+00:38:53,140 --> 00:38:55,020
+This is Rachel's team.
+
+887
+00:38:55,020 --> 00:38:58,420
+That is Shubham's team who did Voxels and ReSTIR.
+
+888
+00:38:58,460 --> 00:39:02,180
+So, you know, again, really good projects.
+
+889
+00:39:02,180 --> 00:39:03,620
+These are not the only great projects.
+
+890
+00:39:03,620 --> 00:39:05,700
+So please visit previous year's websites
+
+891
+00:39:05,700 --> 00:39:07,260
+to actually see what was done.
+
+892
+00:39:08,420 --> 00:39:10,260
+I'm not gonna be walking through each of these,
+
+893
+00:39:10,260 --> 00:39:11,700
+but these are for your inspiration
+
+894
+00:39:11,700 --> 00:39:14,420
+when you go back home and start thinking about projects
+
+895
+00:39:14,420 --> 00:39:18,020
+to take a look at for inspiration of what is expected
+
+896
+00:39:18,020 --> 00:39:20,420
+and how students have gone on in the past
+
+897
+00:39:20,420 --> 00:39:21,700
+and done their projects.
+
+898
+00:39:21,700 --> 00:39:22,700
+Okay.
+
+899
+00:39:22,700 --> 00:39:25,500
+So let me skip through these.
+
+900
+00:39:26,340 --> 00:39:30,060
+This was the first DXR project in the class, by the way.
+
+901
+00:39:35,580 --> 00:39:36,700
+So a bunch of them.
+
+902
+00:39:36,700 --> 00:39:41,260
+And then there are links for you to reference
+
+903
+00:39:41,260 --> 00:39:45,380
+really good pitches, milestone, final project presentation.
+
+904
+00:39:45,380 --> 00:39:47,180
+So these are all like, again,
+
+905
+00:39:47,180 --> 00:39:50,100
+references for you to understand what is expected.
+
+906
+00:39:53,100 --> 00:39:54,300
+Any questions on this?
+
+907
+00:39:55,940 --> 00:39:56,780
+Nope.
+
+908
+00:40:00,460 --> 00:40:01,580
+No?
+
+909
+00:40:01,580 --> 00:40:02,420
+Okay.
+
+910
+00:40:03,380 --> 00:40:05,340
+So let's get into project ideas.
+
+911
+00:40:06,660 --> 00:40:10,700
+And these are, I will be very clear, only some ideas.
+
+912
+00:40:10,700 --> 00:40:15,700
+I ask for recommendations from people in the industry.
+
+913
+00:40:15,860 --> 00:40:18,420
+I come up with some of my ideas of my own,
+
+914
+00:40:18,420 --> 00:40:19,660
+but these are only some.
+
+915
+00:40:19,660 --> 00:40:21,780
+You are free to explore the world
+
+916
+00:40:21,780 --> 00:40:23,700
+and come up with your own ideas, okay?
+
+917
+00:40:24,700 --> 00:40:28,740
+So denoising is very big.
+
+918
+00:40:28,740 --> 00:40:30,340
+I think Eric Haynes shared that with us.
+
+919
+00:40:30,340 --> 00:40:32,300
+You guys saw the project poll.
+
+920
+00:40:32,300 --> 00:40:36,180
+If you want to do a denoising with Path Tracer and or DXR,
+
+921
+00:40:37,140 --> 00:40:38,820
+please, I think it's a wonderful topic.
+
+922
+00:40:38,820 --> 00:40:42,540
+It's definitely taking a lot of headway in the world.
+
+923
+00:40:42,540 --> 00:40:44,300
+So definitely recommend it.
+
+924
+00:40:45,820 --> 00:40:48,460
+I won't read all of this, but this is an idea from Nvidia.
+
+925
+00:40:48,460 --> 00:40:51,140
+So when Eric Haynes came in, I asked him,
+
+926
+00:40:51,140 --> 00:40:53,660
+hey, do you have ideas for final projects?
+
+927
+00:40:54,500 --> 00:40:57,020
+And he asked in basically Nvidia's research Slack channel
+
+928
+00:40:57,020 --> 00:40:59,140
+about what are good ideas for students.
+
+929
+00:40:59,140 --> 00:41:00,180
+And this is one of those.
+
+930
+00:41:00,180 --> 00:41:01,180
+So I won't read this.
+
+931
+00:41:01,180 --> 00:41:03,460
+This is for your reference to read at home.
+
+932
+00:41:06,020 --> 00:41:08,660
+DXR, I think, is an amazing topic.
+
+933
+00:41:08,660 --> 00:41:10,180
+And I write DXR, but it's really,
+
+934
+00:41:10,180 --> 00:41:11,700
+if you want to do welcome ray tracing,
+
+935
+00:41:11,700 --> 00:41:13,380
+that's perfectly fine with me too.
+
+936
+00:41:14,900 --> 00:41:18,460
+Again, in this case, so if you remember the second slide
+
+937
+00:41:18,460 --> 00:41:20,420
+that I showed you, it was that your project
+
+938
+00:41:20,420 --> 00:41:22,580
+must be a combination of things, right?
+
+939
+00:41:22,580 --> 00:41:24,860
+So in this case, DXR is one part of that.
+
+940
+00:41:24,860 --> 00:41:27,300
+And then you come up with, what do you want to do with DXR?
+
+941
+00:41:27,300 --> 00:41:28,420
+There are so many things you can do.
+
+942
+00:41:28,420 --> 00:41:30,540
+What do you want to apply DXR to?
+
+943
+00:41:30,540 --> 00:41:33,220
+So that's something you have to come up with.
+
+944
+00:41:35,540 --> 00:41:38,540
+Replicating papers from advances in real-time rendering.
+
+945
+00:41:38,540 --> 00:41:40,860
+I think it's an amazing course at SIGGRAPH.
+
+946
+00:41:41,780 --> 00:41:44,220
+Please check out the papers from there.
+
+947
+00:41:44,220 --> 00:41:47,460
+Both of these links are really good for that.
+
+948
+00:41:47,460 --> 00:41:50,620
+Check them out if that's what you want to re-implement.
+
+949
+00:41:50,620 --> 00:41:51,940
+Very well recommended.
+
+950
+00:41:53,180 --> 00:41:56,460
+Another idea coming from NVIDIA
+
+951
+00:41:56,460 --> 00:41:59,020
+is this Voxel space GitHub repo.
+
+952
+00:41:59,020 --> 00:42:01,140
+Again, I won't read the full text.
+
+953
+00:42:01,140 --> 00:42:03,820
+This is as it's coming from NVIDIA,
+
+954
+00:42:03,820 --> 00:42:06,900
+but another thing that you can think about
+
+955
+00:42:06,900 --> 00:42:09,500
+how to improve with the GPU.
+
+956
+00:42:12,180 --> 00:42:16,620
+ReSTIR, so we've had all the last two years,
+
+957
+00:42:18,020 --> 00:42:20,620
+we've probably had like four or five ReSTIR projects.
+
+958
+00:42:20,620 --> 00:42:25,620
+ReSTIR is spatial temporal sampling.
+
+959
+00:42:25,780 --> 00:42:26,940
+I forget the entire form,
+
+960
+00:42:26,940 --> 00:42:28,940
+but it's essentially a technique
+
+961
+00:42:28,940 --> 00:42:32,700
+for making ray tracing faster
+
+962
+00:42:32,700 --> 00:42:35,460
+because of improving denoising and stuff.
+
+963
+00:42:35,460 --> 00:42:38,820
+So if you try to do the seminal ReSTIR paper,
+
+964
+00:42:38,820 --> 00:42:40,180
+you'll get a no.
+
+965
+00:42:40,180 --> 00:42:42,860
+But if you try to do an advanced ReSTIR paper
+
+966
+00:42:42,860 --> 00:42:45,380
+with improvements and stuff that are coming every year,
+
+967
+00:42:45,380 --> 00:42:47,780
+sure, I'm very much open to that.
+
+968
+00:42:47,780 --> 00:42:50,260
+So this is one of those ideas coming from NVIDIA.
+
+969
+00:42:51,620 --> 00:42:54,300
+You can do a lot of machine learning projects,
+
+970
+00:42:54,300 --> 00:42:57,740
+both with graphics output and not graphics output.
+
+971
+00:42:57,740 --> 00:42:59,940
+These are some with graphical outputs,
+
+972
+00:42:59,940 --> 00:43:03,620
+you know, CNNL, STM, transformers.
+
+973
+00:43:04,940 --> 00:43:07,140
+Again, I may or may not understand all of these,
+
+974
+00:43:07,140 --> 00:43:09,460
+but I'm more than happy to connect you with Liam
+
+975
+00:43:09,460 --> 00:43:12,180
+and others who are interested in this
+
+976
+00:43:12,180 --> 00:43:13,860
+and have a lot of expertise here.
+
+977
+00:43:14,780 --> 00:43:17,020
+And Liam will be coming to the milestones and stuff
+
+978
+00:43:17,020 --> 00:43:19,580
+if any of you are doing machine learning projects.
+
+979
+00:43:21,620 --> 00:43:24,460
+And then there's machine learning on the compute side.
+
+980
+00:43:24,460 --> 00:43:28,580
+So this is object detections, speech to text.
+
+981
+00:43:28,580 --> 00:43:31,660
+Speech to text is a big hobby for Liam.
+
+982
+00:43:31,660 --> 00:43:33,380
+He does NLP, right?
+
+983
+00:43:33,380 --> 00:43:36,220
+So a bunch of things here, again,
+
+984
+00:43:36,220 --> 00:43:39,020
+very much of interest for this class
+
+985
+00:43:39,020 --> 00:43:40,420
+as well as for the industry.
+
+986
+00:43:42,900 --> 00:43:46,020
+Advanced projects in Vulkan, DirectX, Metal.
+
+987
+00:43:46,020 --> 00:43:47,660
+Again, these are APIs.
+
+988
+00:43:47,660 --> 00:43:50,300
+How you apply them is up to you, okay?
+
+989
+00:43:50,980 --> 00:43:52,540
+I think Metal is certainly very interesting.
+
+990
+00:43:52,540 --> 00:43:55,340
+Vulkan and DirectX, probably a little bit more common,
+
+991
+00:43:55,340 --> 00:43:58,100
+but definitely try to explore these if you want to.
+
+992
+00:44:00,980 --> 00:44:03,180
+WebGPU, I don't think I need to say much more
+
+993
+00:44:03,180 --> 00:44:05,980
+than what Brandon has already shared with us.
+
+994
+00:44:05,980 --> 00:44:08,980
+We had three WebGPU projects last year.
+
+995
+00:44:08,980 --> 00:44:10,980
+I'm looking to build on that.
+
+996
+00:44:10,980 --> 00:44:12,900
+I think that momentum is great.
+
+997
+00:44:12,900 --> 00:44:13,780
+People took notice.
+
+998
+00:44:13,780 --> 00:44:15,380
+The entire Chrome GPU team
+
+999
+00:44:15,380 --> 00:44:17,820
+joined the final project presentations last year.
+
+1000
+00:44:18,660 --> 00:44:22,460
+And maybe, Wayne, if I'm putting you on the spot,
+
+1001
+00:44:22,460 --> 00:44:24,900
+you were in touch with the Chrome GPU team
+
+1002
+00:44:24,900 --> 00:44:26,300
+and maybe why don't you share
+
+1003
+00:44:27,700 --> 00:44:29,900
+some of how your communication with them went
+
+1004
+00:44:29,900 --> 00:44:34,020
+and how it's like, in complete honesty,
+
+1005
+00:44:34,020 --> 00:44:35,820
+how it's like to interact with them.
+
+1006
+00:44:38,820 --> 00:44:41,060
+Yeah, I think they are very,
+
+1007
+00:44:41,060 --> 00:44:42,900
+definitely open to the WebGPU team.
+
+1008
+00:44:42,900 --> 00:44:46,140
+I mean, I'm sure you guys heard from Brandon.
+
+1009
+00:44:46,220 --> 00:44:49,860
+The whole team, they're very open to project ideas
+
+1010
+00:44:49,860 --> 00:44:52,860
+and they really want to make the API better.
+
+1011
+00:44:52,860 --> 00:44:57,180
+So whenever you have questions,
+
+1012
+00:44:57,180 --> 00:45:00,300
+you can really just reach out to them directly
+
+1013
+00:45:00,300 --> 00:45:01,140
+during your project.
+
+1014
+00:45:01,140 --> 00:45:05,500
+So I'd say, don't be scared.
+
+1015
+00:45:05,500 --> 00:45:08,180
+If it's like WebGPU is such a new thing,
+
+1016
+00:45:08,180 --> 00:45:11,660
+you can definitely get a ton of support from the team.
+
+1017
+00:45:11,660 --> 00:45:13,620
+Yeah, it was way more complex when you were doing it.
+
+1018
+00:45:13,620 --> 00:45:14,980
+We are a year ahead of that
+
+1019
+00:45:14,980 --> 00:45:16,900
+and there's been so much progress made.
+
+1020
+00:45:16,900 --> 00:45:18,660
+It's very, very close to standardization.
+
+1021
+00:45:18,660 --> 00:45:20,340
+So it should be a lot better experience
+
+1022
+00:45:20,340 --> 00:45:21,380
+for you guys as well.
+
+1023
+00:45:23,900 --> 00:45:26,060
+Okay, again, this is an API.
+
+1024
+00:45:26,060 --> 00:45:27,660
+How you apply it is up to you.
+
+1025
+00:45:29,740 --> 00:45:32,340
+This next one is pretty close to me.
+
+1026
+00:45:32,340 --> 00:45:37,020
+So for geospatial, so you can essentially
+
+1027
+00:45:37,020 --> 00:45:41,500
+take the entire globe and stream it into Unreal Engine
+
+1028
+00:45:41,500 --> 00:45:45,620
+or on WebGL using Cesium JS.
+
+1029
+00:45:46,780 --> 00:45:49,500
+If you have ideas that you want to work on,
+
+1030
+00:45:49,500 --> 00:45:52,740
+for example, I think back in like 2017,
+
+1031
+00:45:52,740 --> 00:45:55,420
+one team did like a snow simulation
+
+1032
+00:45:55,420 --> 00:45:57,540
+inside Cesium JS using WebGL.
+
+1033
+00:45:58,500 --> 00:46:02,020
+If you have ideas that would help with something like this,
+
+1034
+00:46:02,020 --> 00:46:04,700
+again, if you think of ideas in the metaverse
+
+1035
+00:46:04,700 --> 00:46:07,420
+or digital twins, those kinds of things,
+
+1036
+00:46:07,420 --> 00:46:09,540
+if you want to improve some of this,
+
+1037
+00:46:09,540 --> 00:46:10,580
+I will certainly help you.
+
+1038
+00:46:10,580 --> 00:46:13,060
+I will get you connected with developers at Cesium
+
+1039
+00:46:13,060 --> 00:46:14,180
+and would strongly encourage
+
+1040
+00:46:14,180 --> 00:46:16,180
+if there's anything you want to do here.
+
+1041
+00:46:18,380 --> 00:46:21,300
+Similarly, that's going to come November 14,
+
+1042
+00:46:21,300 --> 00:46:22,860
+but even before that,
+
+1043
+00:46:22,860 --> 00:46:24,860
+NVIDIA Omniverse is a fantastic platform.
+
+1044
+00:46:24,860 --> 00:46:27,180
+We've been playing around with it a little bit.
+
+1045
+00:46:28,740 --> 00:46:32,780
+If you want to use NVIDIA Omniverse
+
+1046
+00:46:32,780 --> 00:46:35,100
+to help build an amazing project
+
+1047
+00:46:35,100 --> 00:46:37,620
+based on some of your interests,
+
+1048
+00:46:37,620 --> 00:46:38,820
+again, that is very open.
+
+1049
+00:46:38,820 --> 00:46:41,460
+I'm more than happy to get you connected.
+
+1050
+00:46:41,460 --> 00:46:43,580
+For those of you who love Python,
+
+1051
+00:46:43,580 --> 00:46:46,060
+the NVIDIA Omniverse API is written in Python,
+
+1052
+00:46:46,060 --> 00:46:47,220
+so that'll be a good opportunity
+
+1053
+00:46:47,220 --> 00:46:49,140
+for you to work with that as well.
+
+1054
+00:46:49,140 --> 00:46:51,260
+Again, Omniverse provides the platform.
+
+1055
+00:46:51,260 --> 00:46:53,420
+It's up to you what you want to do with it.
+
+1056
+00:46:56,420 --> 00:46:59,300
+Other general ideas using game engines,
+
+1057
+00:46:59,300 --> 00:47:01,100
+you can use Unity or Unreal Engine
+
+1058
+00:47:01,100 --> 00:47:03,060
+and add a key feature on top of that
+
+1059
+00:47:03,060 --> 00:47:05,020
+that takes advantage of the GPU.
+
+1060
+00:47:05,020 --> 00:47:08,820
+This could be compute shaders
+
+1061
+00:47:08,820 --> 00:47:10,580
+or anything like that that you're using
+
+1062
+00:47:10,580 --> 00:47:12,980
+to help advance a certain feature.
+
+1063
+00:47:14,740 --> 00:47:16,740
+Similarly for O3D,
+
+1064
+00:47:16,740 --> 00:47:18,460
+some of you may or may not have heard of this,
+
+1065
+00:47:18,460 --> 00:47:22,900
+but O3D is formerly Crytek,
+
+1066
+00:47:22,900 --> 00:47:24,780
+used for Crysis, of course,
+
+1067
+00:47:24,780 --> 00:47:26,620
+that became Amazon Lumberyard,
+
+1068
+00:47:26,620 --> 00:47:29,900
+and then Lumberyard became O3D
+
+1069
+00:47:29,900 --> 00:47:30,860
+through a collaboration
+
+1070
+00:47:30,860 --> 00:47:33,580
+between Linux Foundation and Amazon.
+
+1071
+00:47:33,580 --> 00:47:36,340
+So O3D is a very new game engine
+
+1072
+00:47:36,340 --> 00:47:38,300
+from that point of view.
+
+1073
+00:47:38,300 --> 00:47:41,580
+It was made open source last year, last summer,
+
+1074
+00:47:41,580 --> 00:47:43,860
+and there's a lot of momentum behind it,
+
+1075
+00:47:43,860 --> 00:47:45,900
+especially with Amazon's backing
+
+1076
+00:47:45,900 --> 00:47:50,260
+on having a AAA-grade open source game engine.
+
+1077
+00:47:50,260 --> 00:47:53,620
+So there's a lot of good stuff that is available
+
+1078
+00:47:53,620 --> 00:47:55,700
+that you can do within O3D,
+
+1079
+00:47:55,700 --> 00:47:58,260
+so I would certainly recommend that as well.
+
+1080
+00:48:00,580 --> 00:48:02,140
+Mesh shading is a great idea as well.
+
+1081
+00:48:02,140 --> 00:48:05,860
+We had Manuel Cramer give a guest lecture in 2020.
+
+1082
+00:48:07,100 --> 00:48:09,460
+Very, very interesting topic,
+
+1083
+00:48:09,460 --> 00:48:10,300
+having mesh shaders,
+
+1084
+00:48:10,300 --> 00:48:12,100
+so if that's something you're interested in,
+
+1085
+00:48:12,100 --> 00:48:14,620
+again, wonderful, wonderful topic to explore.
+
+1086
+00:48:16,220 --> 00:48:18,220
+3D mesh classification and segmentation
+
+1087
+00:48:18,220 --> 00:48:19,580
+is really good as well,
+
+1088
+00:48:19,580 --> 00:48:21,900
+where you're taking data from the real world,
+
+1089
+00:48:21,900 --> 00:48:23,220
+3D models and stuff,
+
+1090
+00:48:23,220 --> 00:48:24,340
+and trying to classify,
+
+1091
+00:48:24,340 --> 00:48:26,220
+this is a window, this is a door,
+
+1092
+00:48:26,220 --> 00:48:27,980
+the door opens this way,
+
+1093
+00:48:27,980 --> 00:48:31,300
+and adding semantic information to 3D models.
+
+1094
+00:48:32,260 --> 00:48:33,820
+They are complex topics,
+
+1095
+00:48:33,820 --> 00:48:36,620
+but certainly well worth exploring as well.
+
+1096
+00:48:39,180 --> 00:48:40,500
+Some other topics,
+
+1097
+00:48:42,900 --> 00:48:44,060
+Three.js, Babylon.js,
+
+1098
+00:48:44,060 --> 00:48:46,340
+again, just like the game engines I mentioned before,
+
+1099
+00:48:46,340 --> 00:48:50,620
+using Three.js and Babylon.js is certainly an option.
+
+1100
+00:48:50,620 --> 00:48:53,260
+Take a look at the GitHub issues that they have
+
+1101
+00:48:53,260 --> 00:48:55,060
+and what they may want to explore.
+
+1102
+00:48:56,180 --> 00:48:57,500
+NVIDIA Optics is great too,
+
+1103
+00:48:57,500 --> 00:48:59,180
+although I would recommend doing something
+
+1104
+00:48:59,180 --> 00:49:01,300
+with Omniverse first before you consider Optics,
+
+1105
+00:49:01,300 --> 00:49:02,580
+but Optics is great too.
+
+1106
+00:49:03,660 --> 00:49:06,180
+And then any people from machine learning conferences,
+
+1107
+00:49:06,180 --> 00:49:07,660
+SIGGRAPH, all of that,
+
+1108
+00:49:07,660 --> 00:49:09,380
+so I've added a link here as well.
+
+1109
+00:49:10,900 --> 00:49:14,380
+Couple of other topics that came from NVIDIA,
+
+1110
+00:49:14,380 --> 00:49:16,540
+massively parallel collision detection.
+
+1111
+00:49:16,540 --> 00:49:17,980
+Again, I'm just giving you four words,
+
+1112
+00:49:17,980 --> 00:49:19,780
+what it actually means is up to you.
+
+1113
+00:49:20,940 --> 00:49:23,020
+And then in general,
+
+1114
+00:49:23,020 --> 00:49:25,660
+trying to improve performance or memory
+
+1115
+00:49:25,660 --> 00:49:27,540
+without affecting any existing algorithms.
+
+1116
+00:49:27,540 --> 00:49:29,860
+So trying to make significant improvements
+
+1117
+00:49:29,860 --> 00:49:32,140
+to existing algorithms is really good as well
+
+1118
+00:49:32,140 --> 00:49:33,940
+and valued a lot by the industry.
+
+1119
+00:49:35,820 --> 00:49:37,780
+Okay, so I've given you ideas,
+
+1120
+00:49:37,780 --> 00:49:39,380
+now let me give you anti-ideas,
+
+1121
+00:49:39,380 --> 00:49:40,980
+things that I don't want to see.
+
+1122
+00:49:42,140 --> 00:49:44,180
+Don't use Vulkan Compute Shader.
+
+1123
+00:49:44,180 --> 00:49:45,700
+You're doing that as part of project five,
+
+1124
+00:49:45,700 --> 00:49:47,460
+I don't really want to see that, okay?
+
+1125
+00:49:47,460 --> 00:49:49,460
+You want to come up with a better idea.
+
+1126
+00:49:52,580 --> 00:49:55,420
+Multi-GPU was a thing back in 2013.
+
+1127
+00:49:56,260 --> 00:49:57,580
+It's not really a thing now,
+
+1128
+00:49:57,580 --> 00:49:59,300
+the GPUs are far more powerful.
+
+1129
+00:50:00,860 --> 00:50:05,140
+Simulation, depending on the algorithm
+
+1130
+00:50:05,140 --> 00:50:07,220
+and the goal it's trying to accomplish,
+
+1131
+00:50:07,220 --> 00:50:09,380
+can, may or may not be good.
+
+1132
+00:50:09,380 --> 00:50:12,180
+So if you're thinking of doing a simulation,
+
+1133
+00:50:12,180 --> 00:50:14,980
+what a simulation, plot simulation or stuff like that,
+
+1134
+00:50:14,980 --> 00:50:16,820
+please run it by me next Monday
+
+1135
+00:50:16,820 --> 00:50:18,460
+when we have those office hours.
+
+1136
+00:50:22,220 --> 00:50:24,180
+If you are trying to extend your CUDA pathways,
+
+1137
+00:50:24,180 --> 00:50:26,940
+I have a very, very strong idea behind it.
+
+1138
+00:50:26,940 --> 00:50:29,420
+If you come to me with the idea that,
+
+1139
+00:50:29,940 --> 00:50:30,940
+okay, I'm going to take my path tracer
+
+1140
+00:50:30,940 --> 00:50:33,660
+and all the features that I didn't do in project three time,
+
+1141
+00:50:33,660 --> 00:50:35,940
+I'm going to do now, not worth it.
+
+1142
+00:50:35,940 --> 00:50:38,180
+Like, absolutely do it,
+
+1143
+00:50:38,180 --> 00:50:40,540
+just not part of the final project, okay?
+
+1144
+00:50:40,540 --> 00:50:42,180
+I strongly recommend all of you do
+
+1145
+00:50:42,180 --> 00:50:43,340
+because it's a great project,
+
+1146
+00:50:43,340 --> 00:50:45,060
+you can keep improving on it,
+
+1147
+00:50:45,060 --> 00:50:46,860
+just not as part of the path tracer.
+
+1148
+00:50:47,820 --> 00:50:51,380
+I mentioned ReSTIR, we have had four in the last two years.
+
+1149
+00:50:51,380 --> 00:50:52,740
+Again, try the newer papers,
+
+1150
+00:50:52,740 --> 00:50:55,900
+don't try to re-implement it.
+
+1151
+00:50:56,740 --> 00:50:58,980
+So this quote again came from NVIDIA.
+
+1152
+00:51:00,900 --> 00:51:05,420
+And this is from somebody who teaches a class like I do,
+
+1153
+00:51:05,420 --> 00:51:08,260
+they work at NVIDIA and they teach a class.
+
+1154
+00:51:08,260 --> 00:51:11,540
+If the goal is to go implement a paper
+
+1155
+00:51:11,540 --> 00:51:14,900
+from the last five years with no improvement,
+
+1156
+00:51:14,900 --> 00:51:16,100
+that'll get you a B-plus
+
+1157
+00:51:16,100 --> 00:51:18,740
+and that's kind of what will happen in this class as well.
+
+1158
+00:51:18,740 --> 00:51:19,780
+Okay?
+
+1159
+00:51:19,780 --> 00:51:23,180
+So the work that we expect is that you do something unique
+
+1160
+00:51:23,180 --> 00:51:26,620
+from either 2021 or 2022
+
+1161
+00:51:27,620 --> 00:51:29,940
+and or make significant improvements to it.
+
+1162
+00:51:31,100 --> 00:51:32,860
+So those are anti-ideas.
+
+1163
+00:51:32,860 --> 00:51:35,620
+And generally my goal behind anti-ideas,
+
+1164
+00:51:35,620 --> 00:51:40,300
+the why is again, so that you are doing amazing work.
+
+1165
+00:51:40,300 --> 00:51:41,140
+Okay?
+
+1166
+00:51:41,140 --> 00:51:45,140
+If you are taking, let's say this one,
+
+1167
+00:51:45,140 --> 00:51:47,420
+this CUDA path tracer idea,
+
+1168
+00:51:47,420 --> 00:51:48,620
+you're not making improvements,
+
+1169
+00:51:48,620 --> 00:51:51,260
+this has been done in 2016, right?
+
+1170
+00:51:51,300 --> 00:51:54,660
+We are in 2022, we want to do the latest and greatest stuff
+
+1171
+00:51:54,660 --> 00:51:56,740
+and you have the opportunity to do that.
+
+1172
+00:51:56,740 --> 00:52:00,540
+If you do make improvements to the CUDA path tracer,
+
+1173
+00:52:00,540 --> 00:52:01,820
+you're falling behind.
+
+1174
+00:52:01,820 --> 00:52:03,700
+There are students who are doing more advanced things.
+
+1175
+00:52:03,700 --> 00:52:06,180
+So the goal is for you to do more advanced things
+
+1176
+00:52:06,180 --> 00:52:07,020
+rather than me saying,
+
+1177
+00:52:07,020 --> 00:52:09,100
+hey, I don't like this, don't do this.
+
+1178
+00:52:09,100 --> 00:52:10,500
+I love the path tracer.
+
+1179
+00:52:10,500 --> 00:52:12,140
+There's a reason why it stayed as a project
+
+1180
+00:52:12,140 --> 00:52:13,620
+for over 10 years.
+
+1181
+00:52:13,620 --> 00:52:14,700
+Continue to improve on it,
+
+1182
+00:52:14,700 --> 00:52:16,500
+just don't do it as a final project.
+
+1183
+00:52:17,700 --> 00:52:18,540
+Okay.
+
+1184
+00:52:18,540 --> 00:52:20,380
+So I'll pause there and take questions.
+
+1185
+00:52:22,260 --> 00:52:25,500
+And I've gone through a bunch of topics.
+
+1186
+00:52:25,500 --> 00:52:27,740
+Again, those topics are not what you're limited to.
+
+1187
+00:52:27,740 --> 00:52:29,460
+You can come up with your own ideas.
+
+1188
+00:52:29,460 --> 00:52:31,220
+Those are just suggestions from me.
+
+1189
+00:52:31,220 --> 00:52:32,060
+Okay.
+
+1190
+00:52:49,340 --> 00:52:54,340
+I mean, you have to come up with that, right?
+
+1191
+00:52:55,140 --> 00:52:57,940
+Like you have from this Monday until next Monday
+
+1192
+00:52:57,940 --> 00:52:59,700
+to come up with that plan.
+
+1193
+00:52:59,700 --> 00:53:01,420
+Like you may have,
+
+1194
+00:53:01,420 --> 00:53:05,260
+I want to make every tree in the world render really nice.
+
+1195
+00:53:05,260 --> 00:53:06,100
+Sure.
+
+1196
+00:53:06,100 --> 00:53:07,260
+Great idea.
+
+1197
+00:53:07,260 --> 00:53:09,620
+How you want to go about doing that is up to you.
+
+1198
+00:53:09,620 --> 00:53:11,700
+And that's the part you are going to figure out
+
+1199
+00:53:11,700 --> 00:53:12,940
+in the next two weeks.
+
+1200
+00:53:12,940 --> 00:53:15,940
+If it was just, hey, here are 15 papers, pick one,
+
+1201
+00:53:15,940 --> 00:53:18,420
+then I'm going to give you two days for it, right?
+
+1202
+00:53:18,420 --> 00:53:20,460
+You guys kind of see it in 660 and stuff.
+
+1203
+00:53:20,460 --> 00:53:21,620
+I love 660 too.
+
+1204
+00:53:21,620 --> 00:53:22,780
+I think it's a fantastic class
+
+1205
+00:53:22,780 --> 00:53:24,780
+that gets you to implement papers.
+
+1206
+00:53:24,780 --> 00:53:27,220
+But here, I want to give you that time and space
+
+1207
+00:53:27,220 --> 00:53:29,220
+to really think about what you're doing.
+
+1208
+00:53:29,700 --> 00:53:30,580
+Edward.
+
+1209
+00:54:00,140 --> 00:54:01,140
+Yes.
+
+1210
+00:54:01,140 --> 00:54:03,860
+So this comes up every year.
+
+1211
+00:54:05,100 --> 00:54:07,060
+If you're trying to do a machine learning project
+
+1212
+00:54:07,060 --> 00:54:11,180
+that requires you to do training,
+
+1213
+00:54:11,180 --> 00:54:13,420
+either understand the requirements
+
+1214
+00:54:13,420 --> 00:54:15,140
+and have the data available.
+
+1215
+00:54:15,140 --> 00:54:18,740
+Again, these two weeks are there for you to research that.
+
+1216
+00:54:18,740 --> 00:54:21,940
+There are data sets available in most places.
+
+1217
+00:54:21,940 --> 00:54:23,820
+If you're trying to re-implement a paper
+
+1218
+00:54:23,820 --> 00:54:26,700
+that needs some training data, go contact the author.
+
+1219
+00:54:26,700 --> 00:54:28,780
+Maybe they'll just give it to you, right?
+
+1220
+00:54:30,660 --> 00:54:32,660
+Don't come to me at the end of milestone two
+
+1221
+00:54:32,660 --> 00:54:35,380
+and be like, hey guys, we have no training data.
+
+1222
+00:54:35,380 --> 00:54:36,820
+Our project's dead in the water.
+
+1223
+00:54:36,820 --> 00:54:37,660
+Please don't do that.
+
+1224
+00:54:37,660 --> 00:54:39,780
+It's not good for you, okay?
+
+1225
+00:54:39,780 --> 00:54:43,180
+So think about this problem early.
+
+1226
+00:54:44,300 --> 00:54:46,420
+If you are planning to do any kind of project,
+
+1227
+00:54:46,420 --> 00:54:49,820
+not just machine learning that requires a dependency
+
+1228
+00:54:49,820 --> 00:54:53,060
+that you don't have access to, think about it early.
+
+1229
+00:54:53,060 --> 00:54:55,500
+If you don't think there's a solution to that,
+
+1230
+00:54:55,500 --> 00:54:57,260
+leave the problem, okay?
+
+1231
+00:54:57,260 --> 00:54:58,660
+You can do it in the future.
+
+1232
+00:55:00,620 --> 00:55:01,820
+What are the questions?
+
+1233
+00:55:08,380 --> 00:55:09,420
+Any other questions?
+
+1234
+00:55:12,540 --> 00:55:14,660
+All right, by now I would have covered most of the FAQs,
+
+1235
+00:55:14,660 --> 00:55:16,740
+but let's go through them, okay.
+
+1236
+00:55:19,220 --> 00:55:20,900
+Very commonly asked.
+
+1237
+00:55:20,900 --> 00:55:22,580
+I want to do a project on a topic
+
+1238
+00:55:22,580 --> 00:55:24,140
+that has been done in the past.
+
+1239
+00:55:25,140 --> 00:55:25,980
+Is that allowed?
+
+1240
+00:55:25,980 --> 00:55:28,700
+Again, the goal of the final projects
+
+1241
+00:55:28,700 --> 00:55:30,580
+is to move you forward,
+
+1242
+00:55:30,580 --> 00:55:33,140
+allow you to do industry relevant topics.
+
+1243
+00:55:33,140 --> 00:55:35,140
+If you do something from previous years,
+
+1244
+00:55:35,140 --> 00:55:36,500
+you're just falling behind.
+
+1245
+00:55:36,500 --> 00:55:38,660
+You're not on the cutting edge.
+
+1246
+00:55:38,660 --> 00:55:42,380
+So can you take inspiration from something
+
+1247
+00:55:42,380 --> 00:55:43,620
+that was done in past years?
+
+1248
+00:55:43,620 --> 00:55:45,580
+Absolutely, please do, okay?
+
+1249
+00:55:45,580 --> 00:55:47,940
+Even projects that were done in previous years
+
+1250
+00:55:47,940 --> 00:55:49,940
+were cutting edge for their time.
+
+1251
+00:55:49,940 --> 00:55:51,780
+Take inspiration, but come to me with
+
+1252
+00:55:52,940 --> 00:55:56,260
+what are the advances that you're making to that, okay?
+
+1253
+00:55:56,260 --> 00:55:57,780
+What changes are you making
+
+1254
+00:55:57,780 --> 00:56:00,220
+that is making it relevant to 2022?
+
+1255
+00:56:04,300 --> 00:56:05,500
+Generic question.
+
+1256
+00:56:05,500 --> 00:56:07,300
+I want to work on a topic or technology
+
+1257
+00:56:07,300 --> 00:56:08,940
+that I have no experience with.
+
+1258
+00:56:08,940 --> 00:56:11,540
+My response to that is always to be brave.
+
+1259
+00:56:11,540 --> 00:56:15,580
+You guys, most of you, if not all of you took this class
+
+1260
+00:56:15,580 --> 00:56:17,620
+knowing nothing about CUDA.
+
+1261
+00:56:17,620 --> 00:56:20,020
+And now you can pretty much walk into any CUDA job
+
+1262
+00:56:20,020 --> 00:56:21,980
+and ace it, right?
+
+1263
+00:56:21,980 --> 00:56:25,300
+So no, I'm being very serious about it.
+
+1264
+00:56:26,300 --> 00:56:29,820
+So there'll be enough time for you to learn
+
+1265
+00:56:29,820 --> 00:56:32,540
+and implement during the final projects, okay?
+
+1266
+00:56:32,540 --> 00:56:35,900
+It's not two weeks deadline every single time.
+
+1267
+00:56:35,900 --> 00:56:37,660
+So be brave.
+
+1268
+00:56:37,660 --> 00:56:40,020
+If the topic and technology is relevant to you,
+
+1269
+00:56:40,020 --> 00:56:41,140
+you are interested in it,
+
+1270
+00:56:41,140 --> 00:56:43,940
+you think you want to work in that field in the future,
+
+1271
+00:56:43,940 --> 00:56:45,060
+do it.
+
+1272
+00:56:45,060 --> 00:56:46,740
+I highly encourage you to do that.
+
+1273
+00:56:48,380 --> 00:56:49,220
+Okay.
+
+1274
+00:56:50,220 --> 00:56:53,180
+I don't think this is so much of a problem these days,
+
+1275
+00:56:53,180 --> 00:56:55,100
+but was in the past.
+
+1276
+00:56:55,900 --> 00:56:56,820
+Let's say you want to do a DXR project
+
+1277
+00:56:56,820 --> 00:56:58,860
+and you need one of the modern GPUs
+
+1278
+00:56:59,940 --> 00:57:01,900
+and you don't have access to one.
+
+1279
+00:57:01,900 --> 00:57:05,540
+Well, firstly, I think most of the Moodle app computers
+
+1280
+00:57:05,540 --> 00:57:10,540
+now have at least a fallback capable DXR GPU.
+
+1281
+00:57:13,180 --> 00:57:14,780
+If that doesn't work,
+
+1282
+00:57:14,780 --> 00:57:19,780
+all of you receive credits from Azure, AWS or Google Cloud
+
+1283
+00:57:20,140 --> 00:57:22,980
+where they have GPUs that are capable,
+
+1284
+00:57:22,980 --> 00:57:24,620
+Tesla T4s and others.
+
+1285
+00:57:25,540 --> 00:57:26,780
+You can take advantage of those,
+
+1286
+00:57:26,780 --> 00:57:30,220
+use those for your DXR projects.
+
+1287
+00:57:32,180 --> 00:57:34,540
+And if you're planning to do this,
+
+1288
+00:57:34,540 --> 00:57:36,460
+let us know as soon as possible.
+
+1289
+00:57:38,780 --> 00:57:40,220
+Okay.
+
+1290
+00:57:40,220 --> 00:57:41,940
+You may or may not be doing something
+
+1291
+00:57:41,940 --> 00:57:43,300
+that's graphics or visual.
+
+1292
+00:57:44,460 --> 00:57:45,300
+Perfectly fine.
+
+1293
+00:57:45,300 --> 00:57:47,500
+We've had so many projects do that in the past.
+
+1294
+00:57:48,500 --> 00:57:50,820
+You should, if in that case,
+
+1295
+00:57:50,820 --> 00:57:53,620
+you may or may not have videos and images,
+
+1296
+00:57:53,620 --> 00:57:56,340
+but what you will have is performance analysis
+
+1297
+00:57:56,340 --> 00:57:57,420
+and some kind of results.
+
+1298
+00:57:57,420 --> 00:57:59,140
+You want to be focusing on that.
+
+1299
+00:58:02,860 --> 00:58:06,020
+Another common question, you're from CIS.
+
+1300
+00:58:06,020 --> 00:58:07,900
+You don't really have a graphics background.
+
+1301
+00:58:07,900 --> 00:58:10,860
+You don't want to do a graphics related project,
+
+1302
+00:58:11,780 --> 00:58:13,180
+projects that you can work on.
+
+1303
+00:58:13,180 --> 00:58:16,020
+Again, I've shared a bunch of those projects already,
+
+1304
+00:58:17,420 --> 00:58:20,100
+but essentially the core piece of advice is
+
+1305
+00:58:20,100 --> 00:58:21,780
+take something that's of interest to you
+
+1306
+00:58:21,780 --> 00:58:23,140
+and put it to the GPU.
+
+1307
+00:58:24,900 --> 00:58:26,540
+Whether that's machine learning, deep learning,
+
+1308
+00:58:26,540 --> 00:58:31,540
+autonomous driving, Tegras, Apple Metal, anything
+
+1309
+00:58:32,660 --> 00:58:35,140
+that's relevant to you and you are interested in
+
+1310
+00:58:35,140 --> 00:58:36,980
+that will generally be okay with me.
+
+1311
+00:58:39,780 --> 00:58:41,660
+I've generally covered this, I think.
+
+1312
+00:58:41,660 --> 00:58:43,060
+So I won't go over it again.
+
+1313
+00:58:45,580 --> 00:58:49,060
+If you're working on a long-term research or PhD project,
+
+1314
+00:58:49,060 --> 00:58:50,380
+and this has happened in the past,
+
+1315
+00:58:50,380 --> 00:58:53,180
+where you've been working on a problem,
+
+1316
+00:58:53,180 --> 00:58:56,020
+mostly on the CPU and maybe multi-threaded on the GPU,
+
+1317
+00:58:56,020 --> 00:58:57,500
+and now you want to move it to the GPU
+
+1318
+00:58:57,500 --> 00:59:00,180
+and take performance advantage of that.
+
+1319
+00:59:00,180 --> 00:59:02,460
+This is okay, this is acceptable,
+
+1320
+00:59:02,460 --> 00:59:04,500
+if, under these conditions,
+
+1321
+00:59:04,500 --> 00:59:06,540
+and all of these must be satisfied.
+
+1322
+00:59:06,540 --> 00:59:07,780
+There's no double dipping.
+
+1323
+00:59:07,780 --> 00:59:09,980
+You're not getting grades in two different courses
+
+1324
+00:59:09,980 --> 00:59:11,580
+for the same work, okay?
+
+1325
+00:59:12,900 --> 00:59:14,220
+The goals are clearly laid out.
+
+1326
+00:59:14,220 --> 00:59:18,500
+What is in the research that you're doing
+
+1327
+00:59:18,980 --> 00:59:21,580
+and what is required for the class are clearly laid out.
+
+1328
+00:59:22,780 --> 00:59:26,460
+And if necessary, I'll request faculty or researcher
+
+1329
+00:59:26,460 --> 00:59:29,060
+also approve the work, okay?
+
+1330
+00:59:29,060 --> 00:59:31,220
+And other conditions based on your research and stuff
+
+1331
+00:59:31,220 --> 00:59:33,060
+may be taken up case by case.
+
+1332
+00:59:35,340 --> 00:59:36,580
+Any questions on this?
+
+1333
+00:59:36,580 --> 00:59:38,460
+Those of you who may be involved in research
+
+1334
+00:59:38,460 --> 00:59:39,940
+and maybe thinking about this?
+
+1335
+00:59:44,020 --> 00:59:44,860
+No?
+
+1336
+00:59:45,780 --> 00:59:46,620
+Okay.
+
+1337
+00:59:49,460 --> 00:59:51,020
+Missing milestones is not okay.
+
+1338
+00:59:51,940 --> 00:59:53,740
+I'll be very, very clear about that.
+
+1339
+00:59:57,060 --> 00:59:59,780
+The only exception under which I will allow you
+
+1340
+00:59:59,780 --> 01:00:02,500
+to miss a milestone and forgive you for it
+
+1341
+01:00:02,500 --> 01:00:05,620
+is if you are going on site for an interview and stuff,
+
+1342
+01:00:05,620 --> 01:00:07,780
+which is a lot less common these days.
+
+1343
+01:00:07,780 --> 01:00:09,580
+It was a lot more common before the pandemic
+
+1344
+01:00:09,580 --> 01:00:12,500
+that people would fly to Google or Nvidia
+
+1345
+01:00:12,500 --> 01:00:14,580
+or anywhere and do in-person interviews.
+
+1346
+01:00:14,580 --> 01:00:16,660
+Doesn't really happen much these days.
+
+1347
+01:00:16,660 --> 01:00:20,020
+So the only circumstance under which you miss a milestone
+
+1348
+01:00:20,020 --> 01:00:22,540
+is, again, the goal of this class
+
+1349
+01:00:22,540 --> 01:00:23,900
+to prepare you for the industry.
+
+1350
+01:00:23,900 --> 01:00:26,700
+If you're doing an interview that helps you get a job,
+
+1351
+01:00:26,700 --> 01:00:28,060
+okay, fine, acceptable.
+
+1352
+01:00:28,060 --> 01:00:30,980
+But otherwise, not okay to miss.
+
+1353
+01:00:31,860 --> 01:00:34,100
+Now, if you have to miss,
+
+1354
+01:00:34,100 --> 01:00:37,220
+make sure that the rest of your team is presenting.
+
+1355
+01:00:37,220 --> 01:00:41,500
+And before you leave to go wherever you have to
+
+1356
+01:00:41,500 --> 01:00:43,540
+or miss the milestone,
+
+1357
+01:00:43,540 --> 01:00:46,180
+schedule a time with the TAs,
+
+1358
+01:00:46,180 --> 01:00:49,260
+AT or multiple TAs prior to the milestone,
+
+1359
+01:00:49,260 --> 01:00:50,300
+not after the milestone,
+
+1360
+01:00:50,300 --> 01:00:53,140
+prior to the milestone and discuss the progress you've made.
+
+1361
+01:00:53,140 --> 01:00:53,980
+Okay?
+
+1362
+01:00:53,980 --> 01:00:57,780
+So again, the importance is on communication.
+
+1363
+01:00:57,780 --> 01:00:58,620
+Don't hide.
+
+1364
+01:00:59,620 --> 01:01:00,660
+If there is a problem,
+
+1365
+01:01:00,660 --> 01:01:02,700
+if you're not able to make a milestone,
+
+1366
+01:01:02,700 --> 01:01:05,300
+whether you have a job interview or you fall sick,
+
+1367
+01:01:05,300 --> 01:01:06,460
+communicate it before.
+
+1368
+01:01:06,460 --> 01:01:09,380
+If you communicate it after, there's not much I can do.
+
+1369
+01:01:09,380 --> 01:01:10,220
+Okay?
+
+1370
+01:01:14,380 --> 01:01:16,900
+This is not really relevant anymore.
+
+1371
+01:01:16,900 --> 01:01:19,180
+It was more when we were remote and stuff
+
+1372
+01:01:19,180 --> 01:01:23,420
+that people were studying from India and Australia
+
+1373
+01:01:23,420 --> 01:01:26,700
+and China and Japan and New Zealand and stuff.
+
+1374
+01:01:26,700 --> 01:01:29,420
+And the times were really, really odd, right?
+
+1375
+01:01:29,420 --> 01:01:30,700
+So that's not a problem,
+
+1376
+01:01:30,700 --> 01:01:33,220
+but just in case I'm leaving this in here.
+
+1377
+01:01:36,140 --> 01:01:37,220
+For shadow teams,
+
+1378
+01:01:37,220 --> 01:01:39,340
+if there are an odd number of teams that come up,
+
+1379
+01:01:39,340 --> 01:01:40,940
+again, because I don't pick the teams
+
+1380
+01:01:40,940 --> 01:01:42,820
+that are 30 students in the class.
+
+1381
+01:01:42,820 --> 01:01:44,900
+If everybody tries to pick a team of three,
+
+1382
+01:01:44,900 --> 01:01:46,420
+that's 10 teams.
+
+1383
+01:01:46,420 --> 01:01:48,580
+But if some of you do two or one,
+
+1384
+01:01:48,580 --> 01:01:49,660
+you're going to have more teams.
+
+1385
+01:01:49,660 --> 01:01:52,580
+And sometimes you may end up with odd teams.
+
+1386
+01:01:52,580 --> 01:01:53,420
+In that case,
+
+1387
+01:01:53,420 --> 01:01:56,460
+we'll just make one or two groups of three,
+
+1388
+01:01:56,460 --> 01:01:57,820
+three teams are shadow teams.
+
+1389
+01:01:57,820 --> 01:02:00,980
+And this has worked generally well in the past.
+
+1390
+01:02:00,980 --> 01:02:02,540
+Okay?
+
+1391
+01:02:02,540 --> 01:02:04,460
+That's it for final projects overview.
+
+1392
+01:02:05,620 --> 01:02:09,020
+Now, the floor is open for you to ask questions
+
+1393
+01:02:09,020 --> 01:02:10,820
+about what's important to you
+
+1394
+01:02:10,820 --> 01:02:14,580
+and what you think should matter for final projects.
+
+1395
+01:02:14,580 --> 01:02:16,820
+Again, this is half your grade.
+
+1396
+01:02:16,820 --> 01:02:19,540
+So ask all the questions you want right now.
+
+1397
+01:02:19,540 --> 01:02:20,900
+Of course, our discussion is open,
+
+1398
+01:02:20,900 --> 01:02:24,300
+but here I'll be able to answer in much more detail.
+
+1399
+01:02:27,220 --> 01:02:28,060
+Yeah?
+
+1400
+01:02:28,060 --> 01:02:31,060
+So if you're going to do an XR related project,
+
+1401
+01:02:31,060 --> 01:02:32,860
+do you have any resources at that time?
+
+1402
+01:02:32,860 --> 01:02:34,460
+Sorry, what related?
+
+1403
+01:02:34,460 --> 01:02:36,660
+XR related project.
+
+1404
+01:02:36,660 --> 01:02:37,500
+XR?
+
+1405
+01:02:37,500 --> 01:02:38,540
+Yes.
+
+1406
+01:02:38,540 --> 01:02:40,500
+And what kind of resources do you want from me?
+
+1407
+01:02:41,180 --> 01:02:42,500
+I was like, you know,
+
+1408
+01:02:42,500 --> 01:02:43,820
+now we are in the past,
+
+1409
+01:02:43,820 --> 01:02:44,660
+we are in the industry.
+
+1410
+01:02:44,660 --> 01:02:45,500
+Yeah.
+
+1411
+01:02:45,500 --> 01:02:46,340
+Absolutely.
+
+1412
+01:02:46,340 --> 01:02:48,540
+I mean, Steve Lane is probably the number one resource.
+
+1413
+01:02:48,540 --> 01:02:49,660
+Steve Lane is amazing.
+
+1414
+01:02:49,660 --> 01:02:53,700
+But if you want to get connected to, for example,
+
+1415
+01:02:53,700 --> 01:02:54,940
+the people at Oculus,
+
+1416
+01:02:54,940 --> 01:02:56,380
+yeah, I'll get you connected.
+
+1417
+01:03:00,540 --> 01:03:01,380
+What else?
+
+1418
+01:03:02,380 --> 01:03:05,380
+You guys have been surprisingly quiet today.
+
+1419
+01:03:08,380 --> 01:03:09,220
+Deep?
+
+1420
+01:03:09,220 --> 01:03:12,620
+What if I'm just really bad at coming up with ideas?
+
+1421
+01:03:12,620 --> 01:03:14,660
+You can join other people's ideas.
+
+1422
+01:03:14,660 --> 01:03:16,620
+That's the goal, right?
+
+1423
+01:03:16,620 --> 01:03:18,820
+It's not that every person comes up with an idea,
+
+1424
+01:03:18,820 --> 01:03:21,300
+you put it in a bowl and pick one out of that.
+
+1425
+01:03:21,300 --> 01:03:22,140
+Please don't do that.
+
+1426
+01:03:22,140 --> 01:03:24,580
+Pick something that you think is worth working on.
+
+1427
+01:03:24,580 --> 01:03:26,140
+Again, you're not going to be able to do it
+
+1428
+01:03:26,140 --> 01:03:26,980
+if you don't have a team.
+
+1429
+01:03:26,980 --> 01:03:28,060
+You're not going to be able to do it
+
+1430
+01:03:28,060 --> 01:03:28,900
+if you don't have a team.
+
+1431
+01:03:28,900 --> 01:03:29,740
+You're not going to be able to do it
+
+1432
+01:03:29,740 --> 01:03:30,580
+if you don't have a team.
+
+1433
+01:03:30,580 --> 01:03:31,420
+It's worth working on.
+
+1434
+01:03:31,420 --> 01:03:34,300
+Again, you're going to be spending significant time
+
+1435
+01:03:34,300 --> 01:03:36,420
+on this and frustration on it.
+
+1436
+01:03:36,420 --> 01:03:38,700
+So pick a topic that you'll actually want to come
+
+1437
+01:03:38,700 --> 01:03:41,580
+on the other side of and be proud of what you've done.
+
+1438
+01:03:46,020 --> 01:03:47,180
+What are the questions?
+
+1439
+01:03:57,420 --> 01:03:58,500
+Wayne, did I miss anything?
+
+1440
+01:03:58,500 --> 01:04:00,300
+Wayne, Shubham, did I miss anything?
+
+1441
+01:04:12,620 --> 01:04:14,780
+Yeah, don't pick up projects that are too hard.
+
+1442
+01:04:14,780 --> 01:04:17,020
+Don't pick up projects that are too easy.
+
+1443
+01:04:17,020 --> 01:04:18,620
+Find a good, reasonable balance.
+
+1444
+01:04:19,540 --> 01:04:23,060
+And if the project's too hard, I'll tell you it's too hard.
+
+1445
+01:04:23,060 --> 01:04:25,300
+Although I will say, I will encourage you to take it on,
+
+1446
+01:04:25,300 --> 01:04:27,940
+but I will say, hey, I think this is too hard.
+
+1447
+01:04:28,380 --> 01:04:29,860
+And I'll be honest about it.
+
+1448
+01:04:29,860 --> 01:04:34,860
+Again, I will reiterate, it gives me no pride
+
+1449
+01:04:34,860 --> 01:04:39,060
+or no ego to either give the entire class an A-plus
+
+1450
+01:04:39,060 --> 01:04:41,460
+or the entire class an F.
+
+1451
+01:04:41,460 --> 01:04:43,540
+These grades, I'm here to teach you.
+
+1452
+01:04:43,540 --> 01:04:45,980
+I'm here to encourage all of you to do amazing work.
+
+1453
+01:04:45,980 --> 01:04:47,540
+If all of you deserve an A-plus,
+
+1454
+01:04:47,540 --> 01:04:49,860
+I will give all of you an A-plus.
+
+1455
+01:04:49,860 --> 01:04:52,860
+So the goal for me is to facilitate
+
+1456
+01:04:52,860 --> 01:04:54,260
+the projects you want to do.
+
+1457
+01:04:57,940 --> 01:05:00,780
+Let's say, I think you sort of addressed this
+
+1458
+01:05:00,780 --> 01:05:03,620
+while you were sliding to be more clear.
+
+1459
+01:05:03,620 --> 01:05:08,060
+What are the stipulations of re-skilling a project
+
+1460
+01:05:08,060 --> 01:05:11,460
+if you take it on, you make good progress,
+
+1461
+01:05:11,460 --> 01:05:14,620
+and then something happens and now it's impossible?
+
+1462
+01:05:14,620 --> 01:05:17,900
+Shubham, do you want to share your experience from last year?
+
+1463
+01:05:17,900 --> 01:05:19,660
+Oh, yeah, yeah, yeah.
+
+1464
+01:05:19,660 --> 01:05:23,100
+Maybe, again, you guys have done it, so you share.
+
+1465
+01:05:23,100 --> 01:05:27,700
+Yeah, so when I was in, I think it was impossible for us.
+
+1466
+01:05:28,620 --> 01:05:32,460
+If you have to redo the project, that's kind of what we did.
+
+1467
+01:05:32,460 --> 01:05:34,020
+Like, we didn't change our project,
+
+1468
+01:05:34,020 --> 01:05:36,780
+but we had to make everything from ground up again.
+
+1469
+01:05:36,780 --> 01:05:40,300
+That's because the project was actually fairly hard,
+
+1470
+01:05:40,300 --> 01:05:42,940
+and that's what Shehzad told us.
+
+1471
+01:05:42,940 --> 01:05:44,260
+I think it was our first pitch also
+
+1472
+01:05:44,260 --> 01:05:46,860
+that this project is going to be really hard to do,
+
+1473
+01:05:46,860 --> 01:05:49,580
+but if you guys want to do it, then do it.
+
+1474
+01:05:49,580 --> 01:05:52,740
+So, yeah, like, but I would say,
+
+1475
+01:05:52,740 --> 01:05:56,220
+even if you have faced a situation like that,
+
+1476
+01:05:56,220 --> 01:05:59,060
+let everybody know, but don't change it.
+
+1477
+01:05:59,060 --> 01:06:02,060
+I think just, like, when you are deciding on,
+
+1478
+01:06:02,060 --> 01:06:05,300
+keep everything in mind and then start from there.
+
+1479
+01:06:05,300 --> 01:06:07,660
+Yeah, you'll be able to do it at the end.
+
+1480
+01:06:07,660 --> 01:06:10,260
+So, I think Shubham laid it out well.
+
+1481
+01:06:10,260 --> 01:06:12,140
+There can be different reasons
+
+1482
+01:06:12,140 --> 01:06:14,260
+your project falls off the rails, right?
+
+1483
+01:06:14,260 --> 01:06:16,700
+And the goal is to, how do we pick back up?
+
+1484
+01:06:18,540 --> 01:06:21,100
+The project may be behind because you underestimated
+
+1485
+01:06:21,100 --> 01:06:22,820
+the task of milestone one, for example,
+
+1486
+01:06:22,820 --> 01:06:24,980
+but you reasonably understand what's required
+
+1487
+01:06:24,980 --> 01:06:26,380
+and you think you'll catch up.
+
+1488
+01:06:26,380 --> 01:06:28,100
+Sure, no problem.
+
+1489
+01:06:28,100 --> 01:06:30,300
+That just means you move a few features around
+
+1490
+01:06:30,300 --> 01:06:32,980
+and or you may want to drop a few features.
+
+1491
+01:06:32,980 --> 01:06:35,100
+Again, communicating early and often
+
+1492
+01:06:35,100 --> 01:06:36,940
+is the key thing that I have to share.
+
+1493
+01:06:36,940 --> 01:06:38,460
+So, that's one.
+
+1494
+01:06:38,460 --> 01:06:41,380
+The second thing might be, you may realize,
+
+1495
+01:06:41,380 --> 01:06:43,940
+oh my God, what kind of project have you picked up?
+
+1496
+01:06:45,100 --> 01:06:47,100
+Again, it's not unheard of, it's happened.
+
+1497
+01:06:47,100 --> 01:06:49,260
+That's why I'm giving you this information.
+
+1498
+01:06:50,180 --> 01:06:54,340
+First, try to, again, try to reach out to the authors.
+
+1499
+01:06:54,340 --> 01:06:56,740
+As soon as you pick the project, reach out to the authors.
+
+1500
+01:06:56,740 --> 01:06:57,900
+That's the first thing you do.
+
+1501
+01:06:57,900 --> 01:06:59,700
+Hey, I'm thinking about doing this.
+
+1502
+01:06:59,700 --> 01:07:01,420
+Do you have any recommendations for me?
+
+1503
+01:07:01,420 --> 01:07:03,780
+And people will love to give you those, okay?
+
+1504
+01:07:06,100 --> 01:07:08,260
+And then if you still find yourself in a tough spot
+
+1505
+01:07:08,260 --> 01:07:09,940
+where you don't know the way forward,
+
+1506
+01:07:09,940 --> 01:07:11,180
+again, reach out to them and be like,
+
+1507
+01:07:11,180 --> 01:07:12,420
+hey guys, you're stuck here.
+
+1508
+01:07:12,420 --> 01:07:14,620
+I think it was in pretty much the first class
+
+1509
+01:07:14,620 --> 01:07:18,340
+where I was like, the students were doing a shallow water,
+
+1510
+01:07:18,340 --> 01:07:19,860
+they were stuck, they reached out to the authors
+
+1511
+01:07:19,860 --> 01:07:22,180
+and the author was like, hey, just change this.
+
+1512
+01:07:22,180 --> 01:07:23,220
+And it worked.
+
+1513
+01:07:23,220 --> 01:07:24,740
+And usually that fixes it.
+
+1514
+01:07:25,900 --> 01:07:30,900
+If everything given, you still need to pivot
+
+1515
+01:07:31,420 --> 01:07:33,340
+and you need to change your project.
+
+1516
+01:07:33,340 --> 01:07:36,540
+Again, communicate that off as early as possible
+
+1517
+01:07:38,100 --> 01:07:40,260
+with good reason, with good reason
+
+1518
+01:07:40,260 --> 01:07:42,100
+and a good plan with that.
+
+1519
+01:07:42,100 --> 01:07:44,340
+If you come to me with, hey Shahzan,
+
+1520
+01:07:44,340 --> 01:07:46,460
+we are really struggling with this.
+
+1521
+01:07:46,460 --> 01:07:47,460
+My first question is, okay,
+
+1522
+01:07:47,460 --> 01:07:48,580
+have you reached out to the authors?
+
+1523
+01:07:48,580 --> 01:07:51,380
+Have you tried a bunch of things, right?
+
+1524
+01:07:51,380 --> 01:07:53,300
+Make sure you've done all of that before you come to me.
+
+1525
+01:07:53,300 --> 01:07:54,860
+And then even when you come to me, be like,
+
+1526
+01:07:54,860 --> 01:07:56,820
+hey, this is the problem we are having.
+
+1527
+01:07:56,820 --> 01:07:59,740
+Here's why we think it's insurmountable
+
+1528
+01:07:59,740 --> 01:08:02,180
+and we won't have a good final presentation.
+
+1529
+01:08:02,180 --> 01:08:03,700
+Here's the pivot we wanna make,
+
+1530
+01:08:03,700 --> 01:08:06,100
+here's the projects we wanna change or stuff like that.
+
+1531
+01:08:06,100 --> 01:08:07,820
+Whatever it may be, okay?
+
+1532
+01:08:09,380 --> 01:08:11,300
+You had a question, sorry.
+
+1533
+01:08:11,300 --> 01:08:15,060
+So suppose we're trying to create a research
+
+1534
+01:08:15,060 --> 01:08:20,060
+and the original product got screwed up
+
+1535
+01:08:20,660 --> 01:08:25,660
+and if I were to use the research in metals
+
+1536
+01:08:27,420 --> 01:08:30,300
+and does that count as a viable option?
+
+1537
+01:08:30,300 --> 01:08:33,340
+Yeah, generally I would say generally yes,
+
+1538
+01:08:33,340 --> 01:08:34,540
+but it also depends.
+
+1539
+01:08:34,540 --> 01:08:37,380
+So for example, if you're taking a paper from 2013
+
+1540
+01:08:37,380 --> 01:08:40,020
+and trying to do it in metal, I'd say probably not.
+
+1541
+01:08:40,020 --> 01:08:42,340
+Unless you're making significant changes.
+
+1542
+01:08:42,340 --> 01:08:45,740
+If you're taking a paper from 2022 GTC,
+
+1543
+01:08:45,740 --> 01:08:47,420
+NVIDIA's GPU technology conference
+
+1544
+01:08:47,420 --> 01:08:49,900
+and you wanna do that in metal, sure, absolutely.
+
+1545
+01:08:50,060 --> 01:08:50,900
+Yeah.
+
+1546
+01:08:58,420 --> 01:09:01,020
+Is there any potential budget allocation
+
+1547
+01:09:01,020 --> 01:09:03,620
+to buy data sets if needed?
+
+1548
+01:09:03,620 --> 01:09:06,340
+I don't know how I fund that.
+
+1549
+01:09:06,340 --> 01:09:09,460
+I don't even know what the university process or anything,
+
+1550
+01:09:10,980 --> 01:09:12,980
+but if it comes up, at least let me know
+
+1551
+01:09:12,980 --> 01:09:15,380
+if there's something that I can help with.
+
+1552
+01:09:15,380 --> 01:09:17,700
+Even if I don't know, I'll probably ask DeepLane
+
+1553
+01:09:17,700 --> 01:09:19,580
+to see if there's something like that.
+
+1554
+01:09:20,900 --> 01:09:21,740
+What else?
+
+1555
+01:09:29,900 --> 01:09:30,740
+Yeah.
+
+1556
+01:09:30,740 --> 01:09:32,220
+Off the top of your head,
+
+1557
+01:09:32,220 --> 01:09:35,180
+is anything relating to state of the fusion
+
+1558
+01:09:35,180 --> 01:09:38,620
+or generation viable in the scope of your project?
+
+1559
+01:09:38,620 --> 01:09:39,940
+Yeah, why not?
+
+1560
+01:09:39,940 --> 01:09:43,100
+Again, ask Liam what better ideas might be.
+
+1561
+01:09:43,100 --> 01:09:45,900
+You have his email, feel free to email him
+
+1562
+01:09:45,900 --> 01:09:48,780
+and get suggestions from what will be good ideas.
+
+1563
+01:09:48,780 --> 01:09:50,500
+Again, the goal is not that,
+
+1564
+01:09:51,700 --> 01:09:53,300
+A, I don't know much about machine learning,
+
+1565
+01:09:53,300 --> 01:09:54,700
+but I can at least give advice,
+
+1566
+01:09:54,700 --> 01:09:56,340
+but my advice could be dangerous.
+
+1567
+01:09:57,380 --> 01:09:59,580
+Liam's advice is gonna be very industry-derived.
+
+1568
+01:09:59,580 --> 01:10:01,620
+Just like I can tell you what Cesium does
+
+1569
+01:10:01,620 --> 01:10:03,420
+and anything related to Cesium,
+
+1570
+01:10:03,420 --> 01:10:05,860
+Liam can tell you the world's end
+
+1571
+01:10:05,860 --> 01:10:08,180
+about natural language processing
+
+1572
+01:10:08,180 --> 01:10:09,380
+or machine learning in general.
+
+1573
+01:10:09,380 --> 01:10:11,260
+So that's my recommendation there.
+
+1574
+01:10:11,260 --> 01:10:12,900
+You may reach out to other professors as well
+
+1575
+01:10:12,900 --> 01:10:15,260
+to understand what might be required,
+
+1576
+01:10:15,260 --> 01:10:17,260
+but it's up to you ultimately.
+
+1577
+01:10:19,780 --> 01:10:21,180
+What are the questions?
+
+1578
+01:10:22,780 --> 01:10:24,860
+Anybody already have the project ideas?
+
+1579
+01:10:26,300 --> 01:10:27,380
+It's okay to say yes.
+
+1580
+01:10:28,580 --> 01:10:30,580
+It'll only help you find good teammates.
+
+1581
+01:10:34,700 --> 01:10:35,540
+No?
+
+1582
+01:10:36,940 --> 01:10:37,780
+Okay.
+
+1583
+01:10:37,780 --> 01:10:39,100
+I don't know if anyone wants to do this with me.
+
+1584
+01:10:39,100 --> 01:10:39,940
+No, no, no.
+
+1585
+01:10:39,940 --> 01:10:41,500
+If you wanna share them.
+
+1586
+01:10:46,820 --> 01:10:47,660
+Okay.
+
+1587
+01:10:49,620 --> 01:10:50,460
+Why not?
+
+1588
+01:10:51,980 --> 01:10:52,820
+Well,
+
+1589
+01:10:54,180 --> 01:10:55,820
+two ideas, right?
+
+1590
+01:10:55,820 --> 01:10:57,340
+One is
+
+1591
+01:10:58,460 --> 01:11:00,340
+pose estimation
+
+1592
+01:11:00,340 --> 01:11:04,260
+to drive a 2D body sprite.
+
+1593
+01:11:04,260 --> 01:11:08,300
+So currently there's motion capture
+
+1594
+01:11:08,300 --> 01:11:10,820
+and there's camera-based motion capture.
+
+1595
+01:11:10,820 --> 01:11:14,580
+A motion capture retargets poses
+
+1596
+01:11:14,580 --> 01:11:17,020
+into rigs of 3D
+
+1597
+01:11:18,900 --> 01:11:20,060
+models.
+
+1598
+01:11:20,060 --> 01:11:22,260
+I was thinking that if we take,
+
+1599
+01:11:22,260 --> 01:11:25,060
+combine like the existing
+
+1600
+01:11:27,020 --> 01:11:28,660
+pose estimation from camera,
+
+1601
+01:11:28,660 --> 01:11:30,780
+like monocular camera view
+
+1602
+01:11:30,780 --> 01:11:31,860
+onto
+
+1603
+01:11:33,860 --> 01:11:34,940
+a rig
+
+1604
+01:11:36,100 --> 01:11:38,300
+with like 2D body
+
+1605
+01:11:40,380 --> 01:11:42,300
+that can be novel.
+
+1606
+01:11:42,300 --> 01:11:44,700
+That's one of the other things.
+
+1607
+01:11:44,700 --> 01:11:47,780
+Although I think that's been done quite a few times.
+
+1608
+01:11:47,820 --> 01:11:49,860
+I think that's being done quite a few times.
+
+1609
+01:11:49,860 --> 01:11:52,500
+You may want to look into that.
+
+1610
+01:11:52,500 --> 01:11:54,420
+Yeah, again, it depends on the combination,
+
+1611
+01:11:54,420 --> 01:11:56,660
+but that idea itself,
+
+1612
+01:11:56,660 --> 01:11:59,100
+I think there's a lot of research being done on it.
+
+1613
+01:11:59,100 --> 01:11:59,940
+Yeah.
+
+1614
+01:11:59,940 --> 01:12:01,860
+I know that pose estimation is big.
+
+1615
+01:12:01,860 --> 01:12:02,700
+Yeah.
+
+1616
+01:12:02,700 --> 01:12:06,340
+It's the mesh deformation of like a 2D.
+
+1617
+01:12:06,340 --> 01:12:07,180
+Oh yeah.
+
+1618
+01:12:07,180 --> 01:12:08,580
+If you want to do mesh deformation as well.
+
+1619
+01:12:08,580 --> 01:12:09,420
+Okay.
+
+1620
+01:12:09,420 --> 01:12:10,420
+If you're just doing the skeleton,
+
+1621
+01:12:10,420 --> 01:12:11,260
+then that's kind of.
+
+1622
+01:12:11,260 --> 01:12:12,100
+No, no, no.
+
+1623
+01:12:12,100 --> 01:12:14,420
+Because like the skeleton is like the output, right?
+
+1624
+01:12:14,420 --> 01:12:16,820
+It's the idea of like retargeting that skeleton
+
+1625
+01:12:16,820 --> 01:12:18,620
+onto a,
+
+1626
+01:12:18,620 --> 01:12:21,100
+because like with 3D mesh, it's a mesh.
+
+1627
+01:12:21,100 --> 01:12:21,940
+Yeah.
+
+1628
+01:12:21,940 --> 01:12:23,540
+And that's driven by like a rig.
+
+1629
+01:12:23,540 --> 01:12:24,380
+Yeah.
+
+1630
+01:12:24,380 --> 01:12:26,980
+But with 2D, the rules are different.
+
+1631
+01:12:26,980 --> 01:12:30,340
+So like, I feel like that could be parallelized
+
+1632
+01:12:30,340 --> 01:12:32,620
+in terms of how those calculations are done.
+
+1633
+01:12:32,620 --> 01:12:36,260
+And then it will like real time
+
+1634
+01:12:36,260 --> 01:12:39,260
+and camera to output sort of thing.
+
+1635
+01:12:40,260 --> 01:12:42,860
+The other thing, which is the machine learning thing
+
+1636
+01:12:42,860 --> 01:12:43,700
+is that
+
+1637
+01:12:44,700 --> 01:12:48,740
+there is a fundamental difference between face,
+
+1638
+01:12:48,740 --> 01:12:53,020
+like in non-photorealistic rendering of faces,
+
+1639
+01:12:53,020 --> 01:12:58,020
+lots of models are scripted to break facial planes
+
+1640
+01:12:58,700 --> 01:13:00,300
+based on camera perspective,
+
+1641
+01:13:00,300 --> 01:13:05,300
+because the 2D aesthetic is not geometrically,
+
+1642
+01:13:06,540 --> 01:13:10,540
+like geospatially like consistent based on camera angles.
+
+1643
+01:13:11,540 --> 01:13:15,020
+And I was thinking potentially doing
+
+1644
+01:13:15,020 --> 01:13:18,060
+the machine learning thing to see if you can just,
+
+1645
+01:13:19,180 --> 01:13:24,180
+given like two branches off of that,
+
+1646
+01:13:25,620 --> 01:13:28,340
+this is just me talking.
+
+1647
+01:13:28,340 --> 01:13:31,140
+One is give a head-on perspective
+
+1648
+01:13:31,140 --> 01:13:33,860
+and you try and get like a three-fourths perspective,
+
+1649
+01:13:33,860 --> 01:13:36,860
+or it's you are given a three-fourths perspective
+
+1650
+01:13:36,860 --> 01:13:38,060
+of like a 3D model,
+
+1651
+01:13:38,180 --> 01:13:41,900
+that you like, you perturb it
+
+1652
+01:13:41,900 --> 01:13:44,820
+to make it look more like a 3D style.
+
+1653
+01:13:44,820 --> 01:13:47,860
+And like, that's, I know like there are a bunch of papers.
+
+1654
+01:13:47,860 --> 01:13:51,540
+Yeah, what you're saying,
+
+1655
+01:13:51,540 --> 01:13:53,900
+and I'm extrapolating here,
+
+1656
+01:13:53,900 --> 01:13:56,980
+is take the entire history of Japanese anime
+
+1657
+01:13:56,980 --> 01:13:58,820
+and create a 3D world out of it.
+
+1658
+01:13:58,820 --> 01:14:02,380
+Yeah, because if that happens,
+
+1659
+01:14:03,380 --> 01:14:06,020
+if that happens, right,
+
+1660
+01:14:06,020 --> 01:14:08,180
+CG in anime is solved.
+
+1661
+01:14:08,180 --> 01:14:09,580
+Yeah.
+
+1662
+01:14:09,580 --> 01:14:11,220
+But I mean, piecemeal.
+
+1663
+01:14:11,220 --> 01:14:12,300
+Yeah, yeah, yeah.
+
+1664
+01:14:13,260 --> 01:14:14,940
+Anybody have any other ideas?
+
+1665
+01:14:17,980 --> 01:14:19,580
+Okay.
+
+1666
+01:14:19,580 --> 01:14:20,420
+David?
+
+1667
+01:14:21,940 --> 01:14:25,700
+I was thinking of doing like a radar tracer.
+
+1668
+01:14:25,700 --> 01:14:28,420
+So it would be similar to like a path tracer,
+
+1669
+01:14:28,420 --> 01:14:31,860
+but instead you're like simulating radar waves
+
+1670
+01:14:31,860 --> 01:14:32,740
+instead of light.
+
+1671
+01:14:33,740 --> 01:14:34,580
+So if you do that,
+
+1672
+01:14:34,580 --> 01:14:37,220
+you would take like an airframe of like a fighter jet
+
+1673
+01:14:37,220 --> 01:14:38,900
+or like a boat,
+
+1674
+01:14:38,900 --> 01:14:41,820
+and you could check the radar signature.
+
+1675
+01:14:41,820 --> 01:14:46,820
+And basically it's how like stealth hardware is built,
+
+1676
+01:14:47,420 --> 01:14:52,140
+like trying to minimize the radar signature of the kid.
+
+1677
+01:14:53,260 --> 01:14:54,940
+And also like thought about different ways
+
+1678
+01:14:54,940 --> 01:14:59,580
+that you could even manipulate the airframe
+
+1679
+01:14:59,860 --> 01:15:01,540
+or the ship hull to make it,
+
+1680
+01:15:01,540 --> 01:15:06,540
+you would have a smaller radar signature.
+
+1681
+01:15:10,180 --> 01:15:12,020
+Yeah, I think that could be very interesting.
+
+1682
+01:15:12,020 --> 01:15:15,420
+And other, Eric Cain's in his presentation
+
+1683
+01:15:15,420 --> 01:15:16,780
+also brought up something like that.
+
+1684
+01:15:16,780 --> 01:15:21,060
+If RF and 5G propagation is really big,
+
+1685
+01:15:21,060 --> 01:15:22,700
+so all of those ideas could be very, very good
+
+1686
+01:15:22,700 --> 01:15:23,820
+where you're taking ray tracing
+
+1687
+01:15:23,820 --> 01:15:27,820
+and applying it to non-visual stuff as well.
+
+1688
+01:15:30,180 --> 01:15:32,060
+Okay, last call for any other ideas.
+
+1689
+01:15:33,060 --> 01:15:33,900
+Uta.
+
+1690
+01:15:39,340 --> 01:15:44,340
+I think the reason for Facebook is that it's a big company.
+
+1691
+01:15:47,620 --> 01:15:50,660
+I thought that Facebook was a big one,
+
+1692
+01:15:50,660 --> 01:15:53,020
+so I was thinking of using it to get able to,
+
+1693
+01:15:53,020 --> 01:15:55,620
+I've never seen a middle in AI.
+
+1694
+01:16:00,420 --> 01:16:02,740
+If I can play some digital,
+
+1695
+01:16:06,300 --> 01:16:08,260
+that's something I'm doing with Facebook.
+
+1696
+01:16:08,260 --> 01:16:10,660
+Of course, there's some limitations that it should do.
+
+1697
+01:16:10,660 --> 01:16:12,540
+Yeah, you may want to think about
+
+1698
+01:16:12,540 --> 01:16:13,780
+what are the applications of that,
+
+1699
+01:16:13,780 --> 01:16:15,060
+and maybe you would talk to Steve Blain
+
+1700
+01:16:15,060 --> 01:16:16,860
+about what he thinks about that idea.
+
+1701
+01:16:16,860 --> 01:16:19,940
+I know he takes a lot of interest in AR, so talk about it.
+
+1702
+01:16:19,940 --> 01:16:22,340
+Yeah, I was reading about it,
+
+1703
+01:16:22,340 --> 01:16:26,260
+and I think it will have the same implications.
+
+1704
+01:16:27,660 --> 01:16:28,500
+Yeah.
+
+1705
+01:16:29,580 --> 01:16:34,580
+Yeah, I think it's something that can behave like-
+
+1706
+01:16:37,980 --> 01:16:39,300
+Yeah, okay.
+
+1707
+01:16:39,300 --> 01:16:41,060
+But I'm not sure how.
+
+1708
+01:16:42,020 --> 01:16:42,860
+No, it's-
+
+1709
+01:16:42,860 --> 01:16:45,860
+I think it's like an idea of, again,
+
+1710
+01:16:48,420 --> 01:16:52,900
+to learn AR, but it's also like generating something
+
+1711
+01:16:52,900 --> 01:16:54,900
+that's used to be in AR,
+
+1712
+01:16:55,900 --> 01:17:00,060
+so as you're, and all of this with a normal phone,
+
+1713
+01:17:01,260 --> 01:17:04,420
+some individual device, so if you can,
+
+1714
+01:17:06,980 --> 01:17:09,420
+as you move along, let's say,
+
+1715
+01:17:09,420 --> 01:17:12,260
+there are things or problems going,
+
+1716
+01:17:15,060 --> 01:17:16,460
+but you really want to play,
+
+1717
+01:17:16,460 --> 01:17:18,860
+so it's basically detecting various areas of time
+
+1718
+01:17:18,860 --> 01:17:20,700
+and generating something.
+
+1719
+01:17:20,700 --> 01:17:23,620
+Yeah, that could be very cool too.
+
+1720
+01:17:25,540 --> 01:17:26,940
+Okay.
+
+1721
+01:17:26,940 --> 01:17:29,020
+Last call, anything else?
+
+1722
+01:17:29,900 --> 01:17:32,460
+All right, I'm super excited hearing just those ideas
+
+1723
+01:17:32,460 --> 01:17:35,740
+about what you guys will come up with.
+
+1724
+01:17:35,740 --> 01:17:39,260
+So as a reminder, go sign up for the sheet.
+
+1725
+01:17:40,780 --> 01:17:41,780
+Again, first come, first serve,
+
+1726
+01:17:41,780 --> 01:17:43,620
+so if you book a slot, it's yours.
+
+1727
+01:17:43,620 --> 01:17:47,860
+I do reserve the right to change the times,
+
+1728
+01:17:47,860 --> 01:17:51,580
+but generally, I won't change your team itself.
+
+1729
+01:17:51,580 --> 01:17:53,300
+But yeah, do that as soon as possible
+
+1730
+01:17:53,300 --> 01:17:55,460
+so that I know at least how many teams there are
+
+1731
+01:17:55,460 --> 01:17:59,420
+and I can organize the pitches on November 7th and all that.
+
+1732
+01:17:59,420 --> 01:18:02,180
+I will follow up with more details around the plan
+
+1733
+01:18:02,180 --> 01:18:03,740
+on November 7th about when you'll come
+
+1734
+01:18:03,740 --> 01:18:06,260
+into the CSUMB office and stuff like that.
+
+1735
+01:18:06,260 --> 01:18:08,500
+I'll post that all to a discussion.
+
+1736
+01:18:09,620 --> 01:18:11,060
+But otherwise, I'll hang out here.
+
+1737
+01:18:11,060 --> 01:18:13,100
+If you want to come ask any questions,
+
+1738
+01:18:13,100 --> 01:18:15,380
+ideally, you would have asked it in the class
+
+1739
+01:18:15,380 --> 01:18:17,260
+and I would have clarified it,
+
+1740
+01:18:17,260 --> 01:18:19,460
+but if there's something very, very personal to you
+
+1741
+01:18:19,460 --> 01:18:21,780
+that you want to ask, sure, come up.
+
+1742
+01:18:21,820 --> 01:18:23,700
+But otherwise, if you're coming up here
+
+1743
+01:18:23,700 --> 01:18:25,020
+and asking a question that applies
+
+1744
+01:18:25,020 --> 01:18:26,380
+to pretty much the entire class,
+
+1745
+01:18:26,380 --> 01:18:28,820
+I'll be like, go ask that on that discussion now
+
+1746
+01:18:28,820 --> 01:18:31,060
+and I'll answer it, okay?
+
+1747
+01:18:33,340 --> 01:18:34,820
+That's all I have, thank you.
+

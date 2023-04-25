@@ -1,0 +1,1348 @@
+1
+00:00:00,000 --> 00:00:01,000
+Yeah.
+
+2
+00:00:01,000 --> 00:00:02,000
+So I think we've covered everything.
+
+3
+00:00:02,000 --> 00:00:03,000
+So I think we're going to go ahead and wrap up.
+
+4
+00:00:03,000 --> 00:00:04,000
+If you have any questions, please let me know.
+
+5
+00:00:04,000 --> 00:00:05,000
+And I'll see you in the next session.
+
+6
+00:00:05,000 --> 00:00:06,000
+Thank you.
+
+7
+00:00:06,000 --> 00:00:07,000
+Bye.
+
+8
+00:00:07,000 --> 00:00:08,000
+Bye.
+
+9
+00:00:08,000 --> 00:00:09,000
+Bye.
+
+10
+00:00:09,000 --> 00:00:10,000
+Bye.
+
+11
+00:00:10,000 --> 00:00:11,000
+Bye.
+
+12
+00:00:11,000 --> 00:00:12,000
+Bye.
+
+13
+00:00:12,000 --> 00:00:13,000
+Bye.
+
+14
+00:00:13,000 --> 00:00:14,000
+Bye.
+
+15
+00:00:14,000 --> 00:00:15,000
+Bye.
+
+16
+00:00:15,000 --> 00:00:16,000
+Bye.
+
+17
+00:00:16,000 --> 00:00:17,000
+Bye.
+
+18
+00:00:17,000 --> 00:00:18,000
+Bye.
+
+19
+00:00:18,000 --> 00:00:19,000
+Bye.
+
+20
+00:00:19,000 --> 00:00:20,000
+Bye.
+
+21
+00:00:20,000 --> 00:00:21,000
+Bye.
+
+22
+00:00:21,000 --> 00:00:22,000
+Bye.
+
+23
+00:00:22,000 --> 00:00:23,000
+Bye.
+
+24
+00:00:23,000 --> 00:00:24,000
+Bye.
+
+25
+00:00:24,000 --> 00:00:25,000
+Bye.
+
+26
+00:00:25,000 --> 00:00:26,000
+Bye.
+
+27
+00:00:26,000 --> 00:00:27,000
+Bye.
+
+28
+00:00:27,000 --> 00:00:28,000
+Bye.
+
+29
+00:00:28,000 --> 00:00:29,000
+Bye.
+
+30
+00:00:29,000 --> 00:00:30,000
+Bye.
+
+31
+00:00:30,000 --> 00:00:31,000
+Bye.
+
+32
+00:00:31,000 --> 00:00:32,000
+Bye.
+
+33
+00:00:32,000 --> 00:00:33,000
+Bye.
+
+34
+00:00:33,000 --> 00:00:34,000
+Bye.
+
+35
+00:00:34,000 --> 00:00:35,000
+Bye.
+
+36
+00:00:35,000 --> 00:00:36,000
+Bye.
+
+37
+00:00:36,000 --> 00:00:37,000
+Bye.
+
+38
+00:00:37,000 --> 00:00:38,000
+Bye.
+
+39
+00:00:38,000 --> 00:00:41,000
+Bye.
+
+40
+00:00:41,000 --> 00:00:44,000
+Bye.
+
+41
+00:00:44,000 --> 00:00:53,000
+Bye.
+
+42
+00:00:53,000 --> 00:00:57,000
+Bye.
+
+43
+00:00:58,000 --> 00:01:06,000
+Bye.
+
+44
+00:01:06,000 --> 00:01:09,000
+Bye.
+
+45
+00:01:09,000 --> 00:01:12,000
+Bye.
+
+46
+00:01:12,000 --> 00:01:15,000
+Bye.
+
+47
+00:01:15,000 --> 00:01:19,000
+Bye.
+
+48
+00:01:19,000 --> 00:01:23,000
+Bye.
+
+49
+00:01:23,000 --> 00:01:26,000
+Bye.
+
+50
+00:01:26,000 --> 00:01:33,000
+So let's continue from there.
+
+51
+00:01:33,000 --> 00:01:35,000
+So.
+
+52
+00:01:35,000 --> 00:01:37,000
+So,
+
+53
+00:01:37,000 --> 00:01:48,000
+essence resources, the literal hardware resources that it has can be partitioned in different ways depending on how you're writing and launching your code, your block sizes and stuff like that.
+
+54
+00:01:48,000 --> 00:02:02,000
+And what we're going to see over the next few slides is how this impacts, impacts how the GPU performance is going to work and how much occupation, you're going to get on those SMs.
+
+55
+00:02:02,000 --> 00:02:09,000
+So, let's say, let's take a GED for example because it has smaller numbers it's easier for us to compute.
+
+56
+00:02:09,000 --> 00:02:21,000
+But on, on this kind of an example where we have a thread log 768 threads and 32 kilobytes of registers and 16 kilobytes of shared memory.
+
+57
+00:02:21,000 --> 00:02:32,000
+What we can have to get started is eight blocks of 96 threads, so eight times 96 is 768, so we take this limit and this limit. So that is okay.
+
+58
+00:02:32,000 --> 00:02:46,000
+We can have four blocks of 192 threads, that's again 768, so we hit this limit but not this limit. Again, hitting any one of these limits will surpass what an SM can pull.
+
+59
+00:02:46,000 --> 00:03:03,000
+But imagine eight blocks of 192 threads, that would be 1536 threads per SM. Can't pull that. What it's going to do is it's going to process four blocks at once and then four blocks at another time. So it becomes kind of iterative in that sense.
+
+60
+00:03:03,000 --> 00:03:10,000
+So, let's say we have now combining the registers plus threads.
+
+61
+00:03:10,000 --> 00:03:21,000
+So we have 8,000 registers. Okay, so 32 kilobytes divided by four bytes for an integer of float we get 8,000 registers.
+
+62
+00:03:21,000 --> 00:03:27,000
+So you can have 768 threads, three blocks of 10 registers each.
+
+63
+00:03:27,000 --> 00:03:33,000
+That rounds up to about 7,600 registers for the entire SM.
+
+64
+00:03:34,000 --> 00:03:40,000
+Or you can have 11 registers with 512 threads each.
+
+65
+00:03:40,000 --> 00:03:45,000
+Okay, again, you have to be under all of the limits, not just any one.
+
+66
+00:03:45,000 --> 00:03:51,000
+You can't have, for example,
+
+67
+00:03:51,000 --> 00:04:00,000
+you can't have 512 threads or 768 threads with 11 registers each. What would happen then?
+
+68
+00:04:00,000 --> 00:04:09,000
+If you have 768 threads with 11 registers each, what happens then?
+
+69
+00:04:09,000 --> 00:04:10,000
+Sorry?
+
+70
+00:04:10,000 --> 00:04:16,000
+Go ahead.
+
+71
+00:04:16,000 --> 00:04:30,000
+Yeah, absolutely. The total number of registers that are required to hold the context, you know, the integers and stuff and have that zero context switching or zero overhead switching will be greater than this.
+
+72
+00:04:30,000 --> 00:04:35,000
+We can't have it. The hardware isn't provided for us to hold that much, right?
+
+73
+00:04:35,000 --> 00:04:42,000
+Now, all of these numbers vary for your GPU. So it's important to understand. Again, in the performance lab, I'll show you how to check those numbers.
+
+74
+00:04:42,000 --> 00:04:49,000
+But it's important to keep in mind that these limits exist and you don't want to be over exceeding them.
+
+75
+00:04:49,000 --> 00:04:53,000
+I have a question here. So more registers decreases thread level balance.
+
+76
+00:04:53,000 --> 00:05:04,000
+So what we said was, if you have 11 registers and 768 threads, basically this can only fit, let's say, two blocks instead of three, right?
+
+77
+00:05:04,000 --> 00:05:15,000
+Can it ever increase the performance?
+
+78
+00:05:15,000 --> 00:05:19,000
+Yes. What kind of memory access?
+
+79
+00:05:19,000 --> 00:05:32,000
+So if you are copying more data from global memory, reading it multiple times from registers, and you're decreasing your bandwidth there, then overall you can see a performance gain if you use more registers.
+
+80
+00:05:32,000 --> 00:05:38,000
+Again, depends very much on the algorithm, but it's certainly something worth looking at.
+
+81
+00:05:38,000 --> 00:05:44,000
+So all of these resources essentially lead to a term called performance clip.
+
+82
+00:05:44,000 --> 00:05:53,000
+So just as in this slide, if I can go back, what you have here is you go from three blocks to two blocks just because of one register.
+
+83
+00:05:53,000 --> 00:05:56,000
+Kind of seems unfair, right?
+
+84
+00:05:56,000 --> 00:06:04,000
+If you think of a much larger case, you can go from 1,000 blocks to 200 blocks if you add a couple of registers.
+
+85
+00:06:04,000 --> 00:06:10,000
+And that's essentially the clip. It's like you have good performance, you add one register and it goes down.
+
+86
+00:06:10,000 --> 00:06:13,000
+That's what you want to protect yourself from.
+
+87
+00:06:13,000 --> 00:06:19,000
+You want to make sure that increasing resources doesn't lead to dramatic performance drops.
+
+88
+00:06:19,000 --> 00:06:24,000
+You always want to make sure that you're within the limits of what you're using.
+
+89
+00:06:24,000 --> 00:06:31,000
+Unless, for example, as we discussed, it hides performance in another place, global memory access or something else.
+
+90
+00:06:32,000 --> 00:06:35,000
+Any questions on SM resources?
+
+91
+00:06:40,000 --> 00:06:43,000
+All right. So the next problem to see is data pink matching.
+
+92
+00:06:43,000 --> 00:06:49,000
+And this is an interesting one and it will help you structure your code better.
+
+93
+00:06:49,000 --> 00:06:56,000
+So what you always want to remember is the scheduler of a GPU is reasonably smart.
+
+94
+00:06:56,000 --> 00:06:59,000
+It's not the smartest thing ever. It's not the dumbest thing ever.
+
+95
+00:06:59,000 --> 00:07:01,000
+But it's reasonably smart.
+
+96
+00:07:01,000 --> 00:07:09,000
+What it's going to do is it's going to try to optimize when the global memory eats happen and when compute happens and try to hide that latency.
+
+97
+00:07:09,000 --> 00:07:16,000
+Remember, from the first class, I've been telling you that CUDA is all about hiding that latency between memory and compute.
+
+98
+00:07:16,000 --> 00:07:20,000
+And data prefetching is kind of leading to that.
+
+99
+00:07:20,000 --> 00:07:23,000
+So let's take these three instructions for example.
+
+100
+00:07:23,000 --> 00:07:27,000
+The first one is reading from global memory.
+
+101
+00:07:28,000 --> 00:07:33,000
+High latency takes a bunch of cycles. Not great.
+
+102
+00:07:33,000 --> 00:07:39,000
+The second instructions are all A, all compute.
+
+103
+00:07:39,000 --> 00:07:43,000
+You know, let's assume that all the memory is there and from registers.
+
+104
+00:07:43,000 --> 00:07:48,000
+And secondly, it's completely independent from that first instruction. Right?
+
+105
+00:07:48,000 --> 00:07:52,000
+And M or MDFI are not used anywhere.
+
+106
+00:07:53,000 --> 00:08:03,000
+And then the last instruction has a global memory that's sitting in M and then has...
+
+107
+00:08:03,000 --> 00:08:13,000
+So what we can do is because this global memory and this compute has one addition and two floating point multiplications,
+
+108
+00:08:13,000 --> 00:08:19,000
+what essentially happens is instead of switching the warp out, like I may have suggested before,
+
+109
+00:08:19,000 --> 00:08:25,000
+that, hey, if you see a global memory, the scheduler will switch the warp out.
+
+110
+00:08:25,000 --> 00:08:30,000
+In this case, it will be like, oh, there's enough work for me to do before I read the next instruction.
+
+111
+00:08:30,000 --> 00:08:35,000
+Let the memory read happen in the background and it won't switch the warp out.
+
+112
+00:08:35,000 --> 00:08:42,000
+OK, so in this case, what I do is, hey, memory bus, go read MDFI for me.
+
+113
+00:08:42,000 --> 00:08:48,000
+While I execute this second statement and while I execute the second statement,
+
+114
+00:08:48,000 --> 00:08:52,000
+the memory is ready for me so I can execute that next.
+
+115
+00:08:52,000 --> 00:09:00,000
+So it's almost like prefetching the data that is used in this from this.
+
+116
+00:09:00,000 --> 00:09:06,000
+So depending on how you write your code, you always want that mix.
+
+117
+00:09:06,000 --> 00:09:12,000
+You want to have memory reads and some compute between them.
+
+118
+00:09:12,000 --> 00:09:18,000
+Now, for clean code, let's say you're reading two matrices and you want to have read A and read B.
+
+119
+00:09:18,000 --> 00:09:22,000
+That's not necessarily the worst thing to do. It provides for clean code.
+
+120
+00:09:22,000 --> 00:09:31,000
+But if you have, let's say, 10 memory reads from global memory and you have a bunch of independent compute instructions from that,
+
+121
+00:09:31,000 --> 00:09:37,000
+you certainly need to try to interleave them if possible.
+
+122
+00:09:37,000 --> 00:09:45,000
+So another example is, recall this from our tile matrix multiply example.
+
+123
+00:09:45,000 --> 00:09:50,000
+What we had was we were loading the tile into the shared memory.
+
+124
+00:09:50,000 --> 00:09:56,000
+So we were taking the sub tile from the matrix and putting that into shared memory and we called sync threads.
+
+125
+00:09:56,000 --> 00:10:00,000
+Then we accumulated dot product and called sync threads again.
+
+126
+00:10:00,000 --> 00:10:04,000
+Everybody remember this?
+
+127
+00:10:04,000 --> 00:10:15,000
+So what essentially happens is, what you can do is, instead of loading the first tile here,
+
+128
+00:10:15,000 --> 00:10:20,000
+what you can do is kind of load the first tile into the registers before the follow.
+
+129
+00:10:20,000 --> 00:10:28,000
+You can restructure it. You can read it into registers, then from registers you copy it into shared memory.
+
+130
+00:10:28,000 --> 00:10:33,000
+This is a much faster operation, right? And you only do this for the first tile.
+
+131
+00:10:33,000 --> 00:10:41,000
+You call sync threads. And while dot product, which is all compute, is happening, all compute from shared memory,
+
+132
+00:10:41,000 --> 00:10:45,000
+you start the next tile from global memory.
+
+133
+00:10:45,000 --> 00:10:50,000
+See how we've changed it up?
+
+134
+00:10:50,000 --> 00:11:01,000
+What we have essentially done here is, instead of having a read from global memory into shared memory here,
+
+135
+00:11:01,000 --> 00:11:07,000
+and a compute here, and two sync threads in between them,
+
+136
+00:11:07,000 --> 00:11:13,000
+this sync thread has to wait for this. So all the global memory needs to be done, right?
+
+137
+00:11:13,000 --> 00:11:16,000
+And then it does all the compute. So there's no overlap.
+
+138
+00:11:16,000 --> 00:11:23,000
+This is called compute-copy overlap. There's no compute-copy overlap here.
+
+139
+00:11:23,000 --> 00:11:29,000
+But I simply changed this to be, this is very quick, so we won't even count it as a memory either.
+
+140
+00:11:29,000 --> 00:11:32,000
+It's shared memory to registers, which is very, very quick.
+
+141
+00:11:32,000 --> 00:11:42,000
+But now you have next tile into registers, which is global memory to registers, and then you have a compute.
+
+142
+00:11:42,000 --> 00:11:46,000
+Now you have compute-copy overlap, because these two are independent.
+
+143
+00:11:46,000 --> 00:11:51,000
+You're reading this into registers, so you're not overriding shared memory. So that's safe.
+
+144
+00:11:51,000 --> 00:11:55,000
+We're not having race conditions.
+
+145
+00:11:55,000 --> 00:12:03,000
+But right after you hit that load instruction, you immediately have a compute operation from shared memory.
+
+146
+00:12:03,000 --> 00:12:09,000
+So this will now overlap. The kernel can tell the threads to be like, hey,
+
+147
+00:12:09,000 --> 00:12:14,000
+open set memory while you do the compute. So you don't actually wait for the memory.
+
+148
+00:12:14,000 --> 00:12:19,000
+As you're doing the dot product, you get that memory ready for yourself.
+
+149
+00:12:19,000 --> 00:12:26,000
+Everybody clear on this? Any questions?
+
+150
+00:12:26,000 --> 00:12:34,000
+So is the memory getting got, like participating in the ads or in the operations, or is that?
+
+151
+00:12:35,000 --> 00:12:40,000
+This actually is for this. So this is for the next iteration.
+
+152
+00:12:40,000 --> 00:12:48,000
+So you have some things that don't, because otherwise you would need to load it, then add it.
+
+153
+00:12:48,000 --> 00:12:51,000
+Whereas it's loaded and you're adding, but you're loading something else.
+
+154
+00:12:51,000 --> 00:12:55,000
+Right. So think of this as this vector. Start here.
+
+155
+00:12:55,000 --> 00:12:59,000
+This same line is there too. So let's start here.
+
+156
+00:12:59,000 --> 00:13:04,000
+Read tile from global memory into registers.
+
+157
+00:13:04,000 --> 00:13:10,000
+For temporary storage only, registers are used for temporary storage only.
+
+158
+00:13:10,000 --> 00:13:13,000
+This is for n-time iteration.
+
+159
+00:13:13,000 --> 00:13:18,000
+Accumulating the dot product for the previous tile that is already in shared memory.
+
+160
+00:13:18,000 --> 00:13:21,000
+Your registers are there. They're not doing anything.
+
+161
+00:13:21,000 --> 00:13:26,000
+But this compute is for the previous tile that's already sitting in shared memory.
+
+162
+00:13:26,000 --> 00:13:30,000
+So no dependency there. So they can have a compute copy over it.
+
+163
+00:13:30,000 --> 00:13:33,000
+You hit some threads, go to the next iteration.
+
+164
+00:13:33,000 --> 00:13:39,000
+Now you're copying these registers into shared memory for this in the next iteration.
+
+165
+00:13:39,000 --> 00:13:47,000
+And then when you copy that into shared memory, the next tile can now read the registers again.
+
+166
+00:13:47,000 --> 00:13:52,000
+So the registers are your next iteration. Your shared memory is the current iteration.
+
+167
+00:13:52,000 --> 00:13:57,000
+Remember how we spoke about SMs using registers for more compute?
+
+168
+00:13:57,000 --> 00:14:00,000
+This is the kind of example where you use more registers.
+
+169
+00:14:00,000 --> 00:14:05,000
+Because it hides that latency from global memory.
+
+170
+00:14:17,000 --> 00:14:29,000
+Right. So this flow takes time because it's reading from global memory.
+
+171
+00:14:29,000 --> 00:14:36,000
+Even if you forget about the same threads, this load has this dependency.
+
+172
+00:14:36,000 --> 00:14:41,000
+So the dot product has to finish for the previous iteration before this can be done.
+
+173
+00:14:41,000 --> 00:14:46,000
+And vice versa, the load needs to be finished before the dot product.
+
+174
+00:14:47,000 --> 00:14:52,000
+So this dependency changes here.
+
+175
+00:14:52,000 --> 00:14:57,000
+What we're changing here is the load doesn't depend on shared memory.
+
+176
+00:14:57,000 --> 00:15:00,000
+It depends on registers.
+
+177
+00:15:00,000 --> 00:15:06,000
+And as soon as you copy registers into shared memory, that dependency is gone.
+
+178
+00:15:06,000 --> 00:15:10,000
+So if you copy registers into shared memory, you're creating a copy of the data.
+
+179
+00:15:10,000 --> 00:15:13,000
+And now you can overwrite your registers.
+
+180
+00:15:13,000 --> 00:15:15,000
+So that's what we're doing here.
+
+181
+00:15:15,000 --> 00:15:19,000
+This statement, of course, depends on this. No doubt.
+
+182
+00:15:19,000 --> 00:15:25,000
+But by the time we get here, load is not dependent on this.
+
+183
+00:15:25,000 --> 00:15:27,000
+And hence, this is not dependent on this.
+
+184
+00:15:27,000 --> 00:15:29,000
+Or this is not dependent on this.
+
+185
+00:15:29,000 --> 00:15:33,000
+So you can read the load and the accumulate simultaneously.
+
+186
+00:15:38,000 --> 00:15:40,000
+Any other questions on this?
+
+187
+00:15:43,000 --> 00:15:44,000
+What happened there?
+
+188
+00:15:47,000 --> 00:15:49,000
+Let's start over.
+
+189
+00:15:54,000 --> 00:15:56,000
+Okay. Any other questions on this?
+
+190
+00:15:59,000 --> 00:16:04,000
+Want to get this? About how the compute-copy overlap is improving within the thread?
+
+191
+00:16:04,000 --> 00:16:05,000
+Okay.
+
+192
+00:16:09,000 --> 00:16:10,000
+All right.
+
+193
+00:16:10,000 --> 00:16:18,000
+The other thing I want to touch on is that there are a few special instructions SFUs built into the hardware.
+
+194
+00:16:18,000 --> 00:16:24,000
+I spoke about this in Lecture 2 as well, where I showed some of the functions that are built in.
+
+195
+00:16:24,000 --> 00:16:29,000
+What you can do is use these hardware-based functions, and they'll all execute in one cycle.
+
+196
+00:16:29,000 --> 00:16:31,000
+So they're really, really fast.
+
+197
+00:16:31,000 --> 00:16:33,000
+So just wanted to highlight that here.
+
+198
+00:16:35,000 --> 00:16:37,000
+I think that's the last topic for today.
+
+199
+00:16:37,000 --> 00:16:39,000
+It's called loop unrolling.
+
+200
+00:16:39,000 --> 00:16:43,000
+Anybody done any loop unrolling in any other classes or projects?
+
+201
+00:16:44,000 --> 00:16:45,000
+Okay.
+
+202
+00:16:45,000 --> 00:16:48,000
+So it's kind of common on the CPU, but let's take a look.
+
+203
+00:16:48,000 --> 00:16:55,000
+So what you want to think about is how many instructions you have per iteration.
+
+204
+00:16:55,000 --> 00:16:58,000
+So let's take this very simple loop, right?
+
+205
+00:16:58,000 --> 00:17:01,000
+So this is, again, a dot product loop, for example.
+
+206
+00:17:02,000 --> 00:17:08,000
+What you have is you have this for loop, and then you have one multiply and one add.
+
+207
+00:17:08,000 --> 00:17:13,000
+So this is what you call a very lightweight for loop, right?
+
+208
+00:17:14,000 --> 00:17:19,000
+But what you also have for every iteration is an increment.
+
+209
+00:17:19,000 --> 00:17:21,000
+What else do you have?
+
+210
+00:17:21,000 --> 00:17:28,000
+No, forget about the global read.
+
+211
+00:17:28,000 --> 00:17:34,000
+I'm talking about in compute, you have one multiply, one add, and we are saying there's one increment.
+
+212
+00:17:34,000 --> 00:17:36,000
+What else do we have?
+
+213
+00:17:37,000 --> 00:17:41,000
+We have a branch, and we know branches are bad in PURL.
+
+214
+00:17:41,000 --> 00:17:48,000
+So, and then we have, as I suggested, we have memory reads and arithmetic, okay?
+
+215
+00:17:48,000 --> 00:17:50,000
+And specifically address arithmetic.
+
+216
+00:17:50,000 --> 00:17:53,000
+So what we may see this as multiply.
+
+217
+00:17:53,000 --> 00:17:57,000
+Resolving this address itself is a computation operation, right?
+
+218
+00:17:57,000 --> 00:18:06,000
+The GPU needs to actually understand what are TY and K and TX to figure out how much the memory pointer should be moved to get that actual space.
+
+219
+00:18:06,000 --> 00:18:09,000
+So all of this adds work.
+
+220
+00:18:09,000 --> 00:18:18,000
+And if you think about it, this simple for loop here, which looks completely innocuous, has two floating point arithmetic instructions.
+
+221
+00:18:19,000 --> 00:18:25,000
+One loop branch instruction, two address arithmetic instructions, and one loop counter increment.
+
+222
+00:18:25,000 --> 00:18:29,000
+For the useful work of one multiply and one add.
+
+223
+00:18:29,000 --> 00:18:31,000
+That is the only useful work we do.
+
+224
+00:18:31,000 --> 00:18:34,000
+Everything else is just overhead, right?
+
+225
+00:18:35,000 --> 00:18:38,000
+So how do we improve this?
+
+226
+00:18:40,000 --> 00:18:43,000
+That's what loop unrolling gets into.
+
+227
+00:18:43,000 --> 00:18:53,000
+The other thing I want to show before we get into the solution is in most of the GPUs today, I think RTX 4090 or whatever got announced.
+
+228
+00:18:53,000 --> 00:18:55,000
+I wish I could buy one.
+
+229
+00:18:55,000 --> 00:19:04,000
+What you want to see is within each port here, if you subdivide them, there are a limited number of ports, right?
+
+230
+00:19:04,000 --> 00:19:09,000
+There's a limited number of compute ports, there's a bunch of load stores, there's special function units.
+
+231
+00:19:09,000 --> 00:19:12,000
+But only a third of them are floating point calculations.
+
+232
+00:19:12,000 --> 00:19:17,000
+You don't have unlimited ports that do all the same thing, okay?
+
+233
+00:19:17,000 --> 00:19:21,000
+But we still want to get the full teraflops.
+
+234
+00:19:21,000 --> 00:19:24,000
+So what options do we have?
+
+235
+00:19:24,000 --> 00:19:27,000
+Our first option is let's not put the loop.
+
+236
+00:19:27,000 --> 00:19:30,000
+Let's write every instruction, right?
+
+237
+00:19:31,000 --> 00:19:35,000
+That essentially gets you most of the way there.
+
+238
+00:19:35,000 --> 00:19:39,000
+Of course, you're still doing the address arithmetic, but it removes the following.
+
+239
+00:19:39,000 --> 00:19:41,000
+What's the problem with this?
+
+240
+00:19:48,000 --> 00:19:49,000
+It doesn't work for variables.
+
+241
+00:19:49,000 --> 00:19:51,000
+It's long to write.
+
+242
+00:19:51,000 --> 00:19:53,000
+Here you're probably seeing, what do we have?
+
+243
+00:19:53,000 --> 00:19:57,000
+We have a 16 by 16 matrix probably.
+
+244
+00:19:57,000 --> 00:19:58,000
+So block size is 16.
+
+245
+00:19:58,000 --> 00:20:00,000
+You're writing 256 lines of instructions.
+
+246
+00:20:00,000 --> 00:20:06,000
+And if you do that in the professional industry, people will think you've never learned for and if, okay?
+
+247
+00:20:06,000 --> 00:20:08,000
+So please don't do that.
+
+248
+00:20:08,000 --> 00:20:10,000
+Okay.
+
+249
+00:20:10,000 --> 00:20:12,000
+What is an alternate option to this?
+
+250
+00:20:14,000 --> 00:20:17,000
+Let's say, what's the medium option?
+
+251
+00:20:18,000 --> 00:20:20,000
+Yeah.
+
+252
+00:20:20,000 --> 00:20:29,000
+So, for example, instead of doing completely the nine way, which is an increment for each,
+
+253
+00:20:29,000 --> 00:20:38,000
+or the extreme way where you have no model, you could have a middle ground where you increment, let's say, by four or by eight.
+
+254
+00:20:38,000 --> 00:20:41,000
+And you do K plus equals four.
+
+255
+00:20:41,000 --> 00:20:44,000
+And then you write four instructions at a time.
+
+256
+00:20:44,000 --> 00:20:46,000
+And then you write four instructions at a time.
+
+257
+00:20:46,000 --> 00:20:50,000
+That's a generally acceptable middle ground.
+
+258
+00:20:50,000 --> 00:20:57,000
+What you could also do in CUDA is this hash pragma unroll.
+
+259
+00:20:57,000 --> 00:21:09,000
+What it essentially does is it tells the compiler that this loop is completely known at compile time.
+
+260
+00:21:10,000 --> 00:21:17,000
+That is the block size, the iteration, the for loop iteration is completely known at compile time.
+
+261
+00:21:17,000 --> 00:21:28,000
+The compiler would then know that it can unroll this entire loop into basically this.
+
+262
+00:21:28,000 --> 00:21:31,000
+Behind the scenes, it's unrolling it into this.
+
+263
+00:21:31,000 --> 00:21:34,000
+But your code is going to look like this.
+
+264
+00:21:34,000 --> 00:21:42,000
+So, you're giving a compiler an instruction for how to improve the performance in a way.
+
+265
+00:21:42,000 --> 00:21:46,000
+What can be the disadvantages of this?
+
+266
+00:21:46,000 --> 00:21:52,000
+What?
+
+267
+00:21:52,000 --> 00:21:53,000
+Yes, you need to know it at compile time.
+
+268
+00:21:53,000 --> 00:21:55,000
+You can't make it run by loop.
+
+269
+00:21:55,000 --> 00:21:56,000
+Yeah.
+
+270
+00:21:56,000 --> 00:22:05,000
+What else?
+
+271
+00:22:05,000 --> 00:22:11,000
+The other disadvantages are that you could have cache misses on instructions.
+
+272
+00:22:11,000 --> 00:22:14,000
+And then you also increase your register usage.
+
+273
+00:22:14,000 --> 00:22:21,000
+Because now if you're reading all of this into registers as it's getting computed, you're storing them in registers.
+
+274
+00:22:21,000 --> 00:22:31,000
+Remember, just because we write our code like this doesn't mean there is an assembly level instruction to add a thousand elements.
+
+275
+00:22:31,000 --> 00:22:35,000
+In assembly, it's still A plus B equals C.
+
+276
+00:22:35,000 --> 00:22:37,000
+You can only add two numbers at a time in assembly.
+
+277
+00:22:37,000 --> 00:22:40,000
+Of course, there's plenty of optimizations that happen around it.
+
+278
+00:22:40,000 --> 00:22:42,000
+But you're not going to get this right away.
+
+279
+00:22:42,000 --> 00:22:45,000
+So, you're going to be increasing your register usage.
+
+280
+00:22:45,000 --> 00:22:50,000
+So, it kind of skips that part.
+
+281
+00:22:50,000 --> 00:22:53,000
+Okay?
+
+282
+00:22:53,000 --> 00:22:57,000
+Last topic, kind of similar to that, is thread granularity.
+
+283
+00:22:57,000 --> 00:23:01,000
+And what we mean by that is how much work should a thread be doing.
+
+284
+00:23:01,000 --> 00:23:03,000
+Okay?
+
+285
+00:23:03,000 --> 00:23:05,000
+So, a couple of examples here.
+
+286
+00:23:05,000 --> 00:23:09,000
+In parallel reduction, what is the useful amount of work?
+
+287
+00:23:09,000 --> 00:23:14,000
+You know, if you're reducing two elements, which is the minimum, right?
+
+288
+00:23:14,000 --> 00:23:17,000
+You're doing one operation in a thread.
+
+289
+00:23:17,000 --> 00:23:24,000
+If you're doing multiple iterations of reduction, like you've done in project two, you're probably doing a little bit more work than that.
+
+290
+00:23:24,000 --> 00:23:27,000
+But not a lot of work.
+
+291
+00:23:27,000 --> 00:23:35,000
+How much work are you doing in a matrix multiplier in each thread?
+
+292
+00:23:35,000 --> 00:23:36,000
+And I'm talking about compute work.
+
+293
+00:23:36,000 --> 00:23:43,000
+How much compute work are you doing in each thread?
+
+294
+00:23:43,000 --> 00:23:44,000
+You're doing a dot product, right?
+
+295
+00:23:44,000 --> 00:23:46,000
+You're doing a dot product per element in each thread.
+
+296
+00:23:46,000 --> 00:23:48,000
+And that's a decent amount of work.
+
+297
+00:23:48,000 --> 00:23:52,000
+That's a decent amount of multiplies and adds that you're doing.
+
+298
+00:23:52,000 --> 00:23:55,000
+So, that's a reminder for thread granularity.
+
+299
+00:23:55,000 --> 00:24:00,000
+And you're doing the same amount of work regardless of which element it is.
+
+300
+00:24:00,000 --> 00:24:04,000
+In reductions, it's slightly different based on which thread you are and how you're adding it.
+
+301
+00:24:04,000 --> 00:24:10,000
+But in matrix multiplier, it's the same amount of work for each thread.
+
+302
+00:24:10,000 --> 00:24:23,000
+So, if you compute both the PDM, so right now what this is saying is both of those elements are computed by different threads, right?
+
+303
+00:24:23,000 --> 00:24:30,000
+But what if you said the number of or each thread does two elements?
+
+304
+00:24:30,000 --> 00:24:33,000
+It computes two elements.
+
+305
+00:24:33,000 --> 00:24:38,000
+You would essentially be reducing the global memory access by three quarters.
+
+306
+00:24:38,000 --> 00:24:42,000
+So, you only have or you reduce it by a quarter.
+
+307
+00:24:42,000 --> 00:24:48,000
+And then the number of independent instructions also increase because you have different data doing different computation.
+
+308
+00:24:48,000 --> 00:24:50,000
+They don't depend on each other.
+
+309
+00:24:50,000 --> 00:24:59,000
+There's also shared memory benefits where you can have the shared memory be used for multiple dot products rather than just one.
+
+310
+00:24:59,000 --> 00:25:04,000
+Of course, the new kernel uses more registers and more shared memory.
+
+311
+00:25:04,000 --> 00:25:08,000
+But what does that imply?
+
+312
+00:25:08,000 --> 00:25:17,000
+What would happen if we use more shared memory and more registers?
+
+313
+00:25:17,000 --> 00:25:23,000
+Less than 15 minutes ago.
+
+314
+00:25:23,000 --> 00:25:25,000
+Our SMs can hold less, right?
+
+315
+00:25:25,000 --> 00:25:30,000
+Our SMs can hold less number of threads and less number of blocks.
+
+316
+00:25:30,000 --> 00:25:43,000
+But the key thing to remember is while the SM quantity might reduce because you're using more registers and more shared memory, you're also reducing your block count.
+
+317
+00:25:43,000 --> 00:25:51,000
+Because now the same thread is doing two elements per thread.
+
+318
+00:25:52,000 --> 00:25:54,000
+You could do four also if you wanted.
+
+319
+00:25:54,000 --> 00:25:59,000
+But let's say for two, you're reducing your blocks in half, right?
+
+320
+00:25:59,000 --> 00:26:01,000
+So, you're reducing your blocks in half.
+
+321
+00:26:01,000 --> 00:26:08,000
+It is okay for the SMs to redistribute their overflowing blocks into different SMs.
+
+322
+00:26:08,000 --> 00:26:10,000
+And that would be fine.
+
+323
+00:26:10,000 --> 00:26:23,000
+It's always a game of what tradeoff you want to make between how many hardware resources you're using versus how many kernels you're launching and how much work each kernel is doing or each thread is doing from that.
+
+324
+00:26:23,000 --> 00:26:29,000
+If your kernel is or if your thread is too light, you're just adding two vectors, it's probably not doing a lot of work.
+
+325
+00:26:29,000 --> 00:26:33,000
+And you may not be able to justify adding so many registers.
+
+326
+00:26:33,000 --> 00:26:40,000
+But if you're able to do more and more work as part of the thread, and it optimizes based on that, then you're fine to use more threads.
+
+327
+00:26:40,000 --> 00:26:46,000
+You're of course going to see a performance cliff at some point, but make sure you test it out with different numbers.
+
+328
+00:26:46,000 --> 00:26:50,000
+And that's something we'll see in the performance lab next week as well.
+
+329
+00:26:50,000 --> 00:26:53,000
+So, that's it for the CUDA performance lecture.
+
+330
+00:26:53,000 --> 00:27:01,000
+A lot of the topics that we've seen both last class and today, we'll be covering again as part of the performance lab.
+
+331
+00:27:02,000 --> 00:27:04,000
+But it'll be more hands-on.
+
+332
+00:27:04,000 --> 00:27:06,000
+I'll take a different approach to explaining it.
+
+333
+00:27:06,000 --> 00:27:09,000
+The CUDA performance slides are one way.
+
+334
+00:27:09,000 --> 00:27:15,000
+The performance lab slides, they go over the same concept, but use a completely different approach of explaining it.
+
+335
+00:27:15,000 --> 00:27:17,000
+So, I'll go over that as well.
+
+336
+00:27:17,000 --> 00:27:19,000
+But that's it for today's class.
+
+337
+00:27:31,000 --> 00:27:32,000
+Thank you.
+

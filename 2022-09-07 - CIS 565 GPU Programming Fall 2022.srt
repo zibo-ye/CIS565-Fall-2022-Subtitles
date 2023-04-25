@@ -1,0 +1,4552 @@
+1
+00:00:00,000 --> 00:00:13,520
+All right.
+
+2
+00:00:13,520 --> 00:00:16,160
+Let's get started with the intro to Kuta Patil.
+
+3
+00:00:16,160 --> 00:00:20,680
+So we'll continue what we were doing yesterday about introducing Kuta, but go one level deeper
+
+4
+00:00:20,680 --> 00:00:25,680
+in that.
+
+5
+00:00:25,680 --> 00:00:32,560
+All right.
+
+6
+00:00:32,560 --> 00:00:34,400
+So here are a few things we're going to cover today.
+
+7
+00:00:34,400 --> 00:00:40,320
+So we'll cover a bunch of Kuta things before we get into matrix multiply.
+
+8
+00:00:40,320 --> 00:00:44,720
+So if you remember, there were a few things that we assumed are limited about our matrix
+
+9
+00:00:44,720 --> 00:00:49,880
+multiply example last week, we'll see how to expand that and do it properly today.
+
+10
+00:00:49,880 --> 00:00:54,300
+So let's start with a bunch of built-in functions that we'll see.
+
+11
+00:00:54,300 --> 00:00:56,580
+So firstly, the first one is global.
+
+12
+00:00:56,580 --> 00:01:00,180
+Of course, all of you are probably well aware of that by now.
+
+13
+00:01:00,180 --> 00:01:03,780
+That is executed on the device and called from the host.
+
+14
+00:01:03,780 --> 00:01:04,980
+Then we have two more like that.
+
+15
+00:01:04,980 --> 00:01:11,620
+We have a device which is telling the compiler that this is a regular function.
+
+16
+00:01:11,620 --> 00:01:12,620
+It's not a kernel.
+
+17
+00:01:12,620 --> 00:01:16,620
+It's a regular function that gets executed on the device.
+
+18
+00:01:16,620 --> 00:01:21,300
+And then the host is telling the compiler that this is the host function and it will
+
+19
+00:01:21,300 --> 00:01:25,740
+only execute on the host.
+
+20
+00:01:25,740 --> 00:01:29,380
+So just differences of global will always return a word.
+
+21
+00:01:29,380 --> 00:01:36,060
+Like we discussed last week, global a kernel will never return anything, whereas a device
+
+22
+00:01:36,060 --> 00:01:41,300
+can return and is in line by default.
+
+23
+00:01:41,300 --> 00:01:43,300
+What do you think these do?
+
+24
+00:01:43,300 --> 00:01:47,500
+The first device and host on a function.
+
+25
+00:01:47,500 --> 00:01:48,500
+What do you think that does?
+
+26
+00:01:48,500 --> 00:02:01,100
+Yes, exactly, you're spot on there.
+
+27
+00:02:01,100 --> 00:02:04,460
+So let's say you have a very simple function called add.
+
+28
+00:02:04,460 --> 00:02:09,180
+Maybe you're adding two vectors, for example, you can write a helper function that does
+
+29
+00:02:09,180 --> 00:02:12,380
+that and call it from both the host and the device.
+
+30
+00:02:12,380 --> 00:02:16,580
+On the compiler side, there are just two copies of that function, one on the host and one
+
+31
+00:02:16,580 --> 00:02:17,580
+on the device.
+
+32
+00:02:17,580 --> 00:02:19,820
+But you won't need to maintain two copies of the code.
+
+33
+00:02:19,820 --> 00:02:20,820
+So that's the advantage.
+
+34
+00:02:20,820 --> 00:02:26,020
+What about the second one, global host?
+
+35
+00:02:26,020 --> 00:02:37,900
+So global is a kernel, host is running on CPU, what do you think that does?
+
+36
+00:02:37,900 --> 00:02:53,540
+You're probably thinking the right thing to say.
+
+37
+00:02:53,540 --> 00:03:07,660
+You think that is something logical?
+
+38
+00:03:07,660 --> 00:03:12,140
+The first question you have to ask is, does this make sense?
+
+39
+00:03:12,140 --> 00:03:17,580
+I never said this was a valid statement, I just asked what do you think it does?
+
+40
+00:03:17,580 --> 00:03:19,340
+This is completely invalid.
+
+41
+00:03:19,340 --> 00:03:25,980
+You can't do that because a global is creating kernels and host is creating a helper function
+
+42
+00:03:25,980 --> 00:03:29,620
+on the host that won't be allowed.
+
+43
+00:03:29,620 --> 00:03:34,540
+I'll have many trick questions like that, don't worry about it.
+
+44
+00:03:34,540 --> 00:03:36,760
+So yeah, that's that.
+
+45
+00:03:36,760 --> 00:03:41,060
+So just function declaration, so global and device functions, recursion is allowed.
+
+46
+00:03:41,060 --> 00:03:45,680
+On the first version of CUDA, on the first versions of GPUs that supported CUDA, you
+
+47
+00:03:45,680 --> 00:03:49,440
+couldn't even do recursion, you couldn't call device functions from device function.
+
+48
+00:03:49,440 --> 00:03:55,720
+So we've come a long way in how easy it is to program CUDA these days.
+
+49
+00:03:55,720 --> 00:03:59,760
+Dynamic parallelism where you can call kernels from kernels is something that became possible
+
+50
+00:03:59,760 --> 00:04:04,600
+around 2013, 2014.
+
+51
+00:04:04,600 --> 00:04:08,840
+It's a neat feature that I've never seen used, like I've never seen anybody actually use
+
+52
+00:04:08,840 --> 00:04:12,520
+it in production code where somebody's calling a kernel from a kernel.
+
+53
+00:04:12,520 --> 00:04:15,240
+I'm sure it's being used somewhere, I've just never seen it.
+
+54
+00:04:15,240 --> 00:04:18,720
+We can't do static variables.
+
+55
+00:04:18,720 --> 00:04:20,760
+Anybody guess why?
+
+56
+00:04:20,760 --> 00:04:33,760
+Why are there no static variables in CUDA, especially on the device?
+
+57
+00:04:33,760 --> 00:04:37,440
+Static variables are generally stored in the host, but they can be, let's say they
+
+58
+00:04:37,440 --> 00:04:39,800
+can be put in constant memory as well.
+
+59
+00:04:39,800 --> 00:04:44,280
+But why no static variables?
+
+60
+00:04:44,280 --> 00:04:49,760
+What does static do on the host?
+
+61
+00:04:49,760 --> 00:05:01,720
+Static specifier essentially tells the program that this memory is for the life of the program.
+
+62
+00:05:02,040 --> 00:05:10,480
+Not conflicts, but because kernels have a certain life, they start and they end, creating
+
+63
+00:05:10,480 --> 00:05:17,720
+a static variable inside a kernel makes no sense because it won't live the life of the
+
+64
+00:05:17,720 --> 00:05:20,440
+entire program and stuff like that.
+
+65
+00:05:20,440 --> 00:05:21,440
+And lastly, no mallocs.
+
+66
+00:05:21,440 --> 00:05:25,200
+You can't dynamically allocate inside a kernel.
+
+67
+00:05:25,200 --> 00:05:26,200
+Edward, go ahead.
+
+68
+00:05:26,200 --> 00:05:39,240
+So when you use device, you are operating within a kernel that has multiple grids and
+
+69
+00:05:39,240 --> 00:05:41,240
+blocks inside of it.
+
+70
+00:05:41,240 --> 00:05:46,040
+You're never calling a device function directly from host.
+
+71
+00:05:46,040 --> 00:05:51,800
+When you define it, when it is being used, when it is being called, what is it running
+
+72
+00:05:51,800 --> 00:05:52,800
+on the inside?
+
+73
+00:05:52,800 --> 00:05:55,960
+It's always running on the GP.
+
+74
+00:05:55,960 --> 00:06:03,240
+So if you think of the functions back, you call the kernel first and the kernel calls
+
+75
+00:06:03,240 --> 00:06:05,400
+the device function.
+
+76
+00:06:05,400 --> 00:06:11,640
+And each thread executes its own version of the device.
+
+77
+00:06:11,640 --> 00:06:20,320
+So in that case, since each thread is using its own version of the device, those threads
+
+78
+00:06:20,400 --> 00:06:23,080
+are in different blocks.
+
+79
+00:06:23,080 --> 00:06:29,960
+No, no, but they could be because if they were on different ones, then they can't.
+
+80
+00:06:29,960 --> 00:06:31,840
+No, I mean, we'll get to that a little later.
+
+81
+00:06:31,840 --> 00:06:36,240
+What you're asking is something about scheduling and how threads operate together.
+
+82
+00:06:36,240 --> 00:06:38,000
+And we'll get to that a little later in the lecture.
+
+83
+00:06:43,360 --> 00:06:48,800
+So just in terms of other hyper functions and stuff, so we have the same data types
+
+84
+00:06:48,800 --> 00:06:53,600
+as we have in C. So you get double and float and unsigned, you know, all of those things
+
+85
+00:06:53,600 --> 00:06:56,080
+in kernels as well.
+
+86
+00:06:56,080 --> 00:07:00,720
+You also get a bunch of math and functions that CUDA has built in.
+
+87
+00:07:00,720 --> 00:07:08,640
+A lot of these work on integers, floats and doubles as well.
+
+88
+00:07:08,640 --> 00:07:10,640
+Some of them are called intrinsics.
+
+89
+00:07:10,640 --> 00:07:14,560
+So you'll see that they come with this underscore, underscore thing.
+
+90
+00:07:14,560 --> 00:07:22,640
+What they do is they operate on floats and doubles, usually on floats.
+
+91
+00:07:22,640 --> 00:07:24,400
+But they only operate on 24 bits.
+
+92
+00:07:24,400 --> 00:07:30,800
+So if you think of a float being 32 bits, it has the mantissa and the exponent.
+
+93
+00:07:30,800 --> 00:07:37,040
+And the exponent bits, if you cut off like 8 bits, you can kind of work faster with it
+
+94
+00:07:37,040 --> 00:07:38,880
+because it's only 24 bits.
+
+95
+00:07:38,960 --> 00:07:45,680
+So what that produces is a slightly inaccurate result, but in a much faster way.
+
+96
+00:07:45,680 --> 00:07:51,520
+And we see that with a lot of you who are doing machine learning when half got introduced.
+
+97
+00:07:51,520 --> 00:07:53,280
+Half is actually half precision.
+
+98
+00:07:53,280 --> 00:07:57,920
+So float is single floating point precision, double is double floating point precision.
+
+99
+00:07:57,920 --> 00:08:00,000
+Half is half floating point precision.
+
+100
+00:08:00,000 --> 00:08:04,800
+And the reason to chop it down to 16 bits was for performance because you don't need,
+
+101
+00:08:04,880 --> 00:08:09,120
+in most machine learning use cases, you don't need that 32 bits of precision.
+
+102
+00:08:09,120 --> 00:08:11,200
+So they chopped it down to 16 bits.
+
+103
+00:08:11,200 --> 00:08:14,560
+And that's why you have all the half values as well.
+
+104
+00:08:16,240 --> 00:08:20,320
+So in addition to those functions, we also have some built-in vector types
+
+105
+00:08:20,960 --> 00:08:25,600
+that help with SIMD and other vector instructions.
+
+106
+00:08:25,600 --> 00:08:33,840
+So just like we have VEC3, VEC4, etc. in GMM, you get a bunch of those here in CUDA as well.
+
+107
+00:08:35,520 --> 00:08:39,120
+So to create something like that, there's this make function here.
+
+108
+00:08:39,120 --> 00:08:42,320
+Again, because there's no object-oriented program in CUDA.
+
+109
+00:08:42,320 --> 00:08:45,200
+You can't do a new VEC3 of something.
+
+110
+00:08:45,200 --> 00:08:49,040
+You have to use this function, make underscore,
+
+111
+00:08:49,040 --> 00:08:52,800
+where you create those vector types and store them as vectors.
+
+112
+00:08:55,760 --> 00:09:00,240
+Finally, you access those vectors with the .xyzw components.
+
+113
+00:09:00,560 --> 00:09:07,440
+Unlike GLSL, there's no RGBA, it's only .xyzw, which is completely fine.
+
+114
+00:09:07,440 --> 00:09:09,120
+Most of us are used to that anyway.
+
+115
+00:09:10,560 --> 00:09:14,960
+So that's pretty much for the built-in function and stuff.
+
+116
+00:09:14,960 --> 00:09:18,320
+This is mostly for your information as you get used to it.
+
+117
+00:09:19,440 --> 00:09:23,520
+You can always refer to the slides or even better refer to the CUDA programming guide.
+
+118
+00:09:23,520 --> 00:09:27,520
+That's going to give you much more comprehensive, much more updated information as well.
+
+119
+00:09:28,480 --> 00:09:30,560
+Any questions before we jump into the next part?
+
+120
+00:09:36,320 --> 00:09:41,520
+So the next part is essentially going to be your guide for the entire semester.
+
+121
+00:09:41,520 --> 00:09:44,320
+And that is how scheduling thread works.
+
+122
+00:09:44,320 --> 00:09:49,600
+Scheduling threads both affects how you run the kernel, how you program it,
+
+123
+00:09:49,600 --> 00:09:53,120
+as well as what performance bottlenecks you might run into later on.
+
+124
+00:09:53,920 --> 00:09:58,400
+So just in terms of how the GPU architecture is arranged,
+
+125
+00:09:59,120 --> 00:10:02,720
+this is the GeForce 8, which is the first CUDA GPU.
+
+126
+00:10:02,720 --> 00:10:07,920
+When I say G80, this is what the logical diagram essentially looks like.
+
+127
+00:10:10,240 --> 00:10:12,320
+First, you're going to see this.
+
+128
+00:10:12,320 --> 00:10:15,360
+Again, these are all logical, so understand that these have evolved
+
+129
+00:10:15,360 --> 00:10:18,960
+and I'll show you some images of how they look for modern GPUs.
+
+130
+00:10:19,120 --> 00:10:26,080
+For modern GPUs, this is called a streaming multiprocessor, an SM.
+
+131
+00:10:27,440 --> 00:10:32,960
+In some of your project zeros, you were asking what's SM3 or SM86 and stuff.
+
+132
+00:10:32,960 --> 00:10:35,440
+That stands for streaming multiprocessor.
+
+133
+00:10:36,720 --> 00:10:41,680
+Each of the green ones here, those are your compute units, are called streaming processors.
+
+134
+00:10:42,960 --> 00:10:45,520
+And a bunch of those are called streaming processors.
+
+135
+00:10:46,240 --> 00:10:52,400
+And when you are buying an NVIDIA GPU and you see 4,000 cores or whatever it might be,
+
+136
+00:10:53,040 --> 00:10:54,320
+this is what they're talking about.
+
+137
+00:10:54,880 --> 00:10:58,080
+They're talking about the number of streaming processors in the GPU.
+
+138
+00:11:00,640 --> 00:11:08,000
+So for a G80, that had 16 SMs, 16 streaming multiprocessors,
+
+139
+00:11:08,000 --> 00:11:10,560
+and each had eight streaming processors.
+
+140
+00:11:11,360 --> 00:11:15,600
+So a total of 128 cores back then.
+
+141
+00:11:18,880 --> 00:11:22,560
+Now, if you think about it, we're going to do a lot of mind math here
+
+142
+00:11:23,120 --> 00:11:24,320
+in the first part of this course.
+
+143
+00:11:25,280 --> 00:11:27,520
+So each SM could host.
+
+144
+00:11:28,480 --> 00:11:33,680
+Remember, this host is different from our CPU host, but what this host means is
+
+145
+00:11:33,680 --> 00:11:37,040
+it can run up to 768 threads at a time.
+
+146
+00:11:38,000 --> 00:11:42,400
+It has eight cores, but it can run up to 768 threads at a time,
+
+147
+00:11:42,400 --> 00:11:44,560
+and we'll get to how in a little bit.
+
+148
+00:11:44,560 --> 00:11:52,080
+But just in terms of this, so what this means is each SM can host six blocks of 128 threads,
+
+149
+00:11:52,800 --> 00:11:57,120
+three blocks of 256 threads, or one block of 512 threads.
+
+150
+00:11:57,120 --> 00:11:58,880
+You can't go over that limit.
+
+151
+00:11:59,600 --> 00:12:04,880
+If you want to go over that limit, it'll just put that block onto the next SM.
+
+152
+00:12:05,840 --> 00:12:09,120
+So when we were discussing it in the last class,
+
+153
+00:12:09,120 --> 00:12:12,640
+what happens if we go over overflow like this happens,
+
+154
+00:12:12,640 --> 00:12:14,640
+where it just puts it onto other hardware.
+
+155
+00:12:19,120 --> 00:12:24,080
+So in-flight, if each SM has 768 threads,
+
+156
+00:12:25,120 --> 00:12:28,320
+16 SMs can have 12,000 threads in-flight.
+
+157
+00:12:29,040 --> 00:12:33,200
+That means running at a time, not maybe actively processing at the time,
+
+158
+00:12:34,000 --> 00:12:40,560
+but you could call 12,000 threads, a kernel with 12,000 threads on a G80.
+
+159
+00:12:40,560 --> 00:12:43,360
+This was back in 2008 or something like that.
+
+160
+00:12:43,360 --> 00:12:46,080
+So you can certainly see where the scale comes from,
+
+161
+00:12:46,080 --> 00:12:47,920
+that you're able to launch that many threads.
+
+162
+00:12:49,840 --> 00:12:52,160
+So after the G80 came the GT200.
+
+163
+00:12:53,200 --> 00:12:59,120
+So this had 30 SMs, 30 streaming multiprocessors, each with eight streaming processors.
+
+164
+00:12:59,120 --> 00:13:00,960
+So 240 SPs total.
+
+165
+00:13:01,200 --> 00:13:05,920
+Each of those could host eight blocks or 1024 threads.
+
+166
+00:13:05,920 --> 00:13:09,600
+And again, doing some different permutations and combinations,
+
+167
+00:13:09,600 --> 00:13:12,400
+it could host eight blocks of 128 threads,
+
+168
+00:13:13,600 --> 00:13:16,800
+four blocks of 256, or one block of 1024.
+
+169
+00:13:19,200 --> 00:13:21,600
+And in-flight, each SM could have 1024 threads.
+
+170
+00:13:22,880 --> 00:13:27,760
+So that essentially means if you launch a block of 1024 threads,
+
+171
+00:13:28,640 --> 00:13:32,720
+only that block will live on one SM.
+
+172
+00:13:34,160 --> 00:13:38,880
+And then with 30 streaming multiprocessors, you get to 30,000 threads.
+
+173
+00:13:38,880 --> 00:13:45,680
+So we went from 12,000 in a G80 to 30,000 threads on a GT200 in about a couple of years.
+
+174
+00:13:48,640 --> 00:13:51,760
+So after the GT200 came the Fermi architecture.
+
+175
+00:13:51,760 --> 00:13:56,640
+This was probably around 2011 when I was essentially at Penn as a student.
+
+176
+00:13:57,360 --> 00:14:00,320
+So you can start seeing how the architecture has changed,
+
+177
+00:14:00,320 --> 00:14:01,600
+and I'll get to that in a little bit.
+
+178
+00:14:01,600 --> 00:14:06,320
+So if you just want to keep a mind picture of this and then see this,
+
+179
+00:14:06,960 --> 00:14:08,800
+not just in the way NVIDIA portrays it,
+
+180
+00:14:08,800 --> 00:14:10,800
+but there are architectural differences as well.
+
+181
+00:14:10,800 --> 00:14:12,240
+And I'll point a few of those out.
+
+182
+00:14:12,960 --> 00:14:17,360
+So the Fermi GF110 architecture, that came with 16 SMs.
+
+183
+00:14:17,360 --> 00:14:21,040
+So the SM count went down, but the core SM count went up.
+
+184
+00:14:21,040 --> 00:14:23,520
+So now we are up to 32 cores per SM.
+
+185
+00:14:24,240 --> 00:14:26,640
+And each SM could host 48 warps.
+
+186
+00:14:27,600 --> 00:14:28,560
+Warps is a new term.
+
+187
+00:14:28,560 --> 00:14:30,400
+We've never said that in this class before.
+
+188
+00:14:30,400 --> 00:14:35,600
+And we'll get to that, what warps means, for 1536 threads per SM.
+
+189
+00:14:37,520 --> 00:14:44,640
+So what that means is you could have, I believe, six blocks of 256 threads,
+
+190
+00:14:45,360 --> 00:14:49,360
+12 blocks of 128 threads, or one block of 1024 threads.
+
+191
+00:14:49,360 --> 00:14:52,320
+You can't have two blocks of 1024 threads per SM.
+
+192
+00:14:52,880 --> 00:14:56,160
+You can have it across the GPU, but not in a single SM.
+
+193
+00:14:58,640 --> 00:15:00,560
+So the architecture differences itself.
+
+194
+00:15:00,560 --> 00:15:05,840
+So with Fermi, NVIDIA introduced this new concept of a giga-thread engine,
+
+195
+00:15:06,560 --> 00:15:11,120
+which added this graphics processing cluster, as it's known,
+
+196
+00:15:11,120 --> 00:15:12,960
+and it's still valid to this day.
+
+197
+00:15:13,520 --> 00:15:16,400
+Where what they did was they took a bunch of SMs,
+
+198
+00:15:17,120 --> 00:15:22,240
+grouped them together, and then created a raster engine for those.
+
+199
+00:15:22,320 --> 00:15:27,600
+A raster engine is essentially what is used in games to render the scenes and stuff.
+
+200
+00:15:28,160 --> 00:15:33,440
+And this raster engine is essentially working for all of these streaming multi-processors.
+
+201
+00:15:33,440 --> 00:15:36,080
+So now you can have, for example, in this architecture,
+
+202
+00:15:36,080 --> 00:15:41,360
+you have four different raster engines for that GPU instead of one single raster engine.
+
+203
+00:15:41,360 --> 00:15:46,400
+So if we come back here, you're going to see you have a geometry shader,
+
+204
+00:15:46,400 --> 00:15:48,480
+vertex shader, set of raster pixel shaders.
+
+205
+00:15:49,360 --> 00:15:53,040
+This is essentially what one raster engine would look like.
+
+206
+00:15:53,040 --> 00:15:58,080
+But now we have four raster engines with a Fermi GPU.
+
+207
+00:16:01,120 --> 00:16:06,640
+After Fermi came Kepler. Kepler has been one of the most widely used NVIDIA architectures.
+
+208
+00:16:08,160 --> 00:16:10,400
+So you see a very similar architecture.
+
+209
+00:16:10,400 --> 00:16:12,960
+You see the number of SMs increase.
+
+210
+00:16:13,840 --> 00:16:16,480
+You see the number of the amount of L2 cache increase.
+
+211
+00:16:16,640 --> 00:16:20,400
+This is when you start getting better double-precision support.
+
+212
+00:16:23,200 --> 00:16:27,520
+In SM 3.5, you start seeing dynamic parallelism and things like that.
+
+213
+00:16:30,240 --> 00:16:34,720
+In Kepler, now they started changing the terminology for SM to SMX,
+
+214
+00:16:34,720 --> 00:16:38,400
+because it refers to the new next-generation SMs that they started creating.
+
+215
+00:16:39,600 --> 00:16:43,120
+Each of these had 192 CUDA cores.
+
+216
+00:16:43,920 --> 00:16:46,800
+And remember, I say single-precision here.
+
+217
+00:16:46,800 --> 00:16:51,120
+Because the way the transistors are essentially laid out,
+
+218
+00:16:51,760 --> 00:16:57,520
+they are designed more for single-precision.
+
+219
+00:16:57,520 --> 00:17:01,760
+And then you have special units for double-precision.
+
+220
+00:17:01,760 --> 00:17:08,480
+So if you were to run very high precision scientific simulations on the graphics card,
+
+221
+00:17:08,480 --> 00:17:11,840
+you would see lower performance compared to single-precision floating point.
+
+222
+00:17:13,760 --> 00:17:15,840
+After Kepler came Maxwell.
+
+223
+00:17:15,840 --> 00:17:20,720
+Maxwell, I believe, if my memory serves me correctly, is the 980 GPU series.
+
+224
+00:17:22,240 --> 00:17:28,080
+And you start seeing very higher transistor counts now, really improved memory,
+
+225
+00:17:28,960 --> 00:17:31,360
+lots of CUDA cores, geometry units, and stuff like that.
+
+226
+00:17:32,240 --> 00:17:33,600
+You don't have to memorize any of this.
+
+227
+00:17:33,600 --> 00:17:36,480
+I'm just showing you how the GPUs have evolved.
+
+228
+00:17:38,560 --> 00:17:42,800
+Maxwell SM, so now you see how they've kind of divided the GPUs.
+
+229
+00:17:42,800 --> 00:17:47,200
+They divided this into two parts, where you have multiple Watt-schedulars.
+
+230
+00:17:47,200 --> 00:17:53,680
+So this was new in Maxwell, where they started breaking out Watt-schedulars and dispatch units,
+
+231
+00:17:53,680 --> 00:17:56,640
+and breaking out the SM into smaller parts, essentially.
+
+232
+00:17:59,040 --> 00:17:59,920
+Then came Pascal.
+
+233
+00:18:00,880 --> 00:18:04,240
+You have widely increasing the number of cores and performance here.
+
+234
+00:18:05,120 --> 00:18:10,240
+Added, I believe, DDR5X, which increased the bandwidth as well for global memory.
+
+235
+00:18:10,400 --> 00:18:14,880
+Turing was the first RTX GPU that was announced in 2018.
+
+236
+00:18:15,920 --> 00:18:17,760
+Again, changing the architecture and stuff.
+
+237
+00:18:18,640 --> 00:18:22,080
+They added TensorCodes for all of you who are doing machine learning.
+
+238
+00:18:22,080 --> 00:18:23,280
+You know this very well.
+
+239
+00:18:24,960 --> 00:18:28,720
+And then each of these, if you compare Pascal to Turing,
+
+240
+00:18:28,720 --> 00:18:32,160
+you start seeing the RTX core down here.
+
+241
+00:18:32,160 --> 00:18:34,640
+And that's what's used for hardware-based ray tracing.
+
+242
+00:18:35,840 --> 00:18:38,960
+So instead of just doing floating point compute here,
+
+243
+00:18:38,960 --> 00:18:43,920
+you're actually doing bounding-volume hierarchies, ray-triangle intersection, and things like that.
+
+244
+00:18:46,880 --> 00:18:51,120
+And finally, to modern, like the latest architecture, that's the Ampere one.
+
+245
+00:18:52,320 --> 00:18:57,440
+I won't read through all the stats, but essentially you can start seeing how much bigger the chips are
+
+246
+00:18:57,440 --> 00:19:03,680
+getting, how many more transistors they're trying to fit in the cores, how many tensor cores,
+
+247
+00:19:03,680 --> 00:19:06,880
+RTX cores that they're trying to fit on these GPUs.
+
+248
+00:19:06,880 --> 00:19:14,240
+Compare that to G80 about 12, 14 years ago, where they were fitting in 16 SMs, 8 SPs.
+
+249
+00:19:14,240 --> 00:19:20,240
+Now we have 10,500 cores on this, possibly.
+
+250
+00:19:22,880 --> 00:19:27,840
+This is an architecture of what a single Ampere architecture looks like.
+
+251
+00:19:29,040 --> 00:19:32,720
+Again, these are all for your reference, not expecting you to memorize any of this.
+
+252
+00:19:33,200 --> 00:19:38,640
+But just to understand about how the evolution has happened.
+
+253
+00:19:40,000 --> 00:19:44,160
+Now, there was one term that we saw that I said that was new.
+
+254
+00:19:44,160 --> 00:19:45,600
+Anybody remember what that was?
+
+255
+00:19:48,720 --> 00:19:50,320
+So that's what we are going to look at.
+
+256
+00:19:50,320 --> 00:19:55,440
+Warps are very, very critical to how performance is improved in GPUs.
+
+257
+00:19:56,720 --> 00:19:57,600
+So let's take a look at that.
+
+258
+00:19:58,320 --> 00:20:03,040
+A warp is a group of threads from a block.
+
+259
+00:20:04,320 --> 00:20:09,520
+It has always been and will always likely be, although Nvidia never guarantees it,
+
+260
+00:20:10,560 --> 00:20:15,760
+32 threads, a group of 32 sequential threads in a block is a warp.
+
+261
+00:20:17,120 --> 00:20:18,800
+They make a few guarantees to you.
+
+262
+00:20:19,600 --> 00:20:21,200
+They always run on the same SM.
+
+263
+00:20:21,200 --> 00:20:24,000
+There's a guarantee that a block makes as well.
+
+264
+00:20:24,000 --> 00:20:26,400
+All the threads of a block run on the same SM.
+
+265
+00:20:26,400 --> 00:20:27,600
+So it's valid for warp.
+
+266
+00:20:28,640 --> 00:20:30,400
+There are a unit of thread scheduling.
+
+267
+00:20:30,400 --> 00:20:37,840
+What that means is all the threads in a warp always do the same command at the same time.
+
+268
+00:20:39,040 --> 00:20:44,880
+So the scheduler in CUDA is never executing one thread at a time.
+
+269
+00:20:44,880 --> 00:20:48,240
+It's never saying thread one, do that, thread two, do this.
+
+270
+00:20:48,960 --> 00:20:54,080
+It's always executing schedules based on warps at the warp level.
+
+271
+00:20:56,400 --> 00:21:03,280
+And if you ever need it, you can use the warp size to check what the warp size on your GPU is.
+
+272
+00:21:06,560 --> 00:21:07,840
+Any questions on warp?
+
+273
+00:21:07,840 --> 00:21:12,480
+I will dive deeper into how they work and stuff, but on a conceptual level, are there any questions?
+
+274
+00:21:14,720 --> 00:21:20,880
+This essentially is also why whenever I say block size, I will generally say multiples of 32,
+
+275
+00:21:20,880 --> 00:21:25,760
+not just in multiples of two, but in multiples of 32, because this becomes important.
+
+276
+00:21:27,120 --> 00:21:29,680
+Why is it called warp?
+
+277
+00:21:29,680 --> 00:21:31,520
+Why is it called warp? That's a good question.
+
+278
+00:21:31,520 --> 00:21:32,560
+Sorry, I didn't catch your name.
+
+279
+00:21:34,960 --> 00:21:35,520
+I don't know.
+
+280
+00:21:37,680 --> 00:21:41,760
+I'm assuming it has something to do with wrapping trends into one,
+
+281
+00:21:41,760 --> 00:21:43,520
+but I don't know why it's called a warp.
+
+282
+00:21:43,520 --> 00:21:46,480
+But to be completely honest, I've never looked.
+
+283
+00:21:47,040 --> 00:21:50,880
+So maybe you can find something on the history of CUDA and bring it to class next week.
+
+284
+00:21:52,320 --> 00:21:53,520
+Any other questions on warp?
+
+285
+00:21:57,360 --> 00:21:59,680
+No, it's always been the same.
+
+286
+00:21:59,680 --> 00:22:00,880
+It's always been 32.
+
+287
+00:22:03,680 --> 00:22:04,560
+Any other questions?
+
+288
+00:22:14,560 --> 00:22:17,040
+Why is it included so much?
+
+289
+00:22:18,560 --> 00:22:19,840
+Yeah, so we'll get to that.
+
+290
+00:22:19,840 --> 00:22:23,840
+But to answer your question, so why not make it one?
+
+291
+00:22:23,840 --> 00:22:26,960
+The answer is because the scheduler will have too much work to do.
+
+292
+00:22:26,960 --> 00:22:28,640
+So that's on the low end.
+
+293
+00:22:28,640 --> 00:22:30,400
+Why not make it 256?
+
+294
+00:22:30,400 --> 00:22:33,440
+Because then you'll see what we are going to come to in a few slides.
+
+295
+00:22:35,520 --> 00:22:36,400
+Any other questions?
+
+296
+00:22:39,520 --> 00:22:43,520
+I can call it warp because of text reference.
+
+297
+00:22:43,520 --> 00:22:44,020
+Interesting.
+
+298
+00:22:47,360 --> 00:22:48,320
+All right, now we know.
+
+299
+00:22:54,640 --> 00:22:55,140
+Okay.
+
+300
+00:23:00,080 --> 00:23:04,080
+No, as long as you're doing CUDA programming and CUDA kernels, they're always the same.
+
+301
+00:23:13,360 --> 00:23:18,320
+Yeah, but if you're writing a traditional CUDA program like we are going to be writing in this
+
+302
+00:23:18,320 --> 00:23:21,760
+course, those aren't generally getting executed on the ray tracing code.
+
+303
+00:23:21,760 --> 00:23:25,600
+Only if you call specific APIs like DirectX and Welcome,
+
+304
+00:23:25,600 --> 00:23:27,680
+then go run on the RTX ports.
+
+305
+00:23:27,680 --> 00:23:28,960
+Only then you're using those.
+
+306
+00:23:28,960 --> 00:23:32,960
+But otherwise, regular CUDA programs are not using the RTX ports.
+
+307
+00:23:36,080 --> 00:23:36,960
+Any other questions?
+
+308
+00:23:39,600 --> 00:23:40,100
+Okay.
+
+309
+00:23:40,100 --> 00:23:52,020
+So this is kind of the view of how three blocks or blocks from three blocks essentially can run on
+
+310
+00:23:52,020 --> 00:23:52,580
+the same SM.
+
+311
+00:23:52,580 --> 00:23:58,260
+So you have block one, block two, block three, and you have threads T0 to T31,
+
+312
+00:23:58,260 --> 00:24:03,060
+maybe 32 to 63 in the background, and they can essentially all run on the same SM.
+
+313
+00:24:05,380 --> 00:24:08,980
+So there's things we want to optimize for this.
+
+314
+00:24:09,620 --> 00:24:12,340
+The reason we have worked.
+
+315
+00:24:13,140 --> 00:24:16,740
+So you know how in some of the early architecture slides I was saying
+
+316
+00:24:17,380 --> 00:24:24,180
+a GAD can have 12,000 threads running even though it doesn't have that many cores to run on?
+
+317
+00:24:24,980 --> 00:24:30,740
+That's because we always try to saturate a GPU with performance, with actual execution.
+
+318
+00:24:31,700 --> 00:24:33,700
+That's why we call it high-density compute.
+
+319
+00:24:34,420 --> 00:24:43,060
+So what happens is, even on the CPU, whenever you read memory or you're waiting for something,
+
+320
+00:24:43,620 --> 00:24:44,580
+it's called a stall.
+
+321
+00:24:46,100 --> 00:24:50,420
+So in the case of GPUs, let's assume our website is 8 just for simplicity.
+
+322
+00:24:52,180 --> 00:24:55,460
+Whenever you try to read global memory, it actually takes time.
+
+323
+00:24:55,460 --> 00:25:02,020
+It takes drop cycles to go to the memory, fetch that memory, and bring it back into the registers.
+
+324
+00:25:02,740 --> 00:25:04,100
+So that's called a stall here.
+
+325
+00:25:04,740 --> 00:25:09,300
+So if our first work executes and, for example, is doing
+
+326
+00:25:10,580 --> 00:25:15,220
+int A equals gory global memory of matrix A, that's a stall.
+
+327
+00:25:15,940 --> 00:25:18,340
+But on the GPU, we don't want to be waiting.
+
+328
+00:25:18,340 --> 00:25:20,900
+We always want to be executing something.
+
+329
+00:25:20,900 --> 00:25:24,660
+So what the scheduler does is, hey, work one, stop.
+
+330
+00:25:24,660 --> 00:25:27,300
+You know, I'll get your memory for you, but hold on.
+
+331
+00:25:27,860 --> 00:25:29,460
+Work two, get started.
+
+332
+00:25:29,540 --> 00:25:33,460
+It will run through the same instructions, and then it will hit that same memory point
+
+333
+00:25:33,460 --> 00:25:34,420
+where it has to be.
+
+334
+00:25:34,420 --> 00:25:35,540
+So you hit that stall.
+
+335
+00:25:36,260 --> 00:25:37,700
+Then you get to work three.
+
+336
+00:25:38,420 --> 00:25:39,700
+Same instructions.
+
+337
+00:25:39,700 --> 00:25:41,620
+It wants to read global memory.
+
+338
+00:25:41,620 --> 00:25:42,740
+It's a stall.
+
+339
+00:25:42,740 --> 00:25:43,780
+Same thing with four.
+
+340
+00:25:43,780 --> 00:25:44,900
+It's that stall.
+
+341
+00:25:44,900 --> 00:25:49,060
+And by the time this hits a stall, we realize that work one is ready to run.
+
+342
+00:25:49,060 --> 00:25:50,100
+So it's read the memory.
+
+343
+00:25:50,100 --> 00:25:51,940
+Now it's ready to go to the next instruction.
+
+344
+00:25:52,740 --> 00:25:56,020
+So we say, okay, work one, continue executing.
+
+345
+00:25:56,020 --> 00:26:01,220
+So you see how in this diagram, even though we're executing four times the amount,
+
+346
+00:26:01,220 --> 00:26:05,380
+they essentially run in two stages, all in parallel.
+
+347
+00:26:08,100 --> 00:26:11,140
+If they were all executing at the same time as well,
+
+348
+00:26:11,140 --> 00:26:14,020
+you'd kind of get a similar performance.
+
+349
+00:26:14,020 --> 00:26:19,140
+Whereas if you never had the stall and never had this change of work,
+
+350
+00:26:19,140 --> 00:26:24,660
+what you would see is work one would run, hit a stall, and then it would finish.
+
+351
+00:26:25,460 --> 00:26:26,980
+Then this would start here.
+
+352
+00:26:27,700 --> 00:26:30,580
+Hit a stall, wait for it to finish, then run.
+
+353
+00:26:30,580 --> 00:26:32,340
+And it would essentially become sequential.
+
+354
+00:26:32,980 --> 00:26:35,940
+Whereas with work, you can swap them out at no cost.
+
+355
+00:26:35,940 --> 00:26:38,420
+It's called zero cross switching.
+
+356
+00:26:38,420 --> 00:26:43,380
+And that's what allows you to saturate the GPU with execution.
+
+357
+00:26:44,980 --> 00:26:46,020
+Any questions on this?
+
+358
+00:26:46,180 --> 00:26:50,420
+Almost anything that's related to memory, except for registers, I believe.
+
+359
+00:26:51,300 --> 00:26:56,100
+So any global memory reads, I think global memory reads have like hundreds of cycles worth of stall.
+
+360
+00:26:57,220 --> 00:26:59,140
+Any places where you have to synchronize,
+
+361
+00:27:00,580 --> 00:27:04,500
+even shared memory reads have like two or three cycles of stall.
+
+362
+00:27:05,380 --> 00:27:07,940
+So most of those kind of cases, you can hit stalls on.
+
+363
+00:27:08,340 --> 00:27:10,260
+Anything that's essentially not compute?
+
+364
+00:27:36,260 --> 00:27:37,140
+That's a good question.
+
+365
+00:27:37,940 --> 00:27:42,740
+If you have, let's say, hundreds of blocks, your question is whether they run on the same SM.
+
+366
+00:27:43,940 --> 00:27:47,700
+And that essentially gets to where I was talking about how many threads can be in a block.
+
+367
+00:27:49,540 --> 00:27:55,540
+If let's say you're launching blocks of 256 threads and an SM can host 1024 threads,
+
+368
+00:27:55,540 --> 00:28:01,220
+then most likely, depending on other factors as well, it could host up to four blocks per SM.
+
+369
+00:28:01,940 --> 00:28:06,420
+And then other blocks would get assigned other SMs.
+
+370
+00:28:07,940 --> 00:28:09,540
+Basically, they're like,
+
+371
+00:28:16,180 --> 00:28:19,380
+rather than the SM choose, they get assigned. You can think of it that way.
+
+372
+00:28:28,980 --> 00:28:31,620
+Basically, we're bundling threads.
+
+373
+00:28:32,500 --> 00:28:42,340
+Or, yeah, and why don't we just, like, all the threads separate, and if a group and stall the
+
+374
+00:28:43,300 --> 00:28:52,660
+thread. So, I mean, like if we're using warp, if this thread and continue to execute,
+
+375
+00:28:52,660 --> 00:29:00,260
+but since we're using warp, we have to wait for other threads inside the same one.
+
+376
+00:29:00,260 --> 00:29:07,860
+So, there are two reasons for that. The first reason is, if we were to individualize
+
+377
+00:29:07,860 --> 00:29:13,460
+at every single thread, we would be wasting transistors on making the scheduler bigger.
+
+378
+00:29:14,260 --> 00:29:18,820
+Right, the scheduler would have to do more work. So, more, you only have so many transistors in a
+
+379
+00:29:18,820 --> 00:29:23,700
+chip, and you have to pick and choose what you're proposing them for. So, if you purpose more for
+
+380
+00:29:23,700 --> 00:29:29,700
+the scheduler, you get less compute. So, that's one reason. The second reason actually has to do
+
+381
+00:29:29,700 --> 00:29:37,140
+with memory and bandwidth. So, for us, again, you know, coming from very traditional CPU programming,
+
+382
+00:29:37,140 --> 00:29:46,100
+we think when we do int i equals a, whatever it might be, that we read how many bits we want
+
+383
+00:29:46,100 --> 00:29:52,420
+from one place to the other. It doesn't always work like that, especially on GPUs. On GPUs,
+
+384
+00:29:52,420 --> 00:29:59,940
+what happens is you read a bunch of memory at once. That is the minimum. Usually, it's 128 bits
+
+385
+00:29:59,940 --> 00:30:08,500
+or 256 bits. So, that no matter if you're reading one float or eight floats, you're reading the same
+
+386
+00:30:08,500 --> 00:30:12,980
+amount of memory. So, why not optimize for that? So, that becomes another reason. I'm sure there
+
+387
+00:30:12,980 --> 00:30:18,500
+are other reasons as well, but these are the two main ones to get started with. Yeah.
+
+388
+00:30:22,420 --> 00:30:26,500
+And there's only one more time exactly the same.
+
+389
+00:30:28,500 --> 00:30:33,220
+Not at all. So, this is only for representation. So, for example, if you have an SM with,
+
+390
+00:30:33,220 --> 00:30:39,700
+you know, 192 threads, for example, you could have six walks running at a time. At any given
+
+391
+00:30:39,700 --> 00:30:45,300
+clock cycle, you could have six walk executing. You can have more walks waiting, but at any given
+
+392
+00:30:45,300 --> 00:30:54,020
+clock cycle, you'd have six walks executing. Yeah, for SM or a global. For SM.
+
+393
+00:30:59,380 --> 00:31:03,300
+All right. So, let's dive deeper into this. This is not the only slide I have. So,
+
+394
+00:31:04,260 --> 00:31:09,460
+SMs essentially implement that zero overhead walk scheduling. So, whenever you write code,
+
+395
+00:31:09,460 --> 00:31:14,820
+you don't have to worry about what's being switched in and out. As long as there are enough
+
+396
+00:31:14,820 --> 00:31:20,020
+walks on an SM, it's going to be saturated. It's going to be doing useful work. So, you
+
+397
+00:31:20,020 --> 00:31:24,900
+don't have to worry about if I'm reading memory over my walk might be waiting or something like
+
+398
+00:31:24,900 --> 00:31:32,900
+that. That's not an area you have to worry about. So, what happens if a branch happens in a
+
+399
+00:31:33,460 --> 00:31:41,140
+or what happens if a branch in a walk diverges? So, you have an if-else condition, for example,
+
+400
+00:31:41,140 --> 00:31:43,940
+that's a branch. What do you think happens?
+
+401
+00:31:47,540 --> 00:31:51,700
+So, what was the first thing we said about a walk? That there are 32 threads
+
+402
+00:31:53,060 --> 00:31:58,020
+that execute the same thing at the same time. What does an if-else condition do?
+
+403
+00:32:00,740 --> 00:32:10,500
+Yeah, it could execute different things. So, what happens if different threads in a walk
+
+404
+00:32:10,500 --> 00:32:15,620
+do different things? What do you think happens?
+
+405
+00:32:18,820 --> 00:32:19,940
+Some empty steps. Okay.
+
+406
+00:32:22,420 --> 00:32:29,540
+Might stall multiple times. Okay. What else? I think both of you are. So, let's take this
+
+407
+00:32:29,540 --> 00:32:37,780
+for an example. Let's say we have a walk of eight and we have three threads that are true and five
+
+408
+00:32:37,780 --> 00:32:45,460
+threads that are false. What actually happens on a clock level is in the first three clock cycles,
+
+409
+00:32:45,460 --> 00:32:50,420
+the crews will execute. If they have any stalls and stuff, those will also have to get to me.
+
+410
+00:32:51,140 --> 00:32:58,420
+And then after that, the else part will also execute. So, even though each thread might be
+
+411
+00:32:58,420 --> 00:33:05,220
+doing only some work, all the threads are doing all like they take all the time essentially. Even
+
+412
+00:33:05,220 --> 00:33:10,740
+though they're not working, they do take all the time. So, this is where you have to start thinking
+
+413
+00:33:10,740 --> 00:33:15,780
+about branch divergence and you don't want too many if-else conditions. Of course, you will always
+
+414
+00:33:15,780 --> 00:33:20,660
+need to have some level of if-else condition. That's a whole part of programming, but you always
+
+415
+00:33:20,660 --> 00:33:26,900
+want to be mindful of where the divergence happens. What's the worst case scenario?
+
+416
+00:33:28,900 --> 00:33:30,900
+What's the worst case scenario in something like this?
+
+417
+00:33:35,300 --> 00:33:41,780
+You get a branch divergence of two then. So, one thread does one thing or 31 threads do
+
+418
+00:33:41,780 --> 00:33:46,820
+another thing. You only get branch divergence of two. What's the worst case scenario?
+
+419
+00:33:50,020 --> 00:33:54,420
+They all have different conditions. Every single thing is trying to do a different part of the core
+
+420
+00:33:54,980 --> 00:33:59,300
+and all the threads will have to wait for every single other thread. Not the thing you want.
+
+421
+00:33:59,780 --> 00:34:06,580
+So, best case scenario, all the threads do the same thing. Even if it's an if-else,
+
+422
+00:34:06,580 --> 00:34:12,820
+you can try to make them do the same part of the core. Sometimes you can't avoid a branch
+
+423
+00:34:12,820 --> 00:34:16,580
+divergence. So, it's okay. It's not the worst thing in the world, but you don't want to be
+
+424
+00:34:16,580 --> 00:34:18,820
+getting to those worst case scenario type of things.
+
+425
+00:34:18,820 --> 00:34:30,740
+So, let's do a couple of exercises. An SM on a GT200 can host up to 1024 threads.
+
+426
+00:34:31,620 --> 00:34:35,300
+How many warps is that? Easy question.
+
+427
+00:34:38,420 --> 00:34:45,460
+It's 32 warps. 32 threads in a warp, 1024 threads, 32 by 10 or 1024 by 32 is 32 again.
+
+428
+00:34:45,460 --> 00:34:54,260
+So, 32 warps. If three blocks are assigned to an SM, each block has 256 threads. How many warps is
+
+429
+00:34:54,260 --> 00:35:15,300
+that? Loudly. So, we have a total of 768 threads, 32 threads in a warp, divide 768 by 32
+
+430
+00:35:15,540 --> 00:35:19,620
+by 32, that's 24. So, you'll have 24 warps in total.
+
+431
+00:35:22,340 --> 00:35:29,540
+So, in a G80, there are 32 threads in a warp, but only eight streaming processors.
+
+432
+00:35:30,500 --> 00:35:35,540
+In modern-day architecture, there's a lot more. Modern-day architectures, you have 192 or 256
+
+433
+00:35:35,540 --> 00:35:45,700
+cores or sometimes 128, but in a G80, you only had eight. So, we said warp runs always together,
+
+434
+00:35:45,700 --> 00:35:51,060
+but there are only eight cores. How can a warp run of 32 threads run only with eight cores?
+
+435
+00:35:52,260 --> 00:36:02,580
+So, to do that, this is what we do. An SM scheduler essentially used a clock cycle
+
+436
+00:36:02,580 --> 00:36:08,580
+to schedule eight threads at a time. So, it did eight threads in the first cycle, eight more in
+
+437
+00:36:08,580 --> 00:36:14,740
+the second cycle, eight more in the third and fourth cycle. So, four cycles were used to dispatch
+
+438
+00:36:14,740 --> 00:36:19,940
+a warp. It wasn't just one cycle. Modern-day, it's one cycle, but back in the day, it was four cycles.
+
+439
+00:36:22,660 --> 00:36:29,940
+So, another exercise. A kernel has one global memory. So, about 200 cycles
+
+440
+00:36:30,340 --> 00:36:40,260
+and it has four non-dependent multipliers and arrays. How many warps are required to hide that
+
+441
+00:36:40,260 --> 00:36:51,780
+memory? So, this is getting into how we want to hide latency by using more warps. So, we have a
+
+442
+00:36:51,780 --> 00:36:59,140
+latency of memory reads. How can we launch enough warps so that memory latency is hidden? So,
+
+443
+00:36:59,140 --> 00:37:04,340
+you remember that step diagram that we had before? How many warps do we need to hide that
+
+444
+00:37:04,340 --> 00:37:15,700
+latency? It's a question. Anybody want to take a guess? 50? You're ignoring one part of that
+
+445
+00:37:15,700 --> 00:37:25,380
+equation. You're on the right track, but you're ignoring something. No. So, 200 by 4 is certainly
+
+446
+00:37:25,380 --> 00:37:36,820
+part of the equation, but there's one more part to it. How many? So, we said four non-dependent
+
+447
+00:37:36,820 --> 00:37:43,620
+multipliers and ads. That takes time, right? Even if it's not 200 cycles, that takes time.
+
+448
+00:37:44,340 --> 00:37:53,620
+So, if we assume that four multipliers and ads take 16 cycles, then to cover 200 cycles, we divide
+
+449
+00:37:54,340 --> 00:38:01,540
+200 divided by the number of cycles that we need for the four multipliers and ads. So, instead of
+
+450
+00:38:01,540 --> 00:38:07,220
+counting four multipliers and ads as one clock cycle each, we have to count them as 16 clock cycles
+
+451
+00:38:07,860 --> 00:38:13,780
+and that will give us 12.5 and we want one more than that, so it'll be 13. So, we need to launch
+
+452
+00:38:13,780 --> 00:38:20,260
+13 warps to make sure that we are hiding that latency. So, these are just exercises, but the
+
+453
+00:38:20,260 --> 00:38:29,140
+core point overall is to make sure that warps execute together to reduce branch divergence in
+
+454
+00:38:29,140 --> 00:38:34,340
+them and try to make sure that they are all executing the same thing at the same time.
+
+455
+00:38:36,100 --> 00:38:41,860
+Any questions on warps before I start moving into other parts of today's agenda?
+
+456
+00:38:50,420 --> 00:38:54,580
+Yeah, so to launch enough warps, you have to see how your kernel is running and then make sure
+
+457
+00:38:54,580 --> 00:38:59,700
+your block size is optimized for that. That's why sometimes you may want to pick a block of 128,
+
+458
+00:38:59,700 --> 00:39:06,980
+sometimes you may want to pick a block of 1024. So, again, it depends on a lot of factors that
+
+459
+00:39:06,980 --> 00:39:12,900
+we cover through the entire course, but for now, think of it as how many threads you're launching,
+
+460
+00:39:12,900 --> 00:39:19,380
+how much memory read you're doing, and stuff like that. That's a thing, like we define that
+
+461
+00:39:19,380 --> 00:39:26,980
+by the code or it can be another run back. No, that's why you do the block dim and grid dim,
+
+462
+00:39:26,980 --> 00:39:30,260
+like when you're setting up the kernel, before calling the kernel, you're defining how many
+
+463
+00:39:30,260 --> 00:39:37,780
+threads per block, right? So, that would be defined by you, unless you go over the resources and the
+
+464
+00:39:37,780 --> 00:39:44,900
+hardware does other things. Any other questions on warps?
+
+465
+00:39:48,740 --> 00:39:53,940
+Okay, there's a lot more to learn about warps, but we'll slowly go over it.
+
+466
+00:39:54,180 --> 00:40:12,980
+No, so each multiply, each multiply and add, it's called an FMA, floating multiply and add,
+
+467
+00:40:12,980 --> 00:40:18,500
+takes about four cycles by itself. So, if you do four of those, that's 16 cycles. It's not about
+
+468
+00:40:18,500 --> 00:40:23,620
+waiting for memory of it. The operation, the floating point operation, it just takes the cycles.
+
+469
+00:40:34,180 --> 00:40:42,340
+Because if you have 12, then at some point, all the 12 warps are going to wait for the
+
+470
+00:40:43,140 --> 00:40:50,340
+for memory and there'll be some level of waiting before the first warp becomes ready to execute
+
+471
+00:40:50,340 --> 00:40:57,460
+again. So, that's why we want one more, so that it's always computing. It's fine as warps are
+
+472
+00:40:57,460 --> 00:41:03,780
+waiting. We're not worried about warps waiting. What we're worried about is not having something
+
+473
+00:41:03,780 --> 00:41:10,900
+to execute. So, we can launch 15 blocks or 15 warps, we can launch 20 warps, not a problem.
+
+474
+00:41:11,700 --> 00:41:17,060
+What we want to make sure is that you're not launching less warps and having the GPU wait for
+
+475
+00:41:17,060 --> 00:41:30,820
+memory. Any other questions on this? So, warps are not something you necessarily
+
+476
+00:41:30,820 --> 00:41:37,140
+ever write in a program. You'll never use the term warp in a program. What you'll essentially do is
+
+477
+00:41:37,140 --> 00:41:43,300
+make sure that your branching conditions and other things are aligned to 32. So, it's more
+
+478
+00:41:43,300 --> 00:41:47,220
+of a hardware concept and a debugging concept as you've seen in the debugging lab.
+
+479
+00:41:49,860 --> 00:41:54,100
+So, let's look at memory. So, we touched on it a little bit last class, but let's dive a little
+
+480
+00:41:54,100 --> 00:41:59,940
+bit deeper into it today. So, you saw this diagram of course, there are five types of memory,
+
+481
+00:42:00,580 --> 00:42:06,660
+registers, local memory, shared memory, global memory, and constant memory. And then the host
+
+482
+00:42:06,660 --> 00:42:13,060
+can read and write to global memory. So, let's look at each one of them. Registers are the fastest
+
+483
+00:42:13,060 --> 00:42:18,340
+kind of memory. They are on a per thread basis. So, one thread's registers cannot be accessed by
+
+484
+00:42:18,340 --> 00:42:24,100
+another thread. They are fast, they're on chip. So, they're very close to the compute CUDA cores
+
+485
+00:42:24,100 --> 00:42:29,940
+essentially. So, they're basically instant. I believe they're probably one or two blocks high
+
+486
+00:42:29,940 --> 00:42:37,540
+for me. Increasing the number of registers used by a kernel has what effect then?
+
+487
+00:42:39,940 --> 00:42:46,580
+So, I think this was asked in the last class probably by somebody. If you have all registers
+
+488
+00:42:46,580 --> 00:42:57,540
+in a kernel, how is that going to affect your kernel? It'll be faster? Maybe? What else?
+
+489
+00:43:00,740 --> 00:43:06,420
+We don't have infinite number of registers. So, what could it affect?
+
+490
+00:43:12,020 --> 00:43:15,300
+The number of threads that can be executed at the same time. Is that what you said?
+
+491
+00:43:16,500 --> 00:43:19,140
+Fewer. Fewer threads can be executed at the same time.
+
+492
+00:43:20,180 --> 00:43:23,860
+Yes, you are along the right lines, but tell that to me in another way.
+
+493
+00:43:30,340 --> 00:43:35,380
+That's like slower memory. So, we can like store the unused registers.
+
+494
+00:43:38,180 --> 00:43:42,340
+But that's not what I'm trying to get at. What I'm trying to get at is
+
+495
+00:43:43,540 --> 00:43:49,380
+on a GPU, you only have so many transistors. And like we've seen, most of them are assigned
+
+496
+00:43:49,380 --> 00:43:53,860
+to CUDA cores. Some of them are assigned to memory and some of them are assigned to registers.
+
+497
+00:43:54,660 --> 00:44:01,300
+So, you only have so many registers on a GPU. There is a numerical limit on it. What happens
+
+498
+00:44:01,300 --> 00:44:09,620
+if you use so many registers in a kernel that you surpass those limits? For example, just for quick
+
+499
+00:44:09,620 --> 00:44:17,860
+numbers, let's say you have a thousand registers on an SM. And your work, maybe not a thousand,
+
+500
+00:44:17,860 --> 00:44:24,260
+let's say you have 20,000. And you launch a block of 1,000 threads.
+
+501
+00:44:25,940 --> 00:44:30,260
+You can at most have, on average, you can have 20 registers per thread.
+
+502
+00:44:31,380 --> 00:44:40,180
+20,000 registers total on an SM. 1,000 threads per block. You can have 20 registers per thread.
+
+503
+00:44:40,180 --> 00:44:47,540
+What happens if you use 25? That's my question. What happens then is essentially
+
+504
+00:44:48,580 --> 00:44:55,060
+the blocks get broken apart or the number of watts executing at the same time has to reduce.
+
+505
+00:44:56,580 --> 00:45:04,340
+So, let's take this example. On a GID, we can have 768 threads. We have 8,000 registers.
+
+506
+00:45:05,780 --> 00:45:07,380
+How many registers per thread is that?
+
+507
+00:45:08,100 --> 00:45:18,180
+It's about 10 registers. So, let's say if we go to 11 or 12 or 13 registers,
+
+508
+00:45:19,460 --> 00:45:26,980
+what happens is, let's say in the example of 11 registers and each block has 256 threads,
+
+509
+00:45:27,620 --> 00:45:35,460
+how many registers is that? 2,560 or 2,560 plus 256, whatever that number is.
+
+510
+00:45:36,260 --> 00:45:40,420
+But what does it mean for how many threads the SM can host?
+
+511
+00:45:42,740 --> 00:45:51,700
+So, each block has 256 threads. If we were under the 10 registers limit,
+
+512
+00:45:53,300 --> 00:45:57,300
+how many blocks can we host? If we are under the 10 registers limit,
+
+513
+00:45:59,700 --> 00:46:01,460
+how many blocks can we host per SM?
+
+514
+00:46:05,460 --> 00:46:10,180
+We can host three blocks because the limit is defined by the number of threads.
+
+515
+00:46:10,740 --> 00:46:17,860
+3 times 256 is 768. So, if we are under the register limit, we can launch three blocks.
+
+516
+00:46:19,700 --> 00:46:23,940
+But if we are over that limit, if we have let's say 11, 12 or 13 registers,
+
+517
+00:46:25,300 --> 00:46:30,420
+then maybe we can only launch two blocks because the third block will not have enough registers
+
+518
+00:46:30,900 --> 00:46:36,580
+to store memory. So, if we were to go to 11 registers, we only launch two blocks.
+
+519
+00:46:38,580 --> 00:46:44,340
+So, that's essentially what it means for overloading resources. So, it's not just
+
+520
+00:46:44,340 --> 00:46:50,580
+the number of threads that dictate how many blocks execute on an SM. It also is determined
+
+521
+00:46:50,580 --> 00:46:54,420
+by how many registers, how much shared memory and all those kind of things that you're using.
+
+522
+00:46:56,820 --> 00:46:57,780
+Any questions on this?
+
+523
+00:46:58,580 --> 00:47:02,420
+What if one thread uses like 10,000 more than eight?
+
+524
+00:47:02,420 --> 00:47:06,980
+There's no, I mean, at some point you're going to run into an error where
+
+525
+00:47:06,980 --> 00:47:10,500
+CUDA is going to complain that it's going to give you a runtime error essentially,
+
+526
+00:47:10,500 --> 00:47:12,180
+saying that I can't launch this kernel.
+
+527
+00:47:16,500 --> 00:47:21,220
+Any other questions on this register memory?
+
+528
+00:47:21,220 --> 00:47:28,420
+Okay. So, there are a few special registers, so thread IDX, block IDX, block IDX,
+
+529
+00:47:28,420 --> 00:47:31,940
+block IDX, and print them. They're all special registers so they don't count towards
+
+530
+00:47:33,060 --> 00:47:40,020
+your register allocation and usage. So, the next type of memory is called local memory.
+
+531
+00:47:41,460 --> 00:47:47,300
+Technically, this is not a physical memory. What it means is when we allocate too many registers,
+
+532
+00:47:48,020 --> 00:47:54,260
+some of those get spilled over and get stored in global memory and are cached so that they are
+
+533
+00:47:54,260 --> 00:48:00,980
+faster for use. Then no one's going to be close to how fast a register is. It's local because
+
+534
+00:48:00,980 --> 00:48:08,660
+it's in the private scope of the thread itself, but not on the physical registers that we have.
+
+535
+00:48:10,020 --> 00:48:12,340
+So, that's essentially like spillover memory.
+
+536
+00:48:13,140 --> 00:48:20,980
+So, it hurts performance in two ways. First, it increases memory traffic because now, if you're
+
+537
+00:48:20,980 --> 00:48:25,940
+going into local memory, you're not just increasing the number of clock cycles you need to
+
+538
+00:48:26,660 --> 00:48:32,580
+cover for because it's slower than registers, but you're also decreasing how many other things
+
+539
+00:48:32,580 --> 00:48:36,980
+can use global memory because it's taking up bandwidth. It's taking up that read-write resource
+
+540
+00:48:36,980 --> 00:48:45,220
+because it's stored in global memory. Sometimes, that spilling may not always be bad. In very,
+
+541
+00:48:45,220 --> 00:48:50,420
+very rare cases, you ideally want to avoid it, but sometimes it may not be bad because it
+
+542
+00:48:50,420 --> 00:48:59,940
+gets stored in the L1 cache. Any questions on local memory? Most of the time, again, you wouldn't
+
+543
+00:48:59,940 --> 00:49:03,780
+know if you're using it. If you're doing something bad, the profiler will complain about it.
+
+544
+00:49:04,100 --> 00:49:09,860
+If you're doing something bad, the profiler will complain about it, but by itself, you're not going
+
+545
+00:49:09,860 --> 00:49:18,020
+to see this as something that you're going to... There's no create local memory for me kind of
+
+546
+00:49:18,020 --> 00:49:26,580
+thing. It's a very inbuilt concept when you use too many resources. All right. The next type of
+
+547
+00:49:26,580 --> 00:49:32,820
+memory is shared memory. This is something we're going to use today as we go into matrix multiply.
+
+548
+00:49:33,460 --> 00:49:42,500
+So, shared memory is per block. It is also per SM because, remember, a block will always execute
+
+549
+00:49:42,500 --> 00:49:49,540
+on the same SM. So, shared memory has a certain limit per block and there's a scope per block
+
+550
+00:49:49,540 --> 00:49:56,180
+and there's a hardware limit on an SM. It's fast, maybe not as fast as registers,
+
+551
+00:49:56,180 --> 00:50:00,820
+but it is fast enough that you shouldn't worry about using shared memory. It is still very much
+
+552
+00:50:00,820 --> 00:50:06,020
+an optimization and it has full random access. So, you can read, write as you want.
+
+553
+00:50:07,620 --> 00:50:15,380
+So, let's see this. I mentioned that there's a block limit and a SM limit. So, let's say per SM,
+
+554
+00:50:15,380 --> 00:50:23,220
+you would host eight blocks and each SM has 16 KB of shared memory. How many kilobytes per block
+
+555
+00:50:23,220 --> 00:50:35,860
+can we allocate on average? So, you have 16 kilobytes and you want to allocate up to eight
+
+556
+00:50:35,860 --> 00:50:44,900
+blocks. On average, how much shared memory can we give to each block? Two. Then give two. Now,
+
+557
+00:50:44,900 --> 00:50:50,020
+similar to the previous example, what if we gave each block five kilobytes? Then how many blocks
+
+558
+00:50:50,020 --> 00:50:56,660
+can an SM host? Three, because you'll hit that limit at 15 and then the other blocks will have
+
+559
+00:50:56,660 --> 00:51:03,300
+to go on to other SMs. Any questions? So, I haven't dived deeper into shared memory. I just
+
+560
+00:51:03,300 --> 00:51:09,140
+want to show how it's conceptual. When we get into magics multiplied, that's when we'll talk
+
+561
+00:51:09,140 --> 00:51:13,220
+a little bit more about shared memory. Any questions on this?
+
+562
+00:51:13,220 --> 00:51:24,820
+Okay. So, global memory, which by now you're all probably used to, is hundreds of cycles. It's off
+
+563
+00:51:24,820 --> 00:51:30,340
+chip. So, it doesn't actually live on the chip itself. If you see any picture of a GPU, you'll
+
+564
+00:51:30,340 --> 00:51:35,620
+see that there's a central chip in there and then you'll have these black dyes all around it. Those
+
+565
+00:51:35,620 --> 00:51:41,780
+black dyes are the global memory. So, that's why there's a bus and a bandwidth on it. It is still
+
+566
+00:51:41,780 --> 00:51:48,260
+actually very, very much faster than your CPU RAM. So, if you have 16 or 32 GB RAM on your laptop
+
+567
+00:51:48,260 --> 00:51:55,140
+or desktop, the global memory on a GPU is still way faster than your CPU RAM. It's just way slower
+
+568
+00:51:55,140 --> 00:52:02,420
+than registers or shared memory and that matters when you're doing parallel compute. So, reads and
+
+569
+00:52:02,420 --> 00:52:09,540
+writes can do it. Complete random access can have performances because, as I was mentioning earlier,
+
+570
+00:52:09,540 --> 00:52:13,300
+when you do reads from global memory, they happen in chunks. They don't happen
+
+571
+00:52:13,940 --> 00:52:20,180
+one float or one intact time. They happen in a group and it's really fun. These are some very
+
+572
+00:52:20,180 --> 00:52:28,500
+old numbers for GT200 and G80, but some of the modern GPUs can hit 300, 400, 500 gigabytes per
+
+573
+00:52:28,500 --> 00:52:34,820
+second. Compare that to a CPU RAM, which can probably hit about 30, 40, maybe gigabytes per second.
+
+574
+00:52:34,820 --> 00:52:44,100
+The last memory is constant memory. So, constant memory is essentially a special global memory
+
+575
+00:52:45,860 --> 00:52:51,060
+that is cached and it's only read-only for the GPU. It's read-only for the GPU,
+
+576
+00:52:51,060 --> 00:52:56,180
+so only the host can write to constant memory. Once you write it and you launch your kernel,
+
+577
+00:52:56,180 --> 00:53:03,380
+it's read-only. Kernels cannot write to constant memory and it's up to 64 kilobytes because it's
+
+578
+00:53:03,380 --> 00:53:09,780
+mostly going to store information that is valid across the entire GPU kernel's lifetime.
+
+579
+00:53:12,820 --> 00:53:19,620
+So, just some terms here for how we're going to define these. So, registers and threads,
+
+580
+00:53:20,180 --> 00:53:26,260
+registers you do int x or float x. That's how you define it. It's both for a thread and this
+
+581
+00:53:26,260 --> 00:53:31,940
+for the kernel's life. Local are automatic array variables or anything that spills over.
+
+582
+00:53:32,740 --> 00:53:39,780
+To define shared memory, you're going to use undersponders for shared. To define a global
+
+583
+00:53:40,340 --> 00:53:44,340
+variable, you're going to use undersponders to device. Same as you use for function,
+
+584
+00:53:44,340 --> 00:53:48,340
+you could potentially use it for this. And then the last one is constant,
+
+585
+00:53:49,300 --> 00:53:54,500
+which you can use for defining constant variables on the host.
+
+586
+00:53:54,500 --> 00:54:05,380
+So, quickly to see how we can read-write constant memory. You don't use CUDA mencopy for constant
+
+587
+00:54:05,380 --> 00:54:11,300
+memory. You do symbols. So, get CUDA symbol address is essentially like CUDA mallet,
+
+588
+00:54:11,300 --> 00:54:14,820
+except you're getting the memory address for where your value is going to be stored.
+
+589
+00:54:15,700 --> 00:54:21,940
+CUDA gets symbol sizes, how much memory you're allocating in CUDA global memory for constant.
+
+590
+00:54:22,900 --> 00:54:27,700
+Mencopy to symbol and mencopy from symbol is similar to CUDA mencopy except we are
+
+591
+00:54:27,700 --> 00:54:34,260
+specifically saying symbol here. So, that's an example of how you're going to use our constant memory.
+
+592
+00:54:37,540 --> 00:54:42,980
+This line here, very important, has to be in global scope. It can't be inside main or any other
+
+593
+00:54:42,980 --> 00:54:49,060
+function. It has to be defined on the global scope because the compiler needs to know how much memory
+
+594
+00:54:49,060 --> 00:54:58,980
+needs to be allocated. So, that's a very important thing. So, with that, I think let's take a break
+
+595
+00:54:58,980 --> 00:55:10,260
+now. Let's come back at 6.40. We'll have Wayne's recitation and then we'll come back to Moore's
+
+596
+00:55:10,340 --> 00:55:11,460
+intro to CUDA stuff.
+
+597
+00:55:11,860 --> 00:55:14,660
+Okay.
+
+598
+00:55:36,020 --> 00:55:38,980
+All right. Is everyone ready for recitation?
+
+599
+00:55:41,460 --> 00:55:55,460
+Okay. So, I hope everyone's hopefully at least looked through project one. It's a
+
+600
+00:55:56,740 --> 00:56:04,020
+relatively gentle introduction to CUDA, but it's a very fun project. I really enjoyed it. So,
+
+601
+00:56:04,020 --> 00:56:08,100
+hopefully you guys will enjoy this one. So, Boyd's flocking on a GPU.
+
+602
+00:56:08,900 --> 00:56:18,900
+So, let me make sure this works. All right. So, what's a Boyd?
+
+603
+00:56:19,700 --> 00:56:32,260
+So, a Boyd actually stands for bird-Boyd object. So, basically it's just like a... So, the term Boyd
+
+604
+00:56:32,420 --> 00:56:38,900
+came from Craig Reynolds and it's basically... He did like a simulation to simulate how birds
+
+605
+00:56:39,700 --> 00:56:46,340
+keep flocking. And so, he basically crowned the term Boyd. So, it's essentially simulating
+
+606
+00:56:46,340 --> 00:56:52,900
+flocking. And if you've taken a CIS 562 computer animation... So, Craig Reynolds is also the guy
+
+607
+00:56:52,900 --> 00:57:02,180
+who came up with a lot of behavioral animation. So, you'll probably be familiar with that.
+
+608
+00:57:02,260 --> 00:57:10,260
+But really, flocking is only like a small part of what he's doing. So, it's kind of like a
+
+609
+00:57:10,260 --> 00:57:15,780
+particle simulation. We have particle, or void, however you want to call it. And they have position
+
+610
+00:57:15,780 --> 00:57:24,340
+and velocity data. And we store them in two separate buffers. So, in the PLC, the position
+
+611
+00:57:25,060 --> 00:57:29,940
+velocity buffer on the GPU. And those are four defaults. And yeah.
+
+612
+00:57:31,300 --> 00:57:34,820
+So, what I want to do is actually show you guys what the...
+
+613
+00:57:35,940 --> 00:57:42,260
+Just to make sure that you guys know what flocking looks like. So, if we go to...
+
+614
+00:57:42,260 --> 00:58:07,780
+So, your results should look something like this. So, you can see...
+
+615
+00:58:08,260 --> 00:58:15,700
+So, basically, each point is like the void. And then they're flying, they're flocking. So,
+
+616
+00:58:15,700 --> 00:58:21,060
+they'll start to group together. And they're going to fly together. And we've color-coded
+
+617
+00:58:22,260 --> 00:58:27,220
+each void group by colors. So, as they kind of join together, they're going to become the
+
+618
+00:58:27,220 --> 00:58:33,380
+same color. And that's kind of a way that you can identify that they're indeed going towards each
+
+619
+00:58:33,380 --> 00:58:39,620
+other. Okay. So, let me go back to the presentation.
+
+620
+00:58:53,780 --> 00:59:01,700
+So, the way flocking works is basically around its neighbor,
+
+621
+00:59:01,700 --> 00:59:07,220
+based on some radius. And we look at what the velocity of the neighbor is. And then
+
+622
+00:59:08,020 --> 00:59:11,700
+based on that, depending on whether I should go, you know, avoid it or
+
+623
+00:59:13,780 --> 00:59:20,660
+follow the velocity. So, there's basically three types of sources that kind of affects
+
+624
+00:59:20,660 --> 00:59:29,540
+how the board moves. One is cohesion, one is separation, one is alignment. And you don't
+
+625
+00:59:29,540 --> 00:59:35,700
+actually need... For this project, you don't actually need to know what... How the voids
+
+626
+00:59:35,700 --> 00:59:45,780
+actually work. So, if you go to... If you go to instructions, so there we give you like the
+
+627
+00:59:45,780 --> 00:59:52,900
+pseudocode for... Okay, rule one, this one is cohesion. Rule two, this one is to keep a small
+
+628
+00:59:52,900 --> 00:59:57,380
+distance away. So, this is separation and finding there's alignment. So, if you follow this pseudocode,
+
+629
+00:59:57,380 --> 01:00:06,660
+you should be able to get the basic result for the voids flocking. And we've provided all the
+
+630
+01:00:06,660 --> 01:00:12,180
+parameters for you. So, like the scaling factors, the search distance, and you shouldn't have to
+
+631
+01:00:12,180 --> 01:00:16,980
+change those, but feel free to play around with them to see... To get different behaviors.
+
+632
+01:00:17,860 --> 01:00:22,340
+But yeah, so that's flocking. Now, let's go back to slides again.
+
+633
+01:00:22,340 --> 01:00:35,300
+So, you start the project by doing the naive method. And the naive method is basically you
+
+634
+01:00:35,300 --> 01:00:41,380
+loop over every single void and then you... So, when you do voids, you need to look at their
+
+635
+01:00:41,380 --> 01:00:46,900
+neighbors. And the naive method of doing that is you look at... You look through all voids and to
+
+636
+01:00:46,900 --> 01:00:54,260
+see if certain void is within the radius. And doing that is super slow, but that's the first
+
+637
+01:00:54,260 --> 01:00:57,620
+step. So, you want to make sure that you actually get that working first before you
+
+638
+01:00:58,420 --> 01:01:03,860
+move on to the second or third... The second and third parts. Okay.
+
+639
+01:01:10,980 --> 01:01:16,340
+Okay. So, to actually do a simulation. So, it's again, it's kind of like a particle simulation.
+
+640
+01:01:16,340 --> 01:01:22,900
+So, you have time steps and for each time step, the void was just going to first look at
+
+641
+01:01:22,900 --> 01:01:29,300
+neighboring voids to determine the new velocities. And then it's going to update the position based
+
+642
+01:01:29,300 --> 01:01:35,380
+on the velocity and the time. So, that's pretty straightforward. The one thing to note here is
+
+643
+01:01:36,100 --> 01:01:44,260
+ping pong buffers. So, does anyone know what a ping pong thing means for this case?
+
+644
+01:01:46,340 --> 01:01:54,500
+Okay. So, yes, it's switching buffer, but why do you want to do ping pong buffer?
+
+645
+01:01:57,940 --> 01:02:01,700
+Yeah, that's right. So, you're reading and writing concurrently and that's why
+
+646
+01:02:02,980 --> 01:02:08,100
+we want to switch it so that we're not overwriting what we're currently reading.
+
+647
+01:02:08,100 --> 01:02:12,580
+When you read your neighboring voids, you're looking at voids, but at the same time, you're
+
+648
+01:02:12,580 --> 01:02:16,820
+writing. So, you want to make sure... And that's happening in parallel. So, you don't want to make
+
+649
+01:02:16,820 --> 01:02:23,620
+sure you're not overwriting what you're reading. And so, for this, if you look at the code...
+
+650
+01:02:34,820 --> 01:02:42,500
+So, we provide you dev. So, dev means device. Hopefully everyone knows by now.
+
+651
+01:02:43,540 --> 01:02:49,540
+Device position, device velocity 1, velocity 2. And if you wonder why we need velocity 1, velocity 2,
+
+652
+01:02:49,540 --> 01:02:55,780
+it's because we need ping pong buffers. And so, once you've
+
+653
+01:02:56,340 --> 01:03:00,660
+write your new velocities and you do your ping pong buffers, then you update your positions.
+
+654
+01:03:13,220 --> 01:03:19,780
+So, after you've done the naive method and hopefully you'll see the flocking behavior,
+
+655
+01:03:19,780 --> 01:03:24,100
+you can start up with some small number. But if you really want to crank it up to, say,
+
+656
+01:03:24,100 --> 01:03:29,620
+like 100,000 to even millions, it's going to be super slow. And this is when you need
+
+657
+01:03:30,820 --> 01:03:33,940
+some sort of spatial data structure to optimize it. And this is very...
+
+658
+01:03:35,860 --> 01:03:42,020
+It's very common in lots of graphics applications where they just introduce spatial data structure
+
+659
+01:03:42,020 --> 01:03:48,180
+to accelerate things. So, for this project, we want you to implement a uniform grid. So,
+
+660
+01:03:50,020 --> 01:03:59,540
+you're basically spatially dividing the space into a grid with uniform cell width.
+
+661
+01:04:00,340 --> 01:04:08,340
+And then, so, each void here, for example, here you have some voids and they may lie
+
+662
+01:04:08,660 --> 01:04:15,460
+in certain cells, but not in others. And that way you're essentially calling out what are needed
+
+663
+01:04:15,460 --> 01:04:24,500
+to be searched. So, for this project, you don't really have to worry about sort of defining
+
+664
+01:04:24,500 --> 01:04:33,220
+what the grid size width are and then the kind of the individual cell width. We have that defined
+
+665
+01:04:34,100 --> 01:04:40,820
+for you. So, if you look at the code here in initialized simulations, you'll see that this is
+
+666
+01:04:40,820 --> 01:04:45,860
+where we set up the grid parameters for you. But you have to make sure that you know,
+
+667
+01:04:46,500 --> 01:04:51,860
+because later on you're going to need some of these variables to calculate, for example,
+
+668
+01:04:51,860 --> 01:04:58,340
+where which grid certain void is in. So, this is where you should kind of look at.
+
+669
+01:05:03,220 --> 01:05:13,940
+And so, for this project, we have defined
+
+670
+01:05:17,060 --> 01:05:20,580
+the grid width. The search way is the grid width is 15 times
+
+671
+01:05:23,860 --> 01:05:30,740
+and only have to search through 8 to 8 cells or 2D is 4. So, you can see that
+
+672
+01:05:30,740 --> 01:05:35,460
+because 9, there is culture of exception to these things.
+
+673
+01:05:54,100 --> 01:06:00,420
+Okay. So, you're going to need to calculate where, which grid cell
+
+674
+01:06:00,740 --> 01:06:12,500
+you want. So, to do that, you have to know sort of the low position of the grid. And by that,
+
+675
+01:06:12,500 --> 01:06:17,540
+you have to know, okay, where is the minimum, where is the very minimum point of the grid
+
+676
+01:06:17,540 --> 01:06:26,020
+for the world space. And based on that, based on that, so you're given the forward position,
+
+677
+01:06:26,020 --> 01:06:33,540
+you have to find which cells. So, for example, here, we want to find 42. And
+
+678
+01:06:35,140 --> 01:06:45,380
+the way we do that is so we can say 42 is at 2.4 and negative 5. So, there.
+
+679
+01:06:48,980 --> 01:06:53,300
+And then divide that by the cell. And then once you know that, it's going to give you
+
+680
+01:06:54,260 --> 01:06:59,540
+an Ix. So, the cell of the x direction and the cell number in the y direction.
+
+681
+01:07:00,180 --> 01:07:04,980
+And because the grid, even though it's the ultimate representation,
+
+682
+01:07:04,980 --> 01:07:11,620
+it's still like the 1D array. So, we want to find that into this one index.
+
+683
+01:07:13,940 --> 01:07:20,820
+It's sort of like the threaded index with x plus resolution. Sorry, 10 percent.
+
+684
+01:07:24,100 --> 01:07:28,020
+And for 3D, it's very similar.
+
+685
+01:07:37,860 --> 01:07:39,220
+Any questions up to this point?
+
+686
+01:07:53,300 --> 01:08:09,060
+Yeah, it cannot be greater than an egg, but yes, you have to consider the edge cases where
+
+687
+01:08:09,060 --> 01:08:14,900
+it's at the corners. Or at the edge, then it's also like, like might be in between.
+
+688
+01:08:15,460 --> 01:08:23,780
+So, in this logic that you're talking about, there was a problem in the scenes. But in this case,
+
+689
+01:08:30,660 --> 01:08:41,300
+we're also given indices, which is supposed to like store the like index. So, like my understanding
+
+690
+01:08:41,300 --> 01:08:50,980
+is like index of zero. But indices of zero gives you the index for the zero point that would get
+
+691
+01:08:50,980 --> 01:09:03,940
+you its corresponding position and velocity. But how is that different from just,
+
+692
+01:09:04,740 --> 01:09:09,540
+because in assigning this, right, like what we call the current computer disease,
+
+693
+01:09:11,540 --> 01:09:22,260
+you are just going through all of the voids one by one and calculating, computing their grid cell
+
+694
+01:09:22,260 --> 01:09:30,340
+index, right? So, I guess in the first pass, do these all in order? I'm confused as to like what
+
+695
+01:09:30,340 --> 01:09:42,900
+to assign the values of indices, because if we are accessing the position, we are accessing,
+
+696
+01:09:43,780 --> 01:09:49,780
+so yeah, we're accessing the positions in order to have the grid index, then doesn't that index
+
+697
+01:09:49,780 --> 01:09:59,220
+already like tell us, like don't we already have that index? So, if you don't sort anything, then
+
+698
+01:09:59,220 --> 01:10:05,620
+yes, you do have that index. But because we're sorting, then your index no longer aligns anymore.
+
+699
+01:10:05,620 --> 01:10:13,940
+And that's why we need to keep track of an extra array of the actual index of the indices of the
+
+700
+01:10:13,940 --> 01:10:19,380
+voids so that when you sort it, and I'm going to go into why we're sorting actually just right now
+
+701
+01:10:19,380 --> 01:10:24,580
+in a bit. But you're right. So, one of the biggest challenge for this assignment is really
+
+702
+01:10:24,580 --> 01:10:28,580
+understanding those buffers and like what goes into them.
+
+703
+01:10:28,580 --> 01:10:31,220
+Yeah, the reason
+
+704
+01:10:33,460 --> 01:10:38,340
+one model is built more, and because of the randomness, when I was talking about
+
+705
+01:10:38,340 --> 01:10:44,180
+real memory, they said random access is bad. So, more we want that access to be
+
+706
+01:10:44,980 --> 01:10:50,180
+fluorescent as we say, you'll get to that more in future class, but we want as much as possible to
+
+707
+01:10:50,180 --> 01:11:03,860
+be accessible at the same time. So, then the question is, how do we get all the voids
+
+708
+01:11:04,660 --> 01:11:07,380
+in a certain cell once we have the uniform grid defined?
+
+709
+01:11:09,380 --> 01:11:14,340
+So, the answer is that we use a key value sort, and this is when we actually need that extra
+
+710
+01:11:14,340 --> 01:11:21,940
+buffer to keep our indices under the voids. So, a key value sort is when you have,
+
+711
+01:11:22,580 --> 01:11:26,580
+for example, like a dictionary key value, but then basically when you sort the key,
+
+712
+01:11:26,580 --> 01:11:33,140
+the value has to fall with it. And this is very important for this project. So, we are,
+
+713
+01:11:37,540 --> 01:11:43,860
+yeah, so we are, when you do compute indices, we are sorting saying, okay, which cell the
+
+714
+01:11:43,860 --> 01:11:49,780
+void belongs to, and we store that into grid cell index. So, you should see that as a buffer.
+
+715
+01:11:50,340 --> 01:12:01,060
+And then we're sorting that, we're sorting grid cell index as well as the voids indices
+
+716
+01:12:02,020 --> 01:12:05,940
+based on the grid cell index. And I'm going to, so this image here actually is going to be
+
+717
+01:12:06,740 --> 01:12:14,980
+visualized. So, at the top, you have, so right now, we have, for example, we have at the top,
+
+718
+01:12:14,980 --> 01:12:22,260
+we have the 15 cell for grids. And the first step, we go through each void, we assign it.
+
+719
+01:12:22,260 --> 01:12:31,620
+Is there a laser producer? This step here, the first step we do is we build through the voids,
+
+720
+01:12:31,620 --> 01:12:43,060
+we're like, okay, which cell will be the one? So, 0, 5, grid cell 5, 5 as well. And then,
+
+721
+01:12:43,060 --> 01:12:50,260
+at the same time, which is whatever you're wondering, it's like we're keeping another array
+
+722
+01:12:52,260 --> 01:12:58,100
+at the start, it's 0, this is 0, 1, 2, 3, 4, 5, 6, which is just the sequential order.
+
+723
+01:12:58,100 --> 01:13:08,900
+But when things start to get tricky is in order to find, to represent this grid and to be able to
+
+724
+01:13:08,900 --> 01:13:18,900
+find, to know, to get, basically to access them, which voids are in the cell, you need to sort,
+
+725
+01:13:18,900 --> 01:13:26,020
+this is when you start sorting. And so, the key essentially is this part and the balance.
+
+726
+01:13:26,660 --> 01:13:35,300
+And so, once we sort it, we get this sorted. So, now your array is not squinted.
+
+727
+01:13:39,940 --> 01:13:46,980
+And so, what happens here is because whenever you're doing the computation or whatever you're
+
+728
+01:13:46,980 --> 01:13:52,900
+doing in the neighbor search, you're always accessing all the voids of that cell. So,
+
+729
+01:13:52,900 --> 01:13:58,020
+having it in continuous form like this essentially helps with that and allows me to access
+
+730
+01:13:58,740 --> 01:14:05,540
+continuous memory. The reason we don't access, don't sort the voids and position and velocity
+
+731
+01:14:05,540 --> 01:14:11,140
+vectors is because we don't need to access those in continuous fashion. So, it's fun to keep them
+
+732
+01:14:11,140 --> 01:14:20,900
+that way and then we can use the releases to access them using that. Any questions about
+
+733
+01:14:21,380 --> 01:14:30,740
+like this part, like the sorting, how we walk over. So, sorry. So, another part of this is that you
+
+734
+01:14:30,740 --> 01:14:37,220
+need to, so these parts, this part is in the compute indices function. So,
+
+735
+01:14:40,500 --> 01:14:46,580
+here you have the kernel compute indices. So, that's the part you sorted the grid indices.
+
+736
+01:14:47,380 --> 01:14:53,460
+And then, after you've sorted it, you need to identify the cell start and end.
+
+737
+01:14:54,260 --> 01:14:58,900
+And this is, if I go back to slides.
+
+738
+01:15:01,540 --> 01:15:06,500
+So, this is where this is sort of representing is that, okay, now I need to figure out based on this,
+
+739
+01:15:07,380 --> 01:15:10,740
+what is the start and end cells that would point to,
+
+740
+01:15:11,540 --> 01:15:20,340
+the points basically point to the starting point of this buffer that contains, okay, what's
+
+741
+01:15:20,340 --> 01:15:25,540
+what word are they? These are like dictionaries.
+
+742
+01:15:28,420 --> 01:15:31,700
+You can think of it as a dictionary, but they are, it's just like index, I mean,
+
+743
+01:15:32,500 --> 01:15:45,700
+index. So, this is, there are two separate arrays, right, but like for instance, what I do,
+
+744
+01:15:47,780 --> 01:15:57,460
+I do, I look for the first element in the grid index, void index, right. Those refer to the same
+
+745
+01:15:57,460 --> 01:16:05,940
+void, right. That tells us that void number eight is in grid cell zero. And if I were to
+
+746
+01:16:05,940 --> 01:16:11,780
+find the eight index of the position where the velocity vector is going to be finding that,
+
+747
+01:16:27,540 --> 01:16:33,540
+So, these are the main buffers that you need to work with. So,
+
+748
+01:16:34,980 --> 01:16:39,620
+again, I just want to stress that it's really important to understand what each buffer is for
+
+749
+01:16:40,660 --> 01:16:46,740
+and then like whether like, and specifically like what the indices represent and what their
+
+750
+01:16:46,740 --> 01:16:53,060
+values represent. So, just having that understanding will be really helpful for this product. So,
+
+751
+01:16:53,060 --> 01:17:01,460
+the particle grid indices, this one stores which grid the void belongs to. And then this array
+
+752
+01:17:01,460 --> 01:17:08,820
+indices, it's like, it contains the pointer to your actual like position and velocity.
+
+753
+01:17:09,780 --> 01:17:18,340
+And these two will get sorted. So, yes. So, in that case, first off, we need to
+
+754
+01:17:18,980 --> 01:17:26,500
+balance by our symbols, right. Second, the particle array indices that will be initialized to just
+
+755
+01:17:26,500 --> 01:17:32,420
+like zero equals zero, like zero, zero, one, one. So, then that will get messed up.
+
+756
+01:17:36,420 --> 01:17:42,740
+And the cell start indices, great. So, these are, once you start to get to that grid,
+
+757
+01:17:43,460 --> 01:17:49,220
+then these are representing actual grids. So, the size is actually great. So, for particles,
+
+758
+01:17:49,220 --> 01:17:54,420
+the size is number of voids. For grid variables, the size is great count.
+
+759
+01:17:58,900 --> 01:17:59,700
+Yeah, great research.
+
+760
+01:18:04,900 --> 01:18:08,580
+Okay. So, any questions up to this point? Yes, sir.
+
+761
+01:18:08,740 --> 01:18:09,240
+So,
+
+762
+01:18:23,460 --> 01:18:30,020
+x times like the numbers of rows and the y. So, if you look at this here, exactly like that.
+
+763
+01:18:38,900 --> 01:18:48,660
+Any other questions? Okay. So, the last part of the project, and it's not as big of a
+
+764
+01:18:48,660 --> 01:18:54,980
+modification. So, the last part you need to do is, so, so far we are, okay, we're sorting
+
+765
+01:18:56,660 --> 01:19:05,460
+the array and then we have, we are doing coalescing for, I guess, for the grid part.
+
+766
+01:19:05,940 --> 01:19:14,660
+Okay. So, we're doing, for the grid cell index, this is, we're doing coalescing. And the last
+
+767
+01:19:14,660 --> 01:19:20,500
+part, we just, we're just sort of like optimizing one step further by saying that, okay, since we
+
+768
+01:19:20,500 --> 01:19:28,900
+are, we, so right now we're, we have, say we have a grid cell index points to eight, we still have
+
+769
+01:19:28,900 --> 01:19:34,100
+to go to eight in another array that tells, another buffer that tells us, okay, what position
+
+770
+01:19:34,100 --> 01:19:41,700
+the blocks are. So, the last step is essentially removing this, sorry, essentially removing this
+
+771
+01:19:41,700 --> 01:19:49,220
+extra step. And the way you do that is that you would, as you rearrange this, this point index,
+
+772
+01:19:49,220 --> 01:19:59,780
+you would, at the same time, rearrange the position of blocks. Yeah. So, if you look at here,
+
+773
+01:20:00,180 --> 01:20:06,100
+um, now you're, we're sort of rearranging position blocks until it matches the x of,
+
+774
+01:20:07,700 --> 01:20:14,900
+of what the array index is, how the array index is sorted. And this will optimize further. So,
+
+775
+01:20:14,900 --> 01:20:22,980
+any questions on this? Yes. My, if that's the case, then what is the point of even having the
+
+776
+01:20:22,980 --> 01:20:24,020
+point of the x in?
+
+777
+01:20:27,860 --> 01:20:33,380
+Guesses for iteration? You have to remember that those, those buffers, you know, there's
+
+778
+01:20:34,100 --> 01:20:39,620
+code as a table that they're actually able to buffers. Yeah. Like we're not using that for
+
+779
+01:20:39,620 --> 01:20:48,580
+accessing anything. I don't think that's entirely true. We still use it for, um, the understanding
+
+780
+01:20:48,580 --> 01:20:54,660
+when we move things based on how the volumes move around the sense that, um,
+
+781
+01:20:55,380 --> 01:20:56,660
+we need to keep that around.
+
+782
+01:21:11,860 --> 01:21:17,780
+Okay. So, we're basically at the end here, but some tips for you guys. So, first of all, um,
+
+783
+01:21:17,780 --> 01:21:21,220
+we didn't define all the kernels that you need. And we also didn't define,
+
+784
+01:21:21,940 --> 01:21:29,860
+you may need some extra buffers as you see fit. Um, definitely use the unit test to test some of
+
+785
+01:21:29,860 --> 01:21:35,940
+your kernels. Uh, it's very helpful. And also definitely make sure you watch the Cuda debugging
+
+786
+01:21:36,900 --> 01:21:37,380
+video.
+
+787
+01:21:39,860 --> 01:21:49,300
+Look at the variables and kernels. Um, so yeah, so between naive to semi-coherent,
+
+788
+01:21:50,500 --> 01:21:56,420
+basically after you finish naive and then, sorry, after you finish uniform grid,
+
+789
+01:21:56,420 --> 01:22:01,220
+that's a lot of change, but from uniform grid, naive uniform grid to semi-coherent uniform grid,
+
+790
+01:22:01,940 --> 01:22:07,860
+uh, it should look very similar. And then, so a lot of copy and pasting, that means you're
+
+791
+01:22:07,860 --> 01:22:16,020
+doing the right thing. And finally, uh, something to consider is when we're doing a index 3D to 1D,
+
+792
+01:22:16,020 --> 01:22:25,140
+we're flattening, um, the 3D index in this fashion. And something you want to think about is when
+
+793
+01:22:25,140 --> 01:22:30,980
+you're traversing the grid cells. Uh, so say you're using, if you're using a for loop,
+
+794
+01:22:30,980 --> 01:22:35,940
+so it's because some people might hard code it, but if you do a for loop, um, you want to think
+
+795
+01:22:35,940 --> 01:22:44,900
+about how, which order, like do I look through X first, Y first, or Z first, which one will get me
+
+796
+01:22:44,900 --> 01:22:53,060
+the most optimal result considering like memory contiguous access. And we're not going to give you
+
+797
+01:22:53,060 --> 01:22:58,660
+the answer, but just think about that, um, how do you optimize that? Does that make sense?
+
+798
+01:23:00,020 --> 01:23:02,260
+So just make sure you're memory, you're accessing memory,
+
+799
+01:23:03,060 --> 01:23:09,060
+but coalescing. And again, Shazam's going to go into more why you want to do this and how you do
+
+800
+01:23:09,060 --> 01:23:14,740
+that. They don't. This is good for me, you know, this project has been the first project in the
+
+801
+01:23:14,740 --> 01:23:22,500
+class for a while. So while you may seem daunting and you're like, oh my God, well,
+
+802
+01:23:22,500 --> 01:23:26,660
+these buffers are really, as you start getting used to it, as you do the first nine
+
+803
+01:23:27,540 --> 01:23:32,420
+two grid, uh, implementation of it, that's when you start getting into the buffer names.
+
+804
+01:23:32,420 --> 01:23:36,900
+And then that's when you start going to uniform it, you start getting more used to it. So
+
+805
+01:23:36,900 --> 01:23:41,540
+programming, I'm sure you've all, have all been in classes that have been said projects where
+
+806
+01:23:42,420 --> 01:23:46,900
+you're starting to write some code, you're getting used to it. So don't be afraid.
+
+807
+01:23:54,820 --> 01:23:58,900
+Our discussion, we'll always try to respond quickly.
+
+808
+01:24:02,340 --> 01:24:07,140
+In terms of the visual reward, this is already going to be one of the best projects in terms
+
+809
+01:24:07,140 --> 01:24:12,260
+of performance, and you can talk about it. So it'll be really fun, especially as we start
+
+810
+01:24:12,260 --> 01:24:16,740
+getting up to those many other points, you'll start seeing how much better it is than, uh,
+
+811
+01:24:16,740 --> 01:24:26,260
+than you see people want you today. I think if anyone else has a question, feel free to
+
+812
+01:24:27,220 --> 01:24:29,380
+present it out. Not that we can go back and forth.
+
+813
+01:24:37,940 --> 01:24:59,700
+Okay.
+
+814
+01:25:03,460 --> 01:25:05,460
+All right. So
+
+815
+01:25:07,700 --> 01:25:12,420
+looking, I'm obviously looking forward to all of your projects. We get some really cool gifts in
+
+816
+01:25:12,420 --> 01:25:18,260
+the readings at all times. So make sure you're putting enough time into it. Don't wait until
+
+817
+01:25:18,260 --> 01:25:24,180
+the last minute. You'll get into trouble for that. Not for me, for yourself. So, you know,
+
+818
+01:25:24,180 --> 01:25:31,780
+be sure to start early. So coming back to threads and warps and stuff. So let's look at how
+
+819
+01:25:31,780 --> 01:25:38,180
+synchronizing thresholds. We said warps execute, you know, at the same time. So let's dive a little
+
+820
+01:25:38,180 --> 01:25:50,100
+bit deeper into that. So let's take this example. Very simple. Something we should all be used to
+
+821
+01:25:50,100 --> 01:25:56,500
+in terms of code now, where we have, where we calculate some thread index. That is...
+
+822
+01:26:01,060 --> 01:26:06,260
+Okay. We calculate some thread index using this very common equation by now,
+
+823
+01:26:07,380 --> 01:26:14,980
+using blocks and grids to compute the global index. We do... No idea why this is not working.
+
+824
+01:26:15,540 --> 01:26:24,020
+We do some read from global memory. We do some function on it and then write it to some global
+
+825
+01:26:24,020 --> 01:26:30,020
+memory. Everybody should be like, this is the bread and butter of this course now.
+
+826
+01:26:32,660 --> 01:26:39,460
+So threads in a block can synchronize. We use a function called sync threads,
+
+827
+01:26:39,460 --> 01:26:44,980
+underscore underscore sync threads to create a barrier essentially. What that means is,
+
+828
+01:26:45,620 --> 01:26:52,020
+a thread called waits until all threads in the block hit the sync threads function.
+
+829
+01:26:53,060 --> 01:27:00,740
+Okay. So let's take this code as an example. It doesn't really matter what that code is
+
+830
+01:27:00,740 --> 01:27:04,020
+doing, but let's see how that executes.
+
+831
+01:27:16,340 --> 01:27:23,220
+So look at the time here. Okay. That's going to be important. Look at the arrows. And for this
+
+832
+01:27:23,220 --> 01:27:27,380
+example, only for this example, we're going to assume a warp time. So I put that out there.
+
+833
+01:27:28,020 --> 01:27:33,140
+Okay. So our first two threads are warp zero. Our bottom two threads are warp one. Okay.
+
+834
+01:27:34,100 --> 01:27:41,300
+So at time zero, we are going to execute warp one and we are going to execute the first line of that
+
+835
+01:27:41,300 --> 01:27:47,540
+and they're going to execute it together. Okay. So time zero. So at time one, we've executed those
+
+836
+01:27:47,540 --> 01:27:55,620
+and we've hit the same threads. What happens now? These warps are in the same block. So what happens
+
+837
+01:27:55,620 --> 01:28:05,460
+now once these hit sync threads? So now warp zero is like, oh, I can't execute any further
+
+838
+01:28:06,180 --> 01:28:12,500
+because I've hit sync threads and I need to wait for all of my co-block threads essentially to
+
+839
+01:28:12,500 --> 01:28:18,980
+finish hitting that sync threads as well. So this, it's a stall. Okay. This is a stall here.
+
+840
+01:28:18,980 --> 01:28:25,060
+So thread zero and one are blocked at the barrier. So the scheduler is going to be like, okay, warp zero
+
+841
+01:28:25,700 --> 01:28:30,980
+you're paused. Let me bring in another warp. So it's going to bring in this warp, execute that line
+
+842
+01:28:31,700 --> 01:28:35,780
+and now it executes sync threads. Now what happens?
+
+843
+01:28:40,340 --> 01:28:47,460
+The end block. Yes. Because now all the threads have hit sync threads, right?
+
+844
+01:28:47,460 --> 01:28:51,460
+So now the threads can move forward. Which one executes next?
+
+845
+01:28:51,460 --> 01:29:00,500
+So we are, our warp, this warp is active. It's syncing threads. All the threads are
+
+846
+01:29:00,500 --> 01:29:10,900
+syncing threads. What executes next? This one or this one? This one executes because it's already
+
+847
+01:29:10,900 --> 01:29:16,500
+active. Even though we have zero cost warp switching, because this is already active,
+
+848
+01:29:16,500 --> 01:29:23,620
+this is going to continue into the next line. So once this is done, we go back into the previous
+
+849
+01:29:23,620 --> 01:29:31,380
+warp, finish executing that and we're done. So any questions on how this is executed for sync threads?
+
+850
+01:29:33,540 --> 01:29:40,180
+This executes inside a block. You can't do sync threads across many blocks. Each block
+
+851
+01:29:40,180 --> 01:29:45,540
+can do its own sync threads, but if you're trying to do one thread from block to one and another
+
+852
+01:29:45,540 --> 01:29:50,980
+thread from block two, they can't synchronize. So any questions on sync threads so far?
+
+853
+01:29:54,740 --> 01:30:02,340
+Everybody gets it? Okay. So now we saw this a little bit earlier,
+
+854
+01:30:02,340 --> 01:30:06,180
+but why is it important that execution time be similar among threads?
+
+855
+01:30:06,180 --> 01:30:23,780
+We scheduled by warp. And if we scheduled by warp and some threads take more time than others,
+
+856
+01:30:24,420 --> 01:30:28,340
+then some threads are going to be waiting longer than others, which means our GPU is
+
+857
+01:30:29,220 --> 01:30:37,860
+possibly. So just as we don't want branch divergence to be costing us more time,
+
+858
+01:30:37,860 --> 01:30:41,860
+we don't want sync threads to be costing us more time either. So that's important.
+
+859
+01:30:43,060 --> 01:30:47,780
+Why does it only synchronize within a block? Why can't we synchronize across blocks?
+
+860
+01:30:52,420 --> 01:30:57,940
+Sure, but sync threads doesn't work using shared memory. It uses some other mechanism.
+
+861
+01:30:58,340 --> 01:31:03,460
+But you may be on the right track. Think about what's one step lower than that.
+
+862
+01:31:06,340 --> 01:31:11,060
+Not in terms of memory. What is the other condition on blocks?
+
+863
+01:31:17,700 --> 01:31:24,580
+Remember how I said blocks execute on the same SM? All threads of a single block always execute
+
+864
+01:31:24,580 --> 01:31:31,860
+on the same SM, which means they execute on the same part of the chip. There's no way for different
+
+865
+01:31:31,860 --> 01:31:39,700
+blocks to talk across SMs on a hardware level, except maybe global memory, but that's more newer
+
+866
+01:31:39,700 --> 01:31:45,940
+controlling it rather than the hardware controlling it. There's no way to synchronize across blocks
+
+867
+01:31:45,940 --> 01:31:51,060
+because they could be executing on different SMs. And we don't have a way to synchronize that.
+
+868
+01:31:51,060 --> 01:31:54,500
+And it would be too costly on a hardware level to synchronize that. So
+
+869
+01:31:55,460 --> 01:32:02,980
+sync threads only works within a block. Any other questions?
+
+870
+01:32:21,940 --> 01:32:29,700
+There is no guarantee on which blocks run on which SM. No guarantee at all. The other thing
+
+871
+01:32:29,700 --> 01:32:34,100
+you should think about is if you're doing something like that, can you change the algorithm to make it
+
+872
+01:32:34,100 --> 01:32:41,380
+different? And I don't know if it's the next class or after that. We will look at a few algorithms
+
+873
+01:32:41,380 --> 01:32:48,500
+and how we synchronize using that. But essentially you don't take traditional CPU algorithms and just
+
+874
+01:32:48,500 --> 01:32:54,100
+put them on GPUs. You see how you can change them to parallelize them and optimize them as well.
+
+875
+01:32:57,140 --> 01:32:58,660
+Any other questions on sync threads?
+
+876
+01:33:01,140 --> 01:33:12,020
+Okay, let's look at it a little bit more. So in this example here, each block can execute in,
+
+877
+01:33:12,020 --> 01:33:17,620
+like I just said, there's no guarantee on which blocks execute where. If you have
+
+878
+01:33:17,620 --> 01:33:23,780
+different types of devices, different types of architectures, they can execute anywhere. So there
+
+879
+01:33:23,780 --> 01:33:30,500
+is no guarantee on which block executes where. So the only guarantee you have is all the threads in
+
+880
+01:33:30,500 --> 01:33:35,140
+a block execute on the same SM. That's the only guarantee that CUDA gives you.
+
+881
+01:33:37,860 --> 01:33:43,780
+So with sync threads, can we cause it to hang? And what may cause it to hang?
+
+882
+01:33:47,620 --> 01:33:56,100
+As a reminder, sync threads is a barrier on a block network that doesn't allow threads to
+
+883
+01:33:56,100 --> 01:34:02,740
+progress until all threads are hit back. So what are potential scenarios in which a sync threads
+
+884
+01:34:02,740 --> 01:34:09,940
+can cause a block to hang? Thread crashes, that's certainly one of them. So what happens here?
+
+885
+01:34:09,940 --> 01:34:15,700
+Does this cause a hang?
+
+886
+01:34:26,980 --> 01:34:28,020
+So what about this?
+
+887
+01:34:31,620 --> 01:34:32,420
+What happens now?
+
+888
+01:34:40,500 --> 01:34:50,180
+So let's say half threads are here, half threads are there.
+
+889
+01:34:50,980 --> 01:34:58,500
+So they're essentially waiting for, both of them are waiting for, let's see if we have a thread,
+
+890
+01:34:58,500 --> 01:35:05,220
+both of them are waiting for A, but they all only get four. So
+
+891
+01:35:05,780 --> 01:35:18,820
+So these two sync threads are not the same. It's almost a cardinal sin in GPU programming
+
+892
+01:35:19,460 --> 01:35:25,940
+to put a sync thread inside a condition. You may do it in very, very, very special circumstances
+
+893
+01:35:25,940 --> 01:35:30,980
+where you know all the threads in a block are going to hit that and those conditions are very,
+
+894
+01:35:30,980 --> 01:35:38,020
+very bad. So if you are putting a sync thread inside an if condition, try to think about why
+
+895
+01:35:38,020 --> 01:35:44,340
+you're doing that. So don't put sync threads inside an if condition or it will cause a turn on your hand.
+
+896
+01:35:47,300 --> 01:35:52,900
+So my next slide is going back into matrix multiply. So any questions so far today?
+
+897
+01:36:00,980 --> 01:36:23,460
+So you're asking for the variables that are getting passed into the kernel?
+
+898
+01:36:24,260 --> 01:36:42,660
+If they're in global, then yeah, you could come. Yeah, it's essentially a copy.
+
+899
+01:36:44,260 --> 01:36:47,060
+You'll have a CPU version of it and a GPU version of it.
+
+900
+01:36:49,860 --> 01:36:52,180
+Any other questions on what we've discussed so far?
+
+901
+01:36:53,460 --> 01:36:59,860
+Okay, let's look at how all of what we've learned today is going to come into play
+
+902
+01:37:00,500 --> 01:37:05,780
+in matrix multiply. So let's revisit it. So CPU implementation, you know, you're
+
+903
+01:37:05,780 --> 01:37:12,500
+iterating through i and j. Again, i and j are of the output matrix. You come in, you do a dot product
+
+904
+01:37:12,500 --> 01:37:20,580
+on each vector as a row and as a column. I assume no questions so far. We've discussed
+
+905
+01:37:20,900 --> 01:37:27,700
+in detail in the last class. On the CUDA side, let's look at the CUDA kernel once again before we
+
+906
+01:37:27,700 --> 01:37:33,300
+try to optimize it. So we have the global to specify the kernel, the void to specify that
+
+907
+01:37:33,300 --> 01:37:39,700
+nothing is returned from a kernel, and then constant types for which are read buffers and
+
+908
+01:37:39,700 --> 01:37:46,740
+which are write buffers. We calculate the indices for the output matrix. There are no for loops here
+
+909
+01:37:46,740 --> 01:37:54,420
+because the for loop is implicit in our multi-threading. You allocate the allocator.
+
+910
+01:37:54,420 --> 01:38:00,500
+Which memory are we allocating this in? What memory are we storing p-value in?
+
+911
+01:38:02,180 --> 01:38:05,620
+It's in registers because it's a regular declaration that we are doing.
+
+912
+01:38:06,980 --> 01:38:14,340
+We do a for loop so that we are now doing the dot product. We read the memory. We do the dot
+
+913
+01:38:14,340 --> 01:38:21,380
+product and accumulate and then write it into global memory once. So what are some of the
+
+914
+01:38:21,380 --> 01:38:27,300
+problems here? We discussed some of these in the last class. What are some of the problems?
+
+915
+01:38:27,300 --> 01:38:39,620
+Matrix size is limited, yes. What else?
+
+916
+01:38:45,700 --> 01:38:48,900
+Matrix shape, we can only do squares. Edward?
+
+917
+01:38:51,700 --> 01:38:56,580
+What's one more? What's the last one? We discussed this in the last class.
+
+918
+01:38:57,300 --> 01:39:03,620
+What about memory?
+
+919
+01:39:13,220 --> 01:39:17,620
+Maybe, but more simply, we are doing global memory reads inside a for loop.
+
+920
+01:39:19,380 --> 01:39:24,100
+And maybe all the threads, a lot of threads are trying to read the same memory over and over again.
+
+921
+01:39:24,420 --> 01:39:32,020
+So our problems are it's limited matrix size. So maximum is a square. We can do 32 by 32 because
+
+922
+01:39:32,020 --> 01:39:39,140
+it's one block and then it has a lot of global memory access. So let's see how we optimize this
+
+923
+01:39:39,140 --> 01:39:44,740
+and scale it because we don't just want to optimize it for one block. We also want to scale it for any
+
+924
+01:39:44,740 --> 01:39:51,300
+size. So let's see how to do. What we're going to do is a kind of a sliding window approach
+
+925
+01:39:51,300 --> 01:39:58,660
+combined with shared memory. So first, to remove the size limitation, what we are going to do is
+
+926
+01:39:58,660 --> 01:40:07,860
+break our matrix, especially our output matrix into blocks. I use the term blocks because
+
+927
+01:40:07,860 --> 01:40:15,380
+essentially that put up blocks. So each part of this PD matrix will execute in one block
+
+928
+01:40:16,100 --> 01:40:21,380
+and use thread IDX and block IDX to identify which part of the memory we are going to be writing.
+
+929
+01:40:22,740 --> 01:40:28,500
+Any questions on this? We'll see how to write the code for it, but just the idea of this. Does it
+
+930
+01:40:28,500 --> 01:40:40,420
+make sense? Another thing we are going to do. So the way to a very simple example of this is that
+
+931
+01:40:40,420 --> 01:40:46,100
+we have a four by four matrix and we divide it into two by two blocks. This is what it looks
+
+932
+01:40:46,100 --> 01:40:53,300
+like. We have block 00, 01, 00, 01 and 01. And again, remember the blocks represent the output
+
+933
+01:40:53,300 --> 01:40:59,620
+matrix and then we'll read the required memory to execute those. So this is what it looks like.
+
+934
+01:40:59,620 --> 01:41:04,740
+Tile width, I put it in red because anytime you see red or blue stuff that generally represents
+
+935
+01:41:04,740 --> 01:41:10,020
+code. So we're going to use that tile width variable. So now how does this actually work?
+
+936
+01:41:10,020 --> 01:41:19,700
+How do we do the dot product for this? So let's see block 00. For index 00, we need row 0 and
+
+937
+01:41:19,700 --> 01:41:28,660
+column Z and multiply that here. So do a dot product. For PD10, we need row 0 and column 1.
+
+938
+01:41:28,660 --> 01:41:40,740
+What are you noticing? Both of these PD00 and 10 are reading MD, row 0. So you're reading that
+
+939
+01:41:40,740 --> 01:41:47,220
+MD twice. Same thing for MD and this. Same thing for column and these two. Now imagine doing it
+
+940
+01:41:47,220 --> 01:41:57,860
+from the entire matrix. So PD00, 10, 20 and T0 are all reading row 0. So that's something we
+
+941
+01:41:57,860 --> 01:42:06,900
+cannot do. So let's look at this. So this is the kernel that we have. We are going to make
+
+942
+01:42:06,900 --> 01:42:13,860
+made a few modifications. First, we have a global index calculation. You guys are used to this.
+
+943
+01:42:13,860 --> 01:42:20,580
+I don't have to explain but I'll walk through it again. Calculate the the row index of PNM.
+
+944
+01:42:21,540 --> 01:42:25,140
+I may have that maybe a typo.
+
+945
+01:42:30,260 --> 01:42:35,780
+Yes, pointing to the wrong place. I should update that. I changed the template that I
+
+946
+01:42:35,780 --> 01:42:43,140
+used on the slide so it kind of pointed to the wrong place. So essentially between these two slides.
+
+947
+01:42:44,020 --> 01:42:52,580
+My clicker is not cooperating today. Between these two rows, you're calculating the row and column
+
+948
+01:42:52,580 --> 01:43:03,380
+of PMNM depending on which version you're using. So each thread computes one element of the P
+
+949
+01:43:03,380 --> 01:43:10,420
+submatrix. You have many blocks. Each thread in a block computes some part of the P output matrix.
+
+950
+01:43:13,540 --> 01:43:18,580
+We'll skip the for loop for now and we'll come back here and this again is very similar. You've
+
+951
+01:43:18,580 --> 01:43:24,100
+seen this before where we calculate the index where we should write and write the value.
+
+952
+01:43:24,100 --> 01:43:32,740
+Everybody clear on these two parts? How we calculate the global index and how we calculate
+
+953
+01:43:32,740 --> 01:43:41,540
+the output? Any questions so far? Okay, let's switch to the CPU side. One of the limitations
+
+954
+01:43:41,540 --> 01:43:48,500
+we had was we could only do 32 by 32 before. So now see how we're changing this. Each block,
+
+955
+01:43:49,060 --> 01:43:55,540
+we've got these blocks now. Dimension of block is tile width by tile width. Remember how I showed
+
+956
+01:43:55,540 --> 01:44:00,580
+you the 2 by 2 and the 4 by 4 matrix? That the tile width is going to dictate how big our blocks
+
+957
+01:44:00,580 --> 01:44:09,060
+are. So that's why tile width by tile width. The number of blocks we need are now the width of the
+
+958
+01:44:09,060 --> 01:44:13,620
+matrix divided by tile width and similarly width of the matrix divided by tile width.
+
+959
+01:44:14,340 --> 01:44:19,780
+Now of course there's some seal and stuff that we should do so that we are accommodating for
+
+960
+01:44:19,780 --> 01:44:26,580
+rectangles but for now let's assume this works. Then we'll launch the kernel
+
+961
+01:44:26,580 --> 01:44:31,460
+similar to before and using dim blocks and dim gates. Any questions on this?
+
+962
+01:44:31,460 --> 01:44:46,500
+Okay, so global memory access. So one theoretical slide here before we go back into matrix multiply.
+
+963
+01:44:47,300 --> 01:44:58,820
+On a G80, peak gigaflops is 346. This is 14-15 years ago. So on a modern RTX card or something
+
+964
+01:44:58,820 --> 01:45:03,140
+like that this is going to be many many teraflops. I don't even know what the latest number is. I
+
+965
+01:45:03,140 --> 01:45:09,540
+should probably check. The reason this number is here is because if you want to achieve that
+
+966
+01:45:09,540 --> 01:45:16,900
+many gigaflops you need 1386 gigabytes per second of memory bandwidth to make that possible.
+
+967
+01:45:17,860 --> 01:45:21,460
+Ignore the math behind it. We won't get into it but believe me that's the number.
+
+968
+01:45:21,700 --> 01:45:26,980
+So this number is probably still double of what is modern day bandwidth
+
+969
+01:45:28,100 --> 01:45:34,660
+and we're talking about something 15 years ago. So basically impossible to achieve. The real
+
+970
+01:45:34,660 --> 01:45:39,300
+world memory bandwidth of a G80 is 86. So we are talking almost 20 times that.
+
+971
+01:45:42,500 --> 01:45:50,020
+What that does is limit our matrix multiply implementation to about only 21 gigaflops.
+
+972
+01:45:50,020 --> 01:45:55,220
+So clearly not optimizing our GPU performance. Remember how I said we want to be scheduling
+
+973
+01:45:55,220 --> 01:45:59,860
+enough watts. How we want to always keep the GPU occupied. This is clearly not
+
+974
+01:46:00,580 --> 01:46:06,660
+executing the GPU in an optimal way. This is very subpar. So that's what we want to improve
+
+975
+01:46:07,300 --> 01:46:11,140
+about how we access global memory so that we are improving our performance.
+
+976
+01:46:12,100 --> 01:46:22,900
+So let's see how to do that. So we discussed before how there is enough duplication in how
+
+977
+01:46:22,900 --> 01:46:30,580
+we are reading them. So for example these two elements both read py. They both need that single
+
+978
+01:46:30,580 --> 01:46:37,620
+column and we can use shared memory to duplicate that. So let's see it on a block level.
+
+979
+01:46:38,580 --> 01:46:44,980
+Okay. So let's assume this. Let's take this block for example. We also don't have unlimited
+
+980
+01:46:44,980 --> 01:46:49,620
+shared memory. So we can't read the entire matrix into shared memory. We can only read parts of it.
+
+981
+01:46:50,180 --> 01:46:57,700
+So for this kind of block execution what we're going to do is we're going to read the blue part
+
+982
+01:46:57,700 --> 01:47:03,380
+into shared memory and we're going to read this blue part into shared memory and do a dot product
+
+983
+01:47:03,380 --> 01:47:10,340
+for that sub matrix essentially. Then you're going to read the orange part, the orange part
+
+984
+01:47:10,340 --> 01:47:19,060
+and read that. Do it. The reason is, the reason this works is when you read this orange part,
+
+985
+01:47:19,060 --> 01:47:23,700
+you don't need this blue part anymore. You're done with it. The dot product is sequential.
+
+986
+01:47:24,740 --> 01:47:29,460
+The values here don't need to get multiplied by the values there. They only need to get
+
+987
+01:47:29,460 --> 01:47:32,980
+multiplied. These values only need to get multiplied by the values there.
+
+988
+01:47:33,620 --> 01:47:39,780
+So you can override shared memory. So the amount of shared memory you need drastically reduces
+
+989
+01:47:39,780 --> 01:47:44,900
+because you use this sliding window. So if you do this, you slide. You do this, you slide.
+
+990
+01:47:45,540 --> 01:47:50,500
+So that's what allows you to do it much faster and maintain that data locality.
+
+991
+01:47:53,540 --> 01:47:58,820
+So for each thread, now we're getting closer to the programming side of it.
+
+992
+01:47:59,460 --> 01:48:07,540
+Each thread, because our blocks are these and the number of elements we bring here will be the same
+
+993
+01:48:07,540 --> 01:48:13,460
+or at least we want them to be the same, each thread in the block reads one element from here
+
+994
+01:48:13,460 --> 01:48:19,620
+and one element from up here. What that means is we are also reading memory in parallel into
+
+995
+01:48:19,620 --> 01:48:24,100
+shared memory. So each thread only needs one element instead of the entire matrix,
+
+996
+01:48:24,100 --> 01:48:30,420
+which we were doing before on the entire row and point. Now we are only reading one at a time.
+
+997
+01:48:30,420 --> 01:48:35,380
+So that's another optimization. So let's see how this looks in code.
+
+998
+01:48:37,300 --> 01:48:44,980
+The first thing you're going to see is two new lines. This is one way of declaring shared memory.
+
+999
+01:48:46,100 --> 01:48:53,140
+You say shared, float, and you give it the dimensions. This is going to get stored in
+
+1000
+01:48:53,140 --> 01:49:02,180
+shared memory. The next thing you do is you break up your global memory computation. You know how
+
+1001
+01:49:02,180 --> 01:49:09,140
+you were calculating index as block size times block dim plus thread x. You're breaking that out
+
+1002
+01:49:09,860 --> 01:49:18,420
+and we'll get to why in a bit. The column and row kind of remains the same, but you're
+
+1003
+01:49:18,420 --> 01:49:24,660
+using the temporary variables for that. See how this has changed now.
+
+1004
+01:49:25,860 --> 01:49:30,980
+M defines the phase of our window. Remember how I said it would be a sliding window?
+
+1005
+01:49:31,700 --> 01:49:41,220
+So M is going to be that window essentially. M by time width is the number of windows we need,
+
+1006
+01:49:41,220 --> 01:49:43,220
+the number of times we need to move that window.
+
+1007
+01:49:43,380 --> 01:49:52,020
+So now we're reading memory into shared memory. We are reading global memory into shared memory
+
+1008
+01:49:52,020 --> 01:49:55,460
+and remember how I said we are doing it once for the time. So there's no
+
+1009
+01:49:56,260 --> 01:50:03,140
+for loop k. The for loop k is down here. Here if we read this, each element is reading one element
+
+1010
+01:50:03,140 --> 01:50:09,860
+and putting it into our shared memory sub-matrix and we do that by this. So this index M should
+
+1011
+01:50:09,860 --> 01:50:19,060
+be pretty clear. SM and SM and see how we are mixing up the row times width plus this
+
+1012
+01:50:19,060 --> 01:50:26,180
+and column times this plus row. Why are we doing that? Because we need row from one matrix and
+
+1013
+01:50:26,180 --> 01:50:35,540
+column from the other matrix. So that's why we are changing the indexing. Then in the for loop k
+
+1014
+01:50:35,540 --> 01:50:39,700
+matrix, we are no longer reading global memory inside this matrix like we were before.
+
+1015
+01:50:40,660 --> 01:50:48,020
+All we are doing is taking the shared memory and reading it here and see how in these two lines
+
+1016
+01:50:48,020 --> 01:50:55,700
+Tx and Ty are the same. But now Tx and Ty are on if this is our major, this is our minor.
+
+1017
+01:50:56,740 --> 01:51:01,620
+That's because we need rows and columns. We're changing which one we need and that's why we
+
+1018
+01:51:01,620 --> 01:51:08,980
+install it as the temporary way we would say. So once we do this, once we do the dot product
+
+1019
+01:51:08,980 --> 01:51:13,460
+for the sub-matrix, let's say we are done with the sub-matrix, we go to the next window now.
+
+1020
+01:51:14,180 --> 01:51:20,260
+So this k is not for the entire row, not for the entire column, it is for the sub-matrix only.
+
+1021
+01:51:20,260 --> 01:51:26,740
+That's why we do k less than ty. Any questions so far on this?
+
+1022
+01:51:27,540 --> 01:51:35,780
+So if we don't have any separation lines, not shared or global, any variable we define here
+
+1023
+01:51:35,780 --> 01:51:41,460
+automatically they're all ready. So let's say you don't put the shared here,
+
+1024
+01:51:42,580 --> 01:51:45,540
+this float SM, this will go into global memory.
+
+1025
+01:51:45,540 --> 01:52:03,380
+Any other questions so far?
+
+1026
+01:52:03,380 --> 01:52:11,780
+No questions. Everybody got this? I'd be surprised. I'm impressed.
+
+1027
+01:52:13,540 --> 01:52:13,860
+Okay.
+
+1028
+01:52:17,700 --> 01:52:23,780
+Once you get to the second same print, all that has happened on all of your friends and
+
+1029
+01:52:24,420 --> 01:52:32,260
+friends so far is going to be the first element of the sub-matrix.
+
+1030
+01:52:34,980 --> 01:52:36,020
+That one is inside of the...
+
+1031
+01:52:40,100 --> 01:52:44,500
+Right. So let's iterate over this. So m equals zero means you are...
+
+1032
+01:52:44,500 --> 01:52:55,540
+So this is m equals zero. Two is m equals zero. Red is m equals one. Okay.
+
+1033
+01:52:56,900 --> 01:53:00,900
+When m equals zero, you're operating on this. When m equals one, you're operating on this.
+
+1034
+01:53:00,900 --> 01:53:05,700
+When m equals three, you're operating on that. So essentially zero, if you think of this here,
+
+1035
+01:53:05,700 --> 01:53:08,420
+that's when you're operating. Okay. So now...
+
+1036
+01:53:14,420 --> 01:53:19,380
+Definitely not positive. Okay. So m equals zero, m equals one, we're doing that.
+
+1037
+01:53:20,100 --> 01:53:25,140
+These two lines are essentially reading our blue and red part. Remember, there's the only
+
+1038
+01:53:25,140 --> 01:53:30,660
+loop for this is m. So we're reading this once for the sliding window. We're reading two global
+
+1039
+01:53:30,660 --> 01:53:38,820
+memory per thread per sliding window. Okay. Here, now we have to do the dot product for
+
+1040
+01:53:38,820 --> 01:53:45,380
+the sub-matrix. That's why we have the k here. And this is our compute. This is addition,
+
+1041
+01:53:45,380 --> 01:53:49,860
+multiplication of shared memory. All compute. It's all shared memory, so it's very fast.
+
+1042
+01:53:50,660 --> 01:53:55,540
+So this is not a performance bottleneck anymore. Before it was because we were doing the global
+
+1043
+01:53:55,540 --> 01:54:02,340
+memory read inside here. No longer a performance bottleneck. Now, if you could call it a bottleneck,
+
+1044
+01:54:02,340 --> 01:54:06,340
+it's here, but it's already optimized. We are already reading it once per thread anyway.
+
+1045
+01:54:06,340 --> 01:54:10,900
+So this is also correct. Any other questions on this?
+
+1046
+01:54:11,460 --> 01:54:12,260
+Okay.
+
+1047
+01:54:22,740 --> 01:54:29,380
+Run it. Run it on your computer and tell me. I have a number towards the end, but
+
+1048
+01:54:30,660 --> 01:54:36,180
+run this on your computer and tell me how much it improves. Any other questions?
+
+1049
+01:54:36,180 --> 01:54:41,780
+Okay. So like Constance asked,
+
+1050
+01:54:44,340 --> 01:54:48,500
+why do we have, she asked first thing, but I'll go to the second thing. Why do we have the second
+
+1051
+01:54:48,500 --> 01:55:02,100
+thing? Yeah, that's spot on. So let's get to the first thing. You're reading into shared memory,
+
+1052
+01:55:02,100 --> 01:55:09,780
+right? All the threads in the block are reading into shared memory. Let's take it when m equals
+
+1053
+01:55:09,780 --> 01:55:13,140
+zero. Okay. Nothing has happened. There was a first time you're reading into shared memory.
+
+1054
+01:55:13,860 --> 01:55:15,140
+Why do you need the same threads?
+
+1055
+01:55:21,620 --> 01:55:28,340
+The value of different area in the matrix for your data. So you want to make sure that the
+
+1056
+01:55:28,340 --> 01:55:32,100
+whole sub-matrix is copy. And what determines that?
+
+1057
+01:55:33,060 --> 01:55:38,100
+That all threads are run. So because that's the index of the sub-matrix.
+
+1058
+01:55:40,740 --> 01:55:48,580
+So what she's getting at is we said all the threads in the block run on the same
+
+1059
+01:55:48,580 --> 01:55:54,580
+method. We have that guarantee. What we don't have a guarantee of is when the warps run.
+
+1060
+01:55:55,140 --> 01:56:03,220
+Right. So warp zero might have executed this and is ready to do this, but warp one may not have read
+
+1061
+01:56:03,220 --> 01:56:10,260
+this. Warp one may have garbage, right? Warp one's part of the shared memory may have garbage.
+
+1062
+01:56:10,260 --> 01:56:16,020
+So we can use this in threads to ensure that all the warps of the block have finished reading into
+
+1063
+01:56:16,020 --> 01:56:20,980
+shared memory. Otherwise we'll get like part of blue and then everything else will be garbage
+
+1064
+01:56:20,980 --> 01:56:26,020
+and that won't work. So we have the same threads here. Why do we need the same threads here?
+
+1065
+01:56:28,900 --> 01:56:36,020
+Like Constance said, if we don't have the same threads here, let's say warp zero finishes this.
+
+1066
+01:56:36,820 --> 01:56:44,340
+It's going to go here and it's going to override shared memory for the next window. Now in warp
+
+1067
+01:56:44,340 --> 01:56:52,900
+zero, M becomes one and it overrides the shared memory before warp one executes this. So now warp
+
+1068
+01:56:52,900 --> 01:57:01,860
+one is reading garbage. So we have to make sure that at all times shared memory has the correct
+
+1069
+01:57:01,860 --> 01:57:08,180
+version of the sliding window. And that's why we have same threads so that no warp is left behind
+
+1070
+01:57:08,180 --> 01:57:11,940
+and no warp is going forward without all the warps being the same.
+
+1071
+01:57:12,500 --> 01:57:19,540
+So now you see how sync threads works with shared memory. So general rule of thumb is if you are
+
+1072
+01:57:19,540 --> 01:57:24,260
+reading into shared memory or writing to shared memory, both of which have been here, you're
+
+1073
+01:57:24,260 --> 01:57:29,220
+reading and you're writing, always put the sync threads around it. Or at least start with the
+
+1074
+01:57:29,220 --> 01:57:34,420
+sync threads around it and then see if you can remove them. Any questions on this?
+
+1075
+01:57:38,980 --> 01:57:44,420
+Okay. Sorry, it's covered by the watermark there, but that last line is essentially the
+
+1076
+01:57:44,420 --> 01:57:47,220
+same as we've been doing before and we are writing to problem method.
+
+1077
+01:57:50,980 --> 01:57:53,300
+So any questions on this kernel so far?
+
+1078
+01:57:57,380 --> 01:58:05,220
+So let's see from the form. Before we had a kernel, when each thread was reading
+
+1079
+01:58:05,220 --> 01:58:15,940
+two times the size of row and the size of column. So if you had a matrix that was 1024 by 1024,
+
+1080
+01:58:15,940 --> 01:58:23,860
+so about a million elements, each thread was reading 248 values from global memory,
+
+1081
+01:58:25,140 --> 01:58:30,980
+which is insane, like that's a lot. And a lot of threads are also reading duplicate
+
+1082
+01:58:30,980 --> 01:58:36,740
+values because they're reading the same rows and the same columns. Now what we have is a structure
+
+1083
+01:58:36,740 --> 01:58:44,340
+where each thread is reading m sliding window, the number of sliding windows we have that many
+
+1084
+01:58:44,340 --> 01:58:51,060
+times of global memory, that's it. Instead of reading the matrix size, we're reading sliding
+
+1085
+01:58:51,060 --> 01:58:57,540
+window size. So let's say we have a matrix that's 1024 by 1024, so a million elements,
+
+1086
+01:58:57,620 --> 01:59:02,420
+right? And our target is 32 by 32, so 1024 threads per block.
+
+1087
+01:59:04,260 --> 01:59:12,180
+So the number of sliding windows we get is 1024 divided by 32. So we are decreasing our memory
+
+1088
+01:59:12,180 --> 01:59:20,660
+reads by a factor of 32. So now you can imagine how we've optimized from going from 2048 memory
+
+1089
+01:59:20,660 --> 01:59:26,260
+reads to maybe like 64 memory reads. And that's where the performance comes in, multiply with
+
+1090
+01:59:26,260 --> 01:59:31,140
+that by 200 cycles of a global memory read and boom, you've optimized your performance.
+
+1091
+01:59:32,420 --> 01:59:37,300
+So that's how we have to start thinking about GPU programming. It's not just doing memory reads for
+
+1092
+01:59:37,300 --> 01:59:43,460
+the sake of memory reading, but how do we optimize how we are reading so that we're doing more compute
+
+1093
+01:59:43,460 --> 01:59:51,460
+and less waiting, okay? So let's take two questions quickly before we end the class.
+
+1094
+01:59:52,020 --> 01:59:59,380
+How do we pick tile width and how can it be too large? So any thoughts here? How can we pick a tile width?
+
+1095
+02:00:10,180 --> 02:00:16,100
+Maybe, maybe not, not necessarily. Like although the code I've shown ignored some parts of it,
+
+1096
+02:00:16,100 --> 02:00:21,060
+but yes, you can do it on rectangular matrices, you can do it on non-multiples as well.
+
+1097
+02:00:21,060 --> 02:00:26,020
+You would have to write if-else conditions that ignore those threads, but you can absolutely do it.
+
+1098
+02:00:28,900 --> 02:00:31,860
+So what about tile width has a limit?
+
+1099
+02:00:40,580 --> 02:00:47,700
+Yeah, or total threads in a block. So your tile width can't be greater than 32 by 32 essentially.
+
+1100
+02:00:48,500 --> 02:00:52,420
+And how can it be too large? If you try to pick a tile width that's 64 by 64,
+
+1101
+02:00:52,420 --> 02:00:58,980
+then it's going to be more than your SM or your blocks can handle. So that will be another
+
+1102
+02:00:58,980 --> 02:01:06,420
+limit there. The other limit can be based on shared memory. So depending on your GPU,
+
+1103
+02:01:06,420 --> 02:01:12,340
+most modern GPUs may or may not run into this problem. If you have too many blocks for SM
+
+1104
+02:01:12,980 --> 02:01:19,540
+and you're allocating a lot of shared memory, that can lead to an overflow and then you get
+
+1105
+02:01:20,420 --> 02:01:24,820
+less number of blocks per SM. You're not going to run into an error, but you're going to get less
+
+1106
+02:01:24,820 --> 02:01:28,980
+number of blocks per SM. So you'll get something like this kind of calculation.
+
+1107
+02:01:32,580 --> 02:01:40,420
+So the benefits of shared memory tiling are depending on how big your tile width is,
+
+1108
+02:01:40,420 --> 02:01:47,300
+you're reducing the number of memory reads per thread by that much of a factor. So if you if
+
+1109
+02:01:47,300 --> 02:01:52,180
+you're tied with the 16, you're optimizing your memory reads by a factor of 16. If it's 32,
+
+1110
+02:01:52,180 --> 02:02:00,500
+you're optimizing it by a factor of 32. So based on this, if we use a factor of 16, remember how we
+
+1111
+02:02:00,500 --> 02:02:09,700
+said our old kernel was only like 21 gigaflops. Multiply that by 16, you almost get 245,
+
+1112
+02:02:10,900 --> 02:02:19,380
+345, 360 gigaflops. So it's all because we optimized how we are doing our memory reads.
+
+1113
+02:02:20,580 --> 02:02:26,260
+So that's when I was asked, how do we know the performance is going to increase?
+
+1114
+02:02:26,260 --> 02:02:30,740
+That's how we know. Just by understanding that we're decreasing our memory reads,
+
+1115
+02:02:30,740 --> 02:02:33,460
+we'll increase our performance. It's plain and simple.
+
+1116
+02:02:36,340 --> 02:02:44,660
+So to put that in again, put that in math. If our tile width is 16 by 16, that gives us 256 threads
+
+1117
+02:02:44,660 --> 02:02:53,220
+per block. In a kernel that or in a matrix that's 1024 by 1024, so a million LEDs,
+
+1118
+02:02:53,940 --> 02:03:01,140
+this gives 64 by 64 blocks of total of 4000 blocks in total. Everybody clear so far
+
+1119
+02:03:01,780 --> 02:03:10,660
+about this math? So 1024 by 16 is 64. So each thread performs two times 256
+
+1120
+02:03:11,780 --> 02:03:17,140
+loads. Loads are essentially reading from global memory. So you're doing 512 loads
+
+1121
+02:03:17,860 --> 02:03:26,020
+from global memory. And in total, you're doing 8000 by 192 multiply max. This is from our dot
+
+1122
+02:03:26,020 --> 02:03:34,340
+product operation. So why am I saying this? Remember how we went back to that example where
+
+1123
+02:03:34,340 --> 02:03:40,900
+we had four floating point operations and 200 cycles of global memory read? This is exactly
+
+1124
+02:03:40,900 --> 02:03:51,220
+that problem. You have 500 memory reads. You have 8192 multiply and add operation.
+
+1125
+02:03:51,860 --> 02:03:57,460
+How do you hide all of those memory reads that you're doing that you have to do? We optimize them,
+
+1126
+02:03:57,460 --> 02:04:02,820
+but they still have a latency, right? Even though you're doing one read per thread,
+
+1127
+02:04:02,820 --> 02:04:09,140
+that still has a latency that still makes the GPU wait. So what we're essentially doing here is
+
+1128
+02:04:09,700 --> 02:04:16,180
+you have that memory read. How can we hide it even more? We're like, go sit in the closet while
+
+1129
+02:04:16,180 --> 02:04:22,100
+the other warp executes. And then when you're ready, come out and do your work. So this is how
+
+1130
+02:04:22,820 --> 02:04:28,500
+we're optimizing it so that it's no longer a memory bandwidth problem. It just means
+
+1131
+02:04:29,300 --> 02:04:37,460
+if one warp is hitting a stall, to quote Hydra from the Marvel movies,
+
+1132
+02:04:37,460 --> 02:04:40,500
+if one warp hits a stall, there are two more to take its place.
+
+1133
+02:04:42,180 --> 02:04:46,340
+So that's how we are optimizing it. The memory reads essentially get hidden,
+
+1134
+02:04:46,340 --> 02:04:49,700
+the latency gets hidden away, and we are always doing compute.
+
+1135
+02:04:53,460 --> 02:04:57,780
+So any questions on this? So that's the end of today's lecture. I'm more than happy to take
+
+1136
+02:04:57,780 --> 02:05:02,740
+any questions. And just a reminder for anybody, I may have email to stay back to stay back because
+
+1137
+02:05:02,740 --> 02:05:09,620
+I would have forgotten if I didn't put that there. So happy to take any questions if anybody has.
+
+1138
+02:05:22,100 --> 02:05:24,980
+I think Wayne might be able to take, let's divide in content.
+
